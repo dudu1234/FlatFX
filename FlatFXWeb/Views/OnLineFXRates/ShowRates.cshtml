@@ -1,0 +1,68 @@
+﻿@{
+    ViewBag.Title = "ShowRates";
+}
+
+    <h1>שערי מטבע</h1>
+    <br />
+
+    <div class="rates-table">
+        <table class="table table-striped table-bordered table-hover">
+            <thead>
+                <tr>
+                    <th class="rates-table-pair">צמד</th>
+                    <th class="rates-table-mid">שער אמצע</th>
+                    <th>שער קניה</th>
+                    <th>שער מכירה</th>
+                </tr>
+            </thead>
+            <tbody>
+                @{
+                    foreach (var currencyItem in FlatFX.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
+                    {
+                        <tr>
+                            <td class="rates-table-pair">@currencyItem.Value</td>
+                            <td id="@(currencyItem.Key + "-MID")" class="rates-table-mid"></td>
+                            <td id="@(currencyItem.Key + "-BID")"></td>
+                            <td id="@(currencyItem.Key + "-ASK")"></td>
+                        </tr>
+                    }
+                }
+            </tbody>
+        </table>
+    </div>
+    <span>תאריך עדכון אחרון: </span><span id="last-feed-update"></span><br />
+    <span>מקור נתונים: </span><a href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a><br />
+
+    <script>
+        var GetFeedRatesUrl = "http://localhost/FlatFXWeb/OnLineFXRates/GetRates";
+
+        function refreshYahooDataFeed() {
+            $.getJSON(GetFeedRatesUrl)
+                .done(function (data) {
+
+                    try
+                    {
+                        $("#last-feed-update").html(data.query.results.rate[0].Date + '&nbsp;' + data.query.results.rate[0].Time);
+                        $.each(data.query.results.rate, function () {
+                            updateCurrencyRow(this);
+                        });
+                    }
+                    catch(err)
+                    {
+                        alert(err);
+                    }
+                });
+        };
+
+        function updateCurrencyRow(currencyRow) {
+            $("#" + currencyRow.id + "-BID").text(currencyRow.Bid);
+            $("#" + currencyRow.id + "-ASK").text(currencyRow.Ask);
+            var mid = (parseFloat(currencyRow.Bid) + parseFloat(currencyRow.Ask)) / 2;
+            $("#" + currencyRow.id + "-MID").text(mid.toFixed(4));
+        }
+
+        $(document).ready(function () {
+            refreshYahooDataFeed();
+            setInterval(function () { refreshYahooDataFeed() }, 60000);
+        });
+    </script>
