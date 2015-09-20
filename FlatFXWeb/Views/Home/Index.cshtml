@@ -2,8 +2,9 @@
     ViewBag.Title = "FlatFX Home Page";
 }
 
-@section featured {
-    <section class="featured">
+@section HomeSection1
+{
+    <section class="featuredBlue">
         <div class="content-wrapper">
             <hgroup class="title">
                 <h1>יצואן/יבואן?</h1>
@@ -20,7 +21,62 @@
     </section>
 }
 
-@Html.Partial("ActionsView")
+@section HomeSection2
+{
+    <section class="featuredBlue featuredGreen">
+        <div class="content-wrapper">
+            <hgroup class="title">
+                <h1>רשימת פעולות</h1>
+            </hgroup>
+            <p>
+                <a class="btn btn-info btn-md" href="About\Index"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-info btn-md" href="HowItWorks\Index"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-info btn-md" href="#"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-info btn-md" href="OnLineFXRates/ShowRates"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-info btn-md" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> לביצוע המרה</a>
+                <br /><br />
+                <a class="btn btn-info btn-md" href="CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
+                <a class="btn btn-info btn-md" href="CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+                <br /><br />
+            </p>
+        </div>
+    </section>
+}
+
+@section HomeSection3
+{
+    <section class="featuredBlue">
+        <div class="content-wrapper">
+            <h1>איך זה עובד:</h1>
+            <ol class="roundHeb">
+                <li class="one">
+                    הלקוח מבצע המרת מט"ח באמצעות האתר
+                    <br /><br />
+                </li>
+                <li class="two">
+                    חדר העיסקאות של FlatFX מבצע את העיסקה מול הבנק במחיר אטרקטיבי
+                    <br /><br />
+                </li>
+                <li class="three">
+                    הלקוח מעביר את הסכום הנדרש במטבע הרוכש
+                    <br /><br />
+                </li>
+                <li class="four">
+                    FlatFX מעבירה לחשבון הלקוח את הסכום הנדרש במטבע הנרכש
+                    <br /><br />
+                </li>
+                <li class="five">
+                    בהצלחה
+                    <br /><br />
+                </li>
+            </ol>
+        </div>
+    </section>
+}
+
+
+
+
 
 
 
