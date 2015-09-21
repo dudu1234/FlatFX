@@ -15,6 +15,9 @@
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 
+    @Scripts.Render("~/bundles/jquery")
+    @RenderSection("scripts", required: false)
+
 </head>
 <body>
     <header>
@@ -28,35 +31,28 @@
                 </section>
                 <nav>
                     <ul id="menu">
-                        <li><a href="/FlatFXWeb/">עמוד הבית &nbsp;<span class="glyphicon glyphicon-home" style="color:darkblue; font-size: medium"></span></a></li>
-                        <li>@Html.ActionLink("איך זה עובד?", "Index", "HowItWorks")</li>
+                        <li><a href="/FlatFXWeb/">&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-home" style="color:darkblue; font-size: medium"></span></a></li>
+                        <li><a href="/FlatFXWeb/Home/Index#HomeHowItWorks">איך זה עובד?</a></li>
                         <li>@Html.ActionLink("שערים OnLine", "ShowRates", "OnLineFXRates")</li>
-                        <li>@Html.ActionLink("לביצוע המרת מט\"ח", "Index", "About")</li>
-                        <li>@Html.ActionLink("אודות", "Index", "About")</li>
-                        <li>@Html.ActionLink("צור קשר", "Index", "About")</li>
+                        <li>@Html.ActionLink("לביצוע המרת מט\"ח", "Index", "Home")</li>
+                        <li><a href="/FlatFXWeb/Home/Index#HomeAbout">אודות</a></li>
+                        <li>@Html.ActionLink("צור קשר", "Index", "Home")</li>
                     </ul>
                 </nav>
             </div>
         </div>
     </header>
     <div id="body">
-        @RenderSection("HomeSection1", required: false)
-        <section class="content-wrapper main-content clear-fix">
-        <br />    
-        </section>
-        @RenderSection("HomeSection2", required: false)
-        <section class="content-wrapper main-content clear-fix">
-            <br />
-        </section>
-        @RenderSection("HomeSection3", required: false)
-
-
-
         
-        <section class="content-wrapper main-content clear-fix">
-            @RenderBody()
-        </section>
-    </div>
+            @RenderSection("HomePromo", required: false)
+            @RenderSection("HomeActions", required: false)
+            @RenderSection("HomeHowItWorks", required: false)
+            @RenderSection("HomeAbout", required: false)
+
+            <section class="content-wrapper main-content clear-fix">
+                @RenderBody()
+            </section>
+        </div>
     <footer>
         <div class="content-wrapper">
             <div class="float-left">
@@ -64,8 +60,5 @@
             </div>
         </div>
     </footer>
-
-    @Scripts.Render("~/bundles/jquery")
-    @RenderSection("scripts", required: false)
 </body>
 </html>

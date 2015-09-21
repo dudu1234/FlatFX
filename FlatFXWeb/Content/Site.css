@@ -111,7 +111,7 @@ h5 a:link, h5 a:visited, h5 a:active {
         padding-top: 30px;
     }
 
-.featuredBlue + .main-content {
+.featuredBasic + .main-content {
         background: url("../Images/heroAccent.png") no-repeat;
     }
 
@@ -212,12 +212,12 @@ ul#menu {
 
 /* page elements
 ----------------------------------------------------------*/
-/* featuredBlue */
-.featuredBlue {
+/* featuredBasic */
+.featuredBasic {
     background-color: #fff;
 }
 
-    .featuredBlue .content-wrapper {
+    .featuredBasic .content-wrapper {
         background-color: #7ac0da;
         background-image: -ms-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
         background-image: -o-linear-gradient(left, #7ac0da 0%, #a4d4e6 100%);
@@ -228,12 +228,16 @@ ul#menu {
         padding: 20px 40px 30px 40px;
     }
 
-        .featuredBlue hgroup.title h1, .featuredBlue hgroup.title h2 {
+        .featuredBasic hgroup.title h1, .featuredBasic hgroup.title h2 {
             color: #fff;
         }
 
-        .featuredBlue p {
+        .featuredBasic p {
             font-size: 1.1em;
+            color: #fff;
+        }
+
+        .featuredBasic p.actionButtons a {
             color: #fff;
         }
 
@@ -251,11 +255,11 @@ ul#menu {
         background-image: linear-gradient(left, #a8ef83 0%, #e3f5d0 100%);
         color: black;
     }
-        .featuredBlue hgroup.title h1, .featuredBlue hgroup.title h2 {
+        .featuredBasic hgroup.title h1, .featuredBasic hgroup.title h2 {
             color: black;
         }
 
-        .featuredBlue p {
+        .featuredBasic p {
             font-size: 1.1em;
             color: black;
         }
@@ -749,7 +753,7 @@ tr.pager td {
     /* main layout
     ----------------------------------------------------------*/
     .main-content,
-    .featuredBlue + .main-content {
+    .featuredBasic + .main-content {
         background-position: 10px 0;
     }
 
@@ -758,7 +762,7 @@ tr.pager td {
         padding-left: 10px;
     }
 
-    .featuredBlue .content-wrapper {
+    .featuredBasic .content-wrapper {
         padding: 10px;
     }
 
@@ -873,3 +877,4 @@ tr.pager td {
 {
     color: blue;
 }
+
