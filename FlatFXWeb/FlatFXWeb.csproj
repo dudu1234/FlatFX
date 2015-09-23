@@ -265,7 +265,6 @@
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
-    <Content Include="HtmlPage1.html" />
     <Content Include="Images\accent.png" />
     <Content Include="Images\bullet.png" />
     <Content Include="Images\favicon.ico" />
@@ -342,9 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="Views\OnLineFXRates\ShowRates.cshtml" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="json1.json" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resource1.resx">

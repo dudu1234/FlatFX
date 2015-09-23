@@ -116,6 +116,20 @@ namespace FlatFX.BussinessLayer
                     "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
                 string response = web.DownloadString(url);
 
+                /*
+                    {
+                        "query": {
+                            "count": 3, 
+                            "created": "2015-08-05T15:13:41Z",
+                            "lang": "en-US",
+                            "results": { "rate": [
+                                { "id": "USDILS", "Name": "USD/ILS", "Rate": "3.8135", "Date": "8/5/2015", "Time": "4:13pm", "Ask": "3.8148", "Bid": "3.8135" },
+                                { "id": "EURUSD", "Name": "EUR/USD", "Rate": "1.0874", "Date": "8/5/2015", "Time": "4:13pm", "Ask": "1.0875", "Bid": "1.0874" }, 
+                                { "id": "EURILS", "Name": "EUR/ILS", "Rate": "4.1469", "Date": "8/5/2015", "Time": "4:13pm", "Ask": "4.1486", "Bid": "4.1451" } ] }
+                        }
+                    }
+                 */
+ 
                 //Convert to Json
                 var results = JsonConvert.DeserializeObject<dynamic>(response);
                 string date = results.query.results.rate[0].Date;
