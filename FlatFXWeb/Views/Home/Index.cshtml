@@ -1,130 +1,101 @@
 ﻿@{
     ViewBag.Title = "FlatFX Home Page";
 }
+<script src="~/JS/Home/HomePage.js"></script>
+<div id="full-page">
+    <div id="sc-1" class="content-wrapper" style="background-color:#ccffff">
+        <hgroup class="title">
+            <h1>יצואן/יבואן?</h1>
+        </hgroup>
+        <hgroup class="title">
+            <h2>חסוך עד 150,000&#8362; כל שנה</h2>
+        </hgroup>
+        <p>
+            הלקוחות שלנו נהנים מעיסקאות מט"ח עם מירווחים נמוכים<br />
+            בכ <b>30%-80%</b> מהמירווחים הניתנים בבנקים.<br />
+            הצטרפו למהפכה וחיסכו לחברתכם אלפי שקלים כל חודש.<br /><br />
+        </p>
+    </div>
 
-@section HomePromo
-{
-    <section id="HomePromo" class="featuredBasic">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>יצואן/יבואן?</h1>
-            </hgroup>
-            <hgroup class="title">
-                <h2>חסוך עד 150,000&#8362; כל שנה</h2>
-            </hgroup>
-            <p>
-                הלקוחות שלנו נהנים מעיסקאות מט"ח עם מירווחים נמוכים<br />
-                בכ <b>30%-80%</b> מהמירווחים הניתנים בבנקים.<br />
-                הצטרפו למהפכה וחיסכו לחברתכם אלפי שקלים כל חודש.<br /><br />
-            </p>
-        </div>
-    </section>
-    <section class="content-wrapper main-content clear-fix">
-        <br />
-    </section>
+    <div id="sc-2" class="content-wrapper">
+        <hgroup class="title">
+            <h1>רשימת פעולות</h1>
+        </hgroup>
+        <p class="actionButtons">
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeAbout"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeHowItWorks"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="#"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/OnLineFXRates/ShowRates"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md disabled" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> לביצוע המרה</a>
+            <br /><br />
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+            <br /><br />
+        </p>
+    </div>
 
-}
 
-@section HomeActions
-{
-    <section id="HomeActions" class="featuredBasic featuredGreen">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>רשימת פעולות</h1>
-            </hgroup>
-            <p class="actionButtons">
-                <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeAbout"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeHowItWorks"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success btn-md" href="#"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success btn-md" href="/FlatFXWeb/OnLineFXRates/ShowRates"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success btn-md disabled" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> לביצוע המרה</a>
+    <div id="sc-3" class="content-wrapper">
+        <h1>איך זה עובד:</h1>
+        <ol class="roundHeb">
+            <li class="one">
+                הלקוח מבצע המרת מט"ח באמצעות האתר
                 <br /><br />
-                <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
-                <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+            </li>
+            <li class="two">
+                חדר העיסקאות של FlatFX מבצע את העיסקה מול הבנק במחיר אטרקטיבי
                 <br /><br />
-            </p>
+            </li>
+            <li class="three">
+                הלקוח מעביר את הסכום הנדרש במטבע הרוכש
+                <br /><br />
+            </li>
+            <li class="four">
+                FlatFX מעבירה לחשבון הלקוח את הסכום הנדרש במטבע הנרכש
+                <br /><br />
+            </li>
+            <li class="five">
+                בהצלחה
+                <br /><br />
+            </li>
+        </ol>
+    </div>
+
+
+    <div id ="sc-4" class="content-wrapper">
+        <hgroup class="title">
+            <h1>אודות</h1>
+        </hgroup>
+        <h3>תיאור:</h3>
+        <div>
+            <strong>FlatFX</strong> הינו אתר אינטרנטי המאפשר ללקוחות הבנקים לבצע פעולות מט"ח והמרת מטבעות מול ספקי נזילות (בנקים) באופן תחרותי, ישיר, מודע וזול.<br />
+            המוצר ייצור מהפיכה בשוק המרות המטבע ויאפשר לחברות בינוניות וקטנות לבצע המרות מטבע במחירים תחרותיים שעד עתה לא ראו (20%-80% הנחה).<br />
+            האתר מציג ללקוח את מצב השוק (On Line Feed) ומתריע מפני מחירי עסקאות לא כדאיים (שומר על הלקוח).<br />
+            האתר מאפשר ללקוח להכניס פקודות מסחר/המרה ושולח אותן למספר בנקים במקביל. עם קבלת ציטוטי הבנקים, התמחור הזול ביותר מובלט והאתר מאפשר את ביצוע העיסקה, בקשת שיפור מחיר, צ'ט מול הבנקאי, ועוד...<br />
         </div>
-    </section>
-    <section class="content-wrapper main-content clear-fix">
-        <br />
-    </section>
-}
 
-@section HomeHowItWorks
-{
-    <section id="HomeHowItWorks" class="featuredBasic">
-        <div class="content-wrapper">
-            <h1>איך זה עובד:</h1>
-            <ol class="roundHeb">
-                <li class="one">
-                    הלקוח מבצע המרת מט"ח באמצעות האתר
-                    <br /><br />
-                </li>
-                <li class="two">
-                    חדר העיסקאות של FlatFX מבצע את העיסקה מול הבנק במחיר אטרקטיבי
-                    <br /><br />
-                </li>
-                <li class="three">
-                    הלקוח מעביר את הסכום הנדרש במטבע הרוכש
-                    <br /><br />
-                </li>
-                <li class="four">
-                    FlatFX מעבירה לחשבון הלקוח את הסכום הנדרש במטבע הנרכש
-                    <br /><br />
-                </li>
-                <li class="five">
-                    בהצלחה
-                    <br /><br />
-                </li>
-            </ol>
+        <h3>תכונות המערכת:</h3>
+        <div>
+            <ul>
+                <li>קבלת מחירי השוק OnLine, התראה במקרה של מחיר עיסקה גבוה, שמירה על הלקוח מביצוע עיסקה במרווחים גדולים.</li>
+                <li>מסך שליחת הוראת קניה/מכירה. אפשרות לשלוח לכל הבנקים במקביל או לבנקים ספציפיים בלבד.</li>
+                <li>מסך ניהול קניה/מכירה מול הבנקים השונים. במסך מקבלים את המחיר של הבנק, ניתן לבקש מחיר טוב יותר, לבצע עיסקה או לבטלה. ניתן לעבור לצ'ט מול הבנק.</li>
+                <li>מסכי הצ'ט, נתוני עסקאות קיימות, היסטוריית עסקאות, דוחות.</li>
+                <li>מסכי ניהול עסקאות. צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
+            </ul>
         </div>
-    </section>
-    <section class="content-wrapper main-content clear-fix">
-        <br />
-    </section>
-}
 
-
-@section HomeAbout
-{
-    <section id="HomeAbout" class="featuredBasic featuredGreen">
-        <div class="content-wrapper">
-            <hgroup class="title">
-                <h1>אודות</h1>
-            </hgroup>
-            <h3>תיאור:</h3>
-            <div>
-                <strong>FlatFX</strong> הינו אתר אינטרנטי המאפשר ללקוחות הבנקים לבצע פעולות מט"ח והמרת מטבעות מול ספקי נזילות (בנקים) באופן תחרותי, ישיר, מודע וזול.<br />
-                המוצר ייצור מהפיכה בשוק המרות המטבע ויאפשר לחברות בינוניות וקטנות לבצע המרות מטבע במחירים תחרותיים שעד עתה לא ראו (20%-80% הנחה).<br />
-                האתר מציג ללקוח את מצב השוק (On Line Feed) ומתריע מפני מחירי עסקאות לא כדאיים (שומר על הלקוח).<br />
-                האתר מאפשר ללקוח להכניס פקודות מסחר/המרה ושולח אותן למספר בנקים במקביל. עם קבלת ציטוטי הבנקים, התמחור הזול ביותר מובלט והאתר מאפשר את ביצוע העיסקה, בקשת שיפור מחיר, צ'ט מול הבנקאי, ועוד...<br />
-            </div>
-
-            <h3>תכונות המערכת:</h3>
-            <div>
-                <ul>
-                    <li>קבלת מחירי השוק OnLine, התראה במקרה של מחיר עיסקה גבוה, שמירה על הלקוח מביצוע עיסקה במרווחים גדולים.</li>
-                    <li>מסך שליחת הוראת קניה/מכירה. אפשרות לשלוח לכל הבנקים במקביל או לבנקים ספציפיים בלבד.</li>
-                    <li>מסך ניהול קניה/מכירה מול הבנקים השונים. במסך מקבלים את המחיר של הבנק, ניתן לבקש מחיר טוב יותר, לבצע עיסקה או לבטלה. ניתן לעבור לצ'ט מול הבנק.</li>
-                    <li>מסכי הצ'ט, נתוני עסקאות קיימות, היסטוריית עסקאות, דוחות.</li>
-                    <li>מסכי ניהול עסקאות. צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
-                </ul>
-            </div>
-
-            <h3>יתרונות עיקריים:</h3>
-            <div>
-                <ul>
-                    <li><b>הקטנת עמלות המשתמשים ב 30%-80%.</b></li>
-                    <li>ניתן לבדוק את המערכת במשך 3 חודשים חינם ולהפסיק את השימוש ללא תשלום</li>
-                    <li>השימוש במערכת גורם לבנקים להתחרות ביניהם על ביצוע העיסקה ע"י הצעת מחיר נמוך יותר</li>
-                    <li>ע"י השימוש במערכת הלקוח מסווג בקבוצת עמלות נמוכות בהשוואה לסיווגו כלקוח יחיד מול הבנק</li>
-                </ul>
-            </div>
-
+        <h3>יתרונות עיקריים:</h3>
+        <div>
+            <ul>
+                <li><b>הקטנת עמלות המשתמשים ב 30%-80%.</b></li>
+                <li>ניתן לבדוק את המערכת במשך 3 חודשים חינם ולהפסיק את השימוש ללא תשלום</li>
+                <li>השימוש במערכת גורם לבנקים להתחרות ביניהם על ביצוע העיסקה ע"י הצעת מחיר נמוך יותר</li>
+                <li>ע"י השימוש במערכת הלקוח מסווג בקבוצת עמלות נמוכות בהשוואה לסיווגו כלקוח יחיד מול הבנק</li>
+            </ul>
         </div>
-    </section>
-    <section class="content-wrapper main-content clear-fix">
-        <br />
-    </section>
-}
+
+</div>
+
+</div>
 
