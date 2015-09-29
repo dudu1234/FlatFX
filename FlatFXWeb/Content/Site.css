@@ -116,7 +116,7 @@ h5 a:link, h5 a:visited, h5 a:active {
     }
 
 .featuredGreen + .main-content {
-        background: url("../Images/greenAccent.png") no-repeat;
+        background: url("../Images/heroAccent.png") no-repeat;
     }
 
 header .content-wrapper {
