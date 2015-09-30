@@ -202,6 +202,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Content Include="Content\examples.css" />
+    <Content Include="Content\flowers.mp4" />
     <Content Include="Content\fullpageex.css" />
     <Content Include="Content\jquery.fullPage.css" />
     <Content Include="Content\themes\base\jquery-ui.css" />
@@ -268,6 +269,7 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Content\flowers.webm" />
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="JS\FFx.js" />
     <Content Include="JS\Home\HomePage.js" />

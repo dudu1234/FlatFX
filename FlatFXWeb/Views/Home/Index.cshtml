@@ -2,8 +2,21 @@
     ViewBag.Title = "FlatFX Home Page";
 }
 <script src="~/JS/Home/HomePage.js"></script>
+<ul id="menu" style="padding-bottom:50px">
+    <li data-menuanchor="firstPage"><a href="#firstPage"><span class="glyphicon glyphicon-home" style="color:darkblue; font-size: medium"></span></a></li>
+    <li data-menuanchor="secondPage"><a href="#secondPage">סרטון</a></li>
+    <li data-menuanchor="3rdPage"><a href="#3rdPage">פעולות</a></li>
+    <li data-menuanchor="4thpage"><a href="#4thpage">איך זה עובד?</a></li>
+    <li data-menuanchor="5thpage"><a href="#5thpage">אודות</a></li>
+</ul>
 <div id="full-page">
-    <div id="sc-1" class="content-wrapper" style="background-color:#ccffff">
+    
+    <div id="sc-0" class="section">
+        <div>
+            <section id="login">
+                @Html.Partial("_LoginPartial")
+            </section>
+        </div>
         <hgroup class="title">
             <h1>יצואן/יבואן?</h1>
         </hgroup>
@@ -16,8 +29,13 @@
             הצטרפו למהפכה וחיסכו לחברתכם אלפי שקלים כל חודש.<br /><br />
         </p>
     </div>
-
-    <div id="sc-2" class="content-wrapper">
+    <div id="sc-1" class="section">
+        <video autoplay loop muted id="myVideo">
+            <source src="Content/flowers.mp4" type="video/mp4">
+            <source src="Content/flowers.webm" type="video/webm">
+        </video>
+    </div>
+    <div id="sc-2" class="section">
         <hgroup class="title">
             <h1>רשימת פעולות</h1>
         </hgroup>
@@ -34,8 +52,7 @@
         </p>
     </div>
 
-
-    <div id="sc-3" class="content-wrapper">
+    <div id="sc-3" class="section">
         <h1>איך זה עובד:</h1>
         <ol class="roundHeb">
             <li class="one">
@@ -61,8 +78,7 @@
         </ol>
     </div>
 
-
-    <div id ="sc-4" class="content-wrapper">
+    <div id="sc-4" class="section">
         <hgroup class="title">
             <h1>אודות</h1>
         </hgroup>
@@ -73,7 +89,6 @@
             האתר מציג ללקוח את מצב השוק (On Line Feed) ומתריע מפני מחירי עסקאות לא כדאיים (שומר על הלקוח).<br />
             האתר מאפשר ללקוח להכניס פקודות מסחר/המרה ושולח אותן למספר בנקים במקביל. עם קבלת ציטוטי הבנקים, התמחור הזול ביותר מובלט והאתר מאפשר את ביצוע העיסקה, בקשת שיפור מחיר, צ'ט מול הבנקאי, ועוד...<br />
         </div>
-
         <h3>תכונות המערכת:</h3>
         <div>
             <ul>
@@ -84,7 +99,6 @@
                 <li>מסכי ניהול עסקאות. צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
             </ul>
         </div>
-
         <h3>יתרונות עיקריים:</h3>
         <div>
             <ul>
@@ -94,8 +108,5 @@
                 <li>ע"י השימוש במערכת הלקוח מסווג בקבוצת עמלות נמוכות בהשוואה לסיווגו כלקוח יחיד מול הבנק</li>
             </ul>
         </div>
-
+    </div>
 </div>
-
-</div>
-

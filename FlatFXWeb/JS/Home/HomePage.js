@@ -1,6 +1,4 @@
-﻿
-
-$(document).ready(function () {
+﻿$(document).ready(function () {
     console.log('test');
 
 
@@ -11,6 +9,9 @@ $(document).ready(function () {
         'navigation': true,
         'navigationPosition': 'right',
         'navigationTooltips': ['fullPage.js', 'Powerful', 'Amazing', 'Simple'],
+        anchors: ['firstPage', 'secondPage', '3rdPage', '4thpage', 'lastPage'],
+        menu: '#menu',
+        scrollingSpeed: 1000,
 
         'afterLoad': function (anchorLink, index) {
             /*
@@ -18,6 +19,12 @@ $(document).ready(function () {
                 $('#iphone3, #iphone2, #iphone4').addClass('active');
             }
             */
+        },
+        afterRender: function () {
+
+
+            //playing the video
+            $('video').get(0).play();
         },
 
         'onLeave': function (index, nextIndex, direction) {

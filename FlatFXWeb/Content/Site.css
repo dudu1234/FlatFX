@@ -184,6 +184,7 @@ footer {
 
 /* menu
 ----------------------------------------------------------*/
+/*
 ul#menu {
     font-size: 1.3em;
     font-weight: 600;
@@ -208,7 +209,7 @@ ul#menu {
             color: #333;
             text-decoration: none;
         }
-
+    */
 
 /* page elements
 ----------------------------------------------------------*/
@@ -877,4 +878,3 @@ tr.pager td {
 {
     color: blue;
 }
-

@@ -7,26 +7,20 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
-
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
     <!-- Optional theme -->
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
-    
 
     @Scripts.Render("~/bundles/jquery")
-
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
-
     @Scripts.Render("~/bundles/jqueryui")
     <link href="~/Content/examples.css" rel="stylesheet" />
-    <script src="~/Scripts/jquery.fullPage.js"></script>    
+    <script src="~/Scripts/jquery.fullPage.js"></script>
     <link href="~/Content/jquery.fullPage.css" rel="stylesheet" />
     <link href="~/Content/fullpageex.css" rel="stylesheet" />
-
     @RenderSection("scripts", required: false)
-
 
     <!-- Kendo links -->
     <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2013.1.319/styles/kendo.common-bootstrap.min.css" />
@@ -39,31 +33,30 @@
     <script src="~/JS/FFx.js"></script>
 </head>
 <body>
-    <header>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p class="site-title">@Html.ActionLink("FlatFX Logo", "Index", "Home")</p>
+    @*<header>
+            <div class="content-wrapper">
+                @*<div class="float-left">
+                    <p class="site-title">@Html.ActionLink("FlatFX Logo", "Index", "Home")</p>
+                </div>
+                <div class="float-right">
+                    <section id="login">
+                        @Html.Partial("_LoginPartial")
+                    </section>
+                    @*<nav>
+                        @Html.Partial("nav");
+                    </nav>
+                </div>
             </div>
-            <div class="float-right">
-                <section id="login">
-                    @Html.Partial("_LoginPartial")
-                </section>
-                <nav>
-                    @Html.Partial("nav");
-                </nav>
-            </div>
-        </div>
-    </header>
+        </header>*@
     <div id="body">
-        
-        @*@RenderSection("HomePromo", required: false)
-        @RenderSection("HomeActions", required: false)
-        @RenderSection("HomeHowItWorks", required: false)
-        @RenderSection("HomeAbout", required: false)*@
 
-        
+        @*@RenderSection("HomePromo", required: false)
+            @RenderSection("HomeActions", required: false)
+            @RenderSection("HomeHowItWorks", required: false)
+            @RenderSection("HomeAbout", required: false)*@
+
         @RenderBody()
-        
+
     </div>
     <footer>
         <div class="content-wrapper">
