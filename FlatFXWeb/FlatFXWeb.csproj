@@ -248,6 +248,8 @@
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DesignFactory.WebMatrix.Executer.dll" />
     <Content Include="Images\FlatFX_Logo.png" />
+    <Content Include="Images\FlatFX_Logo2.png" />
+    <Content Include="Images\FlatFX_Logo3.png" />
     <Content Include="Images\Logo3.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
