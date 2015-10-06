@@ -9,6 +9,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatFXCore", "FFXBussinessL
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FFXUnitTest", "FFXUnitTest\FFXUnitTest.csproj", "{60C1249F-EC7D-4158-B286-128C3EEB044D}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatFXWebClient", "FlatFXWebClient\FlatFXWebClient.csproj", "{02A6C998-F9E1-41CB-B6E7-56339E559111}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "FlatFXWebClient.Tests", "FlatFXWebClient.Tests\FlatFXWebClient.Tests.csproj", "{226A0BE0-1A6D-4C8E-84B3-DD6D7017AA3D}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -27,6 +31,14 @@ Global
 		{60C1249F-EC7D-4158-B286-128C3EEB044D}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{60C1249F-EC7D-4158-B286-128C3EEB044D}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{60C1249F-EC7D-4158-B286-128C3EEB044D}.Release|Any CPU.Build.0 = Release|Any CPU
+		{02A6C998-F9E1-41CB-B6E7-56339E559111}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{02A6C998-F9E1-41CB-B6E7-56339E559111}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{02A6C998-F9E1-41CB-B6E7-56339E559111}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{02A6C998-F9E1-41CB-B6E7-56339E559111}.Release|Any CPU.Build.0 = Release|Any CPU
+		{226A0BE0-1A6D-4C8E-84B3-DD6D7017AA3D}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{226A0BE0-1A6D-4C8E-84B3-DD6D7017AA3D}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{226A0BE0-1A6D-4C8E-84B3-DD6D7017AA3D}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{226A0BE0-1A6D-4C8E-84B3-DD6D7017AA3D}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
