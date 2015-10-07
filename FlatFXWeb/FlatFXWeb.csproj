@@ -247,9 +247,12 @@
     <Content Include="Content\themes\base\minified\jquery.ui.tabs.min.css" />
     <Content Include="Content\themes\base\minified\jquery.ui.theme.min.css" />
     <Content Include="DesignFactory.WebMatrix.Executer.dll" />
+    <Content Include="Images\FlatFXIcon.ico" />
+    <Content Include="Images\FlatFXIconImage.png" />
     <Content Include="Images\FlatFX_Logo.png" />
     <Content Include="Images\FlatFX_Logo2.png" />
     <Content Include="Images\FlatFX_Logo3.png" />
+    <Content Include="Images\HowItWorks1.jpg" />
     <Content Include="Images\Logo3.png" />
     <Content Include="Content\Site.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
