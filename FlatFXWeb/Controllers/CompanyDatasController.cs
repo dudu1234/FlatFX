@@ -11,13 +11,21 @@ using FlatFX.Model.Data;
 
 namespace FlatFXWeb.Controllers
 {
+    [Authorize]
     public class CompanyDatasController : Controller
     {
         private FfxContext db = new FfxContext();
 
         // GET: CompanyDatas
+        //[Authorize]
+        //[Authorize(Users="dudu,guy")]
+        //[Authorize(Rules="admin")]
+        //[AllowAnonymous]
         public ActionResult Index()
         {
+            //if (User.Identity.IsAuthenticated)
+            //User.Identity.Name
+            
             var companies = db.Companies.Include(c => c.ContactDetails);
             return View(companies.ToList());
         }
