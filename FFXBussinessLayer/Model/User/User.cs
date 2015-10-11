@@ -28,20 +28,7 @@ namespace FlatFXCore.Model.User
     public class ApplicationUser : IdentityUser
     {
         [MaxLength(100), Required]
-        public string FirstName {
-            get
-            {
-                return "aaa";
-            }
-            set
-            {
-
-            }
-
-        }
-        /// <summary>
-        /// MiddleName 
-        /// </summary>
+        public string FirstName { get; set; }
         [MaxLength(100)]
         public string MiddleName { get; set; }
         [MaxLength(100), Required]
