@@ -11,10 +11,10 @@ using System.Timers;
 using System.Runtime.InteropServices;
 using System.Linq;
 using System.Threading.Tasks;
-using FlatFX.Model.Core;
-using FlatFX.Model.Data;
+using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
 
-namespace FlatFX.BussinessLayer
+namespace FlatFXCore.BussinessLayer
 {
     /// <summary>
     ///     Responsible to write to log. There are several log States.
@@ -162,8 +162,8 @@ namespace FlatFX.BussinessLayer
                 if (!checkIfWriteLevel(_LogLevel, _OperationLevel))
                     return false;
 
-                int? _UserId = ApplicationInformation.Instance.GetUserID();
-                if (_UserId.HasValue && _UserId.Value <= 0)
+                string _UserId = ApplicationInformation.Instance.GetUserID();
+                if (_UserId == "")
                     _UserId = null;
                 string _SessionId = ApplicationInformation.Instance.GetSessionID();
                 string _UserIP = ApplicationInformation.Instance.GetUserIP();

@@ -1,31 +1,105 @@
 ﻿@{
-    ViewBag.Title = "Home Page";
+    ViewBag.Title = "FlatFX Home Page";
 }
 
-<div class="jumbotron">
-    <h1>ASP.NET</h1>
-    <p class="lead">ASP.NET is a free web framework for building great Web sites and Web applications using HTML, CSS and JavaScript.</p>
-    <p><a href="http://asp.net" class="btn btn-primary btn-lg">Learn more &raquo;</a></p>
-</div>
+<script src="~/JS/Home/HomePage.js"></script>
 
-<div class="row">
-    <div class="col-md-4">
-        <h2>Getting started</h2>
+<div id="full-page">
+    <div id="sc-0" class="section">
+        <hgroup class="title">
+            <h1>יצואן/יבואן/איש כספים?</h1>
+        </hgroup>
+        <p style="font-size: 40px"><b>תפסיק להיות לקוח שבוי - הצטרף למהפיכה במט"ח</b></p>
         <p>
-            ASP.NET MVC gives you a powerful, patterns-based way to build dynamic websites that
-            enables a clean separation of concerns and gives you full control over markup
-            for enjoyable, agile development.
+            תן למערכת המסחר לעבוד עבורך מול כל הבנקים ולהשיג את המחיר הטוב ביותר
+            <br />
+            איתנו תחסוך עד &#8362;200,000 כל שנה
         </p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301865">Learn more &raquo;</a></p>
+        <br />
+        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-registration-mark"></span>הצטרף למהפיכה</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-registration-mark"></span>פתח חשבון דמו</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-info-sign"></span>למידע נוסף</a>&nbsp;&nbsp;&nbsp;
+        <br /><br />
     </div>
-    <div class="col-md-4">
-        <h2>Get more libraries</h2>
-        <p>NuGet is a free Visual Studio extension that makes it easy to add, remove, and update libraries and tools in Visual Studio projects.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301866">Learn more &raquo;</a></p>
+    <div id="sc-1" class="section">
+        <video autoplay loop muted id="myVideo">
+            <source src="Content/flowers.mp4" type="video/mp4">
+            <source src="Content/flowers.webm" type="video/webm">
+        </video>
     </div>
-    <div class="col-md-4">
-        <h2>Web Hosting</h2>
-        <p>You can easily find a web hosting company that offers the right mix of features and price for your applications.</p>
-        <p><a class="btn btn-default" href="http://go.microsoft.com/fwlink/?LinkId=301867">Learn more &raquo;</a></p>
+    <div id="sc-2" class="section">
+        <h1>איך זה עובד:</h1>
+        <img src="~/Images/HowItWorks1.jpg" />
+        <ol class="roundHeb">
+            <li class="one">
+                הלקוח מבצע המרת מט"ח באמצעות האתר
+                <br /><br />
+            </li>
+            <li class="two">
+                חדר העיסקאות של FlatFX מבצע את העיסקה מול הבנק במחיר אטרקטיבי
+                <br /><br />
+            </li>
+            <li class="three">
+                הלקוח מעביר את הסכום הנדרש במטבע הרוכש
+                <br /><br />
+            </li>
+            <li class="four">
+                FlatFX מעבירה לחשבון הלקוח את הסכום הנדרש במטבע הנרכש
+                <br /><br />
+            </li>
+            <li class="five">
+                בהצלחה
+                <br /><br />
+            </li>
+        </ol>
     </div>
+
+    <div id="sc-3" class="section">
+        <hgroup class="title">
+            <h1>אודות</h1>
+        </hgroup>
+        <h3>תיאור:</h3>
+        <div>
+            <strong>FlatFX</strong> הינו אתר אינטרנטי המאפשר ללקוחות הבנקים לבצע פעולות מט"ח והמרת מטבעות מול ספקי נזילות (בנקים) באופן תחרותי, ישיר, מודע וזול.<br />
+            המוצר ייצור מהפיכה בשוק המרות המטבע ויאפשר לחברות בינוניות וקטנות לבצע המרות מטבע במחירים תחרותיים שעד עתה לא ראו (20%-80% הנחה).<br />
+            האתר מציג ללקוח את מצב השוק (On Line Feed) ומתריע מפני מחירי עסקאות לא כדאיים (שומר על הלקוח).<br />
+            האתר מאפשר ללקוח להכניס פקודות מסחר/המרה ושולח אותן למספר בנקים במקביל. עם קבלת ציטוטי הבנקים, התמחור הזול ביותר מובלט והאתר מאפשר את ביצוע העיסקה, בקשת שיפור מחיר, צ'ט מול הבנקאי, ועוד...<br />
+        </div>
+        <h3>תכונות המערכת:</h3>
+        <div>
+            <ul>
+                <li>קבלת מחירי השוק OnLine, התראה במקרה של מחיר עיסקה גבוה, שמירה על הלקוח מביצוע עיסקה במרווחים גדולים.</li>
+                <li>מסך שליחת הוראת קניה/מכירה. אפשרות לשלוח לכל הבנקים במקביל או לבנקים ספציפיים בלבד.</li>
+                <li>מסך ניהול קניה/מכירה מול הבנקים השונים. במסך מקבלים את המחיר של הבנק, ניתן לבקש מחיר טוב יותר, לבצע עיסקה או לבטלה. ניתן לעבור לצ'ט מול הבנק.</li>
+                <li>מסכי הצ'ט, נתוני עסקאות קיימות, היסטוריית עסקאות, דוחות.</li>
+                <li>מסכי ניהול עסקאות. צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
+            </ul>
+        </div>
+        <h3>יתרונות עיקריים:</h3>
+        <div>
+            <ul>
+                <li><b>הקטנת עמלות המשתמשים ב 30%-80%.</b></li>
+                <li>ניתן לבדוק את המערכת במשך 3 חודשים חינם ולהפסיק את השימוש ללא תשלום</li>
+                <li>השימוש במערכת גורם לבנקים להתחרות ביניהם על ביצוע העיסקה ע"י הצעת מחיר נמוך יותר</li>
+                <li>ע"י השימוש במערכת הלקוח מסווג בקבוצת עמלות נמוכות בהשוואה לסיווגו כלקוח יחיד מול הבנק</li>
+            </ul>
+        </div>
+    </div>
+    <div id="sc-4" class="section" style="background-color: #808080">
+        <hgroup class="title">
+            <h1>רשימת פעולות</h1>
+        </hgroup>
+        <p class="actionButtons">
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeAbout"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/Home/Index#HomeHowItWorks"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="#"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/OnLineFXRates/ShowRates"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md disabled" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> לביצוע המרה</a>
+            <br /><br />
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
+            <a class="btn btn-success btn-md" href="/FlatFXWeb/CompanyDatas"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+            <br /><br />
+        </p>
+    </div>
+
 </div>

@@ -1,4 +1,5 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("LogInfo")]
     public class LogInfoData
@@ -22,10 +23,10 @@ namespace FlatFX.Model.Data
         [MaxLength(30)]
         public string ApplicationName { get; set; }
         
-        public int? UserId { get; set; }
+        public string UserId { get; set; }
         //GUY : how can i add row with UserId = -1 or NULL ?
         [ForeignKey("UserId")]
-        public virtual UserData User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         public string UserIP { get; set; }
         [MaxLength(30)]

@@ -6,15 +6,15 @@ using System.Linq;
 using System.Reflection;
 using System.Text;
 using System.Threading.Tasks;
-using FlatFX.Model.Data;
+using FlatFXCore.Model.Data;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
+using FlatFXCore.Model.User;
 
-namespace FlatFX.Model.Core
+namespace FlatFXCore.Model.Core
 {
-    public class FfxContext : DbContext
+    public class FfxContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<UserData> Users { get; set; }
         public DbSet<ContactDetails> ContactsDetails { get; set; }
         public DbSet<UserMessageData> UserMessages { get; set; }
         public DbSet<UserFavoriteData> UserFavorites { get; set; }
@@ -36,34 +36,14 @@ namespace FlatFX.Model.Core
         public DbSet<LogInfoData> LogInfo { get; set; }
 
         public FfxContext()
-            : base("name=FFXConnectionString")
+            : base("name=FFXConnectionString", throwIfV1Schema: false)
         {
             
         }
 
-        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        public static FfxContext Create()
         {
-            /*
-            modelBuilder.Entity<UserData>()
-                    .HasMany(u => u.ToMessageData)
-                    .HasRequired(m => m.FromUser)
-                    .HasForeignKey(m => m.FromUserId)
-                    .WillCascadeOnDelete(false);
-            */
-            modelBuilder.Conventions.Remove<OneToManyCascadeDeleteConvention>();
-
-            base.OnModelCreating(modelBuilder);
-            
-           // var typesToRegister = Assembly.GetExecutingAssembly().GetTypes()
-           //.Where(type => !String.IsNullOrEmpty(type.Namespace))
-           //.Where(type => type.BaseType != null && type.BaseType.IsGenericType
-           //     && type.BaseType.GetGenericTypeDefinition() == typeof(EntityTypeConfiguration<>));
-           // foreach (var type in typesToRegister)
-           // {
-           //     dynamic configurationInstance = Activator.CreateInstance(type);
-           //     modelBuilder.Configurations.Add(configurationInstance);
-           // }
-           // base.OnModelCreating(modelBuilder);
+            return new FfxContext();
         }
     }
 }

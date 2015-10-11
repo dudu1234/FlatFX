@@ -1,18 +1,18 @@
-namespace FlatFX.Migrations
+namespace FlatFXCore.Migrations
 {
     using System;
     using System.Data.Entity;
     using System.Data.Entity.Migrations;
     using System.Linq;
 
-    internal sealed class Configuration : DbMigrationsConfiguration<FlatFX.Model.Core.FfxContext>
+    internal sealed class Configuration : DbMigrationsConfiguration<FlatFXCore.Model.Core.FfxContext>
     {
         public Configuration()
         {
             AutomaticMigrationsEnabled = true;
         }
 
-        protected override void Seed(FlatFX.Model.Core.FfxContext context)
+        protected override void Seed(FlatFXCore.Model.Core.FfxContext context)
         {
             //  This method will be called after migrating to the latest version.
 

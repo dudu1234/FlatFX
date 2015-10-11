@@ -1,4 +1,4 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("Configuration")]
     public class ConfigurationData
@@ -16,7 +16,7 @@ namespace FlatFX.Model.Data
         public string Key { get; set; }
         
         [Key, Column(Order = 2)]
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         //[ForeignKey("UserId")]
         //public virtual UserData User { get; set; }
 

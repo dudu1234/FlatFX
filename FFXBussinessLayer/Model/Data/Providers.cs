@@ -1,4 +1,5 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("Providers")]
     public class ProviderData
     {
         [Key]
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         
         [Index("IX_ShortName", IsUnique = true), MaxLength(10), Required]
         public string ShortName { get; set; }
@@ -55,9 +56,9 @@ namespace FlatFX.Model.Data
         public double QuoteResponse_NumberOfPromilsWithoutDiscount { get; set; }
 
         public virtual ICollection<ProviderAccountData> Accounts { get; set; }
-        public virtual ICollection<UserData> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
 
-        public int ContactDetailsId { get; set; }
+        public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
@@ -67,11 +68,11 @@ namespace FlatFX.Model.Data
     public class ProviderAccountData
     {
         [Key, Column(Order = 1)]
-        public int CompanyAccountId { get; set; }
+        public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
         public virtual CompanyAccountData CompanyAccount { get; set; }
         [Key, Column(Order = 2)]
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 

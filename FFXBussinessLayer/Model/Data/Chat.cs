@@ -1,4 +1,5 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("ChatSessions")]
     public class ChatSessionData
@@ -15,10 +16,10 @@ namespace FlatFX.Model.Data
         [Key]
         public Int64 ChatSessionId { get; set; }
         
-        public int CompanyId { get; set; }
+        public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual CompanyData Company { get; set; }
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 
@@ -40,9 +41,9 @@ namespace FlatFX.Model.Data
         public Int64 ChatSessionId { get; set; }
         [ForeignKey("ChatSessionId")]
         public virtual ChatSessionData ChatSession { get; set; }
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public virtual UserData User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
         [MaxLength(4000)]
         public string Text { get; set; }

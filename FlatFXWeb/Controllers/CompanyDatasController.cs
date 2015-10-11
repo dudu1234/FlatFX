@@ -6,8 +6,8 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
-using FlatFX.Model.Core;
-using FlatFX.Model.Data;
+using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
 
 namespace FlatFXWeb.Controllers
 {

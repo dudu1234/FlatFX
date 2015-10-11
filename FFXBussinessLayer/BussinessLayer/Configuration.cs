@@ -8,10 +8,12 @@ using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using FlatFX.Model.Core;
-using FlatFX.Model.Data;
+using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
+using System.Web;
+using System.Web.Security;
 
-namespace FlatFX.BussinessLayer
+namespace FlatFXCore.BussinessLayer
 {
     /// <summary>
     /// Returns all app configuration.
@@ -25,7 +27,7 @@ namespace FlatFX.BussinessLayer
         #region Members
         private static Config m_Instance = null;
         private static object sync = new object();
-        private Dictionary<int, Dictionary<string, ConfigurationData>> _dictionary = new Dictionary<int, Dictionary<string, ConfigurationData>>();
+        private Dictionary<string, Dictionary<string, ConfigurationData>> _dictionary = new Dictionary<string, Dictionary<string, ConfigurationData>>();
         #endregion
 
         #region Ctor
@@ -70,7 +72,7 @@ namespace FlatFX.BussinessLayer
         /// <param name="userId"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public string getRealTimeValue(string key, int userId, string defaultValue)
+        public string getRealTimeValue(string key, string userId, string defaultValue)
         {
             return Convert.ToString(getRealTimeConfigValue(key, userId, defaultValue));
         }
@@ -81,7 +83,7 @@ namespace FlatFX.BussinessLayer
         /// <param name="userId"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public int getRealTimeValue(string key, int userId, int defaultValue)
+        public int getRealTimeValue(string key, string userId, int defaultValue)
         {
             return Convert.ToInt32(getRealTimeConfigValue(key, userId, defaultValue.ToString()));
         }
@@ -92,7 +94,7 @@ namespace FlatFX.BussinessLayer
         /// <param name="userId"></param>
         /// <param name="defaultValue"></param>
         /// <returns></returns>
-        public bool getRealTimeValue(string key, int userId, bool defaultValue)
+        public bool getRealTimeValue(string key, string userId, bool defaultValue)
         {
             object value = getRealTimeConfigValue(key, userId, defaultValue.ToString());
             if (value.ToString() == "1" || value.ToString().ToLower() == "true")
@@ -108,7 +110,7 @@ namespace FlatFX.BussinessLayer
         /// <param name="userId"></param>
         /// <param name="DefaultValue"></param>
         /// <returns></returns>
-        public string getRealTimeConfigValue(string Key, int userId, string DefaultValue)
+        public string getRealTimeConfigValue(string Key, string userId, string DefaultValue)
         {
             using (var context = new FfxContext())
             {
@@ -117,7 +119,7 @@ namespace FlatFX.BussinessLayer
 
                 //get default row if user not exists
                 if (data == null)
-                    data = context.Configurations.FirstOrDefault(row => row.Key == Key && row.UserId == -1);
+                    data = context.Configurations.FirstOrDefault(row => row.Key == Key && row.UserId == "");
 
                 if (data == null)
                     return DefaultValue;
@@ -143,12 +145,11 @@ namespace FlatFX.BussinessLayer
         /// <returns></returns>
         public string getValue(string key,string defaultValue)
         {
-            int userId = GetUserID();
-            
-            if (userId > 0 && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
+            string userId = GetUserID(); 
+            if (userId != "" && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
                 return _dictionary[userId][key].Value;
-            else if (_dictionary[-1].ContainsKey(key))
-                return _dictionary[-1][key].Value;
+            else if (_dictionary[""].ContainsKey(key))
+                return _dictionary[""][key].Value;
             else
                 return defaultValue;
         }
@@ -163,12 +164,12 @@ namespace FlatFX.BussinessLayer
         {
             try
             {
-                int userId = GetUserID();
+                string userId = GetUserID();
 
-                if (userId > 0 && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
+                if (userId != "" && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
                     return _dictionary[userId][key].Value.ToInt();
-                else if (_dictionary[-1].ContainsKey(key))
-                    return _dictionary[-1][key].Value.ToInt();
+                else if (_dictionary[""].ContainsKey(key))
+                    return _dictionary[""][key].Value.ToInt();
                 else
                     return defaultValue;
             }
@@ -188,12 +189,12 @@ namespace FlatFX.BussinessLayer
         {
             try
             {
-                int userId = GetUserID();
+                string userId = GetUserID();
 
-                if (userId > 0 && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
+                if (userId != "" && _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key))
                     return _dictionary[userId][key].Value.ToBoolean();
-                else if (_dictionary[-1].ContainsKey(key))
-                    return _dictionary[-1][key].Value.ToBoolean();
+                else if (_dictionary[""].ContainsKey(key))
+                    return _dictionary[""][key].Value.ToBoolean();
                 else
                     return defaultValue;
             }
@@ -266,7 +267,7 @@ namespace FlatFX.BussinessLayer
         public string getDescription(string key)
         {
             ConfigurationData val;
-            bool hasKey = _dictionary[-1].TryGetValue(key, out val);
+            bool hasKey = _dictionary[""].TryGetValue(key, out val);
             if (!hasKey)
                 return null;
 
@@ -284,14 +285,14 @@ namespace FlatFX.BussinessLayer
         /// <summary>
         ///     Loads the data from the database into the hash. override the common data by user specific parameters
         /// </summary>
-        public void LoadData(int userId)
+        public void LoadData(string userId)
         {
-            if (!_dictionary.ContainsKey(-1))
+            if (!_dictionary.ContainsKey(""))
                 LoadCommonData();
 
             try
             {
-                if (userId <= 0)
+                if (userId == "")
                     return;
 
                 //Load user configurations
@@ -315,7 +316,7 @@ namespace FlatFX.BussinessLayer
         /// <param name="key"></param>
         /// <param name="userId"></param>
         /// <returns></returns>
-        public bool HasValueForUser(string key, int userId)
+        public bool HasValueForUser(string key, string userId)
         {
             return _dictionary.ContainsKey(userId) && _dictionary[userId].ContainsKey(key);
         }
@@ -328,10 +329,10 @@ namespace FlatFX.BussinessLayer
             {
                 using (var context = new FfxContext())
                 {
-                    if (_dictionary.ContainsKey(-1))
-                        _dictionary.Remove(-1);
-                    Dictionary<string, ConfigurationData> commonDictionary = context.Configurations.Where(row => row.UserId == -1).ToDictionary(key => key.Key);
-                    _dictionary.Add(-1, commonDictionary);
+                    if (_dictionary.ContainsKey(""))
+                        _dictionary.Remove("");
+                    Dictionary<string, ConfigurationData> commonDictionary = context.Configurations.Where(row => row.UserId == "").ToDictionary(key => key.Key);
+                    _dictionary.Add("", commonDictionary);
                 }
             }
             catch (Exception ex)
@@ -339,13 +340,17 @@ namespace FlatFX.BussinessLayer
                 throw new Exception("Failed to load common configurations.", ex);
             }
         }
-        private int GetUserID()
+        private string GetUserID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null || context.Session == null || context.Session["UserID"] == null)
-                return -1;
-            else 
-                return context.Session["UserID"].ToInt(-1);
+            if (context == null)
+                return "";
+            else
+            {
+                var user = Membership.GetUser(context.User.Identity.Name);
+                Guid currentUserID = (Guid)user.ProviderUserKey;
+                return currentUserID.ToString();
+            }
         }
         #endregion
     }

@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using System.Timers;
 
-namespace FlatFX.BussinessLayer
+namespace FlatFXCore.BussinessLayer
 {
     public class CurrencyFeedManager
     {

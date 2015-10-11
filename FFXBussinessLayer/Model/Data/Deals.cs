@@ -1,4 +1,5 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
@@ -7,7 +8,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("Deals")]
     public class DealData
@@ -15,21 +16,21 @@ namespace FlatFX.Model.Data
         [Key]
         public Int64 DealId { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public virtual UserData User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public int CompanyAccountId { get; set; }
+        public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
         public virtual CompanyAccountData CompanyAccount { get; set; }
 
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 
-        public int ProviderUserId { get; set; }
+        public string ProviderUserId { get; set; }
         [ForeignKey("ProviderUserId")]
-        public virtual UserData ProviderUser { get; set; }
+        public virtual ApplicationUser ProviderUser { get; set; }
 
         [MaxLength(100)]
         public string ProviderDealRef { get; set; }
@@ -77,15 +78,15 @@ namespace FlatFX.Model.Data
         [Key]
         public Int64 QueryId { get; set; }
 
-        public int UserId { get; set; }
+        public string UserId { get; set; }
         [ForeignKey("UserId")]
-        public virtual UserData User { get; set; }
+        public virtual ApplicationUser User { get; set; }
 
-        public int CompanyAccountId { get; set; }
+        public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
         public virtual CompanyAccountData CompanyAccount { get; set; }
 
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 
@@ -110,7 +111,7 @@ namespace FlatFX.Model.Data
         public virtual QueryData Query { get; set; }
 
         [Key, Column(Order = 2)]
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 

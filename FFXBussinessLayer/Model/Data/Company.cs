@@ -1,4 +1,5 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -8,13 +9,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     [Table("Companies")]
     public class CompanyData
     {
         [Key]
-        public int CompanyId { get; set; }
+        public string CompanyId { get; set; }
         [Index("IX_CompanyShortName", IsUnique = true), MaxLength(20), Required]
         public string CompanyShortName { get; set; }
         [MaxLength(400), Required]
@@ -31,12 +32,12 @@ namespace FlatFX.Model.Data
         public bool? IsDepositValid { get; set; }
         public bool? IsSignOnRegistrationAgreement { get; set; }
 
-        public int ContactDetailsId { get; set; }
+        public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
         public virtual ICollection<CompanyAccountData> Accounts { get; set; }
-        public virtual ICollection<UserData> Users { get; set; }
+        public virtual ICollection<ApplicationUser> Users { get; set; }
        
         public CompanyData() { }
     }
@@ -44,12 +45,12 @@ namespace FlatFX.Model.Data
     public class CompanyAccountData
     {
         [Key]
-        public int CompanyAccountId { get; set; }
+        public string CompanyAccountId { get; set; }
       
         [Index("IX_AccountName", IsUnique = true), MaxLength(200), Required]
         public string AccountName { get; set; }
       
-        public int CompanyId { get; set; }
+        public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual CompanyData Company { get; set; }
 
@@ -80,12 +81,12 @@ namespace FlatFX.Model.Data
         public virtual FXRateData FXRate { get; set; }
 
         [Key, Column(Order = 2)]
-        public int CompanyId { get; set; }
+        public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual CompanyData Company { get; set; }
 
         [Key, Column(Order = 3)]
-        public int ProviderId { get; set; }
+        public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual ProviderData Provider { get; set; }
 

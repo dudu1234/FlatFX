@@ -5,9 +5,8 @@
 //using System.Threading.Tasks;
 //using System.ComponentModel.DataAnnotations.Schema;  
 //using System.Data.Entity.ModelConfiguration;
-//using FlatFX.Model.Data;  
 
-//namespace FlatFX.Model.Mapping  
+//namespace FlatFXCore.Model.Mapping  
 //{  
 //    public class UserMap : EntityTypeConfiguration<User>  
 //    {  

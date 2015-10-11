@@ -78,10 +78,6 @@
       <Project>{ed9d30ca-2e80-4e07-94dc-1e5e4174e305}</Project>
       <Name>FlatFXCore</Name>
     </ProjectReference>
-    <ProjectReference Include="..\FlatFXWeb\FlatFXWeb.csproj">
-      <Project>{d61a26ff-5041-4645-a3e1-e57636df6a70}</Project>
-      <Name>FlatFXWeb</Name>
-    </ProjectReference>
   </ItemGroup>
   <Choose>
     <When Condition="'$(VisualStudioVersion)' == '10.0' And '$(IsCodedUITest)' == 'True'">

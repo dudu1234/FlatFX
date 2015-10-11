@@ -9,8 +9,8 @@ using DotNetOpenAuth.AspNet;
 using Microsoft.Web.WebPages.OAuth;
 using WebMatrix.WebData;
 using FlatFXWeb;
-using FlatFX.Model.Data;
-using FlatFX.Model.Core;
+using FlatFXCore.Model.Data;
+using FlatFXCore.Model.Core;
 
 namespace FlatFXWeb.Controllers
 {

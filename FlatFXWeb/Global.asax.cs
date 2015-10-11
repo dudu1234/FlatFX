@@ -1,4 +1,4 @@
-﻿using FlatFX.BussinessLayer;
+﻿using FlatFXCore.BussinessLayer;
 using System;
 using System.Collections.Generic;
 using System.Linq;

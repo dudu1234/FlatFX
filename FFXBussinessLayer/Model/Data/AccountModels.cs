@@ -6,7 +6,7 @@ using System.Data.Entity;
 using System.Globalization;
 using System.Web.Security;
 
-namespace FlatFX.Model.Data
+namespace FlatFXCore.Model.Data
 {
     public class RegisterExternalLoginModel
     {

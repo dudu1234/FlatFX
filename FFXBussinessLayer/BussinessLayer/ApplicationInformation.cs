@@ -11,8 +11,9 @@ using System.Security.Cryptography;
 using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
+using System.Web.Security;
 
-namespace FlatFX.BussinessLayer
+namespace FlatFXCore.BussinessLayer
 {
     /// <summary>
     ///     Contains General Information regarding current application state.
@@ -118,13 +119,17 @@ namespace FlatFX.BussinessLayer
         #endregion
 
         #region Public Functions
-        public int? GetUserID()
+        public string GetUserID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null || context.Session == null || context.Session["UserID"] == null)
-                return null;
-            else 
-                return context.Session["UserID"].ToInt(-1);
+            if (context == null)
+                return "";
+            else
+            {
+                var user = Membership.GetUser(context.User.Identity.Name);
+                Guid currentUserID = (Guid)user.ProviderUserKey;
+                return currentUserID.ToString();
+            }
         }
         public string GetSessionID()
         {
@@ -848,7 +853,7 @@ namespace FlatFX.BussinessLayer
             }
         }
         #endregion
-        
+
         #region Checksum
         /// <summary>
         /// Return the Checksum of the String
