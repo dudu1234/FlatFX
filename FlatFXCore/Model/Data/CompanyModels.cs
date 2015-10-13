@@ -16,21 +16,25 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string CompanyId { get; set; }
-        [Index("IX_CompanyShortName", IsUnique = true), MaxLength(30), Required, MinLength(2)]
+        [Index("IX_CompanyShortName", IsUnique = true), MaxLength(30), Required, MinLength(2), DisplayName("Short Name")]
         public string CompanyShortName { get; set; }
-        [MaxLength(400), Required, MinLength(5)]
+        [MaxLength(400), Required, MinLength(5), DisplayName("Full Name")]
         public string CompanyFullName { get; set; }
-        [Required]
+        [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }
         [Required]
         public Consts.eCompanyStatus Status { get; set; }
+        [DisplayName("Created At")]
         public DateTime? CreatedAt { get; set; }
+        [DisplayName("Last Update")]
         public DateTime? LastUpdate { get; set; }
-        [MaxLength(300), Description("Valid users IP, Seperated by ;")]
+        [MaxLength(300), Description("Valid users IP, Seperated by ;"), DisplayName("Valid IP")]
         public string ValidIP { get; set; }
+        [DisplayName("Type")]
         public Consts.eCustomerType? CustomerType { get; set; }
         [DisplayName("Is Deposit valid")]
         public bool? IsDepositValid { get; set; }
+        [DisplayName("Is Sign On Registration Agreement")]
         public bool? IsSignOnRegistrationAgreement { get; set; }
 
         public string ContactDetailsId { get; set; }
