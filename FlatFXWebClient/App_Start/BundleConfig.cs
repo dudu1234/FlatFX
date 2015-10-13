@@ -25,8 +25,8 @@ namespace FlatFXWebClient
                       "~/Scripts/respond.js"));
 
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/bootstrap.css",
-                      "~/Content/site.css"));
+                      "~/Content/*.css",
+                      "~/Content/*.css.map"));
         }
     }
 }

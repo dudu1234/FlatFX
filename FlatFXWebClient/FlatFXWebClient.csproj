@@ -15,7 +15,7 @@
     <AssemblyName>FlatFXWebClient</AssemblyName>
     <TargetFrameworkVersion>v4.5.1</TargetFrameworkVersion>
     <MvcBuildViews>false</MvcBuildViews>
-    <UseIISExpress>false</UseIISExpress>
+    <UseIISExpress>true</UseIISExpress>
     <IISExpressSSLPort />
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
@@ -172,12 +172,14 @@
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="App_Start\WebApiConfig.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\CompanyDatasController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OnLineFXRatesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\CompanyAccountDataMetadata.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
@@ -237,6 +239,7 @@
     <Content Include="Images\FlatFX_Logo3.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HowItWorks1.jpg" />
+    <Content Include="Images\HowItWorks2.jpg" />
     <Content Include="Images\Logo3.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
@@ -315,18 +318,25 @@
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\OnLineFXRates\ShowRates.cshtml" />
     <Content Include="Views\Shared\nav.cshtml" />
+    <Content Include="Views\CompanyDatas\Create.cshtml" />
+    <Content Include="Views\CompanyDatas\Delete.cshtml" />
+    <Content Include="Views\CompanyDatas\Details.cshtml" />
+    <Content Include="Views\CompanyDatas\Edit.cshtml" />
+    <Content Include="Views\CompanyDatas\Index.cshtml" />
+    <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
+    <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Models\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FFXBussinessLayer\FlatFXCore.csproj">
-      <Project>{ed9d30ca-2e80-4e07-94dc-1e5e4174e305}</Project>
+    <ProjectReference Include="..\FlatFXCore\FlatFXCore.csproj">
+      <Project>{8af6ba4a-67d8-4b4b-bdf0-417afc4ed92f}</Project>
       <Name>FlatFXCore</Name>
     </ProjectReference>
   </ItemGroup>
@@ -348,7 +358,7 @@
           <AutoAssignPort>True</AutoAssignPort>
           <DevelopmentServerPort>58065</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
-          <IISUrl>http://localhost/FlatFX</IISUrl>
+          <IISUrl>http://localhost:58065/</IISUrl>
           <NTLMAuthentication>False</NTLMAuthentication>
           <UseCustomServer>False</UseCustomServer>
           <CustomServerUrl>

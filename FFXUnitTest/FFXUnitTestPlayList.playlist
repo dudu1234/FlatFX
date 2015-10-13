@@ -1,7 +1,0 @@
-<Playlist Version="1.0">
-  <Add Test="FFXUnitTest.FFXUnitTest.TestAddUser" />
-  <Add Test="FFXUnitTest.FFXUnitTest.TestEditUser" />
-  <Add Test="FFXUnitTest.FFXUnitTest.TestAddAction" />
-  <Add Test="FFXUnitTest.FFXUnitTest.TestDeleteActions" />
-  <Add Test="FFXUnitTest.FFXUnitTest.TestDeleteUser" />
-</Playlist>

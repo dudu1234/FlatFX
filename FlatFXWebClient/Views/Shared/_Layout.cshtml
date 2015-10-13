@@ -13,6 +13,7 @@
     <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
 
     @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/jqueryval")
     <!-- Latest compiled and minified JavaScript -->
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
     @Scripts.Render("~/bundles/bootstrap")
@@ -37,9 +38,6 @@
 <body>
     <header>
         <div class="content-wrapper">
-            <div class="float-left">
-                <img class="logoImage" src="~/Images/FlatFX_Logo3.png" />
-            </div>
             <div class="float-right">
                 <section id="login">
                     @Html.Partial("_LoginPartial")
@@ -51,9 +49,7 @@
         </div>
     </header>
     <div id="body">
-
         @RenderBody()
-
     </div>
     <footer>
         <div class="content-wrapper">

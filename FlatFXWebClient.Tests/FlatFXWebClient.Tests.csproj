@@ -94,8 +94,8 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\FFXBussinessLayer\FlatFXCore.csproj">
-      <Project>{ed9d30ca-2e80-4e07-94dc-1e5e4174e305}</Project>
+    <ProjectReference Include="..\FlatFXCore\FlatFXCore.csproj">
+      <Project>{8af6ba4a-67d8-4b4b-bdf0-417afc4ed92f}</Project>
       <Name>FlatFXCore</Name>
     </ProjectReference>
     <ProjectReference Include="..\FlatFXWebClient\FlatFXWebClient.csproj">
