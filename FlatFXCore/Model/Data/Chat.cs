@@ -11,17 +11,17 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("ChatSessions")]
-    public class ChatSessionData
+    public class ChatSession
     {
         [Key]
         public Int64 ChatSessionId { get; set; }
         
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
-        public virtual CompanyData Company { get; set; }
+        public virtual Company Company { get; set; }
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
@@ -33,14 +33,14 @@ namespace FlatFXCore.Model.Data
         public Int64? LastChatEntry { get; set; }
     }
     [Table("ChatEntries")]
-    public class ChatEntrieData
+    public class ChatEntrie
     {
         [Key]
         public Int64 ChatEntryId { get; set; }
 
         public Int64 ChatSessionId { get; set; }
         [ForeignKey("ChatSessionId")]
-        public virtual ChatSessionData ChatSession { get; set; }
+        public virtual ChatSession ChatSession { get; set; }
         public string UserId { get; set; }
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }

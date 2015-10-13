@@ -11,7 +11,7 @@ namespace FlatFXCore.Model.Data
     public partial class CompanyAccountDataMetadata
     {
         [Display(Name = "Company")]
-        public CompanyData Company { get; set; }
+        public Company Company { get; set; }
 
         [Required(ErrorMessage = "Please enter : CompanyAccountId")]
         [Display(Name = "CompanyAccountId")]

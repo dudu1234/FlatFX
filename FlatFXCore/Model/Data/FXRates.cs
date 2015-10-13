@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("FXRates")]
-    public class FXRateData
+    public class FXRate
     {
         [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
@@ -27,15 +27,15 @@ namespace FlatFXCore.Model.Data
         [Required]
         public bool IsActive { get; set; }
 
-        public FXRateData() { }
+        public FXRate() { }
     }
     [Table("HistoricalFXRates")]
-    public class HistoricalFXRateData
+    public class HistoricalFXRate
     {
         [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
         [ForeignKey("Key")]
-        public virtual FXRateData FXRate { get; set; }
+        public virtual FXRate FXRate { get; set; }
 
         [Key, Column(Order = 2), Required]
         public DateTime Time { get; set; }
@@ -49,15 +49,15 @@ namespace FlatFXCore.Model.Data
 
         
 
-        public HistoricalFXRateData() { }
+        public HistoricalFXRate() { }
     }
     [Table("DailyFXRates")]
-    public class DailyFXRateData
+    public class DailyFXRate
     {
         [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
         [ForeignKey("Key")]
-        public virtual FXRateData FXRate { get; set; }
+        public virtual FXRate FXRate { get; set; }
 
         [Key, Column(Order = 2), Required]
         public DateTime Time { get; set; }
@@ -69,6 +69,6 @@ namespace FlatFXCore.Model.Data
         [Required]
         public double Mid { get; set; }
 
-        public DailyFXRateData() { }
+        public DailyFXRate() { }
     }
 }

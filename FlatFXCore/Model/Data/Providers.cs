@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("Providers")]
-    public class ProviderData
+    public class Provider
     {
         [Key]
         public string ProviderId { get; set; }
@@ -55,26 +55,26 @@ namespace FlatFXCore.Model.Data
         [Required]
         public double QuoteResponse_NumberOfPromilsWithoutDiscount { get; set; }
 
-        public virtual ICollection<ProviderAccountData> Accounts { get; set; }
+        public virtual ICollection<ProviderAccount> Accounts { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
 
         public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
-        public ProviderData() { }
+        public Provider() { }
     }
     [Table("ProviderAccounts")]
-    public class ProviderAccountData
+    public class ProviderAccount
     {
         [Key, Column(Order = 1)]
         public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
-        public virtual CompanyAccountData CompanyAccount { get; set; }
+        public virtual CompanyAccount CompanyAccount { get; set; }
         [Key, Column(Order = 2)]
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         [Index("IX_BankAccountName", IsUnique = true), MaxLength(200), Required]
         public string BankAccountName { get; set; }
@@ -97,6 +97,6 @@ namespace FlatFXCore.Model.Data
         public bool QuoteResponse_IsBlocked { get; set; }
         public double? QuoteResponse_CustomerPromil { get; set; }
         
-        public ProviderAccountData() { }
+        public ProviderAccount() { }
     }
 }

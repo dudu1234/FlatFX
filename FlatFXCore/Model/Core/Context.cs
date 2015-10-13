@@ -19,21 +19,21 @@ namespace FlatFXCore.Model.Core
         public DbSet<UserMessageData> UserMessages { get; set; }
         public DbSet<UserFavoriteData> UserFavorites { get; set; }
         public DbSet<UserActionData> UserActions { get; set; }
-        public DbSet<CompanyData> Companies { get; set; }
-        public DbSet<CompanyAccountData> CompanyAccounts { get; set; }
-        public DbSet<ProviderData> Providers { get; set; }
-        public DbSet<ProviderAccountData> ProviderAccounts { get; set; }
-        public DbSet<ChatSessionData> ChatSessions { get; set; }
-        public DbSet<ChatEntrieData> ChatEntries { get; set; }
-        public DbSet<SpreadData> Spreads { get; set; }
-        public DbSet<FXRateData> FXRates { get; set; }
-        public DbSet<HistoricalFXRateData> HistoricalFXRates { get; set; }
-        public DbSet<DailyFXRateData> DailyFXRates { get; set; }
-        public DbSet<DealData> Deals { get; set; }
+        public DbSet<Company> Companies { get; set; }
+        public DbSet<CompanyAccount> CompanyAccounts { get; set; }
+        public DbSet<Provider> Providers { get; set; }
+        public DbSet<ProviderAccount> ProviderAccounts { get; set; }
+        public DbSet<ChatSession> ChatSessions { get; set; }
+        public DbSet<ChatEntrie> ChatEntries { get; set; }
+        public DbSet<SpreadInfo> Spreads { get; set; }
+        public DbSet<FXRate> FXRates { get; set; }
+        public DbSet<HistoricalFXRate> HistoricalFXRates { get; set; }
+        public DbSet<DailyFXRate> DailyFXRates { get; set; }
+        public DbSet<Deal> Deals { get; set; }
         public DbSet<QueryData> Querys { get; set; }
-        public DbSet<QueryPerProviderData> QueriesPerProvider { get; set; }
-        public DbSet<ConfigurationData> Configurations { get; set; }
-        public DbSet<LogInfoData> LogInfo { get; set; }
+        public DbSet<QueryPerProvider> QueriesPerProvider { get; set; }
+        public DbSet<ConfigurationRow> Configurations { get; set; }
+        public DbSet<LogInfo> LogInfo { get; set; }
 
         public FfxContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)

@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("LogInfo")]
-    public class LogInfoData
+    public class LogInfo
     {
         [Key]
         public Int64 LogId { get; set; }
@@ -41,6 +41,6 @@ namespace FlatFXCore.Model.Data
         public string OperationName { get; set; }
         public Consts.eLogOperationStatus? OperationStatus { get; set; }
 
-        public LogInfoData() { }
+        public LogInfo() { }
     }
 }

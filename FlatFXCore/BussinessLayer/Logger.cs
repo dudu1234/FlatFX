@@ -170,7 +170,7 @@ namespace FlatFXCore.BussinessLayer
 
                 using (var context = new FfxContext())
                 {
-                    LogInfoData row = new LogInfoData
+                    LogInfo row = new LogInfo
                     {
                         ApplicationName = "FlatFXClient",
                         Date = DateTime.Now,

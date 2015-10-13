@@ -27,7 +27,7 @@ namespace FlatFXCore.BussinessLayer
         #region Members
         private static Config m_Instance = null;
         private static object sync = new object();
-        private Dictionary<string, Dictionary<string, ConfigurationData>> _dictionary = new Dictionary<string, Dictionary<string, ConfigurationData>>();
+        private Dictionary<string, Dictionary<string, ConfigurationRow>> _dictionary = new Dictionary<string, Dictionary<string, ConfigurationRow>>();
         #endregion
 
         #region Ctor
@@ -115,7 +115,7 @@ namespace FlatFXCore.BussinessLayer
             using (var context = new FfxContext())
             {
                 //Get user row
-                ConfigurationData data = context.Configurations.FirstOrDefault(row => row.Key == Key && row.UserId == userId);
+                ConfigurationRow data = context.Configurations.FirstOrDefault(row => row.Key == Key && row.UserId == userId);
 
                 //get default row if user not exists
                 if (data == null)
@@ -266,7 +266,7 @@ namespace FlatFXCore.BussinessLayer
         /// <returns></returns>
         public string getDescription(string key)
         {
-            ConfigurationData val;
+            ConfigurationRow val;
             bool hasKey = _dictionary[""].TryGetValue(key, out val);
             if (!hasKey)
                 return null;
@@ -301,7 +301,7 @@ namespace FlatFXCore.BussinessLayer
 
                 using (var context = new FfxContext())
                 {
-                    Dictionary<string, ConfigurationData> userDictionary = context.Configurations.Where(row => row.UserId == userId).ToDictionary(key => key.Key);
+                    Dictionary<string, ConfigurationRow> userDictionary = context.Configurations.Where(row => row.UserId == userId).ToDictionary(key => key.Key);
                     _dictionary.Add(userId, userDictionary);
                 }
             }
@@ -331,7 +331,7 @@ namespace FlatFXCore.BussinessLayer
                 {
                     if (_dictionary.ContainsKey(""))
                         _dictionary.Remove("");
-                    Dictionary<string, ConfigurationData> commonDictionary = context.Configurations.Where(row => row.UserId == "").ToDictionary(key => key.Key);
+                    Dictionary<string, ConfigurationRow> commonDictionary = context.Configurations.Where(row => row.UserId == "").ToDictionary(key => key.Key);
                     _dictionary.Add("", commonDictionary);
                 }
             }

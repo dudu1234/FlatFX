@@ -13,121 +13,121 @@ using FlatFXCore.Model.User;
 
 namespace FlatFXWebClient.Controllers
 {
-    public class CompanyDatasController : Controller
+    public class CompanyController : Controller
     {
         private FfxContext db = new FfxContext();
 
-        // GET: CompanyDatas
+        // GET: Company
         public async Task<ActionResult> Index()
         {
             var companies = db.Companies.Include(c => c.ContactDetails);
             return View(await companies.ToListAsync());
         }
 
-        // GET: CompanyDatas/Details/5
+        // GET: Company/Details/5
         public async Task<ActionResult> Details(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CompanyData companyData = await db.Companies.FindAsync(id);
-            if (companyData == null)
+            Company company = await db.Companies.FindAsync(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(companyData);
+            return View(company);
         }
 
-        // GET: CompanyDatas/Create
+        // GET: Company/Create
         public ActionResult Create()
         {
             return View();
         }
 
-        // POST: CompanyDatas/Create
+        // POST: Company/Create
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CompanyShortName,CompanyFullName,ValidIP,CustomerType,IsDepositValid,IsSignOnRegistrationAgreement")] CompanyData companyData)
+        public async Task<ActionResult> Create([Bind(Include = "CompanyShortName,CompanyFullName,ValidIP,CustomerType,IsDepositValid,IsSignOnRegistrationAgreement")] Company company)
         {
             if (ModelState.IsValid)
             {
-                companyData.CompanyId = Guid.NewGuid().ToString();
-                companyData.CreatedAt = DateTime.Now;
-                companyData.IsActive = true;
-                companyData.LastUpdate = DateTime.Now;
-                companyData.Status = FlatFXCore.BussinessLayer.Consts.eCompanyStatus.Active;
+                company.CompanyId = Guid.NewGuid().ToString();
+                company.CreatedAt = DateTime.Now;
+                company.IsActive = true;
+                company.LastUpdate = DateTime.Now;
+                company.Status = FlatFXCore.BussinessLayer.Consts.eCompanyStatus.Active;
 
                 ContactDetails contactDetails = new ContactDetails();
                 contactDetails.ContactDetailsId = Guid.NewGuid().ToString();
 
-                companyData.ContactDetailsId = contactDetails.ContactDetailsId;
+                company.ContactDetailsId = contactDetails.ContactDetailsId;
 
-                db.Companies.Add(companyData);
+                db.Companies.Add(company);
                 db.ContactsDetails.Add(contactDetails);
 
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
-            return View(companyData);
+            return View(company);
         }
 
-        // GET: CompanyDatas/Edit/5
+        // GET: Company/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CompanyData companyData = await db.Companies.FindAsync(id);
-            if (companyData == null)
+            Company company = await db.Companies.FindAsync(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(companyData);
+            return View(company);
         }
 
-        // POST: CompanyDatas/Edit/5
+        // POST: Company/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CompanyId,CompanyShortName,CompanyFullName,IsActive,Status,CreatedAt,LastUpdate,ValidIP,CustomerType,IsDepositValid,IsSignOnRegistrationAgreement,ContactDetailsId")] CompanyData companyData)
+        public async Task<ActionResult> Edit([Bind(Include = "CompanyId,CompanyShortName,CompanyFullName,IsActive,Status,CreatedAt,LastUpdate,ValidIP,CustomerType,IsDepositValid,IsSignOnRegistrationAgreement,ContactDetailsId")] Company company)
         {
             if (ModelState.IsValid)
             {
-                db.Entry(companyData).State = EntityState.Modified;
+                db.Entry(company).State = EntityState.Modified;
                 await db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
-            return View(companyData);
+            return View(company);
         }
 
-        // GET: CompanyDatas/Delete/5
+        // GET: Company/Delete/5
         public async Task<ActionResult> Delete(string id)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            CompanyData companyData = await db.Companies.FindAsync(id);
-            if (companyData == null)
+            Company company = await db.Companies.FindAsync(id);
+            if (company == null)
             {
                 return HttpNotFound();
             }
-            return View(companyData);
+            return View(company);
         }
 
-        // POST: CompanyDatas/Delete/5
+        // POST: Company/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            CompanyData companyData = await db.Companies.FindAsync(id);
-            db.Companies.Remove(companyData);
+            Company company = await db.Companies.FindAsync(id);
+            db.Companies.Remove(company);
             await db.SaveChangesAsync();
             return RedirectToAction("Index");
         }

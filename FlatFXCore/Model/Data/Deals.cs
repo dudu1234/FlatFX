@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("Deals")]
-    public class DealData
+    public class Deal
     {
         [Key]
         public Int64 DealId { get; set; }
@@ -22,11 +22,11 @@ namespace FlatFXCore.Model.Data
 
         public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
-        public virtual CompanyAccountData CompanyAccount { get; set; }
+        public virtual CompanyAccount CompanyAccount { get; set; }
 
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         public string ProviderUserId { get; set; }
         [ForeignKey("ProviderUserId")]
@@ -64,7 +64,7 @@ namespace FlatFXCore.Model.Data
         public bool IsCanceled { get; set; }
 	    public double? TotalProfitUSD { get; set; }
 
-        public DealData() 
+        public Deal() 
         {
             //Set the default values
             IsCanceled = false;
@@ -84,11 +84,11 @@ namespace FlatFXCore.Model.Data
 
         public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
-        public virtual CompanyAccountData CompanyAccount { get; set; }
+        public virtual CompanyAccount CompanyAccount { get; set; }
 
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         [Required]
         public DateTime CreatedAt { get; set; }        
@@ -103,7 +103,7 @@ namespace FlatFXCore.Model.Data
         public QueryData() { }
     }
     [Table("QueriesPerProvider")]
-    public class QueryPerProviderData
+    public class QueryPerProvider
     {
         [Key, Column(Order = 1)]
         public Int64 QueryId { get; set; }
@@ -113,7 +113,7 @@ namespace FlatFXCore.Model.Data
         [Key, Column(Order = 2)]
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         public double? ProviderApprovedBuyRate { get; set; }
         public double? ProviderApprovedSellRate { get; set; }
@@ -122,6 +122,6 @@ namespace FlatFXCore.Model.Data
         public DateTime? BankResponseTime { get; set; }
         public DateTime? UserResponseTime { get; set; }
 
-        public QueryPerProviderData() { }
+        public QueryPerProvider() { }
     }
 }

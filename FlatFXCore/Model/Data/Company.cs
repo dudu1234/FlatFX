@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("Companies")]
-    public class CompanyData
+    public class Company
     {
         [Key]
         public string CompanyId { get; set; }
@@ -37,13 +37,13 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
-        public virtual ICollection<CompanyAccountData> Accounts { get; set; }
+        public virtual ICollection<CompanyAccount> Accounts { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
 
-        public CompanyData() { }
+        public Company() { }
     }
     [Table("CompanyAccounts")]
-    public class CompanyAccountData
+    public class CompanyAccount
     {
         [Key]
         public string CompanyAccountId { get; set; }
@@ -53,7 +53,7 @@ namespace FlatFXCore.Model.Data
 
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
-        public virtual CompanyData Company { get; set; }
+        public virtual Company Company { get; set; }
 
         [MaxLength(400), Required]
         public string AccountFullName { get; set; }
@@ -71,25 +71,25 @@ namespace FlatFXCore.Model.Data
         [Required]
         public double GrossPNL { get; set; }
 
-        public CompanyAccountData() { }
+        public CompanyAccount() { }
     }
     [Table("Spreads")]
-    public class SpreadData
+    public class SpreadInfo
     {
         [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
         [ForeignKey("Key")]
-        public virtual FXRateData FXRate { get; set; }
+        public virtual FXRate FXRate { get; set; }
 
         [Key, Column(Order = 2)]
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
-        public virtual CompanyData Company { get; set; }
+        public virtual Company Company { get; set; }
 
         [Key, Column(Order = 3)]
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
-        public virtual ProviderData Provider { get; set; }
+        public virtual Provider Provider { get; set; }
 
         [Key, Column(Order = 4), Required]
         public bool IsStartingSpread { get; set; }
@@ -97,6 +97,6 @@ namespace FlatFXCore.Model.Data
         [Required]
         public int Spread { get; set; }
 
-        public SpreadData() { }
+        public SpreadInfo() { }
     }
 }

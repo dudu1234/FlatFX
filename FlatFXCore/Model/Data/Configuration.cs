@@ -10,7 +10,7 @@ using System.Threading.Tasks;
 namespace FlatFXCore.Model.Data
 {
     [Table("Configuration")]
-    public class ConfigurationData
+    public class ConfigurationRow
     {
         [Key, Column(Order = 1), MaxLength(100)]
         public string Key { get; set; }
@@ -40,6 +40,6 @@ namespace FlatFXCore.Model.Data
         [Required, MaxLength(2000)]
         public string DefaultValue { get; set; }
 
-        public ConfigurationData() { }
+        public ConfigurationRow() { }
     }
 }

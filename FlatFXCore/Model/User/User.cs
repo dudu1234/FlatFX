@@ -53,8 +53,8 @@ namespace FlatFXCore.Model.User
         //public virtual ICollection<UserMessageData> FromMessageData { get; set; }
         public virtual ICollection<UserActionData> Actions { get; set; }
         public virtual ICollection<UserFavoriteData> Favorites { get; set; }
-        public virtual ICollection<ProviderData> Providers { get; set; }
-        public virtual ICollection<CompanyData> Companies { get; set; }
+        public virtual ICollection<Provider> Providers { get; set; }
+        public virtual ICollection<Company> Companies { get; set; }
 
         public ApplicationUser() { }
 
