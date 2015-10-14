@@ -13,14 +13,12 @@ using FlatFXCore.Model.User;
 
 namespace FlatFXWebClient.Controllers
 {
-    public class CompanyController : Controller
+    public class CompanyController : BaseController
     {
-        private FfxContext db = new FfxContext();
-
         // GET: Company
         public async Task<ActionResult> Index()
         {
-            var companies = db.Companies.Include(c => c.ContactDetails);
+            var companies = _db.Companies.Include(c => c.ContactDetails);
             return View(await companies.ToListAsync());
         }
 
@@ -31,7 +29,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = await db.Companies.FindAsync(id);
+            Company company = await _db.Companies.FindAsync(id);
             if (company == null)
             {
                 return HttpNotFound();
@@ -65,10 +63,10 @@ namespace FlatFXWebClient.Controllers
 
                 company.ContactDetailsId = contactDetails.ContactDetailsId;
 
-                db.Companies.Add(company);
-                db.ContactsDetails.Add(contactDetails);
+                _db.Companies.Add(company);
+                _db.ContactsDetails.Add(contactDetails);
 
-                await db.SaveChangesAsync();
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
 
@@ -82,7 +80,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = await db.Companies.FindAsync(id);
+            Company company = await _db.Companies.FindAsync(id);
             if (company == null)
             {
                 return HttpNotFound();
@@ -99,8 +97,8 @@ namespace FlatFXWebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Entry(company).State = EntityState.Modified;
-                await db.SaveChangesAsync();
+                _db.Entry(company).State = EntityState.Modified;
+                await _db.SaveChangesAsync();
                 return RedirectToAction("Index");
             }
             return View(company);
@@ -113,7 +111,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Company company = await db.Companies.FindAsync(id);
+            Company company = await _db.Companies.FindAsync(id);
             if (company == null)
             {
                 return HttpNotFound();
@@ -126,9 +124,9 @@ namespace FlatFXWebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            Company company = await db.Companies.FindAsync(id);
-            db.Companies.Remove(company);
-            await db.SaveChangesAsync();
+            Company company = await _db.Companies.FindAsync(id);
+            _db.Companies.Remove(company);
+            await _db.SaveChangesAsync();
             return RedirectToAction("Index");
         }
 
@@ -136,7 +134,7 @@ namespace FlatFXWebClient.Controllers
         {
             if (disposing)
             {
-                db.Dispose();
+                _db.Dispose();
             }
             base.Dispose(disposing);
         }

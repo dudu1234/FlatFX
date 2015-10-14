@@ -3,6 +3,9 @@
 		font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
 	}
 
+html {
+    font-size: 11px;
+}
 
 	/* Style for our header texts
 	* --------------------------------------- */
@@ -19,11 +22,13 @@
 	}
 
     #myVideo{
-		position: absolute;
+		position: inherit;
+        /*
 		right: 0;
 		bottom: 0;
 		top:0;
 		right:0;
+        */
 		width: 100%;
 		height: 100%;
 		background-size: 100% 100%;
@@ -61,8 +66,18 @@
 		font-size: 1.2em;
 		line-height: 1.6em;
 	}
-
-
+    .containerCentered {
+      margin-right: auto;
+      margin-left: auto;
+      -moz-box-sizing: content-box;
+      box-sizing: content-box;
+      min-width: 940px;
+      max-width: 1150px;
+    }
+    #left, #right {
+        width: 40%; 
+        float: left;
+    }
 
 
 	/* Section 0

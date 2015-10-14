@@ -199,5 +199,17 @@ namespace FlatFXCore.BussinessLayer
             Medium = 2,
             Low = 3
         }
+        /// <summary>
+        /// Defines the user roles.
+        /// </summary>
+        public enum UserRoles : short
+        {
+            Administrator = 1,
+            ProviderUser = 2,
+            ProviderDemoUser = 3,
+            CompanyUser = 4,
+            CompanyDemoUser = 5,
+            Unknown = 6
+        }
     }
 }

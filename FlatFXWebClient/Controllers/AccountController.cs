@@ -9,11 +9,13 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FlatFXCore.Model.User;
+using FlatFXCore.Model.Core;
+using System.Web.Security;
 
 namespace FlatFXWebClient.Controllers
 {
     [Authorize]
-    public class AccountController : Controller
+    public class AccountController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
@@ -26,6 +28,20 @@ namespace FlatFXWebClient.Controllers
         {
             UserManager = userManager;
             SignInManager = signInManager;
+        }
+        /// <summary>
+        /// Change the current culture.
+        /// </summary>
+        /// <param name="culture">The current selected culture.</param>
+        /// <returns>The action result.</returns>
+        [AllowAnonymous]
+        public ActionResult ChangeCurrentCulture(string culture)
+        {
+            FlatFXCookie.SetCookie("lang", culture);
+            Session["lang"] = culture;
+
+            // Redirect to the same page from where the request was made! 
+            return Redirect(Request.UrlReferrer.ToString());
         }
 
         public ApplicationSignInManager SignInManager
@@ -75,11 +91,19 @@ namespace FlatFXWebClient.Controllers
 
             // This doesn't count login failures towards account lockout
             // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, shouldLockout: false);
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
                 case SignInStatus.Success:
-                    return RedirectToLocal(returnUrl);
+                    {
+                        // User logined succesfully ==> create a new site session!
+                        FormsAuthentication.SetAuthCookie(model.UserName, false);
+                        ApplicationUser user = _db.Users.FirstOrDefault(u => u.UserName == model.UserName);
+                        FlatFXSession siteSession = new FlatFXSession(_db, user);
+                        Session["SiteSession"] = siteSession; // Cache the user login data!
+                    
+                        return RedirectToLocal(returnUrl);
+                    }
                 case SignInStatus.LockedOut:
                     return View("Lockout");
                 case SignInStatus.RequiresVerification:
@@ -147,11 +171,37 @@ namespace FlatFXWebClient.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterViewModel model)
+        public async Task<ActionResult> Register(RegisterUserViewModel model)
         {
             if (ModelState.IsValid)
             {
-                var user = new ApplicationUser { UserName = model.Email, Email = model.Email };
+                var user = new ApplicationUser();
+
+                user.UserName = model.UserName;
+                //user.PasswordHash = model.Password;
+                user.FirstName = model.FirstName;
+                user.LastName = model.LastName; 
+                user.Email = model.Email;
+                user.RoleInCompany = model.Role;
+                user.PhoneNumber = model.MobilePhone;
+
+                ContactDetails contactDetails = new ContactDetails();
+                contactDetails.ContactDetailsId = Guid.NewGuid().ToString();
+                contactDetails.OfficePhone = model.OfficePhone;
+                contactDetails.Fax = model.Fax;
+                contactDetails.Country = model.Country;
+                contactDetails.WebSite = model.WebSite;
+                contactDetails.MobilePhone = model.MobilePhone;
+                
+                user.ContactDetailsId = contactDetails.ContactDetailsId;
+                user.CreatedAt = DateTime.Now;
+                user.IsActive = true;
+                user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
+                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
+
+                _db.ContactsDetails.Add(contactDetails);
+                _db.SaveChanges();
+
                 var result = await UserManager.CreateAsync(user, model.Password);
                 if (result.Succeeded)
                 {
@@ -165,6 +215,15 @@ namespace FlatFXWebClient.Controllers
 
                     return RedirectToAction("Index", "Home");
                 }
+                else
+                {
+                    if (_db.ContactsDetails.Contains(contactDetails))
+                    {
+                        _db.ContactsDetails.Remove(contactDetails);
+                        _db.SaveChanges();
+                    }
+                }
+
                 AddErrors(result);
             }
 
@@ -392,6 +451,7 @@ namespace FlatFXWebClient.Controllers
         public ActionResult LogOff()
         {
             AuthenticationManager.SignOut();
+            Session["SiteSession"] = null;
             return RedirectToAction("Index", "Home");
         }
 

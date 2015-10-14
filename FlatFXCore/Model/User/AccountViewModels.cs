@@ -1,4 +1,5 @@
 ﻿using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 
 namespace FlatFXCore.Model.User
@@ -49,9 +50,8 @@ namespace FlatFXCore.Model.User
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "Email")]
-        //[EmailAddress]
-        public string Email { get; set; }
+        [Display(Name = "User Name")]
+        public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
@@ -62,61 +62,61 @@ namespace FlatFXCore.Model.User
         public bool RememberMe { get; set; }
     }
 
-    public class RegisterViewModel
+    public class RegisterUserViewModel
     {
-        [Required]
-        [Display(Name = "UserName")]
-        [StringLength(40, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 4)]
+        [Display(Name="UserName",ResourceType=typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(40, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string UserName { get; set; }
 
-        [Required]
-        [StringLength(100, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(100, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(FlatFXResources.Resources))]
         public string Password { get; set; }
 
+        [Display(Name = "ConfirmPassword", ResourceType = typeof(FlatFXResources.Resources))]
         [DataType(DataType.Password)]
-        [Display(Name = "Confirm password")]
-        [Compare("Password", ErrorMessage = "The password and confirmation password do not match.")]
+        [Compare("Password", ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "UserComfirmPasswordValidation")]
         public string ConfirmPassword { get; set; }
 
-        [Required]
-        [Display(Name = "FirstName")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Display(Name = "FirstName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(50, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string FirstName { get; set; }
 
-        [Required]
-        [Display(Name = "LastName")]
-        [StringLength(50, ErrorMessage = "The {0} must be at least {2} characters long.", MinimumLength = 1)]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [Display(Name = "LastName", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(50, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string LastName { get; set; }
 
-        [Display(Name = "Role")]
-        [StringLength(50)]
+        [Display(Name = "Role", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(50, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string Role { get; set; }
 
-        [Required]
-        [EmailAddress]
-        [Display(Name = "Email")]
+        [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [EmailAddress] 
         public string Email { get; set; }
 
-        [Required]
+        [Display(Name = "MobilePhone", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [Phone]
-        [Display(Name = "MobilePhone")]
         public string MobilePhone { get; set; }
 
+        [Display(Name = "OfficePhone", ResourceType = typeof(FlatFXResources.Resources))]
         [Phone]
-        [Display(Name = "OfficePhone")]
         public string OfficePhone { get; set; }
 
+        [Display(Name = "Fax", ResourceType = typeof(FlatFXResources.Resources))]
         [Phone]
-        [Display(Name = "Fax")]
         public string Fax { get; set; }
 
-        [Display(Name = "Country")]
+        [Display(Name = "Country", ResourceType = typeof(FlatFXResources.Resources))]
         public string Country { get; set; }
 
+        [Display(Name = "WebSite", ResourceType = typeof(FlatFXResources.Resources))]
         [Url]
-        [Display(Name = "WebSite")]
         public string WebSite { get; set; }
     }
 

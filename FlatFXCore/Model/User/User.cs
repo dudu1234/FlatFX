@@ -24,6 +24,7 @@ namespace FlatFXCore.Model.User
 
 
 
+
     //[Table("Users")]
     public class ApplicationUser : IdentityUser
     {
@@ -33,8 +34,6 @@ namespace FlatFXCore.Model.User
         public string MiddleName { get; set; }
         [MaxLength(100), Required]
         public string LastName { get; set; }
-        [MaxLength(200), Required]
-        public string Password { get; set; }
         [Required, DefaultValue(true), Index("IX_IsActive", IsUnique = false)]
         public bool IsActive { get; set; }
         
@@ -42,7 +41,7 @@ namespace FlatFXCore.Model.User
         public Consts.eUserStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
         [MaxLength(100)]
-        public string Role { get; set; }
+        public string RoleInCompany { get; set; }
 
         public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]
@@ -72,7 +71,13 @@ namespace FlatFXCore.Model.User
             {
                 return FirstName + " " + ((MiddleName != "")? (MiddleName + " ") : "") + LastName;
             }
-            
+        }
+
+        private Consts.UserRoles _UserRole = Consts.UserRoles.Unknown;
+        public Consts.UserRoles UserRole
+        {
+            get { return (Consts.UserRoles)this._UserRole; }
+            set { _UserRole = value; }
         }
     }
     [Table("ContactDetails")]

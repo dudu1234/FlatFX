@@ -11,7 +11,7 @@ using FlatFXCore.Model.User;
 namespace FlatFXWebClient.Controllers
 {
     [Authorize]
-    public class ManageController : Controller
+    public class ManageController : BaseController
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;

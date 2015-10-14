@@ -121,6 +121,8 @@
     <Compile Include="BussinessLayer\Logger.cs" />
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Core\Context.cs" />
+    <Compile Include="Model\Core\FlatFXCookie.cs" />
+    <Compile Include="Model\Core\FlatFXSession.cs" />
     <Compile Include="Model\Data\ChatModels.cs" />
     <Compile Include="Model\Data\CompanyModels.cs" />
     <Compile Include="Model\Data\ConfigurationModels.cs" />
@@ -157,6 +159,12 @@
     <Content Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\FlatFXResources\FlatFXResources.csproj">
+      <Project>{d22b88ba-85e8-45a8-aaba-7e9fcee71b37}</Project>
+      <Name>FlatFXResources</Name>
+    </ProjectReference>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

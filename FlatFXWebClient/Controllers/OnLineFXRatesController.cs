@@ -5,9 +5,9 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 
-namespace FlatFXWeb.Controllers
+namespace FlatFXWebClient.Controllers
 {
-    public class OnLineFXRatesController : Controller
+    public class OnLineFXRatesController : BaseController
     {
         //
         // GET: /OnLineFXRates/
