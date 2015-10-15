@@ -188,10 +188,12 @@
     <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
+    <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\examples.css" />
     <Content Include="Content\flowers.mp4" />
     <Content Include="Content\fullpageex.css" />
     <Content Include="Content\jquery.fullPage.css" />
+    <Content Include="Content\rtlCustom.css" />
     <Content Include="Content\Site.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
@@ -240,6 +242,8 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HowItWorks1.jpg" />
     <Content Include="Images\HowItWorks2.jpg" />
+    <Content Include="Images\israelFlag.png" />
+    <Content Include="Images\israel_flag_16.png" />
     <Content Include="Images\Logo3.png" />
     <Content Include="Images\orderedList0.png" />
     <Content Include="Images\orderedList1.png" />
@@ -251,6 +255,9 @@
     <Content Include="Images\orderedList7.png" />
     <Content Include="Images\orderedList8.png" />
     <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\usa-flag-16.gif" />
+    <Content Include="Images\usdFlag.png" />
+    <Content Include="JS\rtlCustom.js" />
     <Content Include="JS\FFx.js" />
     <Content Include="JS\Home\HomePage.js" />
     <Content Include="Content\flowers.webm" />
@@ -263,6 +270,7 @@
     <None Include="Scripts\jquery-2.1.4.intellisense.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Scripts\bootstrap.rtl.min.js" />
     <Content Include="Scripts\jquery-2.1.4.js" />
     <Content Include="Scripts\jquery-2.1.4.min.js" />
     <Content Include="Scripts\jquery-2.1.4.min.map" />
@@ -333,7 +341,6 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <None Include="Project_Readme.html" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\FlatFXCore\FlatFXCore.csproj">

@@ -16,9 +16,9 @@
             איתנו תחסוך עד &#8362;200,000 כל שנה
         </p>
         <br />
-        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-registration-mark"></span>הצטרף למהפיכה</a>&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-registration-mark"></span>פתח חשבון דמו</a>&nbsp;&nbsp;&nbsp;
-        <a class="btn btn-success btn-lg" href="#"><span class="glyphicon glyphicon-info-sign"></span>למידע נוסף</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success btn-lg" href="@Url.Action("Register", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>הצטרף למהפיכה</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success btn-lg" href="@Url.Action("Register", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>פתח חשבון דמו</a>&nbsp;&nbsp;&nbsp;
+        <a class="btn btn-success btn-lg" href="@Url.Action("Index", "Home")#4thPage"><span class="glyphicon glyphicon-info-sign"></span>למידע נוסף</a>&nbsp;&nbsp;&nbsp;
         <br /><br />
     </div>
     <div id="sc-1" class="section">
@@ -90,14 +90,15 @@
             <h1>רשימת פעולות</h1>
         </hgroup>
         <p class="actionButtons">
-            <a class="btn btn-success btn-md" href="Home/Index#HomeAbout"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
-            <a class="btn btn-success btn-md" href="Home/Index#HomeHowItWorks"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
-            <a class="btn btn-success btn-md" href="#"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
-            <a class="btn btn-success btn-md" href="OnLineFXRates/ShowRates"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="@Url.Action("Index", "Home")#4thPage"><span class="glyphicon glyphicon-info-sign"></span> אודות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="@Url.Action("Index", "Home")#3rdPage"><span class="glyphicon glyphicon-question-sign"></span> איך זה עובד?</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="@Url.Action("Register", "Account")"><span class="glyphicon glyphicon-registration-mark"></span> להצטרפות</a>&nbsp;&nbsp;&nbsp;
+            <a class="btn btn-success btn-md" href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd"></span><span class="glyphicon glyphicon-euro"></span> לבדיקת שערים עדכניים</a>&nbsp;&nbsp;&nbsp;
             <a class="btn btn-success btn-md disabled" href="#"><span class="glyphicon glyphicon-shopping-cart"></span> לביצוע המרה</a>
             <br /><br />
-            <a class="btn btn-success btn-md" href="Company"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
-            <a class="btn btn-success btn-md" href="Company"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+            <a class="btn btn-success btn-md" href="@Url.Action("Index", "Company")"><span class="glyphicon glyphicon-user"></span> ניהול חברות</a>
+            <a class="btn btn-success btn-md" href="@Url.Action("Index", "Company")"><span class="glyphicon glyphicon-user"></span> ניהול חשבונות חברה</a>
+            <a class="btn btn-success btn-md" href="@Url.Action("Index", "Company")"><span class="glyphicon glyphicon-user"></span> ניהול משתמשים</a>
             <br /><br />
         </p>
     </div>

@@ -26,9 +26,28 @@ namespace FlatFXWebClient
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.min.js"));
 
+            //// Styles for RTL
+            //bundles.Add(new StyleBundle("~/bundles/styleRTL").Include(
+            //           "~/Content/bootstrap.rtl.min.css",
+            //           "~/Content/rtlCustom.css"
+            //           ));
+
+            //bundles.Add(new ScriptBundle("~/bundles/scriptRTL").Include(
+            //           "~/Scripts/bootstrap.rtl.min.js",
+            //           "~/Scripts/rtlCustom.js"
+            //           ));
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
-                      "~/Content/*.css",
-                      "~/Content/*.css.map"));
+                      "~/Content/bootstrap-theme.min.css",
+                      "~/Content/bootstrap-theme.css.map",
+                      "~/Content/bootstrap.css",
+                      "~/Content/bootstrap.css.map",
+                      "~/Content/bootstrap.min.css",
+                      "~/Content/examples.css",
+                      "~/Content/fullpageex.css",
+                      "~/Content/jquery.fullPage.css",
+                      "~/Content/Site.css"
+                      ));
         }
     }
 }

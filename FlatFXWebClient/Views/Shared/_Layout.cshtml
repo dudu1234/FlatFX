@@ -20,20 +20,21 @@
     <link href="~/Content/fullpageex.css" rel="stylesheet" />
 
     @RenderSection("scripts", required: false)
-
-    <!-- Kendo links -->
-    @*<link rel="stylesheet" href="http://kendo.cdn.telerik.com/2013.3.1119/styles/kendo.common-bootstrap.min.css" />
-    <link rel="stylesheet" href="http://kendo.cdn.telerik.com/2013.3.1119/styles/kendo.bootstrap.min.css" />
-    <link href="http://kendo.cdn.telerik.com/2013.1.319/styles/kendo.common.min.css" rel="stylesheet" />
-    <link href="http://kendo.cdn.telerik.com/2013.1.319/styles/kendo.default.min.css" rel="stylesheet" />
-    <link href="http://kendo.cdn.telerik.com/2013.1.319/styles/kendo.rtl.min.css" rel="stylesheet" />
-    <script src="http://kendo.cdn.telerik.com/2013.1.319/js/kendo.all.min.js"></script>
-    <script src="http://kendo.cdn.telerik.com/2013.1.319/js/kendo.aspnetmvc.min.js"></script>*@
     <script src="~/JS/FFx.js"></script>
+
+    @{
+        if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
+        {
+            <script src="~/Scripts/bootstrap.rtl.min.js"></script>
+            <link href="~/Content/rtlCustom.css" rel="stylesheet" />
+            <script src="~/Scripts/bootstrap.rtl.min.js"></script>
+            <script src="~/JS/rtlCustom.js"></script>
+        }
+    }
 </head>
 <body>
     <header>
-        <div> 
+        <div>
             <div class="row">
                 <div class="col-xs-2">
                 </div>
@@ -41,26 +42,26 @@
                     <img style="width:100%" class="logoImage" src="~/Images/FlatFX_Logo3.png" />
                 </div>
                 <div class="col-xs-2"></div>
-                    <div class="col-xs-2">
-                        <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
-                            @if (culture == "he-IL")
-                            {
-                                <option value="en-US" title="@Url.Content("~/Content/Images/flag_En.png")">English</option>
-                                <option value="he-IL" title="@Url.Content("~/Content/Images/flag_Ro.png")" selected="selected">עברית</option>
-                            }
-                            else
-                            {
-                                <option value="en-US" title="@Url.Content("~/Content/Images/flag_En.png")" selected="selected">English</option>
-                                <option value="he-IL" title="@Url.Content("~/Content/Images/flag_Ro.png")">עברית</option>
-                            }
-                        </select>
-                    </div>
-                    <div id="login" class="col-xs-2">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                    <div class="col-xs-2">
-                    </div>
+                <div class="col-xs-2">
+                    <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
+                        @if (culture == "he-IL")
+                        {
+                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
+                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
+                        }
+                        else
+                        {
+                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
+                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
+                        }
+                    </select>
                 </div>
+                <div id="login" class="col-xs-2">
+                    @Html.Partial("_LoginPartial")
+                </div>
+                <div class="col-xs-2">
+                </div>
+            </div>
             <div class="row">
                 <div class="col-xs-2">
                 </div>
@@ -84,14 +85,14 @@
     </footer>
 
     <script type="text/javascript">
-    var paramObject = {
-        UrlChangeCulture: '@Url.Content("~/Account/ChangeCurrentCulture")'
-    }
+        var paramObject = {
+            UrlChangeCulture: '@Url.Content("~/Account/ChangeCurrentCulture")'
+        }
 
-    function changeCurrentCulture(culture) {
-        document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
-        return true;
-    }
+        function changeCurrentCulture(culture) {
+            document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
+            return true;
+        }
 
     </script>
 

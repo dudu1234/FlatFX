@@ -23,7 +23,7 @@
         </thead>
         <tbody>
             @{
-                foreach (var currencyItem in FlatFX.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
+                foreach (var currencyItem in FlatFXCore.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
                 {
                     <tr>
                         <td>@currencyItem.Value</td>

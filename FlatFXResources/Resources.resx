@@ -135,8 +135,26 @@
   <data name="FirstName" xml:space="preserve">
     <value>First Name</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>Hello</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>Login</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>About</value>
+  </data>
+  <data name="MenuActions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="MenuHowItWorks" xml:space="preserve">
+    <value>How It Works</value>
+  </data>
+  <data name="MenuMovie" xml:space="preserve">
+    <value>Movie</value>
   </data>
   <data name="MobilePhone" xml:space="preserve">
     <value>Mobile Phone</value>
@@ -155,6 +173,9 @@
   </data>
   <data name="Role" xml:space="preserve">
     <value>Role</value>
+  </data>
+  <data name="Signout" xml:space="preserve">
+    <value>Sign out</value>
   </data>
   <data name="UserComfirmPasswordValidation" xml:space="preserve">
     <value>The password and confirmation password do not match.</value>

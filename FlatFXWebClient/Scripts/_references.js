@@ -10,4 +10,6 @@
 /// <reference path="modernizr-2.8.3.js" />
 /// <reference path="respond.min.js" />
 /// <reference path="respond.matchmedia.addlistener.min.js" />
-/// <reference path="../../localhost/FlatFX/scripts/jquery.fullpage.js" />
+/// <reference path="jquery.fullPage.js" />
+/// <reference path="bootstrap.rtl.min.js" />
+/// <reference path="../js/rtlcustom.js" />

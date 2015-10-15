@@ -135,8 +135,26 @@
   <data name="FirstName" xml:space="preserve">
     <value>שם פרטי</value>
   </data>
+  <data name="Hello" xml:space="preserve">
+    <value>שלום</value>
+  </data>
   <data name="LastName" xml:space="preserve">
     <value>שם משפחה</value>
+  </data>
+  <data name="Login" xml:space="preserve">
+    <value>כניסה</value>
+  </data>
+  <data name="MenuAbout" xml:space="preserve">
+    <value>אודות</value>
+  </data>
+  <data name="MenuActions" xml:space="preserve">
+    <value>פעולות</value>
+  </data>
+  <data name="MenuHowItWorks" xml:space="preserve">
+    <value>איך זה עובד?</value>
+  </data>
+  <data name="MenuMovie" xml:space="preserve">
+    <value>סרטון</value>
   </data>
   <data name="MobilePhone" xml:space="preserve">
     <value>טלפון סלולרי</value>
@@ -155,6 +173,9 @@
   </data>
   <data name="Role" xml:space="preserve">
     <value>תפקיד</value>
+  </data>
+  <data name="Signout" xml:space="preserve">
+    <value>יציאה</value>
   </data>
   <data name="UserComfirmPasswordValidation" xml:space="preserve">
     <value>וידוי הסיסמא נכשל.</value>

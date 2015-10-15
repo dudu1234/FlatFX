@@ -12,7 +12,7 @@ body {
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
-    direction: rtl;
+    direction: ltr;
 }
 
 a { 
