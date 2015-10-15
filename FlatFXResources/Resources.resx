@@ -117,17 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountFullName" xml:space="preserve">
+    <value>Account full name</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>Account name</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="CarPhone" xml:space="preserve">
+    <value>Car Phone</value>
+  </data>
+  <data name="CompanyFullName" xml:space="preserve">
+    <value>Full Name</value>
+  </data>
+  <data name="CompanyShortName" xml:space="preserve">
+    <value>Short Name</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>Contact Details</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>Country</value>
   </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>Create new account</value>
+  </data>
+  <data name="CreateNewCompany" xml:space="preserve">
+    <value>Create new company</value>
+  </data>
   <data name="CreateNewUser" xml:space="preserve">
     <value>Create new user</value>
   </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>Customer Type</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>Email</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>Additional Email</value>
   </data>
   <data name="Fax" xml:space="preserve">
     <value>Fax</value>
@@ -137,6 +170,18 @@
   </data>
   <data name="Hello" xml:space="preserve">
     <value>Hello</value>
+  </data>
+  <data name="HomePhone" xml:space="preserve">
+    <value>Home Phone</value>
+  </data>
+  <data name="IsDefaultAccount" xml:space="preserve">
+    <value>Is default?</value>
+  </data>
+  <data name="IsDepositValid" xml:space="preserve">
+    <value>Is deposit valid</value>
+  </data>
+  <data name="IsSignOnRegistrationAgreement" xml:space="preserve">
+    <value>Is sign on registration agreement</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>Last Name</value>
@@ -159,8 +204,14 @@
   <data name="MobilePhone" xml:space="preserve">
     <value>Mobile Phone</value>
   </data>
+  <data name="MobilePhone2" xml:space="preserve">
+    <value>Additional Mobile Phone</value>
+  </data>
   <data name="OfficePhone" xml:space="preserve">
     <value>Office Phone</value>
+  </data>
+  <data name="OfficePhone2" xml:space="preserve">
+    <value>Additional  Office Phone</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>Password</value>
@@ -188,6 +239,9 @@
   </data>
   <data name="ValidationRequired" xml:space="preserve">
     <value>The {0} field is required.</value>
+  </data>
+  <data name="ValidIP" xml:space="preserve">
+    <value>Valid IP</value>
   </data>
   <data name="WebSite" xml:space="preserve">
     <value>Web Site</value>

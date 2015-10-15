@@ -117,17 +117,50 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="AccountFullName" xml:space="preserve">
+    <value>שם חשבון מלא</value>
+  </data>
+  <data name="AccountName" xml:space="preserve">
+    <value>שם חשבון</value>
+  </data>
+  <data name="Address" xml:space="preserve">
+    <value>כתובת</value>
+  </data>
+  <data name="CarPhone" xml:space="preserve">
+    <value>טלפון ברכב</value>
+  </data>
+  <data name="CompanyFullName" xml:space="preserve">
+    <value>שם מלא</value>
+  </data>
+  <data name="CompanyShortName" xml:space="preserve">
+    <value>שם קצר</value>
+  </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>וודא סיסמא</value>
+  </data>
+  <data name="ContactDetails" xml:space="preserve">
+    <value>פרטי קשר</value>
   </data>
   <data name="Country" xml:space="preserve">
     <value>ארץ</value>
   </data>
+  <data name="CreateNewAccount" xml:space="preserve">
+    <value>צור חשבון חדש</value>
+  </data>
+  <data name="CreateNewCompany" xml:space="preserve">
+    <value>צור חברה חדשה</value>
+  </data>
   <data name="CreateNewUser" xml:space="preserve">
     <value>צור משתמש חדש</value>
   </data>
+  <data name="CustomerType" xml:space="preserve">
+    <value>סוג לקוח</value>
+  </data>
   <data name="Email" xml:space="preserve">
     <value>אימייל</value>
+  </data>
+  <data name="Email2" xml:space="preserve">
+    <value>אימייל נוסף</value>
   </data>
   <data name="Fax" xml:space="preserve">
     <value>פקס</value>
@@ -137,6 +170,18 @@
   </data>
   <data name="Hello" xml:space="preserve">
     <value>שלום</value>
+  </data>
+  <data name="HomePhone" xml:space="preserve">
+    <value>טלפון בבית</value>
+  </data>
+  <data name="IsDefaultAccount" xml:space="preserve">
+    <value>האם ברירת מחדל?</value>
+  </data>
+  <data name="IsDepositValid" xml:space="preserve">
+    <value>ישנה ערבות</value>
+  </data>
+  <data name="IsSignOnRegistrationAgreement" xml:space="preserve">
+    <value>חתום על מסמכי הרשמה</value>
   </data>
   <data name="LastName" xml:space="preserve">
     <value>שם משפחה</value>
@@ -159,8 +204,14 @@
   <data name="MobilePhone" xml:space="preserve">
     <value>טלפון סלולרי</value>
   </data>
+  <data name="MobilePhone2" xml:space="preserve">
+    <value>סלולרי נוסף</value>
+  </data>
   <data name="OfficePhone" xml:space="preserve">
     <value>טלפון בעבודה</value>
+  </data>
+  <data name="OfficePhone2" xml:space="preserve">
+    <value>טלפון בעבודה נוסף</value>
   </data>
   <data name="Password" xml:space="preserve">
     <value>סיסמא</value>
@@ -188,6 +239,9 @@
   </data>
   <data name="ValidationRequired" xml:space="preserve">
     <value>השדה {0} הינו שדה חובה.</value>
+  </data>
+  <data name="ValidIP" xml:space="preserve">
+    <value>Valid IP</value>
   </data>
   <data name="WebSite" xml:space="preserve">
     <value>שם אתר</value>

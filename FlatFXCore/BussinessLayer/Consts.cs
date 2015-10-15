@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
@@ -27,11 +28,13 @@ namespace FlatFXCore.BussinessLayer
         {
             Importer = 1,
             Exporter = 2,
-            Changer = 3,
-            Broker = 4,
-            Private = 5,
-            Demo = 6,
-            FlatFX = 7
+            [Display(Name="Exporter & Importer")]
+            Exporter_Importer = 3,
+            Changer = 4,
+            Broker = 5,
+            Private = 6,
+            Demo = 7,
+            FlatFX = 8
         }
         public enum eProviderType
         {

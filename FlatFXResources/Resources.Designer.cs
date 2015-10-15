@@ -61,11 +61,74 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account full name.
+        /// </summary>
+        public static string AccountFullName {
+            get {
+                return ResourceManager.GetString("AccountFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Account name.
+        /// </summary>
+        public static string AccountName {
+            get {
+                return ResourceManager.GetString("AccountName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string Address {
+            get {
+                return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Car Phone.
+        /// </summary>
+        public static string CarPhone {
+            get {
+                return ResourceManager.GetString("CarPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Full Name.
+        /// </summary>
+        public static string CompanyFullName {
+            get {
+                return ResourceManager.GetString("CompanyFullName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Short Name.
+        /// </summary>
+        public static string CompanyShortName {
+            get {
+                return ResourceManager.GetString("CompanyShortName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Details.
+        /// </summary>
+        public static string ContactDetails {
+            get {
+                return ResourceManager.GetString("ContactDetails", resourceCulture);
             }
         }
         
@@ -79,6 +142,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create new account.
+        /// </summary>
+        public static string CreateNewAccount {
+            get {
+                return ResourceManager.GetString("CreateNewAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new company.
+        /// </summary>
+        public static string CreateNewCompany {
+            get {
+                return ResourceManager.GetString("CreateNewCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new user.
         /// </summary>
         public static string CreateNewUser {
@@ -88,11 +169,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Customer Type.
+        /// </summary>
+        public static string CustomerType {
+            get {
+                return ResourceManager.GetString("CustomerType", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
             get {
                 return ResourceManager.GetString("Email", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additional Email.
+        /// </summary>
+        public static string Email2 {
+            get {
+                return ResourceManager.GetString("Email2", resourceCulture);
             }
         }
         
@@ -120,6 +219,42 @@ namespace FlatFXResources {
         public static string Hello {
             get {
                 return ResourceManager.GetString("Hello", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home Phone.
+        /// </summary>
+        public static string HomePhone {
+            get {
+                return ResourceManager.GetString("HomePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is default?.
+        /// </summary>
+        public static string IsDefaultAccount {
+            get {
+                return ResourceManager.GetString("IsDefaultAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is deposit valid.
+        /// </summary>
+        public static string IsDepositValid {
+            get {
+                return ResourceManager.GetString("IsDepositValid", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Is sign on registration agreement.
+        /// </summary>
+        public static string IsSignOnRegistrationAgreement {
+            get {
+                return ResourceManager.GetString("IsSignOnRegistrationAgreement", resourceCulture);
             }
         }
         
@@ -187,11 +322,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Additional Mobile Phone.
+        /// </summary>
+        public static string MobilePhone2 {
+            get {
+                return ResourceManager.GetString("MobilePhone2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Office Phone.
         /// </summary>
         public static string OfficePhone {
             get {
                 return ResourceManager.GetString("OfficePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Additional  Office Phone.
+        /// </summary>
+        public static string OfficePhone2 {
+            get {
+                return ResourceManager.GetString("OfficePhone2", resourceCulture);
             }
         }
         
@@ -273,6 +426,15 @@ namespace FlatFXResources {
         public static string ValidationRequired {
             get {
                 return ResourceManager.GetString("ValidationRequired", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Valid IP.
+        /// </summary>
+        public static string ValidIP {
+            get {
+                return ResourceManager.GetString("ValidIP", resourceCulture);
             }
         }
         
