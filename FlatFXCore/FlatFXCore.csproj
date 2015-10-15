@@ -130,9 +130,7 @@
     <Compile Include="Model\Data\FXRateModels.cs" />
     <Compile Include="Model\Data\LogModels.cs" />
     <Compile Include="Model\Data\ProviderModels.cs" />
-    <Compile Include="Model\User\AccountViewModels.cs" />
     <Compile Include="Model\User\IdentityConfig.cs" />
-    <Compile Include="Model\User\ManageViewModels.cs" />
     <Compile Include="Model\User\User.cs" />
     <Compile Include="Model\Mapping\Mapping.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />

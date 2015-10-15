@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 
-namespace FlatFXCore.Model.User
+namespace FlatFXWebClient.ViewModels
 {
     public class IndexViewModel
     {

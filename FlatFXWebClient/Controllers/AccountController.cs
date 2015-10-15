@@ -11,6 +11,7 @@ using Microsoft.Owin.Security;
 using FlatFXCore.Model.User;
 using FlatFXCore.Model.Core;
 using System.Web.Security;
+using FlatFXWebClient.ViewModels;
 
 namespace FlatFXWebClient.Controllers
 {
