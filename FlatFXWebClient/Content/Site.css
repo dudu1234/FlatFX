@@ -870,3 +870,13 @@ tr.pager td {
 {
     color: blue;
 }
+.editorRow label {
+    float: left;
+    width: 100px;
+    text-align: right;
+}
+
+.editorRow input[type=text] {
+    width: 80px;
+    margin: 0 0 0 10px;
+}

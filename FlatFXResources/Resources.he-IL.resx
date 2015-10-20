@@ -145,7 +145,7 @@
     <value>ארץ</value>
   </data>
   <data name="CreateNewAccount" xml:space="preserve">
-    <value>צור חשבון חדש</value>
+    <value>צור קבוצת חשבונות חדשה</value>
   </data>
   <data name="CreateNewCompany" xml:space="preserve">
     <value>צור חברה חדשה</value>
@@ -245,5 +245,38 @@
   </data>
   <data name="WebSite" xml:space="preserve">
     <value>שם אתר</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>מספר חשבון</value>
+  </data>
+  <data name="ApprovedBYFlatFX" xml:space="preserve">
+    <value>מאושר ע"י FlatFX</value>
+  </data>
+  <data name="ApprovedBYProvider" xml:space="preserve">
+    <value>מאושר ע"י ספק הנזילות</value>
+  </data>
+  <data name="BankAccountDetails" xml:space="preserve">
+    <value>פרטי חשבון בנק</value>
+  </data>
+  <data name="BranchNumber" xml:space="preserve">
+    <value>מספר סניף</value>
+  </data>
+  <data name="CompanyVolumePerYearUSD" xml:space="preserve">
+    <value>נפח עסקאות (שנתי, דולר)</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="ProviderOrBank" xml:space="preserve">
+    <value>ספק נזילות/בנק</value>
+  </data>
+  <data name="SWIFT" xml:space="preserve">
+    <value>SWIFT</value>
+  </data>
+  <data name="UserList_SendEmail" xml:space="preserve">
+    <value>שלח מיילים לרשימת כתובות</value>
+  </data>
+  <data name="UserList_SendInvoice" xml:space="preserve">
+    <value>שלח חשבוניות לרשימת כתובות</value>
   </data>
 </root>

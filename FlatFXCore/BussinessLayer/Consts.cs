@@ -214,5 +214,43 @@ namespace FlatFXCore.BussinessLayer
             CompanyDemoUser = 5,
             Unknown = 6
         }
+        /// <summary>
+        /// eLanguage
+        /// </summary>
+        public enum eLanguage
+        {
+            English = 1,
+            Hebrew = 2
+        }
+        /// <summary>
+        /// eInvoiceCurrency
+        /// </summary>
+        public enum eInvoiceCurrency
+        {
+            USD = 1,
+            ILS = 2,
+            EUR = 3
+        }
+        public enum eCompanyVolume
+        {
+            [Display(Name="No FX")]
+            NoFX = 1,
+            [Display(Name = "< 100,000 $")]
+            Under100K = 2,
+            [Display(Name = "100,000-500,000 $")]
+            Under500K = 3,
+            [Display(Name = "500,000-1,000,000 $")]
+            Under1M = 4,
+            [Display(Name = "1,000,000-5,000,000 $")]
+            Under5M = 5,
+            [Display(Name = "5,000,000-12,000,000 $")]
+            Under12M = 6,
+            [Display(Name = "> 12,000,000 $")]
+            MoreThan12M = 7
+        }
+        public enum eCountries
+        {
+            Israel = 1
+        }
     }
 }

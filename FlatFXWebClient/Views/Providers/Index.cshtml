@@ -1,0 +1,62 @@
+﻿@model IEnumerable<FlatFXCore.Model.Data.Provider>
+
+@{
+    ViewBag.Title = "Provider List";
+}
+
+<h3>Provider List</h3>
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Status)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ProviderType)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.QuoteResponse_Enabled)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.ShortName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.IsActive)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Status)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ProviderType)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.QuoteResponse_Enabled)
+        </td>
+        <td>
+            @Html.ActionLink("Edit", "Edit", new { id=item.ProviderId }) |
+            @Html.ActionLink("Details", "Details", new { id=item.ProviderId }) |
+            @Html.ActionLink("Delete", "Delete", new { id=item.ProviderId })
+        </td>
+    </tr>
+}
+
+</table>

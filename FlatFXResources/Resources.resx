@@ -145,7 +145,7 @@
     <value>Country</value>
   </data>
   <data name="CreateNewAccount" xml:space="preserve">
-    <value>Create new account</value>
+    <value>Create new account group</value>
   </data>
   <data name="CreateNewCompany" xml:space="preserve">
     <value>Create new company</value>
@@ -245,5 +245,38 @@
   </data>
   <data name="WebSite" xml:space="preserve">
     <value>Web Site</value>
+  </data>
+  <data name="AccountNumber" xml:space="preserve">
+    <value>Account Number</value>
+  </data>
+  <data name="ApprovedBYFlatFX" xml:space="preserve">
+    <value>Approved by FlatFX</value>
+  </data>
+  <data name="ApprovedBYProvider" xml:space="preserve">
+    <value>Approved by provider</value>
+  </data>
+  <data name="BankAccountDetails" xml:space="preserve">
+    <value>Bank account details</value>
+  </data>
+  <data name="BranchNumber" xml:space="preserve">
+    <value>Branch Number</value>
+  </data>
+  <data name="CompanyVolumePerYearUSD" xml:space="preserve">
+    <value>Company Volume (yearly, USD)</value>
+  </data>
+  <data name="IBAN" xml:space="preserve">
+    <value>IBAN</value>
+  </data>
+  <data name="ProviderOrBank" xml:space="preserve">
+    <value>Provider/Bank</value>
+  </data>
+  <data name="SWIFT" xml:space="preserve">
+    <value>SWIFT</value>
+  </data>
+  <data name="UserList_SendEmail" xml:space="preserve">
+    <value>Send Emails to email addresses</value>
+  </data>
+  <data name="UserList_SendInvoice" xml:space="preserve">
+    <value>Send Invoice to email addresses</value>
   </data>
 </root>

@@ -36,6 +36,12 @@ namespace FlatFXCore.Model.Data
         public bool? IsDepositValid { get; set; }
         [DisplayName("Is Sign On Registration Agreement")]
         public bool? IsSignOnRegistrationAgreement { get; set; }
+        [DisplayName("Company volume per year (USD)")]
+        public Consts.eCompanyVolume CompanyVolumePerYearUSD { get; set; }
+        [MaxLength(800), Description("Send email to addresses (Seperated by ;)"), DisplayName("Send Email list")]
+        public string UserList_SendEmail { get; set; }
+        [MaxLength(800), Description("Send invoice to addresses (Seperated by ;)"), DisplayName("Send Invoice list")]
+        public string UserList_SendInvoice { get; set; }
 
         public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]

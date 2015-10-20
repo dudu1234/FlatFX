@@ -1,4 +1,5 @@
 ﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using System;
 using System.Collections.Generic;
@@ -59,12 +60,19 @@ namespace FlatFXWebClient.ViewModels
         public string ValidIP { get; set; }
         [Display(Name = "CustomerType", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCustomerType? CustomerType { get; set; }
-        //[DisplayName("Is Deposit valid")]
         [Display(Name = "IsDepositValid", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool? IsDepositValid { get; set; }
-        //[DisplayName("Is Sign On Registration Agreement")]
+        public bool IsDepositValid { get; set; }
         [Display(Name = "IsSignOnRegistrationAgreement", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool? IsSignOnRegistrationAgreement { get; set; }
+        public bool IsSignOnRegistrationAgreement { get; set; }
+        [Display(Name = "CompanyVolumePerYearUSD", ResourceType = typeof(FlatFXResources.Resources))]
+        public Consts.eCompanyVolume? CompanyVolumePerYearUSD { get; set; }
+        [Display(Name = "UserList_SendEmail", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string UserList_SendEmail { get; set; }
+        [Display(Name = "UserList_SendInvoice", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string UserList_SendInvoice { get; set; }
+
 
         public ContactDetailsViewModel contactDetails = new ContactDetailsViewModel();
         public ContactDetailsExViewModel contactDetailsEx = new ContactDetailsExViewModel();
@@ -84,6 +92,55 @@ namespace FlatFXWebClient.ViewModels
 
         [Display(Name = "IsDefaultAccount", ResourceType = typeof(FlatFXResources.Resources))]
         public bool IsDefaultAccount { get; set; }
+    }
+
+    public class RegisterProviderAccountViewModel
+    {
+        [Display(Name = "ProviderOrBank", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        public string ProviderId { get; set; }
+        [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string AccountName { get; set; }
+        [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string AccountFullName { get; set; }
+        [Display(Name = "BranchNumber", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(10, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string BranchNumber { get; set; }
+        [Display(Name = "AccountNumber", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(20, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string AccountNumber { get; set; }
+        [Display(Name = "Address", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string Address { get; set; }
+        [Display(Name = "IBAN", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(30, MinimumLength = 10, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string IBAN { get; set; }
+        [Display(Name = "SWIFT", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(10, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string SWIFT { get; set; }
+        [Display(Name = "ApprovedBYFlatFX", ResourceType = typeof(FlatFXResources.Resources))]
+        public bool ApprovedBYFlatFX { get; set; }
+        [Display(Name = "ApprovedBYProvider", ResourceType = typeof(FlatFXResources.Resources))]
+        public bool ApprovedBYProvider { get; set; }
+
+        public Dictionary<string, Provider> Providers = new Dictionary<string,Provider>();
+
+        public RegisterProviderAccountViewModel()
+        {
+            using (var context = new FfxContext())
+            {
+                Providers = context.Providers.Where(p => p.IsActive).ToDictionary(p => p.ProviderId);
+            }
+        }
     }
 
     public class ContactDetailsViewModel
@@ -107,7 +164,7 @@ namespace FlatFXWebClient.ViewModels
         public string Fax { get; set; }
 
         [Display(Name = "Country", ResourceType = typeof(FlatFXResources.Resources))]
-        public string Country { get; set; }
+        public Consts.eCountries? Country { get; set; }
 
         [Display(Name = "WebSite", ResourceType = typeof(FlatFXResources.Resources))]
         [Url]
@@ -130,7 +187,7 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "OfficePhone2", ResourceType = typeof(FlatFXResources.Resources))]
         [Phone]
         public string OfficePhone2 { get; set; }
-        
+
         [Display(Name = "CarPhone", ResourceType = typeof(FlatFXResources.Resources))]
         [Phone]
         public string CarPhone { get; set; }
@@ -145,5 +202,6 @@ namespace FlatFXWebClient.ViewModels
         public RegisterUserViewModel UserVM = new RegisterUserViewModel();
         public RegisterCompanyViewModel companyVM = new RegisterCompanyViewModel();
         public RegisterCompanyAccountViewModel companyAccountVM = new RegisterCompanyAccountViewModel();
+        public RegisterProviderAccountViewModel providerAccountVM = new RegisterProviderAccountViewModel();
     }
 }

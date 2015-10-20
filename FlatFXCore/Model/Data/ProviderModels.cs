@@ -16,43 +16,45 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string ProviderId { get; set; }
-        
-        [Index("IX_ShortName", IsUnique = true), MaxLength(10), Required]
+
+        [DisplayName("Short Name"), Index("IX_ShortName", IsUnique = true), MaxLength(10), Required]
         public string ShortName { get; set; }
-        [Index("IX_FullName", IsUnique = true), MaxLength(200), Required]
+        [DisplayName("Full Name"), Index("IX_FullName", IsUnique = true), MaxLength(200), Required]
         public string FullName { get; set; }
 
-        [Required]
+        [DisplayName("Bank Number"), Required]
         public int BankNumber { get; set; }
         [Required]
         public bool IsActive { get; set; }
         [Required]
         public Consts.eProviderStatus Status { get; set; }
-        [Required]
+        [DisplayName("Provider Type"), Required]
         public Consts.eProviderType ProviderType { get; set; }
 
-        [Required]
+        [DisplayName("Is enabled"), Required]
         public bool QuoteResponse_Enabled { get; set; }
-        [Required]
+        [DisplayName("Spread method"), Required]
         public Consts.eQuoteResponseSpreadMethod QuoteResponse_SpreadMethod { get; set; }
-        [Required]
+        [DisplayName("Daily start time"), Required]
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
         public DateTime QuoteResponse_StartTime { get; set; }
-        [Required]
+        [DisplayName("Daily end time"), Required]
         public DateTime QuoteResponse_EndTime { get; set; }
-        [Required]
+        [DisplayName("Friday start time"), Required]
         public DateTime QuoteResponse_FridayStartTime { get; set; }
-        [Required]
+        [DisplayName("Friday end time"), Required]
         public DateTime QuoteResponse_FridayEndTime { get; set; }
-    
-        [Required]
+
+        [DisplayName("User confirmation time interval"), Required]
         public Int16 QuoteResponse_UserConfirmationTimeInterval { get; set; }
-        [Required]
+        [DisplayName("Automatic response enabled"), Required]
         public bool QuoteResponse_AutomaticResponseEnabled { get; set; }
-        [Required]
+        [DisplayName("Min request volume (USD)"), Required]
         public int QuoteResponse_MinRequestVolumeUSD { get; set; }
-        [Required]
+        [DisplayName("Max daily volume (USD)"), Required]
         public int QuoteResponse_MaxDailyVolumeUSD { get; set; }
-        [Required]
+        [DisplayName("Number of promils without discount"), Required]
         public double QuoteResponse_NumberOfPromilsWithoutDiscount { get; set; }
 
         public virtual ICollection<ProviderAccount> Accounts { get; set; }
@@ -62,7 +64,10 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
-        public Provider() { }
+        public Provider() 
+        {
+            ContactDetails = new ContactDetails();
+        }
     }
     [Table("ProviderAccounts")]
     public class ProviderAccount
@@ -85,7 +90,16 @@ namespace FlatFXCore.Model.Data
         [MaxLength(20)]
         public string BankAccountNumber { get; set; }
 
-        
+        [MaxLength(200)]
+        public string BankAddress { get; set; }
+        [MaxLength(30)]
+        public string IBAN { get; set; }
+        [MaxLength(10)]
+        public string SWIFT { get; set; }
+
+        public bool ApprovedBYFlatFX { get; set; }
+        public bool ApprovedBYProvider { get; set; }
+
         [Required]
         public bool IsActive { get; set; }
         

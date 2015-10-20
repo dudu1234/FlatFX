@@ -15,17 +15,6 @@ using System.Threading.Tasks;
 
 namespace FlatFXCore.Model.User
 {
-    //Attributes Examples:
-    //[MaxLength(10),MinLength(5)] 
-    //[MaxLength(10, ErrorMessage="BloggerName must be 10 characters or less"),MinLength(5)]
-    //[ConcurrencyCheck, MaxLength(10, ErrorMessage = "BloggerName must be 10 characters or less"), MinLength(5)]
-    //[Column(“BlogDescription", TypeName="ntext")]
-    //[ForeignKey("BlogId")]
-
-
-
-
-    //[Table("Users")]
     public class ApplicationUser : IdentityUser
     {
         [MaxLength(100), Required]
@@ -42,6 +31,12 @@ namespace FlatFXCore.Model.User
         public DateTime CreatedAt { get; set; }
         [MaxLength(100)]
         public string RoleInCompany { get; set; }
+        [DisplayName("Language")]
+        public Consts.eLanguage Language { get; set; }
+        [MaxLength(16), MinLength(8), DisplayName("Signing Key")]
+        public string SigningKey { get; set; }
+        [DisplayName("Invoice Currency")]
+        public Consts.eInvoiceCurrency InvoiceCurrency { get; set; }
 
         public string ContactDetailsId { get; set; }
         [ForeignKey("ContactDetailsId")]
@@ -55,7 +50,10 @@ namespace FlatFXCore.Model.User
         public virtual ICollection<Provider> Providers { get; set; }
         public virtual ICollection<Company> Companies { get; set; }
 
-        public ApplicationUser() { }
+        public ApplicationUser()
+        {
+            Language = Consts.eLanguage.English;
+        }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
         {
@@ -85,34 +83,34 @@ namespace FlatFXCore.Model.User
     {
         [Key]
         public string ContactDetailsId { get; set; }
-        [MaxLength(200)]
+        [DisplayName("Email"), MaxLength(200)]
         public string Email { get; set; }
-        [MaxLength(200)]
+        [DisplayName("Email2"), MaxLength(200)]
         public string Email2 { get; set; }
-        
-        [MaxLength(30)]
+
+        [DisplayName("OfficePhone"), MaxLength(30)]
         public string OfficePhone { get; set; }
-        [MaxLength(30)]
+        [DisplayName("OfficePhone2"), MaxLength(30)]
         public string OfficePhone2 { get; set; }
 
-        [MaxLength(30)]
+        [DisplayName("Fax"), MaxLength(30)]
         public string Fax { get; set; }
-        [MaxLength(30)]
+        [DisplayName("HomePhone"), MaxLength(30)]
         public string HomePhone { get; set; }
 
-        [MaxLength(30)]
+        [DisplayName("MobilePhone"), MaxLength(30)]
         public string MobilePhone { get; set; }
-        [MaxLength(30)]
+        [DisplayName("MobilePhone2"), MaxLength(30)]
         public string MobilePhone2 { get; set; }
 
-        [MaxLength(30)]
+        [DisplayName("CarPhone"), MaxLength(30)]
         public string CarPhone { get; set; }
 
-        [MaxLength(400)]
+        [DisplayName("Address"), MaxLength(400)]
         public string Address { get; set; }
-        [MaxLength(200)]
-        public string Country { get; set; }
-        [MaxLength(400)]
+        [DisplayName("Country")]
+        public Consts.eCountries? Country { get; set; }
+        [DisplayName("WebSite"), MaxLength(400)]
         public string WebSite { get; set; }
     }
     [Table("UserMessages")]

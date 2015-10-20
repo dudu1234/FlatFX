@@ -79,11 +79,56 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account Number.
+        /// </summary>
+        public static string AccountNumber {
+            get {
+                return ResourceManager.GetString("AccountNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
             get {
                 return ResourceManager.GetString("Address", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved by FlatFX.
+        /// </summary>
+        public static string ApprovedBYFlatFX {
+            get {
+                return ResourceManager.GetString("ApprovedBYFlatFX", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Approved by provider.
+        /// </summary>
+        public static string ApprovedBYProvider {
+            get {
+                return ResourceManager.GetString("ApprovedBYProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank account details.
+        /// </summary>
+        public static string BankAccountDetails {
+            get {
+                return ResourceManager.GetString("BankAccountDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Branch Number.
+        /// </summary>
+        public static string BranchNumber {
+            get {
+                return ResourceManager.GetString("BranchNumber", resourceCulture);
             }
         }
         
@@ -115,6 +160,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Volume (yearly, USD).
+        /// </summary>
+        public static string CompanyVolumePerYearUSD {
+            get {
+                return ResourceManager.GetString("CompanyVolumePerYearUSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string ConfirmPassword {
@@ -142,7 +196,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Create new account.
+        ///   Looks up a localized string similar to Create new account group.
         /// </summary>
         public static string CreateNewAccount {
             get {
@@ -228,6 +282,15 @@ namespace FlatFXResources {
         public static string HomePhone {
             get {
                 return ResourceManager.GetString("HomePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to IBAN.
+        /// </summary>
+        public static string IBAN {
+            get {
+                return ResourceManager.GetString("IBAN", resourceCulture);
             }
         }
         
@@ -358,6 +421,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provider/Bank.
+        /// </summary>
+        public static string ProviderOrBank {
+            get {
+                return ResourceManager.GetString("ProviderOrBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
@@ -394,11 +466,38 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to SWIFT.
+        /// </summary>
+        public static string SWIFT {
+            get {
+                return ResourceManager.GetString("SWIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The password and confirmation password do not match..
         /// </summary>
         public static string UserComfirmPasswordValidation {
             get {
                 return ResourceManager.GetString("UserComfirmPasswordValidation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Emails to email addresses.
+        /// </summary>
+        public static string UserList_SendEmail {
+            get {
+                return ResourceManager.GetString("UserList_SendEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Send Invoice to email addresses.
+        /// </summary>
+        public static string UserList_SendInvoice {
+            get {
+                return ResourceManager.GetString("UserList_SendInvoice", resourceCulture);
             }
         }
         

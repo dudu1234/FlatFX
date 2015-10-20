@@ -1,0 +1,169 @@
+﻿@model FlatFXCore.Model.Data.Provider
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Shared/_Layout.cshtml";
+}
+
+<h2>Delete</h2>
+
+<h3>Are you sure you want to delete this?</h3>
+<div>
+    <h4>Provider</h4>
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            @Html.DisplayNameFor(model => model.ContactDetails.Email)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ContactDetails.Email)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ShortName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ShortName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.FullName)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.FullName)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.BankNumber)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.BankNumber)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.IsActive)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.IsActive)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.Status)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.Status)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.ProviderType)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.ProviderType)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_Enabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_Enabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_SpreadMethod)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_SpreadMethod)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_StartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_StartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_EndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_EndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_FridayStartTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_FridayStartTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_FridayEndTime)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_FridayEndTime)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_UserConfirmationTimeInterval)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_UserConfirmationTimeInterval)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_AutomaticResponseEnabled)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_AutomaticResponseEnabled)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_MinRequestVolumeUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_MinRequestVolumeUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_MaxDailyVolumeUSD)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_MaxDailyVolumeUSD)
+        </dd>
+
+        <dt>
+            @Html.DisplayNameFor(model => model.QuoteResponse_NumberOfPromilsWithoutDiscount)
+        </dt>
+
+        <dd>
+            @Html.DisplayFor(model => model.QuoteResponse_NumberOfPromilsWithoutDiscount)
+        </dd>
+
+    </dl>
+
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-default" /> |
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

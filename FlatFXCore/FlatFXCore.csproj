@@ -119,6 +119,10 @@
     <Compile Include="BussinessLayer\Consts.cs" />
     <Compile Include="BussinessLayer\Extensions.cs" />
     <Compile Include="BussinessLayer\Logger.cs" />
+    <Compile Include="Migrations\201510200825190_Initial.cs" />
+    <Compile Include="Migrations\201510200825190_Initial.Designer.cs">
+      <DependentUpon>201510200825190_Initial.cs</DependentUpon>
+    </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Core\Context.cs" />
     <Compile Include="Model\Core\FlatFXCookie.cs" />
@@ -163,6 +167,11 @@
       <Project>{d22b88ba-85e8-45a8-aaba-7e9fcee71b37}</Project>
       <Name>FlatFXResources</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Migrations\201510200825190_Initial.resx">
+      <DependentUpon>201510200825190_Initial.cs</DependentUpon>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

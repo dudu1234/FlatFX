@@ -164,7 +164,8 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         public ActionResult Register()
         {
-            return View();
+            RegisterCompanyEntitiesModelView registerCompanyEntitiesModelView = new RegisterCompanyEntitiesModelView();
+            return View(registerCompanyEntitiesModelView);
         }
 
         //
