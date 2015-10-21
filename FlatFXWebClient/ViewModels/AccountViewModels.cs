@@ -50,15 +50,15 @@ namespace FlatFXWebClient.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "User Name")]
+        [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
         public string UserName { get; set; }
 
         [Required]
         [DataType(DataType.Password)]
-        [Display(Name = "Password")]
+        [Display(Name = "Password", ResourceType = typeof(FlatFXResources.Resources))]
         public string Password { get; set; }
 
-        [Display(Name = "Remember me?")]
+        [Display(Name = "RememberMe", ResourceType = typeof(FlatFXResources.Resources))]
         public bool RememberMe { get; set; }
     }
 

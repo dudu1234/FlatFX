@@ -36,8 +36,9 @@ namespace FlatFXCore.Model.Data
         [DisplayName("Spread method"), Required]
         public Consts.eQuoteResponseSpreadMethod QuoteResponse_SpreadMethod { get; set; }
         [DisplayName("Daily start time"), Required]
-        [DataType(DataType.Date)]
-        [DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        //[DataType(DataType.Date)]
+        //[DisplayFormat(DataFormatString = "{0:hh\\:mm}", ApplyFormatInEditMode = true)]
+        //[DisplayFormat(ApplyFormatInEditMode = true, DataFormatString = "{0:HH\\:mm\\:ss}")]
         public DateTime QuoteResponse_StartTime { get; set; }
         [DisplayName("Daily end time"), Required]
         public DateTime QuoteResponse_EndTime { get; set; }
@@ -102,6 +103,7 @@ namespace FlatFXCore.Model.Data
 
         [Required]
         public bool IsActive { get; set; }
+        public bool IsDemoAccount { get; set; }
         
         public DateTime? CreatedAt { get; set; }
         public DateTime? LastUpdate { get; set; }

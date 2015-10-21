@@ -279,4 +279,16 @@
   <data name="UserList_SendInvoice" xml:space="preserve">
     <value>שלח חשבוניות לרשימת כתובות</value>
   </data>
+  <data name="IsDemoAccount" xml:space="preserve">
+    <value>חשבון דמו?</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>הכנס כמשתמש חדש</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>זוכר אותי?</value>
+  </data>
+  <data name="UseLocalLogin" xml:space="preserve">
+    <value>השתמש בחשבון מקומי ע"מ להיכנס למערכת</value>
+  </data>
 </root>

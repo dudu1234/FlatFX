@@ -279,4 +279,16 @@
   <data name="UserList_SendInvoice" xml:space="preserve">
     <value>Send Invoice to email addresses</value>
   </data>
+  <data name="IsDemoAccount" xml:space="preserve">
+    <value>Is Demo Account</value>
+  </data>
+  <data name="RegisterAsNewUser" xml:space="preserve">
+    <value>Register as a new user</value>
+  </data>
+  <data name="RememberMe" xml:space="preserve">
+    <value>Remember me?</value>
+  </data>
+  <data name="UseLocalLogin" xml:space="preserve">
+    <value>Use a local account to log in</value>
+  </data>
 </root>

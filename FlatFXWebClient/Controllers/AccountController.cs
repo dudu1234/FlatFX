@@ -12,6 +12,7 @@ using FlatFXCore.Model.User;
 using FlatFXCore.Model.Core;
 using System.Web.Security;
 using FlatFXWebClient.ViewModels;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -543,5 +544,26 @@ namespace FlatFXWebClient.Controllers
             }
         }
         #endregion
+
+        [HttpPost]
+        [AllowAnonymous]
+        public JsonResult isFieldUnique(string UserName)
+        {
+            // GUY how to analize the POST request parameters ?
+            string paramNames = "";
+            foreach (string key in Request.Form.Keys)
+                paramNames += key + ";";
+
+            if (Request["UserVM.UserName"] != null)
+            {
+                UserName = Request["UserVM.UserName"];
+                var user = Membership.GetUser(UserName);
+                return Json(user == null);
+            }
+
+            
+
+            return Json(false);
+        }
     }
 }

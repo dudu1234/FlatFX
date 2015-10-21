@@ -89,7 +89,8 @@
                     @Html.DropDownListFor(m => m.providerAccountVM.ProviderId, 
                         new SelectList(Model.providerAccountVM.Providers, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
         
-                    @Html.TextBoxFor(m => m.providerAccountVM.ProviderId, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.ProviderId) })
+                    @Html.LabelFor(m => m.providerAccountVM.IsDemoAccount, htmlAttributes: new { @class = "control-label" })
+                    @Html.CheckBoxFor(m => m.providerAccountVM.IsDemoAccount, new { @class = "form-control" })
                     @Html.TextBoxFor(m => m.providerAccountVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountName) })
                     @Html.TextBoxFor(m => m.providerAccountVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountFullName) })
                     @Html.TextBoxFor(m => m.providerAccountVM.BranchNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.BranchNumber) })

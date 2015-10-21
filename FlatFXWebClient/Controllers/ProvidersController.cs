@@ -23,7 +23,10 @@ namespace FlatFXWebClient.Controllers
             List<Provider> list = providers.ToList();
             // GUY 34
             // why does the Address is null ?
-            string Address = list[0].ContactDetails.Address;
+            if (list.Count > 0)
+            {
+                string Address = list[0].ContactDetails.Address;
+            }
             return View(list);
         }
 
@@ -40,6 +43,10 @@ namespace FlatFXWebClient.Controllers
             {
                 return HttpNotFound();
             }
+
+            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
+            provider.ContactDetails = details;
+
             return View(provider);
         }
 
@@ -99,11 +106,14 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = db.Providers.Find(id);
+            Provider provider = db.Providers.Include(p => p.ContactDetails).Where(p => p.ProviderId == id).Single();
             if (provider == null)
             {
                 return HttpNotFound();
             }
+            
+            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
+            provider.ContactDetails = details;
 
             return View(provider);
         }
@@ -118,7 +128,9 @@ namespace FlatFXWebClient.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(provider).State = EntityState.Modified;
+                db.Entry(provider.ContactDetails).State = EntityState.Modified;
                 db.SaveChanges();
+
                 return RedirectToAction("Index");
             }
             return View(provider);
@@ -145,7 +157,12 @@ namespace FlatFXWebClient.Controllers
         public ActionResult DeleteConfirmed(string id)
         {
             Provider provider = db.Providers.Find(id);
+
+            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
+            provider.ContactDetails = details;
+            
             db.Providers.Remove(provider);
+            db.ContactsDetails.Remove(details);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

@@ -16,7 +16,9 @@
         <div class="panel-body">
             @Html.ValidationSummary("", new { @class = "text-danger" })
             @Html.HiddenFor(model => model.ProviderId)
-
+            @Html.HiddenFor(model => model.ContactDetailsId)
+            @Html.HiddenFor(model => model.ContactDetails.ContactDetailsId)
+            
             <div class="form-group">
                 @Html.LabelFor(model => model.ShortName, htmlAttributes: new { @class = "control-label col-xs-4" })
                 <div class="col-xs-8">

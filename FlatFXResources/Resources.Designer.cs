@@ -304,6 +304,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Is Demo Account.
+        /// </summary>
+        public static string IsDemoAccount {
+            get {
+                return ResourceManager.GetString("IsDemoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is deposit valid.
         /// </summary>
         public static string IsDepositValid {
@@ -439,11 +448,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register as a new user.
+        /// </summary>
+        public static string RegisterAsNewUser {
+            get {
+                return ResourceManager.GetString("RegisterAsNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Registration.
         /// </summary>
         public static string Registration {
             get {
                 return ResourceManager.GetString("Registration", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Remember me?.
+        /// </summary>
+        public static string RememberMe {
+            get {
+                return ResourceManager.GetString("RememberMe", resourceCulture);
             }
         }
         
@@ -471,6 +498,15 @@ namespace FlatFXResources {
         public static string SWIFT {
             get {
                 return ResourceManager.GetString("SWIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use a local account to log in.
+        /// </summary>
+        public static string UseLocalLogin {
+            get {
+                return ResourceManager.GetString("UseLocalLogin", resourceCulture);
             }
         }
         
