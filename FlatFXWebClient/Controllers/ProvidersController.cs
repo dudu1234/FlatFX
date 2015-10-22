@@ -20,6 +20,7 @@ namespace FlatFXWebClient.Controllers
         public ActionResult Index()
         {
             var providers = db.Providers.Include(p => p.ContactDetails);
+            //var providers = db.Providers.Include("ContactDetails");
             List<Provider> list = providers.ToList();
             // GUY 34
             // why does the Address is null ?

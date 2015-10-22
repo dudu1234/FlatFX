@@ -178,6 +178,26 @@ namespace FlatFXWebClient.Controllers
         {
             if (ModelState.IsValid)
             {
+                string errors = "";
+                #region chack if model is valid
+                if (!IsUnique("UserName", model.UserVM.UserName))
+                    errors += "UserName is not unique." + Environment.NewLine;
+                if (!IsUnique("UserEmail", model.UserVM.contactDetails.Email))
+                    errors += "User email is not unique." + Environment.NewLine;
+                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName))
+                    errors += "Company short name is not unique." + Environment.NewLine;
+                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName))
+                    errors += "Company full name is not unique." + Environment.NewLine;
+                if (!IsUnique("AccountName", model.companyAccountVM.AccountName))
+                    errors += "Account name is not unique." + Environment.NewLine;
+                if (!IsUnique("AccountFullName", model.companyAccountVM.AccountFullName))
+                    errors += "Account full name is not unique." + Environment.NewLine;
+                //if (!IsUnique("providerAccountVM_ProviderAccountName", model.providerAccountVM))
+                //    errors += "Provider account name is not unique." + Environment.NewLine;
+                //if (!IsUnique("providerAccountVM_ProviderAccountNumber", model.providerAccountVM))
+                //    errors += "Provider account number is not unique." + Environment.NewLine;
+                #endregion
+
                 var user = new ApplicationUser();
 
                 user.UserName = model.UserVM.UserName;
@@ -560,10 +580,19 @@ namespace FlatFXWebClient.Controllers
                 var user = Membership.GetUser(UserName);
                 return Json(user == null);
             }
-
-            
-
             return Json(false);
+        }
+        private bool IsUnique(string fieldName, string fieldValue)
+        {
+            if (fieldName == "UserName")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                var user = Membership.GetUser(fieldValue);
+                return (user == null);
+            }
+
+            return false;
         }
     }
 }
