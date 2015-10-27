@@ -13,6 +13,8 @@ using FlatFXCore.Model.Core;
 using System.Web.Security;
 using FlatFXWebClient.ViewModels;
 using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Data;
+using System.Collections.Generic;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -158,100 +160,6 @@ namespace FlatFXWebClient.Controllers
                     ModelState.AddModelError("", "Invalid code.");
                     return View(model);
             }
-        }
-
-        //
-        // GET: /Account/Register
-        [AllowAnonymous]
-        public ActionResult Register()
-        {
-            RegisterCompanyEntitiesModelView registerCompanyEntitiesModelView = new RegisterCompanyEntitiesModelView();
-            return View(registerCompanyEntitiesModelView);
-        }
-
-        //
-        // POST: /Account/Register
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterCompanyEntitiesModelView model)
-        {
-            if (ModelState.IsValid)
-            {
-                string errors = "";
-                #region chack if model is valid
-                if (!IsUnique("UserName", model.UserVM.UserName))
-                    errors += "UserName is not unique." + Environment.NewLine;
-                if (!IsUnique("UserEmail", model.UserVM.contactDetails.Email))
-                    errors += "User email is not unique." + Environment.NewLine;
-                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName))
-                    errors += "Company short name is not unique." + Environment.NewLine;
-                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName))
-                    errors += "Company full name is not unique." + Environment.NewLine;
-                if (!IsUnique("AccountName", model.companyAccountVM.AccountName))
-                    errors += "Account name is not unique." + Environment.NewLine;
-                if (!IsUnique("AccountFullName", model.companyAccountVM.AccountFullName))
-                    errors += "Account full name is not unique." + Environment.NewLine;
-                //if (!IsUnique("providerAccountVM_ProviderAccountName", model.providerAccountVM))
-                //    errors += "Provider account name is not unique." + Environment.NewLine;
-                //if (!IsUnique("providerAccountVM_ProviderAccountNumber", model.providerAccountVM))
-                //    errors += "Provider account number is not unique." + Environment.NewLine;
-                #endregion
-
-                var user = new ApplicationUser();
-
-                user.UserName = model.UserVM.UserName;
-                //user.PasswordHash = model.Password;
-                user.FirstName = model.UserVM.FirstName;
-                user.LastName = model.UserVM.LastName;
-                user.Email = model.UserVM.contactDetails.Email;
-                user.RoleInCompany = model.UserVM.Role;
-                user.PhoneNumber = model.UserVM.contactDetails.MobilePhone;
-
-                ContactDetails contactDetails = new ContactDetails();
-                contactDetails.ContactDetailsId = Guid.NewGuid().ToString();
-                contactDetails.OfficePhone = model.UserVM.contactDetails.OfficePhone;
-                contactDetails.Fax = model.UserVM.contactDetails.Fax;
-                contactDetails.Country = model.UserVM.contactDetails.Country;
-                contactDetails.WebSite = model.UserVM.contactDetails.WebSite;
-                contactDetails.MobilePhone = model.UserVM.contactDetails.MobilePhone;
-
-                user.ContactDetailsId = contactDetails.ContactDetailsId;
-                user.CreatedAt = DateTime.Now;
-                user.IsActive = true;
-                user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
-                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
-
-                _db.ContactsDetails.Add(contactDetails);
-                _db.SaveChanges();
-
-                var result = await UserManager.CreateAsync(user, model.UserVM.Password);
-                if (result.Succeeded)
-                {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
-                }
-                else
-                {
-                    if (_db.ContactsDetails.Contains(contactDetails))
-                    {
-                        _db.ContactsDetails.Remove(contactDetails);
-                        _db.SaveChanges();
-                    }
-                }
-
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(model);
         }
 
         //
@@ -574,13 +482,20 @@ namespace FlatFXWebClient.Controllers
             foreach (string key in Request.Form.Keys)
                 paramNames += key + ";";
 
-            if (Request["UserVM.UserName"] != null)
-            {
-                UserName = Request["UserVM.UserName"];
-                var user = Membership.GetUser(UserName);
-                return Json(user == null);
-            }
-            return Json(false);
+            if (Request["UserName"] != null)
+                return Json(IsUnique("UserName", Request["UserName"]));
+            else if (Request["CompanyShortName"] != null)
+                return Json(IsUnique("CompanyShortName", Request["CompanyShortName"]));
+            else if (Request["CompanyFullName"] != null)
+                return Json(IsUnique("CompanyFullName", Request["CompanyFullName"]));
+            else if (Request["Email"] != null)
+                return Json(IsUnique("UserEmail", Request["Email"]));
+            else if (Request["AccountName"] != null)
+                return Json(IsUnique("AccountName", Request["AccountName"]));
+            else if (Request["AccountFullName"] != null)
+                return Json(IsUnique("AccountFullName", Request["AccountFullName"]));
+            else
+                return Json(false);
         }
         private bool IsUnique(string fieldName, string fieldValue)
         {
@@ -591,8 +506,323 @@ namespace FlatFXWebClient.Controllers
                 var user = Membership.GetUser(fieldValue);
                 return (user == null);
             }
+            else if (fieldName == "UserEmail")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.Users.Where(u => u.Email.ToLower() == fieldValue.ToLower()).Any();
+            }
+            else if (fieldName == "CompanyEmail")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.Companies.Where(c => c.ContactDetails.Email.ToLower() == fieldValue.ToLower()).Any();
+            }
+            else if (fieldName == "CompanyShortName")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.Companies.Where(c => c.CompanyShortName.ToLower() == fieldValue.ToLower()).Any();
+            }
+            else if (fieldName == "CompanyFullName")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.Companies.Where(c => c.CompanyFullName.ToLower() == fieldValue.ToLower()).Any();
+            }
+            else if (fieldName == "AccountName")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.CompanyAccounts.Where(a => a.AccountName.ToLower() == fieldValue.ToLower()).Any();
+            }
+            else if (fieldName == "AccountFullName")
+            {
+                if (fieldValue == null || fieldValue == "")
+                    return false;
+                return !_db.CompanyAccounts.Where(a => a.AccountFullName.ToLower() == fieldValue.ToLower()).Any();
+            }
 
             return false;
         }
+        private bool IsUnique(string fieldName, object viewModel)
+        {
+            if (fieldName == "ProviderAccountName" && viewModel != null)
+            {
+                if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
+                    return false;
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == (viewModel as RegisterProviderAccountViewModel).ProviderId &&
+                    pa.BankAccountName.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).AccountName.Trim().ToLower()).Any();
+            }
+            else if (fieldName == "ProviderAccountNumber" && viewModel != null)
+            {
+                if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
+                    return false;
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId ==
+                    (viewModel as RegisterProviderAccountViewModel).ProviderId &&
+                    pa.BankAccountNumber.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).AccountNumber.Trim().ToLower() &&
+                    pa.BankBranchNumber.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).BranchNumber.Trim().ToLower()).Any();
+            }
+
+            return false;
+        }
+
+        #region Register
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult Register()
+        {
+            if (ViewBag.ProviderList == null)
+            {
+                Dictionary<string, string> Providers = new Dictionary<string, string>();
+                if (_db.Providers.Where(p => p.IsActive).Any())
+                    Providers = _db.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
+                ViewBag.ProviderList = Providers;
+            }
+
+            RegisterCompanyEntitiesModelView registerCompanyEntitiesModelView = new RegisterCompanyEntitiesModelView();
+            return View(registerCompanyEntitiesModelView);
+            
+            //return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> Register(RegisterCompanyEntitiesModelView model)
+        {
+            // GUY : why does the model is empty (all members are null)
+            IdentityResult result = null;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                #region chack if model is valid
+                if (!IsUnique("UserName", model.UserVM.UserName.Trim()))
+                    ModelState.AddModelError("", "UserName is not unique.");
+                if (!IsUnique("UserEmail", model.UserVM.userContactDetails.Email.Trim()))
+                    ModelState.AddModelError("", "User email is not unique.");
+                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName.Trim()))
+                    ModelState.AddModelError("", "Company short name is not unique.");
+                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName.Trim()))
+                    ModelState.AddModelError("", "Company full name is not unique.");
+                if (!IsUnique("AccountName", model.companyVM.AccountName.Trim()))
+                    ModelState.AddModelError("", "Account name is not unique.");
+                if (!IsUnique("AccountFullName", model.companyVM.AccountFullName.Trim()))
+                    ModelState.AddModelError("", "Account full name is not unique.");
+                if (!IsUnique("ProviderAccountName", model.providerAccountVM))
+                    ModelState.AddModelError("", "Provider account name is not unique.");
+                if (!IsUnique("ProviderAccountNumber", model.providerAccountVM))
+                    ModelState.AddModelError("", "Provider account number is not unique.");
+                #endregion
+
+                //Create User contact details
+                ContactDetails contactDetails = new ContactDetails();
+                contactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.Trim();
+                contactDetails.Fax = model.UserVM.userContactDetails.Fax.Trim();
+                contactDetails.Country = model.UserVM.userContactDetails.Country;
+                contactDetails.WebSite = model.UserVM.userContactDetails.WebSite.Trim();
+                contactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.Trim();
+
+                //Create User
+                var user = new ApplicationUser();
+                user.UserName = model.UserVM.UserName.Trim();
+                user.FirstName = model.UserVM.FirstName.Trim();
+                user.LastName = model.UserVM.LastName.Trim();
+                user.Email = model.UserVM.userContactDetails.Email.Trim();
+                user.RoleInCompany = model.UserVM.Role;
+                user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.Trim();
+                user.CreatedAt = DateTime.Now;
+                user.IsActive = true;
+                user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
+                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
+                user.Language = Consts.eLanguage.English;
+                user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
+                user.ContactDetails = contactDetails;
+                
+                result = await UserManager.CreateAsync(user, model.UserVM.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    //Create company contact details
+                    ContactDetails companyDetails = new ContactDetails();
+                    companyDetails.Email = model.companyVM.companyContactDetails.Email.Trim();
+                    companyDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.Trim();
+                    companyDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.Trim();
+                    companyDetails.Fax = model.companyVM.companyContactDetails.Fax.Trim();
+                    companyDetails.Country = model.companyVM.companyContactDetails.Country;
+                    companyDetails.WebSite = model.companyVM.companyContactDetails.WebSite.Trim();
+                    companyDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.Trim();
+                    companyDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.Trim();
+                    companyDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.Trim();
+                    companyDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.Trim();
+                    companyDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.Trim();
+                    companyDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.Trim();
+                    
+                    //Add company
+                    var company = new Company();
+                    company.ContactDetails = companyDetails;
+                    company.CreatedAt = DateTime.Now;
+                    company.IsActive = true;
+                    company.Status = Consts.eCompanyStatus.Active;
+                    company.CompanyFullName = model.companyVM.CompanyFullName.Trim();
+                    company.CompanyId = Guid.NewGuid().ToString();
+                    company.CompanyShortName = model.companyVM.CompanyShortName.Trim();
+                    company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
+                    company.CustomerType = model.companyVM.CustomerType;
+                    company.IsDepositValid = false;
+                    company.IsSignOnRegistrationAgreement = false;
+                    company.LastUpdate = DateTime.Now;
+                    company.ValidIP = model.companyVM.ValidIP;
+                    _db.Companies.Add(company);
+
+                    //Add company account
+                    var companyAccount = new CompanyAccount();
+                    companyAccount.AccountFullName = model.companyVM.AccountFullName.Trim();
+                    companyAccount.AccountName = model.companyVM.AccountName.Trim();
+                    companyAccount.CompanyAccountId = Guid.NewGuid().ToString();
+                    companyAccount.CompanyId = company.CompanyId;
+                    companyAccount.IsActive = true;
+                    companyAccount.IsDefaultAccount = true;
+                    _db.CompanyAccounts.Add(companyAccount);
+
+                    //Add provider account
+                    var providerAccount = new ProviderAccount();
+                    providerAccount.ApprovedBYFlatFX = false;
+                    providerAccount.ApprovedBYProvider = false;
+                    providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.Trim();
+                    providerAccount.BankAccountName = model.providerAccountVM.AccountName.Trim();
+                    providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.Trim();
+                    providerAccount.BankAddress = model.providerAccountVM.Address.Trim();
+                    providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.Trim();
+                    providerAccount.CompanyAccountId = companyAccount.CompanyAccountId;
+                    providerAccount.CreatedAt = DateTime.Now;
+                    providerAccount.IBAN = model.providerAccountVM.IBAN;
+                    providerAccount.IsActive = true;
+                    //providerAccount.IsDemoAccount = true;
+                    providerAccount.LastUpdate = DateTime.Now;
+                    providerAccount.LastUpdateBy = User.Identity.Name;
+                    providerAccount.ProviderId = model.providerAccountVM.ProviderId;
+                    providerAccount.QuoteResponse_CustomerPromil = null;
+                    providerAccount.QuoteResponse_IsBlocked = false;
+                    providerAccount.SWIFT = model.providerAccountVM.SWIFT;
+                    _db.ProviderAccounts.Add(providerAccount);
+
+                    _db.SaveChanges();
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex);
+            }
+
+            if (result != null)
+                AddErrors(result);
+
+            return View(model);
+        }
+
+        #endregion
+
+        #region Register Demo
+        //
+        // GET: /Account/Register
+        [AllowAnonymous]
+        public ActionResult RegisterDemo()
+        {
+            return View();
+        }
+
+        //
+        // POST: /Account/Register
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<ActionResult> RegisterDemo(RegisterDemoUserModelView model)
+        {
+            IdentityResult result = null;
+            ContactDetails contactDetails = null;
+
+            if (!ModelState.IsValid)
+            {
+                return View(model);
+            }
+
+            try
+            {
+                #region chack if model is valid
+                if (!IsUnique("UserName", model.Email.Trim()))
+                    ModelState.AddModelError("", "User Name is not unique.");
+                if (!IsUnique("UserEmail", model.Email.Trim()))
+                    ModelState.AddModelError("", "User Email is not unique.");
+                #endregion
+
+                //Create User
+                var user = new ApplicationUser();
+                user.UserName = model.Email.Trim();
+                user.FirstName = model.Email.Trim().Substring(0, model.Email.Trim().IndexOf('@'));
+                user.LastName = "Demo";
+                user.Email = model.Email.Trim();
+                user.RoleInCompany = "";
+                user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.Trim();
+                contactDetails = new ContactDetails();
+                user.ContactDetails = contactDetails;
+                user.CreatedAt = DateTime.Now;
+                user.IsActive = true;
+                user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
+                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.CompanyDemoUser;
+                user.Language = Consts.eLanguage.English;
+                user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
+
+                result = UserManager.Create(user, model.Password);
+                if (result.Succeeded)
+                {
+                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    //Add the demo user to the Demo company
+                    Company demoCompany = _db.Companies.Where(c => c.CompanyShortName == "Demo").SingleOrDefault();
+                    if (demoCompany != null)
+                    {
+                        var u = _db.Users.First(p => p.Email == user.Email);
+                        demoCompany.Users.Add(u);
+                        _db.SaveChanges();
+                    }
+
+                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                    // Send an email with this link
+                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    return RedirectToAction("Index", "Home");
+                }
+            }
+            catch (Exception ex)
+            {
+                ModelState.AddModelError("", ex);
+            }
+
+            if (result != null)
+                AddErrors(result);
+
+            return View(model);
+        }
+        #endregion
     }
 }

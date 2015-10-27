@@ -15,7 +15,7 @@ namespace FlatFXCore.Model.Core
 {
     public class FfxContext : IdentityDbContext<ApplicationUser>
     {
-        public DbSet<ContactDetails> ContactsDetails { get; set; }
+        //public DbSet<ContactDetails> ContactsDetails { get; set; }
         public DbSet<UserMessageData> UserMessages { get; set; }
         public DbSet<UserFavoriteData> UserFavorites { get; set; }
         public DbSet<UserActionData> UserActions { get; set; }
@@ -24,7 +24,7 @@ namespace FlatFXCore.Model.Core
         public DbSet<Provider> Providers { get; set; }
         public DbSet<ProviderAccount> ProviderAccounts { get; set; }
         public DbSet<ChatSession> ChatSessions { get; set; }
-        public DbSet<ChatEntrie> ChatEntries { get; set; }
+        public DbSet<ChatEntry> ChatEntries { get; set; }
         public DbSet<SpreadInfo> Spreads { get; set; }
         public DbSet<FXRate> FXRates { get; set; }
         public DbSet<HistoricalFXRate> HistoricalFXRates { get; set; }
@@ -44,6 +44,31 @@ namespace FlatFXCore.Model.Core
         public static FfxContext Create()
         {
             return new FfxContext();
+        }
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            //modelBuilder.Entity<ApplicationUser>()
+            //        .Property(u => u.ContactDetails.Email)
+            //        .HasColumnName("User_Email");
+
+            //one to many
+            //modelBuilder.Entity<ProviderAccount>()
+            //           .HasRequired<Provider>(pa => pa.Provider)
+            //           .WithMany(p => p.Accounts)
+            //           .HasForeignKey(p => p.ProviderId);
+
+            ////many to many
+            //modelBuilder.Entity<ApplicationUser>()
+            //       .HasMany<Company>(u => u.Companies)
+            //       .WithMany(c => c.Users)
+            //       .Map(cu =>
+            //       {
+            //           cu.MapLeftKey("ApplicationUser_Id");
+            //           cu.MapRightKey("Company_CompanyId");
+            //           cu.ToTable("ApplicationUserCompanies");
+            //       });
+
+            base.OnModelCreating(modelBuilder);
         }
     }
 }

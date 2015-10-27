@@ -19,16 +19,8 @@ namespace FlatFXWebClient.Controllers
         // GET: Providers
         public ActionResult Index()
         {
-            var providers = db.Providers.Include(p => p.ContactDetails);
-            //var providers = db.Providers.Include("ContactDetails");
-            List<Provider> list = providers.ToList();
-            // GUY 34
-            // why does the Address is null ?
-            if (list.Count > 0)
-            {
-                string Address = list[0].ContactDetails.Address;
-            }
-            return View(list);
+            List<Provider> providers = db.Providers.ToList();
+            return View(providers);
         }
 
         // GET: Providers/Details/5
@@ -44,9 +36,6 @@ namespace FlatFXWebClient.Controllers
             {
                 return HttpNotFound();
             }
-
-            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
-            provider.ContactDetails = details;
 
             return View(provider);
         }
@@ -69,7 +58,6 @@ namespace FlatFXWebClient.Controllers
             if (ModelState.IsValid)
             {
                 ContactDetails contactDetails = new ContactDetails();
-                contactDetails.ContactDetailsId = Guid.NewGuid().ToString();
                 contactDetails.Address = provider.ContactDetails.Address;
                 contactDetails.Country = provider.ContactDetails.Country;
                 contactDetails.Email = provider.ContactDetails.Email;
@@ -77,9 +65,7 @@ namespace FlatFXWebClient.Controllers
                 contactDetails.OfficePhone = provider.ContactDetails.OfficePhone;
                 contactDetails.MobilePhone = provider.ContactDetails.MobilePhone;
 
-                provider.ContactDetailsId = contactDetails.ContactDetailsId;
                 provider.ContactDetails = contactDetails;
-
                 provider.IsActive = true;
                 provider.ProviderId = Guid.NewGuid().ToString();
                 provider.QuoteResponse_StartTime = new DateTime(1999, 1, 1, 8, 0, 0);
@@ -91,7 +77,6 @@ namespace FlatFXWebClient.Controllers
                 provider.QuoteResponse_UserConfirmationTimeInterval = 40;
                 provider.Status = FlatFXCore.BussinessLayer.Consts.eProviderStatus.Active;
 
-                db.ContactsDetails.Add(contactDetails);
                 db.Providers.Add(provider);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -107,15 +92,12 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            Provider provider = db.Providers.Include(p => p.ContactDetails).Where(p => p.ProviderId == id).Single();
+            Provider provider = db.Providers.Where(p => p.ProviderId == id).Single();
             if (provider == null)
             {
                 return HttpNotFound();
             }
             
-            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
-            provider.ContactDetails = details;
-
             return View(provider);
         }
 
@@ -129,7 +111,6 @@ namespace FlatFXWebClient.Controllers
             if (ModelState.IsValid)
             {
                 db.Entry(provider).State = EntityState.Modified;
-                db.Entry(provider.ContactDetails).State = EntityState.Modified;
                 db.SaveChanges();
 
                 return RedirectToAction("Index");
@@ -159,11 +140,7 @@ namespace FlatFXWebClient.Controllers
         {
             Provider provider = db.Providers.Find(id);
 
-            ContactDetails details = db.ContactsDetails.Where(d => d.ContactDetailsId == provider.ContactDetailsId).Single();
-            provider.ContactDetails = details;
-            
             db.Providers.Remove(provider);
-            db.ContactsDetails.Remove(details);
             db.SaveChanges();
             return RedirectToAction("Index");
         }

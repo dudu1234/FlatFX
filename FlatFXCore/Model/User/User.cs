@@ -25,7 +25,6 @@ namespace FlatFXCore.Model.User
         public string LastName { get; set; }
         [Required, DefaultValue(true), Index("IX_IsActive", IsUnique = false)]
         public bool IsActive { get; set; }
-        
         [Required]
         public Consts.eUserStatus Status { get; set; }
         public DateTime CreatedAt { get; set; }
@@ -37,9 +36,9 @@ namespace FlatFXCore.Model.User
         public string SigningKey { get; set; }
         [DisplayName("Invoice Currency")]
         public Consts.eInvoiceCurrency InvoiceCurrency { get; set; }
+        [DisplayName("User Permission Rule")]
+        public Consts.UserRoles UserRole { get; set; }
 
-        public string ContactDetailsId { get; set; }
-        [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
         // NAVIGATION PROPERTIES GUY ??? if I uncomment this line a new index is created in table UserMessages
@@ -53,6 +52,11 @@ namespace FlatFXCore.Model.User
         public ApplicationUser()
         {
             Language = Consts.eLanguage.English;
+            ContactDetails = new ContactDetails(); 
+            Companies = new List<Company>();
+            Providers = new List<Provider>(); 
+            Actions = new List<UserActionData>();
+            Favorites = new List<UserFavoriteData>();
         }
 
         public async Task<ClaimsIdentity> GenerateUserIdentityAsync(UserManager<ApplicationUser> manager)
@@ -62,7 +66,7 @@ namespace FlatFXCore.Model.User
             // Add custom user claims here
             return userIdentity;
         }
-
+        [NotMapped]
         public string FullName
         {
             get
@@ -70,47 +74,38 @@ namespace FlatFXCore.Model.User
                 return FirstName + " " + ((MiddleName != "")? (MiddleName + " ") : "") + LastName;
             }
         }
-
-        private Consts.UserRoles _UserRole = Consts.UserRoles.Unknown;
-        public Consts.UserRoles UserRole
-        {
-            get { return (Consts.UserRoles)this._UserRole; }
-            set { _UserRole = value; }
-        }
     }
-    [Table("ContactDetails")]
+    [ComplexType]
     public class ContactDetails
     {
-        [Key]
-        public string ContactDetailsId { get; set; }
-        [DisplayName("Email"), MaxLength(200)]
+        [Column("Email1"), DisplayName("Email"), MaxLength(200)]
         public string Email { get; set; }
-        [DisplayName("Email2"), MaxLength(200)]
+        [Column("Email2"), DisplayName("Additional Email"), MaxLength(200)]
         public string Email2 { get; set; }
 
-        [DisplayName("OfficePhone"), MaxLength(30)]
+        [Column("OfficePhone"), DisplayName("Office Phone"), MaxLength(30)]
         public string OfficePhone { get; set; }
-        [DisplayName("OfficePhone2"), MaxLength(30)]
+        [Column("OfficePhone2"), DisplayName("Additional Office Phone"), MaxLength(30)]
         public string OfficePhone2 { get; set; }
 
-        [DisplayName("Fax"), MaxLength(30)]
+        [Column("Fax"), DisplayName("Fax"), MaxLength(30)]
         public string Fax { get; set; }
-        [DisplayName("HomePhone"), MaxLength(30)]
+        [Column("HomePhone"), DisplayName("Home Phone"), MaxLength(30)]
         public string HomePhone { get; set; }
 
-        [DisplayName("MobilePhone"), MaxLength(30)]
+        [Column("MobilePhone"), DisplayName("Mobile Phone"), MaxLength(30)]
         public string MobilePhone { get; set; }
-        [DisplayName("MobilePhone2"), MaxLength(30)]
+        [Column("MobilePhone2"), DisplayName("Additional Mobile Phone"), MaxLength(30)]
         public string MobilePhone2 { get; set; }
 
-        [DisplayName("CarPhone"), MaxLength(30)]
+        [Column("CarPhone"), DisplayName("Car Phone"), MaxLength(30)]
         public string CarPhone { get; set; }
 
-        [DisplayName("Address"), MaxLength(400)]
+        [Column("Address"), DisplayName("Address"), MaxLength(400)]
         public string Address { get; set; }
-        [DisplayName("Country")]
+        [Column("Country"), DisplayName("Country")]
         public Consts.eCountries? Country { get; set; }
-        [DisplayName("WebSite"), MaxLength(400)]
+        [Column("WebSite"), DisplayName("WebSite"), MaxLength(400)]
         public string WebSite { get; set; }
     }
     [Table("UserMessages")]

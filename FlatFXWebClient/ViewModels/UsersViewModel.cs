@@ -9,6 +9,13 @@ using System.Web;
 
 namespace FlatFXWebClient.ViewModels
 {
+    public class RegisterCompanyEntitiesModelView 
+    {        
+        public RegisterUserViewModel UserVM = new RegisterUserViewModel();
+        public RegisterCompanyViewModel companyVM = new RegisterCompanyViewModel();
+        public RegisterProviderAccountViewModel providerAccountVM = new RegisterProviderAccountViewModel();
+    }
+
     public class RegisterUserViewModel
     {
         [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
@@ -42,7 +49,7 @@ namespace FlatFXWebClient.ViewModels
         [StringLength(50, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string Role { get; set; }
 
-        public ContactDetailsViewModel contactDetails = new ContactDetailsViewModel();
+        public ContactDetailsViewModel userContactDetails = new ContactDetailsViewModel();
     }
 
     public class RegisterCompanyViewModel
@@ -62,40 +69,30 @@ namespace FlatFXWebClient.ViewModels
         public string ValidIP { get; set; }
         [Display(Name = "CustomerType", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCustomerType? CustomerType { get; set; }
-        [Display(Name = "IsDepositValid", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool IsDepositValid { get; set; }
-        [Display(Name = "IsSignOnRegistrationAgreement", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool IsSignOnRegistrationAgreement { get; set; }
+        //[Display(Name = "IsDepositValid", ResourceType = typeof(FlatFXResources.Resources))]
+        //public bool IsDepositValid { get; set; }
+        //[Display(Name = "IsSignOnRegistrationAgreement", ResourceType = typeof(FlatFXResources.Resources))]
+        //public bool IsSignOnRegistrationAgreement { get; set; }
         [Display(Name = "CompanyVolumePerYearUSD", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCompanyVolume? CompanyVolumePerYearUSD { get; set; }
-        [Display(Name = "UserList_SendEmail", ResourceType = typeof(FlatFXResources.Resources))]
-        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        public string UserList_SendEmail { get; set; }
-        [Display(Name = "UserList_SendInvoice", ResourceType = typeof(FlatFXResources.Resources))]
-        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        public string UserList_SendInvoice { get; set; }
-
-
-        public ContactDetailsViewModel contactDetails = new ContactDetailsViewModel();
-        public ContactDetailsExViewModel contactDetailsEx = new ContactDetailsExViewModel();
-    }
-
-    public class RegisterCompanyAccountViewModel
-    {
+        //[Display(Name = "UserList_SendEmail", ResourceType = typeof(FlatFXResources.Resources))]
+        //[StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //public string UserList_SendEmail { get; set; }
+        //[Display(Name = "UserList_SendInvoice", ResourceType = typeof(FlatFXResources.Resources))]
+        //[StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //public string UserList_SendInvoice { get; set; }
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
         public string AccountName { get; set; }
-
         [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
         public string AccountFullName { get; set; }
 
-        [Display(Name = "IsDefaultAccount", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool IsDefaultAccount { get; set; }
+        public ContactDetailsViewModel companyContactDetails = new ContactDetailsViewModel();
     }
 
     public class RegisterProviderAccountViewModel
@@ -131,21 +128,15 @@ namespace FlatFXWebClient.ViewModels
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(10, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string SWIFT { get; set; }
-        [Display(Name = "ApprovedBYFlatFX", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool ApprovedBYFlatFX { get; set; }
-        [Display(Name = "ApprovedBYProvider", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool ApprovedBYProvider { get; set; }
-        [Display(Name = "IsDemoAccount", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool IsDemoAccount { get; set; }
+        //[Display(Name = "ApprovedBYFlatFX", ResourceType = typeof(FlatFXResources.Resources))]
+        //public bool ApprovedBYFlatFX { get; set; }
+        //[Display(Name = "ApprovedBYProvider", ResourceType = typeof(FlatFXResources.Resources))]
+        //public bool ApprovedBYProvider { get; set; }
+        //[Display(Name = "IsDemoAccount", ResourceType = typeof(FlatFXResources.Resources))]
+        //public bool IsDemoAccount { get; set; }
         
-        public Dictionary<string, string> Providers = new Dictionary<string, string>();
-
         public RegisterProviderAccountViewModel()
         {
-            using (var context = new FfxContext())
-            {
-                Providers = context.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
-            }
         }
     }
 
@@ -175,6 +166,9 @@ namespace FlatFXWebClient.ViewModels
 
         [Display(Name = "WebSite", ResourceType = typeof(FlatFXResources.Resources))]
         public string WebSite { get; set; }
+
+        public bool ShowContactDetailsExViewModel = false;
+        public ContactDetailsExViewModel contactDetailsEx = new ContactDetailsExViewModel();
     }
 
     public class ContactDetailsExViewModel
@@ -202,12 +196,22 @@ namespace FlatFXWebClient.ViewModels
         [Phone]
         public string HomePhone { get; set; }
     }
-
-    public class RegisterCompanyEntitiesModelView
+    public class RegisterDemoUserModelView
     {
-        public RegisterUserViewModel UserVM = new RegisterUserViewModel();
-        public RegisterCompanyViewModel companyVM = new RegisterCompanyViewModel();
-        public RegisterCompanyAccountViewModel companyAccountVM = new RegisterCompanyAccountViewModel();
-        public RegisterProviderAccountViewModel providerAccountVM = new RegisterProviderAccountViewModel();
+        [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [EmailAddress]
+        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Email address already exists. Please enter a different Email address.")]
+        public string Email { get; set; }
+        
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(100, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        [DataType(DataType.Password)]
+        [Display(Name = "Password", ResourceType = typeof(FlatFXResources.Resources))]
+        public string Password { get; set; }
+
+        [Display(Name = "MobilePhone", ResourceType = typeof(FlatFXResources.Resources))]
+        [Phone]
+        public string MobilePhone { get; set; }
     }
 }

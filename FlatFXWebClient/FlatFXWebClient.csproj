@@ -335,6 +335,12 @@
     <Content Include="Views\Providers\Details.cshtml" />
     <Content Include="Views\Providers\Edit.cshtml" />
     <Content Include="Views\Providers\Index.cshtml" />
+    <Content Include="Views\Account\RegisterDemo.cshtml" />
+    <Content Include="Views\Account\RegisterUser.cshtml" />
+    <Content Include="Views\Account\RegisterCompany.cshtml" />
+    <Content Include="Views\Account\RegisterProviderAccount.cshtml" />
+    <Content Include="Views\Account\RegisterContactDetails.cshtml" />
+    <Content Include="Views\Account\RegisterContactDetailsEx.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

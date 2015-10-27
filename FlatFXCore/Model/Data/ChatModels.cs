@@ -31,9 +31,13 @@ namespace FlatFXCore.Model.Data
         [MaxLength(200)]
         public string ChatListenerUsers { get; set; }
         public Int64? LastChatEntry { get; set; }
+
+        public ChatSession()
+        {
+        }
     }
     [Table("ChatEntries")]
-    public class ChatEntrie
+    public class ChatEntry
     {
         [Key]
         public Int64 ChatEntryId { get; set; }
@@ -57,5 +61,9 @@ namespace FlatFXCore.Model.Data
         public Consts.eChatEntryType EntryType { get; set; }
         [MaxLength(4000)]
         public string ObjectData { get; set; }
+
+        public ChatEntry()
+        {
+        }
     }
 }

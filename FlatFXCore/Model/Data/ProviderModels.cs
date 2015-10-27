@@ -61,13 +61,13 @@ namespace FlatFXCore.Model.Data
         public virtual ICollection<ProviderAccount> Accounts { get; set; }
         public virtual ICollection<ApplicationUser> Users { get; set; }
 
-        public string ContactDetailsId { get; set; }
-        [ForeignKey("ContactDetailsId")]
         public ContactDetails ContactDetails { get; set; }
 
         public Provider() 
         {
             ContactDetails = new ContactDetails();
+            Accounts = new List<ProviderAccount>();
+            Users = new List<ApplicationUser>();
         }
     }
     [Table("ProviderAccounts")]

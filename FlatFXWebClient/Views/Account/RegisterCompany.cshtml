@@ -1,0 +1,34 @@
+﻿@model FlatFXWebClient.ViewModels.RegisterCompanyViewModel
+<div class="panel panel-primary">
+    <div class="panel-heading">
+        <h3 class="panel-title">@FlatFXResources.Resources.CreateNewCompany</h3>
+    </div>
+    <div class="panel-body">
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.CompanyShortName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.CompanyShortName) })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.CompanyFullName) })
+        </div>
+        <div class="form-group">
+            @Html.LabelFor(m => m.CustomerType, htmlAttributes: new { @class = "control-label" })
+            @Html.EnumDropDownListFor(m => m.CustomerType, htmlAttributes: new { @class = "form-control" })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.ValidIP, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.ValidIP) })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountName) })
+        </div>
+        <div class="form-group">
+            @Html.TextBoxFor(m => m.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountFullName) })
+        </div>
+        @{
+            if (Model.companyContactDetails != null)
+            {
+                Model.companyContactDetails.ShowContactDetailsExViewModel = true;
+            }
+        }
+        @Html.Partial("RegisterContactDetails", Model.companyContactDetails);
+    </div>
+</div>
