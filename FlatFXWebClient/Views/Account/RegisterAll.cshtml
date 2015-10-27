@@ -1,23 +1,24 @@
-﻿@model FlatFXWebClient.ViewModels.RegisterCompanyEntitiesModelView
+﻿@model FlatFXWebClient.ViewModels.RegisterAllEntitiesModelView
 @{
     ViewBag.Title = "Register";
 }
 
-@using (Html.BeginForm("Register", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+@using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
 
     <div class="col-xs-1"></div>
     <div class="col-xs-3" style="margin: 0px 10px 0px 10px;">
-        @Html.Partial("RegisterUser", Model.UserVM);
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+        @Html.Partial("RegisterUser", Model)
     </div>
 
     <div class="col-xs-3" style="margin: 0px 10px 0px 10px;">
-        @Html.Partial("RegisterCompany", Model.companyVM);
+        @Html.Partial("RegisterCompany", Model);
     </div>
 
     <div class="col-xs-4" style="margin: 0px 10px 0px 10px;">
-        @Html.Partial("RegisterProviderAccount", Model.providerAccountVM);
+        @Html.Partial("RegisterProviderAccount", Model);
     </div>
 
     <div class="col-xs-1"></div>

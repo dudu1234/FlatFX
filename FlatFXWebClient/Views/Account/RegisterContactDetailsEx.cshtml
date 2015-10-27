@@ -1,20 +1,62 @@
-﻿@model FlatFXWebClient.ViewModels.ContactDetailsExViewModel
+﻿@model FlatFXWebClient.ViewModels.RegisterAllEntitiesModelView
 
 <div class="form-group">
-    @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.Address) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.Address) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.Address) });
+    }
 </div>
 <div class="form-group">
-    @Html.TextBoxFor(m => m.Email2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.Email2) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.Email2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.Email2) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Email2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.Email2) });
+    }
 </div>
 <div class="form-group">
-    @Html.TextBoxFor(m => m.MobilePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.MobilePhone2) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.MobilePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.MobilePhone2) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2) });
+    }
 </div>
 <div class="form-group">
-    @Html.TextBoxFor(m => m.OfficePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.OfficePhone2) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.OfficePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.OfficePhone2) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2) });
+    }
 </div>
 <div class="form-group">
-    @Html.TextBoxFor(m => m.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.HomePhone) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.HomePhone) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.HomePhone) });
+    }
 </div>
 <div class="form-group">
-    @Html.TextBoxFor(m => m.CarPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.CarPhone) })
+    @if (Model.ShowContactDetailsForUser)
+    {
+        @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.CarPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.CarPhone) });
+    }
+    else
+    {
+        @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.CarPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.CarPhone) });
+    }
 </div>

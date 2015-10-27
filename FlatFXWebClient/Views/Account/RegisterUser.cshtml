@@ -1,28 +1,30 @@
-﻿@model FlatFXWebClient.ViewModels.RegisterUserViewModel
+﻿@model FlatFXWebClient.ViewModels.RegisterAllEntitiesModelView
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">@FlatFXResources.Resources.CreateNewUser</h3>
     </div>
     <div class="panel-body">
-        @Html.ValidationSummary("", new { @class = "text-danger" })
         <div class="form-group">
-            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserName) })
+            @Html.TextBoxFor(m => m.UserVM.UserName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.UserName) })
         </div>
         <div class="form-group">
-            @Html.EditorFor(m => m.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.Password) } })
+            @Html.EditorFor(m => m.UserVM.Password, new { htmlAttributes = new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.Password) } })
         </div>
         <div class="form-group">
-            @Html.EditorFor(m => m.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.ConfirmPassword) } })
+            @Html.EditorFor(m => m.UserVM.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.ConfirmPassword) } })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.FirstName) })
+            @Html.TextBoxFor(m => m.UserVM.FirstName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.FirstName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.LastName) })
+            @Html.TextBoxFor(m => m.UserVM.LastName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.LastName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.Role, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.Role) })
+            @Html.TextBoxFor(m => m.UserVM.Role, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.Role) })
         </div>
-        @Html.Partial("RegisterContactDetails", Model.userContactDetails);
+        @{
+            Model.ShowContactDetailsForUser = true;
+            @Html.Partial("RegisterContactDetails", Model)
+        }
     </div>
 </div>

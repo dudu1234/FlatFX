@@ -9,11 +9,20 @@ using System.Web;
 
 namespace FlatFXWebClient.ViewModels
 {
-    public class RegisterCompanyEntitiesModelView 
-    {        
-        public RegisterUserViewModel UserVM = new RegisterUserViewModel();
-        public RegisterCompanyViewModel companyVM = new RegisterCompanyViewModel();
-        public RegisterProviderAccountViewModel providerAccountVM = new RegisterProviderAccountViewModel();
+    public class RegisterAllEntitiesModelView 
+    {
+        public RegisterUserViewModel UserVM { get; set; }
+        public RegisterCompanyViewModel companyVM { get; set; }
+        public RegisterProviderAccountViewModel providerAccountVM { get; set; }
+
+        public bool ShowContactDetailsForUser = true; // false = show for company
+
+        public RegisterAllEntitiesModelView()
+        {
+            UserVM = new RegisterUserViewModel();
+            companyVM = new RegisterCompanyViewModel();
+            providerAccountVM = new RegisterProviderAccountViewModel();
+        }
     }
 
     public class RegisterUserViewModel
@@ -49,7 +58,12 @@ namespace FlatFXWebClient.ViewModels
         [StringLength(50, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string Role { get; set; }
 
-        public ContactDetailsViewModel userContactDetails = new ContactDetailsViewModel();
+        public ContactDetailsViewModel userContactDetails { get; set; }
+
+        public RegisterUserViewModel()
+        {
+            userContactDetails = new ContactDetailsViewModel();
+        }
     }
 
     public class RegisterCompanyViewModel
@@ -92,7 +106,12 @@ namespace FlatFXWebClient.ViewModels
         [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
         public string AccountFullName { get; set; }
 
-        public ContactDetailsViewModel companyContactDetails = new ContactDetailsViewModel();
+        public ContactDetailsViewModel companyContactDetails { get; set; }
+
+        public RegisterCompanyViewModel()
+        {
+            companyContactDetails = new ContactDetailsViewModel();
+        }
     }
 
     public class RegisterProviderAccountViewModel
@@ -167,8 +186,12 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "WebSite", ResourceType = typeof(FlatFXResources.Resources))]
         public string WebSite { get; set; }
 
-        public bool ShowContactDetailsExViewModel = false;
-        public ContactDetailsExViewModel contactDetailsEx = new ContactDetailsExViewModel();
+        public ContactDetailsExViewModel contactDetailsEx { get; set; }
+        
+        public ContactDetailsViewModel()
+        {
+            contactDetailsEx = new ContactDetailsExViewModel();
+        }
     }
 
     public class ContactDetailsExViewModel

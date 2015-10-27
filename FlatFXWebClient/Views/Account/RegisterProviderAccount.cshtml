@@ -1,34 +1,34 @@
-﻿@model FlatFXWebClient.ViewModels.RegisterProviderAccountViewModel
-<div class="panel panel-info">
+﻿@model FlatFXWebClient.ViewModels.RegisterAllEntitiesModelView
+<div class="panel panel-primary">
     <div class="panel-heading">
         <h4 class="panel-title">@FlatFXResources.Resources.BankAccountDetails</h4>
     </div>
     <div class="panel-body">
         <div class="form-group">
-            @Html.LabelFor(m => m.ProviderId, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(m => m.ProviderId,
+            @Html.LabelFor(m => m.providerAccountVM.ProviderId, htmlAttributes: new { @class = "control-label" })
+            @Html.DropDownListFor(m => m.providerAccountVM.ProviderId,
                             new SelectList(ViewBag.ProviderList as Dictionary<string, string>, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountName) })
+            @Html.TextBoxFor(m => m.providerAccountVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountFullName) })
+            @Html.TextBoxFor(m => m.providerAccountVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountFullName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.BranchNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.BranchNumber) })
+            @Html.TextBoxFor(m => m.providerAccountVM.BranchNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.BranchNumber) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.AccountNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountNumber) })
+            @Html.TextBoxFor(m => m.providerAccountVM.AccountNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountNumber) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.Address) })
+            @Html.TextBoxFor(m => m.providerAccountVM.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.Address) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.IBAN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.IBAN) })
+            @Html.TextBoxFor(m => m.providerAccountVM.IBAN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.IBAN) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.SWIFT, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.SWIFT) })
+            @Html.TextBoxFor(m => m.providerAccountVM.SWIFT, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.SWIFT) })
         </div>
     </div>
 </div>

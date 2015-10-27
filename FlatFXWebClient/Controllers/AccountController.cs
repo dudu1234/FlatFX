@@ -482,18 +482,20 @@ namespace FlatFXWebClient.Controllers
             foreach (string key in Request.Form.Keys)
                 paramNames += key + ";";
 
-            if (Request["UserName"] != null)
-                return Json(IsUnique("UserName", Request["UserName"]));
-            else if (Request["CompanyShortName"] != null)
-                return Json(IsUnique("CompanyShortName", Request["CompanyShortName"]));
-            else if (Request["CompanyFullName"] != null)
-                return Json(IsUnique("CompanyFullName", Request["CompanyFullName"]));
-            else if (Request["Email"] != null)
-                return Json(IsUnique("UserEmail", Request["Email"]));
-            else if (Request["AccountName"] != null)
-                return Json(IsUnique("AccountName", Request["AccountName"]));
-            else if (Request["AccountFullName"] != null)
-                return Json(IsUnique("AccountFullName", Request["AccountFullName"]));
+            if (Request["UserVM.UserName"] != null)
+                return Json(IsUnique("UserName", Request["UserVM.UserName"]));
+            else if (Request["CompanyVM.CompanyShortName"] != null)
+                return Json(IsUnique("CompanyShortName", Request["CompanyVM.CompanyShortName"]));
+            else if (Request["CompanyVM.CompanyFullName"] != null)
+                return Json(IsUnique("CompanyFullName", Request["CompanyVM.CompanyFullName"]));
+            else if (Request["UserVM.userContactDetails.Email"] != null)
+                return Json(IsUnique("UserEmail", Request["UserVM.userContactDetails.Email"]));
+            else if (Request["companyVM.companyContactDetails.Email"] != null)
+                return Json(IsUnique("CompanyEmail", Request["companyVM.companyContactDetails.Email"]));
+            else if (Request["companyVM.AccountName"] != null)
+                return Json(IsUnique("AccountName", Request["companyVM.AccountName"]));
+            else if (Request["companyVM.AccountFullName"] != null)
+                return Json(IsUnique("AccountFullName", Request["companyVM.AccountFullName"]));
             else
                 return Json(false);
         }
@@ -551,17 +553,21 @@ namespace FlatFXWebClient.Controllers
             {
                 if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
                     return false;
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == (viewModel as RegisterProviderAccountViewModel).ProviderId &&
-                    pa.BankAccountName.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).AccountName.Trim().ToLower()).Any();
+                string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
+                string accName = (viewModel as RegisterProviderAccountViewModel).AccountName.Trim().ToLower();
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.Trim().ToLower() == accName).Any();
             }
             else if (fieldName == "ProviderAccountNumber" && viewModel != null)
             {
                 if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
                     return false;
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId ==
-                    (viewModel as RegisterProviderAccountViewModel).ProviderId &&
-                    pa.BankAccountNumber.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).AccountNumber.Trim().ToLower() &&
-                    pa.BankBranchNumber.Trim().ToLower() == (viewModel as RegisterProviderAccountViewModel).BranchNumber.Trim().ToLower()).Any();
+
+                string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
+                string AccountNumber = (viewModel as RegisterProviderAccountViewModel).AccountNumber.Trim().ToLower();
+                string BranchNumber = (viewModel as RegisterProviderAccountViewModel).BranchNumber.Trim().ToLower();
+
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountNumber.Trim().ToLower() == AccountNumber &&
+                    pa.BankBranchNumber.Trim().ToLower() == BranchNumber).Any();
             }
 
             return false;
@@ -571,7 +577,7 @@ namespace FlatFXWebClient.Controllers
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult Register()
+        public ActionResult RegisterAll()
         {
             if (ViewBag.ProviderList == null)
             {
@@ -581,8 +587,8 @@ namespace FlatFXWebClient.Controllers
                 ViewBag.ProviderList = Providers;
             }
 
-            RegisterCompanyEntitiesModelView registerCompanyEntitiesModelView = new RegisterCompanyEntitiesModelView();
-            return View(registerCompanyEntitiesModelView);
+            RegisterAllEntitiesModelView registerAllEntitiesModelView = new RegisterAllEntitiesModelView();
+            return View(registerAllEntitiesModelView);
             
             //return View();
         }
@@ -592,7 +598,7 @@ namespace FlatFXWebClient.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Register(RegisterCompanyEntitiesModelView model)
+        public async Task<ActionResult> RegisterAll(RegisterAllEntitiesModelView model)
         {
             // GUY : why does the model is empty (all members are null)
             IdentityResult result = null;
@@ -623,14 +629,6 @@ namespace FlatFXWebClient.Controllers
                     ModelState.AddModelError("", "Provider account number is not unique.");
                 #endregion
 
-                //Create User contact details
-                ContactDetails contactDetails = new ContactDetails();
-                contactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.Trim();
-                contactDetails.Fax = model.UserVM.userContactDetails.Fax.Trim();
-                contactDetails.Country = model.UserVM.userContactDetails.Country;
-                contactDetails.WebSite = model.UserVM.userContactDetails.WebSite.Trim();
-                contactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.Trim();
-
                 //Create User
                 var user = new ApplicationUser();
                 user.UserName = model.UserVM.UserName.Trim();
@@ -645,31 +643,19 @@ namespace FlatFXWebClient.Controllers
                 user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
                 user.Language = Consts.eLanguage.English;
                 user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
-                user.ContactDetails = contactDetails;
-                
+                user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.Trim();
+                user.ContactDetails.Fax = model.UserVM.userContactDetails.Fax.Trim();
+                user.ContactDetails.Country = model.UserVM.userContactDetails.Country;
+                user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.Trim();
+                user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.Trim();
+
                 result = await UserManager.CreateAsync(user, model.UserVM.Password);
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    //Create company contact details
-                    ContactDetails companyDetails = new ContactDetails();
-                    companyDetails.Email = model.companyVM.companyContactDetails.Email.Trim();
-                    companyDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.Trim();
-                    companyDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.Trim();
-                    companyDetails.Fax = model.companyVM.companyContactDetails.Fax.Trim();
-                    companyDetails.Country = model.companyVM.companyContactDetails.Country;
-                    companyDetails.WebSite = model.companyVM.companyContactDetails.WebSite.Trim();
-                    companyDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.Trim();
-                    companyDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.Trim();
-                    companyDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.Trim();
-                    companyDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.Trim();
-                    companyDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.Trim();
-                    companyDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.Trim();
-                    
                     //Add company
                     var company = new Company();
-                    company.ContactDetails = companyDetails;
                     company.CreatedAt = DateTime.Now;
                     company.IsActive = true;
                     company.Status = Consts.eCompanyStatus.Active;
@@ -682,6 +668,20 @@ namespace FlatFXWebClient.Controllers
                     company.IsSignOnRegistrationAgreement = false;
                     company.LastUpdate = DateTime.Now;
                     company.ValidIP = model.companyVM.ValidIP;
+                    company.ContactDetails.Email = model.companyVM.companyContactDetails.Email.Trim();
+                    company.ContactDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.Trim();
+                    company.ContactDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.Trim();
+                    company.ContactDetails.Fax = model.companyVM.companyContactDetails.Fax.Trim();
+                    company.ContactDetails.Country = model.companyVM.companyContactDetails.Country;
+                    company.ContactDetails.WebSite = model.companyVM.companyContactDetails.WebSite.Trim();
+                    company.ContactDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.Trim();
+                    company.ContactDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.Trim();
+                    company.ContactDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.Trim();
+                    company.ContactDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.Trim();
+                    company.ContactDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.Trim();
+                    company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.Trim();
+                    
+                    
                     _db.Companies.Add(company);
 
                     //Add company account
@@ -757,8 +757,6 @@ namespace FlatFXWebClient.Controllers
         public async Task<ActionResult> RegisterDemo(RegisterDemoUserModelView model)
         {
             IdentityResult result = null;
-            ContactDetails contactDetails = null;
-
             if (!ModelState.IsValid)
             {
                 return View(model);
@@ -781,8 +779,6 @@ namespace FlatFXWebClient.Controllers
                 user.Email = model.Email.Trim();
                 user.RoleInCompany = "";
                 user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.Trim();
-                contactDetails = new ContactDetails();
-                user.ContactDetails = contactDetails;
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;

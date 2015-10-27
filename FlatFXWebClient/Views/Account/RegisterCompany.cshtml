@@ -1,34 +1,33 @@
-﻿@model FlatFXWebClient.ViewModels.RegisterCompanyViewModel
+﻿@model FlatFXWebClient.ViewModels.RegisterAllEntitiesModelView
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">@FlatFXResources.Resources.CreateNewCompany</h3>
     </div>
     <div class="panel-body">
         <div class="form-group">
-            @Html.TextBoxFor(m => m.CompanyShortName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.CompanyShortName) })
+            @Html.TextBoxFor(m => m.companyVM.CompanyShortName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyShortName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.CompanyFullName) })
+            @Html.TextBoxFor(m => m.companyVM.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyFullName) })
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.CustomerType, htmlAttributes: new { @class = "control-label" })
-            @Html.EnumDropDownListFor(m => m.CustomerType, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "control-label" })
+            @Html.EnumDropDownListFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "form-control" })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.ValidIP, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.ValidIP) })
+            @Html.TextBoxFor(m => m.companyVM.ValidIP, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.ValidIP) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountName) })
+            @Html.TextBoxFor(m => m.companyVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountName) })
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.AccountFullName) })
+            @Html.TextBoxFor(m => m.companyVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountFullName) })
         </div>
         @{
-            if (Model.companyContactDetails != null)
-            {
-                Model.companyContactDetails.ShowContactDetailsExViewModel = true;
-            }
+            Model.ShowContactDetailsForUser = false;
+            @Html.Partial("RegisterContactDetails", Model)
         }
-        @Html.Partial("RegisterContactDetails", Model.companyContactDetails);
+
+        
     </div>
 </div>

@@ -57,15 +57,6 @@ namespace FlatFXWebClient.Controllers
         {
             if (ModelState.IsValid)
             {
-                ContactDetails contactDetails = new ContactDetails();
-                contactDetails.Address = provider.ContactDetails.Address;
-                contactDetails.Country = provider.ContactDetails.Country;
-                contactDetails.Email = provider.ContactDetails.Email;
-                contactDetails.Fax = provider.ContactDetails.Fax;
-                contactDetails.OfficePhone = provider.ContactDetails.OfficePhone;
-                contactDetails.MobilePhone = provider.ContactDetails.MobilePhone;
-
-                provider.ContactDetails = contactDetails;
                 provider.IsActive = true;
                 provider.ProviderId = Guid.NewGuid().ToString();
                 provider.QuoteResponse_StartTime = new DateTime(1999, 1, 1, 8, 0, 0);
@@ -76,6 +67,13 @@ namespace FlatFXWebClient.Controllers
                 provider.QuoteResponse_SpreadMethod = FlatFXCore.BussinessLayer.Consts.eQuoteResponseSpreadMethod.Constant;
                 provider.QuoteResponse_UserConfirmationTimeInterval = 40;
                 provider.Status = FlatFXCore.BussinessLayer.Consts.eProviderStatus.Active;
+                provider.ContactDetails.Address = provider.ContactDetails.Address;
+                provider.ContactDetails.Country = provider.ContactDetails.Country;
+                provider.ContactDetails.Email = provider.ContactDetails.Email;
+                provider.ContactDetails.Fax = provider.ContactDetails.Fax;
+                provider.ContactDetails.OfficePhone = provider.ContactDetails.OfficePhone;
+                provider.ContactDetails.MobilePhone = provider.ContactDetails.MobilePhone;
+
 
                 db.Providers.Add(provider);
                 db.SaveChanges();
