@@ -23,7 +23,6 @@ namespace FlatFXWebClient.Controllers
     {
         private ApplicationSignInManager _signInManager;
         private ApplicationUserManager _userManager;
-
         public AccountController()
         {
         }
@@ -554,8 +553,8 @@ namespace FlatFXWebClient.Controllers
                 if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
                     return false;
                 string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
-                string accName = (viewModel as RegisterProviderAccountViewModel).AccountName.Trim().ToLower();
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.Trim().ToLower() == accName).Any();
+                string accName = (viewModel as RegisterProviderAccountViewModel).AccountName.TrimString().ToLower();
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.ToLower() == accName).Any();
             }
             else if (fieldName == "ProviderAccountNumber" && viewModel != null)
             {
@@ -563,11 +562,11 @@ namespace FlatFXWebClient.Controllers
                     return false;
 
                 string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
-                string AccountNumber = (viewModel as RegisterProviderAccountViewModel).AccountNumber.Trim().ToLower();
-                string BranchNumber = (viewModel as RegisterProviderAccountViewModel).BranchNumber.Trim().ToLower();
+                string AccountNumber = (viewModel as RegisterProviderAccountViewModel).AccountNumber.TrimString().ToLower();
+                string BranchNumber = (viewModel as RegisterProviderAccountViewModel).BranchNumber.TrimString().ToLower();
 
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountNumber.Trim().ToLower() == AccountNumber &&
-                    pa.BankBranchNumber.Trim().ToLower() == BranchNumber).Any();
+                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountNumber.ToLower() == AccountNumber &&
+                    pa.BankBranchNumber.ToLower() == BranchNumber).Any();
             }
 
             return false;
@@ -579,18 +578,8 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         public ActionResult RegisterAll()
         {
-            if (ViewBag.ProviderList == null)
-            {
-                Dictionary<string, string> Providers = new Dictionary<string, string>();
-                if (_db.Providers.Where(p => p.IsActive).Any())
-                    Providers = _db.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
-                ViewBag.ProviderList = Providers;
-            }
-
             RegisterAllEntitiesModelView registerAllEntitiesModelView = new RegisterAllEntitiesModelView();
             return View(registerAllEntitiesModelView);
-            
-            //return View();
         }
 
         //
@@ -611,43 +600,73 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 #region chack if model is valid
-                if (!IsUnique("UserName", model.UserVM.UserName.Trim()))
+                bool errorFlag = false;
+                if (!IsUnique("UserName", model.UserVM.UserName.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "UserName is not unique.");
-                if (!IsUnique("UserEmail", model.UserVM.userContactDetails.Email.Trim()))
+                }
+                if (!IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "User email is not unique.");
-                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName.Trim()))
+                }
+                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Company short name is not unique.");
-                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName.Trim()))
+                }
+                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Company full name is not unique.");
-                if (!IsUnique("AccountName", model.companyVM.AccountName.Trim()))
+                }
+                if (!IsUnique("AccountName", model.companyVM.AccountName.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Account name is not unique.");
-                if (!IsUnique("AccountFullName", model.companyVM.AccountFullName.Trim()))
+                }
+                if (!IsUnique("AccountFullName", model.companyVM.AccountFullName.TrimString()))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Account full name is not unique.");
+                }
                 if (!IsUnique("ProviderAccountName", model.providerAccountVM))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Provider account name is not unique.");
+                }
                 if (!IsUnique("ProviderAccountNumber", model.providerAccountVM))
+                {
+                    errorFlag = true;
                     ModelState.AddModelError("", "Provider account number is not unique.");
+                }
+
+                if (errorFlag)
+                {
+                    return View(model);
+                }
                 #endregion
 
                 //Create User
                 var user = new ApplicationUser();
-                user.UserName = model.UserVM.UserName.Trim();
-                user.FirstName = model.UserVM.FirstName.Trim();
-                user.LastName = model.UserVM.LastName.Trim();
-                user.Email = model.UserVM.userContactDetails.Email.Trim();
+                user.UserName = model.UserVM.UserName.TrimString();
+                user.FirstName = model.UserVM.FirstName.TrimString();
+                user.LastName = model.UserVM.LastName.TrimString();
+                user.Email = model.UserVM.userContactDetails.Email.TrimString();
                 user.RoleInCompany = model.UserVM.Role;
-                user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.Trim();
+                user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.TrimString();
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
                 user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
                 user.Language = Consts.eLanguage.English;
                 user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
-                user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.Trim();
-                user.ContactDetails.Fax = model.UserVM.userContactDetails.Fax.Trim();
+                user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.TrimString();
+                user.ContactDetails.Fax = model.UserVM.userContactDetails.Fax.TrimString();
                 user.ContactDetails.Country = model.UserVM.userContactDetails.Country;
-                user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.Trim();
-                user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.Trim();
+                user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.TrimString();
+                user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.TrimString();
 
                 result = await UserManager.CreateAsync(user, model.UserVM.Password);
                 if (result.Succeeded)
@@ -659,35 +678,35 @@ namespace FlatFXWebClient.Controllers
                     company.CreatedAt = DateTime.Now;
                     company.IsActive = true;
                     company.Status = Consts.eCompanyStatus.Active;
-                    company.CompanyFullName = model.companyVM.CompanyFullName.Trim();
+                    company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
                     company.CompanyId = Guid.NewGuid().ToString();
-                    company.CompanyShortName = model.companyVM.CompanyShortName.Trim();
+                    company.CompanyShortName = model.companyVM.CompanyShortName.TrimString();
                     company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
                     company.CustomerType = model.companyVM.CustomerType;
                     company.IsDepositValid = false;
                     company.IsSignOnRegistrationAgreement = false;
                     company.LastUpdate = DateTime.Now;
                     company.ValidIP = model.companyVM.ValidIP;
-                    company.ContactDetails.Email = model.companyVM.companyContactDetails.Email.Trim();
-                    company.ContactDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.Trim();
-                    company.ContactDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.Trim();
-                    company.ContactDetails.Fax = model.companyVM.companyContactDetails.Fax.Trim();
+                    company.ContactDetails.Email = model.companyVM.companyContactDetails.Email.TrimString();
+                    company.ContactDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.TrimString();
+                    company.ContactDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.TrimString();
+                    company.ContactDetails.Fax = model.companyVM.companyContactDetails.Fax.TrimString();
                     company.ContactDetails.Country = model.companyVM.companyContactDetails.Country;
-                    company.ContactDetails.WebSite = model.companyVM.companyContactDetails.WebSite.Trim();
-                    company.ContactDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.Trim();
-                    company.ContactDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.Trim();
-                    company.ContactDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.Trim();
-                    company.ContactDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.Trim();
-                    company.ContactDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.Trim();
-                    company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.Trim();
+                    company.ContactDetails.WebSite = model.companyVM.companyContactDetails.WebSite.TrimString();
+                    company.ContactDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.TrimString();
+                    company.ContactDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.TrimString();
+                    company.ContactDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.TrimString();
+                    company.ContactDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.TrimString();
+                    company.ContactDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.TrimString();
+                    company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.TrimString();
                     
                     
                     _db.Companies.Add(company);
 
                     //Add company account
                     var companyAccount = new CompanyAccount();
-                    companyAccount.AccountFullName = model.companyVM.AccountFullName.Trim();
-                    companyAccount.AccountName = model.companyVM.AccountName.Trim();
+                    companyAccount.AccountFullName = model.companyVM.AccountFullName.TrimString();
+                    companyAccount.AccountName = model.companyVM.AccountName.TrimString();
                     companyAccount.CompanyAccountId = Guid.NewGuid().ToString();
                     companyAccount.CompanyId = company.CompanyId;
                     companyAccount.IsActive = true;
@@ -698,11 +717,11 @@ namespace FlatFXWebClient.Controllers
                     var providerAccount = new ProviderAccount();
                     providerAccount.ApprovedBYFlatFX = false;
                     providerAccount.ApprovedBYProvider = false;
-                    providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.Trim();
-                    providerAccount.BankAccountName = model.providerAccountVM.AccountName.Trim();
-                    providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.Trim();
-                    providerAccount.BankAddress = model.providerAccountVM.Address.Trim();
-                    providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.Trim();
+                    providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.TrimString();
+                    providerAccount.BankAccountName = model.providerAccountVM.AccountName.TrimString();
+                    providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
+                    providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
+                    providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
                     providerAccount.CompanyAccountId = companyAccount.CompanyAccountId;
                     providerAccount.CreatedAt = DateTime.Now;
                     providerAccount.IBAN = model.providerAccountVM.IBAN;
@@ -765,20 +784,20 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 #region chack if model is valid
-                if (!IsUnique("UserName", model.Email.Trim()))
+                if (!IsUnique("UserName", model.Email.TrimString()))
                     ModelState.AddModelError("", "User Name is not unique.");
-                if (!IsUnique("UserEmail", model.Email.Trim()))
+                if (!IsUnique("UserEmail", model.Email.TrimString()))
                     ModelState.AddModelError("", "User Email is not unique.");
                 #endregion
 
                 //Create User
                 var user = new ApplicationUser();
-                user.UserName = model.Email.Trim();
-                user.FirstName = model.Email.Trim().Substring(0, model.Email.Trim().IndexOf('@'));
+                user.UserName = model.Email.TrimString();
+                user.FirstName = model.Email.TrimString().Substring(0, model.Email.TrimString().IndexOf('@'));
                 user.LastName = "Demo";
-                user.Email = model.Email.Trim();
+                user.Email = model.Email.TrimString();
                 user.RoleInCompany = "";
-                user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.Trim();
+                user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.TrimString();
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;

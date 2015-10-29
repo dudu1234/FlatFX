@@ -36,6 +36,20 @@ public static class Extensions
     }
 
     /// <summary>
+    /// Trim String.
+    /// Returns null if string is null.
+    /// </summary>
+    /// <param name="str"></param>
+    /// <returns></returns>
+    public static string TrimString(this string str)
+    {
+        if (str == null)
+            return null;
+
+        return str.Trim();
+    }
+
+    /// <summary>
     /// Converts a given string to int.
     /// Returns the defaultValue if convertion faild.
     /// </summary>

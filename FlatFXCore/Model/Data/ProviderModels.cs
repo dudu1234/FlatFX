@@ -1,4 +1,5 @@
 ﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Core;
 using FlatFXCore.Model.User;
 using System;
 using System.Collections.Generic;
@@ -68,6 +69,24 @@ namespace FlatFXCore.Model.Data
             ContactDetails = new ContactDetails();
             Accounts = new List<ProviderAccount>();
             Users = new List<ApplicationUser>();
+        }
+
+        private static Dictionary<string, string> _ProviderList = null;
+        public static Dictionary<string, string> ProviderList
+        {
+            get
+            {
+                if (_ProviderList == null)
+                {
+                    _ProviderList = new Dictionary<string, string>();
+                    using (var context = new FfxContext())
+                    {
+                        if (context.Providers.Where(p => p.IsActive).Any())
+                            _ProviderList = context.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
+                    }
+                }
+                return _ProviderList;
+            }
         }
     }
     [Table("ProviderAccounts")]

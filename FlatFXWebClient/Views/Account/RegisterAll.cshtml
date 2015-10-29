@@ -6,25 +6,19 @@
 @using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
+    <div class="row">
+        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
+            @Html.ValidationSummary("", new { @class = "text-danger" })
+            @Html.Partial("RegisterUser", Model)
+        </div>
 
-    <div class="col-xs-1"></div>
-    <div class="col-xs-3" style="margin: 0px 10px 0px 10px;">
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        @Html.Partial("RegisterUser", Model)
-    </div>
+        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
+            @Html.Partial("RegisterCompany", Model)
+        </div>
 
-    <div class="col-xs-3" style="margin: 0px 10px 0px 10px;">
-        @Html.Partial("RegisterCompany", Model);
-    </div>
-
-    <div class="col-xs-4" style="margin: 0px 10px 0px 10px;">
-        @Html.Partial("RegisterProviderAccount", Model);
-    </div>
-
-    <div class="col-xs-1"></div>
-
-    <div class="col-xs-12" style="margin: 0px 10px 0px 10px;">
-        <div class="form-group">
+        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
+            @Html.Partial("RegisterProviderAccount", Model)
+            <br />
             <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
         </div>
     </div>

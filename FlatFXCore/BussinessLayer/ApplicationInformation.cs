@@ -12,6 +12,7 @@ using Microsoft.Win32;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Security;
+using FlatFXCore.Model.Data;
 
 namespace FlatFXCore.BussinessLayer
 {
@@ -27,14 +28,14 @@ namespace FlatFXCore.BussinessLayer
         /// </summary>
         internal ApplicationInformation()
         {
-            if (DATE_FORMAT == "dd/MM/yyyy")
-            {
-                FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("he-IL");
-            }
-            else
-            {
-                FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("en-us");
-            }
+            //if (DATE_FORMAT == "dd/MM/yyyy")
+            //{
+            //    FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("he-IL");
+            //}
+            //else
+            //{
+            //    FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("en-us");
+            //}
         }
         public static ApplicationInformation Instance
         {
@@ -740,10 +741,12 @@ namespace FlatFXCore.BussinessLayer
         #endregion
 
         #region Format
+        
         /// <summary>
         /// The Application FormatProvider
         /// </summary>
         public IFormatProvider FormatProvider = CultureInfo.CurrentCulture;
+        
         /// <summary>
         /// Date Format
         /// </summary>

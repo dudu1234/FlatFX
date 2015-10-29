@@ -33,56 +33,54 @@
     }
 </head>
 <body>
-    <header>
-        <div>
-            <div class="row">
-                <div class="col-xs-2">
+    <div class="row">
+        <div class="col-xs-2"></div>
+        <div class="col-xs-8">
+            <header>
+                <div>
+                    <div class="row">
+                        <div class="col-xs-3">
+                            <img style="width:100%" class="logoImage" src="~/Images/FlatFX_Logo3.png" />
+                        </div>
+                        <div class="col-xs-3"></div>
+                        <div class="col-xs-3">
+                            <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
+                                @if (culture == "he-IL")
+                                {
+                                    <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
+                                    <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
+                                }
+                                else
+                                {
+                                    <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
+                                    <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
+                                }
+                            </select>
+                        </div>
+                        <div id="login" class="col-xs-3">
+                            @Html.Partial("_LoginPartial")
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div id="nav" class="col-xs-12">
+                            @Html.Partial("nav")
+                        </div>
+                    </div>
                 </div>
-                <div class="col-xs-2">
-                    <img style="width:100%" class="logoImage" src="~/Images/FlatFX_Logo3.png" />
-                </div>
-                <div class="col-xs-2"></div>
-                <div class="col-xs-2">
-                    <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
-                        @if (culture == "he-IL")
-                        {
-                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
-                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
-                        }
-                        else
-                        {
-                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
-                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
-                        }
-                    </select>
-                </div>
-                <div id="login" class="col-xs-2">
-                    @Html.Partial("_LoginPartial")
-                </div>
-                <div class="col-xs-2">
-                </div>
+            </header>
+            <div id="body">
+                @RenderBody()
             </div>
-            <div class="row">
-                <div class="col-xs-2">
+            <footer>
+                <div class="col-xs-12">
+                    <div class="float-left">
+                        <p>FlatFX @DateTime.Now.Year &copy;</p>
+                    </div>
                 </div>
-                <div id="nav" class="col-xs-8">
-                    @Html.Partial("nav")
-                </div>
-                <div class="col-xs-2">
-                </div>
-            </div>
+            </footer>
         </div>
-    </header>
-    <div id="body">
-        @RenderBody()
+        <div class="col-xs-2"></div>
     </div>
-    <footer>
-        <div class="content-wrapper">
-            <div class="float-left">
-                <p>FlatFX @DateTime.Now.Year &copy;</p>
-            </div>
-        </div>
-    </footer>
 
     <script type="text/javascript">
         var paramObject = {
@@ -93,7 +91,6 @@
             document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
             return true;
         }
-
     </script>
 
 </body>
