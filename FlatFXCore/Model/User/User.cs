@@ -18,17 +18,20 @@ namespace FlatFXCore.Model.User
     public class ApplicationUser : IdentityUser
     {
         [MaxLength(100), Required]
+        [Display(Name = "FirstName", ResourceType = typeof(FlatFXResources.Resources))]
         public string FirstName { get; set; }
-        [MaxLength(100)]
+        [Display(Name = "Middle Name"), MaxLength(100)]
         public string MiddleName { get; set; }
         [MaxLength(100), Required]
+        [Display(Name = "LastName", ResourceType = typeof(FlatFXResources.Resources))]
         public string LastName { get; set; }
-        [Required, DefaultValue(true), Index("IX_IsActive", IsUnique = false)]
+        [Display(Name = "Is Active"), Required, DefaultValue(true), Index("IX_IsActive", IsUnique = false)]
         public bool IsActive { get; set; }
         [Required]
         public Consts.eUserStatus Status { get; set; }
+        [Display(Name = "Created At")]
         public DateTime CreatedAt { get; set; }
-        [MaxLength(100)]
+        [Display(Name = "Role In Company"), MaxLength(100)]
         public string RoleInCompany { get; set; }
         [DisplayName("Language")]
         public Consts.eLanguage Language { get; set; }
@@ -36,9 +39,7 @@ namespace FlatFXCore.Model.User
         public string SigningKey { get; set; }
         [DisplayName("Invoice Currency")]
         public Consts.eInvoiceCurrency InvoiceCurrency { get; set; }
-        [DisplayName("User Permission Rule")]
-        public Consts.UserRoles UserRole { get; set; }
-
+        
         public ContactDetails ContactDetails { get; set; }
 
         // NAVIGATION PROPERTIES GUY ??? if I uncomment this line a new index is created in table UserMessages

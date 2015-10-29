@@ -9,6 +9,11 @@ namespace FlatFXCore.BussinessLayer
 {
     public class Consts
     {
+        public const string Role_CompanyUser = "CompanyUser";
+        public const string Role_CompanyDemoUser = "CompanyDemoUser";
+        public const string Role_ProviderUser = "ProviderUser";
+        public const string Role_Administrator = "Administrator";
+
         public enum eUserStatus
         {
             Active = 1,

@@ -28,7 +28,7 @@ namespace FlatFXWebClient.Controllers
         /// <summary>
         /// The data context.
         /// </summary>
-        protected ApplicationDBContext _db = new ApplicationDBContext();
+        protected ApplicationDBContext db = new ApplicationDBContext();
 
         /// <summary>
         /// Dispose the used resource.
@@ -36,9 +36,9 @@ namespace FlatFXWebClient.Controllers
         /// <param name="disposing">The disposing flag.</param>
         protected override void Dispose(bool disposing)
         {
-            if (_db != null)
+            if (db != null)
             {
-                _db.Dispose();
+                db.Dispose();
             }
             base.Dispose(disposing);
         }

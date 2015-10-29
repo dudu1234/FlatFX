@@ -1,10 +1,10 @@
 ﻿@model FlatFXWebClient.ViewModels.ManageLoginsViewModel
 @using Microsoft.Owin.Security
 @{
-    ViewBag.Title = "Manage your external logins";
+    Layout = "~/Views/Manage/ManageLayout.cshtml"; 
 }
 
-<h2>@ViewBag.Title.</h2>
+<h2>Manage your external logins</h2>
 
 <p class="text-success">@ViewBag.StatusMessage</p>
 @{

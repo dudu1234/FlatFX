@@ -9,23 +9,23 @@ using System.Web;
 
 namespace FlatFXWebClient.ViewModels
 {
-    public class RegisterAllEntitiesModelView 
+    public class CompanyUserAllEntitiesModelView 
     {
-        public RegisterUserViewModel UserVM { get; set; }
-        public RegisterCompanyViewModel companyVM { get; set; }
-        public RegisterProviderAccountViewModel providerAccountVM { get; set; }
+        public UserDetailsViewModel UserVM { get; set; }
+        public CompanyDetailsViewModel companyVM { get; set; }
+        public ProviderAccountDetailsViewModel providerAccountVM { get; set; }
 
         public bool ShowContactDetailsForUser = true; // false = show for company
 
-        public RegisterAllEntitiesModelView()
+        public CompanyUserAllEntitiesModelView()
         {
-            UserVM = new RegisterUserViewModel();
-            companyVM = new RegisterCompanyViewModel();
-            providerAccountVM = new RegisterProviderAccountViewModel();
+            UserVM = new UserDetailsViewModel();
+            companyVM = new CompanyDetailsViewModel();
+            providerAccountVM = new ProviderAccountDetailsViewModel();
         }
     }
 
-    public class RegisterUserViewModel
+    public class UserDetailsViewModel
     {
         [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
@@ -60,13 +60,13 @@ namespace FlatFXWebClient.ViewModels
 
         public ContactDetailsViewModel userContactDetails { get; set; }
 
-        public RegisterUserViewModel()
+        public UserDetailsViewModel()
         {
             userContactDetails = new ContactDetailsViewModel();
         }
     }
 
-    public class RegisterCompanyViewModel
+    public class CompanyDetailsViewModel
     {
         [Display(Name = "CompanyShortName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
@@ -108,13 +108,13 @@ namespace FlatFXWebClient.ViewModels
 
         public ContactDetailsViewModel companyContactDetails { get; set; }
 
-        public RegisterCompanyViewModel()
+        public CompanyDetailsViewModel()
         {
             companyContactDetails = new ContactDetailsViewModel();
         }
     }
 
-    public class RegisterProviderAccountViewModel
+    public class ProviderAccountDetailsViewModel
     {
         [Display(Name = "ProviderOrBank", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
@@ -154,7 +154,7 @@ namespace FlatFXWebClient.ViewModels
         //[Display(Name = "IsDemoAccount", ResourceType = typeof(FlatFXResources.Resources))]
         //public bool IsDemoAccount { get; set; }
         
-        public RegisterProviderAccountViewModel()
+        public ProviderAccountDetailsViewModel()
         {
         }
     }
@@ -219,7 +219,7 @@ namespace FlatFXWebClient.ViewModels
         [Phone]
         public string HomePhone { get; set; }
     }
-    public class RegisterDemoUserModelView
+    public class DemoUserDetailsModelView
     {
         [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]

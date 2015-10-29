@@ -4,6 +4,8 @@
     ViewBag.Title = "Edit";
 }
 
+<p class="error">@ViewBag.ErrorMessage</p>
+
 @using (Html.BeginForm())
 {
     @Html.AntiForgeryToken()

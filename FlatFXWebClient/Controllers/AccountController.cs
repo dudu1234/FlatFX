@@ -101,8 +101,8 @@ namespace FlatFXWebClient.Controllers
                     {
                         // User logined succesfully ==> create a new site session!
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
-                        ApplicationUser user = _db.Users.FirstOrDefault(u => u.UserName == model.UserName);
-                        FlatFXSession siteSession = new FlatFXSession(_db, user);
+                        ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
+                        FlatFXSession siteSession = new FlatFXSession(db, user);
                         Session["SiteSession"] = siteSession; // Cache the user login data!
 
                         return RedirectToLocal(returnUrl);
@@ -511,37 +511,37 @@ namespace FlatFXWebClient.Controllers
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.Users.Where(u => u.Email.ToLower() == fieldValue.ToLower()).Any();
+                return !db.Users.Where(u => u.Email.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "CompanyEmail")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.Companies.Where(c => c.ContactDetails.Email.ToLower() == fieldValue.ToLower()).Any();
+                return !db.Companies.Where(c => c.ContactDetails.Email.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "CompanyShortName")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.Companies.Where(c => c.CompanyShortName.ToLower() == fieldValue.ToLower()).Any();
+                return !db.Companies.Where(c => c.CompanyShortName.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "CompanyFullName")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.Companies.Where(c => c.CompanyFullName.ToLower() == fieldValue.ToLower()).Any();
+                return !db.Companies.Where(c => c.CompanyFullName.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "AccountName")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.CompanyAccounts.Where(a => a.AccountName.ToLower() == fieldValue.ToLower()).Any();
+                return !db.CompanyAccounts.Where(a => a.AccountName.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "AccountFullName")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !_db.CompanyAccounts.Where(a => a.AccountFullName.ToLower() == fieldValue.ToLower()).Any();
+                return !db.CompanyAccounts.Where(a => a.AccountFullName.ToLower() == fieldValue.ToLower()).Any();
             }
 
             return false;
@@ -550,22 +550,22 @@ namespace FlatFXWebClient.Controllers
         {
             if (fieldName == "ProviderAccountName" && viewModel != null)
             {
-                if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
+                if (viewModel == null || !(viewModel is ProviderAccountDetailsViewModel))
                     return false;
-                string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
-                string accName = (viewModel as RegisterProviderAccountViewModel).AccountName.TrimString().ToLower();
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.ToLower() == accName).Any();
+                string provId = (viewModel as ProviderAccountDetailsViewModel).ProviderId;
+                string accName = (viewModel as ProviderAccountDetailsViewModel).AccountName.TrimString().ToLower();
+                return !db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.ToLower() == accName).Any();
             }
             else if (fieldName == "ProviderAccountNumber" && viewModel != null)
             {
-                if (viewModel == null || !(viewModel is RegisterProviderAccountViewModel))
+                if (viewModel == null || !(viewModel is ProviderAccountDetailsViewModel))
                     return false;
 
-                string provId = (viewModel as RegisterProviderAccountViewModel).ProviderId;
-                string AccountNumber = (viewModel as RegisterProviderAccountViewModel).AccountNumber.TrimString().ToLower();
-                string BranchNumber = (viewModel as RegisterProviderAccountViewModel).BranchNumber.TrimString().ToLower();
+                string provId = (viewModel as ProviderAccountDetailsViewModel).ProviderId;
+                string AccountNumber = (viewModel as ProviderAccountDetailsViewModel).AccountNumber.TrimString().ToLower();
+                string BranchNumber = (viewModel as ProviderAccountDetailsViewModel).BranchNumber.TrimString().ToLower();
 
-                return !_db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountNumber.ToLower() == AccountNumber &&
+                return !db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountNumber.ToLower() == AccountNumber &&
                     pa.BankBranchNumber.ToLower() == BranchNumber).Any();
             }
 
@@ -578,8 +578,8 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         public ActionResult RegisterAll()
         {
-            RegisterAllEntitiesModelView registerAllEntitiesModelView = new RegisterAllEntitiesModelView();
-            return View(registerAllEntitiesModelView);
+            CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
+            return View(companyUserAllEntitiesModelView);
         }
 
         //
@@ -587,7 +587,7 @@ namespace FlatFXWebClient.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterAll(RegisterAllEntitiesModelView model)
+        public async Task<ActionResult> RegisterAll(CompanyUserAllEntitiesModelView model)
         {
             // GUY : why does the model is empty (all members are null)
             IdentityResult result = null;
@@ -659,7 +659,6 @@ namespace FlatFXWebClient.Controllers
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
-                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.Administrator;
                 user.Language = Consts.eLanguage.English;
                 user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
                 user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.TrimString();
@@ -672,6 +671,8 @@ namespace FlatFXWebClient.Controllers
                 if (result.Succeeded)
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                    UserManager.AddToRole(user.Id, Consts.Role_CompanyUser);
 
                     //Add company
                     var company = new Company();
@@ -701,7 +702,7 @@ namespace FlatFXWebClient.Controllers
                     company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.TrimString();
                     
                     
-                    _db.Companies.Add(company);
+                    db.Companies.Add(company);
 
                     //Add company account
                     var companyAccount = new CompanyAccount();
@@ -711,7 +712,7 @@ namespace FlatFXWebClient.Controllers
                     companyAccount.CompanyId = company.CompanyId;
                     companyAccount.IsActive = true;
                     companyAccount.IsDefaultAccount = true;
-                    _db.CompanyAccounts.Add(companyAccount);
+                    db.CompanyAccounts.Add(companyAccount);
 
                     //Add provider account
                     var providerAccount = new ProviderAccount();
@@ -733,9 +734,9 @@ namespace FlatFXWebClient.Controllers
                     providerAccount.QuoteResponse_CustomerPromil = null;
                     providerAccount.QuoteResponse_IsBlocked = false;
                     providerAccount.SWIFT = model.providerAccountVM.SWIFT;
-                    _db.ProviderAccounts.Add(providerAccount);
+                    db.ProviderAccounts.Add(providerAccount);
 
-                    _db.SaveChanges();
+                    db.SaveChanges();
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
@@ -773,7 +774,7 @@ namespace FlatFXWebClient.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> RegisterDemo(RegisterDemoUserModelView model)
+        public async Task<ActionResult> RegisterDemo(DemoUserDetailsModelView model)
         {
             IdentityResult result = null;
             if (!ModelState.IsValid)
@@ -801,7 +802,6 @@ namespace FlatFXWebClient.Controllers
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
-                user.UserRole = FlatFXCore.BussinessLayer.Consts.UserRoles.CompanyDemoUser;
                 user.Language = Consts.eLanguage.English;
                 user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
 
@@ -810,13 +810,15 @@ namespace FlatFXWebClient.Controllers
                 {
                     await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
+                    UserManager.AddToRole(user.Id, Consts.Role_CompanyDemoUser);
+
                     //Add the demo user to the Demo company
-                    Company demoCompany = _db.Companies.Where(c => c.CompanyShortName == "Demo").SingleOrDefault();
+                    Company demoCompany = db.Companies.Where(c => c.CompanyShortName == "Demo").SingleOrDefault();
                     if (demoCompany != null)
                     {
-                        var u = _db.Users.First(p => p.Email == user.Email);
+                        var u = db.Users.First(p => p.Email == user.Email);
                         demoCompany.Users.Add(u);
-                        _db.SaveChanges();
+                        db.SaveChanges();
                     }
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771

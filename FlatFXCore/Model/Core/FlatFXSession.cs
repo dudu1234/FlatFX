@@ -27,10 +27,6 @@ namespace FlatFXCore.Model.Core
         /// </summary>
         public string UserName { get; set; }
         /// <summary>
-        /// Gets or sets the user role.
-        /// </summary>
-        public Consts.UserRoles UserRole { get; set; }
-        /// <summary>
         /// Initializes a new instance of the SiteSession class.
         /// </summary>
         /// <param name="db">The data context.</param>
@@ -39,7 +35,6 @@ namespace FlatFXCore.Model.Core
         {
             this.UserID = user.Id;
             this.UserName = user.UserName;
-            this.UserRole = user.UserRole;
         }
     }
 }
