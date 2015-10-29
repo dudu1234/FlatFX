@@ -35,7 +35,7 @@ namespace FlatFXCore.Model.Core
         /// </summary>
         /// <param name="db">The data context.</param>
         /// <param name="user">The current user.</param>
-        public FlatFXSession(FfxContext db, ApplicationUser user)
+        public FlatFXSession(ApplicationDBContext db, ApplicationUser user)
         {
             this.UserID = user.Id;
             this.UserName = user.UserName;

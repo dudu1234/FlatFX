@@ -28,7 +28,7 @@ namespace FlatFXWebClient.Controllers
         /// <summary>
         /// The data context.
         /// </summary>
-        protected FfxContext _db = new FfxContext();
+        protected ApplicationDBContext _db = new ApplicationDBContext();
 
         /// <summary>
         /// Dispose the used resource.

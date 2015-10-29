@@ -79,7 +79,7 @@ namespace FlatFXCore.Model.Data
                 if (_ProviderList == null)
                 {
                     _ProviderList = new Dictionary<string, string>();
-                    using (var context = new FfxContext())
+                    using (var context = new ApplicationDBContext())
                     {
                         if (context.Providers.Where(p => p.IsActive).Any())
                             _ProviderList = context.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);

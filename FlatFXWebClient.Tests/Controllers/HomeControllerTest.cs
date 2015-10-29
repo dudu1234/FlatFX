@@ -66,7 +66,7 @@ namespace FlatFXWebClient.Tests.Controllers
             {
                 if (m_TestUserData == null)
                 {
-                    using (var context = new FfxContext())
+                    using (var context = new ApplicationDBContext())
                     {
                         List<UserData> testUsers = context.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToList();
                         if (testUsers.Count > 0)
@@ -86,7 +86,7 @@ namespace FlatFXWebClient.Tests.Controllers
             {
                 UserData user = null;
 
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     user = new UserData
                     {
@@ -125,7 +125,7 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     if (TestUser == null)
                         return;
@@ -144,7 +144,7 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     Dictionary<int, UserData> usersToDelete = context.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToDictionary(u2 => u2.UserId);
 
@@ -169,7 +169,7 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     if (TestUser == null)
                         return;
@@ -209,7 +209,7 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     //Remove all temp contact details
                     List<UserActionData> tempActions = context.UserActions.Where(a => a.Text.StartsWith("@@UnitTest@@ test")).ToList();

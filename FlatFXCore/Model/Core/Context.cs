@@ -13,7 +13,7 @@ using FlatFXCore.Model.User;
 
 namespace FlatFXCore.Model.Core
 {
-    public class FfxContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     {
         //public DbSet<ContactDetails> ContactsDetails { get; set; }
         public DbSet<UserMessageData> UserMessages { get; set; }
@@ -35,15 +35,15 @@ namespace FlatFXCore.Model.Core
         public DbSet<ConfigurationRow> Configurations { get; set; }
         public DbSet<LogInfo> LogInfo { get; set; }
 
-        public FfxContext()
+        public ApplicationDBContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)
         {
             
         }
 
-        public static FfxContext Create()
+        public static ApplicationDBContext Create()
         {
-            return new FfxContext();
+            return new ApplicationDBContext();
         }
         protected override void OnModelCreating(DbModelBuilder modelBuilder)
         {

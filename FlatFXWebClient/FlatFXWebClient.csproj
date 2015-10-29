@@ -177,6 +177,7 @@
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OnLineFXRatesController.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
+    <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
@@ -341,6 +342,11 @@
     <Content Include="Views\Account\RegisterProviderAccount.cshtml" />
     <Content Include="Views\Account\RegisterContactDetails.cshtml" />
     <Content Include="Views\Account\RegisterContactDetailsEx.cshtml" />
+    <Content Include="Views\Manage\ManageLayout.cshtml" />
+    <Content Include="Views\Roles\Create.cshtml" />
+    <Content Include="Views\Roles\Edit.cshtml" />
+    <Content Include="Views\Roles\Index.cshtml" />
+    <Content Include="Views\Roles\ManageUserRoles.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

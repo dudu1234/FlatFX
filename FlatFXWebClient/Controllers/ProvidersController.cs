@@ -14,7 +14,7 @@ namespace FlatFXWebClient.Controllers
 {
     public class ProvidersController : Controller
     {
-        private FfxContext db = new FfxContext();
+        private ApplicationDBContext db = new ApplicationDBContext();
 
         // GET: Providers
         public ActionResult Index()

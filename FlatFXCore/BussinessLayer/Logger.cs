@@ -168,7 +168,7 @@ namespace FlatFXCore.BussinessLayer
                 string _SessionId = ApplicationInformation.Instance.GetSessionID();
                 string _UserIP = ApplicationInformation.Instance.GetUserIP();
 
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     LogInfo row = new LogInfo
                     {

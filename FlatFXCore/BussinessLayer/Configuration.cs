@@ -112,7 +112,7 @@ namespace FlatFXCore.BussinessLayer
         /// <returns></returns>
         public string getRealTimeConfigValue(string Key, string userId, string DefaultValue)
         {
-            using (var context = new FfxContext())
+            using (var context = new ApplicationDBContext())
             {
                 //Get user row
                 ConfigurationRow data = context.Configurations.FirstOrDefault(row => row.Key == Key && row.UserId == userId);
@@ -299,7 +299,7 @@ namespace FlatFXCore.BussinessLayer
                 if (_dictionary.ContainsKey(userId))
                     _dictionary.Remove(userId);
 
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     Dictionary<string, ConfigurationRow> userDictionary = context.Configurations.Where(row => row.UserId == userId).ToDictionary(key => key.Key);
                     _dictionary.Add(userId, userDictionary);
@@ -327,7 +327,7 @@ namespace FlatFXCore.BussinessLayer
         {
             try
             {
-                using (var context = new FfxContext())
+                using (var context = new ApplicationDBContext())
                 {
                     if (_dictionary.ContainsKey(""))
                         _dictionary.Remove("");
