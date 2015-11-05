@@ -17,27 +17,48 @@ namespace FlatFXCore.Model.User
 {
     public class ApplicationUser : IdentityUser
     {
-        [MaxLength(100), Required]
+        /*/override IdentityUser members
+        [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(256, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public virtual string UserName { get; set; }
+        [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(256, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        [EmailAddress]
+        public virtual string Email { get; set; }
+        [Display(Name = "PhoneNumber", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [Phone]
+        public virtual string PhoneNumber { get; set; }
+        */
+
         [Display(Name = "FirstName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(50, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string FirstName { get; set; }
-        [Display(Name = "Middle Name"), MaxLength(100)]
+        [MaxLength(100)]
+        [Display(Name = "MiddleName", ResourceType = typeof(FlatFXResources.Resources))]
         public string MiddleName { get; set; }
-        [MaxLength(100), Required]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [Display(Name = "LastName", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(50, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string LastName { get; set; }
         [Display(Name = "Is Active"), Required, DefaultValue(true), Index("IX_IsActive", IsUnique = false)]
         public bool IsActive { get; set; }
         [Required]
         public Consts.eUserStatus Status { get; set; }
-        [Display(Name = "Created At")]
+        [Display(Name = "CreatedAt", ResourceType = typeof(FlatFXResources.Resources))]
         public DateTime CreatedAt { get; set; }
-        [Display(Name = "Role In Company"), MaxLength(100)]
+        [Display(Name = "Role", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(50, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string RoleInCompany { get; set; }
-        [DisplayName("Language")]
+        [Display(Name = "Language", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eLanguage Language { get; set; }
-        [MaxLength(16), MinLength(8), DisplayName("Signing Key")]
+        [MaxLength(16), MinLength(8)]
+        [Display(Name = "SigningKey", ResourceType = typeof(FlatFXResources.Resources))]
         public string SigningKey { get; set; }
-        [DisplayName("Invoice Currency")]
+        [Display(Name = "InvoiceCurrency", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eInvoiceCurrency InvoiceCurrency { get; set; }
         
         public ContactDetails ContactDetails { get; set; }
@@ -52,7 +73,14 @@ namespace FlatFXCore.Model.User
 
         public ApplicationUser()
         {
+            //set default new user values
+            this.Id = Guid.NewGuid().ToString();
             Language = Consts.eLanguage.English;
+            CreatedAt = DateTime.Now;
+            IsActive = true;
+            Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
+            SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
+                
             ContactDetails = new ContactDetails(); 
             Companies = new List<Company>();
             Providers = new List<Provider>(); 
@@ -79,34 +107,55 @@ namespace FlatFXCore.Model.User
     [ComplexType]
     public class ContactDetails
     {
-        [Column("Email1"), DisplayName("Email"), MaxLength(200)]
+        [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]        
+        [Column("Email1"), MaxLength(200)]
+        [EmailAddress]
         public string Email { get; set; }
-        [Column("Email2"), DisplayName("Additional Email"), MaxLength(200)]
+        [Column("Email2"), MaxLength(200)]
+        [EmailAddress]
+        [Display(Name = "Email2", ResourceType = typeof(FlatFXResources.Resources))]
         public string Email2 { get; set; }
 
-        [Column("OfficePhone"), DisplayName("Office Phone"), MaxLength(30)]
+        [Column("OfficePhone"), MaxLength(30)]
+        [Display(Name = "OfficePhone", ResourceType = typeof(FlatFXResources.Resources))]
+        [Phone]
         public string OfficePhone { get; set; }
-        [Column("OfficePhone2"), DisplayName("Additional Office Phone"), MaxLength(30)]
+        [Column("OfficePhone2"), MaxLength(30)]
+        [Phone]
+        [Display(Name = "OfficePhone2", ResourceType = typeof(FlatFXResources.Resources))]
         public string OfficePhone2 { get; set; }
 
-        [Column("Fax"), DisplayName("Fax"), MaxLength(30)]
+        [Column("Fax"), MaxLength(30)]
+        [Display(Name = "Fax", ResourceType = typeof(FlatFXResources.Resources))]
+        [Phone]
         public string Fax { get; set; }
-        [Column("HomePhone"), DisplayName("Home Phone"), MaxLength(30)]
+        [Column("HomePhone"), MaxLength(30)]
+        [Phone]
+        [Display(Name = "HomePhone", ResourceType = typeof(FlatFXResources.Resources))]
         public string HomePhone { get; set; }
 
-        [Column("MobilePhone"), DisplayName("Mobile Phone"), MaxLength(30)]
+        [Column("MobilePhone"), MaxLength(30)]
+        [Display(Name = "MobilePhone", ResourceType = typeof(FlatFXResources.Resources))]
+        [Phone]
         public string MobilePhone { get; set; }
-        [Column("MobilePhone2"), DisplayName("Additional Mobile Phone"), MaxLength(30)]
+        [Column("MobilePhone2"), MaxLength(30)]
+        [Phone]
+        [Display(Name = "MobilePhone2", ResourceType = typeof(FlatFXResources.Resources))]
         public string MobilePhone2 { get; set; }
 
-        [Column("CarPhone"), DisplayName("Car Phone"), MaxLength(30)]
+        [Column("CarPhone"), MaxLength(30)]
+        [Phone]
+        [Display(Name = "CarPhone", ResourceType = typeof(FlatFXResources.Resources))]
         public string CarPhone { get; set; }
 
-        [Column("Address"), DisplayName("Address"), MaxLength(400)]
+        [Column("Address"), MaxLength(400)]
+        [Display(Name = "Address", ResourceType = typeof(FlatFXResources.Resources))]
         public string Address { get; set; }
-        [Column("Country"), DisplayName("Country")]
+        [Column("Country")]
+        [Display(Name = "Country", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCountries? Country { get; set; }
-        [Column("WebSite"), DisplayName("WebSite"), MaxLength(400)]
+        [Column("WebSite"), MaxLength(400)]
+        [Display(Name = "WebSite", ResourceType = typeof(FlatFXResources.Resources))]
         public string WebSite { get; set; }
     }
     [Table("UserMessages")]

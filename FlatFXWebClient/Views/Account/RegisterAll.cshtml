@@ -1,7 +1,4 @@
 ﻿@model FlatFXWebClient.ViewModels.CompanyUserAllEntitiesModelView
-@{
-    ViewBag.Title = "Register";
-}
 
 @using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -9,15 +6,19 @@
     <div class="row">
         <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
             @Html.ValidationSummary("", new { @class = "text-danger" })
-            @Html.Partial("RegisterUser", Model)
+
+            @if (Model.UserVM != null)
+            {
+                @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
+            }
         </div>
 
         <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
-            @Html.Partial("RegisterCompany", Model)
+            @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
         </div>
 
         <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
-            @Html.Partial("RegisterProviderAccount", Model)
+            @Html.Partial("RegisterBankAccount", Model)
             <br />
             <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
         </div>

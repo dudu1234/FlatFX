@@ -15,11 +15,9 @@
             <div class="navbar navbar-default" role="navigation">
                 <div class="navbar-collapse collapse sidebar-navbar-collapse">
                     <ul class="nav navbar-nav">
-                        <li class="active">@Html.ActionLink("Password", "ManageUser_Password", "Manage")</li>
-                        <li>@Html.ActionLink("External Logins", "ManageUser_ExternalLogin", "Manage")</li>
-                        <li>@Html.ActionLink("Two-factor Authentication", "ManageUser_TwoFactor", "Manage")</li>
-                        <li>@Html.ActionLink("User Information", "EditByUser", "ApplicationUsers")</li>
-                        <li><a href="#">User Companies</a></li>
+                        <li class="active">@Html.ActionLink("Main", "UserIndex", "Manage")</li>
+                        <li>@Html.ActionLink("Edit User", "EditByUser", "ApplicationUsers")</li>
+                        <li>@Html.ActionLink("Edit Companies", "IndexUserMode", "Companies")</li>
                         <li><a href="#">Company Accounts</a></li>
                         <li><a href="#">Provider Accounts</a></li>
                     </ul>
@@ -27,7 +25,7 @@
             </div>
         </div>
     </div>
-    <div id="userManagerBody" class="col-xs-9">
+    <div class="col-xs-9">
         @RenderBody()
     </div>
 </div>

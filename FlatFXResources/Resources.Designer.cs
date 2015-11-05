@@ -97,6 +97,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Allow to trade directlly.
+        /// </summary>
+        public static string AllowToTradeDirectlly {
+            get {
+                return ResourceManager.GetString("AllowToTradeDirectlly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approved by FlatFX.
         /// </summary>
         public static string ApprovedBYFlatFX {
@@ -111,6 +120,15 @@ namespace FlatFXResources {
         public static string ApprovedBYProvider {
             get {
                 return ResourceManager.GetString("ApprovedBYProvider", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank.
+        /// </summary>
+        public static string Bank {
+            get {
+                return ResourceManager.GetString("Bank", resourceCulture);
             }
         }
         
@@ -192,6 +210,15 @@ namespace FlatFXResources {
         public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Created At.
+        /// </summary>
+        public static string CreatedAt {
+            get {
+                return ResourceManager.GetString("CreatedAt", resourceCulture);
             }
         }
         
@@ -295,6 +322,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to InvoiceCurrency.
+        /// </summary>
+        public static string InvoiceCurrency {
+            get {
+                return ResourceManager.GetString("InvoiceCurrency", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Is default?.
         /// </summary>
         public static string IsDefaultAccount {
@@ -327,6 +363,15 @@ namespace FlatFXResources {
         public static string IsSignOnRegistrationAgreement {
             get {
                 return ResourceManager.GetString("IsSignOnRegistrationAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Language.
+        /// </summary>
+        public static string Language {
+            get {
+                return ResourceManager.GetString("Language", resourceCulture);
             }
         }
         
@@ -381,6 +426,15 @@ namespace FlatFXResources {
         public static string MenuMovie {
             get {
                 return ResourceManager.GetString("MenuMovie", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Middle Name.
+        /// </summary>
+        public static string MiddleName {
+            get {
+                return ResourceManager.GetString("MiddleName", resourceCulture);
             }
         }
         
@@ -480,6 +534,15 @@ namespace FlatFXResources {
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Signing Key.
+        /// </summary>
+        public static string SigningKey {
+            get {
+                return ResourceManager.GetString("SigningKey", resourceCulture);
             }
         }
         

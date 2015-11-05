@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using FlatFXCore.Model.User;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXWebClient.Controllers
 {
+    [Authorize(Roles = Consts.Role_Administrator)]
     public class ProvidersController : Controller
     {
         private ApplicationDBContext db = new ApplicationDBContext();
@@ -42,8 +44,6 @@ namespace FlatFXWebClient.Controllers
             {
                 if (ModelState.IsValid)
                 {
-                    provider.IsActive = true;
-                    provider.ProviderId = Guid.NewGuid().ToString();
                     provider.QuoteResponse_StartTime = new DateTime(1999, 1, 1, 8, 0, 0);
                     provider.QuoteResponse_EndTime = new DateTime(1999, 1, 1, 23, 0, 0);
                     provider.QuoteResponse_FridayEndTime = new DateTime(1999, 1, 1, 13, 0, 0);
@@ -51,7 +51,6 @@ namespace FlatFXWebClient.Controllers
                     provider.QuoteResponse_NumberOfPromilsWithoutDiscount = 10;
                     provider.QuoteResponse_SpreadMethod = FlatFXCore.BussinessLayer.Consts.eQuoteResponseSpreadMethod.Constant;
                     provider.QuoteResponse_UserConfirmationTimeInterval = 40;
-                    provider.Status = FlatFXCore.BussinessLayer.Consts.eProviderStatus.Active;
                     provider.ContactDetails.Address = provider.ContactDetails.Address;
                     provider.ContactDetails.Country = provider.ContactDetails.Country;
                     provider.ContactDetails.Email = provider.ContactDetails.Email;
@@ -74,6 +73,7 @@ namespace FlatFXWebClient.Controllers
         }
 
         // GET: Providers/Edit/5
+        [HttpGet]
         public ActionResult Edit(string id)
         {
             if (id == null)
@@ -91,7 +91,7 @@ namespace FlatFXWebClient.Controllers
 
         // POST: Providers/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
+        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.        
         [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
         public ActionResult EditPost(string id)

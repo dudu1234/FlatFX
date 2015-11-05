@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity.EntityFramework;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.User;
 using FlatFXWebClient.Controllers;
+using FlatFXCore.BussinessLayer;
 
 namespace MVCInBuiltFeatures.Controllers
 {
@@ -16,7 +17,7 @@ namespace MVCInBuiltFeatures.Controllers
     /// Roles controller
     /// </summary>
     /// <remarks>http://www.dotnetfunda.com/articles/show/2898/working-with-roles-in-aspnet-identity-for-mvc</remarks>
-    [Authorize(Roles = "Administrator")]
+    [Authorize(Roles = Consts.Role_Administrator)]
     public class RolesController : Controller
     {
         ApplicationDBContext context = new ApplicationDBContext();

@@ -17,7 +17,7 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string ProviderId { get; set; }
-
+        
         [DisplayName("Short Name"), Index("IX_ShortName", IsUnique = true), MaxLength(10), Required]
         public string ShortName { get; set; }
         [DisplayName("Full Name"), Index("IX_FullName", IsUnique = true), MaxLength(200), Required]
@@ -66,6 +66,10 @@ namespace FlatFXCore.Model.Data
 
         public Provider() 
         {
+            ProviderId = Guid.NewGuid().ToString();
+            IsActive = true;
+            Status = FlatFXCore.BussinessLayer.Consts.eProviderStatus.Active;
+            
             ContactDetails = new ContactDetails();
             Accounts = new List<ProviderAccount>();
             Users = new List<ApplicationUser>();
@@ -88,37 +92,75 @@ namespace FlatFXCore.Model.Data
                 return _ProviderList;
             }
         }
+
+        private static Dictionary<string, string> _BankList = null;
+        public static Dictionary<string, string> BankList
+        {
+            get
+            {
+                if (_BankList == null)
+                {
+                    _BankList = new Dictionary<string, string>();
+                    using (var context = new ApplicationDBContext())
+                    {
+                        if (context.Providers.Where(p => p.IsActive).Any())
+                            _BankList = context.Providers.Where(p => p.IsActive && p.ProviderType == Consts.eProviderType.Bank).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
+                    }
+                }
+                return _BankList;
+            }
+        }
     }
     [Table("ProviderAccounts")]
     public class ProviderAccount
     {
         [Key, Column(Order = 1)]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         public string CompanyAccountId { get; set; }
         [ForeignKey("CompanyAccountId")]
         public virtual CompanyAccount CompanyAccount { get; set; }
         [Key, Column(Order = 2)]
+        [Display(Name = "ProviderOrBank", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Index("IX_BankAccountName", IsUnique = true), MaxLength(200), Required]
+        [Index("IX_BankAccountName", IsUnique = true)]
+        [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(100, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankAccountName { get; set; }
-        [MaxLength(400)]
+        [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankAccountFullName { get; set; }
-        [MaxLength(10)]
+        [Display(Name = "BranchNumber", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(10, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankBranchNumber { get; set; }
-        [MaxLength(20)]
+        [Display(Name = "AccountNumber", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(20, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankAccountNumber { get; set; }
-
-        [MaxLength(200)]
+        [Display(Name = "Address", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankAddress { get; set; }
-        [MaxLength(30)]
+        [Display(Name = "IBAN", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(30, MinimumLength = 10, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string IBAN { get; set; }
-        [MaxLength(10)]
+        [Display(Name = "SWIFT", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(10, MinimumLength = 6, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string SWIFT { get; set; }
-
+        [Display(Name = "AllowToTradeDirectlly", ResourceType = typeof(FlatFXResources.Resources))]
+        public bool AllowToTradeDirectlly { get; set; }
         public bool ApprovedBYFlatFX { get; set; }
         public bool ApprovedBYProvider { get; set; }
+
+        public string UserKeyInProviderSystems { get; set; }
 
         [Required]
         public bool IsActive { get; set; }
@@ -132,6 +174,15 @@ namespace FlatFXCore.Model.Data
         public bool QuoteResponse_IsBlocked { get; set; }
         public double? QuoteResponse_CustomerPromil { get; set; }
         
-        public ProviderAccount() { }
+        public ProviderAccount() 
+        {
+            ApprovedBYFlatFX = false;
+            ApprovedBYProvider = false;
+            CreatedAt = DateTime.Now;
+            IsActive = true;
+            LastUpdate = DateTime.Now;
+            QuoteResponse_CustomerPromil = null;
+            QuoteResponse_IsBlocked = false;                
+        }
     }
 }

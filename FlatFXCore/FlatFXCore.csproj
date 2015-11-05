@@ -131,12 +131,14 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="BussinessLayer\Attributes.cs" />
     <Compile Include="BussinessLayer\CurrencyFeedManager.cs" />
     <Compile Include="BussinessLayer\ApplicationInformation.cs" />
     <Compile Include="BussinessLayer\Configuration.cs" />
     <Compile Include="BussinessLayer\Consts.cs" />
     <Compile Include="BussinessLayer\Extensions.cs" />
     <Compile Include="BussinessLayer\Logger.cs" />
+    <Compile Include="BussinessLayer\SecurityManager.cs" />
     <Compile Include="Migrations\201510200825190_Initial.cs" />
     <Compile Include="Migrations\201510200825190_Initial.Designer.cs">
       <DependentUpon>201510200825190_Initial.cs</DependentUpon>

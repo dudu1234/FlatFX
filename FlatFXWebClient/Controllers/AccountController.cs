@@ -9,6 +9,7 @@ using Microsoft.AspNet.Identity;
 using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin.Security;
 using FlatFXCore.Model.User;
+using System.Data.Entity;
 using FlatFXCore.Model.Core;
 using System.Web.Security;
 using FlatFXWebClient.ViewModels;
@@ -345,7 +346,7 @@ namespace FlatFXWebClient.Controllers
         {
             if (User.Identity.IsAuthenticated)
             {
-                return RedirectToAction("Index", "Manage");
+                return RedirectToAction("UserIndex", "Manage");
             }
 
             if (ModelState.IsValid)
@@ -574,6 +575,14 @@ namespace FlatFXWebClient.Controllers
 
         #region Register
         //
+        // GET: /Account/RegisterCompany
+        public ActionResult RegisterCompany()
+        {
+            CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
+            companyUserAllEntitiesModelView.UserVM = null;
+            return View("RegisterAll", companyUserAllEntitiesModelView);
+        }
+        //
         // GET: /Account/Register
         [AllowAnonymous]
         public ActionResult RegisterAll()
@@ -589,7 +598,6 @@ namespace FlatFXWebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> RegisterAll(CompanyUserAllEntitiesModelView model)
         {
-            // GUY : why does the model is empty (all members are null)
             IdentityResult result = null;
 
             if (!ModelState.IsValid)
@@ -597,46 +605,63 @@ namespace FlatFXWebClient.Controllers
                 return View(model);
             }
 
+            if (model.UserVM.UserName == null && model.companyVM.AccountName == null && model.providerAccountVM.AccountName == null)
+            {
+                return View(model);
+            }
+
             try
             {
+                bool IsUserRegister = true;
+                if (model.UserVM.UserName == null)
+                    IsUserRegister = false;
+
+                bool IsCompanyRegister = true;
+                if (model.companyVM.AccountName == null)
+                    IsCompanyRegister = false;
+
+                bool IsProviderAccountRegister = true;
+                if (model.providerAccountVM.AccountName == null)
+                    IsProviderAccountRegister = false;
+
                 #region chack if model is valid
                 bool errorFlag = false;
-                if (!IsUnique("UserName", model.UserVM.UserName.TrimString()))
+                if (IsUserRegister && !IsUnique("UserName", model.UserVM.UserName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "UserName is not unique.");
                 }
-                if (!IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
+                if (IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "User email is not unique.");
                 }
-                if (!IsUnique("CompanyShortName", model.companyVM.CompanyShortName.TrimString()))
+                if (IsCompanyRegister && !IsUnique("CompanyShortName", model.companyVM.CompanyShortName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Company short name is not unique.");
                 }
-                if (!IsUnique("CompanyFullName", model.companyVM.CompanyFullName.TrimString()))
+                if (IsCompanyRegister && !IsUnique("CompanyFullName", model.companyVM.CompanyFullName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Company full name is not unique.");
                 }
-                if (!IsUnique("AccountName", model.companyVM.AccountName.TrimString()))
+                if (IsCompanyRegister && !IsUnique("AccountName", model.companyVM.AccountName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Account name is not unique.");
                 }
-                if (!IsUnique("AccountFullName", model.companyVM.AccountFullName.TrimString()))
+                if (IsCompanyRegister && !IsUnique("AccountFullName", model.companyVM.AccountFullName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Account full name is not unique.");
                 }
-                if (!IsUnique("ProviderAccountName", model.providerAccountVM))
+                if (IsProviderAccountRegister && !IsUnique("ProviderAccountName", model.providerAccountVM))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Provider account name is not unique.");
                 }
-                if (!IsUnique("ProviderAccountNumber", model.providerAccountVM))
+                if (IsProviderAccountRegister && !IsUnique("ProviderAccountNumber", model.providerAccountVM))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Provider account number is not unique.");
@@ -648,103 +673,115 @@ namespace FlatFXWebClient.Controllers
                 }
                 #endregion
 
-                //Create User
-                var user = new ApplicationUser();
-                user.UserName = model.UserVM.UserName.TrimString();
-                user.FirstName = model.UserVM.FirstName.TrimString();
-                user.LastName = model.UserVM.LastName.TrimString();
-                user.Email = model.UserVM.userContactDetails.Email.TrimString();
-                user.RoleInCompany = model.UserVM.Role;
-                user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.TrimString();
-                user.CreatedAt = DateTime.Now;
-                user.IsActive = true;
-                user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
-                user.Language = Consts.eLanguage.English;
-                user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
-                user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.TrimString();
-                user.ContactDetails.Fax = model.UserVM.userContactDetails.Fax.TrimString();
-                user.ContactDetails.Country = model.UserVM.userContactDetails.Country;
-                user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.TrimString();
-                user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.TrimString();
-
-                result = await UserManager.CreateAsync(user, model.UserVM.Password);
-                if (result.Succeeded)
+                ApplicationUser user = null;
+                bool succeeded = true;
+                
+                if (IsUserRegister)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                    //Create User
+                    user = new ApplicationUser();
+                    user.UserName = model.UserVM.UserName.TrimString();
+                    user.FirstName = model.UserVM.FirstName.TrimString();
+                    user.LastName = model.UserVM.LastName.TrimString();
+                    user.Email = model.UserVM.userContactDetails.Email.TrimString();
+                    user.RoleInCompany = model.UserVM.Role;
+                    user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.TrimString();
+                    user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.TrimString();
+                    user.ContactDetails.Fax = model.UserVM.userContactDetails.Fax.TrimString();
+                    user.ContactDetails.Country = model.UserVM.userContactDetails.Country;
+                    user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.TrimString();
+                    user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.TrimString();
 
-                    UserManager.AddToRole(user.Id, Consts.Role_CompanyUser);
+                    result = await UserManager.CreateAsync(user, model.UserVM.Password);
+                    succeeded = result.Succeeded;
+                }
+                else
+                {
+                    string userId = User.Identity.GetUserId();
+                    user = db.Users.Include(u => u.Companies).Where(u => u.Id == userId).FirstOrDefault();
+                }
 
-                    //Add company
-                    var company = new Company();
-                    company.CreatedAt = DateTime.Now;
-                    company.IsActive = true;
-                    company.Status = Consts.eCompanyStatus.Active;
-                    company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
-                    company.CompanyId = Guid.NewGuid().ToString();
-                    company.CompanyShortName = model.companyVM.CompanyShortName.TrimString();
-                    company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
-                    company.CustomerType = model.companyVM.CustomerType;
-                    company.IsDepositValid = false;
-                    company.IsSignOnRegistrationAgreement = false;
-                    company.LastUpdate = DateTime.Now;
-                    company.ValidIP = model.companyVM.ValidIP;
-                    company.ContactDetails.Email = model.companyVM.companyContactDetails.Email.TrimString();
-                    company.ContactDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.TrimString();
-                    company.ContactDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.TrimString();
-                    company.ContactDetails.Fax = model.companyVM.companyContactDetails.Fax.TrimString();
-                    company.ContactDetails.Country = model.companyVM.companyContactDetails.Country;
-                    company.ContactDetails.WebSite = model.companyVM.companyContactDetails.WebSite.TrimString();
-                    company.ContactDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.TrimString();
-                    company.ContactDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.TrimString();
-                    company.ContactDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.TrimString();
-                    company.ContactDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.TrimString();
-                    company.ContactDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.TrimString();
-                    company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.TrimString();
-                    
-                    
-                    db.Companies.Add(company);
+                if (succeeded)
+                {
+                    if (IsUserRegister)
+                    {
+                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        UserManager.AddToRole(user.Id, Consts.Role_CompanyUser);
 
-                    //Add company account
-                    var companyAccount = new CompanyAccount();
-                    companyAccount.AccountFullName = model.companyVM.AccountFullName.TrimString();
-                    companyAccount.AccountName = model.companyVM.AccountName.TrimString();
-                    companyAccount.CompanyAccountId = Guid.NewGuid().ToString();
-                    companyAccount.CompanyId = company.CompanyId;
-                    companyAccount.IsActive = true;
-                    companyAccount.IsDefaultAccount = true;
-                    db.CompanyAccounts.Add(companyAccount);
+                        user = db.Users.Include(u => u.Companies).Where(u => u.Id == user.Id).FirstOrDefault();
 
-                    //Add provider account
-                    var providerAccount = new ProviderAccount();
-                    providerAccount.ApprovedBYFlatFX = false;
-                    providerAccount.ApprovedBYProvider = false;
-                    providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.TrimString();
-                    providerAccount.BankAccountName = model.providerAccountVM.AccountName.TrimString();
-                    providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
-                    providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
-                    providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
-                    providerAccount.CompanyAccountId = companyAccount.CompanyAccountId;
-                    providerAccount.CreatedAt = DateTime.Now;
-                    providerAccount.IBAN = model.providerAccountVM.IBAN;
-                    providerAccount.IsActive = true;
-                    //providerAccount.IsDemoAccount = true;
-                    providerAccount.LastUpdate = DateTime.Now;
-                    providerAccount.LastUpdateBy = User.Identity.Name;
-                    providerAccount.ProviderId = model.providerAccountVM.ProviderId;
-                    providerAccount.QuoteResponse_CustomerPromil = null;
-                    providerAccount.QuoteResponse_IsBlocked = false;
-                    providerAccount.SWIFT = model.providerAccountVM.SWIFT;
-                    db.ProviderAccounts.Add(providerAccount);
+                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
+                        // Send an email with this link
+                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    }
+
+                    if (IsCompanyRegister)
+                    {
+                        //Add company
+                        Company company = new Company();
+                        company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
+                        company.CompanyShortName = model.companyVM.CompanyShortName.TrimString();
+                        company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
+                        company.CustomerType = model.companyVM.CustomerType;
+                        company.ValidIP = model.companyVM.ValidIP;
+                        company.ContactDetails.Email = model.companyVM.companyContactDetails.Email.TrimString();
+                        company.ContactDetails.MobilePhone = model.companyVM.companyContactDetails.MobilePhone.TrimString();
+                        company.ContactDetails.OfficePhone = model.companyVM.companyContactDetails.OfficePhone.TrimString();
+                        company.ContactDetails.Fax = model.companyVM.companyContactDetails.Fax.TrimString();
+                        company.ContactDetails.Country = model.companyVM.companyContactDetails.Country;
+                        company.ContactDetails.WebSite = model.companyVM.companyContactDetails.WebSite.TrimString();
+                        company.ContactDetails.Address = model.companyVM.companyContactDetails.contactDetailsEx.Address.TrimString();
+                        company.ContactDetails.Email2 = model.companyVM.companyContactDetails.contactDetailsEx.Email2.TrimString();
+                        company.ContactDetails.MobilePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2.TrimString();
+                        company.ContactDetails.OfficePhone2 = model.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2.TrimString();
+                        company.ContactDetails.HomePhone = model.companyVM.companyContactDetails.contactDetailsEx.HomePhone.TrimString();
+                        company.ContactDetails.CarPhone = model.companyVM.companyContactDetails.contactDetailsEx.CarPhone.TrimString();
+
+                        //Attach user to company
+                        company.Users.Add(user);
+
+                        db.Companies.Add(company);
+
+                        //Add company account
+                        CompanyAccount companyAccount = new CompanyAccount();
+                        companyAccount.AccountFullName = model.companyVM.AccountFullName.TrimString();
+                        companyAccount.AccountName = model.companyVM.AccountName.TrimString();
+                        companyAccount.CompanyId = company.CompanyId;
+                        db.CompanyAccounts.Add(companyAccount);
+
+                        model.companyAccountParent = companyAccount.CompanyAccountId;
+                    }
+
+                    if (IsProviderAccountRegister)
+                    {
+                        //Add provider account
+                        var providerAccount = new ProviderAccount();
+                        providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.TrimString();
+                        providerAccount.BankAccountName = model.providerAccountVM.AccountName.TrimString();
+                        providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
+                        providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
+                        providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
+                        providerAccount.CompanyAccountId = model.companyAccountParent;
+                        providerAccount.IBAN = model.providerAccountVM.IBAN;
+                        //providerAccount.IsDemoAccount = true;
+                        providerAccount.LastUpdateBy = User.Identity.Name;
+                        providerAccount.ProviderId = model.providerAccountVM.ProviderId;
+                        providerAccount.SWIFT = model.providerAccountVM.SWIFT;
+                        providerAccount.AllowToTradeDirectlly = model.providerAccountVM.AllowToTradeDirectlly;
+                        db.ProviderAccounts.Add(providerAccount);
+                    }
 
                     db.SaveChanges();
 
-                    // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                    // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
-
-                    return RedirectToAction("Index", "Home");
+                    if (IsCompanyRegister && IsUserRegister && IsProviderAccountRegister)
+                        return RedirectToAction("Index", "Home");
+                    else if (IsCompanyRegister)
+                        return RedirectToAction("Index", "Companies");
+                    else
+                        return RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception ex)
@@ -803,7 +840,6 @@ namespace FlatFXWebClient.Controllers
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;
                 user.Language = Consts.eLanguage.English;
-                user.SigningKey = Guid.NewGuid().ToString().Substring(0, 8);
 
                 result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)

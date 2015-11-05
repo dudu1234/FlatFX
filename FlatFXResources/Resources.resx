@@ -291,4 +291,25 @@
   <data name="UseLocalLogin" xml:space="preserve">
     <value>Use a local account to log in</value>
   </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>Created At</value>
+  </data>
+  <data name="InvoiceCurrency" xml:space="preserve">
+    <value>InvoiceCurrency</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>Language</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>Middle Name</value>
+  </data>
+  <data name="SigningKey" xml:space="preserve">
+    <value>Signing Key</value>
+  </data>
+  <data name="AllowToTradeDirectlly" xml:space="preserve">
+    <value>Allow to trade directlly</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>Bank</value>
+  </data>
 </root>

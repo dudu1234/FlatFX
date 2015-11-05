@@ -16,9 +16,16 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string CompanyId { get; set; }
-        [Index("IX_CompanyShortName", IsUnique = true), MaxLength(30), Required, MinLength(2), DisplayName("Short Name")]
+        [Index("IX_CompanyShortName", IsUnique = true)]
+        [Display(Name = "CompanyShortName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(30, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company short name already exists. Please enter a different company short name.")]
         public string CompanyShortName { get; set; }
-        [MaxLength(400), Required, MinLength(5), DisplayName("Full Name")]
+        [Display(Name = "CompanyFullName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company full name already exists. Please enter a different company full name.")]
         public string CompanyFullName { get; set; }
         [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }
@@ -28,19 +35,22 @@ namespace FlatFXCore.Model.Data
         public DateTime? CreatedAt { get; set; }
         [DisplayName("Last Update")]
         public DateTime? LastUpdate { get; set; }
-        [MaxLength(300), Description("Valid users IP, Seperated by ;"), DisplayName("Valid IP")]
+        [Display(Name = "ValidIP", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(300, MinimumLength = 14, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string ValidIP { get; set; }
-        [DisplayName("Type")]
+        [Display(Name = "CustomerType", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCustomerType? CustomerType { get; set; }
-        [DisplayName("Is Deposit valid")]
+        [Display(Name = "IsDepositValid", ResourceType = typeof(FlatFXResources.Resources))]
         public bool? IsDepositValid { get; set; }
-        [DisplayName("Is Sign On Registration Agreement")]
+        [Display(Name = "IsSignOnRegistrationAgreement", ResourceType = typeof(FlatFXResources.Resources))]
         public bool? IsSignOnRegistrationAgreement { get; set; }
-        [DisplayName("Company volume per year (USD)")]
+        [Display(Name = "CompanyVolumePerYearUSD", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCompanyVolume? CompanyVolumePerYearUSD { get; set; }
-        [MaxLength(800), Description("Send email to addresses (Seperated by ;)"), DisplayName("Send Email list")]
+        [Display(Name = "UserList_SendEmail", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string UserList_SendEmail { get; set; }
-        [MaxLength(800), Description("Send invoice to addresses (Seperated by ;)"), DisplayName("Send Invoice list")]
+        [Display(Name = "UserList_SendInvoice", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(800, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string UserList_SendInvoice { get; set; }
 
         public ContactDetails ContactDetails { get; set; }
@@ -50,6 +60,14 @@ namespace FlatFXCore.Model.Data
 
         public Company() 
         {
+            CompanyId = Guid.NewGuid().ToString();
+            CreatedAt = DateTime.Now;
+            IsActive = true;
+            Status = Consts.eCompanyStatus.Active;
+            IsDepositValid = false;
+            IsSignOnRegistrationAgreement = false;
+            LastUpdate = DateTime.Now;                
+
             ContactDetails = new ContactDetails();
             Users = new List<ApplicationUser>();
             Accounts = new List<CompanyAccount>();
@@ -61,31 +79,41 @@ namespace FlatFXCore.Model.Data
         [Key]
         public string CompanyAccountId { get; set; }
 
-        [Index("IX_AccountName", IsUnique = true), MaxLength(200), Required]
-        public string AccountName { get; set; }
-
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
 
-        [MaxLength(400), Required]
+
+        [Index("IX_AccountName", IsUnique = true)]
+        [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
+        public string AccountName { get; set; }
+        [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
+        [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
         public string AccountFullName { get; set; }
-        [Required]
+        [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }
-        [Required]
+        [Required, DisplayName("Is default account")]
         public bool IsDefaultAccount { get; set; }
 
         [Required]
         public double Balance { get; set; }
         [Required]
         public double Equity { get; set; }
-        [Required]
+        [Required, DisplayName("Daily P&L")]
         public double DailyPNL { get; set; }
-        [Required]
+        [Required, DisplayName("Gross P&L")]
         public double GrossPNL { get; set; }
 
         public CompanyAccount() 
         {
+            IsActive = true;
+            IsDefaultAccount = true;        
+            CompanyAccountId = Guid.NewGuid().ToString();
         }
     }
     [Table("Spreads")]

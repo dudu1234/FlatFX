@@ -291,4 +291,25 @@
   <data name="UseLocalLogin" xml:space="preserve">
     <value>השתמש בחשבון מקומי ע"מ להיכנס למערכת</value>
   </data>
+  <data name="CreatedAt" xml:space="preserve">
+    <value>תאריך יצירה</value>
+  </data>
+  <data name="InvoiceCurrency" xml:space="preserve">
+    <value>מטבע חשבונית</value>
+  </data>
+  <data name="Language" xml:space="preserve">
+    <value>שפה</value>
+  </data>
+  <data name="MiddleName" xml:space="preserve">
+    <value>שם אמצעי</value>
+  </data>
+  <data name="SigningKey" xml:space="preserve">
+    <value>מפתח חתימה</value>
+  </data>
+  <data name="AllowToTradeDirectlly" xml:space="preserve">
+    <value>רשאי לסחור מול הבנק</value>
+  </data>
+  <data name="Bank" xml:space="preserve">
+    <value>בנק</value>
+  </data>
 </root>

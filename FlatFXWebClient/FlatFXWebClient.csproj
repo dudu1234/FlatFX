@@ -322,7 +322,7 @@
     <Content Include="Views\Account\VerifyCode.cshtml" />
     <Content Include="Views\Manage\AddPhoneNumber.cshtml" />
     <Content Include="Views\Manage\ChangePassword.cshtml" />
-    <Content Include="Views\Manage\Index.cshtml" />
+    <Content Include="Views\Manage\UserIndex.cshtml" />
     <Content Include="Views\Manage\ManageLogins.cshtml" />
     <Content Include="Views\Manage\SetPassword.cshtml" />
     <Content Include="Views\Manage\VerifyPhoneNumber.cshtml" />
@@ -338,19 +338,16 @@
     <Content Include="Views\Providers\Edit.cshtml" />
     <Content Include="Views\Providers\Index.cshtml" />
     <Content Include="Views\Account\RegisterDemo.cshtml" />
-    <Content Include="Views\Account\RegisterUser.cshtml" />
-    <Content Include="Views\Account\RegisterCompany.cshtml" />
-    <Content Include="Views\Account\RegisterProviderAccount.cshtml" />
+    <Content Include="Views\ApplicationUsers\CreateAll.cshtml" />
+    <Content Include="Views\Companies\CreateAll.cshtml" />
+    <Content Include="Views\Account\RegisterBankAccount.cshtml" />
     <Content Include="Views\Account\RegisterContactDetails.cshtml" />
     <Content Include="Views\Account\RegisterContactDetailsEx.cshtml" />
-    <Content Include="Views\Manage\ManageLayout.cshtml" />
+    <Content Include="Views\Manage\UserManageLayout.cshtml" />
     <Content Include="Views\Roles\Create.cshtml" />
     <Content Include="Views\Roles\Edit.cshtml" />
     <Content Include="Views\Roles\Index.cshtml" />
     <Content Include="Views\Roles\ManageUserRoles.cshtml" />
-    <Content Include="Views\Manage\ManageUser_Password.cshtml" />
-    <Content Include="Views\Manage\ManageUser_ExternalLogin.cshtml" />
-    <Content Include="Views\Manage\ManageUser_TwoFactor.cshtml" />
     <Content Include="Views\ApplicationUsers\Delete.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />
     <Content Include="Views\ApplicationUsers\Index.cshtml" />
@@ -358,6 +355,8 @@
     <Content Include="Views\Companies\Delete.cshtml" />
     <Content Include="Views\Companies\Edit.cshtml" />
     <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Manage\AdminManageLayout.cshtml" />
+    <Content Include="Views\Manage\AdminIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

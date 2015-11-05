@@ -17,6 +17,8 @@ namespace FlatFXWebClient.ViewModels
 
         public bool ShowContactDetailsForUser = true; // false = show for company
 
+        public string companyAccountParent = null;
+
         public CompanyUserAllEntitiesModelView()
         {
             UserVM = new UserDetailsViewModel();
@@ -30,7 +32,7 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(40, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different user name.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "User name already exists. Please enter a different user name.")]
         public string UserName { get; set; }
 
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
@@ -71,12 +73,12 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "CompanyShortName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(30, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company short name already exists. Please enter a different company short name.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company short name already exists. Please enter a different company short name.")]
         public string CompanyShortName { get; set; }
         [Display(Name = "CompanyFullName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company full name already exists. Please enter a different company full name.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company full name already exists. Please enter a different company full name.")]
         public string CompanyFullName { get; set; }
         [Display(Name = "ValidIP", ResourceType = typeof(FlatFXResources.Resources))]
         [StringLength(300, MinimumLength = 14, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
@@ -98,12 +100,12 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
         public string AccountName { get; set; }
         [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
         public string AccountFullName { get; set; }
 
         public ContactDetailsViewModel companyContactDetails { get; set; }
@@ -116,16 +118,18 @@ namespace FlatFXWebClient.ViewModels
 
     public class ProviderAccountDetailsViewModel
     {
-        [Display(Name = "ProviderOrBank", ResourceType = typeof(FlatFXResources.Resources))]
+        [Display(Name = "Bank", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         public string ProviderId { get; set; }
+        [Display(Name = "AllowToTradeDirectlly", ResourceType = typeof(FlatFXResources.Resources))]
+        public bool AllowToTradeDirectlly { get; set; }
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        [StringLength(50, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string AccountName { get; set; }
         [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        [StringLength(200, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string AccountFullName { get; set; }
         [Display(Name = "BranchNumber", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
@@ -164,7 +168,6 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [EmailAddress]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Email address already exists. Please enter a different Email address.")]
         public string Email { get; set; }
 
         [Display(Name = "MobilePhone", ResourceType = typeof(FlatFXResources.Resources))]
@@ -224,7 +227,7 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [EmailAddress]
-        [System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Email address already exists. Please enter a different Email address.")]
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Email address already exists. Please enter a different Email address.")]
         public string Email { get; set; }
         
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]

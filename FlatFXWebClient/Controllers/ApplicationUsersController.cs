@@ -9,9 +9,11 @@ using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.User;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXWebClient.Controllers
 {
+    [Authorize(Roles = Consts.Role_Administrator)]
     public class ApplicationUsersController : BaseController
     {
         // GET: ApplicationUsers
@@ -81,7 +83,7 @@ namespace FlatFXWebClient.Controllers
             }
             return View(user);
         }
-
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public ActionResult EditByUser()
         {
             string id = User.Identity.GetUserId();
@@ -98,12 +100,10 @@ namespace FlatFXWebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("EditByUser")]
         [ValidateAntiForgeryToken]
-        public ActionResult EditByUserPost(string id)
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        public ActionResult EditByUserPost()
         {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
+            string id = User.Identity.GetUserId();
             ApplicationUser user = db.Users.Find(id);
             try
             {

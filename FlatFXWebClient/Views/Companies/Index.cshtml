@@ -1,4 +1,12 @@
 ﻿@model IEnumerable<FlatFXCore.Model.Data.Company>
+@{
+    Layout = "~/Views/Manage/UserManageLayout.cshtml";
+    //Layout = "~/Views/Manage/AdminManageLayout.cshtml";
+}
+
+<p>
+    @Html.ActionLink("Create New Company", "CreateAll")
+</p>
 
 <h2>Company List</h2>
 <table class="table">
@@ -9,7 +17,7 @@
         <th>
             @Html.DisplayNameFor(model => model.CompanyFullName)
         </th>
-        <th>
+        @*<th>
             @Html.DisplayNameFor(model => model.IsActive)
         </th>
         <th>
@@ -20,7 +28,7 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.IsSignOnRegistrationAgreement)
-        </th>
+        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CompanyVolumePerYearUSD)
         </th>
@@ -36,43 +44,45 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
-    <tr>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyShortName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyFullName)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsActive)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Status)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsDepositValid)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.IsSignOnRegistrationAgreement)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CompanyVolumePerYearUSD)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactDetails.Email)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactDetails.OfficePhone)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ContactDetails.MobilePhone)
-        </td>
-        <td>
-            @Html.ActionLink("Edit", "Edit", new { id=item.CompanyId }) |
-            @Html.ActionLink("Delete", "Delete", new { id=item.CompanyId })
-        </td>
-    </tr>
-}
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyShortName)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyFullName)
+            </td>
+            @*<td>
+                @Html.DisplayFor(modelItem => item.IsActive)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Status)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsDepositValid)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.IsSignOnRegistrationAgreement)
+            </td>*@
+            <td>
+                @Html.DisplayFor(modelItem => item.CompanyVolumePerYearUSD)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactDetails.Email)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactDetails.OfficePhone)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.ContactDetails.MobilePhone)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "EditUserMode", new { id = item.CompanyId })
+                @*@Html.ActionLink("Edit", "Edit", new { id = item.CompanyId })*@
+                @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
+            </td>
+        </tr>
+    }
 
 </table>

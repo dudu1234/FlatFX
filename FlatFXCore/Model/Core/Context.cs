@@ -69,6 +69,13 @@ namespace FlatFXCore.Model.Core
             //       });
 
             base.OnModelCreating(modelBuilder);
+
+            //modelBuilder.Entity<IdentityUser>().ToTable("FlatFXUsers").Property(p => p.Id).HasColumnName("UserId");
+            //modelBuilder.Entity<ApplicationUser>().ToTable("FlatFXUsers").Property(p => p.Id).HasColumnName("UserId");
+            //modelBuilder.Entity<IdentityUserRole>().ToTable("FlatFXUserRoles");
+            //modelBuilder.Entity<IdentityUserLogin>().ToTable("FlatFXUserLogins");
+            //modelBuilder.Entity<IdentityUserClaim>().ToTable("FlatFXUserClaims");
+            //modelBuilder.Entity<IdentityRole>().ToTable("FlatFXRoles");
         }
     }
 }
