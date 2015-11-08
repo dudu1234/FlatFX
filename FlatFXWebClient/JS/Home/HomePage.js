@@ -1,7 +1,7 @@
 ﻿$(document).ready(function () {
     console.log('test');
 
-
+    //xxx    
     $('#full-page').fullpage({
         'verticalCentered': false,
         'css3': true,
