@@ -2,6 +2,8 @@
     console.log('test');
 
     //zzz
+
+    //xxxxx
     $('#full-page').fullpage({
         'verticalCentered': false,
         'css3': true,
