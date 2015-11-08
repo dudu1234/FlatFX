@@ -1,6 +1,7 @@
 ﻿$(document).ready(function () {
     console.log('test');
 
+    //ttt
     //xxx   xxx2 
     $('#full-page').fullpage({
         'verticalCentered': false,
