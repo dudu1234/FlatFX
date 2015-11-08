@@ -4,6 +4,7 @@
     //zzz
 
     //xxxxx
+    //dudu
     $('#full-page').fullpage({
         'verticalCentered': false,
         'css3': true,
