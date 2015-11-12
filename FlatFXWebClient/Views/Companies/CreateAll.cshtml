@@ -5,24 +5,36 @@
     </div>
     <div class="panel-body">
         <div class="form-group">
-            @Html.TextBoxFor(m => m.companyVM.CompanyShortName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyShortName) })
+            @Html.LabelFor(m => m.companyVM.CompanyShortName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.companyVM.CompanyShortName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyShortName) })
+            </div>
+            @Html.LabelFor(m => m.companyVM.CompanyFullName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.companyVM.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyFullName) })
+            </div>
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.companyVM.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyFullName) })
+            @Html.LabelFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "control-label col-sm-2" })
+            <div class="col-sm-4">
+                @Html.EnumDropDownListFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.companyVM.ValidIP, htmlAttributes: new { @class = "control-label col-sm-2" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.companyVM.ValidIP, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyShortName) })
+            </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "control-label" })
-            @Html.EnumDropDownListFor(m => m.companyVM.CustomerType, htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(m => m.companyVM.AccountName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.companyVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountName) })
+            </div>
+            @Html.LabelFor(m => m.companyVM.AccountFullName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.companyVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountFullName) })
+            </div>
         </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.companyVM.ValidIP, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.ValidIP) })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.companyVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountName) })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.companyVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.AccountFullName) })
-        </div>
+
         @{
             Model.ShowContactDetailsForUser = false;
             @Html.Partial("RegisterContactDetails", Model)

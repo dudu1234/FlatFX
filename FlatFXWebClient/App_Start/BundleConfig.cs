@@ -45,8 +45,7 @@ namespace FlatFXWebClient
                       "~/Content/bootstrap.min.css",
                       "~/Content/examples.css",
                       "~/Content/fullpageex.css",
-                      "~/Content/jquery.fullPage.css",
-                      "~/Content/Site.css"
+                      "~/Content/jquery.fullPage.css"
                       ));
         }
     }

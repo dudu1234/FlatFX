@@ -1,12 +1,4 @@
-﻿@using FlatFXCore.Model.Core;
-@{
-    string culture = "en-US";
-    if (Session["lang"] != null)
-    {
-        culture = Session["lang"].ToString();
-    }
-}
-<!DOCTYPE html>
+﻿<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -17,10 +9,8 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-    <link href="~/Content/fullpageex.css" rel="stylesheet" />
 
     @RenderSection("scripts", required: false)
-    <script src="~/JS/FFx.js"></script>
 
     @{
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
@@ -31,38 +21,24 @@
             <script src="~/JS/rtlCustom.js"></script>
         }
     }
+
+    <link href="~/Content/fullpageex.css" rel="stylesheet" />
+    <link href="~/Content/Site.css" rel="stylesheet" />
+    <script src="~/JS/FFx.js"></script>
+
 </head>
 <body>
     <div class="row">
         <div class="col-xs-1"></div>
+        <div id="nav" class="col-xs-10">
+            @Html.Partial("MainSiteHeader")
+        </div>
+        <div class="col-xs-1"></div>
+    </div>
+    <div class="row">
+        <div class="col-xs-1"></div>
         <div class="col-xs-10">
-            <header>
-                <div class="row">
-                    <div class="col-xs-2">
-                        <img class="logoImage" src="~/Images/FlatFX_Logo3.png" />
-                    </div>
-                    <div id="nav" class="col-xs-7">
-                        @Html.Partial("nav")
-                    </div>
-                    <div class="col-xs-1">
-                        <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
-                            @if (culture == "he-IL")
-                            {
-                                <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
-                                <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
-                            }
-                            else
-                            {
-                                <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
-                                <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
-                            }
-                        </select>
-                    </div>
-                    <div id="login" class="col-xs-2">
-                        @Html.Partial("_LoginPartial")
-                    </div>
-                </div>
-            </header>
+
             <div id="body">
                 @RenderBody()
             </div>
@@ -76,17 +52,5 @@
         </div>
         <div class="col-xs-1"></div>
     </div>
-
-    <script type="text/javascript">
-        var paramObject = {
-            UrlChangeCulture: '@Url.Content("~/Account/ChangeCurrentCulture")'
-        }
-
-        function changeCurrentCulture(culture) {
-            document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
-            return true;
-        }
-    </script>
-
 </body>
 </html>

@@ -3,26 +3,108 @@
 @using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
-    <div class="row">
-        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
+
+    <div class="container ffx-wizard">
+        <div class="row form-group">
+            <div class="col-xs-12">
+                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                    <li class="active">
+                        <a href="#step-1" style="text-decoration: none;">
+                            <h1>1</h1>
+                            <h3 class="list-group-item-heading">Register User</h3>
+                            <p class="list-group-item-text">Enter user data and user contact details</p>
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a href="#step-2" style="text-decoration: none;">
+                            <h1>2</h1>
+                            <h3 class="list-group-item-heading">Register Company</h3>
+                            <p class="list-group-item-text">Enter company data and company account details</p>
+                        </a>
+                    </li>
+                    <li class="disabled">
+                        <a href="#step-3" style="text-decoration: none;">
+                            <h1>3</h1>
+                            <h3 class="list-group-item-heading">Register Account</h3>
+                            <p class="list-group-item-text">Enter the account's bank details</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <div>
             @Html.ValidationSummary("", new { @class = "text-danger" })
-
-            @if (Model.UserVM != null)
-            {
-                @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
-            }
         </div>
+        <div class="row setup-content" id="step-1">
+            <div class="col-xs-12">
+                <div class="col-md-12 well text-center">
+                    @if (Model.UserVM != null)
+                    {
+                        @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
+                    }
 
-        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
-            @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
+                    <br />
+                    <button id="activate-step-2" class="btn btn-primary btn-lg">Next</button>
+                </div>
+            </div>
         </div>
+        <div class="row setup-content" id="step-2">
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
 
-        <div class="col-xs-4" style="padding: 0px 5px 0px 5px;">
-            @Html.Partial("RegisterBankAccount", Model)
-            <br />
-            <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
+                    <br />
+                    <button id="activate-step-3" class="btn btn-primary btn-lg">Next</button>
+                </div>
+            </div>
+        </div>
+        <div class="row setup-content" id="step-3">
+            <div class="col-xs-12">
+                <div class="col-md-12 well">
+                    @Html.Partial("RegisterBankAccount", Model)
+                    
+                    <br />
+                    <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
+                </div>
+            </div>
         </div>
     </div>
 }
 
+<script>
+    $(document).ready(function () {
 
+        var navListItems = $('ul.setup-panel li a'),
+            allWells = $('.setup-content');
+
+        allWells.hide();
+
+        navListItems.click(function (e) {
+            e.preventDefault();
+            var $target = $($(this).attr('href')),
+                $item = $(this).closest('li');
+
+            if (!$item.hasClass('disabled')) {
+                navListItems.closest('li').removeClass('active');
+                $item.addClass('active');
+                allWells.hide();
+                $target.show();
+            }
+        });
+
+        $('ul.setup-panel li.active a').trigger('click');
+
+        $('#activate-step-2').on('click', function (e) {
+            $('ul.setup-panel li:eq(1)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step-2"]').trigger('click');
+            //$(this).remove();
+        })
+
+        $('#activate-step-3').on('click', function (e) {
+            $('ul.setup-panel li:eq(2)').removeClass('disabled');
+            $('ul.setup-panel li a[href="#step-3"]').trigger('click');
+            //$(this).remove();
+        })
+    });
+
+</script>

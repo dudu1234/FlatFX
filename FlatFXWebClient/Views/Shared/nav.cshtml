@@ -1,7 +1,47 @@
-﻿<ul id="menu" style="padding-bottom:2px">
-    <li data-menuanchor="firstPage"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home" style="color:darkblue; font-size: medium"></span></a></li>
-    <li data-menuanchor="secondPage"><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
-    <li data-menuanchor="3rdPage"><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
-    @*<li data-menuanchor="4thPage"><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>*@
-    <li data-menuanchor="lastPage"><a href="@Url.Action("Index", "Home")#lastPage">@FlatFXResources.Resources.MenuActions</a></li>
-</ul>
+﻿@{
+    string culture = "en-US";
+    if (Session["lang"] != null)
+    {
+        culture = Session["lang"].ToString();
+    }
+}
+<div class="col-xs-2">
+    <img class="logoImage" src="~/Images/FlatFX_Logo3.png" />
+</div>
+<div class="col-xs-7">
+    <ul id="menu" style="padding-bottom:2px">
+        <li data-menuanchor="firstPage"><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
+        <li data-menuanchor="secondPage"><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
+        <li data-menuanchor="3rdPage"><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
+        <li data-menuanchor="4thPage"><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+        <li data-menuanchor="4thPage"><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+        <li data-menuanchor="lastPage"><a href="@Url.Action("Index", "Home")#lastPage">@FlatFXResources.Resources.MenuActions</a></li>
+    </ul>
+</div>
+<div class="col-xs-1">
+    <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
+        @if (culture == "he-IL")
+        {
+            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
+            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
+        }
+        else
+        {
+            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
+            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
+        }
+    </select>
+</div>
+<div id="login" class="col-xs-2">
+    @Html.Partial("_LoginPartial")
+</div>
+<script type="text/javascript">
+    var paramObject = {
+        UrlChangeCulture: '@Url.Content("~/Account/ChangeCurrentCulture")'
+    }
+
+    function changeCurrentCulture(culture) {
+        document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
+        return true;
+    }
+</script>

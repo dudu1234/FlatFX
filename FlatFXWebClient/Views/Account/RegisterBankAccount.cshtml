@@ -6,35 +6,51 @@
     </div>
     <div class="panel-body">
         <div class="form-group">
-            @Html.LabelFor(m => m.providerAccountVM.ProviderId, htmlAttributes: new { @class = "control-label" })
-            @Html.DropDownListFor(m => m.providerAccountVM.ProviderId,
-                                  new SelectList(Provider.BankList, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+            @Html.LabelFor(m => m.providerAccountVM.ProviderId, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.DropDownListFor(m => m.providerAccountVM.ProviderId, new SelectList(Provider.BankList, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+            </div>
+            @Html.LabelFor(m => m.providerAccountVM.AllowToTradeDirectlly, htmlAttributes: new { @class = "control-label col-sm-2" })
+            <div class="col-sm-4">
+                @Html.CheckBoxFor(m => m.providerAccountVM.AllowToTradeDirectlly, htmlAttributes: new { @class = "form-control" })
+            </div>
         </div>
         <div class="form-group">
-            @Html.LabelFor(m => m.providerAccountVM.AllowToTradeDirectlly, htmlAttributes: new { @class = "control-label" })
-            @Html.CheckBoxFor(m => m.providerAccountVM.AllowToTradeDirectlly, htmlAttributes: new { @class = "form-control" })
-        </div>
-         
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountName) })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountFullName) })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.BranchNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.BranchNumber) })
+            @Html.LabelFor(m => m.providerAccountVM.AccountName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.AccountName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountName) })
+            </div>
+            @Html.LabelFor(m => m.providerAccountVM.AccountFullName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.AccountFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountFullName) })
+            </div>
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.AccountNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountNumber) })
+            @Html.LabelFor(m => m.providerAccountVM.BranchNumber, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.BranchNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.BranchNumber) })
+            </div>
+
+            @Html.LabelFor(m => m.providerAccountVM.AccountNumber, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.AccountNumber, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.AccountNumber) })
+            </div>
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.Address) })
+            @Html.LabelFor(m => m.providerAccountVM.Address, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.Address) })
+            </div>
         </div>
         <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.IBAN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.IBAN) })
-        </div>
-        <div class="form-group">
-            @Html.TextBoxFor(m => m.providerAccountVM.SWIFT, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.SWIFT) })
+            @Html.LabelFor(m => m.providerAccountVM.IBAN, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.IBAN, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.IBAN) })
+            </div>
+            @Html.LabelFor(m => m.providerAccountVM.SWIFT, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.providerAccountVM.SWIFT, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.providerAccountVM.SWIFT) })
+            </div>
         </div>
     </div>
 </div>
