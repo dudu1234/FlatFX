@@ -1,7 +1,7 @@
 ﻿@model FlatFXCore.Model.Data.Company
 @{
     ViewBag.Title = "Edit Company";
-    if (ViewBag.IsUserMode == true)
+    if (ViewBag.IsUserMode)
     {
         Layout = "~/Views/Manage/UserManageLayout.cshtml";
     }
@@ -26,98 +26,90 @@
                 @Html.HiddenFor(model => model.CompanyId)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.CompanyShortName, htmlAttributes: new { disabled = "disabled", @readonly = "readonly", @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CompanyShortName, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.LabelFor(model => model.CompanyShortName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.CompanyShortName, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
                     </div>
-                </div>
 
-                <div class="form-group">
                     @Html.LabelFor(model => model.CompanyFullName, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.CompanyFullName, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.IsActive)
+                @if (!ViewBag.IsUserMode)
+                { 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsActive, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsActive)
+                            </div>
+                        </div>
+
+                        @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
                         </div>
                     </div>
-                </div>
-
+                }
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EnumDropDownListFor(model => model.Status, htmlAttributes: new { @class = "form-control" })
+                    @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
                     </div>
-                </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { disabled = "disabled", @readonly = "readonly", @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @class = "form-control" } })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.LastUpdate, htmlAttributes: new { disabled = "disabled", @readonly = "readonly", @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        @Html.EditorFor(model => model.LastUpdate, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.LabelFor(model => model.LastUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.LastUpdate, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.ValidIP, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.ValidIP, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
-                </div>
 
-                <div class="form-group">
                     @Html.LabelFor(model => model.CustomerType, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EnumDropDownListFor(model => model.CustomerType, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
 
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IsDepositValid, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.IsDepositValid)
+                @if (!ViewBag.IsUserMode)
+                { 
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.IsDepositValid, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsDepositValid.Value)
+                            </div>
+                        </div>
+                        }
+                        @Html.LabelFor(model => model.IsSignOnRegistrationAgreement, htmlAttributes: new { @class = "control-label col-md-2" })
+                        <div class="col-md-4">
+                            <div class="checkbox">
+                                @Html.EditorFor(model => model.IsSignOnRegistrationAgreement.Value)
+                            </div>
                         </div>
                     </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.IsSignOnRegistrationAgreement, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
-                        <div class="checkbox">
-                            @Html.EditorFor(model => model.IsSignOnRegistrationAgreement)
-                        </div>
-                    </div>
-                </div>
-
+                }
                 <div class="form-group">
                     @Html.LabelFor(model => model.CompanyVolumePerYearUSD, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EnumDropDownListFor(model => model.CompanyVolumePerYearUSD, htmlAttributes: new { @class = "form-control" })
                     </div>
-                </div>
 
-                <div class="form-group">
                     @Html.LabelFor(model => model.UserList_SendEmail, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.UserList_SendEmail, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.UserList_SendInvoice, htmlAttributes: new { @class = "control-label col-md-2" })
-                    <div class="col-md-10">
+                    <div class="col-md-4">
                         @Html.EditorFor(model => model.UserList_SendInvoice, new { htmlAttributes = new { @class = "form-control" } })
                     </div>
                 </div>
@@ -128,13 +120,76 @@
                     <div class="panel-body">
 
                         <div class="form-group">
-                            @Html.LabelFor(model => model.ContactDetails.Address, htmlAttributes: new { @class = "control-label col-md-2" })
-                            <div class="col-md-10">
-                                @Html.EditorFor(model => model.ContactDetails.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.LabelFor(model => model.ContactDetails.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            @Html.LabelFor(model => model.ContactDetails.Email2, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.Email2, new { htmlAttributes = new { @class = "form-control" } })
                             </div>
                         </div>
 
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactDetails.OfficePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.OfficePhone, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
 
+                            @Html.LabelFor(model => model.ContactDetails.OfficePhone2, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.OfficePhone2, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactDetails.MobilePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.MobilePhone, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            @Html.LabelFor(model => model.ContactDetails.MobilePhone2, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.MobilePhone2, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactDetails.Address, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.Address, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            @Html.LabelFor(model => model.ContactDetails.Country, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EnumDropDownListFor(model => model.ContactDetails.Country, htmlAttributes: new { @class = "form-control" })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactDetails.CarPhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.CarPhone, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            @Html.LabelFor(model => model.ContactDetails.HomePhone, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.HomePhone, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            @Html.LabelFor(model => model.ContactDetails.WebSite, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.WebSite, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+
+                            @Html.LabelFor(model => model.ContactDetails.Fax, htmlAttributes: new { @class = "control-label col-md-2" })
+                            <div class="col-md-4">
+                                @Html.EditorFor(model => model.ContactDetails.Fax, new { htmlAttributes = new { @class = "form-control" } })
+                            </div>
+                        </div>
                     </div>
                 </div>
 
@@ -157,5 +212,5 @@
     {
         @Html.ActionLink("Back to List", "Index")
     }
-    
+
 </div>
