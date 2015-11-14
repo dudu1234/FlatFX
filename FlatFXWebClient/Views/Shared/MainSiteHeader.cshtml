@@ -1,0 +1,77 @@
+﻿@{
+    string culture = "en-US";
+    if (Session["lang"] != null)
+    {
+        culture = Session["lang"].ToString();
+    }
+}
+
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a href="@Url.Action("Index", "Home")"><img class="logoImage" src="~/Images/FlatFX_Logo3.png" /></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
+                <li class="active"><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
+                <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
+                <li><a href="@Url.Action("Index", "Home")#4rdPage">@FlatFXResources.Resources.MenuAbout</a></li>
+                <li><a href="@Url.Action("Index", "Home")#lastPage">@FlatFXResources.Resources.MenuActions</a></li>
+                <li class="dropdown">
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Manage<span class="caret"></span></a>
+                    <ul class="dropdown-menu">
+                        <li><a href="@Url.Action("Index", "Home")#secondPage">Edit User Details</a></li>
+                        <li><a href="@Url.Action("Index", "Home")#secondPage">Edit Company Details</a></li>
+                        @*<li role="separator" class="divider"></li>*@
+                    </ul>
+                </li>
+            </ul>
+            @*<form class="navbar-form navbar-left" role="search">
+                    <div class="form-group">
+                        <input type="text" class="form-control" placeholder="Search">
+                    </div>
+                    <button type="submit" class="btn btn-default">Submit</button>
+                </form>*@
+            <ul class="nav navbar-nav navbar-right">
+                <li>
+                    <select class="currentCulture" name="selectCulture" id="_cultureDDL" onchange="changeCurrentCulture(this.value)">
+                        @if (culture == "he-IL")
+                        {
+                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")">English</option>
+                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")" selected="selected">עברית</option>
+                        }
+                        else
+                        {
+                            <option value="en-US" title="@Url.Content("~/Content/Images/usa-flag-16.gif")" selected="selected">English</option>
+                            <option value="he-IL" title="@Url.Content("~/Content/Images/israel_flag_16.png")">עברית</option>
+                        }
+                    </select>
+                </li>
+            </ul>
+            <ul class="nav navbar-nav navbar-right">
+                @Html.Partial("_LoginPartial")
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </div><!-- /.container-fluid -->
+</nav>
+
+<script type="text/javascript">
+    var paramObject = {
+        UrlChangeCulture: '@Url.Content("~/Account/ChangeCurrentCulture")'
+    }
+
+    function changeCurrentCulture(culture) {
+        document.location = paramObject.UrlChangeCulture + "?culture=" + culture;
+        return true;
+    }
+</script>
