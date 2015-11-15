@@ -17,12 +17,10 @@ namespace FlatFXWebClient.Controllers
     public class ApplicationUsersController : BaseController
     {
         // GET: ApplicationUsers
-        public ActionResult Index()
+        public ActionResult IndexAdmin()
         {
-            return View(db.Users.ToList());
+            return View(db.Users.Include(u => u.Companies).ToList());
         }
-
-        
         // GET: ApplicationUsers/Create
         public ActionResult Create()
         {
@@ -67,7 +65,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         db.SaveChanges();
                         ViewBag.Result = "Update succeeded";
-                        return RedirectToAction("Index");
+                        return RedirectToAction("IndexAdmin");
                     }
                     catch (DataException /* dex */)
                     {
@@ -158,7 +156,7 @@ namespace FlatFXWebClient.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
-            return RedirectToAction("Index");
+            return RedirectToAction("IndexAdmin");
         }
     }
 }

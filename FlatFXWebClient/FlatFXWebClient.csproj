@@ -349,14 +349,16 @@
     <Content Include="Views\Roles\ManageUserRoles.cshtml" />
     <Content Include="Views\ApplicationUsers\Delete.cshtml" />
     <Content Include="Views\ApplicationUsers\Edit.cshtml" />
-    <Content Include="Views\ApplicationUsers\Index.cshtml" />
+    <Content Include="Views\ApplicationUsers\IndexAdmin.cshtml" />
     <Content Include="Views\ApplicationUsers\EditByUser.cshtml" />
     <Content Include="Views\Companies\Delete.cshtml" />
     <Content Include="Views\Companies\Edit.cshtml" />
-    <Content Include="Views\Companies\Index.cshtml" />
+    <Content Include="Views\Companies\IndexAdmin.cshtml" />
     <Content Include="Views\Manage\AdminManageLayout.cshtml" />
     <Content Include="Views\Manage\AdminIndex.cshtml" />
     <Content Include="Views\Shared\MainSiteHeader.cshtml" />
+    <Content Include="Views\Companies\IndexUser.cshtml" />
+    <Content Include="Views\Companies\EditByUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

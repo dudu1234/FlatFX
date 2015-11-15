@@ -383,7 +383,7 @@ namespace FlatFXWebClient.Controllers
         {
             AuthenticationManager.SignOut();
             Session["SiteSession"] = null;
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("IndexAdmin", "Home");
         }
 
         //
@@ -440,7 +440,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return Redirect(returnUrl);
             }
-            return RedirectToAction("Index", "Home");
+            return RedirectToAction("IndexAdmin", "Home");
         }
 
         internal class ChallengeResult : HttpUnauthorizedResult
@@ -777,11 +777,11 @@ namespace FlatFXWebClient.Controllers
                     db.SaveChanges();
 
                     if (IsCompanyRegister && IsUserRegister && IsProviderAccountRegister)
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("IndexAdmin", "Home");
                     else if (IsCompanyRegister)
-                        return RedirectToAction("Index", "Companies");
+                        return RedirectToAction("IndexUser", "Companies");
                     else
-                        return RedirectToAction("Index", "Home");
+                        return RedirectToAction("IndexAdmin", "Home");
                 }
             }
             catch (Exception ex)
@@ -863,7 +863,7 @@ namespace FlatFXWebClient.Controllers
                     // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                     // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("IndexAdmin", "Home");
                 }
             }
             catch (Exception ex)

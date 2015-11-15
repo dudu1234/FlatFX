@@ -1,7 +1,6 @@
 ﻿@model IEnumerable<FlatFXCore.Model.Data.Company>
 @{
     Layout = "~/Views/Manage/UserManageLayout.cshtml";
-    //Layout = "~/Views/Manage/AdminManageLayout.cshtml";
 }
 
 <p>
@@ -17,18 +16,6 @@
         <th>
             @Html.DisplayNameFor(model => model.CompanyFullName)
         </th>
-        @*<th>
-            @Html.DisplayNameFor(model => model.IsActive)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Status)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsDepositValid)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.IsSignOnRegistrationAgreement)
-        </th>*@
         <th>
             @Html.DisplayNameFor(model => model.CompanyVolumePerYearUSD)
         </th>
@@ -53,18 +40,6 @@
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyFullName)
             </td>
-            @*<td>
-                @Html.DisplayFor(modelItem => item.IsActive)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.Status)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsDepositValid)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.IsSignOnRegistrationAgreement)
-            </td>*@
             <td>
                 @Html.DisplayFor(modelItem => item.CompanyVolumePerYearUSD)
             </td>
@@ -78,8 +53,7 @@
                 @Html.DisplayFor(modelItem => item.ContactDetails.MobilePhone)
             </td>
             <td>
-                @Html.ActionLink("Edit", "EditUserMode", new { id = item.CompanyId })
-                @*@Html.ActionLink("Edit", "Edit", new { id = item.CompanyId })*@
+                @Html.ActionLink("Edit", "EditByUser", new { id = item.CompanyId })
                 @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
             </td>
         </tr>

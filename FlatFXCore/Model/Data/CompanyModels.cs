@@ -41,9 +41,11 @@ namespace FlatFXCore.Model.Data
         [Display(Name = "CustomerType", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCustomerType? CustomerType { get; set; }
         [Display(Name = "IsDepositValid", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool? IsDepositValid { get; set; }
+        [DefaultValue(false)]
+        public bool IsDepositValid { get; set; }
         [Display(Name = "IsSignOnRegistrationAgreement", ResourceType = typeof(FlatFXResources.Resources))]
-        public bool? IsSignOnRegistrationAgreement { get; set; }
+        [DefaultValue(false)]
+        public bool IsSignOnRegistrationAgreement { get; set; }
         [Display(Name = "CompanyVolumePerYearUSD", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eCompanyVolume? CompanyVolumePerYearUSD { get; set; }
         [Display(Name = "UserList_SendEmail", ResourceType = typeof(FlatFXResources.Resources))]

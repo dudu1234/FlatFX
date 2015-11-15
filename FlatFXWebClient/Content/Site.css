@@ -866,3 +866,22 @@ tr.pager td {
 .form-group .control-label {
     margin-top: 6px;
 }
+
+.admin-manage{
+    background-color: #b2eaef;
+}
+.admin-manage-header {
+    background-color: #ff6a00;
+    height: 50px;
+    padding-top: 15px;
+    font-size: 1.8em;
+}
+.user-manage{
+    background-color: #b2eaef;
+}
+.user-manage-header {
+    background-color: #e4f6ae;
+    height: 50px;
+    padding-top: 15px;
+    font-size: 1.8em;
+}

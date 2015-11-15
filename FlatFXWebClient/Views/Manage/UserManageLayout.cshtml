@@ -3,13 +3,13 @@
     ViewBag.Title = "Manage User";
 }
 
-<div class="row">
+<div class="row user-manage">
     <div class="col-xs-12">
-        <h2>User Manage</h2>
+        <div class="text-center user-manage-header">User Manage</div>
         <p class="text-success">@ViewBag.StatusMessage</p>
     </div>
 </div>
-<div class="row">
+<div class="row user-manage" style="background-color: #b2eaef">
     <div class="col-xs-3">
         <div class="sidebar-nav">
             <div class="navbar navbar-default" role="navigation">
@@ -17,7 +17,7 @@
                     <ul class="nav navbar-nav">
                         <li class="active">@Html.ActionLink("Main", "UserIndex", "Manage")</li>
                         <li>@Html.ActionLink("Edit User", "EditByUser", "ApplicationUsers")</li>
-                        <li>@Html.ActionLink("Edit Companies", "IndexUserMode", "Companies")</li>
+                        <li>@Html.ActionLink("Edit Companies", "IndexUser", "Companies")</li>
                         <li><a href="#">Company Accounts</a></li>
                         <li><a href="#">Provider Accounts</a></li>
                     </ul>
