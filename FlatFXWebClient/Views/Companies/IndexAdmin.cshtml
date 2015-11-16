@@ -6,10 +6,10 @@
 <div class="form-horizontal">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Company List</h3>
+            <h3 class="panel-title">@((ViewBag.UserName == null) ? "Company List" : (ViewBag.UserName + " companies:"))</h3>
         </div>
-        <div class="panel-body">
-            <table class="table">
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered table-hover table-striped">
                 <tr>
                     <th>
                         @Html.DisplayNameFor(model => model.CompanyShortName)
@@ -41,7 +41,7 @@
                     <th>
                         @Html.DisplayNameFor(model => model.ContactDetails.MobilePhone)
                     </th>
-                    <th></th>
+                    <th>Actions</th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -78,8 +78,10 @@
                             @Html.DisplayFor(modelItem => item.ContactDetails.MobilePhone)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId })
-                            @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId })
+                            @Html.ActionLink("Edit", "Edit", new { id = item.CompanyId }) <br />
+                            @Html.ActionLink("Delete", "Delete", new { id = item.CompanyId }) <br />
+                            @Html.ActionLink("Company Users", "CompanyUsers", "ApplicationUsers", new { companyId = item.CompanyId }, null) <br />
+                            @Html.ActionLink("Company Accounts", "", "", new { id = item.CompanyId }, null) <br />
                         </td>
                     </tr>
                 }

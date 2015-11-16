@@ -38,6 +38,15 @@ namespace FlatFXWebClient.Controllers
             return View("IndexUser", companies);
         }
 
+        public async Task<ActionResult> UserCompanies(string userId)
+        {
+            ApplicationUser user = await db.Users.Where(u => u.Id == userId).SingleOrDefaultAsync();
+            ViewBag.UserName = user.UserName;
+            List<Company> companies = await db.Companies.Include(u => u.Users).Where(c => c.Users.Any<ApplicationUser>(u => u.Id == userId) == true).ToListAsync();
+            return View("IndexAdmin", companies);
+        }
+
+
         // GET: Companies/Edit/5
         public async Task<ActionResult> Edit(string id)
         {

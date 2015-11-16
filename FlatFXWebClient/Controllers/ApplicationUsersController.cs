@@ -10,6 +10,8 @@ using Microsoft.AspNet.Identity;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.User;
 using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Data;
+using System.Threading.Tasks;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -21,6 +23,14 @@ namespace FlatFXWebClient.Controllers
         {
             return View(db.Users.Include(u => u.Companies).ToList());
         }
+        public async Task<ActionResult> CompanyUsers(string companyId)
+        {
+            Company company = await db.Companies.Where(comp => comp.CompanyId == companyId).SingleOrDefaultAsync();
+            ViewBag.CompanyName = company.CompanyShortName;
+            List<ApplicationUser> users = await db.Users.Include(u => u.Companies).Where(u => u.Companies.Any<Company>(comp => comp.CompanyId == companyId) == true).ToListAsync();
+            return View("IndexAdmin", users);
+        }
+
         // GET: ApplicationUsers/Create
         public ActionResult Create()
         {
