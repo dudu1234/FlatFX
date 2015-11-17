@@ -51,7 +51,7 @@ namespace MVCInBuiltFeatures.Controllers
                 });
                 context.SaveChanges();
                 ViewBag.ResultMessage = "Role created successfully !";
-                return RedirectToAction("IndexAdmin");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -79,7 +79,7 @@ namespace MVCInBuiltFeatures.Controllers
                 context.Entry(role).State = System.Data.Entity.EntityState.Modified;
                 context.SaveChanges();
 
-                return RedirectToAction("IndexAdmin");
+                return RedirectToAction("Index");
             }
             catch
             {
@@ -94,7 +94,7 @@ namespace MVCInBuiltFeatures.Controllers
             var thisRole = context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             context.Roles.Remove(thisRole);
             context.SaveChanges();
-            return RedirectToAction("IndexAdmin");
+            return RedirectToAction("Index");
         }
 
         public ActionResult ManageUserRoles()

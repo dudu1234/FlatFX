@@ -8,7 +8,8 @@ body {
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
-    font-size: .85em;
+    /*font-size: .85em;*/
+    font-size: small;
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
@@ -864,24 +865,37 @@ tr.pager td {
 }
 
 .form-group .control-label {
-    margin-top: 6px;
+    /*margin-top: 6px;*/
 }
 
-.admin-manage{
+.admin-manage {
     background-color: #b2eaef;
 }
+
 .admin-manage-header {
     background-color: #ff6a00;
     height: 50px;
     padding-top: 15px;
     font-size: 1.8em;
 }
-.user-manage{
+
+.user-manage {
     background-color: #b2eaef;
 }
+
 .user-manage-header {
     background-color: #e4f6ae;
     height: 50px;
     padding-top: 15px;
     font-size: 1.8em;
 }
+
+.ffx-table {
+    background-color: #e4f6ae;
+    border: double;
+}
+
+    .ffx-table tr th {
+        background-color: #b2eaef;
+        font-size: small;
+    }

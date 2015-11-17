@@ -61,7 +61,7 @@ namespace FlatFXWebClient.Controllers
 
                     db.Providers.Add(provider);
                     db.SaveChanges();
-                    return RedirectToAction("IndexAdmin");
+                    return RedirectToAction("Index");
                 }
             }
             catch (DataException) // dex )
@@ -113,7 +113,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         db.SaveChanges();
                         ViewBag.Result = "Update succeeded";
-                        return RedirectToAction("IndexAdmin");
+                        return RedirectToAction("Index");
                     }
                     catch (DataException /* dex */)
                     {
@@ -166,7 +166,7 @@ namespace FlatFXWebClient.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
-            return RedirectToAction("IndexAdmin");
+            return RedirectToAction("Index");
         }
 
         protected override void Dispose(bool disposing)
