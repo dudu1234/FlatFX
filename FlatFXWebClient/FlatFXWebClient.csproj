@@ -175,9 +175,11 @@
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
+    <Compile Include="Controllers\CompanyAccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OnLineFXRatesController.cs" />
+    <Compile Include="Controllers\ProviderAccountsController.cs" />
     <Compile Include="Controllers\ProvidersController.cs" />
     <Compile Include="Controllers\RolesController.cs" />
     <Compile Include="Global.asax.cs">
@@ -328,7 +330,6 @@
     <Content Include="Views\Shared\Lockout.cshtml" />
     <Content Include="Views\Shared\_LoginPartial.cshtml" />
     <Content Include="Views\OnLineFXRates\ShowRates.cshtml" />
-    <Content Include="Views\Shared\nav.cshtml" />
     <Content Include="Views\Shared\EditorTemplates\Date.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\Date.cshtml" />
     <Content Include="Views\Shared\DisplayTemplates\DateTime.cshtml" />
@@ -359,6 +360,12 @@
     <Content Include="Views\Shared\MainSiteHeader.cshtml" />
     <Content Include="Views\Companies\IndexUser.cshtml" />
     <Content Include="Views\Companies\EditByUser.cshtml" />
+    <Content Include="Views\CompanyAccounts\Delete.cshtml" />
+    <Content Include="Views\CompanyAccounts\Edit.cshtml" />
+    <Content Include="Views\CompanyAccounts\Index.cshtml" />
+    <Content Include="Views\ProviderAccounts\Delete.cshtml" />
+    <Content Include="Views\ProviderAccounts\Edit.cshtml" />
+    <Content Include="Views\ProviderAccounts\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

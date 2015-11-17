@@ -21,19 +21,6 @@ namespace FlatFXWebClient
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
         }
-        private void Application_BeginRequest(Object source, EventArgs e)
-        {
-            
-            HttpApplication application = (HttpApplication)source;
-            HttpContext context = application.Context;
-
-            string lang = FlatFXCookie.GetCookieValue("lang");
-            if (lang != null && lang != Thread.CurrentThread.CurrentCulture.Name)
-            {
-                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(FlatFXCookie.GetCookieValue("lang"));
-                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
-            }
-        }
         protected void Session_Start(object sender, EventArgs e)
         {
             string lang = FlatFXCookie.GetCookieValue("lang");
@@ -41,6 +28,9 @@ namespace FlatFXWebClient
                 Session["lang"] = lang;
             else
                 Session["lang"] = "en-US";
+
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
+            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             
         }
     }

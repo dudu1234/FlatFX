@@ -1,10 +1,12 @@
 ﻿body {
     color: #333;
     font-family: "Lucida Grande", "Lucida Sans Unicode", Helvetica, Arial, Verdana, sans-serif;
+    height: 100%;
 }
 
 html {
     font-size: 11px;
+    height: 100%;
 }
 
 li a {
@@ -43,8 +45,15 @@ h2 {
     object-fit: cover; /*cover video background */
     z-index: 3;
 }
-
-
+#registerLink{
+    background-color:#00a9e0;
+    color: white;
+    font-weight: 800;
+}
+#footer{
+    /*position:fixed;
+        bottom:2px;*/
+}
 /* Common styles
 	* --------------------------------------- */
 img {
@@ -239,6 +248,10 @@ img {
 #iphone-yellow {
     top: -35px;
     left: -222px;
+}
+
+.static{
+    z-index:9;
 }
 
 #iphone-red {

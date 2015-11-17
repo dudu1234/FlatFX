@@ -33,21 +33,6 @@ namespace FlatFXWebClient.Controllers
             UserManager = userManager;
             SignInManager = signInManager;
         }
-        /// <summary>
-        /// Change the current culture.
-        /// </summary>
-        /// <param name="culture">The current selected culture.</param>
-        /// <returns>The action result.</returns>
-        [AllowAnonymous]
-        public ActionResult ChangeCurrentCulture(string culture)
-        {
-            FlatFXCookie.SetCookie("lang", culture);
-            Session["lang"] = culture;
-
-            // Redirect to the same page from where the request was made! 
-            return Redirect(Request.UrlReferrer.ToString());
-        }
-
         public ApplicationSignInManager SignInManager
         {
             get
@@ -477,7 +462,6 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         public JsonResult isFieldUnique(string UserName)
         {
-            // GUY how to analize the POST request parameters ?
             string paramNames = "";
             foreach (string key in Request.Form.Keys)
                 paramNames += key + ";";

@@ -30,7 +30,7 @@
 <body>
     <div class="row">
         <div class="col-xs-1"></div>
-        <div id="nav" class="col-xs-10">
+        <div id="nav" class="col-xs-10 static">
             @Html.Partial("MainSiteHeader")
         </div>
         <div class="col-xs-1"></div>
@@ -42,13 +42,13 @@
             <div id="body">
                 @RenderBody()
             </div>
-            <footer>
-                <div class="col-xs-12">
-                    <div class="float-left">
-                        <p>FlatFX @DateTime.Now.Year &copy;</p>
-                    </div>
-                </div>
-            </footer>
+        </div>
+        <div class="col-xs-1"></div>
+    </div>
+    <div id="footer" class="row">
+        <div class="col-xs-1"></div>
+        <div id="nav" class="col-xs-10 float-left">
+            <p>FlatFX @DateTime.Now.Year &copy;</p>
         </div>
         <div class="col-xs-1"></div>
     </div>

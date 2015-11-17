@@ -24,7 +24,6 @@ namespace FlatFXCore.Model.Data
         public string ApplicationName { get; set; }
         
         public string UserId { get; set; }
-        //GUY : how can i add row with UserId = -1 or NULL ?
         [ForeignKey("UserId")]
         public virtual ApplicationUser User { get; set; }
 
