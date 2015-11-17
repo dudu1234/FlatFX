@@ -51,7 +51,7 @@ namespace FlatFXWebClient.Controllers
             if (filterContext.Exception is UnauthorizedAccessException)
             {
                 filterContext.ExceptionHandled = true;
-                filterContext.Result = RedirectToAction("Home", "IndexAdmin");
+                filterContext.Result = RedirectToAction("Index", "Home");
             }
             //
             base.OnException(filterContext);

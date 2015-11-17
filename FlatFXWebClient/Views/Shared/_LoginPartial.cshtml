@@ -1,19 +1,20 @@
 ﻿@using Microsoft.AspNet.Identity
 @if (Request.IsAuthenticated)
 {
-    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "navbar-right" }))
+    using (Html.BeginForm("LogOff", "Account", FormMethod.Post, new { id = "logoutForm", @class = "form-horizontal" }))
     {
-    @Html.AntiForgeryToken()
-
-        <li>
-            @Html.ActionLink(FlatFXResources.Resources.Hello + " " + User.Identity.GetUserName() + "!", "UserIndex", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })
+        @Html.AntiForgeryToken()
+        <li class="dropdown padding-header">
+            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@User.Identity.GetUserName()<span class="caret"></span></a>
+            <ul class="dropdown-menu">
+                <li>@Html.ActionLink("Manage Account", "UserIndex", "Manage", routeValues: null, htmlAttributes: new { title = "Manage" })</li>
+                <li><a href="javascript:document.getElementById('logoutForm').submit()">@FlatFXResources.Resources.Signout</a></li>
+            </ul>
         </li>
-        <li><a href="javascript:document.getElementById('logoutForm').submit()">@FlatFXResources.Resources.Signout</a></li>
     }
 }
 else
 {
-        <li>@Html.ActionLink(FlatFXResources.Resources.Registration, "RegisterAll", "Account", routeValues: null, htmlAttributes: new { id = "registerLink"  })</li>
-        <li>@Html.ActionLink(FlatFXResources.Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
-    
+    <li>@Html.ActionLink(FlatFXResources.Resources.Registration, "RegisterAll", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</li>
+    <li>@Html.ActionLink(FlatFXResources.Resources.Login, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</li>
 }
