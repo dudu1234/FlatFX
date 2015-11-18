@@ -99,16 +99,21 @@ namespace FlatFXCore.Model.Data
         public string AccountFullName { get; set; }
         [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }
-        [Required, DisplayName("Is default account")]
+        [Required]
+        [Display(Name = "IsDefaultAccount", ResourceType = typeof(FlatFXResources.Resources))]
         public bool IsDefaultAccount { get; set; }
 
         [Required]
+        [Display(Name = "Balance", ResourceType = typeof(FlatFXResources.Resources))]
         public double Balance { get; set; }
         [Required]
+        [Display(Name = "Equity", ResourceType = typeof(FlatFXResources.Resources))]
         public double Equity { get; set; }
-        [Required, DisplayName("Daily P&L")]
+        [Required]
+        [Display(Name = "DailyPNL", ResourceType = typeof(FlatFXResources.Resources))]
         public double DailyPNL { get; set; }
-        [Required, DisplayName("Gross P&L")]
+        [Required]
+        [Display(Name = "GrossPNL", ResourceType = typeof(FlatFXResources.Resources))]
         public double GrossPNL { get; set; }
 
         public CompanyAccount() 

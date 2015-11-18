@@ -157,21 +157,29 @@ namespace FlatFXCore.Model.Data
         public string SWIFT { get; set; }
         [Display(Name = "AllowToTradeDirectlly", ResourceType = typeof(FlatFXResources.Resources))]
         public bool AllowToTradeDirectlly { get; set; }
+        [DisplayName("Approved by FlatFX")]
         public bool ApprovedBYFlatFX { get; set; }
+        [DisplayName("Approved by Provider")]
         public bool ApprovedBYProvider { get; set; }
-
+        [DisplayName("User key in provider systems")]
         public string UserKeyInProviderSystems { get; set; }
 
         [Required]
+        [DisplayName("Is active")]
         public bool IsActive { get; set; }
+        [DisplayName("Is demo account")]
         public bool IsDemoAccount { get; set; }
-        
+        [DisplayName("Created at")]
         public DateTime? CreatedAt { get; set; }
+        [DisplayName("Last update")]
         public DateTime? LastUpdate { get; set; }
+        [DisplayName("Last update by")]
         public string LastUpdateBy { get; set; }
 
         [Required]
+        [DisplayName("Is blocked")]
         public bool QuoteResponse_IsBlocked { get; set; }
+        [DisplayName("Quote Response customer promil")]
         public double? QuoteResponse_CustomerPromil { get; set; }
         
         public ProviderAccount() 

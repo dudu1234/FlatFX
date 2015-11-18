@@ -8,22 +8,19 @@
 <div class="form-horizontal">
     <div class="panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Company Accounts</h3>
+            <h3 class="panel-title">Provider Accounts</h3>
         </div>
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-hover table-striped ffx-table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.CompanyAccount.CompanyId)
+                        Provider short name
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Provider.ShortName)
+                        Bank account name
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BankAccountName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.BankAccountFullName)
+                        Bank account full name
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.BankAccountNumber)
@@ -46,15 +43,12 @@
                     <th>
                         @Html.DisplayNameFor(model => model.QuoteResponse_IsBlocked)
                     </th>
-                    <th></th>
+                    <th width="150px">Actions</th>
                 </tr>
 
                 @foreach (var item in Model)
                 {
                     <tr>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.CompanyAccount.CompanyId)
-                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.Provider.ShortName)
                         </td>
@@ -86,8 +80,8 @@
                             @Html.DisplayFor(modelItem => item.QuoteResponse_IsBlocked)
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "Edit", new { /* id=item.PrimaryKey */ }) |
-                            @Html.ActionLink("Delete", "Delete", new { /* id=item.PrimaryKey */ })
+                            @Html.ActionLink("Edit", "Edit", new { companyAccountId = item.CompanyAccountId, providerId = item.ProviderId }) |
+                            @Html.ActionLink("Delete", "Delete", new { companyAccountId = item.CompanyAccountId, providerId = item.ProviderId })
                         </td>
                     </tr>
                 }

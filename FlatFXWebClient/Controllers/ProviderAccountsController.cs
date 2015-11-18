@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using Microsoft.AspNet.Identity;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using FlatFXCore.BussinessLayer;
@@ -26,48 +27,82 @@ namespace FlatFXWebClient.Controllers
         }
 
         // GET: ProviderAccounts/Edit/5
-        public async Task<ActionResult> Edit(string id)
+        public async Task<ActionResult> Edit(string companyAccountId, string providerId)
         {
-            if (id == null)
+            if (companyAccountId == null || providerId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProviderAccount providerAccount = await db.ProviderAccounts.FindAsync(id);
+            ProviderAccount providerAccount = await db.ProviderAccounts.Where(pa => pa.ProviderId == providerId && pa.CompanyAccountId == companyAccountId).SingleOrDefaultAsync();
             if (providerAccount == null)
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyAccountId = new SelectList(db.CompanyAccounts, "CompanyAccountId", "CompanyId", providerAccount.CompanyAccountId);
-            ViewBag.ProviderId = new SelectList(db.Providers, "ProviderId", "ShortName", providerAccount.ProviderId);
+            //ViewBag.ProviderId = new SelectList(db.Providers, "ProviderId", "ShortName", providerAccount.ProviderId);
             return View(providerAccount);
         }
 
         // POST: ProviderAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CompanyAccountId,ProviderId,BankAccountName,BankAccountFullName,BankBranchNumber,BankAccountNumber,BankAddress,IBAN,SWIFT,AllowToTradeDirectlly,ApprovedBYFlatFX,ApprovedBYProvider,UserKeyInProviderSystems,IsActive,IsDemoAccount,CreatedAt,LastUpdate,LastUpdateBy,QuoteResponse_IsBlocked,QuoteResponse_CustomerPromil")] ProviderAccount providerAccount)
+        public async Task<ActionResult> EditPost(string companyAccountId, string providerId)
         {
-            if (ModelState.IsValid)
-            {
-                db.Entry(providerAccount).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-            ViewBag.CompanyAccountId = new SelectList(db.CompanyAccounts, "CompanyAccountId", "CompanyId", providerAccount.CompanyAccountId);
-            ViewBag.ProviderId = new SelectList(db.Providers, "ProviderId", "ShortName", providerAccount.ProviderId);
-            return View(providerAccount);
-        }
-
-        // GET: ProviderAccounts/Delete/5
-        public async Task<ActionResult> Delete(string id)
-        {
-            if (id == null)
+            if (companyAccountId == null || providerId == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            ProviderAccount providerAccount = await db.ProviderAccounts.FindAsync(id);
+            ProviderAccount providerAccount = await db.ProviderAccounts.Where(pa => pa.ProviderId == providerId && pa.CompanyAccountId == companyAccountId).SingleOrDefaultAsync();
+            if (providerAccount == null)
+            {
+                return HttpNotFound();
+            }
+
+            try
+            {
+                string[] whiteList = new string[] { "BankAccountName","BankAccountFullName","BankBranchNumber","BankAccountNumber","BankAddress","IBAN","SWIFT",
+                    "AllowToTradeDirectlly","ApprovedBYFlatFX","ApprovedBYProvider","UserKeyInProviderSystems","IsActive","IsDemoAccount","QuoteResponse_IsBlocked",
+                    "QuoteResponse_CustomerPromil" };
+                if (TryUpdateModel(providerAccount, "", whiteList))
+                {
+                    try
+                    {
+                        providerAccount.LastUpdate = DateTime.Now;
+                        providerAccount.LastUpdateBy = User.Identity.GetUserName();
+
+                        db.SaveChanges();
+                        ViewBag.Result = "Update succeeded";
+                        return RedirectToAction("Index");
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+
+            return View(providerAccount);
+        }
+        
+        // GET: ProviderAccounts/Delete/5
+        public async Task<ActionResult> Delete(string companyAccountId, string providerId, bool? saveChangesError = false)
+        {
+            if (companyAccountId == null || providerId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+            }
+            ProviderAccount providerAccount = await db.ProviderAccounts.Where(pa => pa.ProviderId == providerId && pa.CompanyAccountId == companyAccountId).SingleOrDefaultAsync();
             if (providerAccount == null)
             {
                 return HttpNotFound();
@@ -78,11 +113,19 @@ namespace FlatFXWebClient.Controllers
         // POST: ProviderAccounts/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> DeleteConfirmed(string id)
+        public async Task<ActionResult> DeleteConfirmed(string companyAccountId, string providerId)
         {
-            ProviderAccount providerAccount = await db.ProviderAccounts.FindAsync(id);
-            db.ProviderAccounts.Remove(providerAccount);
-            await db.SaveChangesAsync();
+            try
+            {
+                ProviderAccount providerAccount = await db.ProviderAccounts.Where(pa => pa.ProviderId == providerId && pa.CompanyAccountId == companyAccountId).SingleOrDefaultAsync();
+                db.ProviderAccounts.Remove(providerAccount);
+                await db.SaveChangesAsync();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { companyAccountId = companyAccountId, providerId = providerId, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

@@ -2,79 +2,85 @@
     ViewBag.Title = "ShowRates";
 }
 
-<h1>שערי מטבע</h1>
-<br />
 
-<div id="onLineRates" class="k-rtl">
-    <table id="grid">
-        <colgroup>
-            <col style="width:110px" />
-            <col style="width:110px" />
-            <col style="width:110px" />
-            <col style="width:110px" />
-        </colgroup>
-        <thead>
-            <tr>
-                <th data-field="pair">צמד</th>
-                <th data-field="mid">שער אמצע</th>
-                <th data-field="bid">שער קניה</th>
-                <th data-field="ask">שער מכירה</th>
-            </tr>
-        </thead>
-        <tbody>
-            @{
-                foreach (var currencyItem in FlatFXCore.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
-                {
-                    <tr>
-                        <td>@currencyItem.Value</td>
-                        <td id="@(currencyItem.Key + "-MID")"></td>
-                        <td id="@(currencyItem.Key + "-BID")"></td>
-                        <td id="@(currencyItem.Key + "-ASK")"></td>
-                    </tr>
-                }
-            }
-        </tbody>
-    </table>
-</div>
+<div class="row" style="direction: rtl; background-color: #dae4e4">
+    <div class="col-sm-4 col-sm-offset-4">
+        <div class="form-horizontal">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">אינדיקציה לשערי מסחר מט"ח</h3>
+                </div>
+                <div id="onLineRates" class="panel-body table-responsive">
+                    <table class="table table-bordered table-hover table-striped ffx-table">
+                        <colgroup>
+                            <col style="width:150px" />
+                            <col style="width:110px" />
+                            <col style="width:110px" />
+                            <col style="width:110px" />
+                        </colgroup>
+                        <thead>
+                            <tr>
+                                <th data-field="pair">צמד</th>
+                                <th data-field="mid">שער מסחר</th>
+                                <th data-field="bid">שער קניה</th>
+                                <th data-field="ask">שער מכירה</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @{
+                                foreach (var currencyItem in FlatFXCore.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
+                                {
+                                    <tr>
+                                        <td>@currencyItem.Value</td>
+                                        <td id="@(currencyItem.Key + "-MID")"></td>
+                                        <td id="@(currencyItem.Key + "-BID")"></td>
+                                        <td id="@(currencyItem.Key + "-ASK")"></td>
+                                    </tr>
+                                }
+                            }
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div id="on-line-rates-remarks">
+            <p>שער אמצע ע"פ <a style="color: blue; text-decoration: underline;" href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a></p>
+            <p>תאריך עדכון אחרון: <span id="last-feed-update"></span></p>
+            <p>שער קניה: השער שבו FlatFX קונה מהלקוח את המטבע</p>
+            <p>שער מכירה: השער שבו FlatFX מוכרת ללקוח את המטבע</p>
+            <p>שער מסחר: משקף את שער האמצע במהלך המסחר</p>
+        </div>
+        <script>
+            var GetFeedRatesUrl = '@(Url.Action("GetRates", "OnLineFXRates"))';
 
-<span>תאריך עדכון אחרון: </span><span id="last-feed-update"></span><br />
-<span>מקור נתונים: </span><a href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a><br />
+            function refreshYahooDataFeed() {
+                $.getJSON(GetFeedRatesUrl)
+                    .done(function (data) {
 
-<script>
-    var GetFeedRatesUrl = "http://localhost/OnLineFXRates/GetRates";
-
-    function refreshYahooDataFeed() {
-        $.getJSON(GetFeedRatesUrl)
-            .done(function (data) {
-
-                try {
-                    $("#last-feed-update").html(data.query.results.rate[0].Date + '&nbsp;' + data.query.results.rate[0].Time);
-                    $.each(data.query.results.rate, function () {
-                        updateCurrencyRow(this);
+                        try {
+                            $("#last-feed-update").html(data.query.results.rate[0].Date + '&nbsp;' + data.query.results.rate[0].Time);
+                            $.each(data.query.results.rate, function () {
+                                updateCurrencyRow(this);
+                            });
+                        }
+                        catch (err) {
+                            alert(err);
+                        }
                     });
-                }
-                catch (err) {
-                    alert(err);
-                }
+            };
+
+            function updateCurrencyRow(currencyRow) {
+                var mid = (parseFloat(currencyRow.Bid) + parseFloat(currencyRow.Ask)) / 2;
+                var spread = mid * 0.003;
+                $("#" + currencyRow.id + "-MID").text(mid.toFixed(4));
+                $("#" + currencyRow.id + "-BID").text((mid - spread).toFixed(4));
+                $("#" + currencyRow.id + "-ASK").text((mid + spread).toFixed(4));
+            }
+
+            $(document).ready(function () {
+                refreshYahooDataFeed();
+                setInterval(function () { refreshYahooDataFeed() }, 5 * 60000);
             });
-    };
-
-    function updateCurrencyRow(currencyRow) {
-        var mid = (parseFloat(currencyRow.Bid) + parseFloat(currencyRow.Ask)) / 2;
-        var spread = mid * 0.003;
-        $("#" + currencyRow.id + "-MID").text(mid.toFixed(4));
-        $("#" + currencyRow.id + "-BID").text((mid - spread).toFixed(4));
-        $("#" + currencyRow.id + "-ASK").text((mid + spread).toFixed(4));
-    }
-
-    $(document).ready(function () {
-        refreshYahooDataFeed();
-        setInterval(function () { refreshYahooDataFeed() }, 5 * 60000);
-
-        $("#grid").kendoGrid({
-            height: 550,
-            sortable: true
-        });
-
-    });
-</script>
+        </script>
+    </div>
+</div>

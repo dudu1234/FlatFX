@@ -22,7 +22,7 @@
                     <div class="form-group">
                         @Html.LabelFor(model => model.CompanyId, "CompanyId", htmlAttributes: new { @class = "control-label col-sm-2" })
                         <div class="col-sm-4">
-                            @Html.DropDownList("CompanyId", null, htmlAttributes: new { @class = "form-control" })
+                            @Html.DropDownList("CompanyId", null, htmlAttributes: new { disabled = "disabled", @readonly = "readonly", @class = "form-control" })
                         </div>
 
                         @Html.LabelFor(model => model.AccountName, htmlAttributes: new { @class = "control-label col-sm-2" })

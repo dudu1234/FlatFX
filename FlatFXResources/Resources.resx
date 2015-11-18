@@ -312,4 +312,16 @@
   <data name="Bank" xml:space="preserve">
     <value>Bank</value>
   </data>
+  <data name="Balance" xml:space="preserve">
+    <value>Balance</value>
+  </data>
+  <data name="DailyPNL" xml:space="preserve">
+    <value>Daily P&amp;L</value>
+  </data>
+  <data name="Equity" xml:space="preserve">
+    <value>Equity</value>
+  </data>
+  <data name="GrossPNL" xml:space="preserve">
+    <value>Gross P&amp;L</value>
+  </data>
 </root>

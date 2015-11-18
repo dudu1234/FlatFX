@@ -124,6 +124,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Balance.
+        /// </summary>
+        public static string Balance {
+            get {
+                return ResourceManager.GetString("Balance", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bank.
         /// </summary>
         public static string Bank {
@@ -259,6 +268,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily P&amp;L.
+        /// </summary>
+        public static string DailyPNL {
+            get {
+                return ResourceManager.GetString("DailyPNL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -277,6 +295,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Equity.
+        /// </summary>
+        public static string Equity {
+            get {
+                return ResourceManager.GetString("Equity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Fax.
         /// </summary>
         public static string Fax {
@@ -291,6 +318,15 @@ namespace FlatFXResources {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Gross P&amp;L.
+        /// </summary>
+        public static string GrossPNL {
+            get {
+                return ResourceManager.GetString("GrossPNL", resourceCulture);
             }
         }
         

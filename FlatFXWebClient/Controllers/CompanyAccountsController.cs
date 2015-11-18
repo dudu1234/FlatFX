@@ -23,46 +23,6 @@ namespace FlatFXWebClient.Controllers
             return View(await companyAccounts.ToListAsync());
         }
 
-        // GET: CompanyAccounts/Details/5
-        public async Task<ActionResult> Details(string id)
-        {
-            if (id == null)
-            {
-                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
-            }
-            CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
-            if (companyAccount == null)
-            {
-                return HttpNotFound();
-            }
-            return View(companyAccount);
-        }
-
-        // GET: CompanyAccounts/Create
-        public ActionResult Create()
-        {
-            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyShortName");
-            return View();
-        }
-
-        // POST: CompanyAccounts/Create
-        // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
-        // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Create([Bind(Include = "CompanyAccountId,CompanyId,AccountName,AccountFullName,IsActive,IsDefaultAccount,Balance,Equity,DailyPNL,GrossPNL")] CompanyAccount companyAccount)
-        {
-            if (ModelState.IsValid)
-            {
-                db.CompanyAccounts.Add(companyAccount);
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
-            }
-
-            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyShortName", companyAccount.CompanyId);
-            return View(companyAccount);
-        }
-
         // GET: CompanyAccounts/Edit/5
         public async Task<ActionResult> Edit(string id)
         {
@@ -82,26 +42,53 @@ namespace FlatFXWebClient.Controllers
         // POST: CompanyAccounts/Edit/5
         // To protect from overposting attacks, please enable the specific properties you want to bind to, for 
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
-        [HttpPost]
+        [HttpPost, ActionName("Edit")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> Edit([Bind(Include = "CompanyAccountId,CompanyId,AccountName,AccountFullName,IsActive,IsDefaultAccount,Balance,Equity,DailyPNL,GrossPNL")] CompanyAccount companyAccount)
+        public async Task<ActionResult> EditPost(string id)
         {
-            if (ModelState.IsValid)
+            if (id == null)
             {
-                db.Entry(companyAccount).State = EntityState.Modified;
-                await db.SaveChangesAsync();
-                return RedirectToAction("Index");
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
+            CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
+            try
+            {
+                string[] whiteList = new string[] { "AccountName", "AccountFullName", "IsActive", "IsDefaultAccount", "Balance", "Equity", "DailyPNL", "GrossPNL" };
+                if (TryUpdateModel(companyAccount, "", whiteList))
+                {
+                    try
+                    {
+                        db.SaveChanges();
+                        ViewBag.Result = "Update succeeded";
+                        return RedirectToAction("Index");
+                    }
+                    catch (DataException /* dex */)
+                    {
+                        //Log the error (uncomment dex variable name and add a line here to write a log.
+                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                    }
+                }
+            }
+            catch (DataException /* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+            }
+
             ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyShortName", companyAccount.CompanyId);
             return View(companyAccount);
         }
 
         // GET: CompanyAccounts/Delete/5
-        public async Task<ActionResult> Delete(string id)
+        public async Task<ActionResult> Delete(string id, bool? saveChangesError = false)
         {
             if (id == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            if (saveChangesError.GetValueOrDefault())
+            {
+                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
             if (companyAccount == null)
@@ -116,9 +103,17 @@ namespace FlatFXWebClient.Controllers
         [ValidateAntiForgeryToken]
         public async Task<ActionResult> DeleteConfirmed(string id)
         {
-            CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
-            db.CompanyAccounts.Remove(companyAccount);
-            await db.SaveChangesAsync();
+            try
+            {
+                CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
+                db.CompanyAccounts.Remove(companyAccount);
+                await db.SaveChangesAsync();
+            }
+            catch (DataException/* dex */)
+            {
+                //Log the error (uncomment dex variable name and add a line here to write a log.
+                return RedirectToAction("Delete", new { id = id, saveChangesError = true });
+            }
             return RedirectToAction("Index");
         }
 

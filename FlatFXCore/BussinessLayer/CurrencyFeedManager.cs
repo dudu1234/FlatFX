@@ -34,7 +34,7 @@ namespace FlatFXCore.BussinessLayer
             {
                 CurrencyList.Add(new KeyValuePair<string, string>("EURUSD", "יורו - דולר"));
                 CurrencyList.Add(new KeyValuePair<string, string>("USDILS", "דולר ארה\"ב - שקל"));
-                CurrencyList.Add(new KeyValuePair<string,string>("EURILS", "יורו - שקל"));
+                CurrencyList.Add(new KeyValuePair<string, string>("EURILS", "יורו - שקל"));
                 CurrencyList.Add(new KeyValuePair<string, string>("GBPILS", "לירה שטרלינג - שקל"));
                 CurrencyList.Add(new KeyValuePair<string, string>("JPYILS", "ין יפני - שקל"));
                 CurrencyList.Add(new KeyValuePair<string, string>("CHFILS", "פרנק שווצרי - שקל"));
@@ -99,7 +99,7 @@ namespace FlatFXCore.BussinessLayer
             {
                 return m_LastUpdateFeedResponse;
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Instance.WriteError("Failed in CurrencyFeedManager::GetYahooRates", ex);
                 return null;
@@ -130,6 +130,8 @@ namespace FlatFXCore.BussinessLayer
                     }
                  */
  
+                //{"query":{"count":7,"created":"2015-11-18T14:25:25Z","lang":"en-US","results":{"rate":[{"id":"EURUSD","Name":"EUR/USD","Rate":"1.0663","Date":"11/18/2015","Time":"2:25pm","Ask":"1.0666","Bid":"1.0661"},{"id":"USDILS","Name":"USD/ILS","Rate":"3.9007","Date":"11/18/2015","Time":"2:25pm","Ask":"3.9022","Bid":"3.9007"},{"id":"EURILS","Name":"EUR/ILS","Rate":"4.1595","Date":"11/18/2015","Time":"2:25pm","Ask":"4.1620","Bid":"4.1569"},{"id":"GBPILS","Name":"GBP/ILS","Rate":"5.9330","Date":"11/18/2015","Time":"2:25pm","Ask":"5.9354","Bid":"5.9305"},{"id":"JPYILS","Name":"JPY/ILS","Rate":"0.0316","Date":"11/18/2015","Time":"2:25pm","Ask":"0.0316","Bid":"0.0316"},{"id":"CHFILS","Name":"CHF/ILS","Rate":"3.8334","Date":"11/18/2015","Time":"2:25pm","Ask":"3.8358","Bid":"3.8309"},{"id":"AUDILS","Name":"AUD/ILS","Rate":"2.7701","Date":"11/18/2015","Time":"2:25pm","Ask":"2.7715","Bid":"2.7687"}]}}}
+
                 //Convert to Json
                 var results = JsonConvert.DeserializeObject<dynamic>(response);
                 string date = results.query.results.rate[0].Date;
