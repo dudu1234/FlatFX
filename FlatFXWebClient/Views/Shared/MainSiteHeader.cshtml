@@ -16,7 +16,7 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a href="@Url.Action("Index", "Home")"><img class="logoImage" src="~/Images/FlatFX_Logo3.png" /></a>
+            <a href="@Url.Action("Index", "Home")"><img class="logoImage" src="~/Images/FlatFX_Logo4.png" /></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
@@ -25,14 +25,14 @@
                 <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
                 <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
-                <li><a href="@Url.Action("Index", "Home")#4rdPage">@FlatFXResources.Resources.MenuAbout</a></li>
-                <li><a href="@Url.Action("Index", "Home")#lastPage">@FlatFXResources.Resources.MenuActions</a></li>
+                <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+                <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd"></span>On Line Rates<span class="glyphicon glyphicon-euro"></span></a></li>
+                <li><a class="disabled" href="#"><span class="glyphicon glyphicon-transfer"></span>Exchange System</a></li>
                 <li class="dropdown">
                     <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Manage<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("Index", "Home")#secondPage">Edit User Details</a></li>
-                        <li><a href="@Url.Action("Index", "Home")#secondPage">Edit Company Details</a></li>
-                        @*<li role="separator" class="divider"></li>*@
+                        <li><a href="@Url.Action("EditByUser", "ApplicationUsers")#secondPage">Edit User Details</a></li>
+                        <li><a href="@Url.Action("IndexUser", "Companies")#secondPage">Edit Company Details</a></li>
                     </ul>
                 </li>
 

@@ -134,10 +134,10 @@ footer {
 /* logo image
 ----------------------------------------------------------*/
 .logoImage {
-    margin: 0;
+    margin: 10px;
     padding: 0;
-    height: 80px;
-    width: 120px;
+    height: 60px;
+    width: 160px;
 }
 
 /* login
