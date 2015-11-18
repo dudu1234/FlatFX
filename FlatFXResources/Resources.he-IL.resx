@@ -312,4 +312,43 @@
   <data name="Bank" xml:space="preserve">
     <value>בנק</value>
   </data>
+  <data name="AdminManage" xml:space="preserve">
+    <value>ניהול אדמיניסטרטור</value>
+  </data>
+  <data name="Companies" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="CompanyAccounts" xml:space="preserve">
+    <value>Company Accounts</value>
+  </data>
+  <data name="EditCompanyDetails" xml:space="preserve">
+    <value>ערוך פרטי חברה</value>
+  </data>
+  <data name="EditUserDetails" xml:space="preserve">
+    <value>ערוך פרטי משתמש</value>
+  </data>
+  <data name="ExchangeSystem" xml:space="preserve">
+    <value>אפליקציית המרות</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="OnLineRates" xml:space="preserve">
+    <value>שערים עדכניים</value>
+  </data>
+  <data name="ProviderAccounts" xml:space="preserve">
+    <value>Provider Accounts</value>
+  </data>
+  <data name="Providers" xml:space="preserve">
+    <value>Providers</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="UserManage" xml:space="preserve">
+    <value>ניהול משתמש</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

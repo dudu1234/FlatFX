@@ -324,4 +324,43 @@
   <data name="GrossPNL" xml:space="preserve">
     <value>Gross P&amp;L</value>
   </data>
+  <data name="AdminManage" xml:space="preserve">
+    <value>Admin Manage</value>
+  </data>
+  <data name="Companies" xml:space="preserve">
+    <value>Companies</value>
+  </data>
+  <data name="CompanyAccounts" xml:space="preserve">
+    <value>Company Accounts</value>
+  </data>
+  <data name="EditCompanyDetails" xml:space="preserve">
+    <value>Edit Company Details</value>
+  </data>
+  <data name="EditUserDetails" xml:space="preserve">
+    <value>Edit User Details</value>
+  </data>
+  <data name="ExchangeSystem" xml:space="preserve">
+    <value>Exchange System</value>
+  </data>
+  <data name="Log" xml:space="preserve">
+    <value>Log</value>
+  </data>
+  <data name="OnLineRates" xml:space="preserve">
+    <value>On Line Rates</value>
+  </data>
+  <data name="ProviderAccounts" xml:space="preserve">
+    <value>Provider Accounts</value>
+  </data>
+  <data name="Providers" xml:space="preserve">
+    <value>Providers</value>
+  </data>
+  <data name="Roles" xml:space="preserve">
+    <value>Roles</value>
+  </data>
+  <data name="UserManage" xml:space="preserve">
+    <value>User Manage</value>
+  </data>
+  <data name="Users" xml:space="preserve">
+    <value>Users</value>
+  </data>
 </root>

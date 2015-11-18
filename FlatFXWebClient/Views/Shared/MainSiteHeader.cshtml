@@ -26,27 +26,27 @@
                 <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
                 <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
                 <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
-                <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">On Line Rates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
-                <li><a class="disabled" href="#">Exchange System <span class="glyphicon glyphicon-transfer red"></span></a></li>
+                <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
+                <li><a class="disabled" href="#">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">User Manage<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("EditByUser", "ApplicationUsers")#secondPage">Edit User Details</a></li>
-                        <li><a href="@Url.Action("IndexUser", "Companies")#secondPage">Edit Company Details</a></li>
+                        <li><a href="@Url.Action("EditByUser", "ApplicationUsers")#secondPage">@FlatFXResources.Resources.EditUserDetails</a></li>
+                        <li><a href="@Url.Action("IndexUser", "Companies")#secondPage">@FlatFXResources.Resources.EditCompanyDetails</a></li>
                     </ul>
                 </li>
 
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">Admin Manage<span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
                     <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Edit Users</a></li>
-                        <li><a href="@Url.Action("IndexAdmin", "Companies")">Edit Companies</a></li>
-                        <li><a href="@Url.Action("Index", "CompanyAccounts")">Edit Company Accounts</a></li>
-                        <li><a href="@Url.Action("Index", "ProviderAccounts")">Edit Provider Accounts</a></li>
-                        <li><a href="@Url.Action("Index", "Providers")">Edit Providers</a></li>
-                        <li><a href="@Url.Action("Index", "Roles")">Edit Roles</a></li>
+                        <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
+                        <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
+                        <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
+                        <li><a href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a></li>
+                        <li><a href="@Url.Action("Index", "Providers")">Providers</a></li>
+                        <li><a href="@Url.Action("Index", "Roles")">Roles</a></li>
                         <li role="separator" class="divider"></li>
-                        <li><a href="@Url.Action("Index", "Log")">View Log Information</a></li>
+                        <li><a href="@Url.Action("Index", "Log")">Log</a></li>
 
                     </ul>
                 </li>

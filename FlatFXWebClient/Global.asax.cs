@@ -29,9 +29,18 @@ namespace FlatFXWebClient
             else
                 Session["lang"] = "en-US";
 
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             
+        }
+        private void Application_BeginRequest(Object source, EventArgs e)
+        {
+            string lang = FlatFXCookie.GetCookieValue("lang");
+            if (lang != null && lang != Thread.CurrentThread.CurrentCulture.Name)
+            {
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+            }
         }
     }
 }

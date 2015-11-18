@@ -97,6 +97,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Admin Manage.
+        /// </summary>
+        public static string AdminManage {
+            get {
+                return ResourceManager.GetString("AdminManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Allow to trade directlly.
         /// </summary>
         public static string AllowToTradeDirectlly {
@@ -165,6 +174,24 @@ namespace FlatFXResources {
         public static string CarPhone {
             get {
                 return ResourceManager.GetString("CarPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Companies.
+        /// </summary>
+        public static string Companies {
+            get {
+                return ResourceManager.GetString("Companies", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Accounts.
+        /// </summary>
+        public static string CompanyAccounts {
+            get {
+                return ResourceManager.GetString("CompanyAccounts", resourceCulture);
             }
         }
         
@@ -277,6 +304,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Company Details.
+        /// </summary>
+        public static string EditCompanyDetails {
+            get {
+                return ResourceManager.GetString("EditCompanyDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit User Details.
+        /// </summary>
+        public static string EditUserDetails {
+            get {
+                return ResourceManager.GetString("EditUserDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Email.
         /// </summary>
         public static string Email {
@@ -300,6 +345,15 @@ namespace FlatFXResources {
         public static string Equity {
             get {
                 return ResourceManager.GetString("Equity", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange System.
+        /// </summary>
+        public static string ExchangeSystem {
+            get {
+                return ResourceManager.GetString("ExchangeSystem", resourceCulture);
             }
         }
         
@@ -421,6 +475,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Log.
+        /// </summary>
+        public static string Log {
+            get {
+                return ResourceManager.GetString("Log", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string Login {
@@ -511,6 +574,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to On Line Rates.
+        /// </summary>
+        public static string OnLineRates {
+            get {
+                return ResourceManager.GetString("OnLineRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -520,11 +592,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Provider Accounts.
+        /// </summary>
+        public static string ProviderAccounts {
+            get {
+                return ResourceManager.GetString("ProviderAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Provider/Bank.
         /// </summary>
         public static string ProviderOrBank {
             get {
                 return ResourceManager.GetString("ProviderOrBank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Providers.
+        /// </summary>
+        public static string Providers {
+            get {
+                return ResourceManager.GetString("Providers", resourceCulture);
             }
         }
         
@@ -570,6 +660,15 @@ namespace FlatFXResources {
         public static string Role {
             get {
                 return ResourceManager.GetString("Role", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Roles.
+        /// </summary>
+        public static string Roles {
+            get {
+                return ResourceManager.GetString("Roles", resourceCulture);
             }
         }
         
@@ -637,11 +736,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Manage.
+        /// </summary>
+        public static string UserManage {
+            get {
+                return ResourceManager.GetString("UserManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to User Name.
         /// </summary>
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Users.
+        /// </summary>
+        public static string Users {
+            get {
+                return ResourceManager.GetString("Users", resourceCulture);
             }
         }
         

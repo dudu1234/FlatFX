@@ -16,15 +16,21 @@
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
         {
             <script src="~/Scripts/bootstrap.rtl.min.js"></script>
-            <link href="~/Content/rtlCustom.css" rel="stylesheet" />
             <script src="~/Scripts/bootstrap.rtl.min.js"></script>
-            <script src="~/JS/rtlCustom.js"></script>
         }
     }
 
     <link href="~/Content/fullpageex.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
     <script src="~/JS/FFx.js"></script>
+
+    @{
+        if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
+        {
+            <link href="~/Content/rtlCustom.css" rel="stylesheet" />
+            <script src="~/JS/rtlCustom.js"></script>
+        }
+    }
 
 </head>
 <body>
