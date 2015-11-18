@@ -243,10 +243,8 @@
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\FlatFXIcon.ico" />
     <Content Include="Images\FlatFXIconImage.png" />
-    <Content Include="Images\FlatFX_Logo.png" />
-    <Content Include="Images\FlatFX_Logo2.png" />
-    <Content Include="Images\FlatFX_Logo3.png" />
     <Content Include="Images\FlatFX_Logo4.png" />
+    <Content Include="Images\FlatFX_Logo5.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HowItWorks1.jpg" />
     <Content Include="Images\HowItWorks2.jpg" />
