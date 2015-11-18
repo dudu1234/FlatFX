@@ -1,0 +1,89 @@
+﻿@model IEnumerable<FlatFXCore.Model.Data.LogInfo>
+
+@{
+    ViewBag.Title = "Log Index";
+    Layout = "~/Views/Manage/AdminManageLayout.cshtml";
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Log Information</h3>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered table-hover table-striped ffx-table">
+                <tr>
+                    <th>
+                        Date
+                    </th>
+                    <th>
+                        Log Level
+                    </th>
+                    <th>
+                        Description
+                    </th>
+                    <th>
+                        User Name
+                    </th>
+                    <th>
+                        Extended Description
+                    </th>
+                    <th>
+                        User IP
+                    </th>
+                    <th>
+                        Session Id
+                    </th>
+                    <th>
+                        Operation Level
+                    </th>
+                    <th>
+                        Operation Name
+                    </th>
+                    <th>
+                        Operation Status
+                    </th>
+                    <th></th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Date)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.LogLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Description)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.User.FullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ExtendedDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.UserIP)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.SessionId)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationLevel)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.OperationStatus)
+                        </td>
+                        <td></td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

@@ -177,6 +177,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CompanyAccountsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\LogInfoController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
     <Compile Include="Controllers\OnLineFXRatesController.cs" />
     <Compile Include="Controllers\ProviderAccountsController.cs" />
@@ -365,6 +366,7 @@
     <Content Include="Views\ProviderAccounts\Delete.cshtml" />
     <Content Include="Views\ProviderAccounts\Edit.cshtml" />
     <Content Include="Views\ProviderAccounts\Index.cshtml" />
+    <Content Include="Views\LogInfo\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
