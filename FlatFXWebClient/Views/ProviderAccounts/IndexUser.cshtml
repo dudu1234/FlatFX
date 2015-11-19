@@ -1,0 +1,85 @@
+﻿@model IEnumerable<FlatFXCore.Model.Data.ProviderAccount>
+
+@{
+    ViewBag.Title = "Index";
+    Layout = "~/Views/Manage/UserManageLayout.cshtml";
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">Provider Accounts</h3>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered table-hover table-striped ffx-table">
+                <tr>
+                    <th>
+                        Provider short name
+                    </th>
+                    <th>
+                        Bank account name
+                    </th>
+                    <th>
+                        Bank account full name
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BankAccountNumber)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.AllowToTradeDirectlly)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ApprovedBYFlatFX)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ApprovedBYProvider)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.IsDemoAccount)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.QuoteResponse_IsBlocked)
+                    </th>
+                    <th width="150px">Actions</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Provider.ShortName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankAccountName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankAccountFullName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BankAccountNumber)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.AllowToTradeDirectlly)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApprovedBYFlatFX)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.ApprovedBYProvider)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.IsDemoAccount)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.QuoteResponse_IsBlocked)
+                        </td>
+                        <td>
+                            @Html.ActionLink("EditByUser", "Edit", new { companyAccountId = item.CompanyAccountId, providerId = item.ProviderId })
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+</div>

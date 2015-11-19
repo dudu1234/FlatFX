@@ -14,10 +14,8 @@ using FlatFXCore.BussinessLayer;
 namespace FlatFXWebClient.Controllers
 {
     [Authorize(Roles = Consts.Role_Administrator)]
-    public class ProvidersController : Controller
+    public class ProvidersController : BaseController
     {
-        private ApplicationDBContext db = new ApplicationDBContext();
-
         // GET: Providers
         public ActionResult Index()
         {
@@ -167,15 +165,6 @@ namespace FlatFXWebClient.Controllers
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

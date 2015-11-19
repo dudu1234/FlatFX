@@ -367,6 +367,8 @@
     <Content Include="Views\ProviderAccounts\Edit.cshtml" />
     <Content Include="Views\ProviderAccounts\Index.cshtml" />
     <Content Include="Views\LogInfo\Index.cshtml" />
+    <Content Include="Views\CompanyAccounts\IndexUser.cshtml" />
+    <Content Include="Views\ProviderAccounts\IndexUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

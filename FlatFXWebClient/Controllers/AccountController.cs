@@ -483,6 +483,7 @@ namespace FlatFXWebClient.Controllers
             else
                 return Json(false);
         }
+        [AllowAnonymous]
         private bool IsUnique(string fieldName, string fieldValue)
         {
             if (fieldName == "UserName")
@@ -531,6 +532,7 @@ namespace FlatFXWebClient.Controllers
 
             return false;
         }
+        [AllowAnonymous]
         private bool IsUnique(string fieldName, object viewModel)
         {
             if (fieldName == "ProviderAccountName" && viewModel != null)
@@ -560,6 +562,7 @@ namespace FlatFXWebClient.Controllers
         #region Register
         //
         // GET: /Account/RegisterCompany
+        [AllowAnonymous]
         public ActionResult RegisterCompany()
         {
             CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();

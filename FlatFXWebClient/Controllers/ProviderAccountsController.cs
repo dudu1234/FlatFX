@@ -11,19 +11,33 @@ using Microsoft.AspNet.Identity;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.User;
 
 namespace FlatFXWebClient.Controllers
 {
     [Authorize(Roles = Consts.Role_Administrator)]
-    public class ProviderAccountsController : Controller
+    public class ProviderAccountsController : BaseController
     {
-        private ApplicationDBContext db = new ApplicationDBContext();
-
         // GET: ProviderAccounts
         public async Task<ActionResult> Index()
         {
             var providerAccounts = db.ProviderAccounts.Include(p => p.CompanyAccount).Include(p => p.Provider);
             return View(await providerAccounts.ToListAsync());
+        }
+
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        public async Task<ActionResult> IndexUser()
+        {
+            string userId = User.Identity.GetUserId();
+            ApplicationUser user = await db.Users.Include(u => u.Companies).Where(u => u.Id == userId).FirstOrDefaultAsync();
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            List<string> userCompaniesIdList = user.Companies.Select(c => c.CompanyId).ToList();
+            var companyAccountsIdList = await db.CompanyAccounts.Where(ca => userCompaniesIdList.Contains(ca.CompanyId)).Select(ca => ca.CompanyAccountId).ToListAsync();
+            var providerAccount = await db.ProviderAccounts.Include(pa => pa.CompanyAccount).Where(pa => companyAccountsIdList.Contains(pa.CompanyAccountId)).ToListAsync();
+            return View("IndexUser", providerAccount);
         }
 
         // GET: ProviderAccounts/Edit/5
@@ -127,15 +141,6 @@ namespace FlatFXWebClient.Controllers
                 return RedirectToAction("Delete", new { companyAccountId = companyAccountId, providerId = providerId, saveChangesError = true });
             }
             return RedirectToAction("Index");
-        }
-
-        protected override void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                db.Dispose();
-            }
-            base.Dispose(disposing);
         }
     }
 }

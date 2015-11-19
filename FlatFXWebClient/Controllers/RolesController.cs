@@ -18,16 +18,15 @@ namespace MVCInBuiltFeatures.Controllers
     /// </summary>
     /// <remarks>http://www.dotnetfunda.com/articles/show/2898/working-with-roles-in-aspnet-identity-for-mvc</remarks>
     [Authorize(Roles = Consts.Role_Administrator)]
-    public class RolesController : Controller
+    public class RolesController : BaseController
     {
-        ApplicationDBContext context = new ApplicationDBContext();
         private ApplicationUserManager _userManager;
 
         //
         // GET: /Roles/
         public ActionResult Index()
         {
-            var roles = context.Roles.ToList();
+            var roles = db.Roles.ToList();
             return View(roles);
         }
 
@@ -45,11 +44,11 @@ namespace MVCInBuiltFeatures.Controllers
         {
             try
             {
-                context.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
+                db.Roles.Add(new Microsoft.AspNet.Identity.EntityFramework.IdentityRole()
                 {
                     Name = collection["RoleName"]
                 });
-                context.SaveChanges();
+                db.SaveChanges();
                 ViewBag.ResultMessage = "Role created successfully !";
                 return RedirectToAction("Index");
             }
@@ -63,7 +62,7 @@ namespace MVCInBuiltFeatures.Controllers
         // GET: /Roles/Edit/5
         public ActionResult Edit(string roleName)
         {
-            var thisRole = context.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            var thisRole = db.Roles.Where(r => r.Name.Equals(roleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
             return View(thisRole);
         }
@@ -76,8 +75,8 @@ namespace MVCInBuiltFeatures.Controllers
         {
             try
             {
-                context.Entry(role).State = System.Data.Entity.EntityState.Modified;
-                context.SaveChanges();
+                db.Entry(role).State = System.Data.Entity.EntityState.Modified;
+                db.SaveChanges();
 
                 return RedirectToAction("Index");
             }
@@ -91,15 +90,15 @@ namespace MVCInBuiltFeatures.Controllers
         // GET: /Roles/Delete/5
         public ActionResult Delete(string RoleName)
         {
-            var thisRole = context.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-            context.Roles.Remove(thisRole);
-            context.SaveChanges();
+            var thisRole = db.Roles.Where(r => r.Name.Equals(RoleName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            db.Roles.Remove(thisRole);
+            db.SaveChanges();
             return RedirectToAction("Index");
         }
 
         public ActionResult ManageUserRoles()
         {
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;            
             return View();
         }
@@ -108,13 +107,13 @@ namespace MVCInBuiltFeatures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
-            ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
             UserManager.AddToRole(user.Id, RoleName);
             
             ViewBag.ResultMessage = "Role created successfully !";
             
             // prepopulat roles for the view dropdown
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;   
 
             return View("ManageUserRoles");
@@ -126,11 +125,11 @@ namespace MVCInBuiltFeatures.Controllers
         {            
             if (!string.IsNullOrWhiteSpace(UserName))
             {
-                ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+                ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
                 ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
 
                 // prepopulat roles for the view dropdown
-                var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+                var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
                 ViewBag.Roles = list;            
             }
             else
@@ -145,7 +144,7 @@ namespace MVCInBuiltFeatures.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteRoleForUser(string UserName, string RoleName)
         {
-            ApplicationUser user = context.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
 
             if (UserManager.IsInRole(user.Id, RoleName))  
             {
@@ -157,7 +156,7 @@ namespace MVCInBuiltFeatures.Controllers
                 ViewBag.ResultMessage = "This user doesn't belong to selected role.";
             }
             // prepopulat roles for the view dropdown
-            var list = context.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
             ViewBag.Roles = list;
 
             return View("ManageUserRoles");

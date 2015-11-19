@@ -9,9 +9,10 @@ namespace FlatFXWebClient.Controllers
 {
     public class OnLineFXRatesController : BaseController
     {
-        //
-        // GET: /OnLineFXRates/
-
+        /// <summary>
+        /// ShowRates
+        /// </summary>
+        /// <returns></returns>
         public ActionResult ShowRates()
         {
             CurrencyFeedManager.Instance.GetYahooRates();

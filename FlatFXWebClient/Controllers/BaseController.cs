@@ -26,7 +26,7 @@ namespace FlatFXWebClient.Controllers
             }
         }
         /// <summary>
-        /// The data context.
+        /// The data db.
         /// </summary>
         protected ApplicationDBContext db = new ApplicationDBContext();
 

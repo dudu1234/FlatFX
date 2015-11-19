@@ -78,6 +78,7 @@ namespace FlatFXWebClient.Controllers
         }
         //
         // GET: /Manage/UserIndex
+        [Authorize(Roles = Consts.Role_Administrator)]
         public ActionResult AdminIndex(ManageMessageId? message)
         {
             return View();

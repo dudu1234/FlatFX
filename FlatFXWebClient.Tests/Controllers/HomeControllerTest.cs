@@ -24,32 +24,6 @@ namespace FlatFXWebClient.Tests.Controllers
             // Assert
             Assert.IsNotNull(result);
         }
-
-        [TestMethod]
-        public void About()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.About() as ViewResult;
-
-            // Assert
-            Assert.AreEqual("Your application description page.", result.ViewBag.Message);
-        }
-
-        [TestMethod]
-        public void Contact()
-        {
-            // Arrange
-            HomeController controller = new HomeController();
-
-            // Act
-            ViewResult result = controller.Contact() as ViewResult;
-
-            // Assert
-            Assert.IsNotNull(result);
-        }
     }
 }
 
@@ -66,9 +40,9 @@ namespace FlatFXWebClient.Tests.Controllers
             {
                 if (m_TestUserData == null)
                 {
-                    using (var context = new ApplicationDBContext())
+                    using (var db = new ApplicationDBContext())
                     {
-                        List<UserData> testUsers = context.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToList();
+                        List<UserData> testUsers = db.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToList();
                         if (testUsers.Count > 0)
                         {
                             m_TestUserData = testUsers[0];
@@ -86,7 +60,7 @@ namespace FlatFXWebClient.Tests.Controllers
             {
                 UserData user = null;
 
-                using (var context = new ApplicationDBContext())
+                using (var db = new ApplicationDBContext())
                 {
                     user = new UserData
                     {
@@ -107,8 +81,8 @@ namespace FlatFXWebClient.Tests.Controllers
                         },
                     };
 
-                    context.Users.Add(user);
-                    context.SaveChanges();
+                    db.Users.Add(user);
+                    db.SaveChanges();
 
                     Logger.Instance.WriteSystemTrace("Test - TestAddUser", Consts.eLogOperationStatus.Succeeded, "Add Test User");
                 }
@@ -125,13 +99,13 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new ApplicationDBContext())
+                using (var db = new ApplicationDBContext())
                 {
                     if (TestUser == null)
                         return;
 
                     TestUser.LastName = "Edited @ " + DateTime.Now.ToShortTimeString();
-                    context.SaveChanges();
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -144,19 +118,19 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new ApplicationDBContext())
+                using (var db = new ApplicationDBContext())
                 {
-                    Dictionary<int, UserData> usersToDelete = context.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToDictionary(u2 => u2.UserId);
+                    Dictionary<int, UserData> usersToDelete = db.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToDictionary(u2 => u2.UserId);
 
                     //Remove all temp contact details
-                    Dictionary<int, UserData> detailsIdToDelete = context.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToDictionary(u3 => u3.ContactDetailsId);
-                    List<ContactDetails> tempUserDetails = context.ContactsDetails.Where(d => detailsIdToDelete.Keys.Contains(d.ContactDetailsId)).ToList();
-                    context.ContactsDetails.RemoveRange(tempUserDetails);
+                    Dictionary<int, UserData> detailsIdToDelete = db.Users.Where(u => u.UserName.StartsWith("testFFX_")).ToDictionary(u3 => u3.ContactDetailsId);
+                    List<ContactDetails> tempUserDetails = db.ContactsDetails.Where(d => detailsIdToDelete.Keys.Contains(d.ContactDetailsId)).ToList();
+                    db.ContactsDetails.RemoveRange(tempUserDetails);
 
                     //remove all temp users
-                    context.Users.RemoveRange(usersToDelete.Values);
+                    db.Users.RemoveRange(usersToDelete.Values);
 
-                    context.SaveChanges();
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -169,7 +143,7 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new ApplicationDBContext())
+                using (var db = new ApplicationDBContext())
                 {
                     if (TestUser == null)
                         return;
@@ -183,7 +157,7 @@ namespace FlatFXWebClient.Tests.Controllers
                         IsSucceded = true,
                         IsRemoved = false
                     };
-                    context.UserActions.Add(action);
+                    db.UserActions.Add(action);
 
                     action = new UserActionData
                     {
@@ -194,9 +168,9 @@ namespace FlatFXWebClient.Tests.Controllers
                         IsSucceded = true,
                         IsRemoved = false
                     };
-                    context.UserActions.Add(action);
+                    db.UserActions.Add(action);
 
-                    context.SaveChanges();
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
@@ -209,12 +183,12 @@ namespace FlatFXWebClient.Tests.Controllers
         {
             try
             {
-                using (var context = new ApplicationDBContext())
+                using (var db = new ApplicationDBContext())
                 {
                     //Remove all temp contact details
-                    List<UserActionData> tempActions = context.UserActions.Where(a => a.Text.StartsWith("@@UnitTest@@ test")).ToList();
-                    context.UserActions.RemoveRange(tempActions);
-                    context.SaveChanges();
+                    List<UserActionData> tempActions = db.UserActions.Where(a => a.Text.StartsWith("@@UnitTest@@ test")).ToList();
+                    db.UserActions.RemoveRange(tempActions);
+                    db.SaveChanges();
                 }
             }
             catch (Exception ex)
