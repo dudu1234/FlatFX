@@ -57,8 +57,7 @@ h2 {
 
 }
 #footer{
-    /*position:fixed;
-        bottom:2px;*/
+    position:inherit;
 }
 /* Common styles
 	* --------------------------------------- */
