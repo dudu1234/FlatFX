@@ -83,7 +83,7 @@ namespace FlatFXWebClient.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
             switch (result)
             {
-                case SignInStatus.Success:
+                case SignInStatus.Success: 
                     {
                         // User logined succesfully ==> create a new site session!
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
