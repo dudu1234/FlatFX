@@ -29,7 +29,7 @@ namespace FlatFXWebClient
             else
                 Session["lang"] = "en-US";
 
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(lang);
+            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
             
         }

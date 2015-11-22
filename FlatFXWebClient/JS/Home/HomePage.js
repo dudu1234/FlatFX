@@ -11,9 +11,17 @@
         scrollingSpeed: 1000,
 
         'afterLoad': function (anchorLink, index) {
-            //if (index == 2) {
-            //    $('#iphone3, #iphone2, #iphone4').addClass('active');
-            //}
+            if (index > 1) {
+                $('nav').addClass('shrink');
+            
+            }
+            if (index == 4) {
+                $('#footer').css({ position: "fixed"});
+               $('#iphone3, #iphone2, #iphone4').addClass('active');
+            }
+            else {
+                $('#footer').css({ position: "inherit" });
+            }
         },
         afterRender: function () {
             //playing the video
