@@ -56,8 +56,11 @@ h2 {
     border-radius:10px;
 
 }
+
 #footer{
-    position:inherit;
+    position: inherit;
+    background: #00a9e0;
+    color: white;
 }
 /* Common styles
 	* --------------------------------------- */
