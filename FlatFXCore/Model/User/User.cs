@@ -60,7 +60,10 @@ namespace FlatFXCore.Model.User
         public string SigningKey { get; set; }
         [Display(Name = "InvoiceCurrency", ResourceType = typeof(FlatFXResources.Resources))]
         public Consts.eInvoiceCurrency InvoiceCurrency { get; set; }
-        
+
+        [Display(Name = "Is approved by FlatFX"), DefaultValue(false)]
+        public bool IsApprovedByFlatFX { get; set; }
+
         public ContactDetails ContactDetails { get; set; }
 
         // NAVIGATION PROPERTIES GUY ??? if I uncomment this line a new index is created in table UserMessages

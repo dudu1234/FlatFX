@@ -1,4 +1,6 @@
-﻿@{
+﻿@using FlatFXCore.BussinessLayer;
+
+@{
     string culture = "en-US";
     if (Session["lang"] != null)
     {
@@ -9,7 +11,7 @@
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
+        <div class="navbar-header navbar-left">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
                 <span class="sr-only">Toggle navigation</span>
                 <span class="icon-bar"></span>
@@ -21,36 +23,46 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav padding-header">
+            <ul class="nav navbar-nav navbar-left padding-header">
                 <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
                 <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
                 <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
                 <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
                 <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
-                <li><a class="disabled" href="#">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("UserIndex", "Manage")#secondPage">@FlatFXResources.Resources.UserManage</a></li>
-                        <li><a href="@Url.Action("EditByUser", "ApplicationUsers")#secondPage">@FlatFXResources.Resources.EditUserDetails</a></li>
-                        <li><a href="@Url.Action("IndexUser", "Companies")#secondPage">@FlatFXResources.Resources.EditCompanyDetails</a></li>
-                    </ul>
-                </li>
+                @if (User.Identity.Name != "")
+                { 
+                    <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
+                }
+                
+                @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a></li>
+                            <li><a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a></li>
+                            <li><a href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.EditCompanyDetails</a></li>
+                        </ul>
+                    </li>
+                }
+                
+                @if (User.IsInRole(Consts.Role_Administrator))
+                {
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
+                            <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
+                            <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
+                            <li><a href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a></li>
+                            <li><a href="@Url.Action("Index", "Providers")">Providers</a></li>
+                            <li><a href="@Url.Action("Index", "Roles")">Roles</a></li>
+                            <li role="separator" class="divider"></li>
+                            <li><a href="@Url.Action("Index", "LogInfo")">Log</a></li>
 
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
-                        <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
-                        <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
-                        <li><a href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a></li>
-                        <li><a href="@Url.Action("Index", "Providers")">Providers</a></li>
-                        <li><a href="@Url.Action("Index", "Roles")">Roles</a></li>
-                        <li role="separator" class="divider"></li>
-                        <li><a href="@Url.Action("Index", "LogInfo")">Log</a></li>
-
-                    </ul>
-                </li>
+                        </ul>
+                    </li>
+                }
             </ul>
 
             <ul class="nav navbar-nav navbar-right padding-header">

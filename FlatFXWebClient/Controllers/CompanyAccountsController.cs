@@ -25,6 +25,7 @@ namespace FlatFXWebClient.Controllers
             return View(await companyAccounts.ToListAsync());
         }
 
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> IndexUser()
         {
@@ -69,7 +70,7 @@ namespace FlatFXWebClient.Controllers
             CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
             try
             {
-                string[] whiteList = new string[] { "AccountName", "AccountFullName", "IsActive", "IsDefaultAccount", "Balance", "Equity", "DailyPNL", "GrossPNL" };
+                string[] whiteList = new string[] { "AccountName", "IsActive", "IsDefaultAccount", "Balance", "Equity", "DailyPNL", "GrossPNL" };
                 if (TryUpdateModel(companyAccount, "", whiteList))
                 {
                     try
@@ -95,6 +96,7 @@ namespace FlatFXWebClient.Controllers
             return View(companyAccount);
         }
 
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> EditByUser(string id)
         {
@@ -121,6 +123,7 @@ namespace FlatFXWebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("EditByUser")]
         [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> EditByUserPost(string id)
         {
@@ -135,7 +138,7 @@ namespace FlatFXWebClient.Controllers
             CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
             try
             {
-                string[] whiteList = new string[] { "AccountName", "AccountFullName", "IsDefaultAccount" };
+                string[] whiteList = new string[] { "AccountName", "IsDefaultAccount" };
                 if (TryUpdateModel(companyAccount, "", whiteList))
                 {
                     try

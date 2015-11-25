@@ -91,6 +91,7 @@ namespace FlatFXWebClient.Controllers
             }
             return View(user);
         }
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public ActionResult EditByUser()
         {
@@ -108,6 +109,7 @@ namespace FlatFXWebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("EditByUser")]
         [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public ActionResult EditByUserPost()
         {

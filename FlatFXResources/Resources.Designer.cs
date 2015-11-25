@@ -61,15 +61,6 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Account full name.
-        /// </summary>
-        public static string AccountFullName {
-            get {
-                return ResourceManager.GetString("AccountFullName", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Account name.
         /// </summary>
         public static string AccountName {
@@ -156,6 +147,15 @@ namespace FlatFXResources {
         public static string BankAccountDetails {
             get {
                 return ResourceManager.GetString("BankAccountDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank account name.
+        /// </summary>
+        public static string BankAccountName {
+            get {
+                return ResourceManager.GetString("BankAccountName", resourceCulture);
             }
         }
         

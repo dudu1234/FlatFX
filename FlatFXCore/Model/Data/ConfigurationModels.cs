@@ -18,7 +18,7 @@ namespace FlatFXCore.Model.Data
         [Key, Column(Order = 2)]
         public string UserId { get; set; }
         //[ForeignKey("UserId")]
-        //public virtual UserData User { get; set; }
+        //public virtual UserData user { get; set; }
 
         [Required, MaxLength(2000)]
         public string Value { get; set; }

@@ -8,10 +8,11 @@ using System.IO;
 using System.Data;
 using System.Data.Entity;
 using System.Threading.Tasks;
-using FlatFXCore.Model.Core;
-using FlatFXCore.Model.Data;
 using System.Web;
 using System.Web.Security;
+using Microsoft.AspNet.Identity;
+using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
 
 namespace FlatFXCore.BussinessLayer
 {
@@ -343,14 +344,10 @@ namespace FlatFXCore.BussinessLayer
         private string GetUserID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null)
+            if (context == null || context.User.Identity.Name == "")
                 return "";
             else
-            {
-                var user = Membership.GetUser(context.User.Identity.Name);
-                Guid currentUserID = (Guid)user.ProviderUserKey;
-                return currentUserID.ToString();
-            }
+                return context.User.Identity.GetUserId();
         }
         #endregion
     }

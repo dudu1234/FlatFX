@@ -84,7 +84,7 @@ namespace FlatFXWebClient.Tests.Controllers
                     db.Users.Add(user);
                     db.SaveChanges();
 
-                    Logger.Instance.WriteSystemTrace("Test - TestAddUser", Consts.eLogOperationStatus.Succeeded, "Add Test User");
+                    Logger.Instance.WriteSystemTrace("Test - TestAddUser", Consts.eLogOperationStatus.Succeeded, "Add Test user");
                 }
             }
             catch (Exception ex)

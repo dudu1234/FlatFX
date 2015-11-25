@@ -26,12 +26,16 @@ namespace FlatFXWebClient.Controllers
 
                 //set user language
                 string userId = User.Identity.GetUserId();
-                ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
-                if (lang == "he-IL")
-                    user.Language = FlatFXCore.BussinessLayer.Consts.eLanguage.Hebrew;
-                else
-                    user.Language = FlatFXCore.BussinessLayer.Consts.eLanguage.English;
-                db.SaveChanges();
+                if (userId != null)
+                {
+                    ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                    if (lang == "he-IL")
+                        user.Language = FlatFXCore.BussinessLayer.Consts.eLanguage.Hebrew;
+                    else
+                        user.Language = FlatFXCore.BussinessLayer.Consts.eLanguage.English;
+
+                    db.SaveChanges();
+                }
             }
             return View();
         }

@@ -48,7 +48,7 @@ namespace FlatFXCore.Model.Data
         [DisplayName("Friday end time"), Required]
         public DateTime QuoteResponse_FridayEndTime { get; set; }
 
-        [DisplayName("User confirmation time interval"), Required]
+        [DisplayName("user confirmation time interval"), Required]
         public Int16 QuoteResponse_UserConfirmationTimeInterval { get; set; }
         [DisplayName("Automatic response enabled"), Required]
         public bool QuoteResponse_AutomaticResponseEnabled { get; set; }
@@ -126,15 +126,14 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Index("IX_BankAccountName", IsUnique = true)]
+        [Index("IX_AccountName", IsUnique = true)]
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(100, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string AccountName { get; set; }
+        [Display(Name = "BankAccountName", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(100, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string BankAccountName { get; set; }
-        [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(200, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        public string BankAccountFullName { get; set; }
         [Display(Name = "BranchNumber", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(10, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
@@ -161,7 +160,7 @@ namespace FlatFXCore.Model.Data
         public bool ApprovedBYFlatFX { get; set; }
         [DisplayName("Approved by Provider")]
         public bool ApprovedBYProvider { get; set; }
-        [DisplayName("User key in provider systems")]
+        [DisplayName("user key in provider systems")]
         public string UserKeyInProviderSystems { get; set; }
 
         [Required]
@@ -181,7 +180,9 @@ namespace FlatFXCore.Model.Data
         public bool QuoteResponse_IsBlocked { get; set; }
         [DisplayName("Quote Response customer promil")]
         public double? QuoteResponse_CustomerPromil { get; set; }
-        
+
+        public virtual ICollection<Deal> Deals { get; set; } 
+    
         public ProviderAccount() 
         {
             ApprovedBYFlatFX = false;

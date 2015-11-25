@@ -8,7 +8,7 @@
 
 //namespace FlatFXCore.Model.Mapping  
 //{  
-//    public class UserMap : EntityTypeConfiguration<User>  
+//    public class UserMap : EntityTypeConfiguration<user>  
 //    {  
 //        public UserMap()  
 //        {  

@@ -1,0 +1,65 @@
+﻿@model FlatFXCore.Model.Data.Deal
+
+@{
+    ViewBag.Title = "Currency Exchange";
+}
+
+<div class="col-sm-3"></div>
+<div class="col-sm-6">
+    <p class="error">@ViewBag.ErrorMessage</p>
+
+    @using (Html.BeginForm())
+    {
+        @Html.AntiForgeryToken()
+        <div class="form-horizontal">
+            <div class="panel panel-primary">
+                <div class="panel-heading">
+                    <h3 class="panel-title">המרות מט"ח</h3>
+                </div>
+                <div class="panel-body">
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    @Html.HiddenFor(model => model.DealId)
+
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.SimpleCurrencyExchangeType, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-3">
+                            @Html.EnumDropDownListFor(model => model.SimpleCurrencyExchangeType, htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ChangedProviderAccount, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(m => m.ChangedProviderAccount, new SelectList(Model.userBankAccounts, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.CreditedProviderAccount, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-8">
+                            @Html.DropDownListFor(m => m.CreditedProviderAccount, new SelectList(Model.userBankAccounts, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AmountToExchangeCreditedCurrency, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-3">
+                            @Html.EditorFor(model => model.AmountToExchangeCreditedCurrency, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.AmountToExchangeCreditedCurrency, htmlAttributes: new { @class = "control-label col-sm-4" })
+                        <div class="col-sm-3">
+                            @Html.EditorFor(model => model.AmountToExchangeCreditedCurrency, new { htmlAttributes = new { @class = "form-control" } })
+                        </div>
+                    </div>
+
+
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <input type="submit" value="Continue" class="btn btn-default" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    }
+</div>
+<div class="col-sm-3"></div>

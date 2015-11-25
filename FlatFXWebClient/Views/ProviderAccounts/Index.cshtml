@@ -14,13 +14,13 @@
             <table class="table table-bordered table-hover table-striped ffx-table">
                 <tr>
                     <th>
-                        Provider short name
+                        Provider
                     </th>
                     <th>
-                        Bank account name
+                        Account Name
                     </th>
                     <th>
-                        Bank account full name
+                        Bank Account Name
                     </th>
                     <th>
                         @Html.DisplayNameFor(model => model.BankAccountNumber)
@@ -53,10 +53,10 @@
                             @Html.DisplayFor(modelItem => item.Provider.ShortName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BankAccountName)
+                            @Html.DisplayFor(modelItem => item.AccountName)
                         </td>
                         <td>
-                            @Html.DisplayFor(modelItem => item.BankAccountFullName)
+                            @Html.DisplayFor(modelItem => item.BankAccountName)
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.BankAccountNumber)

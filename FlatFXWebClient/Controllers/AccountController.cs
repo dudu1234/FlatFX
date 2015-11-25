@@ -85,7 +85,7 @@ namespace FlatFXWebClient.Controllers
             {
                 case SignInStatus.Success: 
                     {
-                        // User logined succesfully ==> create a new site session!
+                        // user logined succesfully ==> create a new site session!
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
                         ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
                         FlatFXSession siteSession = new FlatFXSession(db, user);
@@ -478,8 +478,6 @@ namespace FlatFXWebClient.Controllers
                 return Json(IsUnique("CompanyEmail", Request["companyVM.companyContactDetails.Email"]));
             else if (Request["companyVM.AccountName"] != null)
                 return Json(IsUnique("AccountName", Request["companyVM.AccountName"]));
-            else if (Request["companyVM.AccountFullName"] != null)
-                return Json(IsUnique("AccountFullName", Request["companyVM.AccountFullName"]));
             else
                 return Json(false);
         }
@@ -523,12 +521,6 @@ namespace FlatFXWebClient.Controllers
                     return false;
                 return !db.CompanyAccounts.Where(a => a.AccountName.ToLower() == fieldValue.ToLower()).Any();
             }
-            else if (fieldName == "AccountFullName")
-            {
-                if (fieldValue == null || fieldValue == "")
-                    return false;
-                return !db.CompanyAccounts.Where(a => a.AccountFullName.ToLower() == fieldValue.ToLower()).Any();
-            }
 
             return false;
         }
@@ -541,7 +533,7 @@ namespace FlatFXWebClient.Controllers
                     return false;
                 string provId = (viewModel as ProviderAccountDetailsViewModel).ProviderId;
                 string accName = (viewModel as ProviderAccountDetailsViewModel).AccountName.TrimString().ToLower();
-                return !db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.BankAccountName.ToLower() == accName).Any();
+                return !db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.AccountName.ToLower() == accName).Any();
             }
             else if (fieldName == "ProviderAccountNumber" && viewModel != null)
             {
@@ -592,7 +584,7 @@ namespace FlatFXWebClient.Controllers
                 return View(model);
             }
 
-            if (model.UserVM.UserName == null && model.companyVM.AccountName == null && model.providerAccountVM.AccountName == null)
+            if (model.UserVM.UserName == null && model.companyVM.CompanyShortName == null && model.providerAccountVM.AccountName == null)
             {
                 return View(model);
             }
@@ -604,7 +596,7 @@ namespace FlatFXWebClient.Controllers
                     IsUserRegister = false;
 
                 bool IsCompanyRegister = true;
-                if (model.companyVM.AccountName == null)
+                if (model.companyVM.CompanyShortName == null)
                     IsCompanyRegister = false;
 
                 bool IsProviderAccountRegister = true;
@@ -621,7 +613,7 @@ namespace FlatFXWebClient.Controllers
                 if (IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
                 {
                     errorFlag = true;
-                    ModelState.AddModelError("", "User email is not unique.");
+                    ModelState.AddModelError("", "user email is not unique.");
                 }
                 if (IsCompanyRegister && !IsUnique("CompanyShortName", model.companyVM.CompanyShortName.TrimString()))
                 {
@@ -632,16 +624,6 @@ namespace FlatFXWebClient.Controllers
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Company full name is not unique.");
-                }
-                if (IsCompanyRegister && !IsUnique("AccountName", model.companyVM.AccountName.TrimString()))
-                {
-                    errorFlag = true;
-                    ModelState.AddModelError("", "Account name is not unique.");
-                }
-                if (IsCompanyRegister && !IsUnique("AccountFullName", model.companyVM.AccountFullName.TrimString()))
-                {
-                    errorFlag = true;
-                    ModelState.AddModelError("", "Account full name is not unique.");
                 }
                 if (IsProviderAccountRegister && !IsUnique("ProviderAccountName", model.providerAccountVM))
                 {
@@ -665,7 +647,7 @@ namespace FlatFXWebClient.Controllers
                 
                 if (IsUserRegister)
                 {
-                    //Create User
+                    //Create user
                     user = new ApplicationUser();
                     user.UserName = model.UserVM.UserName.TrimString();
                     user.FirstName = model.UserVM.FirstName.TrimString();
@@ -709,8 +691,10 @@ namespace FlatFXWebClient.Controllers
                     {
                         //Add company
                         Company company = new Company();
-                        company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
                         company.CompanyShortName = model.companyVM.CompanyShortName.TrimString();
+                        company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
+                        if (company.CompanyFullName == "")
+                            company.CompanyFullName = company.CompanyShortName;
                         company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
                         company.CustomerType = model.companyVM.CustomerType;
                         company.ValidIP = model.companyVM.ValidIP;
@@ -734,9 +718,10 @@ namespace FlatFXWebClient.Controllers
 
                         //Add company account
                         CompanyAccount companyAccount = new CompanyAccount();
-                        companyAccount.AccountFullName = model.companyVM.AccountFullName.TrimString();
-                        companyAccount.AccountName = model.companyVM.AccountName.TrimString();
+                        companyAccount.AccountName = model.companyVM.CompanyShortName.TrimString();
+                        companyAccount.IsDefaultAccount = true;
                         companyAccount.CompanyId = company.CompanyId;
+                        companyAccount.IsActive = true;
                         db.CompanyAccounts.Add(companyAccount);
 
                         model.companyAccountParent = companyAccount.CompanyAccountId;
@@ -746,8 +731,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         //Add provider account
                         var providerAccount = new ProviderAccount();
-                        providerAccount.BankAccountFullName = model.providerAccountVM.AccountFullName.TrimString();
-                        providerAccount.BankAccountName = model.providerAccountVM.AccountName.TrimString();
+                        providerAccount.AccountName = model.providerAccountVM.AccountName.TrimString();
                         providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
                         providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
                         providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
@@ -757,7 +741,7 @@ namespace FlatFXWebClient.Controllers
                         providerAccount.LastUpdateBy = User.Identity.Name;
                         providerAccount.ProviderId = model.providerAccountVM.ProviderId;
                         providerAccount.SWIFT = model.providerAccountVM.SWIFT;
-                        providerAccount.AllowToTradeDirectlly = model.providerAccountVM.AllowToTradeDirectlly;
+                        providerAccount.AllowToTradeDirectlly = false;
                         db.ProviderAccounts.Add(providerAccount);
                     }
 
@@ -810,12 +794,12 @@ namespace FlatFXWebClient.Controllers
             {
                 #region chack if model is valid
                 if (!IsUnique("UserName", model.Email.TrimString()))
-                    ModelState.AddModelError("", "User Name is not unique.");
+                    ModelState.AddModelError("", "user Name is not unique.");
                 if (!IsUnique("UserEmail", model.Email.TrimString()))
-                    ModelState.AddModelError("", "User Email is not unique.");
+                    ModelState.AddModelError("", "user Email is not unique.");
                 #endregion
 
-                //Create User
+                //Create user
                 var user = new ApplicationUser();
                 user.UserName = model.Email.TrimString();
                 user.FirstName = model.Email.TrimString().Substring(0, model.Email.TrimString().IndexOf('@'));

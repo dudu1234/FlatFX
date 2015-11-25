@@ -71,7 +71,8 @@ namespace FlatFXCore.BussinessLayer
             None = 1,
             Spot = 2,
             Forward = 3,
-            Same_Day = 4
+            Same_Day = 4,
+            SimpleCurrencyExchange = 5
         }
         public enum eBuySell
         {
@@ -256,6 +257,16 @@ namespace FlatFXCore.BussinessLayer
         public enum eCountries
         {
             Israel = 1
+        }
+        public enum eSimpleCurrencyExchangeType
+        {
+            None = 0,
+            [Display(Name = "מטח לשקלים")]
+            FXtoILS = 1,
+            [Display(Name = "שקלים למטח")]
+            ILStoFX = 2,
+            [Display(Name = "מטח למטח")]
+            FXtoFX = 3
         }
     }
 }

@@ -92,29 +92,11 @@ namespace FlatFXCore.Model.Data
         [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
         public string AccountName { get; set; }
-        [Display(Name = "AccountFullName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(400, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account full name already exists. Please enter a different account full name.")]
-        public string AccountFullName { get; set; }
         [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }
         [Required]
         [Display(Name = "IsDefaultAccount", ResourceType = typeof(FlatFXResources.Resources))]
         public bool IsDefaultAccount { get; set; }
-
-        [Required]
-        [Display(Name = "Balance", ResourceType = typeof(FlatFXResources.Resources))]
-        public double Balance { get; set; }
-        [Required]
-        [Display(Name = "Equity", ResourceType = typeof(FlatFXResources.Resources))]
-        public double Equity { get; set; }
-        [Required]
-        [Display(Name = "DailyPNL", ResourceType = typeof(FlatFXResources.Resources))]
-        public double DailyPNL { get; set; }
-        [Required]
-        [Display(Name = "GrossPNL", ResourceType = typeof(FlatFXResources.Resources))]
-        public double GrossPNL { get; set; }
 
         public CompanyAccount() 
         {

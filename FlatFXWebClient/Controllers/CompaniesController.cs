@@ -25,6 +25,7 @@ namespace FlatFXWebClient.Controllers
         }
 
         // GET: Companies
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> IndexUser()
         {
@@ -106,6 +107,7 @@ namespace FlatFXWebClient.Controllers
             return View(company);
         }
         // GET: Companies/Edit/5
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> EditByUser(string id)
         {
@@ -132,6 +134,7 @@ namespace FlatFXWebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost, ActionName("EditByUser")]
         [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> EditByUserPost(string id)
         {

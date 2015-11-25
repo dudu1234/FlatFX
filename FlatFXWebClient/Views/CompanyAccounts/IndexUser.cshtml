@@ -18,21 +18,6 @@
                     <th>
                         @Html.DisplayNameFor(model => model.AccountName)
                     </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.AccountFullName)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Balance)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.Equity)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.DailyPNL)
-                    </th>
-                    <th>
-                        @Html.DisplayNameFor(model => model.GrossPNL)
-                    </th>
                     <th></th>
                 </tr>
 
@@ -44,21 +29,6 @@
                         </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.AccountName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.AccountFullName)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Balance)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.Equity)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.DailyPNL)
-                        </td>
-                        <td>
-                            @Html.DisplayFor(modelItem => item.GrossPNL)
                         </td>
                         <td>
                             @Html.ActionLink("Edit", "EditByUser", new { id = item.CompanyAccountId })

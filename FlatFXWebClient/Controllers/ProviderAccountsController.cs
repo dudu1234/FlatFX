@@ -25,6 +25,7 @@ namespace FlatFXWebClient.Controllers
             return View(await providerAccounts.ToListAsync());
         }
 
+        [OverrideAuthorization]
         [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
         public async Task<ActionResult> IndexUser()
         {
@@ -75,7 +76,7 @@ namespace FlatFXWebClient.Controllers
 
             try
             {
-                string[] whiteList = new string[] { "BankAccountName","BankAccountFullName","BankBranchNumber","BankAccountNumber","BankAddress","IBAN","SWIFT",
+                string[] whiteList = new string[] { "AccountName","BankAccountName","BankBranchNumber","BankAccountNumber","BankAddress","IBAN","SWIFT",
                     "AllowToTradeDirectlly","ApprovedBYFlatFX","ApprovedBYProvider","UserKeyInProviderSystems","IsActive","IsDemoAccount","QuoteResponse_IsBlocked",
                     "QuoteResponse_CustomerPromil" };
                 if (TryUpdateModel(providerAccount, "", whiteList))

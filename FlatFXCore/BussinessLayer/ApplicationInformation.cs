@@ -9,6 +9,7 @@ using System.Threading;
 using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.Win32;
+using Microsoft.AspNet.Identity;
 using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Security;
@@ -123,14 +124,10 @@ namespace FlatFXCore.BussinessLayer
         public string GetUserID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null)
+            if (context == null || context.User.Identity.Name == "")
                 return "";
             else
-            {
-                var user = Membership.GetUser(context.User.Identity.Name);
-                Guid currentUserID = (Guid)user.ProviderUserKey;
-                return currentUserID.ToString();
-            }
+                return context.User.Identity.GetUserId();
         }
         public string GetSessionID()
         {
