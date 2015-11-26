@@ -52,7 +52,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return HttpNotFound();
             }
-            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyShortName", companyAccount.CompanyId);
+            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyName", companyAccount.CompanyId);
             return View(companyAccount);
         }
 
@@ -92,7 +92,7 @@ namespace FlatFXWebClient.Controllers
                 ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
             }
 
-            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyShortName", companyAccount.CompanyId);
+            ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyName", companyAccount.CompanyId);
             return View(companyAccount);
         }
 

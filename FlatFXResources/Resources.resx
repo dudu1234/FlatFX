@@ -132,8 +132,8 @@
   <data name="CompanyFullName" xml:space="preserve">
     <value>Full Name</value>
   </data>
-  <data name="CompanyShortName" xml:space="preserve">
-    <value>Short Name</value>
+  <data name="CompanyName" xml:space="preserve">
+    <value>Company Name</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>Confirm password</value>
@@ -362,5 +362,11 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>Contact Us</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>Product</value>
   </data>
 </root>

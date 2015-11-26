@@ -108,6 +108,18 @@ footer {
     height: 100px;
 }
 
+#footer a{
+    color: white;
+}
+#footer b{
+    color: white;
+    font-size: medium;
+}
+
+#footer .copyright{
+    color: white;
+    font-size: x-small;
+}
 
 /* logo image
 ----------------------------------------------------------*/

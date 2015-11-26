@@ -34,7 +34,7 @@ namespace FlatFXWebClient.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = @"ShortName,FullName,BankNumber,ProviderType,QuoteResponse_Enabled,
+        public ActionResult Create([Bind(Include = @"Name,FullName,BankNumber,ProviderType,QuoteResponse_Enabled,
             QuoteResponse_AutomaticResponseEnabled,QuoteResponse_MinRequestVolumeUSD,QuoteResponse_MaxDailyVolumeUSD,
             ContactDetails")] Provider provider)
         {
@@ -102,7 +102,7 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 if (TryUpdateModel(provider, "",
-                   new string[] { "ShortName", "FullName", "BankNumber", "IsActive", "Status", "ProviderType", "QuoteResponse_Enabled", "QuoteResponse_SpreadMethod", "QuoteResponse_StartTime", 
+                   new string[] { "Name", "FullName", "BankNumber", "IsActive", "Status", "ProviderType", "QuoteResponse_Enabled", "QuoteResponse_SpreadMethod", "QuoteResponse_StartTime", 
                    "QuoteResponse_EndTime", "QuoteResponse_FridayStartTime", "QuoteResponse_FridayEndTime", "QuoteResponse_UserConfirmationTimeInterval", 
                    "QuoteResponse_AutomaticResponseEnabled", "QuoteResponse_MinRequestVolumeUSD", "QuoteResponse_MaxDailyVolumeUSD", "QuoteResponse_NumberOfPromilsWithoutDiscount" }) &&
                     TryUpdateModel(provider.ContactDetails, "ContactDetails", new string[] { "Address", "Country", "Email", "Fax", "MobilePhone", "OfficePhone" }))

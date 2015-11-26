@@ -205,11 +205,11 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Short Name.
+        ///   Looks up a localized string similar to Company Name.
         /// </summary>
-        public static string CompanyShortName {
+        public static string CompanyName {
             get {
-                return ResourceManager.GetString("CompanyShortName", resourceCulture);
+                return ResourceManager.GetString("CompanyName", resourceCulture);
             }
         }
         
@@ -237,6 +237,15 @@ namespace FlatFXResources {
         public static string ContactDetails {
             get {
                 return ResourceManager.GetString("ContactDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Contact Us.
+        /// </summary>
+        public static string ContactUs {
+            get {
+                return ResourceManager.GetString("ContactUs", resourceCulture);
             }
         }
         
@@ -588,6 +597,15 @@ namespace FlatFXResources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Product.
+        /// </summary>
+        public static string Product {
+            get {
+                return ResourceManager.GetString("Product", resourceCulture);
             }
         }
         

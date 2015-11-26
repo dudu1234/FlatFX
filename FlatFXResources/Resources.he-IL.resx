@@ -132,8 +132,8 @@
   <data name="CompanyFullName" xml:space="preserve">
     <value>שם מלא</value>
   </data>
-  <data name="CompanyShortName" xml:space="preserve">
-    <value>שם קצר</value>
+  <data name="CompanyName" xml:space="preserve">
+    <value>שם חברה</value>
   </data>
   <data name="ConfirmPassword" xml:space="preserve">
     <value>וודא סיסמא</value>
@@ -350,5 +350,11 @@
   </data>
   <data name="Users" xml:space="preserve">
     <value>Users</value>
+  </data>
+  <data name="ContactUs" xml:space="preserve">
+    <value>צור קשר</value>
+  </data>
+  <data name="Product" xml:space="preserve">
+    <value>מוצר</value>
   </data>
 </root>

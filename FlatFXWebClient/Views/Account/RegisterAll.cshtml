@@ -62,7 +62,7 @@
             <div class="col-xs-12">
                 <div class="col-md-12 well">
                     @Html.Partial("RegisterBankAccount", Model)
-                    
+
                     <br />
                     <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
                 </div>
@@ -93,6 +93,7 @@
         });
 
         $('ul.setup-panel li.active a').trigger('click');
+
 
         $('#activate-step-2').on('click', function (e) {
             $('ul.setup-panel li:eq(1)').removeClass('disabled');

@@ -77,7 +77,7 @@ namespace FlatFXWebClient.Controllers
             Company company = await db.Companies.FindAsync(id);
             try
             {
-                string[] whiteListCompany = new string[] { "CompanyShortName", "CompanyFullName", "IsActive", "Status", "ValidIP", "CustomerType", "IsDepositValid", "IsSignOnRegistrationAgreement", "CompanyVolumePerYearUSD", 
+                string[] whiteListCompany = new string[] { "CompanyName", "CompanyFullName", "IsActive", "Status", "ValidIP", "CustomerType", "IsDepositValid", "IsSignOnRegistrationAgreement", "CompanyVolumePerYearUSD", 
                         "UserList_SendEmail", "UserList_SendInvoice" };
                 string[] whiteListContactDetails = new string[] { "CarPhone", "Address", "Country", "Email", "Email2", "Fax", "MobilePhone", "MobilePhone2", 
                         "OfficePhone", "OfficePhone2", "HomePhone", "WebSite" };
@@ -149,7 +149,7 @@ namespace FlatFXWebClient.Controllers
             Company company = await db.Companies.FindAsync(id);
             try
             {
-                string[] whiteListCompany = new string[] { "CompanyShortName", "CompanyFullName", "CustomerType", "CompanyVolumePerYearUSD", "UserList_SendEmail", "UserList_SendInvoice" };
+                string[] whiteListCompany = new string[] { "CompanyName", "CompanyFullName", "CustomerType", "CompanyVolumePerYearUSD", "UserList_SendEmail", "UserList_SendInvoice" };
                 string[] whiteListContactDetails = new string[] { "CarPhone", "Address", "Country", "Email", "Email2", "Fax", "MobilePhone", "MobilePhone2", 
                         "OfficePhone", "OfficePhone2", "HomePhone", "WebSite" };
 

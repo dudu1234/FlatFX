@@ -70,11 +70,10 @@ namespace FlatFXWebClient.ViewModels
 
     public class CompanyDetailsViewModel
     {
-        [Display(Name = "CompanyShortName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Display(Name = "CompanyName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(30, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company short name already exists. Please enter a different company short name.")]
-        public string CompanyShortName { get; set; }
+        public string CompanyName { get; set; }
         [Display(Name = "CompanyFullName", ResourceType = typeof(FlatFXResources.Resources))]
         [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company full name already exists. Please enter a different company full name.")]
@@ -99,10 +98,6 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Bank", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         public string ProviderId { get; set; }
-        [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(50, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        public string AccountName { get; set; }
         [Display(Name = "BranchNumber", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(10, MinimumLength = 3, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]

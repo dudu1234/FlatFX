@@ -6,89 +6,96 @@
     {
         culture = Session["lang"].ToString();
     }
+    string menuClass = (culture == "he-IL") ? "navbar-left" : "navbar-right";
 }
 
 <nav class="navbar navbar-default">
     <div class="container-fluid">
         <!-- Brand and toggle get grouped for better mobile display -->
-        <div class="navbar-header">
-            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
-                <span class="sr-only">Toggle navigation</span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-                <span class="icon-bar"></span>
-            </button>
-            <a href="@Url.Action("Index", "Home")"><img class="logoImage" src="~/Images/FlatFX_Logo5.png" /></a>
+        <div class="col-xs-1"></div>
+        <div class="col-xs-10">
+            <div class="navbar-header">
+                <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                    <span class="sr-only">Toggle navigation</span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="@Url.Action("Index", "Home")"><img class="logoImage" src="~/Images/FlatFX_Logo5.png" /></a>
+            </div>
+
+
+            <!-- Collect the nav links, forms, and other content for toggling -->
+            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav padding-header">
+                    <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
+                    <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
+                    <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
+                    <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
+                    @if (User.Identity.Name != "")
+                    {
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
+                    }
+
+                    @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a></li>
+                                <li><a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a></li>
+                                <li><a href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.EditCompanyDetails</a></li>
+                            </ul>
+                        </li>
+                    }
+
+                    @if (User.IsInRole(Consts.Role_Administrator))
+                    {
+                        <li class="dropdown">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
+                                <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
+                                <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
+                                <li><a href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a></li>
+                                <li><a href="@Url.Action("Index", "Providers")">Providers</a></li>
+                                <li><a href="@Url.Action("Index", "Roles")">Roles</a></li>
+                                <li role="separator" class="divider"></li>
+                                <li><a href="@Url.Action("Index", "LogInfo")">Log</a></li>
+
+                            </ul>
+                        </li>
+                    }
+                </ul>
+
+                <ul class="nav navbar-nav @menuClass padding-header">
+                    <li class="dropdown">
+                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                            <span class="caret">
+                                @if (culture == "he-IL")
+                                {
+                                    <img src="~/Images/israel_flag_16.png" alt="Hebrew">;
+                                }
+                                else
+                                {
+                                    <img src="~/Images/usa-flag-16.gif" alt="English">
+                                }
+                            </span>
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
+                            <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
+                        </ul>
+                    </li>
+
+                    <li>
+                        @Html.Partial("_LoginPartial")
+                    </li>
+                </ul>
+            </div><!-- /.navbar-collapse -->
         </div>
+        <div class="col-xs-1"></div>
 
-        <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-            <ul class="nav navbar-nav padding-header">
-                <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
-                <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
-                <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
-                <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
-                <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
-                @if (User.Identity.Name != "")
-                { 
-                    <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
-                }
-                
-                @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
-                {
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a></li>
-                            <li><a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a></li>
-                            <li><a href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.EditCompanyDetails</a></li>
-                        </ul>
-                    </li>
-                }
-                
-                @if (User.IsInRole(Consts.Role_Administrator))
-                {
-                    <li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
-                            <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
-                            <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
-                            <li><a href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a></li>
-                            <li><a href="@Url.Action("Index", "Providers")">Providers</a></li>
-                            <li><a href="@Url.Action("Index", "Roles")">Roles</a></li>
-                            <li role="separator" class="divider"></li>
-                            <li><a href="@Url.Action("Index", "LogInfo")">Log</a></li>
-
-                        </ul>
-                    </li>
-                }
-            </ul>
-
-            <ul class="nav navbar-nav navbar-right padding-header">
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                        <span class="caret">
-                            @if (culture == "he-IL")
-                            {
-                                <img src="~/Images/israel_flag_16.png" alt="Hebrew">;
-                            }
-                            else
-                            {
-                                <img src="~/Images/usa-flag-16.gif" alt="English">
-                            }
-                        </span>
-                    </a>
-                    <ul class="dropdown-menu">
-                        <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
-                        <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
-                    </ul>
-                </li>
-
-                <li>
-                    @Html.Partial("_LoginPartial")
-                </li>
-            </ul>
-        </div><!-- /.navbar-collapse -->
     </div><!-- /.container-fluid -->
 </nav>

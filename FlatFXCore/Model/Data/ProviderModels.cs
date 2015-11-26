@@ -17,9 +17,10 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string ProviderId { get; set; }
-        
-        [DisplayName("Short Name"), Index("IX_ShortName", IsUnique = true), MaxLength(10), Required]
-        public string ShortName { get; set; }
+
+        [Index("IX_ProviderName", IsUnique = true)]
+        [DisplayName("Name"), MaxLength(20), Required]
+        public string Name { get; set; }
         [DisplayName("Full Name"), Index("IX_FullName", IsUnique = true), MaxLength(200), Required]
         public string FullName { get; set; }
 
@@ -126,9 +127,7 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Index("IX_AccountName", IsUnique = true)]
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(100, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string AccountName { get; set; }
         [Display(Name = "BankAccountName", ResourceType = typeof(FlatFXResources.Resources))]

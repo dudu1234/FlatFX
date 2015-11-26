@@ -468,10 +468,8 @@ namespace FlatFXWebClient.Controllers
 
             if (Request["UserVM.UserName"] != null)
                 return Json(IsUnique("UserName", Request["UserVM.UserName"]));
-            else if (Request["CompanyVM.CompanyShortName"] != null)
-                return Json(IsUnique("CompanyShortName", Request["CompanyVM.CompanyShortName"]));
-            else if (Request["CompanyVM.CompanyFullName"] != null)
-                return Json(IsUnique("CompanyFullName", Request["CompanyVM.CompanyFullName"]));
+            else if (Request["CompanyVM.CompanyName"] != null)
+                return Json(IsUnique("CompanyName", Request["CompanyVM.CompanyName"]));
             else if (Request["UserVM.userContactDetails.Email"] != null)
                 return Json(IsUnique("UserEmail", Request["UserVM.userContactDetails.Email"]));
             else if (Request["companyVM.companyContactDetails.Email"] != null)
@@ -503,11 +501,11 @@ namespace FlatFXWebClient.Controllers
                     return false;
                 return !db.Companies.Where(c => c.ContactDetails.Email.ToLower() == fieldValue.ToLower()).Any();
             }
-            else if (fieldName == "CompanyShortName")
+            else if (fieldName == "CompanyName")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
-                return !db.Companies.Where(c => c.CompanyShortName.ToLower() == fieldValue.ToLower()).Any();
+                return !db.Companies.Where(c => c.CompanyName.ToLower() == fieldValue.ToLower()).Any();
             }
             else if (fieldName == "CompanyFullName")
             {
@@ -527,15 +525,7 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         private bool IsUnique(string fieldName, object viewModel)
         {
-            if (fieldName == "ProviderAccountName" && viewModel != null)
-            {
-                if (viewModel == null || !(viewModel is ProviderAccountDetailsViewModel))
-                    return false;
-                string provId = (viewModel as ProviderAccountDetailsViewModel).ProviderId;
-                string accName = (viewModel as ProviderAccountDetailsViewModel).AccountName.TrimString().ToLower();
-                return !db.ProviderAccounts.Where(pa => pa.ProviderId == provId && pa.AccountName.ToLower() == accName).Any();
-            }
-            else if (fieldName == "ProviderAccountNumber" && viewModel != null)
+            if (fieldName == "ProviderAccountNumber" && viewModel != null)
             {
                 if (viewModel == null || !(viewModel is ProviderAccountDetailsViewModel))
                     return false;
@@ -569,7 +559,7 @@ namespace FlatFXWebClient.Controllers
             CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
             return View(companyUserAllEntitiesModelView);
         }
-
+        
         //
         // POST: /Account/Register
         [HttpPost]
@@ -584,7 +574,7 @@ namespace FlatFXWebClient.Controllers
                 return View(model);
             }
 
-            if (model.UserVM.UserName == null && model.companyVM.CompanyShortName == null && model.providerAccountVM.AccountName == null)
+            if (model.UserVM.UserName == null && model.companyVM.CompanyName == null && model.providerAccountVM.AccountNumber == null)
             {
                 return View(model);
             }
@@ -596,11 +586,11 @@ namespace FlatFXWebClient.Controllers
                     IsUserRegister = false;
 
                 bool IsCompanyRegister = true;
-                if (model.companyVM.CompanyShortName == null)
+                if (model.companyVM.CompanyName == null)
                     IsCompanyRegister = false;
 
                 bool IsProviderAccountRegister = true;
-                if (model.providerAccountVM.AccountName == null)
+                if (model.providerAccountVM.AccountNumber == null)
                     IsProviderAccountRegister = false;
 
                 #region chack if model is valid
@@ -615,20 +605,10 @@ namespace FlatFXWebClient.Controllers
                     errorFlag = true;
                     ModelState.AddModelError("", "user email is not unique.");
                 }
-                if (IsCompanyRegister && !IsUnique("CompanyShortName", model.companyVM.CompanyShortName.TrimString()))
+                if (IsCompanyRegister && !IsUnique("CompanyName", model.companyVM.CompanyName.TrimString()))
                 {
                     errorFlag = true;
-                    ModelState.AddModelError("", "Company short name is not unique.");
-                }
-                if (IsCompanyRegister && !IsUnique("CompanyFullName", model.companyVM.CompanyFullName.TrimString()))
-                {
-                    errorFlag = true;
-                    ModelState.AddModelError("", "Company full name is not unique.");
-                }
-                if (IsProviderAccountRegister && !IsUnique("ProviderAccountName", model.providerAccountVM))
-                {
-                    errorFlag = true;
-                    ModelState.AddModelError("", "Provider account name is not unique.");
+                    ModelState.AddModelError("", "Company name is not unique.");
                 }
                 if (IsProviderAccountRegister && !IsUnique("ProviderAccountNumber", model.providerAccountVM))
                 {
@@ -691,10 +671,10 @@ namespace FlatFXWebClient.Controllers
                     {
                         //Add company
                         Company company = new Company();
-                        company.CompanyShortName = model.companyVM.CompanyShortName.TrimString();
+                        company.CompanyName = model.companyVM.CompanyName.TrimString();
                         company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
                         if (company.CompanyFullName == "")
-                            company.CompanyFullName = company.CompanyShortName;
+                            company.CompanyFullName = company.CompanyName;
                         company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
                         company.CustomerType = model.companyVM.CustomerType;
                         company.ValidIP = model.companyVM.ValidIP;
@@ -718,7 +698,7 @@ namespace FlatFXWebClient.Controllers
 
                         //Add company account
                         CompanyAccount companyAccount = new CompanyAccount();
-                        companyAccount.AccountName = model.companyVM.CompanyShortName.TrimString();
+                        companyAccount.AccountName = model.companyVM.CompanyName.TrimString();
                         companyAccount.IsDefaultAccount = true;
                         companyAccount.CompanyId = company.CompanyId;
                         companyAccount.IsActive = true;
@@ -731,10 +711,10 @@ namespace FlatFXWebClient.Controllers
                     {
                         //Add provider account
                         var providerAccount = new ProviderAccount();
-                        providerAccount.AccountName = model.providerAccountVM.AccountName.TrimString();
-                        providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
-                        providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
                         providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
+                        providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString(); 
+                        providerAccount.AccountName = providerAccount.BankBranchNumber + "-" + providerAccount.BankAccountNumber;
+                        providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
                         providerAccount.CompanyAccountId = model.companyAccountParent;
                         providerAccount.IBAN = model.providerAccountVM.IBAN;
                         //providerAccount.IsDemoAccount = true;
@@ -765,7 +745,6 @@ namespace FlatFXWebClient.Controllers
 
             return View(model);
         }
-
         #endregion
 
         #region Register Demo
@@ -820,7 +799,7 @@ namespace FlatFXWebClient.Controllers
                     UserManager.AddToRole(user.Id, Consts.Role_CompanyDemoUser);
 
                     //Add the demo user to the Demo company
-                    Company demoCompany = db.Companies.Where(c => c.CompanyShortName == "Demo").SingleOrDefault();
+                    Company demoCompany = db.Companies.Where(c => c.CompanyName == "Demo").SingleOrDefault();
                     if (demoCompany != null)
                     {
                         var u = db.Users.First(p => p.Email == user.Email);

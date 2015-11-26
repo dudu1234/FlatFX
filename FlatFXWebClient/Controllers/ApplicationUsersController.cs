@@ -26,7 +26,7 @@ namespace FlatFXWebClient.Controllers
         public async Task<ActionResult> CompanyUsers(string companyId)
         {
             Company company = await db.Companies.Where(comp => comp.CompanyId == companyId).SingleOrDefaultAsync();
-            ViewBag.CompanyName = company.CompanyShortName;
+            ViewBag.CompanyName = company.CompanyName;
             List<ApplicationUser> users = await db.Users.Include(u => u.Companies).Where(u => u.Companies.Any<Company>(comp => comp.CompanyId == companyId) == true).ToListAsync();
             return View("IndexAdmin", users);
         }

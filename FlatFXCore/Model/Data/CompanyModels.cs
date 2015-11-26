@@ -16,16 +16,14 @@ namespace FlatFXCore.Model.Data
     {
         [Key]
         public string CompanyId { get; set; }
-        [Index("IX_CompanyShortName", IsUnique = true)]
-        [Display(Name = "CompanyShortName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Index("IX_CompanyName", IsUnique = true)]
+        [Display(Name = "CompanyName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(30, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company short name already exists. Please enter a different company short name.")]
-        public string CompanyShortName { get; set; }
+        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company Name already exists. Please enter a different company name.")]
+        public string CompanyName { get; set; }
         [Display(Name = "CompanyFullName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Company full name already exists. Please enter a different company full name.")]
+        [StringLength(200, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string CompanyFullName { get; set; }
         [Required, DisplayName("Is Active")]
         public bool IsActive { get; set; }

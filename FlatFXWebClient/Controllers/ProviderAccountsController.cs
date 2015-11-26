@@ -53,7 +53,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return HttpNotFound();
             }
-            //ViewBag.ProviderId = new SelectList(db.Providers, "ProviderId", "ShortName", providerAccount.ProviderId);
+            //ViewBag.ProviderId = new SelectList(db.Providers, "ProviderId", "Name", providerAccount.ProviderId);
             return View(providerAccount);
         }
 

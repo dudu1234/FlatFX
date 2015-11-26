@@ -1,4 +1,6 @@
-﻿<!DOCTYPE html>
+﻿@using FlatFXCore.BussinessLayer;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="utf-8" />
@@ -16,9 +18,10 @@
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
         {
             <script src="~/Scripts/bootstrap.rtl.min.js"></script>
+            <script src="~/Scripts/bootstrap.rtl.min.js"></script>
             <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
         }
-}
+    }
 
     <link href="~/Content/fullpageex.css" rel="stylesheet" />
     <link href="~/Content/Site.css" rel="stylesheet" />
@@ -35,11 +38,9 @@
 </head>
 <body>
     <div class="row">
-        <div class="col-xs-1"></div>
-        <div id="nav" class="col-xs-10 static">
+        <div id="nav" class="col-xs-12 static">
             @Html.Partial("MainSiteHeader")
         </div>
-        <div class="col-xs-1"></div>
     </div>
     <div class="row">
         <div class="col-xs-1"></div>
@@ -51,20 +52,45 @@
         </div>
         <div class="col-xs-1"></div>
     </div>
-    <div class="row">filler</div>
+    @*<div class="row">filler</div>*@
     <div id="footer" class="row navbar navbar-default navbar-fixed-bottom">
-         <div id="nav" class="col-xs-5 float-left">
-            <p>@FlatFXResources.Resources.MenuMovie</p>
-            <p>@FlatFXResources.Resources.MenuHowItWorks</p>
-            <p>@FlatFXResources.Resources.MenuAbout</p>
-            <p> @FlatFXResources.Resources.OnLineRates</p>
-            
+        <div class="row">
+            <div class="col-xs-1"></div>
+            <div id="nav" class="col-xs-3">
+                <b>Product</b><br />
+                <a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a><br />
+                <a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a><br />
+                <a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a><br />
+                <a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd white"></span><span class="glyphicon glyphicon-euro white"></span></a><br />
+                @if (User.Identity.Name != "")
+                {
+                    <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer white"></span></a>
+                }
+            </div>
+            @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
+            {
+                <div id="nav" class="col-xs-3">
+                    <b>@FlatFXResources.Resources.UserManage</b><br />
+                    <a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a><br />
+                    <a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a><br />
+                    <a href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.EditCompanyDetails</a><br />
+                </div>
+            }
+
+            <div id="nav" class="col-xs-4">
+                <b>@FlatFXResources.Resources.ContactUs</b><br />
+                @FlatFXResources.Resources.OfficePhone: 972-3-2222222<br />
+                @FlatFXResources.Resources.Email: <a href="mailto:info@FlatFX.com">info@FlatFX.com</a><br />
+                @FlatFXResources.Resources.Address: Somewhere in the Middle East<br />
+            </div>
+            <div class="col-xs-1"></div>
         </div>
-        <div id="nav" class="col-xs-7 float-left">
-            <p>@FlatFXResources.Resources.UserManage</p>
-            <p>@FlatFXResources.Resources.EditUserDetails</p>
-            <p>@FlatFXResources.Resources.EditCompanyDetails</p>
-        </div>        
+        <br /><br /><br />
+        <div class="row copyright">
+            <div class="col-xs-1"></div>
+            <div id="nav" class="col-xs-10 text-left">&nbsp;&nbsp;Copyright © 2015 FlatFX Limited</div>
+            <div class="col-xs-1"></div>
+        </div>
     </div>
 </body>
 </html>
