@@ -673,7 +673,7 @@ namespace FlatFXWebClient.Controllers
                         Company company = new Company();
                         company.CompanyName = model.companyVM.CompanyName.TrimString();
                         company.CompanyFullName = model.companyVM.CompanyFullName.TrimString();
-                        if (company.CompanyFullName == "")
+                        if (company.CompanyFullName == null)
                             company.CompanyFullName = company.CompanyName;
                         company.CompanyVolumePerYearUSD = model.companyVM.CompanyVolumePerYearUSD;
                         company.CustomerType = model.companyVM.CustomerType;
