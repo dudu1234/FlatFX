@@ -8,7 +8,7 @@
         <div class="form-horizontal">
             <div class="panel panel-primary">
                 <div class="panel-heading">
-                    <h3 class="panel-title">אינדיקציה לשערי מסחר מט"ח</h3>
+                    <h3 class="panel-title">@FlatFXResources.Resources.CurrencyExchangeRateIndication</h3>
                 </div>
                 <div id="onLineRates" class="panel-body table-responsive">
                     <table class="table table-bordered table-hover table-striped ffx-table">
@@ -20,10 +20,10 @@
                         </colgroup>
                         <thead>
                             <tr>
-                                <th data-field="pair">צמד</th>
-                                <th data-field="mid">שער מסחר</th>
-                                <th data-field="bid">שער קניה</th>
-                                <th data-field="ask">שער מכירה</th>
+                                <th data-field="pair">@FlatFXResources.Resources.Pair</th>
+                                <th data-field="mid">@FlatFXResources.Resources.MidRate</th>
+                                <th data-field="bid">@FlatFXResources.Resources.Buy</th>
+                                <th data-field="ask">@FlatFXResources.Resources.Sell</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -44,11 +44,11 @@
             </div>
         </div>
         <div id="on-line-rates-remarks">
-            <p>שער אמצע ע"פ <a style="color: blue; text-decoration: underline;" href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a></p>
-            <p>תאריך עדכון אחרון: <span id="last-feed-update"></span></p>
-            <p>שער קניה: השער שבו FlatFX קונה מהלקוח את המטבע</p>
-            <p>שער מכירה: השער שבו FlatFX מוכרת ללקוח את המטבע</p>
-            <p>שער מסחר: משקף את שער האמצע במהלך המסחר</p>
+            <p>@FlatFXResources.Resources.ShowRateRemarksRow1 <a style="color: blue; text-decoration: underline;" href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a></p>
+            <p>@FlatFXResources.Resources.ShowRateRemarksRow2 <span id="last-feed-update"></span></p>
+            <p>@FlatFXResources.Resources.ShowRateRemarksRow3</p>
+            <p>@FlatFXResources.Resources.ShowRateRemarksRow4</p>
+            <p>@FlatFXResources.Resources.ShowRateRemarksRow5</p>
         </div>
         <script>
             var GetFeedRatesUrl = '@(Url.Action("GetRates", "OnLineFXRates"))';

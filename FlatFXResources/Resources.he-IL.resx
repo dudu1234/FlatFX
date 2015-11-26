@@ -357,4 +357,55 @@
   <data name="Product" xml:space="preserve">
     <value>מוצר</value>
   </data>
+  <data name="AUDILS" xml:space="preserve">
+    <value>דולר אוסטרלי - שקל</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>קניה</value>
+  </data>
+  <data name="CHFILS" xml:space="preserve">
+    <value>פרנק שווצרי - שקל</value>
+  </data>
+  <data name="CurrencyExchangeRateIndication" xml:space="preserve">
+    <value>אינדיקציה לשערי מסחר מט"ח</value>
+  </data>
+  <data name="EURILS" xml:space="preserve">
+    <value>יורו - שקל</value>
+  </data>
+  <data name="EURUSD" xml:space="preserve">
+    <value>יורו - דולר ארה"ב</value>
+  </data>
+  <data name="GBPILS" xml:space="preserve">
+    <value>לירה שטרלינג - שקל</value>
+  </data>
+  <data name="JPYILS" xml:space="preserve">
+    <value>ין יפני - שקל</value>
+  </data>
+  <data name="MidRate" xml:space="preserve">
+    <value>שער אמצע</value>
+  </data>
+  <data name="Pair" xml:space="preserve">
+    <value>צמד</value>
+  </data>
+  <data name="Sell" xml:space="preserve">
+    <value>מכירה</value>
+  </data>
+  <data name="ShowRateRemarksRow1" xml:space="preserve">
+    <value>שער אמצע ע"פ</value>
+  </data>
+  <data name="ShowRateRemarksRow2" xml:space="preserve">
+    <value>תאריך עדכון אחרון:</value>
+  </data>
+  <data name="ShowRateRemarksRow3" xml:space="preserve">
+    <value>שער קניה: השער שבו האתר קונה מהלקוח את המטבע</value>
+  </data>
+  <data name="ShowRateRemarksRow4" xml:space="preserve">
+    <value>שער מכירה: השער שבו האתר מוכר ללקוח את המטבע</value>
+  </data>
+  <data name="ShowRateRemarksRow5" xml:space="preserve">
+    <value>שער אמצע: משקף את שער האמצע (המסחר הבין בנקאי) במהלך המסחר</value>
+  </data>
+  <data name="USDILS" xml:space="preserve">
+    <value>דולר ארה"ב - שקל</value>
+  </data>
 </root>

@@ -369,4 +369,55 @@
   <data name="Product" xml:space="preserve">
     <value>Product</value>
   </data>
+  <data name="AUDILS" xml:space="preserve">
+    <value>AUD - ILS</value>
+  </data>
+  <data name="Buy" xml:space="preserve">
+    <value>Buy</value>
+  </data>
+  <data name="CHFILS" xml:space="preserve">
+    <value>CHF - ILS</value>
+  </data>
+  <data name="CurrencyExchangeRateIndication" xml:space="preserve">
+    <value>Currency Exchange rates indication</value>
+  </data>
+  <data name="EURILS" xml:space="preserve">
+    <value>EUR - ILS</value>
+  </data>
+  <data name="EURUSD" xml:space="preserve">
+    <value>EUR - USD</value>
+  </data>
+  <data name="GBPILS" xml:space="preserve">
+    <value>GBP - ILS</value>
+  </data>
+  <data name="JPYILS" xml:space="preserve">
+    <value>JPY - ILS</value>
+  </data>
+  <data name="MidRate" xml:space="preserve">
+    <value>Mid Rate</value>
+  </data>
+  <data name="Pair" xml:space="preserve">
+    <value>Pair</value>
+  </data>
+  <data name="Sell" xml:space="preserve">
+    <value>Sell</value>
+  </data>
+  <data name="ShowRateRemarksRow1" xml:space="preserve">
+    <value>Mid rate according to</value>
+  </data>
+  <data name="ShowRateRemarksRow2" xml:space="preserve">
+    <value>Last update date:</value>
+  </data>
+  <data name="ShowRateRemarksRow3" xml:space="preserve">
+    <value>Buying rate: The rate that the site is buying the currency from the customer</value>
+  </data>
+  <data name="ShowRateRemarksRow4" xml:space="preserve">
+    <value>Selling rate: The rate that the site is selling the currency to the customer</value>
+  </data>
+  <data name="ShowRateRemarksRow5" xml:space="preserve">
+    <value>Mid rate: The inter bank trading rate during trading time</value>
+  </data>
+  <data name="USDILS" xml:space="preserve">
+    <value>USD - ILS</value>
+  </data>
 </root>

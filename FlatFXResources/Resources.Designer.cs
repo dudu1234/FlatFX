@@ -124,6 +124,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to AUD - ILS.
+        /// </summary>
+        public static string AUDILS {
+            get {
+                return ResourceManager.GetString("AUDILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Balance.
         /// </summary>
         public static string Balance {
@@ -169,11 +178,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy.
+        /// </summary>
+        public static string Buy {
+            get {
+                return ResourceManager.GetString("Buy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car Phone.
         /// </summary>
         public static string CarPhone {
             get {
                 return ResourceManager.GetString("CarPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to CHF - ILS.
+        /// </summary>
+        public static string CHFILS {
+            get {
+                return ResourceManager.GetString("CHFILS", resourceCulture);
             }
         }
         
@@ -295,6 +322,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Currency Exchange rates indication.
+        /// </summary>
+        public static string CurrencyExchangeRateIndication {
+            get {
+                return ResourceManager.GetString("CurrencyExchangeRateIndication", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Type.
         /// </summary>
         public static string CustomerType {
@@ -358,6 +394,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to EUR - ILS.
+        /// </summary>
+        public static string EURILS {
+            get {
+                return ResourceManager.GetString("EURILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EUR - USD.
+        /// </summary>
+        public static string EURUSD {
+            get {
+                return ResourceManager.GetString("EURUSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Exchange System.
         /// </summary>
         public static string ExchangeSystem {
@@ -381,6 +435,15 @@ namespace FlatFXResources {
         public static string FirstName {
             get {
                 return ResourceManager.GetString("FirstName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to GBP - ILS.
+        /// </summary>
+        public static string GBPILS {
+            get {
+                return ResourceManager.GetString("GBPILS", resourceCulture);
             }
         }
         
@@ -466,6 +529,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to JPY - ILS.
+        /// </summary>
+        public static string JPYILS {
+            get {
+                return ResourceManager.GetString("JPYILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Language.
         /// </summary>
         public static string Language {
@@ -547,6 +619,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Mid Rate.
+        /// </summary>
+        public static string MidRate {
+            get {
+                return ResourceManager.GetString("MidRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Phone.
         /// </summary>
         public static string MobilePhone {
@@ -588,6 +669,15 @@ namespace FlatFXResources {
         public static string OnLineRates {
             get {
                 return ResourceManager.GetString("OnLineRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Pair.
+        /// </summary>
+        public static string Pair {
+            get {
+                return ResourceManager.GetString("Pair", resourceCulture);
             }
         }
         
@@ -691,6 +781,60 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Sell.
+        /// </summary>
+        public static string Sell {
+            get {
+                return ResourceManager.GetString("Sell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid rate according to.
+        /// </summary>
+        public static string ShowRateRemarksRow1 {
+            get {
+                return ResourceManager.GetString("ShowRateRemarksRow1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Last update date:.
+        /// </summary>
+        public static string ShowRateRemarksRow2 {
+            get {
+                return ResourceManager.GetString("ShowRateRemarksRow2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buying rate: The rate that the site is buying the currency from the customer.
+        /// </summary>
+        public static string ShowRateRemarksRow3 {
+            get {
+                return ResourceManager.GetString("ShowRateRemarksRow3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Selling rate: The rate that the site is selling the currency to the customer.
+        /// </summary>
+        public static string ShowRateRemarksRow4 {
+            get {
+                return ResourceManager.GetString("ShowRateRemarksRow4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid rate: The inter bank trading rate during trading time.
+        /// </summary>
+        public static string ShowRateRemarksRow5 {
+            get {
+                return ResourceManager.GetString("ShowRateRemarksRow5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Signing Key.
         /// </summary>
         public static string SigningKey {
@@ -714,6 +858,15 @@ namespace FlatFXResources {
         public static string SWIFT {
             get {
                 return ResourceManager.GetString("SWIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USD - ILS.
+        /// </summary>
+        public static string USDILS {
+            get {
+                return ResourceManager.GetString("USDILS", resourceCulture);
             }
         }
         

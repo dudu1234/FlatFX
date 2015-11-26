@@ -32,13 +32,13 @@ namespace FlatFXCore.BussinessLayer
         {
             try
             {
-                CurrencyList.Add(new KeyValuePair<string, string>("EURUSD", "יורו - דולר"));
-                CurrencyList.Add(new KeyValuePair<string, string>("USDILS", "דולר ארה\"ב - שקל"));
-                CurrencyList.Add(new KeyValuePair<string, string>("EURILS", "יורו - שקל"));
-                CurrencyList.Add(new KeyValuePair<string, string>("GBPILS", "לירה שטרלינג - שקל"));
-                CurrencyList.Add(new KeyValuePair<string, string>("JPYILS", "ין יפני - שקל"));
-                CurrencyList.Add(new KeyValuePair<string, string>("CHFILS", "פרנק שווצרי - שקל"));
-                CurrencyList.Add(new KeyValuePair<string, string>("AUDILS", "דולר אוסטרלי - שקל"));
+                CurrencyList.Add(new KeyValuePair<string, string>("EURUSD", FlatFXResources.Resources.EURUSD));
+                CurrencyList.Add(new KeyValuePair<string, string>("USDILS", FlatFXResources.Resources.USDILS));
+                CurrencyList.Add(new KeyValuePair<string, string>("EURILS", FlatFXResources.Resources.EURILS));
+                CurrencyList.Add(new KeyValuePair<string, string>("GBPILS", FlatFXResources.Resources.GBPILS));
+                CurrencyList.Add(new KeyValuePair<string, string>("JPYILS", FlatFXResources.Resources.JPYILS));
+                CurrencyList.Add(new KeyValuePair<string, string>("CHFILS", FlatFXResources.Resources.CHFILS));
+                CurrencyList.Add(new KeyValuePair<string, string>("AUDILS", FlatFXResources.Resources.AUDILS));
 
                 foreach (KeyValuePair<string, string> pair in CurrencyList)
                 {

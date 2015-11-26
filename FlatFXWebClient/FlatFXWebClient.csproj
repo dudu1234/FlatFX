@@ -250,6 +250,7 @@
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HowItWorks1.jpg" />
     <Content Include="Images\HowItWorks2.jpg" />
+    <Content Include="Images\import-export.jpg" />
     <Content Include="Images\israelFlag.png" />
     <Content Include="Images\israel_flag_16.png" />
     <Content Include="Images\Logo3.png" />
