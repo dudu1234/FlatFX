@@ -6,10 +6,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.Address) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.Address, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Address, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.Address) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Address, "", new { @class = "text-danger" })
         }
     </div>
     @Html.LabelFor(m => m.UserVM.userContactDetails.contactDetailsEx.Email2, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -17,10 +19,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.Email2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.Email2) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.Email2, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Email2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.Email2) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.Email2, "", new { @class = "text-danger" })
         }
     </div>
 </div>
@@ -30,10 +34,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.MobilePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.MobilePhone2) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.MobilePhone2, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.MobilePhone2, "", new { @class = "text-danger" })
         }
     </div>
     @Html.LabelFor(m => m.UserVM.userContactDetails.contactDetailsEx.OfficePhone2, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -41,10 +47,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.OfficePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.OfficePhone2) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.OfficePhone2, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.OfficePhone2, "", new { @class = "text-danger" })
         }
     </div>
 </div>
@@ -54,10 +62,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.HomePhone) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.HomePhone, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.HomePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.HomePhone) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.HomePhone, "", new { @class = "text-danger" })
         }
     </div>
     @Html.LabelFor(m => m.UserVM.userContactDetails.contactDetailsEx.CarPhone, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -65,10 +75,12 @@
         @if (Model.ShowContactDetailsForUser)
         {
             @Html.TextBoxFor(m => m.UserVM.userContactDetails.contactDetailsEx.CarPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.contactDetailsEx.CarPhone) });
+            @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.contactDetailsEx.CarPhone, "", new { @class = "text-danger" })
         }
         else
         {
             @Html.TextBoxFor(m => m.companyVM.companyContactDetails.contactDetailsEx.CarPhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.contactDetailsEx.CarPhone) });
+            @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.contactDetailsEx.CarPhone, "", new { @class = "text-danger" })
         }
     </div>
 </div>

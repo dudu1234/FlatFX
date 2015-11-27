@@ -11,10 +11,12 @@
                 @if (Model.ShowContactDetailsForUser)
                 {
                     @Html.TextBoxFor(m => m.UserVM.userContactDetails.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.Email) });
+                    @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.Email, "", new { @class = "text-danger" })
                 }
                 else
                 {
                     @Html.TextBoxFor(m => m.companyVM.companyContactDetails.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.Email) });
+                    @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.Email, "", new { @class = "text-danger" })
                 }
             </div>
             @Html.LabelFor(m => m.UserVM.userContactDetails.MobilePhone, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -22,10 +24,12 @@
                 @if (Model.ShowContactDetailsForUser)
                 {
                     @Html.TextBoxFor(m => m.UserVM.userContactDetails.MobilePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.MobilePhone) });
+                    @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.MobilePhone, "", new { @class = "text-danger" })
                 }
                 else
                 {
                     @Html.TextBoxFor(m => m.companyVM.companyContactDetails.MobilePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.MobilePhone) });
+                    @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.MobilePhone, "", new { @class = "text-danger" })
                 }
             </div>
         </div>
@@ -35,10 +39,12 @@
                 @if (Model.ShowContactDetailsForUser)
                 {
                     @Html.TextBoxFor(m => m.UserVM.userContactDetails.OfficePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.OfficePhone) });
+                    @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.OfficePhone, "", new { @class = "text-danger" })
                 }
                 else
                 {
                     @Html.TextBoxFor(m => m.companyVM.companyContactDetails.OfficePhone, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.OfficePhone) });
+                    @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.OfficePhone, "", new { @class = "text-danger" })
                 }
             </div>
             @Html.LabelFor(m => m.UserVM.userContactDetails.Fax, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -46,10 +52,12 @@
                 @if (Model.ShowContactDetailsForUser)
                 {
                     @Html.TextBoxFor(m => m.UserVM.userContactDetails.Fax, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.Fax) });
+                    @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.Fax, "", new { @class = "text-danger" })
                 }
                 else
                 {
                     @Html.TextBoxFor(m => m.companyVM.companyContactDetails.Fax, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.Fax) });
+                    @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.Fax, "", new { @class = "text-danger" })
                 }
             </div>
         </div>
@@ -70,10 +78,12 @@
                 @if (Model.ShowContactDetailsForUser)
                 {
                     @Html.TextBoxFor(m => m.UserVM.userContactDetails.WebSite, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.WebSite) });
+                    @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.WebSite, "", new { @class = "text-danger" })
                 }
                 else
                 {
                     @Html.TextBoxFor(m => m.companyVM.companyContactDetails.WebSite, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.companyContactDetails.WebSite) });
+                    @Html.ValidationMessageFor(m => m.companyVM.companyContactDetails.WebSite, "", new { @class = "text-danger" })
                 }
             </div>
         </div>

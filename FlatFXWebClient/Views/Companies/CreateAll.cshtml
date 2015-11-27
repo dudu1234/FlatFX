@@ -8,10 +8,12 @@
             @Html.LabelFor(m => m.companyVM.CompanyName, htmlAttributes: new { @class = "control-label col-sm-2 required" })
             <div class="col-sm-4">
                 @Html.TextBoxFor(m => m.companyVM.CompanyName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyName) })
+                @Html.ValidationMessageFor(m => m.companyVM.CompanyName, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(m => m.companyVM.CompanyFullName, htmlAttributes: new { @class = "control-label col-sm-2" })
             <div class="col-sm-4">
                 @Html.TextBoxFor(m => m.companyVM.CompanyFullName, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.companyVM.CompanyFullName) })
+                @Html.ValidationMessageFor(m => m.companyVM.CompanyFullName, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="form-group">

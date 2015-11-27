@@ -36,7 +36,10 @@ namespace FlatFXWebClient.Controllers
                 return HttpNotFound();
             }
             List<Company> companies = user.Companies.ToList();
-            return View("IndexUser", companies);
+            if (companies.Count == 1)
+                return RedirectToAction("EditByUser", new { id = companies[0].CompanyId });
+            else
+                return View("IndexUser", companies);
         }
 
         public async Task<ActionResult> UserCompanies(string userId)
@@ -89,7 +92,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         company.LastUpdate = DateTime.Now;
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return RedirectToAction("IndexAdmin");
                     }
                     catch (DataException /* dex */)
@@ -160,8 +163,8 @@ namespace FlatFXWebClient.Controllers
                     {
                         company.LastUpdate = DateTime.Now;
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
-                        return RedirectToAction("IndexUser");
+                        TempData["Result"] = "Update succeeded";
+                        return View(company); // RedirectToAction("IndexUser");
                     }
                     catch (DataException /* dex */)
                     {
@@ -214,6 +217,8 @@ namespace FlatFXWebClient.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+
+            TempData["Result"] = "Delete succeeded";
             return RedirectToAction("IndexAdmin");
         }
     }

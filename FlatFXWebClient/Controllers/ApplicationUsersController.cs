@@ -74,7 +74,7 @@ namespace FlatFXWebClient.Controllers
                     try
                     {
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return RedirectToAction("IndexAdmin");
                     }
                     catch (DataException /* dex */)
@@ -168,6 +168,8 @@ namespace FlatFXWebClient.Controllers
                 //Log the error (uncomment dex variable name and add a line here to write a log.
                 return RedirectToAction("Delete", new { id = id, saveChangesError = true });
             }
+
+            TempData["Result"] = "Delete succeeded";
             return RedirectToAction("IndexAdmin");
         }
     }
