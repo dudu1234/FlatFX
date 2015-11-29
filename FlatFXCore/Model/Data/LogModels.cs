@@ -14,6 +14,7 @@ namespace FlatFXCore.Model.Data
     public class LogInfo
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 LogId { get; set; }
 
         [MaxLength(4000)]

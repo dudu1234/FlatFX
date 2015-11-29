@@ -17,6 +17,7 @@ namespace FlatFXCore.Model.Data
     public class Deal
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 DealId { get; set; }
 
         public string UserId { get; set; }
@@ -156,6 +157,7 @@ namespace FlatFXCore.Model.Data
     public class QueryData
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 QueryId { get; set; }
 
         public string UserId { get; set; }

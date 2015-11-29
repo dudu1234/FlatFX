@@ -14,6 +14,7 @@ namespace FlatFXCore.Model.Data
     public class ChatSession
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 ChatSessionId { get; set; }
         
         public string CompanyId { get; set; }
@@ -40,6 +41,7 @@ namespace FlatFXCore.Model.Data
     public class ChatEntry
     {
         [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
         public Int64 ChatEntryId { get; set; }
 
         public Int64 ChatSessionId { get; set; }
