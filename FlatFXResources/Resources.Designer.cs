@@ -295,6 +295,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create a Demo account.
+        /// </summary>
+        public static string CreateDemoAccount {
+            get {
+                return ResourceManager.GetString("CreateDemoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new account group.
         /// </summary>
         public static string CreateNewAccount {
@@ -439,6 +448,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Forgot your password?.
+        /// </summary>
+        public static string ForgotYourPassword {
+            get {
+                return ResourceManager.GetString("ForgotYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to GBP - ILS.
         /// </summary>
         public static string GBPILS {
@@ -525,6 +543,15 @@ namespace FlatFXResources {
         public static string IsSignOnRegistrationAgreement {
             get {
                 return ResourceManager.GetString("IsSignOnRegistrationAgreement", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Join the Revolution.
+        /// </summary>
+        public static string JoinTheRevolution {
+            get {
+                return ResourceManager.GetString("JoinTheRevolution", resourceCulture);
             }
         }
         
@@ -853,6 +880,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Still don&apos;t have an account?.
+        /// </summary>
+        public static string StillDontHaveAccount {
+            get {
+                return ResourceManager.GetString("StillDontHaveAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SWIFT.
         /// </summary>
         public static string SWIFT {
@@ -934,7 +970,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The {0} must be at least {2} characters long..
+        ///   Looks up a localized string similar to The {0} must be {2}-{1} characters long..
         /// </summary>
         public static string ValidationLength {
             get {

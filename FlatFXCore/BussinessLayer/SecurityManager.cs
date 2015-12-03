@@ -43,7 +43,7 @@ namespace FlatFXCore.BussinessLayer
 
                 return false;
             }
-            catch(Exception ex)
+            catch
             {
                 return false;
             }

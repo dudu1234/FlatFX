@@ -17,7 +17,7 @@ namespace FlatFXWebClient.ViewModels
 
         public bool ShowContactDetailsForUser = true; // false = show for company
 
-        public string companyAccountParent = null;
+        public string m_CompanyAccountParent = null;
 
         public CompanyUserAllEntitiesModelView()
         {

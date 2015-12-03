@@ -11,15 +11,53 @@ using Microsoft.AspNet.Identity.Owin;
 using Microsoft.Owin;
 using Microsoft.Owin.Security;
 using FlatFXCore.Model.Core;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXCore.Model.User
 {
     public class EmailService : IIdentityMessageService
     {
-        public Task SendAsync(IdentityMessage message)
+        public async Task SendAsync(IdentityMessage message)
         {
-            // Plug in your email service here to send an email.
-            return Task.FromResult(0);
+            await configSMTPasync(message);
+        }
+
+        // send email via smtp service
+        private async Task configSMTPasync(IdentityMessage message)
+        {
+            try
+            {
+                // Plug in your email service here to send an email.
+                var credentialUserName = "noreply.FlatFX@gmail.com";
+                var sentFrom = "noreply.FlatFX@gmail.com";
+                var pwd = "FlatFx1!";
+
+                // Configure the client:
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
+
+                client.Timeout = 30000;
+                client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+
+                // Creatte the credentials:
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
+                client.EnableSsl = true;
+                client.Credentials = credentials;
+
+                // Create the message:
+                var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
+                mail.Subject = message.Subject;
+                mail.IsBodyHtml = true;
+                mail.Body = message.Body;
+
+                await client.SendMailAsync(mail);
+
+                mail = null;
+            }
+            catch(Exception ex)
+            {
+                Logger.Instance.WriteError("Failed to send email to " + message.Destination + ". Subject: " + message.Subject, ex);
+            }
         }
     }
 

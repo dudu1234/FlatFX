@@ -25,11 +25,14 @@ a {
 
     a:link, a:visited,
     a:active, a:hover {
+        /*color: #333;*/
         color: #333;
     }
 
     a:hover {
-        background-color: #c7d1d6;
+        /*background-color: #c7d1d6;*/
+        background-color: transparent;
+        color: blue;
     }
 
 header, footer, hgroup,
@@ -108,15 +111,16 @@ footer {
     height: 100px;
 }
 
-#footer a{
+#footer a {
     color: white;
 }
-#footer b{
+
+#footer b {
     color: white;
     font-size: medium;
 }
 
-#footer .copyright{
+#footer .copyright {
     color: white;
     font-size: x-small;
 }
@@ -125,8 +129,9 @@ footer {
     width: 100%;
     height: 100px;
     background-image: url('../Images/import-export.jpg');
-    /*background-size: 100% 100%;*/
-    background-repeat: repeat-x;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-color: #c7ecf6;
 }
 
 /* logo image
@@ -359,12 +364,12 @@ aside {
         width: 250px;
     }
 
-        #loginForm input[type="checkbox"],
+/*#loginForm input[type="checkbox"],
         #loginForm input[type="submit"],
         #loginForm input[type="button"],
         #loginForm button {
             width: auto;
-        }
+        }*/
 
 #socialLoginForm {
     margin-left: 40px;
@@ -420,7 +425,7 @@ fieldset {
 
 label {
     display: block;
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     font-weight: 600;
 }
 
@@ -430,48 +435,48 @@ label {
 
 input, textarea {
     border: 1px solid #e2e2e2;
-    background: #fff;
+    /*background: #fff;
     color: #333;
     font-size: 1.2em;
     margin: 5px 0 6px 0;
     padding: 5px;
-    width: 300px;
+    width: 300px;*/
 }
 
-textarea {
+    /*textarea {
     font-family: inherit;
     width: 500px;
-}
+}*/
 
     input:focus, textarea:focus {
         border: 1px solid #7ac0da;
     }
 
-input[type="checkbox"] {
-    background: transparent;
-    border: inherit;
-    width: auto;
-}
+    input[type="checkbox"] {
+        background: transparent;
+        border: inherit;
+        width: auto;
+    }
 
-input[type="submit"],
-input[type="button"],
-button {
-    background-color: #d3dce0;
-    border: 1px solid #787878;
-    cursor: pointer;
-    font-size: 1.2em;
-    font-weight: 600;
-    padding: 7px;
-    margin-right: 8px;
-    width: auto;
-}
+    input[type="submit"],
+    input[type="button"],
+    button {
+        /*background-color: #d3dce0;*/
+        border: 1px solid #787878;
+        cursor: pointer;
+        /*font-size: 1.2em;*/
+        font-weight: 600;
+        /*padding: 7px;*/
+        /*margin-right: 8px;*/
+        /*width: auto;*/
+    }
 
 td input[type="submit"],
 td input[type="button"],
 td button {
-    font-size: 1em;
+    /*font-size: 1em;
     padding: 4px;
-    margin-right: 4px;
+    margin-right: 4px;*/
 }
 
 /* info and errors */
@@ -844,6 +849,7 @@ tr.pager td {
 }
 
 .form-group .control-label {
+    text-align: start;
     /*margin-top: 6px;*/
 }
 
@@ -893,4 +899,33 @@ table.ffx-table tr td a {
 
 #on-line-rates-remarks {
     text-align: center;
+}
+
+.forgot-your-password {
+    font-size: x-small;
+}
+
+.remember-me {
+    font-size: x-small;
+    margin-left: 20px;
+    margin-top: 0px;
+    display: inline;
+    width: auto;
+}
+
+.full-width {
+    width: 100%;
+}
+
+.start-align {
+    text-align: start;
+}
+
+.not-active {
+   pointer-events: none;
+   cursor: default;
+}
+
+.display-none {
+    display: none;
 }

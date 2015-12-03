@@ -78,17 +78,31 @@ namespace FlatFXWebClient.Controllers
                 return View(model);
             }
 
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, change to shouldLockout: true
-            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: false);
+            var user = await UserManager.FindByNameAsync(model.UserName);
+            if (user == null)
+            {
+                ModelState.AddModelError("", "Invalid login attempt.");
+                return View(model);
+            }
+            if (!await UserManager.IsEmailConfirmedAsync(user.Id))
+            {
+                ModelState.AddModelError("", "You need to confirm your email.");
+                return View(model);
+            }
+            if (await UserManager.IsLockedOutAsync(user.Id))
+            {
+                return View("Lockout");
+            }
+
+            var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
                 case SignInStatus.Success: 
                     {
                         // user logined succesfully ==> create a new site session!
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
-                        ApplicationUser user = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
-                        FlatFXSession siteSession = new FlatFXSession(db, user);
+                        ApplicationUser user2 = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
+                        FlatFXSession siteSession = new FlatFXSession(db, user2);
                         Session["SiteSession"] = siteSession; // Cache the user login data!
 
                         return RedirectToLocal(returnUrl);
@@ -186,10 +200,10 @@ namespace FlatFXWebClient.Controllers
 
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
-                // string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                // var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
-                // await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
-                // return RedirectToAction("ForgotPasswordConfirmation", "Account");
+                string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
 
             // If we got this far, something failed, redisplay form
@@ -557,6 +571,7 @@ namespace FlatFXWebClient.Controllers
         public ActionResult RegisterAll()
         {
             CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
+            Session["RegisterAllStep"] = 1;
             return View(companyUserAllEntitiesModelView);
         }
         
@@ -575,9 +590,13 @@ namespace FlatFXWebClient.Controllers
             }
 
             if (model.UserVM.UserName == null && model.companyVM.CompanyName == null && model.providerAccountVM.AccountNumber == null)
-            {
                 return View(model);
-            }
+            if (Session["RegisterAllStep"].ToInt() == 1 && model.UserVM.UserName == null)
+                return View(model);
+            if (Session["RegisterAllStep"].ToInt() == 2 && model.companyVM.CompanyName == null)
+                return View(model);
+            if (Session["RegisterAllStep"].ToInt() == 3 && model.providerAccountVM.AccountNumber == null)
+                return View(model);
 
             try
             {
@@ -595,22 +614,22 @@ namespace FlatFXWebClient.Controllers
 
                 #region chack if model is valid
                 bool errorFlag = false;
-                if (IsUserRegister && !IsUnique("UserName", model.UserVM.UserName.TrimString()))
+                if (Session["RegisterAllStep"].ToInt() >= 1 && IsUserRegister && !IsUnique("UserName", model.UserVM.UserName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "UserName is not unique.");
                 }
-                if (IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
+                if (Session["RegisterAllStep"].ToInt() >= 1 && IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "user email is not unique.");
                 }
-                if (IsCompanyRegister && !IsUnique("CompanyName", model.companyVM.CompanyName.TrimString()))
+                if (Session["RegisterAllStep"].ToInt() >= 2 && IsCompanyRegister && !IsUnique("CompanyName", model.companyVM.CompanyName.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Company name is not unique.");
                 }
-                if (IsProviderAccountRegister && !IsUnique("ProviderAccountNumber", model.providerAccountVM))
+                if (Session["RegisterAllStep"].ToInt() >= 3 && IsProviderAccountRegister && !IsUnique("ProviderAccountNumber", model.providerAccountVM))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "Provider account number is not unique.");
@@ -621,6 +640,17 @@ namespace FlatFXWebClient.Controllers
                     return View(model);
                 }
                 #endregion
+
+                if (Session["RegisterAllStep"].ToInt() == 1)
+                {
+                    Session["RegisterAllStep"] = 2;
+                    return View(model);
+                }
+                if (Session["RegisterAllStep"].ToInt() == 2)
+                {
+                    Session["RegisterAllStep"] = 3;
+                    return View(model);
+                }
 
                 ApplicationUser user = null;
                 bool succeeded = true;
@@ -654,16 +684,16 @@ namespace FlatFXWebClient.Controllers
                 {
                     if (IsUserRegister)
                     {
-                        await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+                        //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
                         UserManager.AddToRole(user.Id, Consts.Role_CompanyUser);
 
                         user = db.Users.Include(u => u.Companies).Where(u => u.Id == user.Id).FirstOrDefault();
 
                         // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                         // Send an email with this link
-                        // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                        await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
 
                     }
 
@@ -704,7 +734,7 @@ namespace FlatFXWebClient.Controllers
                         companyAccount.IsActive = true;
                         db.CompanyAccounts.Add(companyAccount);
 
-                        model.companyAccountParent = companyAccount.CompanyAccountId;
+                        model.m_CompanyAccountParent = companyAccount.CompanyAccountId;
                     }
 
                     if (IsProviderAccountRegister)
@@ -715,7 +745,7 @@ namespace FlatFXWebClient.Controllers
                         providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString(); 
                         providerAccount.AccountName = providerAccount.BankBranchNumber + "-" + providerAccount.BankAccountNumber;
                         providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
-                        providerAccount.CompanyAccountId = model.companyAccountParent;
+                        providerAccount.CompanyAccountId = model.m_CompanyAccountParent;
                         providerAccount.IBAN = model.providerAccountVM.IBAN;
                         //providerAccount.IsDemoAccount = true;
                         providerAccount.LastUpdateBy = User.Identity.Name;
@@ -794,8 +824,6 @@ namespace FlatFXWebClient.Controllers
                 result = UserManager.Create(user, model.Password);
                 if (result.Succeeded)
                 {
-                    await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
-
                     UserManager.AddToRole(user.Id, Consts.Role_CompanyDemoUser);
 
                     //Add the demo user to the Demo company
@@ -809,9 +837,11 @@ namespace FlatFXWebClient.Controllers
 
                     // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                     // Send an email with this link
-                    // string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                    // var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    // await UserManager.SendEmailAsync(user.Id, "Confirm your account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                    var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX Demo account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+
+                    //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
                     return RedirectToAction("Index", "Home");
                 }

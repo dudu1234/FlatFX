@@ -235,7 +235,7 @@
     <value>User Name</value>
   </data>
   <data name="ValidationLength" xml:space="preserve">
-    <value>The {0} must be at least {2} characters long.</value>
+    <value>The {0} must be {2}-{1} characters long.</value>
   </data>
   <data name="ValidationRequired" xml:space="preserve">
     <value>The {0} field is required.</value>
@@ -419,5 +419,17 @@
   </data>
   <data name="USDILS" xml:space="preserve">
     <value>USD - ILS</value>
+  </data>
+  <data name="CreateDemoAccount" xml:space="preserve">
+    <value>Create a Demo account</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>Forgot your password?</value>
+  </data>
+  <data name="JoinTheRevolution" xml:space="preserve">
+    <value>Join the Revolution</value>
+  </data>
+  <data name="StillDontHaveAccount" xml:space="preserve">
+    <value>Still don't have an account?</value>
   </data>
 </root>

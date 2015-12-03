@@ -235,7 +235,7 @@
     <value>שם משתמש</value>
   </data>
   <data name="ValidationLength" xml:space="preserve">
-    <value>השדה {0} צריך להיות באורך {2} לפחות.</value>
+    <value>השדה {0} צריך להיות באורך {1}-{2}.</value>
   </data>
   <data name="ValidationRequired" xml:space="preserve">
     <value>השדה {0} הינו שדה חובה.</value>
@@ -407,5 +407,17 @@
   </data>
   <data name="USDILS" xml:space="preserve">
     <value>דולר ארה"ב - שקל</value>
+  </data>
+  <data name="CreateDemoAccount" xml:space="preserve">
+    <value>צור חשבון דמו</value>
+  </data>
+  <data name="ForgotYourPassword" xml:space="preserve">
+    <value>שכחת סיסמא?</value>
+  </data>
+  <data name="JoinTheRevolution" xml:space="preserve">
+    <value>הצטרף למהפיכה</value>
+  </data>
+  <data name="StillDontHaveAccount" xml:space="preserve">
+    <value>עדיין אין לך חשבון?</value>
   </data>
 </root>

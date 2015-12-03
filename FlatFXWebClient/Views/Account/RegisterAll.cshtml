@@ -1,5 +1,11 @@
 ﻿@model FlatFXWebClient.ViewModels.CompanyUserAllEntitiesModelView
-
+@{
+    string userHeaderClass = (Session["RegisterAllStep"].ToInt() == 1) ? "active" : "disabled not-active";
+    string userBodyClass = (Session["RegisterAllStep"].ToInt() == 1) ? "" : "display-none";
+    string companyHeaderClass = (Session["RegisterAllStep"].ToInt() == 2) ? "active" : "disabled not-active";
+    string companyBodyClass = (Session["RegisterAllStep"].ToInt() == 2) ? "" : "display-none";
+    string accountHeaderClass = (Session["RegisterAllStep"].ToInt() == 3) ? "active" : "disabled not-active";
+}
 @using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()
@@ -8,25 +14,37 @@
         <div class="row form-group">
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                    <li class="active">
-                        <a href="#step-1" style="text-decoration: none;">
-                            <h1>1</h1>
+                    <li class="@userHeaderClass">
+                        <a href="" style="text-decoration: none;">
+                            <h1>
+                                Step 1
+                                @if (Session["RegisterAllStep"].ToInt() > 1)
+                                {
+                                    <span class="glyphicon glyphicon-ok green"></span>
+                                }
+                            </h1>
                             <h3 class="list-group-item-heading">Register User</h3>
-                            <p class="list-group-item-text">Enter user data and user contact details</p>
+                            <p class="list-group-item-text">Enter the User information</p>
                         </a>
                     </li>
-                    <li class="disabled">
-                        <a href="#step-2" style="text-decoration: none;">
-                            <h1>2</h1>
+                    <li class="@companyHeaderClass">
+                        <a href="" style="text-decoration: none;">
+                            <h1>
+                                Step 2
+                                @if (Session["RegisterAllStep"].ToInt() > 2)
+                                {
+                                    <span class="glyphicon glyphicon-ok green"></span>
+                                }
+                            </h1>
                             <h3 class="list-group-item-heading">Register Company</h3>
-                            <p class="list-group-item-text">Enter company data and company account details</p>
+                            <p class="list-group-item-text">Enter the Company information</p>
                         </a>
                     </li>
-                    <li class="disabled">
-                        <a href="#step-3" style="text-decoration: none;">
-                            <h1>3</h1>
+                    <li class="@accountHeaderClass">
+                        <a href="" style="text-decoration: none;">
+                            <h1>Step 3</h1>
                             <h3 class="list-group-item-heading">Register Account</h3>
-                            <p class="list-group-item-text">Enter the account's bank details</p>
+                            <p class="list-group-item-text">Enter the Bank Account information</p>
                         </a>
                     </li>
                 </ul>
@@ -35,77 +53,38 @@
         <div>
             @Html.ValidationSummary("", new { @class = "text-danger" })
         </div>
-        <div class="row setup-content" id="step-1">
+        <div class="row setup-content @userBodyClass">
             <div class="col-xs-12">
                 <div class="col-md-12 well text-center">
-                    @if (Model.UserVM != null)
-                    {
-                        @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
-                    }
-
+                    @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
                     <br />
-                    <button id="activate-step-2" class="btn btn-primary btn-lg">Next</button>
+                    <input type="submit" value="Next" class="btn btn-primary btn-lg" />
                 </div>
             </div>
         </div>
-        <div class="row setup-content" id="step-2">
-            <div class="col-xs-12">
-                <div class="col-md-12 well">
-                    @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
-
-                    <br />
-                    <button id="activate-step-3" class="btn btn-primary btn-lg">Next</button>
+        @if (Session["RegisterAllStep"].ToInt() != 1)
+        {
+            <div class="row setup-content @companyBodyClass">
+                <div class="col-xs-12">
+                    <div class="col-md-12 well text-center">
+                        @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
+                        <br />
+                        <input type="submit" value="Next" class="btn btn-primary btn-lg" />
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="row setup-content" id="step-3">
-            <div class="col-xs-12">
-                <div class="col-md-12 well">
-                    @Html.Partial("RegisterBankAccount", Model)
-
-                    <br />
-                    <input type="submit" class="btn btn-default" value="@FlatFXResources.Resources.Register" />
+        }
+        @if (Session["RegisterAllStep"].ToInt() == 3)
+        {
+            <div class="row setup-content">
+                <div class="col-xs-12">
+                    <div class="col-md-12 well text-center">
+                        @Html.Partial("RegisterBankAccount", Model)
+                        <br />
+                        <input type="submit" value="@FlatFXResources.Resources.Register" class="btn btn-primary btn-lg" />
+                    </div>
                 </div>
             </div>
-        </div>
+        }
     </div>
 }
-
-<script>
-    $(document).ready(function () {
-
-        var navListItems = $('ul.setup-panel li a'),
-            allWells = $('.setup-content');
-
-        allWells.hide();
-
-        navListItems.click(function (e) {
-            e.preventDefault();
-            var $target = $($(this).attr('href')),
-                $item = $(this).closest('li');
-
-            if (!$item.hasClass('disabled')) {
-                navListItems.closest('li').removeClass('active');
-                $item.addClass('active');
-                allWells.hide();
-                $target.show();
-            }
-        });
-
-        $('ul.setup-panel li.active a').trigger('click');
-
-
-        $('#activate-step-2').on('click', function (e) {
-            $('ul.setup-panel li:eq(1)').removeClass('disabled');
-            $('ul.setup-panel li a[href="#step-2"]').trigger('click');
-            //$(this).remove();
-        })
-
-        $('#activate-step-3').on('click', function (e) {
-            $('ul.setup-panel li:eq(2)').removeClass('disabled');
-            $('ul.setup-panel li a[href="#step-3"]').trigger('click');
-            //$(this).remove();
-        })
-    });
-
-</script>
