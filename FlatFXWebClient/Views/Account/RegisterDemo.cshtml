@@ -8,10 +8,10 @@
 {
     @Html.AntiForgeryToken()
 
-    <div class="col-xs-3"></div>
-    <div class="col-xs-6 panel panel-primary">
+    <div class="col-xs-4"></div>
+    <div class="col-xs-4 panel panel-primary">
         <div class="panel-heading">
-            <h3 class="panel-title">Create Demo User</h3>
+            <h3 class="panel-title">@FlatFXResources.Resources.CreateDemoUser</h3>
         </div>
         <div class="panel-body">
             @Html.ValidationSummary("", new { @class = "text-danger" })
@@ -19,6 +19,7 @@
             <div class="form-group">
                 @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label" })
                 @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                <remark>@FlatFXResources.Resources.YouMustConfirmYourEmail</remark>
             </div>
 
             <div class="form-group">
@@ -31,8 +32,8 @@
                 @Html.EditorFor(model => model.MobilePhone, new { htmlAttributes = new { @class = "form-control" } })
             </div>
 
-            <input type="submit" value="Create Demo User" class="btn btn-info" />
+            <input type="submit" value="@FlatFXResources.Resources.CreateDemoUser" class="btn btn-primary" />
         </div>
     </div>
-    <div class="col-xs-3"></div>
+    <div class="col-xs-4"></div>
 }

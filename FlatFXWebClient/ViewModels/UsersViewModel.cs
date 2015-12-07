@@ -29,12 +29,6 @@ namespace FlatFXWebClient.ViewModels
 
     public class UserDetailsViewModel
     {
-        [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
-        [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(40, MinimumLength = 4, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
-        //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "user name already exists. Please enter a different user name.")]
-        public string UserName { get; set; }
-
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(100, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         [DataType(DataType.Password)]

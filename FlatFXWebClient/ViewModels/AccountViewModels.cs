@@ -50,7 +50,7 @@ namespace FlatFXWebClient.ViewModels
     public class LoginViewModel
     {
         [Required]
-        [Display(Name = "UserName", ResourceType = typeof(FlatFXResources.Resources))]
+        [Display(Name = "Email", ResourceType = typeof(FlatFXResources.Resources))]
         public string UserName { get; set; }
 
         [Required]

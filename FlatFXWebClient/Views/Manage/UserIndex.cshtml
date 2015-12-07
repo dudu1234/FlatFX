@@ -1,4 +1,6 @@
 ﻿@model FlatFXWebClient.ViewModels.IndexViewModel
+
+@using FlatFXCore.BussinessLayer;
 @{
     Layout = "~/Views/Manage/UserManageLayout.cshtml";
 }
@@ -18,18 +20,25 @@
     ]
 </div>
 
+@if (User.IsInRole(Consts.Role_CompanyDemoUser))
+{
+    <br />
+    <div>
+        @Html.ActionLink("Change your Demo Account to a Real Account", "ConvertDemoToRealAccount", "Account")
+    </div>
+}
 <div>
     @*
-    @Model.Logins.Count [
-    @Html.ActionLink("Manage", "ManageLogins") ]
+        @Model.Logins.Count [
+        @Html.ActionLink("Manage", "ManageLogins") ]
 
-    @*
-        Phone Numbers can used as a second factor of verification in a two-factor authentication system.
+        @*
+            Phone Numbers can used as a second factor of verification in a two-factor authentication system.
 
-         See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-            for details on setting up this ASP.NET application to support two-factor authentication using SMS.
+             See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+                for details on setting up this ASP.NET application to support two-factor authentication using SMS.
 
-         Uncomment the following block after you have set up two-factor authentication
+             Uncomment the following block after you have set up two-factor authentication
     *@
     @*
         <dt>Phone Number:</dt>
@@ -53,9 +62,9 @@
 
 <div>
     @*<p>
-        There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
-        for details on setting up this ASP.NET application to support two-factor authentication.
-    </p>*@
+            There are no two-factor authentication providers configured. See <a href="http://go.microsoft.com/fwlink/?LinkId=403804">this article</a>
+            for details on setting up this ASP.NET application to support two-factor authentication.
+        </p>*@
     @*@if (Model.TwoFactor)
         {
             using (Html.BeginForm("DisableTwoFactorAuthentication", "Manage", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

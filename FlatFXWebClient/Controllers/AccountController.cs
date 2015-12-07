@@ -16,6 +16,7 @@ using FlatFXWebClient.ViewModels;
 using FlatFXCore.BussinessLayer;
 using FlatFXCore.Model.Data;
 using System.Collections.Generic;
+using System.Net;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -480,9 +481,7 @@ namespace FlatFXWebClient.Controllers
             foreach (string key in Request.Form.Keys)
                 paramNames += key + ";";
 
-            if (Request["UserVM.UserName"] != null)
-                return Json(IsUnique("UserName", Request["UserVM.UserName"]));
-            else if (Request["CompanyVM.CompanyName"] != null)
+            if (Request["CompanyVM.CompanyName"] != null)
                 return Json(IsUnique("CompanyName", Request["CompanyVM.CompanyName"]));
             else if (Request["UserVM.userContactDetails.Email"] != null)
                 return Json(IsUnique("UserEmail", Request["UserVM.userContactDetails.Email"]));
@@ -496,14 +495,7 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         private bool IsUnique(string fieldName, string fieldValue)
         {
-            if (fieldName == "UserName")
-            {
-                if (fieldValue == null || fieldValue == "")
-                    return false;
-                var user = Membership.GetUser(fieldValue);
-                return (user == null);
-            }
-            else if (fieldName == "UserEmail")
+            if (fieldName == "UserEmail")
             {
                 if (fieldValue == null || fieldValue == "")
                     return false;
@@ -561,20 +553,53 @@ namespace FlatFXWebClient.Controllers
         [AllowAnonymous]
         public ActionResult RegisterCompany()
         {
+            Session["ConvertDemoToRealAccount"] = false;
             CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
             companyUserAllEntitiesModelView.UserVM = null;
-            return View("RegisterAll", companyUserAllEntitiesModelView);
+            Session["RegisterAll1"] = companyUserAllEntitiesModelView;
+            return RedirectToAction("RegisterAll", new { mode = 1 });
         }
         //
         // GET: /Account/Register
         [AllowAnonymous]
-        public ActionResult RegisterAll()
+        public ActionResult RegisterAll(int mode = 0)
         {
-            CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
+            CompanyUserAllEntitiesModelView companyUserAllEntitiesModelView = null;
+            if (mode != 0)
+            {
+                companyUserAllEntitiesModelView = Session["RegisterAll1"] as CompanyUserAllEntitiesModelView;
+                Session["RegisterAll1"] = null;
+            }
+
+            if (mode != 2)
+                Session["ConvertDemoToRealAccount"] = false;
+            if (companyUserAllEntitiesModelView == null)
+                companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
             Session["RegisterAllStep"] = 1;
             return View(companyUserAllEntitiesModelView);
         }
-        
+        [AllowAnonymous]
+        public ActionResult ConvertDemoToRealAccount()
+        {
+            string id = User.Identity.GetUserId();
+            if (id == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            ApplicationUser applicationUser = db.Users.Find(id);
+            if (applicationUser == null)
+            {
+                return HttpNotFound();
+            }
+            CompanyUserAllEntitiesModelView userAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
+            userAllEntitiesModelView.UserVM = new UserDetailsViewModel();
+            userAllEntitiesModelView.UserVM.userContactDetails.Email = applicationUser.Email;
+            userAllEntitiesModelView.UserVM.userContactDetails.MobilePhone = applicationUser.PhoneNumber;
+            Session["ConvertDemoToRealAccount"] = true;
+            Session["RegisterAll1"] = userAllEntitiesModelView;
+            return RedirectToAction("RegisterAll", new { mode = 2 });
+        }
+
         //
         // POST: /Account/Register
         [HttpPost]
@@ -589,19 +614,23 @@ namespace FlatFXWebClient.Controllers
                 return View(model);
             }
 
-            if (model.UserVM.UserName == null && model.companyVM.CompanyName == null && model.providerAccountVM.AccountNumber == null)
+            if (model.UserVM.FirstName == null && model.companyVM.CompanyName == null && model.providerAccountVM.AccountNumber == null)
                 return View(model);
-            if (Session["RegisterAllStep"].ToInt() == 1 && model.UserVM.UserName == null)
+            if (Session["RegisterAllStep"].ToInt() == 1 && model.UserVM.FirstName == null)
                 return View(model);
             if (Session["RegisterAllStep"].ToInt() == 2 && model.companyVM.CompanyName == null)
                 return View(model);
             if (Session["RegisterAllStep"].ToInt() == 3 && model.providerAccountVM.AccountNumber == null)
                 return View(model);
 
+            bool isConvertDemoUserToRealUser = false;
+            if (Session["ConvertDemoToRealAccount"] != null && Session["ConvertDemoToRealAccount"].ToBoolean() == true)
+                isConvertDemoUserToRealUser = true;
+
             try
             {
                 bool IsUserRegister = true;
-                if (model.UserVM.UserName == null)
+                if (model.UserVM.FirstName == null)
                     IsUserRegister = false;
 
                 bool IsCompanyRegister = true;
@@ -614,12 +643,7 @@ namespace FlatFXWebClient.Controllers
 
                 #region chack if model is valid
                 bool errorFlag = false;
-                if (Session["RegisterAllStep"].ToInt() >= 1 && IsUserRegister && !IsUnique("UserName", model.UserVM.UserName.TrimString()))
-                {
-                    errorFlag = true;
-                    ModelState.AddModelError("", "UserName is not unique.");
-                }
-                if (Session["RegisterAllStep"].ToInt() >= 1 && IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
+                if (!isConvertDemoUserToRealUser && Session["RegisterAllStep"].ToInt() >= 1 && IsUserRegister && !IsUnique("UserEmail", model.UserVM.userContactDetails.Email.TrimString()))
                 {
                     errorFlag = true;
                     ModelState.AddModelError("", "user email is not unique.");
@@ -657,12 +681,22 @@ namespace FlatFXWebClient.Controllers
                 
                 if (IsUserRegister)
                 {
-                    //Create user
-                    user = new ApplicationUser();
-                    user.UserName = model.UserVM.UserName.TrimString();
+                    if (isConvertDemoUserToRealUser)
+                    {
+                        string id = User.Identity.GetUserId();
+                        user = db.Users.Find(id);
+                    }
+                    else
+                    {
+                        //Create user
+                        user = new ApplicationUser();
+                    }
+                    
                     user.FirstName = model.UserVM.FirstName.TrimString();
                     user.LastName = model.UserVM.LastName.TrimString();
-                    user.Email = model.UserVM.userContactDetails.Email.TrimString();
+                    if (isConvertDemoUserToRealUser == false)
+                        user.Email = model.UserVM.userContactDetails.Email.TrimString();
+                    user.UserName = user.Email;
                     user.RoleInCompany = model.UserVM.Role;
                     user.PhoneNumber = model.UserVM.userContactDetails.MobilePhone.TrimString();
                     user.ContactDetails.OfficePhone = model.UserVM.userContactDetails.OfficePhone.TrimString();
@@ -671,8 +705,16 @@ namespace FlatFXWebClient.Controllers
                     user.ContactDetails.WebSite = model.UserVM.userContactDetails.WebSite.TrimString();
                     user.ContactDetails.MobilePhone = model.UserVM.userContactDetails.MobilePhone.TrimString();
 
-                    result = await UserManager.CreateAsync(user, model.UserVM.Password);
-                    succeeded = result.Succeeded;
+                    if (isConvertDemoUserToRealUser)
+                    {
+                        await db.SaveChangesAsync();
+                        succeeded = true;
+                    }
+                    else
+                    {
+                        result = await UserManager.CreateAsync(user, model.UserVM.Password);
+                        succeeded = result.Succeeded;
+                    }
                 }
                 else
                 {
@@ -685,15 +727,25 @@ namespace FlatFXWebClient.Controllers
                     if (IsUserRegister)
                     {
                         //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
+
+                        if (isConvertDemoUserToRealUser)
+                            UserManager.RemoveFromRole(user.Id, Consts.Role_CompanyDemoUser);
                         UserManager.AddToRole(user.Id, Consts.Role_CompanyUser);
 
                         user = db.Users.Include(u => u.Companies).Where(u => u.Id == user.Id).FirstOrDefault();
 
-                        // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
-                        // Send an email with this link
-                        string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
-                        var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                        await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                        //remove the user from the demo company
+                        if (user.Companies.Count > 0)
+                            user.Companies.Clear();
+
+                        if (!isConvertDemoUserToRealUser)
+                        {
+                            // Send an email with this link
+                            string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
+                            var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
+                            await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX account",
+                                "Thank you for joining FlatFX,<br />Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a><br />Regards,<br />FlatFX Team");
+                        }
 
                     }
 
@@ -757,6 +809,17 @@ namespace FlatFXWebClient.Controllers
 
                     db.SaveChanges();
 
+                    Session["ConvertDemoToRealAccount"] = null;
+                    Session["RegisterAllStep"] = null;
+
+                    if (isConvertDemoUserToRealUser)
+                    {
+                        AuthenticationManager.SignOut();
+                        Session["SiteSession"] = null;
+                        return RedirectToAction("DemoToRealRegistrationSucceeded");
+                    }
+                    else if (IsUserRegister)
+                        return RedirectToAction("UserCreated");
                     if (IsCompanyRegister && IsUserRegister && IsProviderAccountRegister)
                         return RedirectToAction("Index", "Home");
                     else if (IsCompanyRegister)
@@ -774,6 +837,16 @@ namespace FlatFXWebClient.Controllers
                 AddErrors(result);
 
             return View(model);
+        }
+        [AllowAnonymous]
+        public ActionResult UserCreated()
+        {
+            return View();
+        }
+        [AllowAnonymous]
+        public ActionResult DemoToRealRegistrationSucceeded()
+        {
+            return View();
         }
         #endregion
 
@@ -802,8 +875,6 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 #region chack if model is valid
-                if (!IsUnique("UserName", model.Email.TrimString()))
-                    ModelState.AddModelError("", "user Name is not unique.");
                 if (!IsUnique("UserEmail", model.Email.TrimString()))
                     ModelState.AddModelError("", "user Email is not unique.");
                 #endregion
@@ -812,7 +883,7 @@ namespace FlatFXWebClient.Controllers
                 var user = new ApplicationUser();
                 user.UserName = model.Email.TrimString();
                 user.FirstName = model.Email.TrimString().Substring(0, model.Email.TrimString().IndexOf('@'));
-                user.LastName = "Demo";
+                user.LastName = model.Email.Substring(model.Email.TrimString().IndexOf('@') + 1);
                 user.Email = model.Email.TrimString();
                 user.RoleInCompany = "";
                 user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.TrimString();
@@ -839,11 +910,12 @@ namespace FlatFXWebClient.Controllers
                     // Send an email with this link
                     string code = await UserManager.GenerateEmailConfirmationTokenAsync(user.Id);
                     var callbackUrl = Url.Action("ConfirmEmail", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
-                    await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX Demo account", "Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a>");
+                    await UserManager.SendEmailAsync(user.Id, "Confirm your FlatFX Demo account",
+                        "Thank you for joining FlatFX,<br />Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a><br />Regards,<br />FlatFX Team");
 
                     //await SignInManager.SignInAsync(user, isPersistent: false, rememberBrowser: false);
 
-                    return RedirectToAction("Index", "Home");
+                    return RedirectToAction("UserCreated"); //RedirectToAction("Index", "Home");
                 }
             }
             catch (Exception ex)

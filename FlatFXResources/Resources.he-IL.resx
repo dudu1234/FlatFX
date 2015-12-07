@@ -420,4 +420,45 @@
   <data name="StillDontHaveAccount" xml:space="preserve">
     <value>עדיין אין לך חשבון?</value>
   </data>
+  <data name="CreateDemoUser" xml:space="preserve">
+    <value>צור חשבון דמו</value>
+  </data>
+  <data name="EnterTheBankAccountInformation" xml:space="preserve">
+    <value>הכנס את פרטי חשבון הבנק</value>
+  </data>
+  <data name="EnterTheCompanyInformation" xml:space="preserve">
+    <value>הכנס את פרטי החברה</value>
+  </data>
+  <data name="EnterTheUserInformation" xml:space="preserve">
+    <value>הכנס פרטי משתמש</value>
+  </data>
+  <data name="RegisterAccount" xml:space="preserve">
+    <value>צור חשבון</value>
+  </data>
+  <data name="RegisterCompany" xml:space="preserve">
+    <value>צור חברה</value>
+  </data>
+  <data name="RegisterUser" xml:space="preserve">
+    <value>צור משתמש</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>שלב</value>
+  </data>
+  <data name="UserCreatedSuccessfully" xml:space="preserve">
+    <value>המשתמש נוצר בהצלחה</value>
+  </data>
+  <data name="UserRegisteredSucceeded" xml:space="preserve">
+    <value>&lt;p&gt;
+        תודה שנרשמת לאתר FlatFX
+    &lt;/p&gt;
+    &lt;p&gt;
+        בדקות הקרובות ישלח אליך אימייל,&lt;br /&gt;
+        בבקשה לחץ על "Activate Account" ע"מ להפעיל את החשבון.&lt;br /&gt;
+        מאחלים לך חסכון ענק,&lt;br /&gt;
+        צוות FlatFX.
+    &lt;/p&gt;</value>
+  </data>
+  <data name="YouMustConfirmYourEmail" xml:space="preserve">
+    <value>עליך לאמת את חשבון המייל ע"מ להיכנס למערכת</value>
+  </data>
 </root>

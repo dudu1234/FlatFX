@@ -304,6 +304,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create Demo User.
+        /// </summary>
+        public static string CreateDemoUser {
+            get {
+                return ResourceManager.GetString("CreateDemoUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new account group.
         /// </summary>
         public static string CreateNewAccount {
@@ -390,6 +399,33 @@ namespace FlatFXResources {
         public static string Email2 {
             get {
                 return ResourceManager.GetString("Email2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Bank Account information.
+        /// </summary>
+        public static string EnterTheBankAccountInformation {
+            get {
+                return ResourceManager.GetString("EnterTheBankAccountInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Company information.
+        /// </summary>
+        public static string EnterTheCompanyInformation {
+            get {
+                return ResourceManager.GetString("EnterTheCompanyInformation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the User information.
+        /// </summary>
+        public static string EnterTheUserInformation {
+            get {
+                return ResourceManager.GetString("EnterTheUserInformation", resourceCulture);
             }
         }
         
@@ -763,11 +799,38 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Register Account.
+        /// </summary>
+        public static string RegisterAccount {
+            get {
+                return ResourceManager.GetString("RegisterAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register as a new user.
         /// </summary>
         public static string RegisterAsNewUser {
             get {
                 return ResourceManager.GetString("RegisterAsNewUser", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register Company.
+        /// </summary>
+        public static string RegisterCompany {
+            get {
+                return ResourceManager.GetString("RegisterCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Register User.
+        /// </summary>
+        public static string RegisterUser {
+            get {
+                return ResourceManager.GetString("RegisterUser", resourceCulture);
             }
         }
         
@@ -880,6 +943,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Step.
+        /// </summary>
+        public static string Step {
+            get {
+                return ResourceManager.GetString("Step", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Still don&apos;t have an account?.
         /// </summary>
         public static string StillDontHaveAccount {
@@ -925,6 +997,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to User Created Successfully.
+        /// </summary>
+        public static string UserCreatedSuccessfully {
+            get {
+                return ResourceManager.GetString("UserCreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Send Emails to email addresses.
         /// </summary>
         public static string UserList_SendEmail {
@@ -957,6 +1038,23 @@ namespace FlatFXResources {
         public static string UserName {
             get {
                 return ResourceManager.GetString("UserName", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;p&gt;
+        ///        Thank you for registering for FlatFX.
+        ///    &lt;/p&gt;
+        ///    &lt;p&gt;
+        ///        An Email Confirmation will be send to your email address during the next minutes,&lt;br /&gt;
+        ///        Please click on the relevant link in order to activate your account.&lt;br /&gt;
+        ///        Wishing you a giant saving,&lt;br /&gt;
+        ///        FlatFX Team.
+        ///    &lt;/p&gt;.
+        /// </summary>
+        public static string UserRegisteredSucceeded {
+            get {
+                return ResourceManager.GetString("UserRegisteredSucceeded", resourceCulture);
             }
         }
         
@@ -1002,6 +1100,15 @@ namespace FlatFXResources {
         public static string WebSite {
             get {
                 return ResourceManager.GetString("WebSite", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must confirm your Email in order to activate your account.
+        /// </summary>
+        public static string YouMustConfirmYourEmail {
+            get {
+                return ResourceManager.GetString("YouMustConfirmYourEmail", resourceCulture);
             }
         }
     }

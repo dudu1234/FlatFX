@@ -1,10 +1,14 @@
 ﻿html {
+    width: 100%;
+    min-height: 100%;
     background-color: #e2e2e2;
     margin: 0;
     padding: 0;
 }
 
 body {
+    width: 100%;
+    min-height: 100%;
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
@@ -17,16 +21,14 @@ body {
 }
 
 a {
-    color: #333;
+    /*color: #333;*/
     outline: none;
     padding-left: 3px;
     padding-right: 3px;
 }
 
-    a:link, a:visited,
-    a:active, a:hover {
+    a:link, a:visited, a:active, a:hover {
         /*color: #333;*/
-        color: #333;
     }
 
     a:hover {
@@ -99,9 +101,9 @@ h5, h6 {
 ----------------------------------------------------------*/
 
 #body {
-    background-color: #efeeef;
+    /*background-color: #efeeef;*/
     clear: both;
-    padding-bottom: 35px;
+    /*padding-bottom: 35px;*/
 }
 
 footer {
@@ -364,13 +366,6 @@ aside {
         width: 250px;
     }
 
-/*#loginForm input[type="checkbox"],
-        #loginForm input[type="submit"],
-        #loginForm input[type="button"],
-        #loginForm button {
-            width: auto;
-        }*/
-
 #socialLoginForm {
     margin-left: 40px;
     float: left;
@@ -425,7 +420,6 @@ fieldset {
 
 label {
     display: block;
-    /*font-size: 1.2em;*/
     font-weight: 600;
 }
 
@@ -435,18 +429,7 @@ label {
 
 input, textarea {
     border: 1px solid #e2e2e2;
-    /*background: #fff;
-    color: #333;
-    font-size: 1.2em;
-    margin: 5px 0 6px 0;
-    padding: 5px;
-    width: 300px;*/
 }
-
-    /*textarea {
-    font-family: inherit;
-    width: 500px;
-}*/
 
     input:focus, textarea:focus {
         border: 1px solid #7ac0da;
@@ -461,23 +444,13 @@ input, textarea {
     input[type="submit"],
     input[type="button"],
     button {
-        /*background-color: #d3dce0;*/
         border: 1px solid #787878;
         cursor: pointer;
-        /*font-size: 1.2em;*/
         font-weight: 600;
-        /*padding: 7px;*/
-        /*margin-right: 8px;*/
-        /*width: auto;*/
     }
 
 td input[type="submit"],
 td input[type="button"],
-td button {
-    /*font-size: 1em;
-    padding: 4px;
-    margin-right: 4px;*/
-}
 
 /* info and errors */
 .message-info {
@@ -922,8 +895,8 @@ table.ffx-table tr td a {
 }
 
 .not-active {
-   pointer-events: none;
-   cursor: default;
+    pointer-events: none;
+    cursor: default;
 }
 
 .display-none {

@@ -372,6 +372,8 @@
     <Content Include="Views\CompanyAccounts\IndexUser.cshtml" />
     <Content Include="Views\ProviderAccounts\IndexUser.cshtml" />
     <Content Include="Views\SimpleCurrencyExchange\EnterData.cshtml" />
+    <Content Include="Views\Account\DemoToRealRegistrationSucceeded.cshtml" />
+    <Content Include="Views\Account\UserCreated.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

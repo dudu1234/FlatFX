@@ -17,34 +17,34 @@
                     <li class="@userHeaderClass">
                         <a href="" style="text-decoration: none;">
                             <h1>
-                                Step 1
+                                @FlatFXResources.Resources.Step 1
                                 @if (Session["RegisterAllStep"].ToInt() > 1)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
                             </h1>
-                            <h3 class="list-group-item-heading">Register User</h3>
-                            <p class="list-group-item-text">Enter the User information</p>
+                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterUser</h3>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheUserInformation</p>
                         </a>
                     </li>
                     <li class="@companyHeaderClass">
                         <a href="" style="text-decoration: none;">
                             <h1>
-                                Step 2
+                                @FlatFXResources.Resources.Step 2
                                 @if (Session["RegisterAllStep"].ToInt() > 2)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
                             </h1>
-                            <h3 class="list-group-item-heading">Register Company</h3>
-                            <p class="list-group-item-text">Enter the Company information</p>
+                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterCompany</h3>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheCompanyInformation</p>
                         </a>
                     </li>
                     <li class="@accountHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h1>Step 3</h1>
-                            <h3 class="list-group-item-heading">Register Account</h3>
-                            <p class="list-group-item-text">Enter the Bank Account information</p>
+                            <h1>@FlatFXResources.Resources.Step 3</h1>
+                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterAccount</h3>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheBankAccountInformation</p>
                         </a>
                     </li>
                 </ul>

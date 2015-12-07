@@ -432,4 +432,45 @@
   <data name="StillDontHaveAccount" xml:space="preserve">
     <value>Still don't have an account?</value>
   </data>
+  <data name="CreateDemoUser" xml:space="preserve">
+    <value>Create Demo User</value>
+  </data>
+  <data name="EnterTheBankAccountInformation" xml:space="preserve">
+    <value>Enter the Bank Account information</value>
+  </data>
+  <data name="EnterTheCompanyInformation" xml:space="preserve">
+    <value>Enter the Company information</value>
+  </data>
+  <data name="EnterTheUserInformation" xml:space="preserve">
+    <value>Enter the User information</value>
+  </data>
+  <data name="RegisterAccount" xml:space="preserve">
+    <value>Register Account</value>
+  </data>
+  <data name="RegisterCompany" xml:space="preserve">
+    <value>Register Company</value>
+  </data>
+  <data name="RegisterUser" xml:space="preserve">
+    <value>Register User</value>
+  </data>
+  <data name="Step" xml:space="preserve">
+    <value>Step</value>
+  </data>
+  <data name="UserCreatedSuccessfully" xml:space="preserve">
+    <value>User Created Successfully</value>
+  </data>
+  <data name="UserRegisteredSucceeded" xml:space="preserve">
+    <value>&lt;p&gt;
+        Thank you for registering for FlatFX.
+    &lt;/p&gt;
+    &lt;p&gt;
+        An Email Confirmation will be send to your email address during the next minutes,&lt;br /&gt;
+        Please click on the relevant link in order to activate your account.&lt;br /&gt;
+        Wishing you a giant saving,&lt;br /&gt;
+        FlatFX Team.
+    &lt;/p&gt;</value>
+  </data>
+  <data name="YouMustConfirmYourEmail" xml:space="preserve">
+    <value>You must confirm your Email in order to activate your account</value>
+  </data>
 </root>
