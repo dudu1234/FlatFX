@@ -473,4 +473,19 @@
   <data name="YouMustConfirmYourEmail" xml:space="preserve">
     <value>You must confirm your Email in order to activate your account</value>
   </data>
+  <data name="CompanyJoiningCode" xml:space="preserve">
+    <value>Company joining code</value>
+  </data>
+  <data name="CompanyJoiningCodeDescrition" xml:space="preserve">
+    <value>In case you wish to join to existing company, you should get a code from the company administrator that enable you to join the company. Enter this code here</value>
+  </data>
+  <data name="CoWorkerEmail" xml:space="preserve">
+    <value>Co-Worker Email</value>
+  </data>
+  <data name="InviteCoWorker1" xml:space="preserve">
+    <value>Invite co-worker to join your company</value>
+  </data>
+  <data name="InviteCoWorker2" xml:space="preserve">
+    <value>* Warning: The co-worker will be able to join the company and execute deals within the site</value>
+  </data>
 </root>

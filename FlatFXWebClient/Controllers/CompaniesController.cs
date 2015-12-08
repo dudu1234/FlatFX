@@ -8,10 +8,12 @@ using System.Net;
 using System.Web;
 using System.Web.Mvc;
 using Microsoft.AspNet.Identity;
+using Microsoft.AspNet.Identity.Owin;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using FlatFXCore.Model.User;
 using FlatFXCore.BussinessLayer;
+using FlatFXWebClient.ViewModels;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -85,7 +87,7 @@ namespace FlatFXWebClient.Controllers
                 string[] whiteListContactDetails = new string[] { "CarPhone", "Address", "Country", "Email", "Email2", "Fax", "MobilePhone", "MobilePhone2", 
                         "OfficePhone", "OfficePhone2", "HomePhone", "WebSite" };
 
-                if (TryUpdateModel(company, "", whiteListCompany) && 
+                if (TryUpdateModel(company, "", whiteListCompany) &&
                     TryUpdateModel(company.ContactDetails, "ContactDetails", whiteListContactDetails))
                 {
                     try
@@ -156,7 +158,7 @@ namespace FlatFXWebClient.Controllers
                 string[] whiteListContactDetails = new string[] { "CarPhone", "Address", "Country", "Email", "Email2", "Fax", "MobilePhone", "MobilePhone2", 
                         "OfficePhone", "OfficePhone2", "HomePhone", "WebSite" };
 
-                if (TryUpdateModel(company, "", whiteListCompany) && 
+                if (TryUpdateModel(company, "", whiteListCompany) &&
                     TryUpdateModel(company.ContactDetails, "ContactDetails", whiteListContactDetails))
                 {
                     try
@@ -180,7 +182,7 @@ namespace FlatFXWebClient.Controllers
             }
             return View(company);
         }
-        
+
 
         // GET: Companies/Delete/5
         public async Task<ActionResult> Delete(string id, bool? saveChangesError = false)
@@ -220,6 +222,78 @@ namespace FlatFXWebClient.Controllers
 
             TempData["Result"] = "Delete succeeded";
             return RedirectToAction("IndexAdmin");
+        }
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        public ActionResult InviteUserToCompany(string companyId)
+        {
+            if (companyId == null)
+            {
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+            }
+            InviteUserToCompanyViewModel model = new InviteUserToCompanyViewModel();
+            model.CompanyId = companyId;
+            return View(model);
+        }
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        public ActionResult InviteUserToCompany(InviteUserToCompanyViewModel model)
+        {
+            try
+            {
+                if (model == null || model.CoWorkerEmail == null || !model.CoWorkerEmail.Contains('@') || !model.CoWorkerEmail.Contains('.'))
+                {
+                    TempData["ErrorResult"] = "Invalid Email address";
+                    return View(model);
+                }
+
+                if (model.CompanyId == null)
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                if (!SecurityManager.IsValidCompany(db, User, User.Identity.GetUserId(), model.CompanyId))
+                {
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+                }
+                //Company company = await db.Companies.FindAsync(model.CompanyId);
+
+                //remove previous rows
+                string key = model.CompanyId + "_" + model.CoWorkerEmail;
+                List<GenericDictionaryItem> items = db.GenericDictionary.Where(item => item.Category == Consts.GenericDictionaryCategory_AddCoWorkerToCompany && item.Key == key).ToList();
+                db.GenericDictionary.RemoveRange(items);
+
+                //Add new item
+                string invitationCode = Guid.NewGuid().ToString().Substring(0, 10);
+                GenericDictionaryItem newItem = new GenericDictionaryItem { Key = key, Category = Consts.GenericDictionaryCategory_AddCoWorkerToCompany, Info1 = invitationCode, Info2 = DateTime.Now.ToString() };
+                db.GenericDictionary.Add(newItem);
+                db.SaveChanges();
+
+                //Send Email to Co-Worker
+                string userId = User.Identity.GetUserId();
+                ApplicationUser user = db.Users.Where(u => u.Id == userId).SingleOrDefault();
+                string userName = user.FirstName + " " + user.LastName;
+
+                IdentityMessage message = new IdentityMessage();
+                message.Subject = "Invitation to join FlatFX by " + userName;
+                string callbackUrl = Request.Url.Authority + "/Account/RegisterAll?invitationCode=" + invitationCode;
+                message.Body = "Hello,<br />You are invited by " + userName + " to join FlatFX<br />In order to join FlatFX please click clicking <a href=\"" + callbackUrl + "\">here</a><br />";
+                message.Destination = model.CoWorkerEmail;
+
+                EmailService service = new EmailService();
+                service.Send(message);
+                
+                TempData["Result"] = "Action Succeeded. Invitation Email sent to: " + model.CoWorkerEmail;
+
+                return View(model);
+            }
+            catch(Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in AddCoWorkerToCompany", ex);
+                TempData["Result"] = "Action Failed";
+                return View(model);
+            }
         }
     }
 }

@@ -576,6 +576,8 @@ namespace FlatFXWebClient.Controllers
             if (companyUserAllEntitiesModelView == null)
                 companyUserAllEntitiesModelView = new CompanyUserAllEntitiesModelView();
             Session["RegisterAllStep"] = 1;
+            if (Request["invitationCode"] != null)
+                companyUserAllEntitiesModelView.UserVM.CompanyJoiningCode = Request["invitationCode"];
             return View(companyUserAllEntitiesModelView);
         }
         [AllowAnonymous]

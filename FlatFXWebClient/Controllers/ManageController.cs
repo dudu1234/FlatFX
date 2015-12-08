@@ -9,6 +9,8 @@ using Microsoft.Owin.Security;
 using FlatFXCore.Model.User;
 using FlatFXWebClient.ViewModels;
 using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Core;
+using System.Collections.Generic;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -327,7 +329,6 @@ namespace FlatFXWebClient.Controllers
             var result = await UserManager.AddLoginAsync(User.Identity.GetUserId(), loginInfo.Login);
             return result.Succeeded ? RedirectToAction("ManageLogins") : RedirectToAction("ManageLogins", new { Message = ManageMessageId.Error });
         }
-
 
         protected override void Dispose(bool disposing)
         {

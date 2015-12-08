@@ -13,7 +13,14 @@ namespace FlatFXWebClient.ViewModels
         public bool TwoFactor { get; set; }
         public bool BrowserRemembered { get; set; }
     }
+    public class InviteUserToCompanyViewModel
+    {
+        [Display(Name = "CoWorkerEmail", ResourceType = typeof(FlatFXResources.Resources))]
+        [EmailAddress]
+        public string CoWorkerEmail { get; set; }
 
+        public string CompanyId { get; set; }
+    }
     public class ManageLoginsViewModel
     {
         public IList<UserLoginInfo> CurrentLogins { get; set; }

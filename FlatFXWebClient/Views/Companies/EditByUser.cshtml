@@ -173,7 +173,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-info" />
+                        <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
                 </div>
             </div>
@@ -182,5 +182,7 @@
 }
 
 <div>
-    @Html.ActionLink("Back to List", "IndexUser")
+    <a class="btn btn-success" href="@Url.Action("IndexUser")">Back to List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-success" href="@Url.Action("InviteUserToCompany", "Companies", new { companyId = Model.CompanyId })">Invite Co-Worker to join your company</a>
+    <br /><br /><br />
 </div>

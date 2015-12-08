@@ -146,6 +146,7 @@
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Core\Context.cs" />
     <Compile Include="Model\Core\FlatFXCookie.cs" />
+    <Compile Include="Model\Core\GenericDictionary.cs" />
     <Compile Include="Model\Core\FlatFXSession.cs" />
     <Compile Include="Model\Data\ChatModels.cs" />
     <Compile Include="Model\Data\CompanyModels.cs" />

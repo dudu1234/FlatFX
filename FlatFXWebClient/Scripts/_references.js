@@ -13,3 +13,4 @@
 /// <reference path="jquery.fullPage.js" />
 /// <reference path="bootstrap.rtl.min.js" />
 /// <reference path="../js/rtlcustom.js" />
+/// <reference path="../js/ondocreadyaddtooltipjs.js" />

@@ -232,6 +232,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company joining code.
+        /// </summary>
+        public static string CompanyJoiningCode {
+            get {
+                return ResourceManager.GetString("CompanyJoiningCode", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In case you wish to join to existing company, you should get a code from the company administrator that enable you to join the company. Enter this code here.
+        /// </summary>
+        public static string CompanyJoiningCodeDescrition {
+            get {
+                return ResourceManager.GetString("CompanyJoiningCodeDescrition", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Name.
         /// </summary>
         public static string CompanyName {
@@ -282,6 +300,15 @@ namespace FlatFXResources {
         public static string Country {
             get {
                 return ResourceManager.GetString("Country", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Co-Worker Email.
+        /// </summary>
+        public static string CoWorkerEmail {
+            get {
+                return ResourceManager.GetString("CoWorkerEmail", resourceCulture);
             }
         }
         
@@ -534,6 +561,24 @@ namespace FlatFXResources {
         public static string IBAN {
             get {
                 return ResourceManager.GetString("IBAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Invite co-worker to join your company.
+        /// </summary>
+        public static string InviteCoWorker1 {
+            get {
+                return ResourceManager.GetString("InviteCoWorker1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to * Warning: The co-worker will be able to join the company and execute deals within the site.
+        /// </summary>
+        public static string InviteCoWorker2 {
+            get {
+                return ResourceManager.GetString("InviteCoWorker2", resourceCulture);
             }
         }
         

@@ -1,14 +1,20 @@
 ﻿@model FlatFXWebClient.ViewModels.CompanyUserAllEntitiesModelView
-
 <div class="panel panel-primary">
     <div class="panel-heading">
         <h3 class="panel-title">@FlatFXResources.Resources.CreateNewUser</h3>
     </div>
-    <div class="panel-body">
+    <div class="panel-body masterTooltip">
         <div class="form-group">
             @Html.LabelFor(m => m.UserVM.userContactDetails.Email, htmlAttributes: new { @class = "control-label col-sm-2 required" })
             <div class="col-sm-4">
-                @Html.TextBoxFor(m => m.UserVM.userContactDetails.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.Email) })
+                @if (Session["ConvertDemoToRealAccount"] != null && Session["ConvertDemoToRealAccount"].ToBoolean() == true)
+                {
+                    @Html.TextBoxFor(m => m.UserVM.userContactDetails.Email, new { disabled = "disabled", @readonly = "readonly", @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.Email) })
+                }
+                else
+                {
+                    @Html.TextBoxFor(m => m.UserVM.userContactDetails.Email, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.userContactDetails.Email) })
+                }
                 @Html.ValidationMessageFor(m => m.UserVM.userContactDetails.Email, "", new { @class = "text-danger" })
             </div>
             @Html.LabelFor(m => m.UserVM.Role, htmlAttributes: new { @class = "control-label col-sm-2" })
@@ -41,9 +47,28 @@
                 @Html.ValidationMessageFor(m => m.UserVM.LastName, "", new { @class = "text-danger" })
             </div>
         </div>
+        <br />
+        <div class="form-group">
+            @*<a style="display: inline" href="#" title="Company joining code" data-toggle="popover" data-trigger="hover"
+                   data-content=".">
+                    <span class="glyphicon glyphicon-info-sign blue"></span>
+                </a>*@
+            @*guy : to do add information icon*@
+            @*<span class="glyphicon glyphicon-info-sign green" title=@FlatFXResources.Resources.CompanyJoiningCodeDescrition></span>*@
+            @Html.LabelFor(m => m.UserVM.CompanyJoiningCode, htmlAttributes: new { @title = @FlatFXResources.Resources.CompanyJoiningCodeDescrition, @class = "control-label col-sm-2" })
+            <div class="col-sm-4">
+                @Html.TextBoxFor(m => m.UserVM.CompanyJoiningCode, new { @title = @FlatFXResources.Resources.CompanyJoiningCodeDescrition, @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.UserVM.CompanyJoiningCode) })
+                @Html.ValidationMessageFor(m => m.UserVM.CompanyJoiningCode, "", new { @class = "text-danger" })
+            </div>
+            <remark class="col-sm-12 start-align">
+                <span class="green">** </span> @FlatFXResources.Resources.CompanyJoiningCodeDescrition
+            </remark>
+        </div>
+        <br /><br />
         @{
             Model.ShowContactDetailsForUser = true;
             @Html.Partial("RegisterContactDetails", Model)
         }
     </div>
 </div>
+

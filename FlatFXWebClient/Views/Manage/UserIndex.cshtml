@@ -5,8 +5,7 @@
     Layout = "~/Views/Manage/UserManageLayout.cshtml";
 }
 
-<h3>Manage User Account</h3>
-
+<h2>Manage User Account</h2>
 <div>
     [
     @if (Model.HasPassword)
@@ -20,13 +19,15 @@
     ]
 </div>
 
+
 @if (User.IsInRole(Consts.Role_CompanyDemoUser))
 {
-    <br />
+    <br /><br /><br />
     <div>
         @Html.ActionLink("Change your Demo Account to a Real Account", "ConvertDemoToRealAccount", "Account")
     </div>
 }
+
 <div>
     @*
         @Model.Logins.Count [

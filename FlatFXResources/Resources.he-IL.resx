@@ -461,4 +461,10 @@
   <data name="YouMustConfirmYourEmail" xml:space="preserve">
     <value>עליך לאמת את חשבון המייל ע"מ להיכנס למערכת</value>
   </data>
+  <data name="CompanyJoiningCode" xml:space="preserve">
+    <value>קוד הצטרפות לחברה</value>
+  </data>
+  <data name="CoWorkerEmail" xml:space="preserve">
+    <value>מייל של עמית לעבודה</value>
+  </data>
 </root>

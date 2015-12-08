@@ -14,6 +14,8 @@ namespace FlatFXCore.BussinessLayer
         public const string Role_ProviderUser = "ProviderUser";
         public const string Role_Administrator = "Administrator";
 
+        public const string GenericDictionaryCategory_AddCoWorkerToCompany = "GenericDictionaryCategory_AddCoWorkerToCompany";
+
         public enum eUserStatus
         {
             Active = 1,

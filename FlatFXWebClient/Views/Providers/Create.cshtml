@@ -107,8 +107,7 @@
             </div>
         </div>
         <input type="submit" value="Create" class="btn btn-info" />
-        @*<input type="button" value="Back to List" class="btn btn-info" onclick="window.location.href('@Url.Action("Index", "Providers")')" />*@
-        @Html.ActionLink("Back to List", "Index", "Providers", null, new { @class = "btn btn-info" })
+        <a class="btn btn-success" href="@Url.Action("Index")">Back to List</a>
     </div>
 
 }

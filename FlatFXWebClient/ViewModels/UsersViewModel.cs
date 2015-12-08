@@ -54,6 +54,10 @@ namespace FlatFXWebClient.ViewModels
         [StringLength(50, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         public string Role { get; set; }
 
+        [Display(Name = "CompanyJoiningCode", ResourceType = typeof(FlatFXResources.Resources))]
+        [StringLength(10, MinimumLength = 10, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        public string CompanyJoiningCode { get; set; }
+
         public ContactDetailsViewModel userContactDetails { get; set; }
 
         public UserDetailsViewModel()
