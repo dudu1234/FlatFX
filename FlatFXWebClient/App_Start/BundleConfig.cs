@@ -24,6 +24,7 @@ namespace FlatFXWebClient
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
+                     "~/Scripts/angular.js",                      
                       "~/Scripts/respond.min.js"));
 
             //// Styles for RTL

@@ -38,7 +38,15 @@ namespace FlatFXCore.BussinessLayer
                 else if (user.IsInRole(Consts.Role_CompanyUser))
                 {
                     ApplicationUser user1 = db.Users.Include(u => u.Companies).Where(u => u.Id == userId).FirstOrDefault();
-                    return db.CompanyAccounts.Include(ca => ca.Company).Where(ca => user1.Companies.Contains(ca.Company)).Any();
+                    //change the many to many relation
+                    //
+                    /*var x = from y in db.CompanyAccounts                             
+                             join z in db.Companies on y.CompanyId equals z.CompanyId                             
+                             where z.Users.Any(c => c.Id) t.Id == userId &&     user1.Companies.Any(xx => xx.CompanyId == z.CompanyId  ) 
+                             select new { CompanyAccountId = y.CompanyAccountId }).ToList();
+                    */
+                    //return x.Contains(companyAccountId);
+                    //return db.CompanyAccounts.Include(ca => ca.Company).Where(ca => user1.Companies.Contains(ca.Company)).Any();
                 }
 
                 return false;
