@@ -98,7 +98,7 @@ namespace FlatFXWebClient.Controllers
             var result = await SignInManager.PasswordSignInAsync(model.UserName, model.Password, model.RememberMe, shouldLockout: true);
             switch (result)
             {
-                case SignInStatus.Success: 
+                case SignInStatus.Success:
                     {
                         // user logined succesfully ==> create a new site session!
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
@@ -202,7 +202,7 @@ namespace FlatFXWebClient.Controllers
                 // For more information on how to enable account confirmation and password reset please visit http://go.microsoft.com/fwlink/?LinkID=320771
                 // Send an email with this link
                 string code = await UserManager.GeneratePasswordResetTokenAsync(user.Id);
-                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);		
+                var callbackUrl = Url.Action("ResetPassword", "Account", new { userId = user.Id, code = code }, protocol: Request.Url.Scheme);
                 await UserManager.SendEmailAsync(user.Id, "Reset Password", "Please reset your password by clicking <a href=\"" + callbackUrl + "\">here</a>");
                 return RedirectToAction("ForgotPasswordConfirmation", "Account");
             }
@@ -660,6 +660,36 @@ namespace FlatFXWebClient.Controllers
                     errorFlag = true;
                     ModelState.AddModelError("", "Provider account number is not unique.");
                 }
+                GenericDictionaryItem companyJoiningCodeItem = null;
+                if (IsUserRegister && model.UserVM.CompanyJoiningCode != null && model.UserVM.CompanyJoiningCode != "")
+                {
+                    //check whether the CompanyJoiningCode is valid
+                    companyJoiningCodeItem = await db.GenericDictionary.Where(m => m.Info1 == model.UserVM.CompanyJoiningCode).FirstOrDefaultAsync();
+                    if (companyJoiningCodeItem == null)
+                    {
+                        errorFlag = true;
+                        ModelState.AddModelError("", "Invalid Company Joining Code.");
+                    }
+                    else
+                    {
+                        //check expired time
+                        TimeSpan ts = DateTime.Now - DateTime.Parse(companyJoiningCodeItem.Info2);
+                        if (ts.TotalDays > 10)
+                        {
+                            errorFlag = true;
+                            ModelState.AddModelError("", "Invalid Company Joining Code, Time expired, ask your company co-worker to create a new 'joining code' for you.");
+                        }
+                        else
+                        {
+                            //check if the email is valid
+                            if (!companyJoiningCodeItem.Key.Contains(model.UserVM.userContactDetails.Email))
+                            {
+                                errorFlag = true;
+                                ModelState.AddModelError("", "Invalid Company Joining Code, The email is not valid, you must create you r user with the same email you were invited with.");
+                            }
+                        }
+                    }
+                }
 
                 if (errorFlag)
                 {
@@ -667,7 +697,7 @@ namespace FlatFXWebClient.Controllers
                 }
                 #endregion
 
-                if (Session["RegisterAllStep"].ToInt() == 1)
+                if (Session["RegisterAllStep"].ToInt() == 1 && companyJoiningCodeItem == null)
                 {
                     Session["RegisterAllStep"] = 2;
                     return View(model);
@@ -680,7 +710,7 @@ namespace FlatFXWebClient.Controllers
 
                 ApplicationUser user = null;
                 bool succeeded = true;
-                
+
                 if (IsUserRegister)
                 {
                     if (isConvertDemoUserToRealUser)
@@ -693,7 +723,7 @@ namespace FlatFXWebClient.Controllers
                         //Create user
                         user = new ApplicationUser();
                     }
-                    
+
                     user.FirstName = model.UserVM.FirstName.TrimString();
                     user.LastName = model.UserVM.LastName.TrimString();
                     if (isConvertDemoUserToRealUser == false)
@@ -749,6 +779,18 @@ namespace FlatFXWebClient.Controllers
                                 "Thank you for joining FlatFX,<br />Please confirm your account by clicking <a href=\"" + callbackUrl + "\">here</a><br />Regards,<br />FlatFX Team");
                         }
 
+                        if (companyJoiningCodeItem != null)
+                        {
+                            //Add the user to the joining company
+                            string joiningCompanyId = companyJoiningCodeItem.Key.Substring(0, Guid.NewGuid().ToString().Length);
+                            Company joiningCompany = await db.Companies.FindAsync(joiningCompanyId);
+                            joiningCompany.Users.Add(user);
+                            db.SaveChanges();
+
+                            Session["ConvertDemoToRealAccount"] = null;
+                            Session["RegisterAllStep"] = null;
+                            return RedirectToAction("UserCreated");
+                        }
                     }
 
                     if (IsCompanyRegister)
@@ -796,7 +838,7 @@ namespace FlatFXWebClient.Controllers
                         //Add provider account
                         var providerAccount = new ProviderAccount();
                         providerAccount.BankBranchNumber = model.providerAccountVM.BranchNumber.TrimString();
-                        providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString(); 
+                        providerAccount.BankAccountNumber = model.providerAccountVM.AccountNumber.TrimString();
                         providerAccount.AccountName = providerAccount.BankBranchNumber + "-" + providerAccount.BankAccountNumber;
                         providerAccount.BankAddress = model.providerAccountVM.Address.TrimString();
                         providerAccount.CompanyAccountId = model.m_CompanyAccountParent;
@@ -888,7 +930,7 @@ namespace FlatFXWebClient.Controllers
                 user.LastName = model.Email.Substring(model.Email.TrimString().IndexOf('@') + 1);
                 user.Email = model.Email.TrimString();
                 user.RoleInCompany = "";
-                user.PhoneNumber = (model.MobilePhone == null)? "" : model.MobilePhone.TrimString();
+                user.PhoneNumber = (model.MobilePhone == null) ? "" : model.MobilePhone.TrimString();
                 user.CreatedAt = DateTime.Now;
                 user.IsActive = true;
                 user.Status = FlatFXCore.BussinessLayer.Consts.eUserStatus.Active;

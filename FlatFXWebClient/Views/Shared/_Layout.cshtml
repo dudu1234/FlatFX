@@ -36,7 +36,7 @@
     }
 
 </head>
-<body ng-app="flatfx">
+<body @*ng-app="flatfx"*@>
     <div class="row">
         <div id="nav" class="col-xs-12 static">
             @Html.Partial("MainSiteHeader")
@@ -61,10 +61,10 @@
                 <a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a><br />
                 <a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a><br />
                 <a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a><br />
-                <a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd white"></span><span class="glyphicon glyphicon-euro white"></span></a><br />
+                <a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-usd white"></span><span class="glyphicon glyphicon-euro white"></span></a><br />
                 @if (User.Identity.Name != "")
                 {
-                    <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer white"></span></a>
+                    <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem<span class="glyphicon glyphicon-transfer white"></span></a>
                 }
             </div>
             @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))

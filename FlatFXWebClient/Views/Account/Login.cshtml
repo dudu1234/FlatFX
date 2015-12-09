@@ -20,7 +20,7 @@
                         <div class="col-md-1"></div>
                         @Html.LabelFor(m => m.UserName, new { @class = "col-md-3 control-label" })
                         <div class="col-md-6">
-                            @Html.TextBoxFor(m => m.UserName, new { @class = "form-control" })
+                            @Html.TextBoxFor(m => m.UserName, new { @id = "", @class = "form-control focused-label" })
                             @Html.ValidationMessageFor(m => m.UserName, "", new { @class = "text-danger" })
                         </div>
                         @*<div class="col-md-4"></div>
@@ -67,3 +67,9 @@
     </div>
     <div class="col-xs-4"></div>
 </div>
+
+<script>
+    $(document).ready(function () {
+        $(".focused-label").focus();
+    });
+</script>

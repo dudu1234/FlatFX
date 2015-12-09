@@ -12,46 +12,48 @@
     @Html.AntiForgeryToken()
 
     <div ng-controller="registerall" class="container ffx-wizard">
-    
-        <div class="row form-group">
-            <div class="col-xs-12">
-                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                    <li class="@userHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h1>
-                                @FlatFXResources.Resources.Step 1
-                                @if (Session["RegisterAllStep"].ToInt() > 1)
-                                {
-                                    <span class="glyphicon glyphicon-ok green"></span>
-                                }
-                            </h1>
-                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterUser</h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheUserInformation</p>
-                        </a>
-                    </li>
-                    <li class="@companyHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h1>
-                                @FlatFXResources.Resources.Step 2
-                                @if (Session["RegisterAllStep"].ToInt() > 2)
-                                {
-                                    <span class="glyphicon glyphicon-ok green"></span>
-                                }
-                            </h1>
-                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterCompany</h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheCompanyInformation</p>
-                        </a>
-                    </li>
-                    <li class="@accountHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h1>@FlatFXResources.Resources.Step 3</h1>
-                            <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterAccount</h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheBankAccountInformation</p>
-                        </a>
-                    </li>
-                </ul>
+        @if (Request["invitationCode"] == null)
+        {
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="@userHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h1>
+                                    @FlatFXResources.Resources.Step 1
+                                    @if (Session["RegisterAllStep"].ToInt() > 1)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                </h1>
+                                <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterUser</h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheUserInformation</p>
+                            </a>
+                        </li>
+                        <li class="@companyHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h1>
+                                    @FlatFXResources.Resources.Step 2
+                                    @if (Session["RegisterAllStep"].ToInt() > 2)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                </h1>
+                                <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterCompany</h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheCompanyInformation</p>
+                            </a>
+                        </li>
+                        <li class="@accountHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h1>@FlatFXResources.Resources.Step 3</h1>
+                                <h3 class="list-group-item-heading">@FlatFXResources.Resources.RegisterAccount</h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.EnterTheBankAccountInformation</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
             </div>
-        </div>
+        }
         <div>
             @Html.ValidationSummary("", new { @class = "text-danger" })
         </div>
@@ -60,7 +62,14 @@
                 <div class="col-md-12 well text-center">
                     @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
                     <br />
-                    <input type="submit" value="Next" class="btn btn-primary btn-lg" />
+                    @if (Request["invitationCode"] != null)
+                    {
+                        <input type="submit" value="@FlatFXResources.Resources.Register" class="btn btn-primary btn-lg" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Next" class="btn btn-primary btn-lg" />
+                    }
                 </div>
             </div>
         </div>
@@ -91,4 +100,3 @@
     </div>
 }
 
-<script src="~/JS/OnDocReadyAddToolTipJS.js"></script>

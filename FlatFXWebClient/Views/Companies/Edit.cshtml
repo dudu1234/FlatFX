@@ -14,14 +14,12 @@
                 <h3 class="panel-title">Edit Company</h3>
             </div>
             <div class="panel-body">
-                <p class="text-success">@TempData["Result"]</p>
-                <p class="error">@ViewBag.ErrorMessage</p>
                 @Html.HiddenFor(model => model.CompanyId)
 
                 <div class="form-group">
                     @Html.LabelFor(model => model.CompanyName, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+                        @Html.EditorFor(model => model.CompanyName, new { htmlAttributes = new { @readonly = "readonly", @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.CompanyName, "", new { @class = "text-danger" })
                     </div>
 
@@ -48,12 +46,12 @@
                 <div class="form-group">
                     @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+                        @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @disabled = true, @readonly = "readonly", @class = "form-control" } })
                     </div>
 
                     @Html.LabelFor(model => model.LastUpdate, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.LastUpdate, new { htmlAttributes = new { disabled = "disabled", @readonly = "readonly", @class = "form-control" } })
+                        @Html.EditorFor(model => model.LastUpdate, new { htmlAttributes = new { @disabled = true, @readonly = "readonly", @class = "form-control" } })
                     </div>
                 </div>
 
@@ -198,14 +196,16 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-info" />
+                        <input type="submit" value="Save" class="btn btn-primary" />
                     </div>
                 </div>
-                <div>
-                    <a class="btn btn-success" href="@Url.Action("IndexAdmin")">Back to List</a>
-                </div>
-
             </div>
         </div>
     </div>
 }
+
+<br /><br />
+<div>
+    <a class="btn btn-success" href="@Url.Action("IndexAdmin")">Back to List</a>
+</div>
+<br /><br />

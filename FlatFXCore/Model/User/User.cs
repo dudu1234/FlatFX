@@ -32,7 +32,7 @@ namespace FlatFXCore.Model.User
         [Phone]
         public virtual string PhoneNumber { get; set; }
         */
-
+        [Description("This is the attribute for FirstName")]
         [Display(Name = "FirstName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
         [StringLength(50, MinimumLength = 1, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]

@@ -29,13 +29,16 @@
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav padding-header">
                     <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
-                    <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
-                    <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
-                    <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
-                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates <span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
+                    @if (User.Identity.Name == "")
+                    {
+                        <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
+                        <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
+                        <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+                    }
+                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem <span class="glyphicon glyphicon-transfer red"></span></a></li>
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem<span class="glyphicon glyphicon-transfer red"></span></a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))

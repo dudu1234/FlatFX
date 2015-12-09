@@ -37,7 +37,10 @@ namespace FlatFXWebClient.Controllers
             }
             List<string> userCompaniesIdList = user.Companies.Select(c => c.CompanyId).ToList();
             var companyAccounts = await db.CompanyAccounts.Include(c => c.Company).Where(ca => userCompaniesIdList.Contains(ca.CompanyId)).ToListAsync();
-            return View("IndexUser", companyAccounts);
+            if (companyAccounts.Count == 1)
+                return RedirectToAction("EditByUser", new { id = companyAccounts[0].CompanyAccountId });
+            else
+                return View("IndexUser", companyAccounts);
         }
 
         // GET: CompanyAccounts/Edit/5
@@ -115,7 +118,8 @@ namespace FlatFXWebClient.Controllers
             {
                 return HttpNotFound();
             }
-
+            
+            //ViewBag.CompanyName = companyAccount.Company.CompanyName;
             return View("EditByUser", companyAccount);
         }
         // POST: Companies/Edit/5
@@ -145,7 +149,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         db.SaveChanges();
                         ViewBag.Result = "Update succeeded";
-                        return RedirectToAction("IndexUser");
+                        return View(companyAccount);
                     }
                     catch (DataException /* dex */)
                     {

@@ -38,15 +38,34 @@ namespace FlatFXCore.BussinessLayer
                 else if (user.IsInRole(Consts.Role_CompanyUser))
                 {
                     ApplicationUser user1 = db.Users.Include(u => u.Companies).Where(u => u.Id == userId).FirstOrDefault();
-                    //change the many to many relation
-                    //
-                    /*var x = from y in db.CompanyAccounts                             
-                             join z in db.Companies on y.CompanyId equals z.CompanyId                             
-                             where z.Users.Any(c => c.Id) t.Id == userId &&     user1.Companies.Any(xx => xx.CompanyId == z.CompanyId  ) 
-                             select new { CompanyAccountId = y.CompanyAccountId }).ToList();
-                    */
-                    //return x.Contains(companyAccountId);
-                    //return db.CompanyAccounts.Include(ca => ca.Company).Where(ca => user1.Companies.Contains(ca.Company)).Any();
+                    List<string> userCompaniesIdList = user1.Companies.Select(c => c.CompanyId).ToList();
+                    List<string> companyAccountsIdList = db.CompanyAccounts.Include(c => c.Company).Where(ca => userCompaniesIdList.Contains(ca.CompanyId))
+                        .Select(ca => ca.CompanyAccountId).ToList();
+                    return companyAccountsIdList.Contains(companyAccountId);
+                }
+
+                return false;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        public static bool IsValidProviderAccount(ApplicationDBContext db, IPrincipal user, string userId, string companyAccountId, string providerId)
+        {
+            try
+            {
+                if (user.IsInRole(Consts.Role_Administrator))
+                    return true;
+                else if (user.IsInRole(Consts.Role_CompanyUser))
+                {
+                    ApplicationUser user1 = db.Users.Include(u => u.Companies).Where(u => u.Id == userId).FirstOrDefault();
+                    List<string> userCompaniesIdList = user1.Companies.Select(c => c.CompanyId).ToList();
+                    List<string> companyAccountsIdList = db.CompanyAccounts.Include(c => c.Company).Where(ca => userCompaniesIdList.Contains(ca.CompanyId))
+                        .Select(ca => ca.CompanyAccountId).ToList();
+                    List<string> providerAccountsIdList = db.ProviderAccounts.Where(pa => companyAccountsIdList.Contains(pa.CompanyAccountId))
+                        .Select(pa => pa.CompanyAccountId).ToList();
+                    return companyAccountsIdList.Contains(companyAccountId);
                 }
 
                 return false;

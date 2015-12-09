@@ -267,7 +267,6 @@
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
     <Content Include="JS\Controllers\RegisterAll.js" />
-    <Content Include="JS\OnDocReadyAddToolTipJS.js" />
     <Content Include="JS\rtlCustom.js" />
     <Content Include="JS\FFx.js" />
     <Content Include="JS\Home\HomePage.js" />
@@ -1159,6 +1158,8 @@
     <Content Include="Views\Account\UserCreated.cshtml" />
     <Content Include="Views\Companies\InviteUserToCompany.cshtml" />
     <Content Include="Scripts\version.json" />
+    <Content Include="Views\CompanyAccounts\EditByUser.cshtml" />
+    <Content Include="Views\ProviderAccounts\EditByUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

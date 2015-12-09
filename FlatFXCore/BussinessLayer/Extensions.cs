@@ -386,6 +386,20 @@ public static class Extensions
         return (obj != null) ? obj.ToString() : null;
     }
     /// <summary>
+    /// ToShortString
+    /// </summary>
+    /// <param name="obj"></param>
+    /// <returns></returns>
+    public static string ToShortString(this object obj, int maxSize)
+    {
+        if (obj == null)
+            return null;
+        if (obj.ToString().Length <= maxSize + 2)
+            return obj.ToString();
+        else
+            return obj.ToString().Substring(0, maxSize) + "...";
+    }
+    /// <summary>
     /// Converts a given object to boolean
     /// Returns false if convertion faild.
     /// </summary>
