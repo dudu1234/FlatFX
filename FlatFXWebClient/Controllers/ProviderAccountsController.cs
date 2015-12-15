@@ -160,7 +160,7 @@ namespace FlatFXWebClient.Controllers
             {
                 // to do , remove this line and do not enable the user to change the account details, the change should be only by email to FlatFX ???
                 //if there is a change than the ApprovedBYFlatFX & ApprovedBYProvider should be reset to 'false' again.
-                string[] whiteList = new string[] { "AccountName", "BankAccountName", "BankBranchNumber", "BankAccountNumber", "BankAddress", "IBAN", "SWIFT" };
+                string[] whiteList = new string[] { "AccountName", "BankBranchNumber", "BankAccountNumber", "BankAddress", "IBAN", "SWIFT" };
                 if (TryUpdateModel(providerAccount, "", whiteList))
                 {
                     try

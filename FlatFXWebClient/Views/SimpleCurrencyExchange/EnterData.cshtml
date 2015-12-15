@@ -1,67 +1,94 @@
-﻿@model FlatFXCore.Model.Data.Deal
-
+﻿@model FlatFXWebClient.ViewModels.SimpleCurrencyExchangeViewModel
 @{
-    ViewBag.Title = "Currency Exchange";
+    ViewBag.Title = "Simple Currency Exchange";
+    string queryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 1) ? "active" : "disabled not-active";
+    string queryBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 1) ? "" : "display-none";
+    string confirmHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "active" : "disabled not-active";
+    string confirmBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "" : "display-none";
+    string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
-
-<div class="col-sm-3"></div>
-<div class="col-sm-6">
-    <p class="error">@ViewBag.ErrorMessage</p>
-
-    @using (Html.BeginForm())
+@using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    if (Model.deal.IsDemo)
     {
-        @Html.AntiForgeryToken()
-        <div class="form-horizontal">
-            <div class="panel panel-primary">
-                <div class="panel-heading">
-                    <h3 class="panel-title">המרות מט"ח</h3>
-                </div>
-                <div class="panel-body">
-                    @Html.ValidationSummary("", new { @class = "text-danger" })
-                    @Html.HiddenFor(model => model.DealId)
+        <div class="col-xs-12 demoToLiveTrading">
+            <span>You are in a demo environment. Your traders won't have any effect.</span>
+            <a class="btn btn-success" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
+        </div>
+        <br /><br /><br />
+    }
 
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.SimpleCurrencyExchangeType, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-3">
-                            @Html.EnumDropDownListFor(model => model.SimpleCurrencyExchangeType, htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ChangedProviderAccount, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-8">
-                            @Html.DropDownListFor(m => m.ChangedProviderAccount, new SelectList(Model.userBankAccounts, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.CreditedProviderAccount, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-8">
-                            @Html.DropDownListFor(m => m.CreditedProviderAccount, new SelectList(Model.userBankAccounts, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AmountToExchangeCreditedCurrency, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-3">
-                            @Html.EditorFor(model => model.AmountToExchangeCreditedCurrency, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AmountToExchangeCreditedCurrency, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.AmountToExchangeCreditedCurrency, htmlAttributes: new { @class = "control-label col-sm-4" })
-                        <div class="col-sm-3">
-                            @Html.EditorFor(model => model.AmountToExchangeCreditedCurrency, new { htmlAttributes = new { @class = "form-control" } })
-                            @Html.ValidationMessageFor(model => model.AmountToExchangeCreditedCurrency, "", new { @class = "text-danger" })
-                        </div>
-                    </div>
+    @Html.AntiForgeryToken()
 
-
-                    <div class="form-group">
-                        <div class="col-sm-offset-2 col-sm-10">
-                            <input type="submit" value="Continue" class="btn btn-info" />
-                        </div>
-                    </div>
+    <div class="row form-group">
+        <div class="col-xs-12">
+            <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                <li class="@queryHeaderClass">
+                    <a href="" style="text-decoration: none;">
+                        <h1>
+                            @FlatFXResources.Resources.Step 1
+                            @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 1)
+                            {
+                                <span class="glyphicon glyphicon-ok green"></span>
+                            }
+                        </h1>
+                        <h3 class="list-group-item-heading">Enter your Order details</h3>
+                        <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
+                    </a>
+                </li>
+                <li class="@confirmHeaderClass">
+                    <a href="" style="text-decoration: none;">
+                        <h1>
+                            @FlatFXResources.Resources.Step 2
+                            @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 2)
+                            {
+                                <span class="glyphicon glyphicon-ok green"></span>
+                            }
+                        </h1>
+                        <h3 class="list-group-item-heading">Confirm Deal</h3>
+                        <p class="list-group-item-text">See the live rates and confirm the deal</p>
+                    </a>
+                </li>
+                <li class="@summaryHeaderClass">
+                    <a href="" style="text-decoration: none;">
+                        <h1>@FlatFXResources.Resources.Step 3</h1>
+                        <h3 class="list-group-item-heading">Summary</h3>
+                        <p class="list-group-item-text">See the Deal summary and the instractions for the money transfer</p>
+                    </a>
+                </li>
+            </ul>
+        </div>
+    </div>
+    <div>
+        @Html.ValidationSummary("", new { @class = "text-danger" })
+    </div>
+    <div class="row setup-content @queryBodyClass">
+        <div class="col-xs-12">
+            <div class="col-md-12 text-center">
+                @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
+            </div>
+        </div>
+    </div>
+    if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
+    {
+        <div class="row setup-content @confirmBodyClass">
+            <div class="col-xs-12">
+                <div class="col-md-12 text-center">
+                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
+                    <br />
+                    <input type="submit" value="Confirm" class="btn btn-primary btn-lg" />
                 </div>
             </div>
         </div>
     }
-</div>
-<div class="col-sm-3"></div>
+    if (Session["SimpleCurrencyExchangeStep"].ToInt() == 3)
+    {
+        <div class="row setup-content">
+            <div class="col-xs-12">
+                <div class="col-md-12 text-center">
+                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)
+                </div>
+            </div>
+        </div>
+    }
+}

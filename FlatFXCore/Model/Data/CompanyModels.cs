@@ -87,7 +87,7 @@ namespace FlatFXCore.Model.Data
         [Index("IX_AccountName", IsUnique = true)]
         [Display(Name = "AccountName", ResourceType = typeof(FlatFXResources.Resources))]
         [Required(ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationRequired")]
-        [StringLength(200, MinimumLength = 5, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
+        [StringLength(200, MinimumLength = 2, ErrorMessageResourceType = typeof(FlatFXResources.Resources), ErrorMessageResourceName = "ValidationLength")]
         //[System.Web.Mvc.Remote("isFieldUnique", "Account", HttpMethod = "POST", ErrorMessage = "Account name already exists. Please enter a different account name.")]
         public string AccountName { get; set; }
         [Required, DisplayName("Is Active")]

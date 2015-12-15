@@ -73,8 +73,13 @@ namespace FlatFXCore.BussinessLayer
             None = 1,
             Spot = 2,
             Forward = 3,
-            Same_Day = 4,
-            SimpleCurrencyExchange = 5
+            Same_Day = 4
+        }
+        public enum eDealProductType
+        {
+            FxSimpleExchange = 1,
+            FxRFQ = 2,
+            FxStreaming = 3
         }
         public enum eBuySell
         {

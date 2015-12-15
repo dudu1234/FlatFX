@@ -104,7 +104,7 @@ namespace FlatFXWebClient.Controllers
                         FormsAuthentication.SetAuthCookie(model.UserName, false);
                         ApplicationUser user2 = db.Users.FirstOrDefault(u => u.UserName == model.UserName);
                         FlatFXSession siteSession = new FlatFXSession(db, user2);
-                        Session["SiteSession"] = siteSession; // Cache the user login data!
+                        Session["SiteSession"] = siteSession; // Cache the user login model!
 
                         return RedirectToLocal(returnUrl);
                     }

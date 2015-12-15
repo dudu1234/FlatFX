@@ -11,7 +11,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <div ng-controller="registerall" class="container ffx-wizard">
+    <div ng-controller="registerall" class="ffx-wizard">
         @if (Request["invitationCode"] == null)
         {
             <div class="row form-group">
@@ -59,7 +59,7 @@
         </div>
         <div class="row setup-content @userBodyClass">
             <div class="col-xs-12">
-                <div class="col-md-12 well text-center">
+                <div class="col-md-12 text-center">
                     @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
                     <br />
                     @if (Request["invitationCode"] != null)
@@ -77,7 +77,7 @@
         {
             <div class="row setup-content @companyBodyClass">
                 <div class="col-xs-12">
-                    <div class="col-md-12 well text-center">
+                    <div class="col-md-12 text-center">
                         @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
                         <br />
                         <input type="submit" value="Next" class="btn btn-primary btn-lg" />
@@ -89,7 +89,7 @@
         {
             <div class="row setup-content">
                 <div class="col-xs-12">
-                    <div class="col-md-12 well text-center">
+                    <div class="col-md-12 text-center">
                         @Html.Partial("RegisterBankAccount", Model)
                         <br />
                         <input type="submit" value="@FlatFXResources.Resources.Register" class="btn btn-primary btn-lg" />

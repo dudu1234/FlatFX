@@ -12,36 +12,38 @@ using FlatFXWebClient.ViewModels;
 using System.Net;
 using FlatFXCore.Model.Data;
 using System.Data;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXWebClient.Controllers
 {
+    [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class SimpleCurrencyExchangeController : BaseController
     {
-        public async Task<ActionResult> EnterData(string dealId)
+        public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
-            Deal deal = null;
-            if (dealId != null)
+            if (model.deal == null)
             {
-                deal = await db.Deals.FindAsync(dealId);
+                Session["SimpleCurrencyExchangeStep"] = 1;
+                model = new SimpleCurrencyExchangeViewModel();
+                await model.Initialize(db);
             }
             else
             {
-                deal = new Deal();
-                await deal.InitializeSimpleCurrencyExchangeAsync();
+                
             }
 
-            return View(deal);
+            return View(model);
         }
         [HttpPost, ActionName("EnterData")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnterDataPost(string dealId)
+        public async Task<ActionResult> EnterDataPost(SimpleCurrencyExchangeViewModel model)
         {
-            if (dealId == null)
+            if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             
-            Deal deal = await db.Deals.FindAsync(dealId);
+            Deal deal = await db.Deals.FindAsync(model.deal.DealId);
             try
             {
                 string[] whiteList = new string[] { "AccountName", "IsActive", "IsDefaultAccount", "Balance", "Equity", "DailyPNL", "GrossPNL" };

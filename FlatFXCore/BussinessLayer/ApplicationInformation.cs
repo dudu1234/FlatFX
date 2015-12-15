@@ -129,6 +129,18 @@ namespace FlatFXCore.BussinessLayer
             else
                 return context.User.Identity.GetUserId();
         }
+        public bool IsUserInRole(string role)
+        {
+            System.Web.HttpContext context = System.Web.HttpContext.Current;
+            if (context == null || context.User.Identity.Name == "")
+                return false;
+            else
+                return context.User.IsInRole(role);
+        }
+        public bool IsDemoUser()
+        {
+            return IsUserInRole(Consts.Role_CompanyDemoUser);
+        }
         public string GetSessionID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;

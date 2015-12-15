@@ -1,0 +1,70 @@
+﻿@model FlatFXWebClient.ViewModels.SimpleCurrencyExchangeViewModel
+
+
+<h1 class="simple-trade-header">Enter your Order</h1>
+<br /><br />
+@Html.HiddenFor(model => model.deal.DealId)
+
+@if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0)
+{
+    <div class="start-align">
+        <h2>You are not allowed to perform the currency exchange:</h2>
+        @foreach (string reason in Model.InvalidAccountReason)
+        {
+            <h3>- @reason</h3>
+        }
+    </div>
+    <br /><br /><br /><br /><br /><br />
+}
+else
+{
+    <div class="form-group">
+        @Html.LabelFor(model => model.deal.CreditedProviderAccount, htmlAttributes: new { @class = "control-label col-sm-4" })
+        <div class="col-sm-8">
+            @Html.DropDownListFor(m => m.deal.CreditedProviderAccount, new SelectList(Model.userBankAccounts, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4">I wish to</label>
+        <div class="col-sm-8">
+            @Html.RadioButtonFor(model => model.deal.BuySell, "Buy")
+            @Html.RadioButtonFor(model => model.deal.BuySell, "Sell")
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4">Amount</label>
+        <div class="col-sm-4">
+            @Html.EditorFor(model => model.deal.AmountToExchangeCreditedCurrency, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.DropDownListFor(m => m.deal.CreditedCurrency, new SelectList(Model.CurrencyList), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        <label class="col-sm-4">Amount</label>
+        <div class="col-sm-4">
+            @Html.DropDownListFor(m => m.deal.CreditedCurrency, new SelectList(Model.CurrencyList), htmlAttributes: new { @class = "form-control" })
+        </div>
+    </div>
+    <div class="form-group">
+        @Html.LabelFor(model => model.deal.Comment, htmlAttributes: new { @class = "control-label col-md-2" })
+        <div class="col-md-4">
+            @Html.EditorFor(model => model.deal.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            @Html.ValidationMessageFor(model => model.deal.Comment, "", new { @class = "text-danger" })
+        </div>
+    </div>
+    <div class="form-group">
+        <div class="start-align col-md-10">
+            @if (Model.deal.IsDemo)
+            {
+                <input type="submit" value="Submit your DEMO Order" class="btn btn-primary btn-lg" />
+            }
+            else
+            {
+                <input type="submit" value="Submit your Order" class="btn btn-primary btn-lg" />
+                <br />
+                <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+            }
+        </div>
+    </div>
+    <br />
+    <br />
+}

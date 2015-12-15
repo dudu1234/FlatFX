@@ -35,7 +35,7 @@ namespace FlatFXCore.Model.Data
         [Display(Name="חשבון לזיכוי")]
         public virtual ProviderAccount CreditedProviderAccount { get; set; }
         [Display(Name = "חשבון לחיוב")]
-        public virtual ProviderAccount ChangedProviderAccount { get; set; }
+        public virtual ProviderAccount ChargedProviderAccount { get; set; }
 
         public string ProviderUserId { get; set; }
         [ForeignKey("ProviderUserId")]
@@ -49,9 +49,7 @@ namespace FlatFXCore.Model.Data
         public virtual QueryData Query { get; set; }
 
         public Consts.eDealType DealType { get; set; }
-        [Display(Name="סוג המרה")]
-        public Consts.eSimpleCurrencyExchangeType? SimpleCurrencyExchangeType { get; set; }
-
+        public Consts.eDealProductType DealProductType { get; set; }
         public Consts.eBuySell BuySell { get; set; }
 
         [Required, Column(TypeName = "VARCHAR"), MaxLength(10)]
@@ -85,10 +83,6 @@ namespace FlatFXCore.Model.Data
         public double? FlatFXTotalProfitUSD { get; set; }
         public double? BankTotalProfitUSD { get; set; }
 
-        //to do: loads it dynamically from the database
-        public List<string> CurrencyList = new List<string> { "USD", "EUR" };
-        public Dictionary<string, ProviderAccount> userBankAccounts = null;
-
         //Simple Currency Exchange
         [Display(Name = "סכום להמרה במטבע הנרכש")]
         public double AmountToExchangeCreditedCurrency { get; set; }
@@ -103,54 +97,6 @@ namespace FlatFXCore.Model.Data
             IsDelivery = false;
             IsOffer = false;
             IsDemo = false;
-        }
-
-        private async Task<Dictionary<string, ProviderAccount>> UpdateUserBankAccountsAsync()
-        {
-            if (userBankAccounts == null)
-            {
-                using (var db = new ApplicationDBContext())
-                {
-                    string userId = ApplicationInformation.Instance.GetUserID();
-                    ApplicationUser user = db.Users.Find(userId);
-
-                    //to do fix the function with the right data
-                    userBankAccounts = await db.ProviderAccounts.ToDictionaryAsync(pa => pa.CompanyAccountId + "___" + pa.ProviderId);
-
-                    //await db.ProviderAccounts.Include(pa => pa.CompanyAccount).Join()
-                    //userBankAccounts = await db.ProviderAccounts.Include(pa => pa.CompanyAccount).Where(pa => pa.CompanyAccount.Company.Users.Contains(user)).
-                    //    ToDictionaryAsync(pa => pa.CompanyAccountId + "___" + pa.ProviderId);
-                }
-            }
-            return userBankAccounts;
-        }
-
-        /// <summary>
-        /// Initialize the empty deal as "SimpleCurrencyExchange" according to the current user
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> InitializeSimpleCurrencyExchangeAsync()
-        {
-            using (var db = new ApplicationDBContext())
-            {
-                await InitializeBasicDealAsync(db);
-                DealType = Consts.eDealType.SimpleCurrencyExchange;
-                IsOffer = true;
-            }
-            return true;
-        }
-        /// <summary>
-        /// Initialize the empty deal as "SimpleCurrencyExchange" according to the current user
-        /// </summary>
-        /// <returns></returns>
-        public async Task<bool> InitializeBasicDealAsync(ApplicationDBContext db)
-        {
-            this.UserId = ApplicationInformation.Instance.GetUserID();
-            this.user = db.Users.Find(UserId);
-            System.Web.HttpContext context = System.Web.HttpContext.Current;
-            IsDemo = context.User.IsInRole(Consts.Role_CompanyDemoUser);
-            await UpdateUserBankAccountsAsync();
-            return true;
         }
     }
     [Table("Queries")]

@@ -68,7 +68,8 @@ namespace FlatFXWebClient.Controllers
             {
                 if (TryUpdateModel(user, "",
                    new string[] { "FirstName", "MiddleName", "LastName", "IsActive", "Status", "RoleInCompany", "Language", "SigningKey", 
-                   "InvoiceCurrency", "Email", "EmailConfirmed", "PhoneNumber", "PhoneNumberConfirmed", "AccessFailedCount", "LockoutEnabled", "LockoutEndDateUtc" }) &&
+                   "InvoiceCurrency", "Email", "EmailConfirmed", "PhoneNumber", "PhoneNumberConfirmed", "AccessFailedCount", "LockoutEnabled", "LockoutEndDateUtc",
+                   "IsApprovedByFlatFX" }) &&
                     TryUpdateModel(user.ContactDetails, "ContactDetails", new string[] { "Address", "Country", "OfficePhone", "Fax", "WebSite" }))
                 {
                     try

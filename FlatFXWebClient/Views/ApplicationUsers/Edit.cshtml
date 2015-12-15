@@ -162,6 +162,13 @@
                         @Html.EditorFor(model => model.ContactDetails.WebSite, new { htmlAttributes = new { @class = "form-control" } })
                         @Html.ValidationMessageFor(model => model.ContactDetails.WebSite, "", new { @class = "text-danger" })
                     </div>
+
+                    @Html.LabelFor(model => model.IsApprovedByFlatFX, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-4">
+                        <div class="checkbox">
+                            @Html.EditorFor(model => model.IsApprovedByFlatFX)
+                        </div>
+                    </div>
                 </div>
 
                 <div class="form-group">

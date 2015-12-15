@@ -451,7 +451,6 @@ input, textarea {
 
 td input[type="submit"],
 td input[type="button"],
-
 /* info and errors */
 .message-info {
     border: 1px solid;
@@ -894,6 +893,10 @@ table.ffx-table tr td a {
     text-align: start;
 }
 
+.end-align {
+    text-align: end;
+}
+
 .not-active {
     pointer-events: none;
     cursor: default;
@@ -908,12 +911,23 @@ table.ffx-table tr td a {
 }
 
 .tooltip {
-	display:none;
-	position:absolute;
-	border:1px solid #333;
-	background-color:#161616;
-	border-radius:5px;
-	padding:10px;
-	color:#fff;
-	font-size:12px;
+    display: none;
+    position: absolute;
+    border: 1px solid #333;
+    background-color: #161616;
+    border-radius: 5px;
+    padding: 10px;
+    color: #fff;
+    font-size: 12px;
+}
+
+.demoToLiveTrading {
+    background-color: #e4f6ae;
+    height: 50px;
+}
+.simple-trade-header {
+    /*background-color: #f6f4a3;*/
+    color: blue;
+    text-align: start;
+    /*height: 50px;*/
 }
