@@ -32,9 +32,9 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Display(Name="חשבון לזיכוי")]
+        [Display(Name="Account")]
         public virtual ProviderAccount CreditedProviderAccount { get; set; }
-        [Display(Name = "חשבון לחיוב")]
+        [Display(Name = "Account")]
         public virtual ProviderAccount ChargedProviderAccount { get; set; }
 
         public string ProviderUserId { get; set; }

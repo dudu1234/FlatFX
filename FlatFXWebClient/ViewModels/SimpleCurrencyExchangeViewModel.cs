@@ -12,38 +12,56 @@ using FlatFXCore.BussinessLayer;
 using FlatFXCore.Model.Core;
 using FlatFXCore.Model.Data;
 using FlatFXCore.Model.User;
+using System.ComponentModel.DataAnnotations;
 
 namespace FlatFXWebClient.ViewModels
 {
     public class SimpleCurrencyExchangeViewModel
     {
-        public Deal deal { get; set; }
-        public List<string> CurrencyList { get; set; }
-        public Dictionary<string, ProviderAccount> userBankAccounts { get; set; }
+        public string OrderKey { get; set; }
+        [Display(Name = "Account")]
+        [Required]
+        public string SelectedAccount { get; set; }
         public List<string> InvalidAccountReason { get; set; }
+        [Required]
+        public Consts.eBuySell BuySell { get; set; }
+        [Required]
+        [Display(Name = "Amount")]
+        [Range(1000, 1000000, ErrorMessage = "Please enter number between 1,000-1,000,000")]
+        public double Amount { get; set; }
+        [Required]
+        public string CCY1 { get; set; }
+        [Required]
+        public string CCY2 { get; set; }
+        [Display(Name = "Comment")]
+        public string Comment { get; set; }
 
-        //[Display(Name = "סוג המרה")]
-        //public Consts.eSimpleCurrencyExchangeType? SimpleCurrencyExchangeType { get; set; }
 
         public SimpleCurrencyExchangeViewModel()
         {
             InvalidAccountReason = new List<string>();
-            userBankAccounts = null;
+            OrderKey = Guid.NewGuid().ToString();
+
+            // To do load it dynamically
+            //CurrencyList
+            List<string> CurrencyList = new List<string> { "USD", "EUR", "ILS" };
+            ApplicationInformation.Instance.Session["CurrencyList"] = CurrencyList;
         }
+
+
         public async Task<bool> Initialize(ApplicationDBContext db)
         {
-            //CurrencyList
-            // To do load it dynamically
-            CurrencyList = new List<string> { "USD", "EUR", "ILS" };
+            CCY1 = "USD";
+            CCY2 = "ILS";
 
             //get User
-            string userId = ApplicationInformation.Instance.GetUserID();
+            string userId = ApplicationInformation.Instance.UserID;
             ApplicationUser user = await db.Users.Include(u => u.Companies).Where(u => u.Id == userId && u.IsActive == true).FirstOrDefaultAsync();
             if (user == null)
                 return false;
-            if (!ApplicationInformation.Instance.IsDemoUser() && !user.IsApprovedByFlatFX)
+            if (!ApplicationInformation.Instance.IsDemoUser && !user.IsApprovedByFlatFX)
                 InvalidAccountReason.Add("User is not approved by FlatFX team.");
-            
+
             //get Company
             List<string> userCompaniesIdList = user.Companies.Where(comp => comp.IsActive == true).Select(c => c.CompanyId).ToList();
             List<string> userCompaniesIdListPlusWhere = user.Companies.Where(comp => comp.IsActive == true && comp.IsSignOnRegistrationAgreement == true)
@@ -70,10 +88,15 @@ namespace FlatFXWebClient.ViewModels
             }
             foreach (ProviderAccount pa in toRemove)
                 providerAccounts.Remove(pa);
-            userBankAccounts = providerAccounts.ToDictionary(pa => pa.AccountName);
+            ApplicationInformation.Instance.Session["UserBankAccounts"] = providerAccounts.Select(pa => new SelectListItem
+            {
+                Value = pa.ProviderId + "_" + pa.CompanyAccountId,
+                Text = pa.CompanyAccount.Company.CompanyName + " - " + pa.AccountName
+            });
+            SelectedAccount = UserBankAccounts.First().Value;
 
             //Initialize deal
-            deal = new Deal();
+            Deal deal = new Deal();
             if (providerAccounts.Count > 0 && providerAccounts[0].IsDemoAccount == true)
                 deal.IsDemo = true;
             if (ApplicationInformation.Instance.IsUserInRole(Consts.Role_CompanyDemoUser))
@@ -93,8 +116,43 @@ namespace FlatFXWebClient.ViewModels
             }
             deal.user = user;
 
+            ApplicationInformation.Instance.Session[OrderKey] = deal;
+
+            if (InvalidAccountReason.Count == 0)
+                InvalidAccountReason = null;
 
             return true;
+        }
+
+        public Deal DealInSession
+        {
+            get
+            {
+                if (ApplicationInformation.Instance.Session[OrderKey] != null)
+                    return ApplicationInformation.Instance.Session[OrderKey] as Deal;
+                else
+                    return null;
+            }
+        }
+        public List<string> CurrencyList 
+        {
+            get 
+            {
+                if (ApplicationInformation.Instance.Session["CurrencyList"] != null)
+                    return ApplicationInformation.Instance.Session["CurrencyList"] as List<string>;
+                else
+                    return null;
+            }
+        }
+        public IEnumerable<SelectListItem> UserBankAccounts 
+        { 
+            get
+            {
+                if (ApplicationInformation.Instance.Session["UserBankAccounts"] != null)
+                    return ApplicationInformation.Instance.Session["UserBankAccounts"] as IEnumerable<SelectListItem>;
+                else
+                    return null;
+            }
         }
     }
 }

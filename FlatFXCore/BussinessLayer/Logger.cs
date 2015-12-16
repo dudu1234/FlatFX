@@ -162,11 +162,11 @@ namespace FlatFXCore.BussinessLayer
                 if (!checkIfWriteLevel(_LogLevel, _OperationLevel))
                     return false;
 
-                string _UserId = ApplicationInformation.Instance.GetUserID();
+                string _UserId = ApplicationInformation.Instance.UserID;
                 if (_UserId == "")
                     _UserId = null;
-                string _SessionId = ApplicationInformation.Instance.GetSessionID();
-                string _UserIP = ApplicationInformation.Instance.GetUserIP();
+                string _SessionId = ApplicationInformation.Instance.SessionID;
+                string _UserIP = ApplicationInformation.Instance.UserIP;
 
                 using (var context = new ApplicationDBContext())
                 {

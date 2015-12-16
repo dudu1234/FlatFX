@@ -1,4 +1,6 @@
 ﻿@model FlatFXWebClient.ViewModels.SimpleCurrencyExchangeViewModel
+@using FlatFXCore.BussinessLayer;
+
 @{
     ViewBag.Title = "Simple Currency Exchange";
     string queryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 1) ? "active" : "disabled not-active";
@@ -7,9 +9,10 @@
     string confirmBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "" : "display-none";
     string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
+
 @using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
-    if (Model.deal.IsDemo)
+    if (ApplicationInformation.Instance.IsDemoUser)
     {
         <div class="col-xs-12 demoToLiveTrading">
             <span>You are in a demo environment. Your traders won't have any effect.</span>
@@ -19,7 +22,8 @@
     }
 
     @Html.AntiForgeryToken()
-
+    @Html.HiddenFor(model => model.OrderKey)
+    
     <div class="row form-group">
         <div class="col-xs-12">
             <ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -61,26 +65,25 @@
     </div>
     <div>
         @Html.ValidationSummary("", new { @class = "text-danger" })
+        <span class="text-danger">@TempData["ErrorResult"]</span>
     </div>
     <div class="row setup-content @queryBodyClass">
-        <div class="col-xs-12">
-            <div class="col-md-12 text-center">
-                @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
-            </div>
+        <div class="col-xs-5 text-center">
+            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
         </div>
-    </div>
-    if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
-    {
-        <div class="row setup-content @confirmBodyClass">
-            <div class="col-xs-12">
-                <div class="col-md-12 text-center">
+        <div class="col-xs-2 text-center"></div>
+        <div class="col-xs-5 text-center">
+            @if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
+            {
+                <div class="@confirmBodyClass">
+
                     @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
                     <br />
                     <input type="submit" value="Confirm" class="btn btn-primary btn-lg" />
                 </div>
-            </div>
+            }
         </div>
-    }
+    </div>
     if (Session["SimpleCurrencyExchangeStep"].ToInt() == 3)
     {
         <div class="row setup-content">

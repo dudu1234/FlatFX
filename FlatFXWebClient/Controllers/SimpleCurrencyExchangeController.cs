@@ -21,7 +21,7 @@ namespace FlatFXWebClient.Controllers
     {
         public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
-            if (model.deal == null)
+            if (model.SelectedAccount == null)
             {
                 Session["SimpleCurrencyExchangeStep"] = 1;
                 model = new SimpleCurrencyExchangeViewModel();
@@ -36,36 +36,47 @@ namespace FlatFXWebClient.Controllers
         }
         [HttpPost, ActionName("EnterData")]
         [ValidateAntiForgeryToken]
-        public async Task<ActionResult> EnterDataPost(SimpleCurrencyExchangeViewModel model)
+        public ActionResult EnterDataPost(SimpleCurrencyExchangeViewModel model)
         {
             if (model == null)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
             
-            Deal deal = await db.Deals.FindAsync(model.deal.DealId);
+            if (model.CCY1 == model.CCY2)
+                TempData["ErrorResult"] += "Currencies must be different. ";
+
+            if (model.InvalidAccountReason != null && model.InvalidAccountReason.Count == 1 && model.InvalidAccountReason[0] == "")
+                model.InvalidAccountReason = null;
+
+            Deal deal = model.DealInSession;
+            if (deal == null)
+            {
+                TempData["ErrorResult"] += "Timeout expired. ";
+                RedirectToAction("EnterData");
+            }
+
+            if (TempData["ErrorResult"] != null)
+                return View(model);
+
+            
+            
             try
             {
-                string[] whiteList = new string[] { "AccountName", "IsActive", "IsDefaultAccount", "Balance", "Equity", "DailyPNL", "GrossPNL" };
-                if (TryUpdateModel(deal, "", whiteList))
+                deal.BuySell = model.BuySell;
+                if (model.BuySell == Consts.eBuySell.Buy)
                 {
-                    try
-                    {
-                        db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
-                        return RedirectToAction("Confim");
-                    }
-                    catch (DataException /* dex */)
-                    {
-                        //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
-                    }
+                    deal.AmountToExchangeCreditedCurrency = model.Amount;
+                }
+                else
+                {
+                    deal.AmountToExchangeChargedCurrency = model.Amount;
                 }
             }
-            catch (DataException /* dex */)
+            catch (Exception ex)
             {
-                //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                Logger.Instance.WriteError("Failed in SimpleCurrencyExchangeController::EnterDataPost", ex);
+                TempData["ErrorResult"] += "General Error. ";
             }
 
             return View(deal);

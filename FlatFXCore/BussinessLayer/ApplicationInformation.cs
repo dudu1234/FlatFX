@@ -14,6 +14,7 @@ using System.IO;
 using System.Text.RegularExpressions;
 using System.Web.Security;
 using FlatFXCore.Model.Data;
+using System.Web.SessionState;
 
 namespace FlatFXCore.BussinessLayer
 {
@@ -121,13 +122,16 @@ namespace FlatFXCore.BussinessLayer
         #endregion
 
         #region Public Functions
-        public string GetUserID()
+        public string UserID
         {
-            System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null || context.User.Identity.Name == "")
-                return "";
-            else
-                return context.User.Identity.GetUserId();
+            get
+            {
+                System.Web.HttpContext context = System.Web.HttpContext.Current;
+                if (context == null || context.User.Identity.Name == "")
+                    return "";
+                else
+                    return context.User.Identity.GetUserId();
+            }
         }
         public bool IsUserInRole(string role)
         {
@@ -137,46 +141,67 @@ namespace FlatFXCore.BussinessLayer
             else
                 return context.User.IsInRole(role);
         }
-        public bool IsDemoUser()
+        public bool IsDemoUser
         {
-            return IsUserInRole(Consts.Role_CompanyDemoUser);
+            get
+            {
+                return IsUserInRole(Consts.Role_CompanyDemoUser);
+            }
         }
-        public string GetSessionID()
+        public string SessionID
         {
-            System.Web.HttpContext context = System.Web.HttpContext.Current;
-
-            if (context == null || context.Session == null)
-                return null;
-            else
-                return context.Session.SessionID;
-        }
-        public string GetUserIP()
-        {
-            try
+            get
             {
                 System.Web.HttpContext context = System.Web.HttpContext.Current;
-                if (context == null || context.Request == null || context.Request.ServerVariables == null || context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] == null)
-                    return null;
 
-                string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
-
-                if (!string.IsNullOrEmpty(ipAddress))
-                {
-                    string[] addresses = ipAddress.Split(',');
-                    if (addresses.Length != 0)
-                    {
-                        return addresses[0];
-                    }
-                }
-
-                if (context.Request.ServerVariables["REMOTE_ADDR"] == null)
+                if (context == null || context.Session == null)
                     return null;
                 else
-                    return context.Request.ServerVariables["REMOTE_ADDR"];
+                    return context.Session.SessionID;
             }
-            catch
+        }
+        public HttpSessionState Session
+        {
+            get
             {
-                return null;
+                System.Web.HttpContext context = System.Web.HttpContext.Current;
+
+                if (context == null || context.Session == null)
+                    return null;
+                else
+                    return context.Session;
+            }
+        }
+        public string UserIP
+        {
+            get
+            {
+                try
+                {
+                    System.Web.HttpContext context = System.Web.HttpContext.Current;
+                    if (context == null || context.Request == null || context.Request.ServerVariables == null || context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"] == null)
+                        return null;
+
+                    string ipAddress = context.Request.ServerVariables["HTTP_X_FORWARDED_FOR"];
+
+                    if (!string.IsNullOrEmpty(ipAddress))
+                    {
+                        string[] addresses = ipAddress.Split(',');
+                        if (addresses.Length != 0)
+                        {
+                            return addresses[0];
+                        }
+                    }
+
+                    if (context.Request.ServerVariables["REMOTE_ADDR"] == null)
+                        return null;
+                    else
+                        return context.Request.ServerVariables["REMOTE_ADDR"];
+                }
+                catch
+                {
+                    return null;
+                }
             }
         }
         /// <summary>
