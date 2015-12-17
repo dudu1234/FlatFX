@@ -41,11 +41,6 @@ namespace FlatFXWebClient.ViewModels
         {
             InvalidAccountReason = new List<string>();
             OrderKey = Guid.NewGuid().ToString();
-
-            // To do load it dynamically
-            //PairList
-            List<string> CurrencyList = new List<string> { "USD", "EUR", "ILS" };
-            ApplicationInformation.Instance.Session["PairList"] = CurrencyList;
         }
 
 
@@ -130,16 +125,6 @@ namespace FlatFXWebClient.ViewModels
             {
                 if (ApplicationInformation.Instance.Session[OrderKey] != null)
                     return ApplicationInformation.Instance.Session[OrderKey] as Deal;
-                else
-                    return null;
-            }
-        }
-        public List<string> CurrencyList 
-        {
-            get 
-            {
-                if (ApplicationInformation.Instance.Session["PairList"] != null)
-                    return ApplicationInformation.Instance.Session["PairList"] as List<string>;
                 else
                     return null;
             }

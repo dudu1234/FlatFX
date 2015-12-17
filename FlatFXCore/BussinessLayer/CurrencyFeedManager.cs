@@ -175,6 +175,7 @@ namespace FlatFXCore.BussinessLayer
         }
         void UpdateFeedTimer_Elapsed(object sender, ElapsedEventArgs e)
         {
+            string response = "";
             try
             {
                 WebClient web = new WebClient();
@@ -182,7 +183,7 @@ namespace FlatFXCore.BussinessLayer
                 string url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22" +
                     m_CurrencyListString +
                     "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
-                string response = web.DownloadString(url);
+                response = web.DownloadString(url);
 
                 /*
                     {
@@ -218,7 +219,7 @@ namespace FlatFXCore.BussinessLayer
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteError("Failed in CurrencyFeedManager::UpdateFeedTimer_Elapsed", ex);
+                Logger.Instance.WriteError("Failed in CurrencyFeedManager::UpdateFeedTimer_Elapsed. Response: " + response, ex);
             }
         }
 

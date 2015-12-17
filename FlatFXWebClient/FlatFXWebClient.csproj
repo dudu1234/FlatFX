@@ -268,6 +268,7 @@
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
     <Content Include="JS\Controllers\RegisterAll.js" />
+    <Content Include="JS\Functions\NotyFunctions.js" />
     <Content Include="JS\rtlCustom.js" />
     <Content Include="JS\FFx.js" />
     <Content Include="JS\Home\HomePage.js" />
@@ -278,6 +279,7 @@
     <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="Content\bootstrap-theme.css.map" />
     <Content Include="Content\bootstrap.css.map" />
+    <Content Include="JS\Services\Services.js" />
     <Content Include="Scripts\angular-animate.js" />
     <Content Include="Scripts\angular-animate.min.js" />
     <Content Include="Scripts\angular-aria.js" />
@@ -292,6 +294,7 @@
     <Content Include="Scripts\angular-messages.js" />
     <Content Include="Scripts\angular-messages.min.js" />
     <Content Include="Scripts\angular-mocks.js" />
+    <Content Include="Scripts\angular-noty.js" />
     <Content Include="Scripts\angular-resource.js" />
     <Content Include="Scripts\angular-resource.min.js" />
     <Content Include="Scripts\angular-route.js" />
@@ -1070,6 +1073,7 @@
     <Content Include="Scripts\jquery-ui-1.11.4.min.js" />
     <None Include="Scripts\jquery.validate-vsdoc.js" />
     <Content Include="Scripts\jquery.fullPage.js" />
+    <Content Include="Scripts\jquery.noty.packaged.js" />
     <Content Include="Scripts\jquery.validate.js" />
     <Content Include="Scripts\jquery.validate.min.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />

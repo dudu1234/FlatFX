@@ -9,89 +9,94 @@
     string confirmBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "" : "display-none";
     string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
-
-@using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    if (ApplicationInformation.Instance.IsDemoUser)
+<script src="~/JS/Controllers/RegisterAll.js"></script>
+<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')">
+    @using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
-        <div class="col-xs-12 demoToLiveTrading">
-            <span>You are in a demo environment. Your traders won't have any effect.</span>
-            <a class="btn btn-success" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
-        </div>
-        <br /><br /><br />
-    }
+        if (ApplicationInformation.Instance.IsDemoUser)
+        {
+            <div id="ddddd" class="col-xs-12">
 
-    @Html.AntiForgeryToken()
-    @Html.HiddenFor(model => model.OrderKey)
-    
-    <div class="row form-group">
-        <div class="col-xs-12">
-            <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                <li class="@queryHeaderClass">
-                    <a href="" style="text-decoration: none;">
-                        <h1>
-                            @FlatFXResources.Resources.Step 1
-                            @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 1)
-                            {
-                                <span class="glyphicon glyphicon-ok green"></span>
-                            }
-                        </h1>
-                        <h3 class="list-group-item-heading">Enter your Order details</h3>
-                        <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
-                    </a>
-                </li>
-                <li class="@confirmHeaderClass">
-                    <a href="" style="text-decoration: none;">
-                        <h1>
-                            @FlatFXResources.Resources.Step 2
-                            @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 2)
-                            {
-                                <span class="glyphicon glyphicon-ok green"></span>
-                            }
-                        </h1>
-                        <h3 class="list-group-item-heading">Confirm Deal</h3>
-                        <p class="list-group-item-text">See the live rates and confirm the deal</p>
-                    </a>
-                </li>
-                <li class="@summaryHeaderClass">
-                    <a href="" style="text-decoration: none;">
-                        <h1>@FlatFXResources.Resources.Step 3</h1>
-                        <h3 class="list-group-item-heading">Summary</h3>
-                        <p class="list-group-item-text">See the Deal summary and the instractions for the money transfer</p>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </div>
-    <div>
-        @Html.ValidationSummary("", new { @class = "text-danger" })
-        <span class="text-danger">@TempData["ErrorResult"]</span>
-    </div>
-    <div class="row setup-content @queryBodyClass">
-        <div class="col-xs-5 text-center">
-            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
-        </div>
-        <div class="col-xs-2 text-center"></div>
-        <div class="col-xs-5 text-center">
-            @if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
-            {
-                <div class="@confirmBodyClass">
-
-                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
-                    <br />
-                    <input type="submit" value="Confirm" class="btn btn-primary btn-lg" />
-                </div>
-            }
-        </div>
-    </div>
-    if (Session["SimpleCurrencyExchangeStep"].ToInt() == 3)
-    {
-        <div class="row setup-content">
-            <div class="col-xs-12">
-                <div class="col-md-12 text-center">
-                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)
-                </div>
             </div>
-        </div>
-    }
-}
+                <div class="col-xs-12 demoToLiveTrading">
+                    <span>You are in a demo environment. Your traders won't have any effect.</span>
+                    <a class="btn btn-success" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
+                </div>
+                <br /><br /><br />
+                }
+
+                @Html.AntiForgeryToken()
+                @Html.HiddenFor(model => model.OrderKey)
+
+                <div class="row form-group">
+                    <div class="col-xs-12">
+                        <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                            <li class="@queryHeaderClass">
+                                <a href="" style="text-decoration: none;">
+                                    <h1>
+                                        @FlatFXResources.Resources.Step 1
+                                        @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 1)
+                                {
+                                            <span class="glyphicon glyphicon-ok green"></span>
+                                }
+                                    </h1>
+                                    <h3 class="list-group-item-heading">Enter your Order details</h3>
+                                    <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
+                                </a>
+                            </li>
+                            <li class="@confirmHeaderClass">
+                                <a href="" style="text-decoration: none;">
+                                    <h1>
+                                        @FlatFXResources.Resources.Step 2
+                                        @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 2)
+                                {
+                                            <span class="glyphicon glyphicon-ok green"></span>
+                                }
+                                    </h1>
+                                    <h3 class="list-group-item-heading">Confirm Deal</h3>
+                                    <p class="list-group-item-text">See the live rates and confirm the deal</p>
+                                </a>
+                            </li>
+                            <li class="@summaryHeaderClass">
+                                <a href="" style="text-decoration: none;">
+                                    <h1>@FlatFXResources.Resources.Step 3</h1>
+                                    <h3 class="list-group-item-heading">Summary</h3>
+                                    <p class="list-group-item-text">See the Deal summary and the instractions for the money transfer</p>
+                                </a>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+                <div>
+                    @Html.ValidationSummary("", new { @class = "text-danger" })
+                    <span class="text-danger">@TempData["ErrorResult"]</span>
+                </div>
+                <div class="row setup-content @queryBodyClass">
+                    <div class="col-xs-5 text-center">
+                        @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
+                    </div>
+                    <div class="col-xs-2 text-center"></div>
+                    <div class="col-xs-5 text-center">
+                        @if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
+                {
+                            <div class="@confirmBodyClass">
+
+                                @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
+                                <br />
+                                <input type="submit" value="Confirm" class="btn btn-primary btn-lg" />
+                            </div>
+                }
+                    </div>
+                </div>
+                if (Session["SimpleCurrencyExchangeStep"].ToInt() == 3)
+                {
+                <div class="row setup-content">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 text-center">
+                            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)
+                        </div>
+                    </div>
+                </div>
+                }
+                }
+            </div>

@@ -42,7 +42,7 @@ namespace FlatFXWebClient.Controllers
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
             }
-            
+
             if (model.CCY1 == model.CCY2)
                 TempData["ErrorResult"] += "Currencies must be different. ";
 

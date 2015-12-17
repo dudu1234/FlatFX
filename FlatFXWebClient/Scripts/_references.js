@@ -27,3 +27,7 @@
 /// <reference path="angular-animate.min.js" />
 /// <reference path="angular.min.js" />
 /// <reference path="../js/controllers/registerall.js" />
+/// <reference path="jquery.noty.packaged.js" />
+/// <reference path="angular-noty.js" />
+/// <reference path="../js/services/services.js" />
+/// <reference path="../js/functions/notyfunctions.js" />

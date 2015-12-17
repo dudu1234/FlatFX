@@ -11,32 +11,29 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
-
-    @RenderSection("scripts", required: false)
-
+    @Scripts.Render("~/bundles/noty")
+   
     @{
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
         {
-            <script src="~/Scripts/bootstrap.rtl.min.js"></script>
-            <script src="~/Scripts/bootstrap.rtl.min.js"></script>
-            <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
+            @Styles.Render("~/bundles/RightToLeft1css")
         }
     }
 
-    <link href="~/Content/fullpageex.css" rel="stylesheet" />
-    <link href="~/Content/Site.css" rel="stylesheet" />
-    <script src="~/JS/FFx.js"></script>
+    @Styles.Render("~/bundles/FFXcss1")
+    @Styles.Render("~/bundles/FFXcss2")
+    @Scripts.Render("~/bundles/FFXjs")
 
     @{
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
         {
-            <link href="~/Content/rtlCustom.css" rel="stylesheet" />
-            <script src="~/JS/rtlCustom.js"></script>
+            @Styles.Render("~/bundles/FFXcssRtl")
+            @Scripts.Render("~/bundles/FFXjsRtl")
         }
     }
 
 </head>
-<body @*ng-app="flatfx"*@>
+<body ng-app="flatfx">
     <div class="row">
         <div id="nav" class="col-xs-12 static">
             @Html.Partial("MainSiteHeader")
