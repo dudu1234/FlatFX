@@ -8,6 +8,17 @@ using System.Threading.Tasks;
 
 namespace FlatFXCore.Model.Data
 {
+    [Table("Currency")]
+    public class Currency
+    {
+        [Key, Column(TypeName = "VARCHAR"), MaxLength(10)]
+        public string Key { get; set; }
+        [Required]
+        public bool IsActive { get; set; }
+
+        public Currency() { }
+    }
+
     [Table("FXRates")]
     public class FXRate
     {

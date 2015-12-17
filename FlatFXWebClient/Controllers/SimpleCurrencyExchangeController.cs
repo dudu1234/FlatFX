@@ -56,6 +56,9 @@ namespace FlatFXWebClient.Controllers
                 RedirectToAction("EnterData");
             }
 
+            if (!CurrencyManager.Instance.PairList.ContainsKey(model.CCY1 + model.CCY2) && !CurrencyManager.Instance.PairList.ContainsKey(model.CCY2 + model.CCY1))
+                TempData["ErrorResult"] += "Invalid currencies combination. ";
+
             if (TempData["ErrorResult"] != null)
                 return View(model);
 
@@ -64,6 +67,18 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 deal.BuySell = model.BuySell;
+                //check the pair order according to the currencies selection
+                string pair = model.CCY1 + model.CCY2;
+                if (CurrencyManager.Instance.PairList.ContainsKey(pair))
+                {
+                    deal.Amount1 = model.Amount;
+                    //deal.Amount2 = 
+                }
+                else
+                {
+                    pair = model.CCY2 + model.CCY1;
+                }
+
                 if (model.BuySell == Consts.eBuySell.Buy)
                 {
                     deal.AmountToExchangeCreditedCurrency = model.Amount;

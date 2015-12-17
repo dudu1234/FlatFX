@@ -63,6 +63,7 @@ namespace FlatFXCore.BussinessLayer
                 throw ex;
             }
         }
+        public void Start() { }
         #endregion
 
         #region Public Functions
@@ -344,7 +345,7 @@ namespace FlatFXCore.BussinessLayer
         private string GetUserID()
         {
             System.Web.HttpContext context = System.Web.HttpContext.Current;
-            if (context == null || context.User.Identity.Name == "")
+            if (context == null || context.User == null || context.User.Identity.Name == "")
                 return "";
             else
                 return context.User.Identity.GetUserId();

@@ -43,9 +43,9 @@ namespace FlatFXWebClient.ViewModels
             OrderKey = Guid.NewGuid().ToString();
 
             // To do load it dynamically
-            //CurrencyList
+            //PairList
             List<string> CurrencyList = new List<string> { "USD", "EUR", "ILS" };
-            ApplicationInformation.Instance.Session["CurrencyList"] = CurrencyList;
+            ApplicationInformation.Instance.Session["PairList"] = CurrencyList;
         }
 
 
@@ -138,8 +138,8 @@ namespace FlatFXWebClient.ViewModels
         {
             get 
             {
-                if (ApplicationInformation.Instance.Session["CurrencyList"] != null)
-                    return ApplicationInformation.Instance.Session["CurrencyList"] as List<string>;
+                if (ApplicationInformation.Instance.Session["PairList"] != null)
+                    return ApplicationInformation.Instance.Session["PairList"] as List<string>;
                 else
                     return null;
             }

@@ -1,4 +1,5 @@
-﻿using FlatFXCore.Model.Core;
+﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Core;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -20,6 +21,13 @@ namespace FlatFXWebClient
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+
+            //Start application instances
+            ApplicationInformation.Instance.Start();
+            Config.Instance.Start();
+            Logger.Instance.Start();
+            CurrencyManager.Instance.Start();
+            CurrencyFeedManager.Instance.Start();
         }
         protected void Session_Start(object sender, EventArgs e)
         {

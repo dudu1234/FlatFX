@@ -78,6 +78,7 @@ namespace FlatFXCore.BussinessLayer
                 return m_LoggerInstance;
             }
         }
+        public void Start() { }
         #endregion
 
         #region WriteToLog

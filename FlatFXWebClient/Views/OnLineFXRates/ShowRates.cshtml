@@ -2,6 +2,7 @@
     ViewBag.Title = "ShowRates";
 }
 
+@using FlatFXCore.BussinessLayer;
 
 <div class="row" style="background-color: #dae4e4">
     <div class="col-sm-4 col-sm-offset-4">
@@ -28,13 +29,13 @@
                         </thead>
                         <tbody>
                             @{
-                                foreach (var currencyItem in FlatFXCore.BussinessLayer.CurrencyFeedManager.Instance.CurrencyList)
+                                foreach (string pairKey in CurrencyManager.Instance.PairList.Keys)
                                 {
                                     <tr>
-                                        <td>@currencyItem.Value</td>
-                                        <td id="@(currencyItem.Key + "-MID")"></td>
-                                        <td id="@(currencyItem.Key + "-BID")"></td>
-                                        <td id="@(currencyItem.Key + "-ASK")"></td>
+                                        <td>@CurrencyManager.Instance.PairList[pairKey]</td>
+                                        <td id="@(pairKey + "-MID")"></td>
+                                        <td id="@(pairKey + "-BID")"></td>
+                                        <td id="@(pairKey + "-ASK")"></td>
                                     </tr>
                                 }
                             }

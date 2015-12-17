@@ -30,14 +30,6 @@ namespace FlatFXCore.BussinessLayer
         /// </summary>
         internal ApplicationInformation()
         {
-            //if (DATE_FORMAT == "dd/MM/yyyy")
-            //{
-            //    FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("he-IL");
-            //}
-            //else
-            //{
-            //    FormatProvider = System.Globalization.CultureInfo.GetCultureInfo("en-us");
-            //}
         }
         public static ApplicationInformation Instance
         {
@@ -49,6 +41,7 @@ namespace FlatFXCore.BussinessLayer
                 return m_ApplicationInformationInstance;
             }
         }
+        public void Start() { }
         #endregion
 
         #region Dispose

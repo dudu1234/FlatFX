@@ -1,9 +1,12 @@
-﻿using Newtonsoft.Json;
+﻿using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using System.Net;
+using System.Resources;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
@@ -11,17 +14,89 @@ using System.Timers;
 
 namespace FlatFXCore.BussinessLayer
 {
+    public class CurrencyManager
+    {
+        #region Members
+        private static CurrencyManager m_CurrencyManagerInstance = null;
+        private Dictionary<string, string> _PairList = new Dictionary<string, string>();
+        public Dictionary<string, FXRate> PairRates = new Dictionary<string, FXRate>();
+        public List<string> CurrencyList = null;
+        #endregion
+
+        #region Ctor + Dtor
+        /// <summary>
+        ///     The Singelton ctor.
+        /// </summary>
+        internal CurrencyManager()
+        {
+            try
+            {
+                using (var db = new ApplicationDBContext())
+                {
+                    CurrencyList = db.Currencies.Where(c => c.IsActive == true).Select(c => c.Key).ToList();
+                    _PairList = db.FXRates.Where(r => r.IsActive == true).Select(c => c.Key).ToDictionary(k => k, k => FlatFXResources.Resources.ResourceManager.GetString(k, FlatFXResources.Resources.Culture));
+                    PairRates = db.FXRates.Where(r => r.IsActive == true).ToDictionary(r => r.Key);
+                }
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in CurrencyManager::Ctor", ex);
+            }
+        }
+        /// <summary> 
+        /// Clean up any resources being used.
+        /// </summary>
+        protected void Dispose(bool disposing)
+        {
+            if (disposing)
+            {
+            }
+        }
+        /// <summary>
+        /// CurrencyManager
+        /// </summary>
+        public static CurrencyManager Instance
+        {
+            get
+            {
+                if (m_CurrencyManagerInstance == null)
+                    m_CurrencyManagerInstance = new CurrencyManager();
+
+                return m_CurrencyManagerInstance;
+            }
+        }
+        public void Start() { }
+        #endregion
+
+        public Dictionary<string, string> PairList
+        {
+            get
+            {
+                if (ApplicationInformation.Instance.Session == null)
+                    return _PairList;
+                if (ApplicationInformation.Instance.Session["PairList"] == null)
+                {
+                    using (var db = new ApplicationDBContext())
+                    {
+                        ApplicationInformation.Instance.Session["PairList"] = db.FXRates.Where(r => r.IsActive == true).Select(c => c.Key).ToDictionary(k => k, k => FlatFXResources.Resources.ResourceManager.GetString(k, FlatFXResources.Resources.Culture));
+                    }
+                }
+
+                return ApplicationInformation.Instance.Session["PairList"] as Dictionary<string, string>;
+            }
+                    
+        }
+    }
     public class CurrencyFeedManager
     {
         #region Members
         private static CurrencyFeedManager m_CurrencyFeedManagerInstance = null;
         private Timer m_UpdateFeedTimer = null;
         private int m_UpdateFeedTimerInterval = 60 * 1000;
-
         private string m_LastUpdateFeedResponse = "";
-
-        public List<KeyValuePair<string, string>> CurrencyList = new List<KeyValuePair<string, string>>();
         private string m_CurrencyListString = "";
+        private DateTime? m_LastHistoricalUpdate = null;
+
         #endregion
 
         #region Ctor + Dtor
@@ -32,15 +107,7 @@ namespace FlatFXCore.BussinessLayer
         {
             try
             {
-                CurrencyList.Add(new KeyValuePair<string, string>("EURUSD", FlatFXResources.Resources.EURUSD));
-                CurrencyList.Add(new KeyValuePair<string, string>("USDILS", FlatFXResources.Resources.USDILS));
-                CurrencyList.Add(new KeyValuePair<string, string>("EURILS", FlatFXResources.Resources.EURILS));
-                CurrencyList.Add(new KeyValuePair<string, string>("GBPILS", FlatFXResources.Resources.GBPILS));
-                CurrencyList.Add(new KeyValuePair<string, string>("JPYILS", FlatFXResources.Resources.JPYILS));
-                CurrencyList.Add(new KeyValuePair<string, string>("CHFILS", FlatFXResources.Resources.CHFILS));
-                CurrencyList.Add(new KeyValuePair<string, string>("AUDILS", FlatFXResources.Resources.AUDILS));
-
-                foreach (KeyValuePair<string, string> pair in CurrencyList)
+                foreach (KeyValuePair<string, string> pair in CurrencyManager.Instance.PairList)
                 {
                     m_CurrencyListString += pair.Key + ",";
                 }
@@ -87,6 +154,7 @@ namespace FlatFXCore.BussinessLayer
                 return m_CurrencyFeedManagerInstance;
             }
         }
+        public void Start() { }
         #endregion
 
         /// <summary>
@@ -129,7 +197,7 @@ namespace FlatFXCore.BussinessLayer
                         }
                     }
                  */
- 
+
                 //{"query":{"count":7,"created":"2015-11-18T14:25:25Z","lang":"en-US","results":{"rate":[{"id":"EURUSD","Name":"EUR/USD","Rate":"1.0663","Date":"11/18/2015","Time":"2:25pm","Ask":"1.0666","Bid":"1.0661"},{"id":"USDILS","Name":"USD/ILS","Rate":"3.9007","Date":"11/18/2015","Time":"2:25pm","Ask":"3.9022","Bid":"3.9007"},{"id":"EURILS","Name":"EUR/ILS","Rate":"4.1595","Date":"11/18/2015","Time":"2:25pm","Ask":"4.1620","Bid":"4.1569"},{"id":"GBPILS","Name":"GBP/ILS","Rate":"5.9330","Date":"11/18/2015","Time":"2:25pm","Ask":"5.9354","Bid":"5.9305"},{"id":"JPYILS","Name":"JPY/ILS","Rate":"0.0316","Date":"11/18/2015","Time":"2:25pm","Ask":"0.0316","Bid":"0.0316"},{"id":"CHFILS","Name":"CHF/ILS","Rate":"3.8334","Date":"11/18/2015","Time":"2:25pm","Ask":"3.8358","Bid":"3.8309"},{"id":"AUDILS","Name":"AUD/ILS","Rate":"2.7701","Date":"11/18/2015","Time":"2:25pm","Ask":"2.7715","Bid":"2.7687"}]}}}
 
                 //Convert to Json
@@ -137,21 +205,106 @@ namespace FlatFXCore.BussinessLayer
                 string date = results.query.results.rate[0].Date;
                 string time = results.query.results.rate[0].Time;
 
-                DateTime dt = DateTime.ParseExact(date + " " + time.ToLower(), "M/d/yyyy h:mtt", CultureInfo.InvariantCulture);
-                dt = dt.AddHours(2);
-
-                response = response.Replace(date, dt.ToString("MM/dd/yyyy"));
-                response = response.Replace(time, dt.ToString("HH:mm"));
-
-                //Insert the response to the DB.
-
+                DateTime updateTime = DateTime.ParseExact(date + " " + time.ToLower(), "M/d/yyyy h:mtt", CultureInfo.InvariantCulture);
+                updateTime = updateTime.AddHours(2);
 
                 //Update the response in cache
+                response = response.Replace(date, updateTime.ToString("MM/dd/yyyy"));
+                response = response.Replace(time, updateTime.ToString("HH:mm"));
                 m_LastUpdateFeedResponse = response;
+
+                //Insert the response to the DB.
+                UpdateFXRatesTables(results, updateTime);
             }
-            catch(Exception ex)
+            catch (Exception ex)
             {
                 Logger.Instance.WriteError("Failed in CurrencyFeedManager::UpdateFeedTimer_Elapsed", ex);
+            }
+        }
+
+        private void UpdateFXRatesTables(dynamic results, DateTime updateTime)
+        {
+            bool updateHistoricalData = false;
+            if (!m_LastHistoricalUpdate.HasValue || (DateTime.Now - m_LastHistoricalUpdate.Value).TotalDays > 1)
+            {
+                updateHistoricalData = true;
+                m_LastHistoricalUpdate = DateTime.Now;
+            }
+
+            using (var db = new ApplicationDBContext())
+            {
+                foreach (var pairInfo in results.query.results.rate)
+                {
+                    string key = pairInfo.id;
+                    double ask = pairInfo.Ask;
+                    double bid = pairInfo.Bid;
+                    double mid = (ask + bid) / 2;
+                    mid = System.Math.Round(mid, 4);
+
+                    #region FXRate table
+                    FXRate pairData = null;
+                    pairData = db.FXRates.Where(rate => rate.Key == key).FirstOrDefault();
+                    if (pairData == null)
+                    {
+                        pairData = new FXRate()
+                        {
+                            Key = key,
+                            IsActive = true,
+                            LastUpdate = updateTime,
+                            Bid = bid,
+                            Ask = ask,
+                            Mid = mid
+                        };
+                        db.FXRates.Add(pairData);
+                    }
+                    else
+                    {
+                        pairData.Bid = bid;
+                        pairData.Ask = ask;
+                        pairData.Mid = mid;
+                        pairData.LastUpdate = updateTime;
+                    }
+                    #endregion
+
+                    #region Update CurrencyManager PairRates memory cache
+                    if (CurrencyManager.Instance.PairRates.ContainsKey(key))
+                    {
+                        CurrencyManager.Instance.PairRates[key].Bid = bid;
+                        CurrencyManager.Instance.PairRates[key].Ask = ask;
+                        CurrencyManager.Instance.PairRates[key].Mid = mid;
+                        CurrencyManager.Instance.PairRates[key].LastUpdate = updateTime;
+                    }
+                    #endregion
+
+                    #region DailyFXRate table
+                    DailyFXRate pairDailyData = new DailyFXRate()
+                        {
+                            Key = key,
+                            Bid = bid,
+                            Ask = ask,
+                            Mid = mid,
+                            Time = updateTime
+                        };
+                    db.DailyFXRates.Add(pairDailyData);
+                    #endregion
+
+                    #region HistoricalFXRate table
+                    if (updateHistoricalData)
+                    {
+                        HistoricalFXRate pairHistoricalData = new HistoricalFXRate()
+                        {
+                            Key = key,
+                            Bid = bid,
+                            Ask = ask,
+                            Mid = mid,
+                            Time = updateTime
+                        };
+                        db.HistoricalFXRates.Add(pairHistoricalData);
+                    }
+                    #endregion
+                }
+
+                db.SaveChanges();
             }
         }
     }

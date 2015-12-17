@@ -35,7 +35,8 @@ namespace FlatFXCore.Model.Core
         public DbSet<ConfigurationRow> Configurations { get; set; }
         public DbSet<LogInfo> LogInfo { get; set; }
         public DbSet<GenericDictionaryItem> GenericDictionary { get; set; }
-        
+        public DbSet<Currency> Currencies { get; set; }
+
         public ApplicationDBContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)
         {
