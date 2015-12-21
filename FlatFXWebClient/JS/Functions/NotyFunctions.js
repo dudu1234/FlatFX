@@ -10,20 +10,19 @@ notyWrapper = {
             dismissQueue: true,
             layout: 'topCenter',
             theme: 'defaultTheme',
-            maxVisible: 10
-
+            maxVisible: 10,
+            animation: {
+                open: { height: 'toggle' },
+                close: { height: 'toggle' },
+                easing: 'swing',
+                speed: 0
+            }
             //layout: 'top',
             //theme: 'defaultTheme',
             //type: 'alert',
             //text: '',
             //dismissQueue: true,
             //template: '<div class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>',
-            //animation: {
-            //    open: { height: 'toggle' },
-            //    close: { height: 'toggle' },
-            //    easing: 'swing',
-            //    speed: 500
-            //},
             //timeout: false,
             //force: false,
             //modal: false,
@@ -43,6 +42,24 @@ notyWrapper = {
             //    }
             //},
             //buttons: false
+        });
+    },
+    //
+    generateResultMessage: function generate(container, type, text) {
+        var n = $(container).noty({
+            text: text,
+            type: type,
+            dismissQueue: true,
+            layout: 'topCenter',
+            theme: 'defaultTheme',
+            maxVisible: 10,
+            animation: {
+                open: { height: 'toggle' },
+                close: { height: 'toggle' },
+                easing: 'swing',
+                speed: 300
+            }
+            //timeout: 5000
         });
     }
 }

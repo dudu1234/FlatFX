@@ -65,7 +65,7 @@ namespace FlatFXWebClient.Controllers
             catch (DataException) // dex )
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists see your system administrator.";
             }
             return View(provider);
         }
@@ -110,20 +110,20 @@ namespace FlatFXWebClient.Controllers
                     try
                     {
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return RedirectToAction("Index");
                     }
                     catch (DataException /* dex */)
                     {
                         //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
                     }
                 }
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
             }
             return View(provider);
         }
@@ -137,7 +137,7 @@ namespace FlatFXWebClient.Controllers
             }
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+                TempData["ErrorResult"] = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             Provider provider = db.Providers.Find(id);
             if (provider == null)

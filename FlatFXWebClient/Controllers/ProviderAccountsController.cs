@@ -91,20 +91,20 @@ namespace FlatFXWebClient.Controllers
                         providerAccount.LastUpdateBy = User.Identity.GetUserName();
 
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return View(providerAccount);
                     }
                     catch (DataException /* dex */)
                     {
                         //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
                     }
                 }
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
             }
 
             return View(providerAccount);
@@ -168,20 +168,20 @@ namespace FlatFXWebClient.Controllers
                         providerAccount.LastUpdate = DateTime.Now;
                         providerAccount.LastUpdateBy = User.Identity.GetUserName();
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return View(providerAccount);
                     }
                     catch (DataException /* dex */)
                     {
                         //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
                     }
                 }
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
             }
             return View(providerAccount);
         }
@@ -195,7 +195,7 @@ namespace FlatFXWebClient.Controllers
             }
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+                TempData["ErrorResult"] = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             ProviderAccount providerAccount = await db.ProviderAccounts.Where(pa => pa.ProviderId == providerId && pa.CompanyAccountId == companyAccountId).SingleOrDefaultAsync();
             if (providerAccount == null)

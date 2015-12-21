@@ -23,3 +23,25 @@ myApp.controller('enterdata', function ($scope, noty) {
         noty.closeAll()
     }
 });
+
+myApp.controller('adminManager', function ($scope, noty) {
+    $scope.init = function (info1, error1) {
+        if (info1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'success', info1);
+        }
+        else if (error1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'error', error1);
+        }
+    }
+});
+
+myApp.controller('userManager', function ($scope, noty) {
+    $scope.init = function (info1, error1) {
+        if (info1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'success', info1);
+        }
+        else if (error1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'error', error1);
+        }
+    }
+});

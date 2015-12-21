@@ -49,7 +49,7 @@ namespace MVCInBuiltFeatures.Controllers
                     Name = collection["RoleName"]
                 });
                 db.SaveChanges();
-                ViewBag.ResultMessage = "Role created successfully !";
+                TempData["Result"] = "Role created successfully !";
                 return RedirectToAction("Index");
             }
             catch
@@ -99,7 +99,7 @@ namespace MVCInBuiltFeatures.Controllers
         public ActionResult ManageUserRoles()
         {
             var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;            
+            ViewBag.Roles = list;
             return View();
         }
 
@@ -108,13 +108,18 @@ namespace MVCInBuiltFeatures.Controllers
         public ActionResult RoleAddToUser(string UserName, string RoleName)
         {
             ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            if (user == null)
+            {
+                TempData["ErrorResult"] = "Action falied, Failed to find user";
+                return RedirectToAction("ManageUserRoles");
+            }
             UserManager.AddToRole(user.Id, RoleName);
-            
-            ViewBag.ResultMessage = "Role created successfully !";
-            
+
+            TempData["Result"] = "Role created successfully !";
+
             // prepopulat roles for the view dropdown
             var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-            ViewBag.Roles = list;   
+            ViewBag.Roles = list;
 
             return View("ManageUserRoles");
         }
@@ -122,21 +127,18 @@ namespace MVCInBuiltFeatures.Controllers
         [HttpPost]
         [ValidateAntiForgeryToken]
         public ActionResult GetRoles(string UserName)
-        {            
-            if (!string.IsNullOrWhiteSpace(UserName))
+        {
+            ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            if (user == null)
             {
-                ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
-                ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
-
-                // prepopulat roles for the view dropdown
-                var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
-                ViewBag.Roles = list;            
+                TempData["ErrorResult"] = "Action falied, Failed to find user.";
+                return RedirectToAction("ManageUserRoles");
             }
-            else
-            {
-                //ViewBag.Roles = new List<Roles>();
-            }
+            ViewBag.RolesForThisUser = UserManager.GetRoles(user.Id);
 
+            // prepopulat roles for the view dropdown
+            var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();
+            ViewBag.Roles = list;
             return View("ManageUserRoles");
         }
 
@@ -145,15 +147,20 @@ namespace MVCInBuiltFeatures.Controllers
         public ActionResult DeleteRoleForUser(string UserName, string RoleName)
         {
             ApplicationUser user = db.Users.Where(u => u.UserName.Equals(UserName, StringComparison.CurrentCultureIgnoreCase)).FirstOrDefault();
+            if (user == null)
+            {
+                TempData["ErrorResult"] = "Action falied, Failed to find user";
+                return RedirectToAction("ManageUserRoles");
+            }
 
-            if (UserManager.IsInRole(user.Id, RoleName))  
+            if (UserManager.IsInRole(user.Id, RoleName))
             {
                 UserManager.RemoveFromRole(user.Id, RoleName);
-                ViewBag.ResultMessage = "Role removed from this user successfully !";
+                TempData["Result"] = "Role removed from this user successfully !";
             }
             else
             {
-                ViewBag.ResultMessage = "This user doesn't belong to selected role.";
+                TempData["ErrorResult"] = "This user doesn't belong to selected role.";
             }
             // prepopulat roles for the view dropdown
             var list = db.Roles.OrderBy(r => r.Name).ToList().Select(rr => new SelectListItem { Value = rr.Name.ToString(), Text = rr.Name }).ToList();

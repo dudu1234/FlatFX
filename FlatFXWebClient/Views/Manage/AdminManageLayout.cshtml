@@ -3,13 +3,10 @@
     ViewBag.Title = "Admin Manage";
 }
 
-<div class="row admin-manage">
+<div ng-controller="adminManager"
+     ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]' )" class="row admin-manage">
     <div class="text-center admin-manage-header">Admin Manage</div>
-    <div class="col-xs-8 col-xs-offset-4">
-        <p class="text-success">@ViewBag.StatusMessage</p>
-        <p class="text-success">@TempData["Result"]</p>
-        <p class="error">@ViewBag.ErrorMessage</p>
-        <p class="text-success">@ViewBag.Result</p>
+    <div id="resultDiv" class="col-xs-10 col-xs-offset-2">
     </div>
 </div>
 <div class="row admin-manage">

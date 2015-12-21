@@ -6,7 +6,7 @@
     string companyBodyClass = (Session["RegisterAllStep"].ToInt() == 2) ? "" : "display-none";
     string accountHeaderClass = (Session["RegisterAllStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
-<script src="~/JS/Controllers/RegisterAll.js"></script>
+
 @using (Html.BeginForm("RegisterAll", "Account", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
     @Html.AntiForgeryToken()

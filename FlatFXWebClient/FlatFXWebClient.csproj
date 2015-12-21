@@ -267,7 +267,7 @@
     <Content Include="Images\orderedList9.png" />
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
-    <Content Include="JS\Controllers\RegisterAll.js" />
+    <Content Include="JS\Controllers\AllControllers.js" />
     <Content Include="JS\Functions\NotyFunctions.js" />
     <Content Include="JS\rtlCustom.js" />
     <Content Include="JS\FFx.js" />

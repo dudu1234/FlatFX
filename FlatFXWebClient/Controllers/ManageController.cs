@@ -58,7 +58,7 @@ namespace FlatFXWebClient.Controllers
         // GET: /Manage/UserIndex
         public async Task<ActionResult> UserIndex(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            TempData["Result"] =
                 message == ManageMessageId.ChangePasswordSuccess ? "Your password has been changed."
                 : message == ManageMessageId.SetPasswordSuccess ? "Your password has been set."
                 : message == ManageMessageId.SetTwoFactorSuccess ? "Your two-factor authentication provider has been set."
@@ -288,7 +288,7 @@ namespace FlatFXWebClient.Controllers
         // GET: /Manage/ManageLogins
         public async Task<ActionResult> ManageLogins(ManageMessageId? message)
         {
-            ViewBag.StatusMessage =
+            TempData["Result"] =
                 message == ManageMessageId.RemoveLoginSuccess ? "The external login was removed."
                 : message == ManageMessageId.Error ? "An error has occurred."
                 : "";

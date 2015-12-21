@@ -79,20 +79,20 @@ namespace FlatFXWebClient.Controllers
                     try
                     {
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return RedirectToAction("Index");
                     }
                     catch (DataException /* dex */)
                     {
                         //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
                     }
                 }
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
             }
 
             ViewBag.CompanyId = new SelectList(db.Companies, "CompanyId", "CompanyName", companyAccount.CompanyId);
@@ -148,20 +148,20 @@ namespace FlatFXWebClient.Controllers
                     try
                     {
                         db.SaveChanges();
-                        ViewBag.Result = "Update succeeded";
+                        TempData["Result"] = "Update succeeded";
                         return View(companyAccount);
                     }
                     catch (DataException /* dex */)
                     {
                         //Log the error (uncomment dex variable name and add a line here to write a log.
-                        ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                        TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
                     }
                 }
             }
             catch (DataException /* dex */)
             {
                 //Log the error (uncomment dex variable name and add a line here to write a log.
-                ModelState.AddModelError("", "Unable to save changes. Try again, and if the problem persists, see your system administrator.");
+                TempData["ErrorResult"] = "Unable to save changes. Try again, and if the problem persists, see your system administrator.";
             }
             return View(companyAccount);
         }
@@ -175,7 +175,7 @@ namespace FlatFXWebClient.Controllers
             }
             if (saveChangesError.GetValueOrDefault())
             {
-                ViewBag.ErrorMessage = "Delete failed. Try again, and if the problem persists see your system administrator.";
+                TempData["ErrorResult"] = "Delete failed. Try again, and if the problem persists see your system administrator.";
             }
             CompanyAccount companyAccount = await db.CompanyAccounts.FindAsync(id);
             if (companyAccount == null)

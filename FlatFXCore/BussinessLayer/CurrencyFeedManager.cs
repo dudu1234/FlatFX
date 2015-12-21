@@ -278,29 +278,39 @@ namespace FlatFXCore.BussinessLayer
                     #endregion
 
                     #region DailyFXRate table
-                    DailyFXRate pairDailyData = new DailyFXRate()
-                        {
-                            Key = key,
-                            Bid = bid,
-                            Ask = ask,
-                            Mid = mid,
-                            Time = updateTime
-                        };
-                    db.DailyFXRates.Add(pairDailyData);
+                    DailyFXRate dailyPairData = null;
+                    dailyPairData = db.DailyFXRates.Where(rate => rate.Key == key && rate.Time == updateTime).FirstOrDefault();
+                    if (dailyPairData == null)
+                    {
+                        DailyFXRate pairDailyData = new DailyFXRate()
+                            {
+                                Key = key,
+                                Bid = bid,
+                                Ask = ask,
+                                Mid = mid,
+                                Time = updateTime
+                            };
+                        db.DailyFXRates.Add(pairDailyData);
+                    }
                     #endregion
 
                     #region HistoricalFXRate table
                     if (updateHistoricalData)
                     {
-                        HistoricalFXRate pairHistoricalData = new HistoricalFXRate()
+                        HistoricalFXRate pairHistoricalData = null;
+                        pairHistoricalData = db.HistoricalFXRates.Where(rate => rate.Key == key && rate.Time == updateTime).FirstOrDefault();
+                        if (pairHistoricalData == null)
                         {
-                            Key = key,
-                            Bid = bid,
-                            Ask = ask,
-                            Mid = mid,
-                            Time = updateTime
-                        };
-                        db.HistoricalFXRates.Add(pairHistoricalData);
+                            pairHistoricalData = new HistoricalFXRate()
+                            {
+                                Key = key,
+                                Bid = bid,
+                                Ask = ask,
+                                Mid = mid,
+                                Time = updateTime
+                            };
+                            db.HistoricalFXRates.Add(pairHistoricalData);
+                        }
                     }
                     #endregion
                 }
