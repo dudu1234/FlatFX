@@ -12,12 +12,14 @@ body {
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
-    /*font-size: .85em;*/
-    font-size: small;
+    /*font-size: 16px; */
+    font-weight: 300; /*TEST*/
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
     padding: 0;
     direction: ltr;
+    background: url("../Images/sitebg8.jpg") no-repeat center center fixed;
+    background-size: cover;
 }
 
 a {
@@ -64,68 +66,33 @@ mark {
     visibility: hidden;
 }
 
-h1, h2, h3,
-h4, h5, h6 {
-    color: #000;
-    margin-bottom: 0;
-    padding-bottom: 0;
+#body {
+    clear: both;
+    min-height: calc(81vh - 100px);
 }
 
-h1 {
-    font-size: 2em;
+.site-header {
+    background: linear-gradient(to right, #d9f1f7, #e2e2e2); /* Standard syntax */
 }
 
-h2 {
-    font-size: 1.75em;
+#footer {
+    background-color: rgba(21, 18, 18, 0.50);
+    padding-top: 15px;
 }
 
-h3 {
-    font-size: 1.2em;
-}
-
-h4 {
-    font-size: 1.1em;
-}
-
-h5, h6 {
-    font-size: 1em;
-}
-
-    h5 a:link, h5 a:visited, h5 a:active {
-        padding: 0;
-        text-decoration: none;
+    #footer a {
+        color: white;
     }
 
+    #footer b {
+        color: white;
+        font-size: medium;
+    }
 
-/* main layout
-----------------------------------------------------------*/
-
-#body {
-    /*background-color: #efeeef;*/
-    clear: both;
-    /*padding-bottom: 35px;*/
-}
-
-footer {
-    clear: both;
-    background-color: #e2e2e2;
-    font-size: small;
-    height: 100px;
-}
-
-#footer a {
-    color: white;
-}
-
-#footer b {
-    color: white;
-    font-size: medium;
-}
-
-#footer .copyright {
-    color: white;
-    font-size: x-small;
-}
+    #footer .copyright {
+        color: white;
+        font-size: x-small;
+    }
 
 #footer-image {
     width: 100%;
@@ -149,7 +116,7 @@ footer {
 ----------------------------------------------------------*/
 #login {
     display: inline;
-    font-size: .85em;
+    /*font-size: .85em;*/
     margin: 0 0 10px;
     text-align: right;
 }
@@ -200,120 +167,6 @@ section.feature {
     padding: 10px;
 }
 
-/* ordered list */
-ol.round {
-    list-style-type: none;
-    padding-left: 0;
-}
-
-    ol.round li {
-        margin: 25px 0;
-        padding-left: 45px;
-    }
-
-        ol.round li.zero {
-            background: url("../Images/orderedList0.png") no-repeat;
-        }
-
-        ol.round li.one {
-            background: url("../Images/orderedList1.png") no-repeat;
-        }
-
-        ol.round li.two {
-            background: url("../Images/orderedList2.png") no-repeat;
-        }
-
-        ol.round li.three {
-            background: url("../Images/orderedList3.png") no-repeat;
-        }
-
-        ol.round li.four {
-            background: url("../Images/orderedList4.png") no-repeat;
-        }
-
-        ol.round li.five {
-            background: url("../Images/orderedList5.png") no-repeat;
-        }
-
-        ol.round li.six {
-            background: url("../Images/orderedList6.png") no-repeat;
-        }
-
-        ol.round li.seven {
-            background: url("../Images/orderedList7.png") no-repeat;
-        }
-
-        ol.round li.eight {
-            background: url("../Images/orderedList8.png") no-repeat;
-        }
-
-        ol.round li.nine {
-            background: url("../Images/orderedList9.png") no-repeat;
-        }
-
-
-/* ordered list hebrew */
-ol.roundHeb {
-    list-style-type: none;
-    padding-right: 0;
-}
-
-    ol.roundHeb li {
-        margin: 25px 0;
-        padding-right: 45px;
-    }
-
-        ol.roundHeb li.zero {
-            background: url("../Images/orderedList0.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.one {
-            background: url("../Images/orderedList1.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.two {
-            background: url("../Images/orderedList2.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.three {
-            background: url("../Images/orderedList3.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.four {
-            background: url("../Images/orderedList4.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.five {
-            background: url("../Images/orderedList5.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.six {
-            background: url("../Images/orderedList6.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.seven {
-            background: url("../Images/orderedList7.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.eight {
-            background: url("../Images/orderedList8.png") no-repeat;
-            background-position-x: right;
-        }
-
-        ol.roundHeb li.nine {
-            background: url("../Images/orderedList9.png") no-repeat;
-            background-position-x: right;
-        }
-
-
 /* content */
 article {
     float: left;
@@ -334,10 +187,6 @@ aside {
             background: url("../Images/bullet.png") no-repeat 0 50%;
             padding: 2px 0 2px 20px;
         }
-
-.label {
-    font-weight: 700;
-}
 
 /* login page */
 #loginForm {
@@ -382,20 +231,6 @@ aside {
 
 #logoutForm {
     display: inline;
-}
-
-/* contact */
-.contact h3 {
-    font-size: 1.2em;
-}
-
-.contact p {
-    margin: 5px 0 0 10px;
-}
-
-.contact iframe {
-    border: 1px solid #333;
-    margin: 5px 0 0 10px;
 }
 
 /* forms */
@@ -461,14 +296,12 @@ td input[type="button"],
 .message-error {
     clear: both;
     color: #e80c4d;
-    font-size: 1.1em;
     font-weight: bold;
     margin: 20px 0 10px 0;
 }
 
 .message-success {
     color: #7ac0da;
-    font-size: 1.3em;
     font-weight: bold;
     margin: 20px 0 10px 0;
 }
@@ -498,7 +331,6 @@ input[type="checkbox"].input-validation-error {
 .validation-summary-errors {
     color: #e80c4d;
     font-weight: bold;
-    font-size: 1.1em;
 }
 
 .validation-summary-valid {
@@ -516,7 +348,7 @@ table {
 }
 
 th {
-    font-size: 1.2em;
+    /*font-size: 1.2em;*/
     /*text-align: left;*/
     border: none 0px;
     padding-left: 0;
@@ -547,7 +379,7 @@ th {
             position: absolute;
             right: 0em;
             top: 0;
-            font-size: 0.75em;
+            /*font-size: 0.75em;*/
         }
 
         th.asc a:after {
@@ -588,7 +420,7 @@ tr.pager td {
 
     /* login */
     #login {
-        font-size: .85em;
+        /*font-size: .85em;*/
         margin: 0 0 12px;
         text-align: center;
     }
@@ -634,70 +466,6 @@ tr.pager td {
         }
 
 
-    /* main layout
-    ----------------------------------------------------------*/
-    .main-content,
-    .featuredBasic + .main-content {
-        background-position: 10px 0;
-    }
-
-    .content-wrapper {
-        padding-right: 10px;
-        padding-left: 10px;
-    }
-
-    .featuredBasic .content-wrapper {
-        padding: 10px;
-    }
-
-    /* page content */
-    article, aside {
-        float: none;
-        width: 100%;
-    }
-
-    /* ordered list */
-    ol.round {
-        list-style-type: none;
-        padding-left: 0;
-    }
-
-        ol.round li {
-            padding-left: 10px;
-            margin: 25px 0;
-        }
-
-            ol.round li.zero,
-            ol.round li.one,
-            ol.round li.two,
-            ol.round li.three,
-            ol.round li.four,
-            ol.round li.five,
-            ol.round li.six,
-            ol.round li.seven,
-            ol.round li.eight,
-            ol.round li.nine {
-                background: none;
-            }
-
-    /* features */
-    section.feature {
-        float: none;
-        padding: 10px;
-        width: auto;
-    }
-
-        section.feature img {
-            color: #999;
-            content: attr(alt);
-            font-size: 1.5em;
-            font-weight: 600;
-        }
-
-    /* forms */
-    input {
-        width: 90%;
-    }
 
     /* login page */
     #loginForm {
@@ -720,7 +488,7 @@ tr.pager td {
 
 
 
-
+/* On Line Rates */
 .rates-table {
     width: 40%;
 }
@@ -730,7 +498,7 @@ tr.pager td {
     }
 
         .rates-table thead tr th {
-            font-size: large;
+            /*font-size: large;*/
             text-align: center;
         }
 
@@ -786,32 +554,6 @@ tr.pager td {
     margin-top: 20px;
 }
 
-.numberCircle {
-    -webkit-border-radius: 50%;
-    -moz-border-radius: 50%;
-    border-radius: 50%;
-    width: 160px;
-    padding: 8px;
-    font-size: 32px;
-    line-height: 1em;
-    border: 2px solid #666;
-    position: relative;
-}
-
-    .numberCircle .height_fix {
-        margin-top: 100%;
-    }
-
-    .numberCircle .content {
-        position: absolute;
-        left: 0;
-        top: 50%;
-        height: 100%;
-        width: 100%;
-        text-align: center;
-        margin-top: -16px; /* Note, this must be half the font size */
-    }
-
 .form-group .control-label.required:after {
     color: #e32;
     content: "*";
@@ -826,25 +568,29 @@ tr.pager td {
 }
 
 .admin-manage {
-    background-color: #b2eaef;
+    background-color: rgba(250, 250, 250, 0.50);
 }
 
 .admin-manage-header {
-    background-color: #ff6a00;
+    background-color: rgba(0, 120, 120, 0.75);
     height: 50px;
     padding-top: 15px;
-    font-size: 1.8em;
+    padding-left: 15px;
+    font-size: 20px;
+    color: white;
 }
 
 .user-manage {
-    background-color: #b2eaef;
+    background-color: rgba(250, 250, 250, 0.50);
 }
 
 .user-manage-header {
-    background-color: #e4f6ae;
+    background-color: rgba(103, 171, 216, 0.75);
     height: 50px;
     padding-top: 15px;
-    font-size: 1.8em;
+    padding-left: 15px;
+    font-size: 20px;
+    color: white;
 }
 
 .ffx-table {
@@ -854,7 +600,7 @@ tr.pager td {
 
     .ffx-table tr th {
         background-color: #b2eaef;
-        font-size: small;
+        /*font-size: small;*/
     }
 
 .red {
@@ -870,6 +616,7 @@ table.ffx-table tr td a {
 }
 
 #on-line-rates-remarks {
+    background-color: rgba(238, 248, 248, 0.80);
     text-align: center;
 }
 
@@ -918,16 +665,27 @@ table.ffx-table tr td a {
     border-radius: 5px;
     padding: 10px;
     color: #fff;
-    font-size: 12px;
+    /*font-size: 12px;*/
 }
 
 .demoToLiveTrading {
     background-color: #e4f6ae;
     height: 50px;
 }
+
 .simple-trade-header {
     /*background-color: #f6f4a3;*/
     color: blue;
     text-align: start;
     /*height: 50px;*/
+}
+
+.panel-title {
+    font-size: 20px;
+    text-align: center;
+}
+
+.simple-currency-exchange {
+    background-color: #eaf7e1;
+    padding: 15px;
 }

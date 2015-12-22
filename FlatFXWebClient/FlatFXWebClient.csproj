@@ -255,16 +255,7 @@
     <Content Include="Images\israelFlag.png" />
     <Content Include="Images\israel_flag_16.png" />
     <Content Include="Images\Logo3.png" />
-    <Content Include="Images\orderedList0.png" />
-    <Content Include="Images\orderedList1.png" />
-    <Content Include="Images\orderedList2.png" />
-    <Content Include="Images\orderedList3.png" />
-    <Content Include="Images\orderedList4.png" />
-    <Content Include="Images\orderedList5.png" />
-    <Content Include="Images\orderedList6.png" />
-    <Content Include="Images\orderedList7.png" />
-    <Content Include="Images\orderedList8.png" />
-    <Content Include="Images\orderedList9.png" />
+    <Content Include="Images\sitebg8.jpg" />
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
     <Content Include="JS\Controllers\AllControllers.js" />

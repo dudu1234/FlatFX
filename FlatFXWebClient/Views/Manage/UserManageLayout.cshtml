@@ -3,13 +3,12 @@
     ViewBag.Title = "Manage User";
 }
 
-<div ng-controller="userManager" ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]')"
-     class=" row user-manage">
-    <div class="text-center user-manage-header">User Manage</div>
+<div ng-controller="userManager" ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]')" class="row user-manage">
+    <div class="user-manage-header start-align"><span class="glyphicon glyphicon-user"></span> User Manage</div>
     <div id="resultDiv" class="col-xs-9 col-xs-offset-3">
     </div>
 </div>
-<div class="row user-manage" style="background-color: #b2eaef">
+<div class="row user-manage">
     <div class="col-xs-3">
         <div class="sidebar-nav">
             <div class="navbar navbar-default" role="navigation">

@@ -10,7 +10,7 @@
     string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
 
-<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')">
+<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')" class="simple-currency-exchange">
     @using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
@@ -33,43 +33,39 @@
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
                     <li class="@queryHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h1>
+                            <h2>
                                 @FlatFXResources.Resources.Step 1
                                 @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 1)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                            </h1>
+                            </h2>
                             <h3 class="list-group-item-heading">Enter your Order details</h3>
                             <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
                         </a>
                     </li>
                     <li class="@confirmHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h1>
+                            <h2>
                                 @FlatFXResources.Resources.Step 2
                                 @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 2)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                            </h1>
+                            </h2>
                             <h3 class="list-group-item-heading">Confirm Deal</h3>
                             <p class="list-group-item-text">See the live rates and confirm the deal</p>
                         </a>
                     </li>
                     <li class="@summaryHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h1>@FlatFXResources.Resources.Step 3</h1>
+                            <h2>@FlatFXResources.Resources.Step 3</h2>
                             <h3 class="list-group-item-heading">Summary</h3>
                             <p class="list-group-item-text">See the Deal summary and the instractions for the money transfer</p>
                         </a>
                     </li>
                 </ul>
             </div>
-        </div>
-        <div>
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-            <span class="text-danger">@TempData["ErrorResult"]</span>
         </div>
         <div class="row setup-content @queryBodyClass">
             <div class="col-xs-5 text-center">
