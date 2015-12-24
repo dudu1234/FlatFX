@@ -10,14 +10,11 @@
     string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
 }
 
-<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')" class="simple-currency-exchange">
+<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
     @using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
         {
-            <div id="ddddd" class="col-xs-12">
-
-            </div>
             <div class="col-xs-12 demoToLiveTrading">
                 <span>You are in a demo environment. Your traders won't have any effect.</span>
                 <a class="btn btn-success" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
@@ -68,6 +65,7 @@
             </div>
         </div>
         <div class="row setup-content @queryBodyClass">
+            <div id="resultDiv" class="col-xs-12"></div>
             <div class="col-xs-5 text-center">
                 @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
             </div>

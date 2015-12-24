@@ -52,9 +52,20 @@ namespace FlatFXCore.BussinessLayer
         }
         public enum eQuoteResponseSpreadMethod
         {
-            PromilPlusConstant = 1,
-            Constant = 2,
-            PromilPlusConstantOverideByConstant = 3
+            [Display(Description="Set only the promil per provider+pair")]
+            PromilPerProvider = 1,
+            [Display(Description = "Set only the spread per provider+pair")]
+            SpreadPerProvider = 2,
+            [Display(Description = "Set the promil per provider+pair with an option to override it by spread per provider+pair")]
+            PromilOverrideBySpreadPerProvider = 3,
+            [Display(Description = "Mid price + commision")]
+            Mid = 4,
+            [Display(Description="Set the promil per provider+pair with an option to override it by promil per customer+pair")]
+            PromilPerProviderAndCustomer = 5,
+            [Display(Description = "Set only the spread per provider+pair with an option to override it by spread per customer+pair")]
+            SpreadPerProviderAndCustomer = 6,
+            [Display(Description = "Set the promil per provider+pair with an option to override it by spread per provider+pair with an option to override it by spread/promil per customer+pair")]
+            PromilOverrideBySpreadPerProviderAndCustomer = 7
         }
         public enum eChatEntryType
         {
@@ -86,6 +97,11 @@ namespace FlatFXCore.BussinessLayer
             Buy = 1,
             Sell = 2,
             Both = 3
+        }
+        public enum eBidAsk
+        {
+            Bid = 1,
+            Ask = 2
         }
         public enum eCallPut
         {

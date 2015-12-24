@@ -65,12 +65,12 @@ namespace FlatFXCore.Model.Data
 
         public ContactDetails ContactDetails { get; set; }
 
-        public Provider() 
+        public Provider()
         {
             ProviderId = Guid.NewGuid().ToString();
             IsActive = true;
             Status = FlatFXCore.BussinessLayer.Consts.eProviderStatus.Active;
-            
+
             ContactDetails = new ContactDetails();
             Accounts = new List<ProviderAccount>();
             Users = new List<ApplicationUser>();
@@ -109,6 +109,96 @@ namespace FlatFXCore.Model.Data
                     }
                 }
                 return _BankList;
+            }
+        }
+        public bool IsSimpleExchangeEnabled(out string errorMessage)
+        {
+            errorMessage = null;
+            if (!this.IsActive)
+                errorMessage = "Provider is not active." + Environment.NewLine;
+            if (this.Name != "FlatFX")
+                errorMessage = "Provider must be FlatFX." + Environment.NewLine;
+            if (!this.QuoteResponse_Enabled)
+                errorMessage = "Quote Response is not enable." + Environment.NewLine;
+            if (!this.QuoteResponse_AutomaticResponseEnabled)
+                errorMessage = "Automatic Quote Response is not enable." + Environment.NewLine;
+            if (this.Status == Consts.eProviderStatus.Blocked)
+                errorMessage = "Provider status is blocked." + Environment.NewLine;
+
+            //Check working hours
+            int startHour, startMinute, endHour, endMinute;
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+            {
+                startHour = this.QuoteResponse_FridayStartTime.Hour;
+                startMinute = this.QuoteResponse_FridayStartTime.Minute;
+                endHour = this.QuoteResponse_FridayEndTime.Hour;
+                endMinute = this.QuoteResponse_FridayEndTime.Minute;
+            }
+            else
+            {
+                startHour = this.QuoteResponse_StartTime.Hour;
+                startMinute = this.QuoteResponse_StartTime.Minute;
+                endHour = this.QuoteResponse_EndTime.Hour;
+                endMinute = this.QuoteResponse_EndTime.Minute;
+            }
+
+            DateTime start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, startHour, startMinute, 0);
+            DateTime end = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, endHour, endMinute, 0);
+
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now < start || DateTime.Now > end)
+            {
+                errorMessage = "Currency Exchange is not available right now, " + Environment.NewLine +
+                    "Office Hours: " + Environment.NewLine +
+                    "Monday - Thursday: " + this.QuoteResponse_StartTime.Hour + ":" + this.QuoteResponse_StartTime.Minute.ToString().PadLeft(2, '0') + " - " +
+                    this.QuoteResponse_EndTime.Hour + ":" + this.QuoteResponse_EndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine +
+                    "Friday: " + this.QuoteResponse_FridayStartTime.Hour + ":" + this.QuoteResponse_FridayStartTime.Minute.ToString().PadLeft(2, '0') + " - " +
+                    this.QuoteResponse_FridayEndTime.Hour + ":" + this.QuoteResponse_FridayEndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine;
+            }
+
+            if (errorMessage == null)
+                return true;
+            else
+                return false;
+        }
+        public bool GetSpread(ApplicationDBContext db, string companyId, string pairKey, out double spread, out string errorMessage)
+        {
+            errorMessage = null;
+            spread = 0;
+
+            try
+            {
+                //level 1 - provider promil
+                SpreadInfo providerSpreadInfo = db.Spreads.Where(s => s.ProviderId == ProviderId).SingleOrDefault();
+                if (providerSpreadInfo == null || !providerSpreadInfo.Promil.HasValue)
+                {
+                    if (this.QuoteResponse_SpreadMethod == Consts.eQuoteResponseSpreadMethod.PromilPerProvider)
+                        errorMessage = "Failed to find provider spread information, please contact FlatFX team.";
+                }
+                else
+                {
+                    double promil = providerSpreadInfo.Promil.Value;
+                    if (CurrencyManager.Instance.PairRates.ContainsKey(pairKey))
+                        spread = 0.0001 * promil * CurrencyManager.Instance.PairRates[pairKey].Mid;
+                }
+
+                //To Do add the other SpreadMethods logic
+
+                //level 2 - provider spread per pair
+
+                //level 3 - customer promil
+
+                //level 4 - customer spread per pair
+
+                if (spread == 0 || errorMessage != null)
+                    return false;
+                else
+                    return true;
+            }
+            catch(Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in Provider::GetSpread", ex);
+                errorMessage = "Failed to generate customer spread." + Environment.NewLine;
+                return false;
             }
         }
     }
@@ -180,9 +270,9 @@ namespace FlatFXCore.Model.Data
         [DisplayName("Quote Response customer promil")]
         public double? QuoteResponse_CustomerPromil { get; set; }
 
-        public virtual ICollection<Deal> Deals { get; set; } 
-    
-        public ProviderAccount() 
+        public virtual ICollection<Deal> Deals { get; set; }
+
+        public ProviderAccount()
         {
             ApprovedBYFlatFX = false;
             ApprovedBYProvider = false;
@@ -190,7 +280,7 @@ namespace FlatFXCore.Model.Data
             IsActive = true;
             LastUpdate = DateTime.Now;
             QuoteResponse_CustomerPromil = null;
-            QuoteResponse_IsBlocked = false;                
+            QuoteResponse_IsBlocked = false;
         }
     }
 }

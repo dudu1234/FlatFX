@@ -106,26 +106,32 @@ namespace FlatFXCore.Model.Data
     [Table("Spreads")]
     public class SpreadInfo
     {
-        [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public int Id { get; set; }
+        
+        //[Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
         [ForeignKey("Key")]
         public virtual FXRate FXRate { get; set; }
 
-        [Key, Column(Order = 2)]
+        //[Key, Column(Order = 2)]
         public string CompanyId { get; set; }
         [ForeignKey("CompanyId")]
         public virtual Company Company { get; set; }
 
-        [Key, Column(Order = 3)]
+        //[Key, Column(Order = 3)]
         public string ProviderId { get; set; }
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Key, Column(Order = 4), Required]
-        public bool IsStartingSpread { get; set; }
+        //[Key, Column(Order = 2), Required]
+        //public bool IsStartingSpread { get; set; }
 
-        [Required]
-        public int Spread { get; set; }
+        [Range(0, 1000, ErrorMessage = "Spread has to be between 0 and 1000")]
+        public double? Spread { get; set; }
+        [Range(0, 20, ErrorMessage = "Promil has to be between 0 and 20")]
+        public double? Promil { get; set; }
 
         public SpreadInfo() 
         {

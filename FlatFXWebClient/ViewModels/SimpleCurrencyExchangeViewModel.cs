@@ -46,6 +46,13 @@ namespace FlatFXWebClient.ViewModels
 
         public async Task<bool> Initialize(ApplicationDBContext db)
         {
+            string error;
+            Provider flatFXProvider = db.Providers.Where(p => p.Name == "FlatFX").SingleOrDefault();
+            if (flatFXProvider == null)
+                InvalidAccountReason.Add("System error. Failed to find provider: 'FlatFX'.");
+            else if (!flatFXProvider.IsSimpleExchangeEnabled(out error))
+                InvalidAccountReason.Add(error);
+
             CCY1 = "USD";
             CCY2 = "ILS";
 

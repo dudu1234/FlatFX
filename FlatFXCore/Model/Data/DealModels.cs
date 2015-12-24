@@ -55,12 +55,11 @@ namespace FlatFXCore.Model.Data
         [Required, Column(TypeName = "VARCHAR"), MaxLength(10)]
         public string Symbol { get; set; }
         public string CreditedCurrency { get; set; }
+        public double AmountToExchangeCreditedCurrency { get; set; }
         public string ChargedCurrency { get; set; }
-
-        public double? Amount1 { get; set; }
-        public double? Amount2 { get; set; }
-        [Required]
+        public double AmountToExchangeChargedCurrency { get; set; }
         public double AmountUSD { get; set; }
+        
         [Required]
         public double CustomerRate { get; set; }
         public double? BankRate { get; set; }
@@ -82,12 +81,6 @@ namespace FlatFXCore.Model.Data
 	    public double? CustomerTotalProfitUSD { get; set; }
         public double? FlatFXTotalProfitUSD { get; set; }
         public double? BankTotalProfitUSD { get; set; }
-
-        //Simple Currency Exchange
-        [Display(Name = "סכום להמרה במטבע הנרכש")]
-        public double AmountToExchangeCreditedCurrency { get; set; }
-        [Display(Name = "סכום להמרה במטבע הרוכש")]
-        public double AmountToExchangeChargedCurrency { get; set; }
 
         public Deal() 
         {

@@ -17,6 +17,7 @@ namespace FlatFXCore.BussinessLayer
     public class CurrencyManager
     {
         #region Members
+        public readonly List<string> CurrencyBeforeUSD = new List<string>() { "EUR", "GBP", "AUD", "NZD", "XAU", "XAG" };
         private static CurrencyManager m_CurrencyManagerInstance = null;
         private Dictionary<string, string> _PairList = new Dictionary<string, string>();
         public Dictionary<string, FXRate> PairRates = new Dictionary<string, FXRate>();
@@ -83,8 +84,21 @@ namespace FlatFXCore.BussinessLayer
                 }
 
                 return ApplicationInformation.Instance.Session["PairList"] as Dictionary<string, string>;
-            }
-                    
+            }        
+        }
+        public FXRate GetFXRateVsUSD(string currency)
+        {
+            if (currency == null || currency == "")
+                return null;
+
+            string pair = "";
+            currency = currency.ToUpper();
+            if (CurrencyBeforeUSD.Contains(currency))
+                pair = currency + "USD";
+            else
+                pair = "USD" + currency;
+
+            return PairRates[pair];
         }
     }
     public class CurrencyFeedManager

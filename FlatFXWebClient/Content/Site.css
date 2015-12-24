@@ -1,5 +1,6 @@
 ﻿html {
     width: 100%;
+    height: 100%;
     min-height: 100%;
     background-color: #e2e2e2;
     margin: 0;
@@ -9,6 +10,7 @@
 body {
     width: 100%;
     min-height: 100%;
+    height: 100%;
     background-color: #fff;
     border-top: solid 10px #000;
     color: #333;
@@ -20,6 +22,10 @@ body {
     direction: ltr;
     background: url("../Images/sitebg8.jpg") no-repeat center center fixed;
     background-size: cover;
+}
+
+li a {
+    font-size: 15px;
 }
 
 a {
@@ -75,7 +81,18 @@ mark {
     background: linear-gradient(to right, #d9f1f7, #e2e2e2); /* Standard syntax */
 }
 
+.site-menu {
+    margin-top: 13px;
+}
+
+.language-button {
+    margin-top: 6px;
+}
+
 #footer {
+    position: inherit;
+    background: #00a9e0;
+    color: white;
     background-color: rgba(21, 18, 18, 0.50);
     padding-top: 15px;
 }
@@ -114,37 +131,11 @@ mark {
 
 /* login
 ----------------------------------------------------------*/
-#login {
-    display: inline;
-    /*font-size: .85em;*/
-    margin: 0 0 10px;
-    text-align: right;
+.login-box {
+    margin-top: 60px;
+    padding: 0px;
+    background-color: white;
 }
-
-    #login a {
-        background-color: #d3dce0;
-        margin-left: 10px;
-        margin-right: 3px;
-        padding: 2px 3px;
-        text-decoration: none;
-    }
-
-        #login a.username {
-            background: none;
-            margin: 0;
-            padding: 0;
-            text-decoration: underline;
-        }
-
-    #login ul {
-        margin: 0;
-    }
-
-    #login li {
-        display: inline;
-        list-style: none;
-    }
-
 
 /* page titles */
 hgroup.title {
@@ -261,6 +252,7 @@ label {
     label.checkbox {
         display: inline;
     }
+
 
 input, textarea {
     border: 1px solid #e2e2e2;
@@ -673,19 +665,40 @@ table.ffx-table tr td a {
     height: 50px;
 }
 
-.simple-trade-header {
-    /*background-color: #f6f4a3;*/
-    color: blue;
-    text-align: start;
-    /*height: 50px;*/
+.ffx-panel {
+    border-radius: 10px;
+    box-shadow: 0 5px 50px rgba(0,0,0,0.4);
 }
 
 .panel-title {
     font-size: 20px;
     text-align: center;
+    font-weight: bold;
 }
 
 .simple-currency-exchange {
-    background-color: #eaf7e1;
+    background-color: #c8c8c8;
     padding: 15px;
+}
+
+.simple-trading-order {
+    background-color: floralwhite;
+}
+
+#registerLink{
+    background-color:#F15A25;
+    color: white;
+    font-weight: 800;
+    padding:5px;
+    margin-top:10px;
+    border-radius:10px;
+}
+
+#loginLink{
+    background-color: #73abcb;
+    color: white;
+    font-weight: 800;
+    padding:5px;
+    margin-top:10px;
+    border-radius:10px;
 }

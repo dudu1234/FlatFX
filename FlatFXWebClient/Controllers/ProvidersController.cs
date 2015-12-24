@@ -47,7 +47,7 @@ namespace FlatFXWebClient.Controllers
                     provider.QuoteResponse_FridayEndTime = new DateTime(1999, 1, 1, 13, 0, 0);
                     provider.QuoteResponse_FridayStartTime = new DateTime(1999, 1, 1, 8, 0, 0);
                     provider.QuoteResponse_NumberOfPromilsWithoutDiscount = 10;
-                    provider.QuoteResponse_SpreadMethod = FlatFXCore.BussinessLayer.Consts.eQuoteResponseSpreadMethod.Constant;
+                    provider.QuoteResponse_SpreadMethod = FlatFXCore.BussinessLayer.Consts.eQuoteResponseSpreadMethod.PromilPerProvider;
                     provider.QuoteResponse_UserConfirmationTimeInterval = 40;
                     provider.ContactDetails.Address = provider.ContactDetails.Address;
                     provider.ContactDetails.Country = provider.ContactDetails.Country;

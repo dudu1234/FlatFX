@@ -10,10 +10,18 @@ myApp.controller('registerall', ['$scope', function ($scope) {
 
 
 myApp.controller('enterdata', function ($scope, noty) {
-    $scope.init = function (isDemo) {
+    $scope.init = function (isDemo, info1, error1) {
         $scope.isDemo = isDemo;
-        if (isDemo == 'True')
-            notyWrapper.generateAlertPlusButton($('#ddddd'), 'warning', 'bla bla bla');
+        if (info1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'success', info1);
+        }
+        else if (error1 != '') {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'error', error1);
+        }
+
+        //if (isDemo == 'True')
+        //    notyWrapper.generateAlertPlusButton($('#ddddd'), 'warning', 'bla bla bla');
+
         //.noty({ text: 'tsts', theme: 'defaultTheme', type: 'alert', template: '<div style="backgroud:blue" class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>' });
     }
     $scope.showNotification = function () {

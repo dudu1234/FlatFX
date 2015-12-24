@@ -26,8 +26,8 @@
 
 
             <!-- Collect the nav links, forms, and other content for toggling -->
-            <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-                <ul class="nav navbar-nav padding-header">
+            <div class="collapse navbar-collapse site-menu" id="bs-example-navbar-collapse-1">
+                <ul class="nav navbar-nav">
                     <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
                     @if (User.Identity.Name == "")
                     {
@@ -72,8 +72,28 @@
                     }
                 </ul>
 
-                <ul class="nav navbar-nav @menuClass padding-header">
-                    <li class="dropdown">
+                <ul class="nav navbar-nav @menuClass">
+                    <li>
+                        <div class="btn-group">
+                            <button type="button" class="btn btn-link dropdown-toggle language-button" data-toggle="dropdown">
+                                @if (culture == "he-IL")
+                                {
+                                    <img src="~/Images/israel_flag_16.png" alt="Hebrew">;
+                                }
+                                else
+                                {
+                                    <img src="~/Images/usa-flag-16.gif" alt="English">
+                                }
+                                <span class="caret"></span>
+                            </button>
+                            <ul class="dropdown-menu" role="menu">
+                                <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
+                                <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
+                            </ul>
+                        </div>
+                    </li>
+                    
+                    @*<li class="dropdown">
                         <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
                             <span class="caret">
                                 @if (culture == "he-IL")
@@ -90,7 +110,7 @@
                             <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
                             <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
                         </ul>
-                    </li>
+                    </li>*@
 
                     <li>
                         @Html.Partial("_LoginPartial")

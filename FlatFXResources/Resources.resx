@@ -488,4 +488,7 @@
   <data name="InviteCoWorker2" xml:space="preserve">
     <value>* Warning: The co-worker will be able to join the company and execute deals within the site</value>
   </data>
+  <data name="EnterPrivateZone" xml:space="preserve">
+    <value>Enter Personal Zone</value>
+  </data>
 </root>

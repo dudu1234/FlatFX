@@ -29,7 +29,7 @@ namespace FlatFXWebClient.Controllers
             }
             else
             {
-                
+
             }
 
             return View(model);
@@ -62,31 +62,76 @@ namespace FlatFXWebClient.Controllers
             if (TempData["ErrorResult"] != null)
                 return View(model);
 
-            
-            
+
+
             try
             {
                 deal.BuySell = model.BuySell;
+                
                 //check the pair order according to the currencies selection
-                string pair = model.CCY1 + model.CCY2;
-                if (CurrencyManager.Instance.PairList.ContainsKey(pair))
+                string symbol = model.CCY1 + model.CCY2;
+                bool isMainCurrencyFirst = true; //USDILS or ILSUSD
+                Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid; 
+                if (CurrencyManager.Instance.PairList.ContainsKey(symbol))
                 {
-                    deal.Amount1 = model.Amount;
-                    //deal.Amount2 = 
+                    deal.Symbol = symbol;
+                    if (model.BuySell == Consts.eBuySell.Buy)
+                        priceBidOrAsk = Consts.eBidAsk.Ask;
                 }
                 else
                 {
-                    pair = model.CCY2 + model.CCY1;
+                    isMainCurrencyFirst = false;
+                    symbol = model.CCY2 + model.CCY1;
+                    if (model.BuySell == Consts.eBuySell.Sell)
+                        priceBidOrAsk = Consts.eBidAsk.Ask;
+                }
+
+                FXRate pairRate = CurrencyManager.Instance.PairRates[symbol];
+
+                if ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5)
+                {
+                    //the exchange rate is not up to date
+                    TempData["ErrorResult"] += "The Exchange Rate is not up to date. Please contact FlatFX Support in order to get price.";
+                    return View(model);
+                }
+
+                deal.OfferingDate = DateTime.Now;
+                deal.MidRate = pairRate.Mid;
+                if (priceBidOrAsk == Consts.eBidAsk.Bid)
+                {
+                    deal.CustomerRate = pairRate.Bid;
+                    deal.BankRate = pairRate.Mid - (0.0005 * pairRate.Mid);
+                }
+                else
+                {
+                    deal.CustomerRate = pairRate.Ask;
+                    deal.BankRate = pairRate.Mid + (0.0005 * pairRate.Mid);
+                    //deal.BankTotalProfitUSD
                 }
 
                 if (model.BuySell == Consts.eBuySell.Buy)
                 {
                     deal.AmountToExchangeCreditedCurrency = model.Amount;
+                    deal.AmountToExchangeChargedCurrency = deal.CustomerRate * model.Amount;
+                    deal.CreditedCurrency = model.CCY1; 
+                    deal.ChargedCurrency = model.CCY2;
                 }
                 else
                 {
                     deal.AmountToExchangeChargedCurrency = model.Amount;
+                    deal.AmountToExchangeCreditedCurrency = deal.CustomerRate * model.Amount;
+                    deal.CreditedCurrency = model.CCY2;
+                    deal.ChargedCurrency = model.CCY1;
                 }
+
+                // Calculate AmountUSD
+                if (deal.CreditedCurrency == "USD")
+                    deal.AmountUSD = deal.AmountToExchangeCreditedCurrency;
+                else if (deal.ChargedCurrency == "USD")
+                    deal.AmountUSD = deal.AmountToExchangeChargedCurrency;
+                else
+                    deal.AmountUSD = deal.AmountToExchangeCreditedCurrency * CurrencyManager.Instance.GetFXRateVsUSD(deal.CreditedCurrency).Mid;
+
             }
             catch (Exception ex)
             {
@@ -94,7 +139,7 @@ namespace FlatFXWebClient.Controllers
                 TempData["ErrorResult"] += "General Error. ";
             }
 
-            return View(deal);
+            return View(model);
         }
         public async Task<ActionResult> Confim(string dealId)
         {

@@ -467,4 +467,7 @@
   <data name="CoWorkerEmail" xml:space="preserve">
     <value>מייל של עמית לעבודה</value>
   </data>
+  <data name="EnterPrivateZone" xml:space="preserve">
+    <value>כניסה לאיזור האישי</value>
+  </data>
 </root>

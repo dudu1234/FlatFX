@@ -1,79 +1,92 @@
 ﻿@model FlatFXWebClient.ViewModels.SimpleCurrencyExchangeViewModel
 @using FlatFXCore.BussinessLayer;
 
-<h2 class="simple-trade-header">Enter your Order</h2>
-<div>
-    @Html.ValidationSummary("", new { @class = "text-danger" })
-    <span class="text-danger">@TempData["ErrorResult"]</span>
-</div>
+<div class="panel-danger form-horizontal simple-trading-order">
+    <div class="panel-heading">
+        <h3 class="panel-title">Enter your Order</h3>
+    </div>
+    <div class="panel-body">
+        @Html.HiddenFor(model => model.InvalidAccountReason)
 
-@Html.HiddenFor(model => model.InvalidAccountReason)
-
-@if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0)
-{
-    <div class="start-align">
-        <h2>You are not allowed to perform the currency exchange:</h2>
-        @foreach (string reason in Model.InvalidAccountReason)
+        @if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0)
         {
-            <h3>- @reason</h3>
+            <div class="start-align">
+                <h3>You are not allowed to perform the currency exchange:</h3><br />
+                @foreach (string reason in Model.InvalidAccountReason)
+                {
+                    string reason2 = " - " + reason;
+                    string[] list = reason2.Split('\n');
+                    foreach (string r in list)
+                    {
+                        if (r != "")
+                        {
+                            <h4>@r</h4>
+                        }
+                    }
+
+                }
+            </div>
+        }
+        else
+        {
+            <div>
+                @Html.ValidationSummary("", new { @class = "text-danger" })
+                @*<span class="text-danger">@TempData["ErrorResult"]</span>*@
+            </div>
+
+            <div class="form-group">
+                <label class="control-label col-md-4">I wish to</label>
+                <div class="col-md-2">
+                    @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" }) Buy
+                </div>
+                <div class="col-md-2">
+                    @Html.RadioButtonFor(model => model.BuySell, "Sell") Sell
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Amount</label>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-4">Sell</label>
+                <div class="col-md-4">
+
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.CCY2, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-7">
+                    @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+                </div>
+            </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-4" })
+                <div class="col-md-8 start-align">
+                    @Html.TextAreaFor(model => model.Comment, 4, 40, new { htmlAttributes = new { @class = "form-control" } })
+                </div>
+            </div>
+            <div class="form-group">
+                <div class="text-center col-md-12">
+                    @if (ApplicationInformation.Instance.IsDemoUser)
+                    {
+                        <input type="submit" value="Submit your DEMO Order" class="btn btn-primary btn-lg" />
+                    }
+                    else
+                    {
+                        <input type="submit" value="Submit your Order" class="btn btn-primary btn-lg" />
+                        <br />
+                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                    }
+                </div>
+            </div>
         }
     </div>
-}
-else
-{   
-    <div class="form-group">
-        <label class="control-label col-md-4">I wish to</label>
-        <div class="col-md-2">
-            @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" }) Buy
-        </div>
-        <div class="col-md-2">
-            @Html.RadioButtonFor(model => model.BuySell, "Sell") Sell
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-4">Amount</label>
-        <div class="col-md-4">
-            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-        <div class="col-md-3">
-            @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-4">Sell</label>
-        <div class="col-md-4">
-
-        </div>
-        <div class="col-md-3">
-            @Html.DropDownListFor(m => m.CCY2, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
-        </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-8">
-            @Html.TextAreaFor(model => model.Comment, 4, 50, new { htmlAttributes = new { @class = "form-control" } })
-        </div>
-    </div>
-    <div class="form-group">
-        <div class="start-align col-md-10">
-            @if (ApplicationInformation.Instance.IsDemoUser)
-            {
-                <input type="submit" value="Submit your DEMO Order" class="btn btn-primary btn-lg" />
-            }
-            else
-            {
-                <input type="submit" value="Submit your Order" class="btn btn-primary btn-lg" />
-                <br />
-                <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
-            }
-        </div>
-    </div>
-    <br />
-    <br />
-}
+</div>
