@@ -2,13 +2,13 @@
     $('#full-page').fullpage({
         'verticalCentered': false,
         'css3': true,
-        'sectionsColor': ['#F0F2F4', '#fff', '#fff', '#fff'],
+        //'sectionsColor': ['#F0F2F4', '#fff', '#fff', '#fff'],
         'navigation': true,
         'navigationPosition': 'right',
         'navigationTooltips': ['Home', 'Movie', 'How it works', 'About'],
         anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage'],
         menu: '#menu',
-        scrollingSpeed: 1000,
+        scrollingSpeed: 300,
 
         'afterLoad': function (anchorLink, index) {
             if (index > 1) {
@@ -39,7 +39,6 @@
             $('#staticImg').toggleClass('active', (index == 2 && direction == 'down') || (index == 4 && direction == 'up'));
             $('#staticImg').toggleClass('moveDown', nextIndex == 4);
             $('#staticImg').toggleClass('moveUp', index == 4 && direction == 'up');
-            
         }
     });
 

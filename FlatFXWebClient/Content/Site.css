@@ -85,6 +85,10 @@ mark {
     margin-top: 13px;
 }
 
+#nav {
+    z-index: 90;
+}
+
 .language-button {
     margin-top: 6px;
 }
