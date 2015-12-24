@@ -90,7 +90,7 @@ mark {
 }
 
 .language-button {
-    margin-top: 6px;
+    margin-top: 4px;
 }
 
 #footer {
@@ -705,4 +705,8 @@ table.ffx-table tr td a {
     padding:5px;
     margin-top:10px;
     border-radius:10px;
+}
+
+.large-glyphicon {
+    font-size: 22px;
 }

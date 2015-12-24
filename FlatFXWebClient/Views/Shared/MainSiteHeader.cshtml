@@ -35,16 +35,16 @@
                         <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
                         <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
                     }
-                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-usd green"></span><span class="glyphicon glyphicon-euro green"></span></a></li>
+                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd green small"></span><span class="glyphicon glyphicon-euro green small"></span> @FlatFXResources.Resources.OnLineRates</a></li>
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.ExchangeSystem<span class="glyphicon glyphicon-transfer red"></span></a></li>
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer red"></span> @FlatFXResources.Resources.ExchangeSystem</a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
                     {
                         <li class="dropdown">
-                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.UserManage<span class="caret"></span></a>
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> @FlatFXResources.Resources.UserManage<span class="caret"></span></a>
                             <ul class="dropdown-menu">
                                 <li><a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a></li>
                                 <li><a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a></li>

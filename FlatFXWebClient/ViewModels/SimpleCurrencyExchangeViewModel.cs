@@ -18,6 +18,7 @@ namespace FlatFXWebClient.ViewModels
 {
     public class SimpleCurrencyExchangeViewModel
     {
+        public int WorkflowStage { get; set; }
         public string OrderKey { get; set; }
         [Display(Name = "Account")]
         [Required]

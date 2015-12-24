@@ -22,9 +22,8 @@ namespace FlatFXWebClient.Controllers
     {
         public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
-            if (model.SelectedAccount == null)
+            if (model.WorkflowStage <= 0)
             {
-                Session["SimpleCurrencyExchangeStep"] = 1;
                 model = new SimpleCurrencyExchangeViewModel();
                 await Initialize(db, model);
             }
@@ -37,6 +36,7 @@ namespace FlatFXWebClient.Controllers
         }
         private async Task<bool> Initialize(ApplicationDBContext db, SimpleCurrencyExchangeViewModel model)
         {
+            model.WorkflowStage = 1;
             string error;
             Provider flatFXProvider = db.Providers.Where(p => p.Name == "FlatFX").SingleOrDefault();
             if (flatFXProvider == null)
@@ -148,11 +148,14 @@ namespace FlatFXWebClient.Controllers
 
             try
             {
+                // to do support this fields on next stage
+                //deal.ChargedProviderAccount
+                
                 deal.BuySell = model.BuySell;
                 
                 //check the pair order according to the currencies selection
                 string symbol = model.CCY1 + model.CCY2;
-                bool isMainCurrencyFirst = true; //USDILS or ILSUSD
+                //bool isMainCurrencyFirst = true; //USDILS or ILSUSD
                 Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid; 
                 if (CurrencyManager.Instance.PairList.ContainsKey(symbol))
                 {
@@ -162,7 +165,7 @@ namespace FlatFXWebClient.Controllers
                 }
                 else
                 {
-                    isMainCurrencyFirst = false;
+                    //isMainCurrencyFirst = false;
                     symbol = model.CCY2 + model.CCY1;
                     if (model.BuySell == Consts.eBuySell.Sell)
                         priceBidOrAsk = Consts.eBidAsk.Ask;
@@ -182,13 +185,12 @@ namespace FlatFXWebClient.Controllers
                 if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
                     deal.CustomerRate = pairRate.Bid;
-                    deal.BankRate = pairRate.Mid - (0.0005 * pairRate.Mid);
+                    deal.BankRate = pairRate.Mid - (0.001 * pairRate.Mid);
                 }
                 else
                 {
                     deal.CustomerRate = pairRate.Ask;
-                    deal.BankRate = pairRate.Mid + (0.0005 * pairRate.Mid);
-                    //deal.BankTotalProfitUSD
+                    deal.BankRate = pairRate.Mid + (0.001 * pairRate.Mid);
                 }
 
                 if (model.BuySell == Consts.eBuySell.Buy)
@@ -206,14 +208,33 @@ namespace FlatFXWebClient.Controllers
                     deal.ChargedCurrency = model.CCY1;
                 }
 
-                // Calculate AmountUSD
+                //calculate AmountUSD (volume)
                 if (deal.CreditedCurrency == "USD")
                     deal.AmountUSD = deal.AmountToExchangeCreditedCurrency;
                 else if (deal.ChargedCurrency == "USD")
                     deal.AmountUSD = deal.AmountToExchangeChargedCurrency;
                 else
-                    deal.AmountUSD = deal.AmountToExchangeCreditedCurrency * CurrencyManager.Instance.GetFXRateVsUSD(deal.CreditedCurrency).Mid;
+                    deal.AmountUSD = CurrencyManager.Instance.GetAmountUSD(deal.CreditedCurrency, deal.AmountToExchangeCreditedCurrency);
 
+                deal.Comment = model.Comment;
+                deal.Commission = 0;
+                deal.ContractDate = null;
+                deal.MaturityDate = null;
+                
+                //calculate profit
+                //deal.BankTotalProfitUSD = CurrencyManager.Instance.GetAmountUSD(deal.CreditedCurrency, deal.AmountToExchangeCreditedCurrency);
+                //deal.CustomerTotalProfitUSD
+                //deal.FlatFXTotalProfitUSD
+
+                ApplicationInformation.Instance.Session[model.OrderKey] = deal;
+                db.Deals.Add(deal);
+                db.Save
+                    to do the userid Providerid etc are missing
+                    Changes();
+
+                model.WorkflowStage = 2;
+
+                return View(model);
             }
             catch (Exception ex)
             {

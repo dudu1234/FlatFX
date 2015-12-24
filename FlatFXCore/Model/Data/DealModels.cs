@@ -65,8 +65,7 @@ namespace FlatFXCore.Model.Data
         public double? BankRate { get; set; }
         public double? MidRate { get; set; }
         public DateTime OfferingDate { get; set; }
-        [Required]
-        public DateTime ContractDate { get; set; }
+        public DateTime? ContractDate { get; set; }
         public DateTime? MaturityDate { get; set; }
         public Consts.eCallPut CallPut { get; set; }
         public double? Commission { get; set; }

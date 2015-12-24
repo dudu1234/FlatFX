@@ -3,11 +3,11 @@
 
 @{
     ViewBag.Title = "Simple Currency Exchange";
-    string queryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 1) ? "active" : "disabled not-active";
-    string queryBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 1) ? "" : "display-none";
-    string confirmHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "active" : "disabled not-active";
-    string confirmBodyClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 2) ? "" : "display-none";
-    string summaryHeaderClass = (Session["SimpleCurrencyExchangeStep"].ToInt() == 3) ? "active" : "disabled not-active";
+    string queryHeaderClass = (Model.WorkflowStage == 1) ? "active" : "disabled not-active";
+    string queryBodyClass = (Model.WorkflowStage == 1) ? "" : "display-none";
+    string confirmHeaderClass = (Model.WorkflowStage == 2) ? "active" : "disabled not-active";
+    string confirmBodyClass = (Model.WorkflowStage == 2) ? "" : "display-none";
+    string summaryHeaderClass = (Model.WorkflowStage == 3) ? "active" : "disabled not-active";
 }
 
 <div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
@@ -24,7 +24,8 @@
 
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.OrderKey)
-
+        @Html.HiddenFor(model => model.WorkflowStage)
+        
         <div class="row form-group">
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -32,7 +33,7 @@
                         <a href="" style="text-decoration: none;">
                             <h2>
                                 @FlatFXResources.Resources.Step 1
-                                @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 1)
+                                @if (Model.WorkflowStage > 1)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
@@ -45,7 +46,7 @@
                         <a href="" style="text-decoration: none;">
                             <h2>
                                 @FlatFXResources.Resources.Step 2
-                                @if (Session["SimpleCurrencyExchangeStep"].ToInt() > 2)
+                                @if (Model.WorkflowStage > 2)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
@@ -71,7 +72,7 @@
             </div>
             <div class="col-xs-2 text-center"></div>
             <div class="col-xs-5 text-center">
-                @if (Session["SimpleCurrencyExchangeStep"].ToInt() != 1)
+                @if (Model.WorkflowStage != 1)
                 {
                     <div class="@confirmBodyClass">
 
@@ -82,7 +83,7 @@
                 }
             </div>
         </div>
-        if (Session["SimpleCurrencyExchangeStep"].ToInt() == 3)
+        if (Model.WorkflowStage == 3)
         {
             <div class="row setup-content">
                 <div class="col-xs-12">

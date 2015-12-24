@@ -59,7 +59,7 @@
                     .done(function (data) {
 
                         try {
-                            $("#last-feed-update").html(data.query.results.rate[0].Date + '&nbsp;' + data.query.results.rate[0].Time);
+                            $("#last-feed-update").html(data.query.LastUpdate);
                             $.each(data.query.results.rate, function () {
                                 updateCurrencyRow(this);
                             });
@@ -71,11 +71,12 @@
             };
 
             function updateCurrencyRow(currencyRow) {
-                var mid = (parseFloat(currencyRow.Bid) + parseFloat(currencyRow.Ask)) / 2;
-                var spread = mid * 0.003;
+                var mid = parseFloat(currencyRow.Mid);
+                var bid = parseFloat(currencyRow.Bid);
+                var ask = parseFloat(currencyRow.Ask);
                 $("#" + currencyRow.id + "-MID").text(mid.toFixed(4));
-                $("#" + currencyRow.id + "-BID").text((mid - spread).toFixed(4));
-                $("#" + currencyRow.id + "-ASK").text((mid + spread).toFixed(4));
+                $("#" + currencyRow.id + "-BID").text(bid.toFixed(4));
+                $("#" + currencyRow.id + "-ASK").text(ask.toFixed(4));
             }
 
             $(document).ready(function () {

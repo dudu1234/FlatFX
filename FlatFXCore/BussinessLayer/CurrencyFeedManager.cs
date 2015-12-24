@@ -100,6 +100,13 @@ namespace FlatFXCore.BussinessLayer
 
             return PairRates[pair];
         }
+        public double GetAmountUSD(string currency, double amount)
+        {
+            if (currency.ToUpper() == "USD")
+                return amount;
+            else 
+                return amount * GetFXRateVsUSD(currency).Mid;
+        }
     }
     public class CurrencyFeedManager
     {
@@ -123,7 +130,8 @@ namespace FlatFXCore.BussinessLayer
             {
                 foreach (KeyValuePair<string, string> pair in CurrencyManager.Instance.PairList)
                 {
-                    m_CurrencyListString += pair.Key + ",";
+                    if (pair.Key != "USDUSD")
+                        m_CurrencyListString += pair.Key + ",";
                 }
                 m_CurrencyListString = m_CurrencyListString.TrimEnd(',');
 
@@ -224,9 +232,9 @@ namespace FlatFXCore.BussinessLayer
                 updateTime = updateTime.AddHours(2);
 
                 //Update the response in cache
-                response = response.Replace(date, updateTime.ToString("MM/dd/yyyy"));
-                response = response.Replace(time, updateTime.ToString("HH:mm"));
-                m_LastUpdateFeedResponse = response;
+                //response = response.Replace(date, updateTime.ToString("MM/dd/yyyy"));
+                //response = response.Replace(time, updateTime.ToString("HH:mm"));
+                //m_LastUpdateFeedResponse = response;
 
                 //Insert the response to the DB.
                 UpdateFXRatesTables(results, updateTime);
@@ -246,16 +254,36 @@ namespace FlatFXCore.BussinessLayer
                 m_LastHistoricalUpdate = DateTime.Now;
             }
 
+            //Create Json string
+            StringBuilder sbResponse = new StringBuilder();
+            sbResponse.Append("{\"query\": { \"LastUpdate\": \"" + updateTime.ToString("MM/dd/yyyy") + " " + updateTime.ToString("HH:mm") + "\", \"results\": { \"rate\": [");
+
             using (var db = new ApplicationDBContext())
             {
+                bool isFirst = true;
                 foreach (var pairInfo in results.query.results.rate)
                 {
                     string key = pairInfo.id;
                     double ask = pairInfo.Ask;
                     double bid = pairInfo.Bid;
                     double mid = (ask + bid) / 2;
+                    
+                    //Calculate FlatFX prices
+                    double spread = mid * 0.003; // 3 Promil
+                    bid = System.Math.Round(mid - spread, 4);
+                    ask = System.Math.Round(mid + spread, 4);
                     mid = System.Math.Round(mid, 4);
 
+                    if (isFirst)
+                    {
+                        sbResponse.Append("{ \"id\": \"" + key + "\", \"Mid\": \"" + mid + "\", \"Ask\": \"" + ask + "\", \"Bid\": \"" + bid + "\" }");
+                        isFirst = false;
+                    }
+                    else
+                    {
+                        sbResponse.Append(",{ \"id\": \"" + key + "\", \"Mid\": \"" + mid + "\", \"Ask\": \"" + ask + "\", \"Bid\": \"" + bid + "\" }");
+                    }   
+                    
                     #region FXRate table
                     FXRate pairData = null;
                     pairData = db.FXRates.Where(rate => rate.Key == key).FirstOrDefault();
@@ -331,6 +359,9 @@ namespace FlatFXCore.BussinessLayer
 
                 db.SaveChanges();
             }
+
+            sbResponse.Append("]}}}");
+            m_LastUpdateFeedResponse = sbResponse.ToString();
         }
     }
 }
