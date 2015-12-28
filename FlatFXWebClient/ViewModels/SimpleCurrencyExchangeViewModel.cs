@@ -36,8 +36,9 @@ namespace FlatFXWebClient.ViewModels
         public string CCY2 { get; set; }
         [Display(Name = "Comment")]
         public string Comment { get; set; }
-
-
+        public Deal deal { get; set; }
+        public long DealId { get; set; }
+        
         public SimpleCurrencyExchangeViewModel()
         {
             InvalidAccountReason = new List<string>();

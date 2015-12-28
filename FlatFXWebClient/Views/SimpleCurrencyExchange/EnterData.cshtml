@@ -4,14 +4,21 @@
 @{
     ViewBag.Title = "Simple Currency Exchange";
     string queryHeaderClass = (Model.WorkflowStage == 1) ? "active" : "disabled not-active";
-    string queryBodyClass = (Model.WorkflowStage == 1) ? "" : "display-none";
+    string queryBodyClass = (Model.WorkflowStage == 1 || Model.WorkflowStage == 2) ? "" : "display-none";
     string confirmHeaderClass = (Model.WorkflowStage == 2) ? "active" : "disabled not-active";
     string confirmBodyClass = (Model.WorkflowStage == 2) ? "" : "display-none";
     string summaryHeaderClass = (Model.WorkflowStage == 3) ? "active" : "disabled not-active";
+    string controllerAction = "EnterData";
+    if (Model.WorkflowStage == 2)
+    {
+        controllerAction = "Confim";
+    }
 }
 
+<br /><br />
+
 <div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
-    @using (Html.BeginForm("EnterData", "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+    @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
         {
@@ -25,7 +32,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.OrderKey)
         @Html.HiddenFor(model => model.WorkflowStage)
-        
+
         <div class="row form-group">
             <div class="col-xs-12">
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
@@ -65,24 +72,24 @@
                 </ul>
             </div>
         </div>
-        <div class="row setup-content @queryBodyClass">
-            <div id="resultDiv" class="col-xs-12"></div>
-            <div class="col-xs-5 text-center">
-                @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
+        if (Model.WorkflowStage != 3)
+        {
+            <div class="row setup-content @queryBodyClass">
+                <div id="resultDiv" class="col-xs-12"></div>
+                <div class="col-xs-5 text-center">
+                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
+                </div>
+                <div class="col-xs-2 text-center"></div>
+                <div class="col-xs-5 text-center">
+                    @if (Model.WorkflowStage != 1)
+                    {
+                        <div class="@confirmBodyClass">
+                            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
+                        </div>
+                    }
+                </div>
             </div>
-            <div class="col-xs-2 text-center"></div>
-            <div class="col-xs-5 text-center">
-                @if (Model.WorkflowStage != 1)
-                {
-                    <div class="@confirmBodyClass">
-
-                        @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
-                        <br />
-                        <input type="submit" value="Confirm" class="btn btn-primary btn-lg" />
-                    </div>
-                }
-            </div>
-        </div>
+        }
         if (Model.WorkflowStage == 3)
         {
             <div class="row setup-content">

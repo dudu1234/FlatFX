@@ -1157,6 +1157,8 @@
     <Content Include="Views\CompanyAccounts\EditByUser.cshtml" />
     <Content Include="Views\ProviderAccounts\EditByUser.cshtml" />
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Order.cshtml" />
+    <Content Include="Views\SimpleCurrencyExchange\EnterData_Confirm.cshtml" />
+    <Content Include="Views\SimpleCurrencyExchange\EnterData_Summary.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

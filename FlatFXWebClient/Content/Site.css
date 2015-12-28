@@ -78,6 +78,12 @@ mark {
 }
 
 .site-header {
+    position: fixed;
+    top: 0;
+    margin: auto;
+    left: 0;
+    right: 0;
+    width: 100%;
     background: linear-gradient(to right, #d9f1f7, #e2e2e2); /* Standard syntax */
 }
 
@@ -689,24 +695,38 @@ table.ffx-table tr td a {
     background-color: floralwhite;
 }
 
-#registerLink{
-    background-color:#F15A25;
+#registerLink {
+    background-color: #F15A25;
     color: white;
     font-weight: 800;
-    padding:5px;
-    margin-top:10px;
-    border-radius:10px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
-#loginLink{
+#loginLink {
     background-color: #73abcb;
     color: white;
     font-weight: 800;
-    padding:5px;
-    margin-top:10px;
-    border-radius:10px;
+    padding: 5px;
+    margin-top: 10px;
+    border-radius: 10px;
 }
 
 .large-glyphicon {
     font-size: 22px;
+}
+
+.order-value {
+    text-align: start;
+    margin-top: 8px;
+}
+
+div.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
 }
