@@ -20,6 +20,7 @@ namespace FlatFXWebClient.ViewModels
     {
         public int WorkflowStage { get; set; }
         public string OrderKey { get; set; }
+        public long DealId { get; set; }
         [Display(Name = "Account")]
         [Required]
         public string SelectedAccount { get; set; }
@@ -37,7 +38,6 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Comment")]
         public string Comment { get; set; }
         public Deal deal { get; set; }
-        public long DealId { get; set; }
         
         public SimpleCurrencyExchangeViewModel()
         {

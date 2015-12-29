@@ -44,7 +44,7 @@ namespace FlatFXCore.Model.Data
         [MaxLength(100)]
         public string ProviderDealRef { get; set; }
 
-        public Int64 QueryId { get; set; }
+        public Int64? QueryId { get; set; }
         [ForeignKey("QueryId")]
         public virtual QueryData Query { get; set; }
 

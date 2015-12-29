@@ -32,6 +32,7 @@
         @Html.AntiForgeryToken()
         @Html.HiddenFor(model => model.OrderKey)
         @Html.HiddenFor(model => model.WorkflowStage)
+        @Html.HiddenFor(model => model.DealId)
 
         <div class="row form-group">
             <div class="col-xs-12">
@@ -65,8 +66,8 @@
                     <li class="@summaryHeaderClass">
                         <a href="" style="text-decoration: none;">
                             <h2>@FlatFXResources.Resources.Step 3</h2>
-                            <h3 class="list-group-item-heading">Summary</h3>
-                            <p class="list-group-item-text">See the Deal summary and the instractions for the money transfer</p>
+                            <h3 class="list-group-item-heading">Money Transfer</h3>
+                            <p class="list-group-item-text">See the Deal summary and the "money transfer" instractions</p>
                         </a>
                     </li>
                 </ul>

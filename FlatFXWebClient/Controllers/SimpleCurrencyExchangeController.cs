@@ -113,11 +113,9 @@ namespace FlatFXWebClient.Controllers
                     deal.CompanyAccount = providerAccounts[0].CompanyAccount;
                     deal.CompanyAccountId = deal.CompanyAccount.CompanyAccountId;
                 }
+                
                 deal.user = user;
                 deal.UserId = user.Id;
-
-                //db.Deals.Add(deal);
-                //db.SaveChanges();
 
                 ApplicationInformation.Instance.Session[model.OrderKey] = deal;
 
@@ -248,13 +246,14 @@ namespace FlatFXWebClient.Controllers
                 ApplicationInformation.Instance.Session[model.OrderKey] = deal;
                 model.deal = deal;
 
-                //db.Deals.Add(deal);
-                //db.SaveChanges();
+                db.Deals.Attach(deal);
+                db.Entry(deal).State = EntityState.Added;
+                db.SaveChanges();
 
                 model.DealId = deal.DealId;
                 model.WorkflowStage = 2;
 
-                return View(model);
+                return RedirectToAction("EnterData", model);
             }
             catch (Exception ex)
             {
@@ -264,6 +263,8 @@ namespace FlatFXWebClient.Controllers
 
             return View(model);
         }
+        [HttpPost, ActionName("Confim")]
+        [ValidateAntiForgeryToken]
         public ActionResult Confim(SimpleCurrencyExchangeViewModel model)
         {
             try
@@ -281,15 +282,12 @@ namespace FlatFXWebClient.Controllers
                 {
                     return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
                 }
-                
 
-                //Deal deal = db.Deals.Find(dealId);
-                Deal deal = model.DealInSession;
-
+                Deal deal = db.Deals.Find(model.DealInSession.DealId);
                 deal.ContractDate = DateTime.Now;
                 deal.IsOffer = false;
                 deal.MaturityDate = DateTime.Now;
-                //db.SaveChanges();
+                db.SaveChanges();
 
                 model.DealId = deal.DealId;
                 model.deal = deal;
