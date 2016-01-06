@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
@@ -24,7 +25,6 @@ namespace FlatFXCore.Model.Data
     {
         [Key, Column(Order = 1, TypeName = "VARCHAR"), MaxLength(10)]
         public string Key { get; set; }
-
         [Required]
         public double Bid { get; set; }
         [Required]
@@ -34,9 +34,15 @@ namespace FlatFXCore.Model.Data
 
         [Required]
         public DateTime LastUpdate { get; set; }
-
+        
         [Required]
         public bool IsActive { get; set; }
+
+        [DefaultValue(100)]
+        public int Priority { get; set; }
+
+        [NotMapped]
+        public string KeyDisplay { get; set; }
 
         public FXRate() { }
     }

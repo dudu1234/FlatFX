@@ -470,4 +470,7 @@
   <data name="EnterPrivateZone" xml:space="preserve">
     <value>כניסה לאיזור האישי</value>
   </data>
+  <data name="LastUpdate" xml:space="preserve">
+    <value>תאריך עדכון</value>
+  </data>
 </root>

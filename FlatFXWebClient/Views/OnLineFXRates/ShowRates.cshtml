@@ -4,86 +4,54 @@
 
 @using FlatFXCore.BussinessLayer;
 
-<br /><br />
-<div class="row">
-    <div class="col-sm-6 col-sm-offset-3">
-        <div class="form-horizontal">
-            <div class="panel panel-danger">
-                <div class="panel-heading">
-                    <h3 class="panel-title">@FlatFXResources.Resources.CurrencyExchangeRateIndication</h3>
-                </div>
-                <div id="onLineRates" class="panel-body table-responsive">
-                    <table class="table table-bordered table-hover table-striped ffx-table">
-                        <colgroup>
-                            <col class="col-sm-3" />
-                            <col class="col-sm-3" />
-                            <col class="col-sm-3" />
-                            <col class="col-sm-3" />
-                        </colgroup>
-                        <thead>
-                            <tr>
-                                <th data-field="pair">@FlatFXResources.Resources.Pair</th>
-                                <th data-field="mid">@FlatFXResources.Resources.MidRate</th>
-                                <th data-field="bid">@FlatFXResources.Resources.Buy</th>
-                                <th data-field="ask">@FlatFXResources.Resources.Sell</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            @{
-                                foreach (string pairKey in CurrencyManager.Instance.PairList.Keys)
-                                {
-                                    <tr>
-                                        <td>@CurrencyManager.Instance.PairList[pairKey]</td>
-                                        <td id="@(pairKey + "-MID")"></td>
-                                        <td id="@(pairKey + "-BID")"></td>
-                                        <td id="@(pairKey + "-ASK")"></td>
-                                    </tr>
-                                }
-                            }
-                        </tbody>
-                    </table>
+<div ng-controller="onLineRatesViewer" ng-init="init('@(Url.Action("GetRates", "OnLineFXRates"))')">
+    <br /><br />
+    <div class="row">
+        <div class="col-sm-6 col-sm-offset-3">
+            <div class="form-horizontal">
+                <div class="panel panel-danger">
+                    <div class="panel-heading">
+                        <h3 class="panel-title">@FlatFXResources.Resources.CurrencyExchangeRateIndication</h3>
+                        <div id="resultDiv" class="col-xs-10 col-xs-offset-2"></div>
+                    </div>
+                    <div id="onLineRates" class="panel-body table-responsive">
+                        <table class="table table-bordered table-hover table-striped ffx-table">
+                            <colgroup>
+                                <col class="col-sm-3" />
+                                <col class="col-sm-2" />
+                                <col class="col-sm-2" />
+                                <col class="col-sm-2" />
+                                <col class="col-sm-3" />
+                            </colgroup>
+                            <thead>
+                                <tr>
+                                    <th>@FlatFXResources.Resources.Pair</th>
+                                    <th>@FlatFXResources.Resources.MidRate</th>
+                                    <th>@FlatFXResources.Resources.Buy</th>
+                                    <th>@FlatFXResources.Resources.Sell</th>
+                                    <th>@FlatFXResources.Resources.LastUpdate</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr ng-repeat="rate in rates">
+                                    <td>{{ rate.KeyDisplay }}</td>
+                                    <td>{{ rate.Mid }}</td>
+                                    <td>{{ rate.Bid }}</td>
+                                    <td>{{ rate.Ask }}</td>
+                                    <td>{{ rate.LastUpdate | date:'HH:mm' }}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
                 </div>
             </div>
+            <div id="on-line-rates-remarks">
+                <p>@FlatFXResources.Resources.ShowRateRemarksRow1 <a style="color: blue; text-decoration: underline;" href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a></p>
+                <p>@FlatFXResources.Resources.ShowRateRemarksRow2 <span>{{ lastUpdate | date:'yyyy-MM-dd HH:mm' }}</span></p>
+                <p>@FlatFXResources.Resources.ShowRateRemarksRow3</p>
+                <p>@FlatFXResources.Resources.ShowRateRemarksRow4</p>
+                <p>@FlatFXResources.Resources.ShowRateRemarksRow5</p>
+            </div>
         </div>
-        <div id="on-line-rates-remarks">
-            <p>@FlatFXResources.Resources.ShowRateRemarksRow1 <a style="color: blue; text-decoration: underline;" href="http://finance.yahoo.com/currency-investing" target="_blank">Yahoo Finance</a></p>
-            <p>@FlatFXResources.Resources.ShowRateRemarksRow2 <span id="last-feed-update"></span></p>
-            <p>@FlatFXResources.Resources.ShowRateRemarksRow3</p>
-            <p>@FlatFXResources.Resources.ShowRateRemarksRow4</p>
-            <p>@FlatFXResources.Resources.ShowRateRemarksRow5</p>
-        </div>
-        <script>
-            var GetFeedRatesUrl = '@(Url.Action("GetRates", "OnLineFXRates"))';
-
-            function refreshYahooDataFeed() {
-                $.getJSON(GetFeedRatesUrl)
-                    .done(function (data) {
-
-                        try {
-                            $("#last-feed-update").html(data.query.LastUpdate);
-                            $.each(data.query.results.rate, function () {
-                                updateCurrencyRow(this);
-                            });
-                        }
-                        catch (err) {
-                            alert(err);
-                        }
-                    });
-            };
-
-            function updateCurrencyRow(currencyRow) {
-                var mid = parseFloat(currencyRow.Mid);
-                var bid = parseFloat(currencyRow.Bid);
-                var ask = parseFloat(currencyRow.Ask);
-                $("#" + currencyRow.id + "-MID").text(mid.toFixed(4));
-                $("#" + currencyRow.id + "-BID").text(bid.toFixed(4));
-                $("#" + currencyRow.id + "-ASK").text(ask.toFixed(4));
-            }
-
-            $(document).ready(function () {
-                refreshYahooDataFeed();
-                setInterval(function () { refreshYahooDataFeed() }, 5 * 60000);
-            });
-        </script>
     </div>
 </div>

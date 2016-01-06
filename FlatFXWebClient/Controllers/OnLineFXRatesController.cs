@@ -1,4 +1,5 @@
 ﻿using FlatFXCore.BussinessLayer;
+using FlatFXCore.Model.Data;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -16,23 +17,39 @@ namespace FlatFXWebClient.Controllers
         /// <returns></returns>
         public ActionResult ShowRates()
         {
-            CurrencyFeedManager.Instance.GetYahooRates();
             return View();
         }
         /// <summary>
-        /// Return the Yahoo current rate
+        /// Return the current rates
         /// </summary>
         /// <returns></returns>
-        public string GetRates()
+        public JsonResult GetRates()
         {
             try
             {
-                return CurrencyFeedManager.Instance.GetYahooRates();
+                IEnumerable<FXRate> Rates = CurrencyManager.Instance.PairRates.Values.Where(r => r.Key != "USDUSD");
+                foreach(FXRate rate in Rates)
+                {
+                    rate.KeyDisplay = FlatFXResources.Resources.ResourceManager.GetString(rate.Key);
+                }
+                RatesResponse ratesResponse = new RatesResponse(Rates, CurrencyManager.Instance.LastFeedUpdate);
+                return Json(ratesResponse, JsonRequestBehavior.AllowGet);
             }
             catch
             {
-                return "";
+                return null;
             }
+        }
+    }
+    public class RatesResponse
+    {
+        public DateTime LastFeedUpdate = DateTime.Now;
+        public IEnumerable<FXRate> Rates = null;
+
+        public RatesResponse(IEnumerable<FXRate> Rates, DateTime LastFeedUpdate)
+        {
+            this.Rates = Rates;
+            this.LastFeedUpdate = LastFeedUpdate;
         }
     }
 }

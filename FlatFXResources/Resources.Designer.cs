@@ -673,6 +673,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Last Update.
+        /// </summary>
+        public static string LastUpdate {
+            get {
+                return ResourceManager.GetString("LastUpdate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Log.
         /// </summary>
         public static string Log {

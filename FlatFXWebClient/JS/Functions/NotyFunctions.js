@@ -1,6 +1,17 @@
 ﻿
 //type: 'alert', 'information', 'error', 'warning', 'notification', 'success'
 
+//if (isDemo == 'True')
+//    notyWrapper.generateAlertPlusButton($('#ddddd'), 'warning', 'bla bla bla');
+
+//.noty({ text: 'tsts', theme: 'defaultTheme', type: 'alert', template: '<div style="backgroud:blue" class="noty_message"><span class="noty_text"></span><div class="noty_close"></div></div>' });
+//$scope.showNotification = function () {
+//    noty.show('Test message', "success")
+//};
+//$scope.close = function () {
+//    noty.closeAll()
+//}
+
 notyWrapper = {
     generateAlertPlusButton: function generate(container, type, text) {
 

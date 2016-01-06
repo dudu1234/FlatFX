@@ -491,4 +491,7 @@
   <data name="EnterPrivateZone" xml:space="preserve">
     <value>Enter Personal Zone</value>
   </data>
+  <data name="LastUpdate" xml:space="preserve">
+    <value>Last Update</value>
+  </data>
 </root>

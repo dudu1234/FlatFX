@@ -55,16 +55,20 @@ namespace FlatFXWebClient
                         "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/FFXjs").Include(
+                        //"~/JS/Controllers/*.js",
                         "~/JS/FFx.js",
                         "~/JS/Services/Services.js",
                         "~/JS/Functions/NotyFunctions.js"));
-            
+
+            bundles.Add(new ScriptBundle("~/bundles/FFXControllers").IncludeDirectory(
+                "~/JS/Controllers", "*.js"));
+
             bundles.Add(new StyleBundle("~/bundles/FFXcssRtl").Include(
                         "~/Content/rtlCustom.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/FFXjsRtl").Include(
                         "~/JS/rtlCustom.js"));
-            
+
         }
     }
 }

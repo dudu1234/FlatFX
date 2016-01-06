@@ -670,11 +670,6 @@ table.ffx-table tr td a {
     /*font-size: 12px;*/
 }
 
-.demoToLiveTrading {
-    background-color: #e4f6ae;
-    height: 50px;
-}
-
 .ffx-panel {
     border-radius: 10px;
     box-shadow: 0 5px 50px rgba(0,0,0,0.4);
@@ -689,10 +684,6 @@ table.ffx-table tr td a {
 .simple-currency-exchange {
     background-color: #c8c8c8;
     padding: 15px;
-}
-
-.simple-trading-order {
-    background-color: floralwhite;
 }
 
 #registerLink {
@@ -720,7 +711,26 @@ table.ffx-table tr td a {
 .order-value {
     text-align: start;
     margin-top: 8px;
+    font-weight: 700;
 }
+
+.simple-trading-order, .simple-trading-confirm {
+    background-color: floralwhite;
+}
+
+.simple-trading-confirm .panel-body .form-group {
+    margin: 0px;
+    line-height: 30px;
+}
+
+.simple-trading-confirm .panel-body .form-group:nth-child(even) {
+    background-color: #d9f1f7;
+}
+
+.simple-trading-confirm .panel-body .form-group:nth-child(odd) {
+    background-color: #e2e2e2;
+}
+
 
 div.disabled
 {
@@ -729,4 +739,25 @@ div.disabled
   /* for "disabled" effect */
   opacity: 0.5;
   background: #CCC;
+}
+
+.demoToLiveTrading {
+    background-color: #e4f6ae;
+    /*height: 50px;*/
+    padding: 10px;
+}
+
+.demo-to-real-button {
+    margin-left: 50px;
+
+}
+
+.demo-to-real-label {
+    text-align: start;
+    font-weight: 700;
+}
+
+textarea
+{
+  width:100%;
 }

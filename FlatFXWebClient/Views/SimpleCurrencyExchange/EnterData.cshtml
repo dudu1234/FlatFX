@@ -17,16 +17,15 @@
 
 <br /><br />
 
-<div ng-controller="enterdata" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
+<div ng-controller="simpleCurrencyExchange" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
     @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
         {
             <div class="col-xs-12 demoToLiveTrading">
-                <span>You are in a demo environment. Your traders won't have any effect.</span>
-                <a class="btn btn-success" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
+                <span class="demo-to-real-label">You are in a demo environment. Your traders won't have any effect!</span>
+                <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
             </div>
-            <br /><br /><br />
         }
 
         @Html.AntiForgeryToken()
@@ -39,40 +38,37 @@
                 <ul class="nav nav-pills nav-justified thumbnail setup-panel">
                     <li class="@queryHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h2>
-                                @FlatFXResources.Resources.Step 1
+                            <h3 class="list-group-item-heading">
                                 @if (Model.WorkflowStage > 1)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                            </h2>
-                            <h3 class="list-group-item-heading">Enter your Order details</h3>
+                                1. Enter your Order details
+                            </h3>
                             <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
                         </a>
                     </li>
                     <li class="@confirmHeaderClass">
                         <a href="" style="text-decoration: none;">
-                            <h2>
-                                @FlatFXResources.Resources.Step 2
+                            <h3 class="list-group-item-heading">
                                 @if (Model.WorkflowStage > 2)
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                            </h2>
-                            <h3 class="list-group-item-heading">Confirm Deal</h3>
-                            <p class="list-group-item-text">See the live rates and confirm the deal</p>
-                        </a>
-                    </li>
-                    <li class="@summaryHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h2>@FlatFXResources.Resources.Step 3</h2>
-                            <h3 class="list-group-item-heading">Money Transfer</h3>
-                            <p class="list-group-item-text">See the Deal summary and the "money transfer" instractions</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
+                            2. Confirm Deal
+                        </h3>
+                        <p class="list-group-item-text">See the live rates and confirm the deal</p>
+                    </a>
+                </li>
+                <li class="@summaryHeaderClass">
+                    <a href="" style="text-decoration: none;">
+                        <h3 class="list-group-item-heading">3. Money Transfer</h3>
+                        <p class="list-group-item-text">See the Deal summary and the "money transfer" instractions</p>
+                    </a>
+                </li>
+            </ul>
         </div>
+    </div>
         if (Model.WorkflowStage != 3)
         {
             <div class="row setup-content @queryBodyClass">
