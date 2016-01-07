@@ -194,8 +194,11 @@ namespace FlatFXWebClient.Controllers
                 if ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5)
                 {
                     //the exchange rate is not up to date
-                    //TempData["ErrorResult"] += "The Exchange Rate is not up to date. Please contact FlatFX Support in order to get price.";
-                    //return View(model);
+                    if (!deal.IsDemo)
+                    {
+                        TempData["ErrorResult"] += "The Exchange Rate is not up to date. Please contact FlatFX Support in order to get price.";
+                        return View(model);
+                    }
                 }
 
                 deal.OfferingDate = DateTime.Now;

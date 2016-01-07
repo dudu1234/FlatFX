@@ -145,15 +145,18 @@ namespace FlatFXCore.Model.Data
             DateTime start = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, startHour, startMinute, 0);
             DateTime end = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, endHour, endMinute, 0);
 
-            //if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now < start || DateTime.Now > end)
-            //{
-            //    errorMessage = "Currency Exchange is not available right now, " + Environment.NewLine +
-            //        "Office Hours: " + Environment.NewLine +
-            //        "Monday - Thursday: " + this.QuoteResponse_StartTime.Hour + ":" + this.QuoteResponse_StartTime.Minute.ToString().PadLeft(2, '0') + " - " +
-            //        this.QuoteResponse_EndTime.Hour + ":" + this.QuoteResponse_EndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine +
-            //        "Friday: " + this.QuoteResponse_FridayStartTime.Hour + ":" + this.QuoteResponse_FridayStartTime.Minute.ToString().PadLeft(2, '0') + " - " +
-            //        this.QuoteResponse_FridayEndTime.Hour + ":" + this.QuoteResponse_FridayEndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine;
-            //}
+            if (!ApplicationInformation.Instance.IsDemoUser)
+            {
+                if (DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday || DateTime.Now < start || DateTime.Now > end)
+                {
+                    errorMessage = "Currency Exchange is not available right now, " + Environment.NewLine +
+                        "Office Hours: " + Environment.NewLine +
+                        "Monday - Thursday: " + this.QuoteResponse_StartTime.Hour + ":" + this.QuoteResponse_StartTime.Minute.ToString().PadLeft(2, '0') + " - " +
+                        this.QuoteResponse_EndTime.Hour + ":" + this.QuoteResponse_EndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine +
+                        "Friday: " + this.QuoteResponse_FridayStartTime.Hour + ":" + this.QuoteResponse_FridayStartTime.Minute.ToString().PadLeft(2, '0') + " - " +
+                        this.QuoteResponse_FridayEndTime.Hour + ":" + this.QuoteResponse_FridayEndTime.Minute.ToString().PadLeft(2, '0') + Environment.NewLine;
+                }
+            }
 
             if (errorMessage == null)
                 return true;
