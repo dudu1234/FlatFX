@@ -133,6 +133,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to as soon as possible and no later than.
+        /// </summary>
+        public static string ASAP {
+            get {
+                return ResourceManager.GetString("ASAP", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to at.
         /// </summary>
         public static string At {
@@ -151,6 +160,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to back to your account.
+        /// </summary>
+        public static string backtoyouraccount {
+            get {
+                return ResourceManager.GetString("backtoyouraccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Balance.
         /// </summary>
         public static string Balance {
@@ -165,6 +183,15 @@ namespace FlatFXResources {
         public static string Bank {
             get {
                 return ResourceManager.GetString("Bank", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank Account.
+        /// </summary>
+        public static string BankAccount {
+            get {
+                return ResourceManager.GetString("BankAccount", resourceCulture);
             }
         }
         
@@ -201,6 +228,15 @@ namespace FlatFXResources {
         public static string Buy {
             get {
                 return ResourceManager.GetString("Buy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buy Amount (you receive).
+        /// </summary>
+        public static string BuyAmount {
+            get {
+                return ResourceManager.GetString("BuyAmount", resourceCulture);
             }
         }
         
@@ -313,11 +349,38 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to ConfirmationNumber.
+        /// </summary>
+        public static string ConfirmationNumber {
+            get {
+                return ResourceManager.GetString("ConfirmationNumber", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm password.
         /// </summary>
         public static string ConfirmPassword {
             get {
                 return ResourceManager.GetString("ConfirmPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your DEMO Order.
+        /// </summary>
+        public static string ConfirmYourDEMOOrder {
+            get {
+                return ResourceManager.GetString("ConfirmYourDEMOOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your Order.
+        /// </summary>
+        public static string ConfirmYourOrder {
+            get {
+                return ResourceManager.GetString("ConfirmYourOrder", resourceCulture);
             }
         }
         
@@ -444,6 +507,24 @@ namespace FlatFXResources {
         public static string DailyPNL {
             get {
                 return ResourceManager.GetString("DailyPNL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deal created successfully.
+        /// </summary>
+        public static string DealCreatedSuccessfully {
+            get {
+                return ResourceManager.GetString("DealCreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deal Summary &amp; Money transfer.
+        /// </summary>
+        public static string DealSummary {
+            get {
+                return ResourceManager.GetString("DealSummary", resourceCulture);
             }
         }
         
@@ -601,11 +682,37 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;h3&gt;FlatFX Bank Account Details:&lt;/h3&gt;
+        ///        &lt;div&gt;
+        ///            Bank Name: לאומי&lt;br /&gt;
+        ///            Bank Number: 10&lt;br /&gt;
+        ///            Branch Number: 123&lt;br /&gt;
+        ///            Account Number: 12345678&lt;br /&gt;
+        ///            IBAN: IL990101230000012345678&lt;br /&gt;
+        ///            Branch Address: Ben-gurion 12/15, Tel-Aviv&lt;br /&gt;
+        ///        &lt;/div&gt;.
+        /// </summary>
+        public static string FlatFXBankAccountDetails {
+            get {
+                return ResourceManager.GetString("FlatFXBankAccountDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot your password?.
         /// </summary>
         public static string ForgotYourPassword {
             get {
                 return ResourceManager.GetString("ForgotYourPassword", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from your bank account.
+        /// </summary>
+        public static string FromYourBankAccount {
+            get {
+                return ResourceManager.GetString("FromYourBankAccount", resourceCulture);
             }
         }
         
@@ -637,11 +744,43 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Here.
+        /// </summary>
+        public static string Here {
+            get {
+                return ResourceManager.GetString("Here", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Home.
+        /// </summary>
+        public static string Home {
+            get {
+                return ResourceManager.GetString("Home", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home Phone.
         /// </summary>
         public static string HomePhone {
             get {
                 return ResourceManager.GetString("HomePhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to &lt;b&gt;How to transfer:&lt;/b&gt;&lt;br /&gt;
+        ///            1) It is recommended to use your bank interent site in order to transfer money.&lt;br /&gt; 
+        ///            2) If you want to transfer by sending fax to the bank:&lt;br /&gt;
+        ///            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;in a few minutes an Email with the &quot;Money Transfer&quot; form will be send to you, please make sure all details are correct,&lt;br /&gt;
+        ///            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;sign the form and send it to your bank, Fax no. 03-3333333.&lt;br /&gt;
+        ///            You can follow th [rest of string was truncated]&quot;;.
+        /// </summary>
+        public static string HowToTransfer {
+            get {
+                return ResourceManager.GetString("HowToTransfer", resourceCulture);
             }
         }
         
@@ -871,6 +1010,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Money Transfer Instractions.
+        /// </summary>
+        public static string MoneyTransferInstractions {
+            get {
+                return ResourceManager.GetString("MoneyTransferInstractions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Currency.
         /// </summary>
         public static string OfCurrency {
@@ -898,11 +1046,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Once the money will be transfered, FlatFX will transfer.
+        /// </summary>
+        public static string OnceTheMoney {
+            get {
+                return ResourceManager.GetString("OnceTheMoney", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to On Line Rates.
         /// </summary>
         public static string OnLineRates {
             get {
                 return ResourceManager.GetString("OnLineRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order ID.
+        /// </summary>
+        public static string OrderID {
+            get {
+                return ResourceManager.GetString("OrderID", resourceCulture);
             }
         }
         
@@ -925,11 +1091,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Please transfer.
+        /// </summary>
+        public static string PleaseTransfer {
+            get {
+                return ResourceManager.GetString("PleaseTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Product.
         /// </summary>
         public static string Product {
             get {
                 return ResourceManager.GetString("Product", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Provider.
+        /// </summary>
+        public static string Provider {
+            get {
+                return ResourceManager.GetString("Provider", resourceCulture);
             }
         }
         
@@ -1047,6 +1231,24 @@ namespace FlatFXResources {
         public static string Sell {
             get {
                 return ResourceManager.GetString("Sell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sell Amount (you give).
+        /// </summary>
+        public static string SellAmount {
+            get {
+                return ResourceManager.GetString("SellAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Settlement Date.
+        /// </summary>
+        public static string SettlementDate {
+            get {
+                return ResourceManager.GetString("SettlementDate", resourceCulture);
             }
         }
         
@@ -1249,6 +1451,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The funds must received by FlatFX on.
+        /// </summary>
+        public static string TheFunds {
+            get {
+                return ResourceManager.GetString("TheFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to US Dollar $.
         /// </summary>
         public static string USD {
@@ -1392,11 +1603,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to We Traded At.
+        /// </summary>
+        public static string WeTradedAt {
+            get {
+                return ResourceManager.GetString("WeTradedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You must confirm your Email in order to activate your account.
         /// </summary>
         public static string YouMustConfirmYourEmail {
             get {
                 return ResourceManager.GetString("YouMustConfirmYourEmail", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Rate Was.
+        /// </summary>
+        public static string YourRateWas {
+            get {
+                return ResourceManager.GetString("YourRateWas", resourceCulture);
             }
         }
     }

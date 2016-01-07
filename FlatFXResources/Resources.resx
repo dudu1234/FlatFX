@@ -569,4 +569,89 @@
   <data name="USD" xml:space="preserve">
     <value>US Dollar $</value>
   </data>
+  <data name="ASAP" xml:space="preserve">
+    <value>as soon as possible and no later than</value>
+  </data>
+  <data name="backtoyouraccount" xml:space="preserve">
+    <value>back to your account</value>
+  </data>
+  <data name="BankAccount" xml:space="preserve">
+    <value>Bank Account</value>
+  </data>
+  <data name="BuyAmount" xml:space="preserve">
+    <value>Buy Amount (you receive)</value>
+  </data>
+  <data name="ConfirmationNumber" xml:space="preserve">
+    <value>ConfirmationNumber</value>
+  </data>
+  <data name="ConfirmYourDEMOOrder" xml:space="preserve">
+    <value>Confirm your DEMO Order</value>
+  </data>
+  <data name="ConfirmYourOrder" xml:space="preserve">
+    <value>Confirm your Order</value>
+  </data>
+  <data name="DealCreatedSuccessfully" xml:space="preserve">
+    <value>Deal created successfully</value>
+  </data>
+  <data name="DealSummary" xml:space="preserve">
+    <value>Deal Summary &amp; Money transfer</value>
+  </data>
+  <data name="FlatFXBankAccountDetails" xml:space="preserve">
+    <value>&lt;h3&gt;FlatFX Bank Account Details:&lt;/h3&gt;
+        &lt;div&gt;
+            Bank Name: לאומי&lt;br /&gt;
+            Bank Number: 10&lt;br /&gt;
+            Branch Number: 123&lt;br /&gt;
+            Account Number: 12345678&lt;br /&gt;
+            IBAN: IL990101230000012345678&lt;br /&gt;
+            Branch Address: Ben-gurion 12/15, Tel-Aviv&lt;br /&gt;
+        &lt;/div&gt;</value>
+  </data>
+  <data name="FromYourBankAccount" xml:space="preserve">
+    <value>from your bank account</value>
+  </data>
+  <data name="Here" xml:space="preserve">
+    <value>Here</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>Home</value>
+  </data>
+  <data name="HowToTransfer" xml:space="preserve">
+    <value>&lt;b&gt;How to transfer:&lt;/b&gt;&lt;br /&gt;
+            1) It is recommended to use your bank interent site in order to transfer money.&lt;br /&gt; 
+            2) If you want to transfer by sending fax to the bank:&lt;br /&gt;
+            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;in a few minutes an Email with the "Money Transfer" form will be send to you, please make sure all details are correct,&lt;br /&gt;
+            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;sign the form and send it to your bank, Fax no. 03-3333333.&lt;br /&gt;
+            You can follow the deal status</value>
+  </data>
+  <data name="MoneyTransferInstractions" xml:space="preserve">
+    <value>Money Transfer Instractions</value>
+  </data>
+  <data name="OnceTheMoney" xml:space="preserve">
+    <value>Once the money will be transfered, FlatFX will transfer</value>
+  </data>
+  <data name="OrderID" xml:space="preserve">
+    <value>Order ID</value>
+  </data>
+  <data name="PleaseTransfer" xml:space="preserve">
+    <value>Please transfer</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>Provider</value>
+  </data>
+  <data name="SellAmount" xml:space="preserve">
+    <value>Sell Amount (you give)</value>
+  </data>
+  <data name="SettlementDate" xml:space="preserve">
+    <value>Settlement Date</value>
+  </data>
+  <data name="TheFunds" xml:space="preserve">
+    <value>The funds must received by FlatFX on</value>
+  </data>
+  <data name="WeTradedAt" xml:space="preserve">
+    <value>We Traded At</value>
+  </data>
+  <data name="YourRateWas" xml:space="preserve">
+    <value>Your Rate Was</value>
+  </data>
 </root>

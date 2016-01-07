@@ -548,4 +548,89 @@
   <data name="USD" xml:space="preserve">
     <value>דולר ארה"ב $</value>
   </data>
+  <data name="ASAP" xml:space="preserve">
+    <value>במהירות האפשרית ולא יאוחר מ</value>
+  </data>
+  <data name="backtoyouraccount" xml:space="preserve">
+    <value>בחזרה לחשבונך</value>
+  </data>
+  <data name="BankAccount" xml:space="preserve">
+    <value>חשבון</value>
+  </data>
+  <data name="BuyAmount" xml:space="preserve">
+    <value>סכום קניה (הסכום שתקבל)</value>
+  </data>
+  <data name="ConfirmationNumber" xml:space="preserve">
+    <value>אישור מספר</value>
+  </data>
+  <data name="ConfirmYourDEMOOrder" xml:space="preserve">
+    <value>לחץ לאישור העיסקה (דמו)</value>
+  </data>
+  <data name="ConfirmYourOrder" xml:space="preserve">
+    <value>אישור עיסקה</value>
+  </data>
+  <data name="DealCreatedSuccessfully" xml:space="preserve">
+    <value>העיסקה נוצרה בהצלחה</value>
+  </data>
+  <data name="DealSummary" xml:space="preserve">
+    <value>סיכום העיסקה והוראות העברת כספים</value>
+  </data>
+  <data name="FlatFXBankAccountDetails" xml:space="preserve">
+    <value>&lt;h3&gt;פרטי חשבון FlatFX:&lt;/h3&gt;
+        &lt;div&gt;
+            בנק: לאומי&lt;br /&gt;
+            מספר בנק: 10&lt;br /&gt;
+            מספר סניף: 123&lt;br /&gt;
+            מספר חשבון: 12345678&lt;br /&gt;
+            IBAN: IL990101230000012345678&lt;br /&gt;
+            כתובת הסניף: בן גוריון, 12.15, תל אביב&lt;br /&gt;
+        &lt;/div&gt;</value>
+  </data>
+  <data name="FromYourBankAccount" xml:space="preserve">
+    <value>מחשבונך</value>
+  </data>
+  <data name="Here" xml:space="preserve">
+    <value>כאן</value>
+  </data>
+  <data name="Home" xml:space="preserve">
+    <value>דף הבית</value>
+  </data>
+  <data name="HowToTransfer" xml:space="preserve">
+    <value>&lt;b&gt;איך להעביר את הכסף&lt;/b&gt;&lt;br /&gt;
+            1) מומלץ בחום להשתמש באתר האינטרנט של הבנק לצורך העברת הכספים&lt;br /&gt; 
+            2) אם ברצונך להעביר את הכסף באמצעות שליחת פקס לבנק:&lt;br /&gt;
+            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;בעוד מספר דקות ישלח אליך במייל טופס העברת כספים, בבקשה וודא שהפרטים נכונים,&lt;br /&gt;
+            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;חתום על הטופס ושלח אותו לבנק, פקס. 03-3333333.&lt;br /&gt;
+            תוכל לעקוב אחר מצב העיסקה</value>
+  </data>
+  <data name="MoneyTransferInstractions" xml:space="preserve">
+    <value>הוראות להעברת הכספים</value>
+  </data>
+  <data name="OnceTheMoney" xml:space="preserve">
+    <value>ברגע שהכסף יועבר, FlatFX תעביר</value>
+  </data>
+  <data name="OrderID" xml:space="preserve">
+    <value>מספר עיסקה</value>
+  </data>
+  <data name="PleaseTransfer" xml:space="preserve">
+    <value>בבקשה העבר</value>
+  </data>
+  <data name="Provider" xml:space="preserve">
+    <value>ספק נזילות</value>
+  </data>
+  <data name="SellAmount" xml:space="preserve">
+    <value>סכום מכירה (הסכום שעליך להעביר)</value>
+  </data>
+  <data name="SettlementDate" xml:space="preserve">
+    <value>תאריך קבלת הכספים</value>
+  </data>
+  <data name="TheFunds" xml:space="preserve">
+    <value>על הכספים להתקבל בחשבון FlatFX עד לתאריך</value>
+  </data>
+  <data name="WeTradedAt" xml:space="preserve">
+    <value>תאריך העיסקה</value>
+  </data>
+  <data name="YourRateWas" xml:space="preserve">
+    <value>השער שלך</value>
+  </data>
 </root>

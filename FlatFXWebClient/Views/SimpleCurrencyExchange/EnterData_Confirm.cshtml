@@ -3,7 +3,7 @@
 
 <div class="panel-danger form-horizontal simple-trading-confirm">
     <div class="panel-heading">
-        <h3 class="panel-title">Confirm your Order</h3>
+        <h3 class="panel-title">@FlatFXResources.Resources.ConfirmYourOrder</h3>
     </div>
     <div class="panel-body">
 
@@ -12,65 +12,65 @@
         </div>
 
         <div class="form-group">
-            <label class="control-label col-md-6">Order ID:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.OrderID:</label>
             <div class="col-md-6 order-value">@Model.deal.DealId</div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Company Name:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.CompanyName:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.CompanyAccount.Company.CompanyName
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Bank Account:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.BankAccount:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">User Name:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.UserName:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.user.FullName
             </div>
         </div>
-        <div class="form-group red">
-            <label class="control-label col-md-6">You Sold:</label>
-            <div class="col-md-6 order-value">
-                @Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency
-            </div>
-        </div>
         <div class="form-group green">
-            <label class="control-label col-md-6">You Bought:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.BuyAmount:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency
             </div>
         </div>
+        <div class="form-group red">
+            <label class="control-label col-md-6">@FlatFXResources.Resources.SellAmount:</label>
+            <div class="col-md-6 order-value">
+                @Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency
+            </div>
+        </div>
         <div class="form-group">
-            <label class="control-label col-md-6">We Traded At:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.WeTradedAt:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.OfferingDate
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Your Rate Was:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.YourRateWas:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.CustomerRate
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Settlement Date:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.SettlementDate:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.OfferingDate.AddDays(1).ToShortDateString() 13:00
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Provider:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.Provider:</label>
             <div class="col-md-6 order-value">
                 FlatFX
             </div>
         </div>
         <div class="form-group">
-            <label class="control-label col-md-6">Comments:</label>
+            <label class="control-label col-md-6">@FlatFXResources.Resources.Comment:</label>
             <div class="col-md-6 order-value">
                 @Model.deal.Comment
             </div>
@@ -84,15 +84,13 @@
                 <div class="col-md-10 start-align">
                     @if (ApplicationInformation.Instance.IsDemoUser)
                     {
-                        <input id="confirm-submit" type="submit" value="Confirm your DEMO Order" class="btn btn-primary" />
-                        <br />
-                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input id="confirm-submit" type="submit" value="Confirm your Order" class="btn btn-primary" />
+                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
                         <br />
-                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                        <remark>@FlatFXResources.Resources.TheFunds @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00</remark>
                     }
 
                     <br />
