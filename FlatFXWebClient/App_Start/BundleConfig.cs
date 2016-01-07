@@ -29,7 +29,7 @@ namespace FlatFXWebClient
                         "~/Scripts/jquery.validate-vsdoc.js",
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"
-                //"~/Scripts/knockout-{version}.js"
+                        //"~/Scripts/knockout-{version}.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(

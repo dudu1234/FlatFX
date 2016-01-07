@@ -36,13 +36,13 @@
         <div class="form-group red">
             <label class="control-label col-md-6">You Sold:</label>
             <div class="col-md-6 order-value">
-                @Model.deal.AmountToExchangeChargedCurrency @Model.deal.ChargedCurrency
+                @Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency
             </div>
         </div>
         <div class="form-group green">
             <label class="control-label col-md-6">You Bought:</label>
             <div class="col-md-6 order-value">
-                @Model.deal.AmountToExchangeCreditedCurrency @Model.deal.CreditedCurrency
+                @Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency
             </div>
         </div>
         <div class="form-group">
@@ -78,16 +78,26 @@
         <div class="form-group">
             <br />
             <div class="text-center col-md-12">
-                @if (ApplicationInformation.Instance.IsDemoUser)
-                {
-                    <input type="submit" value="Conform your DEMO Order" class="btn btn-primary" />
-                }
-                else
-                {
-                    <input type="submit" value="Conform your Order" class="btn btn-primary" />
+                <div class="end-align col-md-2">
+                    <span id="confirm-countdown" class="countdown-enabled">{{ CountDown }}</span>
+                </div>
+                <div class="col-md-10 start-align">
+                    @if (ApplicationInformation.Instance.IsDemoUser)
+                    {
+                        <input id="confirm-submit" type="submit" value="Confirm your DEMO Order" class="btn btn-primary" />
+                        <br />
+                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                    }
+                    else
+                    {
+                        <input id="confirm-submit" type="submit" value="Confirm your Order" class="btn btn-primary" />
+                        <br />
+                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                    }
+
                     <br />
-                    <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
-                }
+                    <a id="confirm-reorder" class="btn btn-primary" href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.CreateNewOrder</a>
+                </div>
             </div>
         </div>
     </div>

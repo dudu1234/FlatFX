@@ -358,28 +358,28 @@
     <value>מוצר</value>
   </data>
   <data name="AUDILS" xml:space="preserve">
-    <value>דולר אוסטרלי - שקל</value>
+    <value>דולר אוסטרלי - שקל ($-₪)</value>
   </data>
   <data name="Buy" xml:space="preserve">
     <value>קניה</value>
   </data>
   <data name="CHFILS" xml:space="preserve">
-    <value>פרנק שווצרי - שקל</value>
+    <value>פרנק שווצרי - שקל (CHF-₪)</value>
   </data>
   <data name="CurrencyExchangeRateIndication" xml:space="preserve">
     <value>אינדיקציה לשערי מסחר מט"ח</value>
   </data>
   <data name="EURILS" xml:space="preserve">
-    <value>יורו - שקל</value>
+    <value>יורו - שקל (€-₪)</value>
   </data>
   <data name="EURUSD" xml:space="preserve">
-    <value>יורו - דולר ארה"ב</value>
+    <value>יורו - דולר ארה"ב (€-$)</value>
   </data>
   <data name="GBPILS" xml:space="preserve">
-    <value>לירה שטרלינג - שקל</value>
+    <value>לירה שטרלינג - שקל (£-₪)</value>
   </data>
   <data name="JPYILS" xml:space="preserve">
-    <value>ין יפני - שקל</value>
+    <value>ין יפני - שקל (¥-₪)</value>
   </data>
   <data name="MidRate" xml:space="preserve">
     <value>שער אמצע</value>
@@ -406,7 +406,7 @@
     <value>שער אמצע: משקף את שער האמצע (המסחר הבין בנקאי) במהלך המסחר</value>
   </data>
   <data name="USDILS" xml:space="preserve">
-    <value>דולר ארה"ב - שקל</value>
+    <value>דולר ארה"ב - שקל ($-₪)</value>
   </data>
   <data name="CreateDemoAccount" xml:space="preserve">
     <value>צור חשבון דמו</value>
@@ -472,5 +472,80 @@
   </data>
   <data name="LastUpdate" xml:space="preserve">
     <value>תאריך עדכון</value>
+  </data>
+  <data name="Account" xml:space="preserve">
+    <value>חשבון</value>
+  </data>
+  <data name="At" xml:space="preserve">
+    <value>בשעה</value>
+  </data>
+  <data name="ByBuying" xml:space="preserve">
+    <value>בתמורה לקניית</value>
+  </data>
+  <data name="BySelling" xml:space="preserve">
+    <value>בתמורה למכירת</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>הערות</value>
+  </data>
+  <data name="CreateNewOrder" xml:space="preserve">
+    <value>הזמן חלף, צור הוראה חדשה</value>
+  </data>
+  <data name="DemoEnvAlert" xml:space="preserve">
+    <value>הינך בסביבת דמו, ההוראות לא יבוצעו במציאות</value>
+  </data>
+  <data name="DemoEnvButtonTxt" xml:space="preserve">
+    <value>החלף את חשבון הדמו לחשבון אמיתי</value>
+  </data>
+  <data name="EUR" xml:space="preserve">
+    <value>יורו €</value>
+  </data>
+  <data name="ILS" xml:space="preserve">
+    <value>שקל חדש ₪</value>
+  </data>
+  <data name="InAmount" xml:space="preserve">
+    <value>בסכום</value>
+  </data>
+  <data name="OfCurrency" xml:space="preserve">
+    <value>של מטבע</value>
+  </data>
+  <data name="SmplTradeOrderHeader" xml:space="preserve">
+    <value>פרטי עיסקה</value>
+  </data>
+  <data name="SmplTradeOrderNotAllowed" xml:space="preserve">
+    <value>אין אפשרות לבצע את הפעולה</value>
+  </data>
+  <data name="SmplTradeOrderSubmit" xml:space="preserve">
+    <value>שלח הוראה</value>
+  </data>
+  <data name="SmplTradeOrderSubmitDemo" xml:space="preserve">
+    <value>שלח הוראת דמו</value>
+  </data>
+  <data name="SmplTradeOrderTheFundsMust" xml:space="preserve">
+    <value>על הכספים להתקבל בחשבון FlatFX עד תאריך</value>
+  </data>
+  <data name="SmplTradeOrderWishTo" xml:space="preserve">
+    <value>ברצוני לבצע</value>
+  </data>
+  <data name="SmplTradeStep1Desc" xml:space="preserve">
+    <value>הכנסת פרטי המטבעות, קניה/מכירה, סכום, חשבון...</value>
+  </data>
+  <data name="SmplTradeStep1Header" xml:space="preserve">
+    <value>הכנסת פרטי עיסקה</value>
+  </data>
+  <data name="SmplTradeStep2Desc" xml:space="preserve">
+    <value>ראה את מרווחי ההמרה ואשר את העיסקה</value>
+  </data>
+  <data name="SmplTradeStep2Header" xml:space="preserve">
+    <value>אישור עיסקה</value>
+  </data>
+  <data name="SmplTradeStep3Desc" xml:space="preserve">
+    <value>קבלת אישור פעולה והוראות להעברת הכספים</value>
+  </data>
+  <data name="SmplTradeStep3Header" xml:space="preserve">
+    <value>העברת כספים</value>
+  </data>
+  <data name="USD" xml:space="preserve">
+    <value>דולר ארה"ב $</value>
   </data>
 </root>

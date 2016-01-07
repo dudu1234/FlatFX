@@ -171,6 +171,7 @@ namespace FlatFXWebClient.Controllers
                 deal.BuySell = model.BuySell;
 
                 //check the pair order according to the currencies selection
+                bool isOppositeSide = false;
                 string symbol = model.CCY1 + model.CCY2;
                 Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid;
                 if (CurrencyManager.Instance.PairList.ContainsKey(symbol))
@@ -181,7 +182,9 @@ namespace FlatFXWebClient.Controllers
                 }
                 else
                 {
+                    isOppositeSide = true;
                     symbol = model.CCY2 + model.CCY1;
+                    deal.Symbol = symbol;
                     if (model.BuySell == Consts.eBuySell.Sell)
                         priceBidOrAsk = Consts.eBidAsk.Ask;
                 }
@@ -211,14 +214,20 @@ namespace FlatFXWebClient.Controllers
                 if (model.BuySell == Consts.eBuySell.Buy)
                 {
                     deal.AmountToExchangeCreditedCurrency = model.Amount;
-                    deal.AmountToExchangeChargedCurrency = deal.CustomerRate * model.Amount;
+                    if (isOppositeSide)
+                        deal.AmountToExchangeChargedCurrency = (1/deal.CustomerRate) * model.Amount;
+                    else
+                        deal.AmountToExchangeChargedCurrency = deal.CustomerRate * model.Amount;
                     deal.CreditedCurrency = model.CCY1;
                     deal.ChargedCurrency = model.CCY2;
                 }
                 else
                 {
                     deal.AmountToExchangeChargedCurrency = model.Amount;
-                    deal.AmountToExchangeCreditedCurrency = deal.CustomerRate * model.Amount;
+                    if (isOppositeSide)
+                        deal.AmountToExchangeCreditedCurrency = (1/deal.CustomerRate) * model.Amount;
+                    else
+                        deal.AmountToExchangeCreditedCurrency = deal.CustomerRate * model.Amount;
                     deal.CreditedCurrency = model.CCY2;
                     deal.ChargedCurrency = model.CCY1;
                 }
@@ -284,6 +293,13 @@ namespace FlatFXWebClient.Controllers
                 }
 
                 Deal deal = db.Deals.Find(model.DealInSession.DealId);
+
+                if (deal.OfferingDate.AddSeconds(60) < DateTime.Now)
+                {
+                    TempData["ErrorResult"] += "Timeout expired. ";
+                    return RedirectToAction("EnterData", model);
+                }
+
                 deal.ContractDate = DateTime.Now;
                 deal.IsOffer = false;
                 deal.MaturityDate = DateTime.Now;

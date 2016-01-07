@@ -108,6 +108,18 @@ namespace FlatFXCore.BussinessLayer
             else 
                 return amount * GetFXRateVsUSD(currency).Mid;
         }
+        public Dictionary<string, string> CurrencyListByCulture
+        {
+            get
+            {
+                Dictionary<string, string> currencyListByCulture = new Dictionary<string, string>();
+                foreach(string curr in CurrencyList)
+                {
+                    currencyListByCulture.Add(curr, curr + " - " + FlatFXResources.Resources.ResourceManager.GetString(curr));
+                }
+                return currencyListByCulture;
+            }
+        }
     }
     public class CurrencyFeedManager
     {

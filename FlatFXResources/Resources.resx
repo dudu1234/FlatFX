@@ -370,28 +370,28 @@
     <value>Product</value>
   </data>
   <data name="AUDILS" xml:space="preserve">
-    <value>AUD - ILS</value>
+    <value>AUD - ILS ($-₪)</value>
   </data>
   <data name="Buy" xml:space="preserve">
     <value>Buy</value>
   </data>
   <data name="CHFILS" xml:space="preserve">
-    <value>CHF - ILS</value>
+    <value>CHF - ILS (CHF-₪)</value>
   </data>
   <data name="CurrencyExchangeRateIndication" xml:space="preserve">
     <value>Currency Exchange rates indication</value>
   </data>
   <data name="EURILS" xml:space="preserve">
-    <value>EUR - ILS</value>
+    <value>EUR - ILS (€-₪)</value>
   </data>
   <data name="EURUSD" xml:space="preserve">
-    <value>EUR - USD</value>
+    <value>EUR - USD (€-$)</value>
   </data>
   <data name="GBPILS" xml:space="preserve">
-    <value>GBP - ILS</value>
+    <value>GBP - ILS (£-₪)</value>
   </data>
   <data name="JPYILS" xml:space="preserve">
-    <value>JPY - ILS</value>
+    <value>JPY - ILS (¥-₪)</value>
   </data>
   <data name="MidRate" xml:space="preserve">
     <value>Mid Rate</value>
@@ -418,7 +418,7 @@
     <value>Mid rate: The inter bank trading rate during trading time</value>
   </data>
   <data name="USDILS" xml:space="preserve">
-    <value>USD - ILS</value>
+    <value>USD - ILS ($-₪)</value>
   </data>
   <data name="CreateDemoAccount" xml:space="preserve">
     <value>Create a Demo account</value>
@@ -491,7 +491,82 @@
   <data name="EnterPrivateZone" xml:space="preserve">
     <value>Enter Personal Zone</value>
   </data>
+  <data name="Account" xml:space="preserve">
+    <value>Account</value>
+  </data>
+  <data name="At" xml:space="preserve">
+    <value>at</value>
+  </data>
+  <data name="ByBuying" xml:space="preserve">
+    <value>By Buying</value>
+  </data>
+  <data name="BySelling" xml:space="preserve">
+    <value>By Selling</value>
+  </data>
+  <data name="Comment" xml:space="preserve">
+    <value>Comment</value>
+  </data>
+  <data name="CreateNewOrder" xml:space="preserve">
+    <value>Time Expired, Create a new Order</value>
+  </data>
+  <data name="DemoEnvAlert" xml:space="preserve">
+    <value>You are in a demo environment. Your trades won't have any effect!</value>
+  </data>
+  <data name="DemoEnvButtonTxt" xml:space="preserve">
+    <value>Change your Demo Account to a Real Account</value>
+  </data>
+  <data name="EUR" xml:space="preserve">
+    <value>Euro €</value>
+  </data>
+  <data name="ILS" xml:space="preserve">
+    <value>Israeli new sheqel ₪</value>
+  </data>
+  <data name="InAmount" xml:space="preserve">
+    <value>Amount of</value>
+  </data>
   <data name="LastUpdate" xml:space="preserve">
     <value>Last Update</value>
+  </data>
+  <data name="OfCurrency" xml:space="preserve">
+    <value>Currency</value>
+  </data>
+  <data name="SmplTradeOrderHeader" xml:space="preserve">
+    <value>Enter your Order</value>
+  </data>
+  <data name="SmplTradeOrderNotAllowed" xml:space="preserve">
+    <value>You are not allowed to perform the currency exchange</value>
+  </data>
+  <data name="SmplTradeOrderSubmit" xml:space="preserve">
+    <value>Submit your Order</value>
+  </data>
+  <data name="SmplTradeOrderSubmitDemo" xml:space="preserve">
+    <value>Submit your DEMO Order</value>
+  </data>
+  <data name="SmplTradeOrderTheFundsMust" xml:space="preserve">
+    <value>The funds must received by FlatFX on</value>
+  </data>
+  <data name="SmplTradeOrderWishTo" xml:space="preserve">
+    <value>I wish to</value>
+  </data>
+  <data name="SmplTradeStep1Desc" xml:space="preserve">
+    <value>Enter the Order currencies, amount, buy/sell, bank account, ...</value>
+  </data>
+  <data name="SmplTradeStep1Header" xml:space="preserve">
+    <value>Enter your Order details</value>
+  </data>
+  <data name="SmplTradeStep2Desc" xml:space="preserve">
+    <value>See the live rates and confirm the deal</value>
+  </data>
+  <data name="SmplTradeStep2Header" xml:space="preserve">
+    <value>Confirm Deal</value>
+  </data>
+  <data name="SmplTradeStep3Desc" xml:space="preserve">
+    <value>See the Deal summary and the "money transfer" instractions</value>
+  </data>
+  <data name="SmplTradeStep3Header" xml:space="preserve">
+    <value>Money Transfer</value>
+  </data>
+  <data name="USD" xml:space="preserve">
+    <value>US Dollar $</value>
   </data>
 </root>

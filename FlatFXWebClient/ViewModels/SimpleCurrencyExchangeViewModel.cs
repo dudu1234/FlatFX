@@ -21,7 +21,7 @@ namespace FlatFXWebClient.ViewModels
         public int WorkflowStage { get; set; }
         public string OrderKey { get; set; }
         public long DealId { get; set; }
-        [Display(Name = "Account")]
+        [Display(Name = "Account", ResourceType = typeof(FlatFXResources.Resources))]
         [Required]
         public string SelectedAccount { get; set; }
         public List<string> InvalidAccountReason { get; set; }
@@ -30,12 +30,13 @@ namespace FlatFXWebClient.ViewModels
         [Required]
         [Display(Name = "Amount")]
         [Range(1000, 1000000, ErrorMessage = "Please enter number between 1,000-1,000,000")]
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double Amount { get; set; }
         [Required]
         public string CCY1 { get; set; }
         [Required]
         public string CCY2 { get; set; }
-        [Display(Name = "Comment")]
+        [Display(Name = "Comment", ResourceType = typeof(FlatFXResources.Resources))]
         public string Comment { get; set; }
         public Deal deal { get; set; }
         

@@ -61,6 +61,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Account.
+        /// </summary>
+        public static string Account {
+            get {
+                return ResourceManager.GetString("Account", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Account name.
         /// </summary>
         public static string AccountName {
@@ -124,7 +133,16 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to AUD - ILS.
+        ///   Looks up a localized string similar to at.
+        /// </summary>
+        public static string At {
+            get {
+                return ResourceManager.GetString("At", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to AUD - ILS ($-₪).
         /// </summary>
         public static string AUDILS {
             get {
@@ -187,6 +205,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to By Buying.
+        /// </summary>
+        public static string ByBuying {
+            get {
+                return ResourceManager.GetString("ByBuying", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to By Selling.
+        /// </summary>
+        public static string BySelling {
+            get {
+                return ResourceManager.GetString("BySelling", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Car Phone.
         /// </summary>
         public static string CarPhone {
@@ -196,11 +232,20 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to CHF - ILS.
+        ///   Looks up a localized string similar to CHF - ILS (CHF-₪).
         /// </summary>
         public static string CHFILS {
             get {
                 return ResourceManager.GetString("CHFILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Comment.
+        /// </summary>
+        public static string Comment {
+            get {
+                return ResourceManager.GetString("Comment", resourceCulture);
             }
         }
         
@@ -358,6 +403,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Time Expired, Create a new Order.
+        /// </summary>
+        public static string CreateNewOrder {
+            get {
+                return ResourceManager.GetString("CreateNewOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new user.
         /// </summary>
         public static string CreateNewUser {
@@ -390,6 +444,24 @@ namespace FlatFXResources {
         public static string DailyPNL {
             get {
                 return ResourceManager.GetString("DailyPNL", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are in a demo environment. Your trades won&apos;t have any effect!.
+        /// </summary>
+        public static string DemoEnvAlert {
+            get {
+                return ResourceManager.GetString("DemoEnvAlert", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change your Demo Account to a Real Account.
+        /// </summary>
+        public static string DemoEnvButtonTxt {
+            get {
+                return ResourceManager.GetString("DemoEnvButtonTxt", resourceCulture);
             }
         }
         
@@ -475,7 +547,16 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EUR - ILS.
+        ///   Looks up a localized string similar to Euro €.
+        /// </summary>
+        public static string EUR {
+            get {
+                return ResourceManager.GetString("EUR", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to EUR - ILS (€-₪).
         /// </summary>
         public static string EURILS {
             get {
@@ -484,7 +565,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to EUR - USD.
+        ///   Looks up a localized string similar to EUR - USD (€-$).
         /// </summary>
         public static string EURUSD {
             get {
@@ -529,7 +610,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to GBP - ILS.
+        ///   Looks up a localized string similar to GBP - ILS (£-₪).
         /// </summary>
         public static string GBPILS {
             get {
@@ -570,6 +651,24 @@ namespace FlatFXResources {
         public static string IBAN {
             get {
                 return ResourceManager.GetString("IBAN", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Israeli new sheqel ₪.
+        /// </summary>
+        public static string ILS {
+            get {
+                return ResourceManager.GetString("ILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Amount of.
+        /// </summary>
+        public static string InAmount {
+            get {
+                return ResourceManager.GetString("InAmount", resourceCulture);
             }
         }
         
@@ -646,7 +745,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to JPY - ILS.
+        ///   Looks up a localized string similar to JPY - ILS (¥-₪).
         /// </summary>
         public static string JPYILS {
             get {
@@ -768,6 +867,15 @@ namespace FlatFXResources {
         public static string MobilePhone2 {
             get {
                 return ResourceManager.GetString("MobilePhone2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Currency.
+        /// </summary>
+        public static string OfCurrency {
+            get {
+                return ResourceManager.GetString("OfCurrency", resourceCulture);
             }
         }
         
@@ -1006,6 +1114,114 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enter your Order.
+        /// </summary>
+        public static string SmplTradeOrderHeader {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not allowed to perform the currency exchange.
+        /// </summary>
+        public static string SmplTradeOrderNotAllowed {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit your Order.
+        /// </summary>
+        public static string SmplTradeOrderSubmit {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderSubmit", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit your DEMO Order.
+        /// </summary>
+        public static string SmplTradeOrderSubmitDemo {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderSubmitDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The funds must received by FlatFX on.
+        /// </summary>
+        public static string SmplTradeOrderTheFundsMust {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderTheFundsMust", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to I wish to.
+        /// </summary>
+        public static string SmplTradeOrderWishTo {
+            get {
+                return ResourceManager.GetString("SmplTradeOrderWishTo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Order currencies, amount, buy/sell, bank account, ....
+        /// </summary>
+        public static string SmplTradeStep1Desc {
+            get {
+                return ResourceManager.GetString("SmplTradeStep1Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Order details.
+        /// </summary>
+        public static string SmplTradeStep1Header {
+            get {
+                return ResourceManager.GetString("SmplTradeStep1Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See the live rates and confirm the deal.
+        /// </summary>
+        public static string SmplTradeStep2Desc {
+            get {
+                return ResourceManager.GetString("SmplTradeStep2Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm Deal.
+        /// </summary>
+        public static string SmplTradeStep2Header {
+            get {
+                return ResourceManager.GetString("SmplTradeStep2Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See the Deal summary and the &quot;money transfer&quot; instractions.
+        /// </summary>
+        public static string SmplTradeStep3Desc {
+            get {
+                return ResourceManager.GetString("SmplTradeStep3Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money Transfer.
+        /// </summary>
+        public static string SmplTradeStep3Header {
+            get {
+                return ResourceManager.GetString("SmplTradeStep3Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Step.
         /// </summary>
         public static string Step {
@@ -1033,7 +1249,16 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to USD - ILS.
+        ///   Looks up a localized string similar to US Dollar $.
+        /// </summary>
+        public static string USD {
+            get {
+                return ResourceManager.GetString("USD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to USD - ILS ($-₪).
         /// </summary>
         public static string USDILS {
             get {

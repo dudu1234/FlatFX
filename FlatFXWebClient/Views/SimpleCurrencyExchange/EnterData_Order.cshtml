@@ -10,7 +10,7 @@
 }
 <div class="panel-danger form-horizontal simple-trading-order">
     <div class="panel-heading">
-        <h3 class="panel-title">Enter your Order</h3>
+        <h3 class="panel-title">@FlatFXResources.Resources.SmplTradeOrderHeader</h3>
     </div>
     <div class="panel-body @disableClass">
 
@@ -18,7 +18,7 @@
         @if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0)
         {
             <div class="start-align">
-                <h3>You are not allowed to perform the currency exchange:</h3><br />
+                <h3>@FlatFXResources.Resources.SmplTradeOrderNotAllowed:</h3><br />
                 @foreach (string reason in Model.InvalidAccountReason)
                 {
                     string reason2 = " - " + reason;
@@ -43,61 +43,68 @@
                 </div>
             }
             <div class="form-group">
-                <label class="control-label col-md-4">I wish to</label>
+                <label class="control-label col-md-3">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
+                <div class="col-md-3 order-radio-div">
+                    @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked", onclick = "setBuySellText('" + @FlatFXResources.Resources.BySelling + "')" })
+                    <span>@FlatFXResources.Resources.Buy</span>
+                </div>
+                <div class="col-md-3 order-radio-div">
+                    @Html.RadioButtonFor(model => model.BuySell, "Sell", new { onclick = "setBuySellText('" + @FlatFXResources.Resources.ByBuying + "')" })
+                    <span>@FlatFXResources.Resources.Sell</span>
+                </div>
+                <div class="col-md-3"></div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-3">@FlatFXResources.Resources.OfCurrency</label>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyListByCulture, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                </div>
+                <label class="control-label col-md-2">@FlatFXResources.Resources.InAmount</label>
                 <div class="col-md-3">
-                    @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" }) Buy
-                </div>
-                <div class="col-md-3">
-                    @Html.RadioButtonFor(model => model.BuySell, "Sell") Sell
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { id = "orderAmount", @class = "form-control", @type = "number" } })
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-4">Amount</label>
+                <label id="buySellText" class="control-label col-md-3">@FlatFXResources.Resources.BySelling</label>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.DropDownListFor(m => m.CCY2, new SelectList(CurrencyManager.Instance.CurrencyListByCulture, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
                 </div>
-                <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
-                </div>
-                <div class="col-md-12">
-                    @*@Html.ValidationMessageFor(m => m.Amount, "", new { @class = "text-danger" })*@
+                <div class="col-md-5">
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-4">Sell</label>
-                <div class="col-md-4">
-
-                </div>
-                <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.CCY2, new SelectList(CurrencyManager.Instance.CurrencyList), htmlAttributes: new { @class = "form-control" })
-                </div>
-            </div>
-            <div class="form-group">
-                @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-8">
+                @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
                 </div>
             </div>
             <div class="form-group">
-                @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-4" })
-                <div class="col-md-8">
+                @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3" })
+                <div class="col-md-9">
                     @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
                 </div>
             </div>
+
             <div class="form-group">
                 <div class="text-center col-md-12">
                     @if (ApplicationInformation.Instance.IsDemoUser)
                     {
-                        <input type="submit" value="Submit your DEMO Order" class="btn btn-primary" />
+                        <input type="submit" value="@FlatFXResources.Resources.SmplTradeOrderSubmitDemo" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input type="submit" value="Submit your Order" class="btn btn-primary" />
+                        <input type="submit" value="@FlatFXResources.Resources.SmplTradeOrderSubmit" class="btn btn-primary" />
                         <br />
-                        <remark>The funds must received by FlatFX on @DateTime.Now.AddDays(1).ToShortDateString() at 13:00</remark>
+                        <remark>@FlatFXResources.Resources.SmplTradeOrderTheFundsMust @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00</remark>
                     }
                 </div>
             </div>
         }
     </div>
 </div>
+
+<script>
+    function setBuySellText(text) {
+        $('#buySellText').html(text);
+    }
+</script>

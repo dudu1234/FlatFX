@@ -5,11 +5,17 @@ myApp.controller('registerall', ['$scope', function ($scope) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('simpleCurrencyExchange', function ($scope, $timeout, noty) {
-    $scope.init = function (isDemo, info, error) {
+myApp.controller('simpleCurrencyExchange', function ($scope, $timeout, $interval, noty) {
+    $scope.init = function (WorkflowStage, isDemo, info, error) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
+        if (WorkflowStage == 2) {
+            $scope.CountDown = 60;
+        }
+        else {
+            $scope.CountDown = 0;
+        }
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
@@ -21,7 +27,20 @@ myApp.controller('simpleCurrencyExchange', function ($scope, $timeout, noty) {
         else if ($scope.error != '') {
             notyWrapper.generateResultMessage($('#resultDiv'), 'error', $scope.error);
         }
+        $('#confirm-reorder').hide();
     }
+    $interval(function () {
+        if ($scope.CountDown < 1)
+            return;
+
+        if ($scope.CountDown == 1) {
+            $('#confirm-submit').attr("disabled", true);
+            $('#confirm-countdown').removeClass('countdown-enabled').addClass('countdown-disabled');
+            $('#confirm-reorder').fadeIn(500);
+        }
+
+        $scope.CountDown = $scope.CountDown - 1;
+    }, 1000);
 });
 
 

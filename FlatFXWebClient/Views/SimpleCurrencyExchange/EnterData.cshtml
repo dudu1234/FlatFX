@@ -17,14 +17,14 @@
 
 <br /><br />
 
-<div ng-controller="simpleCurrencyExchange" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
+<div ng-controller="simpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
     @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
         {
             <div class="col-xs-12 demoToLiveTrading">
-                <span class="demo-to-real-label">You are in a demo environment. Your traders won't have any effect!</span>
-                <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">Change your Demo Account to a Real Account</a>
+                <span class="demo-to-real-label">@FlatFXResources.Resources.DemoEnvAlert</span>
+                <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">@FlatFXResources.Resources.DemoEnvButtonTxt</a>
             </div>
         }
 
@@ -43,9 +43,9 @@
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                                1. Enter your Order details
+                                1. @FlatFXResources.Resources.SmplTradeStep1Header
                             </h3>
-                            <p class="list-group-item-text">Enter the Order currencies, amount, buy/sell, bank account, ...</p>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep1Desc</p>
                         </a>
                     </li>
                     <li class="@confirmHeaderClass">
@@ -55,20 +55,20 @@
                                 {
                                     <span class="glyphicon glyphicon-ok green"></span>
                                 }
-                            2. Confirm Deal
-                        </h3>
-                        <p class="list-group-item-text">See the live rates and confirm the deal</p>
-                    </a>
-                </li>
-                <li class="@summaryHeaderClass">
-                    <a href="" style="text-decoration: none;">
-                        <h3 class="list-group-item-heading">3. Money Transfer</h3>
-                        <p class="list-group-item-text">See the Deal summary and the "money transfer" instractions</p>
-                    </a>
-                </li>
-            </ul>
+                                2. @FlatFXResources.Resources.SmplTradeStep2Header
+                            </h3>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep2Desc</p>
+                        </a>
+                    </li>
+                    <li class="@summaryHeaderClass">
+                        <a href="" style="text-decoration: none;">
+                            <h3 class="list-group-item-heading">3. @FlatFXResources.Resources.SmplTradeStep3Header</h3>
+                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep3Desc</p>
+                        </a>
+                    </li>
+                </ul>
+            </div>
         </div>
-    </div>
         if (Model.WorkflowStage != 3)
         {
             <div class="row setup-content @queryBodyClass">
