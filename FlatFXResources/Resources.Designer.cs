@@ -699,6 +699,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Commission.
+        /// </summary>
+        public static string FlatFXCommission {
+            get {
+                return ResourceManager.GetString("FlatFXCommission", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot your password?.
         /// </summary>
         public static string ForgotYourPassword {
@@ -1626,6 +1635,15 @@ namespace FlatFXResources {
         public static string YourRateWas {
             get {
                 return ResourceManager.GetString("YourRateWas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You Save.
+        /// </summary>
+        public static string YouSave {
+            get {
+                return ResourceManager.GetString("YouSave", resourceCulture);
             }
         }
     }

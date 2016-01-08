@@ -654,4 +654,10 @@
   <data name="YourRateWas" xml:space="preserve">
     <value>Your Rate Was</value>
   </data>
+  <data name="FlatFXCommission" xml:space="preserve">
+    <value>Commission</value>
+  </data>
+  <data name="YouSave" xml:space="preserve">
+    <value>You Save</value>
+  </data>
 </root>

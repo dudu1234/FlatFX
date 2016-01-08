@@ -105,8 +105,10 @@ namespace FlatFXCore.BussinessLayer
         {
             if (currency.ToUpper() == "USD")
                 return amount;
-            else 
+            else if (CurrencyBeforeUSD.Contains(currency))
                 return amount * GetFXRateVsUSD(currency).Mid;
+            else
+                return amount * (1 / GetFXRateVsUSD(currency).Mid);
         }
         public Dictionary<string, string> CurrencyListByCulture
         {
@@ -129,7 +131,7 @@ namespace FlatFXCore.BussinessLayer
         private int m_UpdateFeedTimerInterval = 60 * 1000;
         private string m_CurrencyListString = "";
         private DateTime? m_LastHistoricalUpdate = null;
-
+        public const double FlatFXSpreadInPromil = 0.003;
         #endregion
 
         #region Ctor + Dtor
@@ -249,7 +251,7 @@ namespace FlatFXCore.BussinessLayer
                     double mid = (ask + bid) / 2;
                     
                     //Calculate FlatFX prices
-                    double spread = mid * 0.003; // 3 Promil
+                    double spread = mid * FlatFXSpreadInPromil; // 3 Promil
                     bid = System.Math.Round(mid - spread, 4);
                     ask = System.Math.Round(mid + spread, 4);
                     mid = System.Math.Round(mid, 4);

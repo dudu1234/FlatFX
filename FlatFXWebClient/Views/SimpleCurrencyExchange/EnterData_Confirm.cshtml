@@ -57,6 +57,20 @@
                 @Model.deal.CustomerRate
             </div>
         </div>
+
+        <div class="form-group">
+            <label class="control-label col-md-6">@FlatFXResources.Resources.YouSave*:</label>
+            <div class="col-md-6 order-value">
+                @Model.deal.CustomerTotalProfitUSD$
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-md-6">@FlatFXResources.Resources.FlatFXCommission:</label>
+            <div class="col-md-6 order-value">
+                @(Model.deal.FlatFXTotalProfitUSD + Model.deal.BankTotalProfitUSD)$
+            </div>
+        </div>
+        
         <div class="form-group">
             <label class="control-label col-md-6">@FlatFXResources.Resources.SettlementDate:</label>
             <div class="col-md-6 order-value">

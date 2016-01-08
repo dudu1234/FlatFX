@@ -633,4 +633,10 @@
   <data name="YourRateWas" xml:space="preserve">
     <value>השער שלך</value>
   </data>
+  <data name="FlatFXCommission" xml:space="preserve">
+    <value>עמלה</value>
+  </data>
+  <data name="YouSave" xml:space="preserve">
+    <value>החיסכון שלך</value>
+  </data>
 </root>

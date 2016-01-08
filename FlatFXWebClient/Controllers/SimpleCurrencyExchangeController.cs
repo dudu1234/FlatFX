@@ -20,6 +20,10 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class SimpleCurrencyExchangeController : BaseController
     {
+        public const double BankProfitInPromil = 0.001;
+        public const double FlatFXProfitInPromil = 0.002;
+        public const double CustomerProfitInPromil = 0.008;
+
         public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
             if (model.WorkflowStage <= 0)
@@ -206,21 +210,25 @@ namespace FlatFXWebClient.Controllers
                 if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
                     deal.CustomerRate = pairRate.Bid;
-                    deal.BankRate = pairRate.Mid - (0.001 * pairRate.Mid);
+                    deal.BankRate = pairRate.Mid - (BankProfitInPromil * pairRate.Mid);
                 }
                 else
                 {
                     deal.CustomerRate = pairRate.Ask;
-                    deal.BankRate = pairRate.Mid + (0.001 * pairRate.Mid);
+                    deal.BankRate = pairRate.Mid + (BankProfitInPromil * pairRate.Mid);
                 }
 
                 if (model.BuySell == Consts.eBuySell.Buy)
                 {
                     deal.AmountToExchangeCreditedCurrency = model.Amount;
                     if (isOppositeSide)
-                        deal.AmountToExchangeChargedCurrency = (1/deal.CustomerRate) * model.Amount;
+                    {
+                        deal.AmountToExchangeChargedCurrency = (1 / deal.CustomerRate) * model.Amount;
+                    }
                     else
+                    {
                         deal.AmountToExchangeChargedCurrency = deal.CustomerRate * model.Amount;
+                    }
                     deal.CreditedCurrency = model.CCY1;
                     deal.ChargedCurrency = model.CCY2;
                 }
@@ -228,9 +236,13 @@ namespace FlatFXWebClient.Controllers
                 {
                     deal.AmountToExchangeChargedCurrency = model.Amount;
                     if (isOppositeSide)
-                        deal.AmountToExchangeCreditedCurrency = (1/deal.CustomerRate) * model.Amount;
+                    {
+                        deal.AmountToExchangeCreditedCurrency = (1 / deal.CustomerRate) * model.Amount;
+                    }
                     else
+                    {
                         deal.AmountToExchangeCreditedCurrency = deal.CustomerRate * model.Amount;
+                    }
                     deal.CreditedCurrency = model.CCY2;
                     deal.ChargedCurrency = model.CCY1;
                 }
@@ -243,17 +255,22 @@ namespace FlatFXWebClient.Controllers
                 else
                     deal.AmountUSD = CurrencyManager.Instance.GetAmountUSD(deal.CreditedCurrency, deal.AmountToExchangeCreditedCurrency);
 
+                //calculate profit
+                string minorCurrency = model.CCY2;
+                if (isOppositeSide)
+                    minorCurrency = model.CCY1;
+                deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * BankProfitInPromil * pairRate.Mid), 2); // 1 promil
+                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CustomerProfitInPromil * pairRate.Mid), 2); // 8 promil
+                deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 3 promil
+                
+                
+
                 if (model.Comment == null)
                     model.Comment = "";
                 deal.Comment = model.Comment;
                 deal.Commission = 0;
                 deal.ContractDate = null;
                 deal.MaturityDate = null;
-
-                //calculate profit
-                //deal.BankTotalProfitUSD = CurrencyManager.Instance.GetAmountUSD(deal.CreditedCurrency, deal.AmountToExchangeCreditedCurrency);
-                //deal.CustomerTotalProfitUSD
-                //deal.FlatFXTotalProfitUSD
 
                 ApplicationInformation.Instance.Session[model.OrderKey] = deal;
                 model.deal = deal;
