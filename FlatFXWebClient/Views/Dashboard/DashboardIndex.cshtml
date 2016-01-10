@@ -1,0 +1,35 @@
+﻿@model FlatFXWebClient.ViewModels.DashboardIndexViewModel
+@using FlatFXCore.BussinessLayer;
+
+@{
+    ViewBag.Title = "Dashboard";
+}
+
+<div ng-controller="Dashboard" @*ng-init="init()"*@ class="DashboardDiv">
+    <div class="row">
+        <div class="col-xs-6 CompanyArea">
+            <h3 class="header">Your company Information (@Model.CompanyName):</h3>
+            <hr class="hr1" />
+            <div class="key">Company Volume: <span class="value blue">@Model.CompanyVolume.ToString("N0")</span>USD</div>
+            <hr class="hr2" />
+            <div class="key">Today Volume: <span class="value blue">@Model.CompanyTodayVolume.ToString("N0")</span>USD</div>
+            <hr class="hr3" />
+            <div class="key">Company Savings: <span class="value green">@Model.CompanySavings.ToString("N0")</span>USD</div>
+            <hr class="hr4" />
+            <div class="key">Company #Deals: <span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span>USD</div>
+            <hr class="hr5" />
+        </div>
+        <div class="col-xs-6 AllSiteArea">
+            <h3 class="header">All Customers Information:</h3>
+            <hr class="hr1" />
+            <div class="key">All customers Volume: <span class="value blue">@Model.SiteTotalVolume.ToString("N0")</span>USD</div>
+            <hr class="hr2" />
+            <div class="key">All customers Today Volume: <span class="value blue">@Model.SiteTodayVolume.ToString("N0")</span>USD</div>
+            <hr class="hr3" />
+            <div class="key">All customers Savings: <span class="value green">@Model.SiteTotalSavings.ToString("N0")</span>USD</div>
+            <hr class="hr4" />
+            <div class="key">All customers #Deals: <span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
+            <hr class="hr5" />
+        </div>
+    </div>
+</div>

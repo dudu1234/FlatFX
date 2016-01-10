@@ -35,10 +35,15 @@
                         <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
                         <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
                     }
-                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd green small"></span><span class="glyphicon glyphicon-euro green small"></span> @FlatFXResources.Resources.OnLineRates</a></li>
+                    
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer red"></span> @FlatFXResources.Resources.ExchangeSystem</a></li>
+                        <li><a href="@Url.Action("DashboardIndex", "Dashboard")"><span class="glyphicon glyphicon-dashboard blue"></span>@FlatFXResources.Resources.Dashboard</a></li>
+                    }
+                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd green small"></span>@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-euro green small"></span></a></li>
+                    @if (User.Identity.Name != "")
+                    {
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer red"></span>@FlatFXResources.Resources.ExchangeSystem</a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))

@@ -639,4 +639,7 @@
   <data name="YouSave" xml:space="preserve">
     <value>החיסכון שלך</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>דף פתיחה</value>
+  </data>
 </root>

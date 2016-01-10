@@ -176,6 +176,7 @@
     <Compile Include="Controllers\BaseController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CompanyAccountsController.cs" />
+    <Compile Include="Controllers\DashboardController.cs" />
     <Compile Include="Controllers\SimpleCurrencyExchangeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\LogInfoController.cs" />
@@ -1159,6 +1160,7 @@
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Order.cshtml" />
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Confirm.cshtml" />
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Summary.cshtml" />
+    <Content Include="Views\Dashboard\DashboardIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

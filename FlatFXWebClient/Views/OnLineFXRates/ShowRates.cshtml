@@ -4,7 +4,7 @@
 
 @using FlatFXCore.BussinessLayer;
 
-<div ng-controller="onLineRatesViewer" ng-init="init('@(Url.Action("GetRates", "OnLineFXRates"))')">
+<div ng-controller="OnLineRatesViewer" ng-init="init('@(Url.Action("GetRates", "OnLineFXRates"))')">
     <br /><br />
     <div class="row">
         <div class="col-sm-6 col-sm-offset-3">
@@ -17,6 +17,7 @@
                     <div id="onLineRates" class="panel-body table-responsive">
                         <table class="table table-bordered table-hover table-striped ffx-table">
                             <colgroup>
+                                <col width="10" />
                                 <col class="col-sm-4" />
                                 <col class="col-sm-2" />
                                 <col class="col-sm-2" />
@@ -25,6 +26,7 @@
                             </colgroup>
                             <thead>
                                 <tr>
+                                    <th></th>
                                     <th>@FlatFXResources.Resources.Pair</th>
                                     <th>@FlatFXResources.Resources.MidRate</th>
                                     <th>@FlatFXResources.Resources.Buy</th>
@@ -34,6 +36,7 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="rate in rates">
+                                    <td ng-class="rate.IsTradable == false ? 'bg-red' : 'bg-green'"></td>
                                     <td>{{ rate.KeyDisplay }}</td>
                                     <td>{{ rate.Mid }}</td>
                                     <td>{{ rate.Bid }}</td>

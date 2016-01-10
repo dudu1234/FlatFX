@@ -491,27 +491,14 @@ tr.pager td {
 
 
 /* On Line Rates */
-.rates-table {
-    width: 40%;
+.bg-green {
+    background-color: green;
 }
 
-    .rates-table thead {
-        background-color: floralwhite;
-    }
-
-        .rates-table thead tr th {
-            /*font-size: large;*/
-            text-align: center;
-        }
-
-.rates-table-pair {
-    color: steelblue;
-    background-color: floralwhite;
+.bg-red {
+    background-color: red;
 }
 
-.rates-table-mid {
-    color: blue;
-}
 
 .editorRow label {
     float: left;
@@ -611,6 +598,10 @@ tr.pager td {
 
 .green {
     color: green;
+}
+
+.blue {
+    color: blue;
 }
 
 table.ffx-table tr td a {
@@ -778,4 +769,59 @@ textarea {
     font-size: 50px;
     color: red;
     font-weight: 300;
+}
+
+.DashboardDiv {
+    background-color: rgba(355, 355, 355, 0.70);
+    padding: 20px;
+}
+
+    .DashboardDiv hr {
+        display: block;
+        margin: 0px;
+        width: 50%;
+        border-top: 1px inset #4cff00;
+    }
+
+    .DashboardDiv .hr1 {
+        border-top: 2px inset #4cff00;
+        width: 100%;
+    }
+    .DashboardDiv .hr2 {
+        border-top: 1px inset lightgray;
+    }
+    .DashboardDiv .hr3 {
+        border-top: 1px inset blue;
+    }
+    .DashboardDiv .hr4 {
+        border-top: 1px inset yellow;
+    }
+    .DashboardDiv .hr5 {
+        border-top: 1px inset red;
+    }
+
+    .DashboardDiv .header {
+        text-align: start;
+        color: black;
+    }
+
+    .DashboardDiv .key {
+        font-size: medium;
+        font-weight: 600;
+    }
+
+    .DashboardDiv .value {
+        font-size: xx-large;
+        font-weight: 700;
+        margin: 0px 10px 0px 10px;
+    }
+
+.AllSiteArea {
+    background-color: rgba(248, 252, 141, 0.72);
+    padding: 2px 10px 20px 20px;
+}
+
+.CompanyArea {
+    background-color: rgba(145, 252, 151, 0.70);
+    padding: 2px 10px 20px 20px;
 }

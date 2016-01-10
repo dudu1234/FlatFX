@@ -37,6 +37,8 @@ namespace FlatFXCore.Model.Data
         
         [Required]
         public bool IsActive { get; set; }
+        [Required, DefaultValue(false)]
+        public bool IsTradable { get; set; }
 
         [DefaultValue(100)]
         public int Priority { get; set; }

@@ -375,7 +375,6 @@ public static class Extensions
         }
         return string.Empty;
     }
-
     /// <summary>
     /// ToNullString
     /// </summary>

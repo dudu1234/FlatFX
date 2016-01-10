@@ -2,9 +2,30 @@
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
+using FlatFXCore.Model.Data;
 
 namespace FlatFXWebClient.ViewModels
 {
+    public class DashboardIndexViewModel
+    {
+        public string UserName { get; set; }
+        public string CompanyName { get; set; }
+        
+        public int SiteTotalVolume { get; set; }
+        public int SiteTodayVolume { get; set; }
+        public int SiteTotalSavings { get; set; }
+        public int SiteTotalNumberOfDeals { get; set; }
+
+        public int CompanyVolume { get; set; }
+        public int CompanyTodayVolume { get; set; }
+        public int CompanySavings { get; set; }
+        public int CompanyNumberOfDeal { get; set; }
+
+        public List<double> CompanyMonthlyVolumeList { get; set; }
+        public List<double> CompanyDailyVolumeList { get; set; }
+
+        List<Deal> LastDeals { get; set; }
+    }
     public class IndexViewModel
     {
         public bool HasPassword { get; set; }

@@ -271,8 +271,9 @@ namespace FlatFXCore.BussinessLayer
                         pairData = new FXRate()
                         {
                             Key = key,
-                            IsActive = true,
+                            IsActive = false,
                             LastUpdate = updateTime,
+                            IsTradable = false,
                             Bid = bid,
                             Ask = ask,
                             Mid = mid,
@@ -286,6 +287,7 @@ namespace FlatFXCore.BussinessLayer
                         pairData.Ask = ask;
                         pairData.Mid = mid;
                         pairData.LastUpdate = updateTime;
+                        pairData.IsTradable = (pairData.IsActive && (DateTime.Now - updateTime).TotalSeconds < 120) ? true : false; //if the rate was updated in the last 2 minutes
                         pairData.KeyDisplay = CurrencyManager.Instance.PairList[key];
                     }
                     #endregion
@@ -297,6 +299,7 @@ namespace FlatFXCore.BussinessLayer
                         CurrencyManager.Instance.PairRates[key].Ask = ask;
                         CurrencyManager.Instance.PairRates[key].Mid = mid;
                         CurrencyManager.Instance.PairRates[key].LastUpdate = updateTime;
+                        CurrencyManager.Instance.PairRates[key].IsTradable = (CurrencyManager.Instance.PairRates[key].IsActive && (DateTime.Now - updateTime).TotalSeconds < 120) ? true : false; //if the rate was updated in the last 2 minutes
                         CurrencyManager.Instance.PairRates[key].KeyDisplay = CurrencyManager.Instance.PairList[key];
                     }
                     #endregion

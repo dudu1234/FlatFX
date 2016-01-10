@@ -195,7 +195,7 @@ namespace FlatFXWebClient.Controllers
 
                 FXRate pairRate = CurrencyManager.Instance.PairRates[symbol];
 
-                if ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5)
+                if ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5 || !pairRate.IsTradable)
                 {
                     //the exchange rate is not up to date
                     if (!deal.IsDemo)

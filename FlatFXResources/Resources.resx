@@ -660,4 +660,7 @@
   <data name="YouSave" xml:space="preserve">
     <value>You Save</value>
   </data>
+  <data name="Dashboard" xml:space="preserve">
+    <value>Dashboard</value>
+  </data>
 </root>

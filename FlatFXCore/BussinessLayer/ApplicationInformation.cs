@@ -235,6 +235,19 @@ namespace FlatFXCore.BussinessLayer
             return new DateTime(Date.Year, Date.Month, Date.Day, 23, 59, 59);
         }
         /// <summary>
+        /// IsToday
+        /// </summary>
+        /// <param name="Date"></param>
+        /// <returns></returns>
+        public bool IsToday(DateTime Date)
+        {
+            DateTime today = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 0, 0, 0);
+            if (Date >= today && Date < today.AddDays(1))
+                return true;
+            else
+                return false;
+        }
+        /// <summary>
         /// MixString
         /// </summary>
         /// <param name="SourceString"></param>

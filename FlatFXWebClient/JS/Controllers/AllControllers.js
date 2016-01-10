@@ -1,11 +1,11 @@
 ﻿
-myApp.controller('registerall', ['$scope', function ($scope) {
+myApp.controller('RegisterAll', ['$scope', function ($scope) {
     //console.log('in controller');
 }]);
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('simpleCurrencyExchange', function ($scope, $timeout, $interval, noty) {
+myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval, noty) {
     $scope.init = function (WorkflowStage, isDemo, info, error) {
         $scope.isDemo = isDemo;
         $scope.info = info;
@@ -46,7 +46,7 @@ myApp.controller('simpleCurrencyExchange', function ($scope, $timeout, $interval
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('adminManager', function ($scope, $timeout, noty) {
+myApp.controller('AdminManager', function ($scope, $timeout, noty) {
     $scope.init = function (info, error) {
         $scope.info = info;
         $scope.error = error;
@@ -67,7 +67,7 @@ myApp.controller('adminManager', function ($scope, $timeout, noty) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('userManager', function ($scope, $timeout, noty) {
+myApp.controller('UserManager', function ($scope, $timeout, noty) {
     $scope.init = function (info, error) {
         $scope.info = info;
         $scope.error = error;
@@ -88,7 +88,7 @@ myApp.controller('userManager', function ($scope, $timeout, noty) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('onLineRatesViewer', function ($scope, $http, $interval, $timeout, noty, StringManipulationService) {
+myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeout, noty, StringManipulationService) {
     $scope.init = function (feedUrl) {
         $scope.FeedRatesUrl = feedUrl;
     };
@@ -102,35 +102,7 @@ myApp.controller('onLineRatesViewer', function ($scope, $http, $interval, $timeo
         $scope.isFirstLoad = true;
     };
 
-    //$scope.$watch('$viewContentLoaded', function (event) { // Use it instead of javascript $(document).ready(
-    //        alert($scope.FeedRatesUrl);
-    //});
-
     $scope.refreshYahooDataFeed = function () {
-        //$.getJSON($scope.FeedRatesUrl)
-        //    .done(function (data) {
-
-        //        try {
-        //            $scope.lastUpdate = new Date(parseInt(data.LastFeedUpdate.substr(6)));
-
-        //            angular.forEach(data.Rates, function (value, key) {
-        //                value.LastUpdate = new Date(parseInt(value.LastUpdate.substr(6)));
-        //            });
-
-        //            $scope.rates = data.Rates;
-        //            if ($scope.isFirstLoad == true) 
-        //            {
-        //                $scope.$apply();
-        //                $scope.isFirstLoad = false;
-        //            }
-        //        }
-        //        catch (err) {
-        //            $scope.rates = {};
-        //            //alert(err);
-        //        }
-        //    });
-
-
         $http.get($scope.FeedRatesUrl)
             .success(function (data, status, headers, config) {
                 try {
@@ -157,9 +129,24 @@ myApp.controller('onLineRatesViewer', function ($scope, $http, $interval, $timeo
     
     $interval(function () {
         $scope.refreshYahooDataFeed();
-    }, 3000);
+    }, 60000);
 
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
+});
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+myApp.controller('Dashboard', function ($scope, $timeout, $interval, noty) {
+    $scope.init = function () {
+        
+    };
+    $timeout(function () { // Use it instead of javascript $(document).ready(
+        $scope.ready();
+    }, 0);
+    $scope.ready = function () {
+        
+    }
 });

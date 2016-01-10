@@ -13,11 +13,12 @@
     {
         controllerAction = "Confim";
     }
+    bool officeHoursOn = true;
 }
 
 <br /><br />
 
-<div ng-controller="simpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
+<div ng-controller="SimpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
     @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
     {
         if (ApplicationInformation.Instance.IsDemoUser)
@@ -69,7 +70,19 @@
                 </ul>
             </div>
         </div>
-        if (Model.WorkflowStage != 3)
+
+        if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0 && Model.InvalidAccountReason[0].Contains("Office Hours:"))
+        {
+            officeHoursOn = false;
+            <h2 class="red">The trading system is not available</h2>
+            <h3 class="green">
+                <u>Office Hours (GMT +02:00):</u><br /><br />
+                Monday - Thursday: 8:00 - 23:00<br /><br />
+                Friday: 8:00 - 13:00<br />
+            </h3>
+        }
+
+        if (officeHoursOn && Model.WorkflowStage != 3)
         {
             <div class="row setup-content @queryBodyClass">
                 <div id="resultDiv" class="col-xs-12"></div>
