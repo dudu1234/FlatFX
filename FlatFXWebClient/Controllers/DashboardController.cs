@@ -41,7 +41,7 @@ namespace FlatFXWebClient.Controllers
             //total volume
             model.SiteTotalVolume = db.Deals.Where(d => d.IsCanceled == false /*&& d.IsDemo == false*/ && d.IsOffer == false).Sum(d => d.AmountUSD).ToInt();
             model.SiteTodayVolume = db.Deals.Where(d => d.IsCanceled == false /*&& d.IsDemo == false*/ && d.IsOffer == false &&
-                DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).Sum(d => d.AmountUSD).ToInt();
+                DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).Sum(d => (double?)d.AmountUSD).ToInt();
             model.SiteTotalSavings = db.Deals.Where(d => d.IsCanceled == false /*&& d.IsDemo == false*/ && d.IsOffer == false).Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
             model.SiteTotalNumberOfDeals = db.Deals.Where(d => d.IsCanceled == false /*&& d.IsDemo == false*/ && d.IsOffer == false).Count();
             
