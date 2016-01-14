@@ -86,11 +86,11 @@
         {
             <div class="row setup-content @queryBodyClass">
                 <div id="resultDiv" class="col-xs-12"></div>
-                <div class="col-xs-5 text-center">
+                <div class="col-xs-6 text-center">
                     @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
                 </div>
-                <div class="col-xs-2 text-center"></div>
-                <div class="col-xs-5 text-center">
+                @*<div class="col-xs-2 text-center"></div>*@
+                <div class="col-xs-6 text-center">
                     @if (Model.WorkflowStage != 1)
                     {
                         <div class="@confirmBodyClass">

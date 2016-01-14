@@ -17,7 +17,7 @@
             </div>
             <br />
             <br />
-            <h4 class="header">Company Volume ($):</h4>
+            <h5>Company Volume ($):</h5>
             <canvas id="dashboardCompanyChart"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
@@ -30,7 +30,7 @@
             </div>
             <br />
             <br />
-            <h4 class="header">Site Volume ($):</h4>
+            <h5>Site Volume ($):</h5>
             <canvas id="dashboardSiteChart"></canvas>
         </div>
     </div>
@@ -60,8 +60,8 @@
     myNewChart.Bar(dataSite, {
         scaleShowGridLines: false,
         responsive: true,
-        scaleFontColor: "#FFF",
-        scaleFontSize: 14
+        scaleFontColor: "#FFF"
+        
     });
 
 
@@ -84,8 +84,7 @@
     myNewChart2.Bar(dataCompany, {
         scaleShowGridLines: false,
         responsive: true,
-        scaleFontColor: "#FFF",
-        scaleFontSize: 14
+        scaleFontColor: "#FFF"
     });
 
 
