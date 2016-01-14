@@ -1,0 +1,32 @@
+﻿@model FlatFXWebClient.ViewModels.SimpleCurrencyExchangeViewModel
+@using FlatFXCore.BussinessLayer;
+
+<div class="panel-danger form-horizontal simple-trading-order">
+    <div class="panel-heading">
+        <h3 class="panel-title">@FlatFXResources.Resources.DealSummary</h3>
+    </div>
+    <div class="panel-body start-align">
+        <div>
+            <span class="text-danger">@TempData["ErrorResult"]</span>
+        </div>
+        <h3><span class="green">@FlatFXResources.Resources.DealCreatedSuccessfully.</span> @FlatFXResources.Resources.ConfirmationNumber: @Model.deal.DealId</h3>
+        <h3><b>@FlatFXResources.Resources.MoneyTransferInstractions:</b></h3>
+        <div>
+            <b>@FlatFXResources.Resources.TheFunds @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00.</b><br />
+            @FlatFXResources.Resources.PleaseTransfer @Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency @FlatFXResources.Resources.FromYourBankAccount @Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName<br />
+            @FlatFXResources.Resources.ASAP @Model.deal.OfferingDate.AddDays(1).ToShortDateString() 13:00.<br />
+            @FlatFXResources.Resources.OnceTheMoney @Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency @FlatFXResources.Resources.backtoyouraccount.<br />
+            <br />
+            @Html.Raw(@FlatFXResources.Resources.HowToTransfer) <a href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Here</a>.<br />
+        </div>
+        @Html.Raw(@FlatFXResources.Resources.FlatFXBankAccountDetails)
+
+        <br />
+        <div class="form-group">
+            <div class="col-md-12">
+                <a class="btn btn-success" href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Home</a>
+            </div>
+        </div>
+        <br /><br />
+    </div>
+</div>

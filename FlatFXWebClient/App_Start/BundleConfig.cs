@@ -14,7 +14,9 @@ namespace FlatFXWebClient
                 //"~/Content/bootstrap.css.map",
                       "~/Content/bootstrap.min.css",
                       "~/Content/bootstrap-theme.min.css",
-                      "~/Content/examples.css"
+                      "~/Content/examples.css",
+                      "~/Content/angular-block-ui.min.css",
+                      "~/Content/font-awesome.min.css"
                 /*"~/Content/fullpageex.css",
                 "~/Content/jquery.fullPage.css"*/
                       ));
@@ -29,14 +31,21 @@ namespace FlatFXWebClient
                         "~/Scripts/jquery.validate-vsdoc.js",
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"
-                        //"~/Scripts/knockout-{version}.js"
+                //"~/Scripts/knockout-{version}.js"
                         ));
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
-                     "~/Scripts/angular.js",
-                     "~/Scripts/jquery.noty.packaged.js",
-                      "~/Scripts/respond.min.js"));
+                      "~/Scripts/jquery.noty.packaged.js",
+                      "~/Scripts/respond.min.js",
+                      "~/Scripts/angular.min.js",
+                       "~/Scripts/angular-route.min.js",
+                       "~/Scripts/angular-sanitize.min.js",
+                       "~/Scripts/angular-ui.min.js",
+                       "~/Scripts/angular-ui/ui-bootstrap.min.js",
+                       "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+                       "~/Scripts/angular-ui.min.js",
+                       "~/Scripts/angular-block-ui.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
                         "~/Scripts/angular-noty.js"));
@@ -55,7 +64,7 @@ namespace FlatFXWebClient
                         "~/Content/Site.css"));
 
             bundles.Add(new ScriptBundle("~/bundles/FFXjs").Include(
-                        //"~/JS/Controllers/*.js",
+                //"~/JS/Controllers/*.js",
                         "~/JS/FFx.js",
                         "~/JS/Services/Services.js",
                         "~/JS/Functions/NotyFunctions.js"));

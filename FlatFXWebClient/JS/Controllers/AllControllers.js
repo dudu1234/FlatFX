@@ -1,7 +1,7 @@
 ﻿
-myApp.controller('RegisterAll', ['$scope', function ($scope) {
+myApp.controller('RegisterAll', function ($scope) {
     //console.log('in controller');
-}]);
+});
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 

@@ -60,6 +60,7 @@ namespace FlatFXWebClient.Controllers
             model.CompanyDailyVolumeList = db.Deals.Where(d4 => d4.CompanyAccount.Company.CompanyId == companyId && d4.IsCanceled == false /*&& d.IsDemo == false*/ &&
                 d4.IsOffer == false && d4.OfferingDate > DbFunctions.AddDays(DateTime.Now, -30)).GroupBy(d => DbFunctions.TruncateTime(d.OfferingDate))
                 .Select(d2 => d2.Sum(d3 => d3.AmountUSD)).ToList();
+
             // CompanyMonthlyVolumeList - 6 month back
             model.CompanyMonthlyVolumeList = db.Deals.Where(d4 => d4.CompanyAccount.Company.CompanyId == companyId && d4.IsCanceled == false /*&& d.IsDemo == false*/ &&
                 d4.IsOffer == false && d4.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -6)).GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year).Select(d2 => d2.Sum(d3 => d3.AmountUSD)).ToList();

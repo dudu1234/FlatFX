@@ -8,34 +8,85 @@
 <div ng-controller="Dashboard" @*ng-init="init()"*@ class="DashboardDiv">
     <div class="row">
         <div class="col-xs-6 CompanyArea">
-            <h3 class="header">Your company Information (@Model.CompanyName):</h3>
-            <hr class="hr1" />
-            <div class="key">Company Volume: <span class="value blue">@Model.CompanyVolume.ToString("N0")</span>USD</div>
-            <hr class="hr2" />
-            <div class="key">Today Volume: <span class="value blue">@Model.CompanyTodayVolume.ToString("N0")</span>USD</div>
-            <hr class="hr3" />
-            <div class="key">Company Savings: <span class="value green">@Model.CompanySavings.ToString("N0")</span>USD</div>
-            <hr class="hr4" />
-            <div class="key">Company #Deals: <span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span>USD</div>
-            <hr class="hr5" />
+            <h3 class="header"><u>Your company Statistics (@Model.CompanyName):</u></h3>
+            <div class="row">
+                <div class="col-xs-3 dashboard-square key">Total Volume ($):<br /><span class="value blue">@Model.CompanyVolume.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Today Volume ($):<br /><span class="value blue">@Model.CompanyTodayVolume.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Savings ($):<br /><span class="value green">@Model.CompanySavings.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">#Deals:<br /><span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span></div>
+            </div>
+            <br />
+            <br />
+            <h4 class="header">Company Volume ($):</h4>
+            <canvas id="dashboardCompanyChart"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
-            <h3 class="header">All Customers Information:</h3>
-            <hr class="hr1" />
-            <div class="key">All customers Volume: <span class="value blue">@Model.SiteTotalVolume.ToString("N0")</span>USD</div>
-            <hr class="hr2" />
-            <div class="key">All customers Today Volume: <span class="value blue">@Model.SiteTodayVolume.ToString("N0")</span>USD</div>
-            <hr class="hr3" />
-            <div class="key">All customers Savings: <span class="value green">@Model.SiteTotalSavings.ToString("N0")</span>USD</div>
-            <hr class="hr4" />
-            <div class="key">All customers #Deals: <span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
-            <hr class="hr5" />
-            <br /><br />
-            <h3 class="header">All customers volume chart:</h3>
-            <hr class="hr1" />
-            @*<bars data="30,4,55,15,16,33,52,20"></bars>*@
-            <hr class="hr5" />
+            <h3 class="header"><u>Site Statistics (All Customers):</u></h3>
+            <div class="row">
+                <div class="col-xs-3 dashboard-square key">Total Volume ($):<br /><span class="value blue">@Model.SiteTotalVolume.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Today Volume ($):<br /><span class="value blue">@Model.SiteTodayVolume.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Savings ($):<br /><span class="value green">@Model.SiteTotalSavings.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">#Deals:<br /><span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
+            </div>
+            <br />
+            <br />
+            <h4 class="header">Site Volume ($):</h4>
+            <canvas id="dashboardSiteChart"></canvas>
         </div>
     </div>
 
 </div>
+
+<script>
+
+    var dataSite = {
+        labels: ["July", "August", "September", "October", "November", "December", "January"],
+        @*@Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeLabels)),*@
+        datasets: [
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,305,0.8)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                @*data: @Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeData))*@
+                data: [230034, 400500, 500200, 800200, 1200400, 1400220, 900300]
+            }
+        ]
+    };
+
+    var ctx = $("#dashboardSiteChart").get(0).getContext("2d");
+    var myNewChart = new Chart(ctx);
+    myNewChart.Bar(dataSite, {
+        scaleShowGridLines: false,
+        responsive: true,
+        scaleFontColor: "#FFF",
+        scaleFontSize: 14
+    });
+
+
+    var dataCompany = {
+        labels: ["July", "August", "September", "October", "November", "December", "January"],
+        datasets: [
+            {
+                label: "My Second dataset",
+                fillColor: "rgba(151,187,305,0.8)",
+                strokeColor: "rgba(151,187,205,0.8)",
+                highlightFill: "rgba(151,187,205,0.75)",
+                highlightStroke: "rgba(151,187,205,1)",
+                data: [0, 0, 50020, 80020, 120040, 140022, 300300]
+            }
+        ]
+    };
+
+    var ctx2 = $("#dashboardCompanyChart").get(0).getContext("2d");
+    var myNewChart2 = new Chart(ctx2);
+    myNewChart2.Bar(dataCompany, {
+        scaleShowGridLines: false,
+        responsive: true,
+        scaleFontColor: "#FFF",
+        scaleFontSize: 14
+    });
+
+
+</script>

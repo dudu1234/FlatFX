@@ -776,30 +776,6 @@ textarea {
     padding: 20px;
 }
 
-    .DashboardDiv hr {
-        display: block;
-        margin: 0px;
-        width: 50%;
-        border-top: 1px inset #4cff00;
-    }
-
-    .DashboardDiv .hr1 {
-        border-top: 2px inset #4cff00;
-        width: 100%;
-    }
-    .DashboardDiv .hr2 {
-        border-top: 1px inset lightgray;
-    }
-    .DashboardDiv .hr3 {
-        border-top: 1px inset blue;
-    }
-    .DashboardDiv .hr4 {
-        border-top: 1px inset yellow;
-    }
-    .DashboardDiv .hr5 {
-        border-top: 1px inset red;
-    }
-
     .DashboardDiv .header {
         text-align: start;
         color: black;
@@ -807,22 +783,43 @@ textarea {
 
     .DashboardDiv .key {
         font-size: medium;
-        font-weight: 600;
+        /*font-weight: 600;*/
     }
 
     .DashboardDiv .value {
         font-size: xx-large;
-        font-weight: 700;
-        margin: 0px 10px 0px 10px;
+        /*font-weight: 700;*/
+        margin: 30px 0px 30px 0px;
+    }
+
+    .DashboardDiv .dashboard-square {
+        border: 5px ridge lightblue;
+        min-width: 200px;
+        /*min-height: 100px;*/
+        margin: 3px;
+        background-color: #f9fb30;
     }
 
 .AllSiteArea {
-    background-color: rgba(248, 252, 141, 0.72);
+    background-color: rgba(186, 251, 113, 0.75);
     padding: 2px 10px 20px 20px;
+    border: 2px inset black;
 }
 
 .CompanyArea {
-    background-color: rgba(145, 252, 151, 0.70);
+    background-color: rgba(217, 241, 247, 0.75);
     padding: 2px 10px 20px 20px;
+    border: 2px inset black;
 }
 
+#dashboardSiteChart {
+    max-height: 600px;
+    max-width: 600px;
+    background-color: #787878;
+}
+
+#dashboardCompanyChart {
+    max-height: 600px;
+    max-width: 600px;
+    background-color: #000;
+}

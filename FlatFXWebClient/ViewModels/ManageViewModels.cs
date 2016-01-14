@@ -1,8 +1,12 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Data;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNet.Identity;
 using Microsoft.Owin.Security;
 using FlatFXCore.Model.Data;
+using Newtonsoft.Json;
+//using System.Web.Mvc;
 
 namespace FlatFXWebClient.ViewModels
 {
@@ -23,6 +27,24 @@ namespace FlatFXWebClient.ViewModels
 
         public List<double> CompanyMonthlyVolumeList { get; set; }
         public List<double> CompanyDailyVolumeList { get; set; }
+
+        public string CompanyMonthlyVolumeLabels
+        {
+            get
+            {
+                List<string> monthBack = new List<string>();
+                for (int i = 1; i > 0; i--)
+                    monthBack.Add(DateTime.Now.AddMonths(-1 * i).ToString("MMMM"));
+                return JsonConvert.SerializeObject(monthBack);
+            }
+        }
+        public string CompanyMonthlyVolumeData
+        {
+            get
+            {
+                return JsonConvert.SerializeObject(CompanyMonthlyVolumeList);
+            }
+        }
 
         List<Deal> LastDeals { get; set; }
     }
