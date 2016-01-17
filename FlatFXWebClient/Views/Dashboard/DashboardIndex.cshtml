@@ -18,7 +18,7 @@
             <br />
             <br />
             <h5>Company Volume ($):</h5>
-            <canvas id="dashboardCompanyChart"></canvas>
+            <canvas id="dashboardCompanyChart" class="chart chart-doughnut" chart-data="siteChartData" chart-labels="siteChartLabels"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
             <h3 class="header"><u>Site Statistics (All Customers):</u></h3>
@@ -34,58 +34,5 @@
             <canvas id="dashboardSiteChart"></canvas>
         </div>
     </div>
-
 </div>
 
-<script>
-
-    var dataSite = {
-        labels: ["July", "August", "September", "October", "November", "December", "January"],
-        @*@Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeLabels)),*@
-        datasets: [
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,305,0.8)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
-                @*data: @Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeData))*@
-                data: [230034, 400500, 500200, 800200, 1200400, 1400220, 900300]
-            }
-        ]
-    };
-
-    var ctx = $("#dashboardSiteChart").get(0).getContext("2d");
-    var myNewChart = new Chart(ctx);
-    myNewChart.Bar(dataSite, {
-        scaleShowGridLines: false,
-        responsive: true,
-        scaleFontColor: "#FFF"
-        
-    });
-
-
-    var dataCompany = {
-        labels: ["July", "August", "September", "October", "November", "December", "January"],
-        datasets: [
-            {
-                label: "My Second dataset",
-                fillColor: "rgba(151,187,305,0.8)",
-                strokeColor: "rgba(151,187,205,0.8)",
-                highlightFill: "rgba(151,187,205,0.75)",
-                highlightStroke: "rgba(151,187,205,1)",
-                data: [0, 0, 50020, 80020, 120040, 140022, 300300]
-            }
-        ]
-    };
-
-    var ctx2 = $("#dashboardCompanyChart").get(0).getContext("2d");
-    var myNewChart2 = new Chart(ctx2);
-    myNewChart2.Bar(dataCompany, {
-        scaleShowGridLines: false,
-        responsive: true,
-        scaleFontColor: "#FFF"
-    });
-
-
-</script>

@@ -1,5 +1,7 @@
-﻿
-var myApp = angular.module('flatfx', ['notyModule']);
+﻿/// <reference path="../Functions/Charts.js" />
+
+var myApp = angular.module('flatfx', ['notyModule', '../Functions/Charts.js']);
+//var myApp = angular.module('flatfx', ['notyModule']);
 
 myApp.service('StringManipulationService', function () {
     this.myFunction = function (str) {

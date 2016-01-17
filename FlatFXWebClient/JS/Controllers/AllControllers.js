@@ -126,7 +126,7 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
             });
     };
 
-    
+
     $interval(function () {
         $scope.refreshYahooDataFeed();
     }, 60000);
@@ -141,12 +141,58 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 
 myApp.controller('Dashboard', function ($scope, $timeout, $interval, noty) {
     $scope.init = function () {
-        
+        $scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
+        $scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
     $scope.ready = function () {
-        
+
+        var dataSite = {
+            labels: ["July", "August", "September", "October", "November", "December", "January"],
+            //@*@Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeLabels)),*@
+            datasets: [
+                {
+                    label: "My Second dataset",
+                    fillColor: "rgba(151,187,305,0.8)",
+                    strokeColor: "rgba(151,187,205,0.8)",
+                    highlightFill: "rgba(151,187,205,0.75)",
+                    highlightStroke: "rgba(151,187,205,1)",
+                    //@*data: @Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeData))*@
+                    data: [230034, 400500, 500200, 800200, 1200400, 1400220, 900300]
+                }
+            ]
+        };
+
+        var ctx = $("#dashboardSiteChart").get(0).getContext("2d");
+        var myNewChart = new Chart(ctx);
+        myNewChart.Bar(dataSite, {
+            scaleShowGridLines: false,
+            responsive: true,
+            scaleFontColor: "#FFF"
+        });
+
+        //var dataCompany = {
+        //    labels: $scope.siteChartLabels,
+        //    datasets: [
+        //        {
+        //            label: "My Second dataset",
+        //            fillColor: "rgba(151,187,305,0.8)",
+        //            strokeColor: "rgba(151,187,205,0.8)",
+        //            highlightFill: "rgba(151,187,205,0.75)",
+        //            highlightStroke: "rgba(151,187,205,1)",
+        //            data: $scope.siteChartData
+        //        }
+        //    ]
+        //};
+
+        //var ctx2 = $("#dashboardCompanyChart").get(0).getContext("2d");
+        //var myNewChart2 = new Chart(ctx2);
+        //myNewChart2.Bar(dataCompany, {
+        //    scaleShowGridLines: false,
+        //    responsive: true,
+        //    scaleFontColor: "#FFF"
+        //});
     }
 });
