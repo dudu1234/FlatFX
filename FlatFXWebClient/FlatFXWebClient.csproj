@@ -1254,6 +1254,7 @@
     <Content Include="Views\Order\OrderCreation.cshtml" />
     <Content Include="Views\Order\OrderSummary.cshtml" />
     <Content Include="Views\Home\_CommissionCalculator.cshtml" />
+    <Content Include="Views\Home\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
