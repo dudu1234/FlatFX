@@ -35,7 +35,7 @@
                         <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
                         <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
                     }
-                    
+
                     @if (User.Identity.Name != "")
                     {
                         <li><a href="@Url.Action("DashboardIndex", "Dashboard")"><span class="glyphicon glyphicon-dashboard blue"></span>@FlatFXResources.Resources.Dashboard</a></li>
@@ -43,7 +43,8 @@
                     <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd green small"></span>@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-euro green small"></span></a></li>
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer red"></span>@FlatFXResources.Resources.ExchangeSystem</a></li>
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer exchange-system-color"></span>@FlatFXResources.Resources.ExchangeSystem</a></li>
+                        <li><a href="@Url.Action("OrderIndex", "Order")"><span class="glyphicon glyphicon-resize-small order-system-color"></span>@FlatFXResources.Resources.OrderSystem</a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
@@ -97,25 +98,25 @@
                             </ul>
                         </div>
                     </li>
-                    
+
                     @*<li class="dropdown">
-                        <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
-                            <span class="caret">
-                                @if (culture == "he-IL")
-                                {
-                                    <img src="~/Images/israel_flag_16.png" alt="Hebrew">;
-                                }
-                                else
-                                {
-                                    <img src="~/Images/usa-flag-16.gif" alt="English">
-                                }
-                            </span>
-                        </a>
-                        <ul class="dropdown-menu">
-                            <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
-                            <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
-                        </ul>
-                    </li>*@
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">
+                                <span class="caret">
+                                    @if (culture == "he-IL")
+                                    {
+                                        <img src="~/Images/israel_flag_16.png" alt="Hebrew">;
+                                    }
+                                    else
+                                    {
+                                        <img src="~/Images/usa-flag-16.gif" alt="English">
+                                    }
+                                </span>
+                            </a>
+                            <ul class="dropdown-menu">
+                                <li><a href="@Url.Action("Index", "Home", new { lang = "he-IL" })"><img src="~/Images/israel_flag_16.png" alt="Hebrew"></a></li>
+                                <li><a href="@Url.Action("Index", "Home", new { lang = "en-US" }) "><img src="~/Images/usa-flag-16.gif" alt="English"></a></li>
+                            </ul>
+                        </li>*@
 
                     <li>
                         @Html.Partial("_LoginPartial")

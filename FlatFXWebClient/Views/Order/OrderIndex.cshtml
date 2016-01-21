@@ -1,0 +1,123 @@
+﻿@model FlatFXWebClient.ViewModels.OrderViewModel
+@using FlatFXCore.BussinessLayer;
+
+@{
+    ViewBag.Title = "Order Currency Exchange";
+    string queryHeaderClass = (Model.WorkflowStage == 1) ? "active" : "disabled not-active";
+    string queryBodyClass = (Model.WorkflowStage == 1 || Model.WorkflowStage == 2) ? "" : "display-none";
+    string confirmHeaderClass = (Model.WorkflowStage == 2) ? "active" : "disabled not-active";
+    string confirmBodyClass = (Model.WorkflowStage == 2) ? "" : "display-none";
+    string summaryHeaderClass = (Model.WorkflowStage == 3) ? "active" : "disabled not-active";
+    string controllerAction = "OrderIndex";
+    if (Model.WorkflowStage == 2)
+    {
+        controllerAction = "Confim";
+    }
+    bool officeHoursOn = true;
+}
+<div class="order-system-wrapper">
+    <div ng-controller="OrderCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="order-currency-exchange-main">
+        @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+        {
+            <div class="col-xs-12 order-system-header">
+                <span class="glyphicon glyphicon-resize-small order-system-icon"></span> Order System 
+            </div>
+            
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.OrderKey)
+            @Html.HiddenFor(model => model.WorkflowStage)
+            @Html.HiddenFor(model => model.OrderId)
+
+            <div class="row form-group">
+                <div class="col-xs-12">
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="@queryHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">
+                                    @if (Model.WorkflowStage > 1)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                    1. @FlatFXResources.Resources.OrderStep1Header
+                                </h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep1Desc</p>
+                            </a>
+                        </li>
+                        <li class="@confirmHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">
+                                    @if (Model.WorkflowStage > 2)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                    2. @FlatFXResources.Resources.OrderStep2Header
+                                </h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.OrderStep2Desc</p>
+                            </a>
+                        </li>
+                        <li class="@summaryHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">3. @FlatFXResources.Resources.OrderStep3Header</h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.OrderStep3Desc</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            if (ApplicationInformation.Instance.IsDemoUser)
+            {
+                <div class="col-xs-12 demoToLiveTrading">
+                    <span class="demo-to-real-label">@FlatFXResources.Resources.DemoEnvAlert</span>
+                    <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">@FlatFXResources.Resources.DemoEnvButtonTxt</a>
+                </div>
+            }
+            
+            if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0 && Model.InvalidAccountReason[0].Contains("Office Hours:"))
+            {
+                officeHoursOn = false;
+                <h2 class="red">The order system is not available</h2>
+                <h3 class="green">
+                    <u>Office Hours (GMT +02:00):</u><br /><br />
+                    Monday - Thursday: 8:00 - 23:00<br /><br />
+                    Friday: 8:00 - 13:00<br />
+                </h3>
+            }
+
+            if (officeHoursOn && Model.WorkflowStage != 3)
+            {
+                string stage1Width = "col-xs-12";
+                if (Model.WorkflowStage == 2)
+                {
+                    stage1Width = "col-xs-6";
+                }
+                
+                <div class="row setup-content @queryBodyClass">
+                    <div id="resultDiv" class="col-xs-12"></div>
+                    <div class="@stage1Width text-center">
+                        @Html.Partial("~/Views/Order/OrderCreation.cshtml", Model)
+                    </div>
+                    @*<div class="col-xs-2 text-center"></div>*@
+                    <div class="col-xs-6 text-center">
+                        @if (Model.WorkflowStage != 1)
+                        {
+                            <div class="@confirmBodyClass">
+                                @Html.Partial("~/Views/Order/OrderConfirm.cshtml", Model)
+                            </div>
+                        }
+                    </div>
+                </div>
+            }
+            if (Model.WorkflowStage == 3)
+            {
+                <div class="row setup-content">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 text-center">
+                            @Html.Partial("~/Views/Order/OrderSummary.cshtml", Model)
+                        </div>
+                    </div>
+                </div>
+            }
+        }
+    </div>
+</div>

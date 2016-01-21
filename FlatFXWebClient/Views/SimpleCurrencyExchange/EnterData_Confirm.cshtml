@@ -3,7 +3,7 @@
 
 <div class="panel-danger form-horizontal simple-trading-confirm">
     <div class="panel-heading">
-        <h3 class="panel-title">@FlatFXResources.Resources.ConfirmYourOrder</h3>
+        <h3 class="panel-title">@FlatFXResources.Resources.ConfirmYourDeal</h3>
     </div>
     <div class="panel-body">
 
@@ -98,11 +98,11 @@
                 <div class="col-md-10 start-align">
                     @if (ApplicationInformation.Instance.IsDemoUser)
                     {
-                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
+                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMODeal" class="btn btn-primary" />
                     }
                     else
                     {
-                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
+                        <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourDeal" class="btn btn-primary" />
                         <br />
                         <remark>@FlatFXResources.Resources.TheFunds @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00</remark>
                     }

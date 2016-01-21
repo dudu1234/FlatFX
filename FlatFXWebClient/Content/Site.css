@@ -672,9 +672,89 @@ table.ffx-table tr td a {
     font-weight: bold;
 }
 
+/* simple-currency-exchange Window */
+
+.simple-currency-exchange-wrapper {
+    background-color: #7fb55e;
+    margin-top: 10px;
+}
 .simple-currency-exchange {
-    background-color: #c8c8c8;
+    background-color: #bdd0b7;
+    margin: 15px;
+    padding: 0px;
+}
+
+.exchange-system-header {
+    background-color: #7fb55e;
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    padding: 5px;
+}
+
+.exchange-system-color {
+    color: #7fb55e;
+}
+
+.exchange-system-icon {
+    font-size: 25px;
+}
+
+/* Order Window */
+.order-system-wrapper {
+    background-color: #6b7c97;
+    margin-top: 10px;
+}
+
+.order-currency-exchange-main {
+    background-color: #c0c8d8;
+    margin: 15px;
+    padding: 0px;
+}
+
+.order-currency-exchange-stage {
+    background-color: #d9f1f7;
     padding: 15px;
+}
+
+.order-system-header {
+    background-color: #6b7c97;
+    color: white;
+    font-size: 40px;
+    font-weight: 800;
+    text-align: center;
+    padding: 5px;
+}
+
+.order-system-color {
+    color: #6b7c97;
+}
+
+.order-system-icon {
+    font-size: 25px;
+}
+
+.pairList span {
+    border: 5px outset brown;
+    padding: 5px;
+}
+
+.pairList .pairItem {
+    min-width: 150px;
+    height: 50px;
+    min-height: 50px;
+    padding: 10px;
+}
+
+.pairList .selected {
+    background-color: #93e16e;
+}
+
+.order-action-description {
+    color: blue;
+    font-size: large;
+    font-weight: 700;
 }
 
 #registerLink {
@@ -732,7 +812,6 @@ div.disabled {
 
 .demoToLiveTrading {
     background-color: #e4f6ae;
-    /*height: 50px;*/
     padding: 10px;
 }
 
@@ -822,4 +901,8 @@ textarea {
     max-height: 600px;
     max-width: 600px;
     background-color: #000;
+}
+
+.howItWorksSection {
+    background-color: white;
 }

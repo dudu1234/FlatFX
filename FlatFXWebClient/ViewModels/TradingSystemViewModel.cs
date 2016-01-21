@@ -67,4 +67,63 @@ namespace FlatFXWebClient.ViewModels
             }
         }
     }
+
+    public class OrderViewModel
+    {
+        public int WorkflowStage { get; set; }
+        public string OrderKey { get; set; }
+        public long OrderId { get; set; }
+        [Display(Name = "Account", ResourceType = typeof(FlatFXResources.Resources))]
+        [Required]
+        public string SelectedAccount { get; set; }
+        public List<string> InvalidAccountReason { get; set; }
+        [Required]
+        public Consts.eBuySell BuySell { get; set; }
+        [Required]
+        [Display(Name = "Amount CCY1")]
+        [Range(1000, 1000000, ErrorMessage = "Please enter number between 1,000-1,000,000")]
+        [DisplayFormat(DataFormatString = "{0:0,0}")]
+        public double AmountCCY1 { get; set; }
+        [Required]
+        [Display(Name = "PromilRequired")]
+        [Range(-1, 10, ErrorMessage = "Please enter number between -1 - 10")]
+        public double PromilRequired { get; set; }
+        [Display(Name = "Minimal Partner Execution Amount (CCY1)")]
+        [Range(0, 100000000, ErrorMessage = "Please enter number between 0 - 100,000,000")]
+        public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
+        [Display(Name = "Expiry Date")]
+        public DateTime? ExpiryDate { get; set; }
+        [Required]
+        public string Symbol { get; set; }
+        [Display(Name = "Comment", ResourceType = typeof(FlatFXResources.Resources))]
+        public string Comment { get; set; }
+        public Order order { get; set; }
+
+        public OrderViewModel()
+        {
+            InvalidAccountReason = new List<string>();
+            OrderKey = Guid.NewGuid().ToString();
+        }
+
+        public Order OrderInSession
+        {
+            get
+            {
+                if (ApplicationInformation.Instance.Session[OrderKey] != null)
+                    return ApplicationInformation.Instance.Session[OrderKey] as Order;
+                else
+                    return null;
+            }
+        }
+        public IEnumerable<SelectListItem> UserBankAccounts
+        {
+            get
+            {
+                if (ApplicationInformation.Instance.Session["UserBankAccounts"] != null)
+                    return ApplicationInformation.Instance.Session["UserBankAccounts"] as IEnumerable<SelectListItem>;
+                else
+                    return null;
+            }
+        }
+    }
 }

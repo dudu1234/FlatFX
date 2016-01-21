@@ -247,7 +247,7 @@ namespace FlatFXWebClient.Controllers
                     deal.ChargedCurrency = model.CCY1;
                 }
 
-                //calculate AmountUSD (volume)
+                //calculate AmountUSD_Estimation (volume)
                 if (deal.CreditedCurrency == "USD")
                     deal.AmountUSD = deal.AmountToExchangeCreditedCurrency;
                 else if (deal.ChargedCurrency == "USD")

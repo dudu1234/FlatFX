@@ -16,99 +16,103 @@
     bool officeHoursOn = true;
 }
 
-<br /><br />
-
-<div ng-controller="SimpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
-    @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-    {
-        if (ApplicationInformation.Instance.IsDemoUser)
+<div class="simple-currency-exchange-wrapper">
+    <div ng-controller="SimpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
+        @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
-            <div class="col-xs-12 demoToLiveTrading">
-                <span class="demo-to-real-label">@FlatFXResources.Resources.DemoEnvAlert</span>
-                <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">@FlatFXResources.Resources.DemoEnvButtonTxt</a>
+            <div class="col-xs-12 exchange-system-header">
+                <span class="glyphicon glyphicon-transfer exchange-system-icon"></span> Exchange System
             </div>
-        }
 
-        @Html.AntiForgeryToken()
-        @Html.HiddenFor(model => model.OrderKey)
-        @Html.HiddenFor(model => model.WorkflowStage)
-        @Html.HiddenFor(model => model.DealId)
+            @Html.AntiForgeryToken()
+            @Html.HiddenFor(model => model.OrderKey)
+            @Html.HiddenFor(model => model.WorkflowStage)
+            @Html.HiddenFor(model => model.DealId)
 
-        <div class="row form-group">
-            <div class="col-xs-12">
-                <ul class="nav nav-pills nav-justified thumbnail setup-panel">
-                    <li class="@queryHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h3 class="list-group-item-heading">
-                                @if (Model.WorkflowStage > 1)
-                                {
-                                    <span class="glyphicon glyphicon-ok green"></span>
-                                }
-                                1. @FlatFXResources.Resources.SmplTradeStep1Header
-                            </h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep1Desc</p>
-                        </a>
-                    </li>
-                    <li class="@confirmHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h3 class="list-group-item-heading">
-                                @if (Model.WorkflowStage > 2)
-                                {
-                                    <span class="glyphicon glyphicon-ok green"></span>
-                                }
-                                2. @FlatFXResources.Resources.SmplTradeStep2Header
-                            </h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep2Desc</p>
-                        </a>
-                    </li>
-                    <li class="@summaryHeaderClass">
-                        <a href="" style="text-decoration: none;">
-                            <h3 class="list-group-item-heading">3. @FlatFXResources.Resources.SmplTradeStep3Header</h3>
-                            <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep3Desc</p>
-                        </a>
-                    </li>
-                </ul>
-            </div>
-        </div>
-
-        if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0 && Model.InvalidAccountReason[0].Contains("Office Hours:"))
-        {
-            officeHoursOn = false;
-            <h2 class="red">The trading system is not available</h2>
-            <h3 class="green">
-                <u>Office Hours (GMT +02:00):</u><br /><br />
-                Monday - Thursday: 8:00 - 23:00<br /><br />
-                Friday: 8:00 - 13:00<br />
-            </h3>
-        }
-
-        if (officeHoursOn && Model.WorkflowStage != 3)
-        {
-            <div class="row setup-content @queryBodyClass">
-                <div id="resultDiv" class="col-xs-12"></div>
-                <div class="col-xs-6 text-center">
-                    @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
-                </div>
-                @*<div class="col-xs-2 text-center"></div>*@
-                <div class="col-xs-6 text-center">
-                    @if (Model.WorkflowStage != 1)
-                    {
-                        <div class="@confirmBodyClass">
-                            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
-                        </div>
-                    }
-                </div>
-            </div>
-        }
-        if (Model.WorkflowStage == 3)
-        {
-            <div class="row setup-content">
+            <div class="row">
                 <div class="col-xs-12">
-                    <div class="col-md-12 text-center">
-                        @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)
+                    <ul class="nav nav-pills nav-justified thumbnail setup-panel">
+                        <li class="@queryHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">
+                                    @if (Model.WorkflowStage > 1)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                    1. @FlatFXResources.Resources.SmplTradeStep1Header
+                                </h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep1Desc</p>
+                            </a>
+                        </li>
+                        <li class="@confirmHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">
+                                    @if (Model.WorkflowStage > 2)
+                                    {
+                                        <span class="glyphicon glyphicon-ok green"></span>
+                                    }
+                                    2. @FlatFXResources.Resources.SmplTradeStep2Header
+                                </h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep2Desc</p>
+                            </a>
+                        </li>
+                        <li class="@summaryHeaderClass">
+                            <a href="" style="text-decoration: none;">
+                                <h3 class="list-group-item-heading">3. @FlatFXResources.Resources.SmplTradeStep3Header</h3>
+                                <p class="list-group-item-text">@FlatFXResources.Resources.SmplTradeStep3Desc</p>
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            if (ApplicationInformation.Instance.IsDemoUser)
+            {
+                <div class="col-xs-12 demoToLiveTrading">
+                    <span class="demo-to-real-label">@FlatFXResources.Resources.DemoEnvAlert</span>
+                    <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">@FlatFXResources.Resources.DemoEnvButtonTxt</a>
+                </div>
+            }
+
+            if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0 && Model.InvalidAccountReason[0].Contains("Office Hours:"))
+            {
+                officeHoursOn = false;
+                <h2 class="red">The trading system is not available</h2>
+                <h3 class="green">
+                    <u>Office Hours (GMT +02:00):</u><br /><br />
+                    Monday - Thursday: 8:00 - 23:00<br /><br />
+                    Friday: 8:00 - 13:00<br />
+                </h3>
+            }
+
+            if (officeHoursOn && Model.WorkflowStage != 3)
+            {
+                <div class="row setup-content @queryBodyClass">
+                    <div id="resultDiv" class="col-xs-12"></div>
+                    <div class="col-xs-6 text-center">
+                        @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
+                    </div>
+                    @*<div class="col-xs-2 text-center"></div>*@
+                    <div class="col-xs-6 text-center">
+                        @if (Model.WorkflowStage != 1)
+                        {
+                            <div class="@confirmBodyClass">
+                                @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Confirm.cshtml", Model)
+                            </div>
+                        }
                     </div>
                 </div>
-            </div>
+            }
+            if (Model.WorkflowStage == 3)
+            {
+                <div class="row setup-content">
+                    <div class="col-xs-12">
+                        <div class="col-md-12 text-center">
+                            @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)
+                        </div>
+                    </div>
+                </div>
+            }
         }
-    }
+    </div>
 </div>

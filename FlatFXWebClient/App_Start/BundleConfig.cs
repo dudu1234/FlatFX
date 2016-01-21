@@ -36,19 +36,23 @@ namespace FlatFXWebClient
 
             bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
                       "~/Scripts/bootstrap.min.js",
-                      "~/Scripts/jquery.noty.packaged.js",
-                      "~/Scripts/respond.min.js",
-                      "~/Scripts/angular.min.js",
+                      "~/Scripts/respond.min.js"));
+
+            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
+                       "~/Scripts/angular.min.js",
                        "~/Scripts/angular-route.min.js",
                        "~/Scripts/angular-sanitize.min.js",
                        "~/Scripts/angular-ui.min.js",
                        "~/Scripts/angular-ui/ui-bootstrap.min.js",
                        "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
                        "~/Scripts/angular-ui.min.js",
-                       "~/Scripts/angular-block-ui.js"));
+                       "~/Scripts/angular-block-ui.js"
+                       ));
 
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
-                        "~/Scripts/angular-noty.js"));
+                        "~/Scripts/jquery.noty.packaged.js",
+                        "~/Scripts/angular-noty.js"
+                        ));
 
             bundles.Add(new StyleBundle("~/bundles/RightToLeft1css").Include(
                         "~/Content/bootstrap.rtl.min.css"));
@@ -70,7 +74,7 @@ namespace FlatFXWebClient
                         "~/JS/Functions/NotyFunctions.js"));
 
             bundles.Add(new ScriptBundle("~/bundles/FFXControllers").IncludeDirectory(
-                "~/JS/Controllers", "*.js"));
+                        "~/JS/Controllers", "*.js"));
 
             bundles.Add(new StyleBundle("~/bundles/FFXcssRtl").Include(
                         "~/Content/rtlCustom.css"));

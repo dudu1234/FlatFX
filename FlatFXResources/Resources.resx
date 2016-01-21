@@ -489,7 +489,7 @@
     <value>* Warning: The co-worker will be able to join the company and execute deals within the site</value>
   </data>
   <data name="EnterPrivateZone" xml:space="preserve">
-    <value>Enter Personal Zone</value>
+    <value>Login</value>
   </data>
   <data name="Account" xml:space="preserve">
     <value>Account</value>
@@ -531,16 +531,16 @@
     <value>Currency</value>
   </data>
   <data name="SmplTradeOrderHeader" xml:space="preserve">
-    <value>Enter your Order</value>
+    <value>Enter Deal Request</value>
   </data>
   <data name="SmplTradeOrderNotAllowed" xml:space="preserve">
     <value>You are not allowed to perform the currency exchange</value>
   </data>
   <data name="SmplTradeOrderSubmit" xml:space="preserve">
-    <value>Submit your Order</value>
+    <value>Submit your Deal</value>
   </data>
   <data name="SmplTradeOrderSubmitDemo" xml:space="preserve">
-    <value>Submit your DEMO Order</value>
+    <value>Submit your DEMO Deal</value>
   </data>
   <data name="SmplTradeOrderTheFundsMust" xml:space="preserve">
     <value>The funds must received by FlatFX on</value>
@@ -549,10 +549,10 @@
     <value>I wish to</value>
   </data>
   <data name="SmplTradeStep1Desc" xml:space="preserve">
-    <value>Enter the Order currencies, amount, buy/sell, bank account, ...</value>
+    <value>Enter currencies, amount, buy/sell, bank account, ...</value>
   </data>
   <data name="SmplTradeStep1Header" xml:space="preserve">
-    <value>Enter your Order details</value>
+    <value>Enter your Deal details</value>
   </data>
   <data name="SmplTradeStep2Desc" xml:space="preserve">
     <value>See the live rates and confirm the deal</value>
@@ -662,5 +662,50 @@
   </data>
   <data name="Dashboard" xml:space="preserve">
     <value>Dashboard</value>
+  </data>
+  <data name="ConfirmYourDeal" xml:space="preserve">
+    <value>Confirm your Deal</value>
+  </data>
+  <data name="ConfirmYourDEMODeal" xml:space="preserve">
+    <value>Confirm your DEMO Deal</value>
+  </data>
+  <data name="OrderCreatedSuccessfully" xml:space="preserve">
+    <value>Order Created Successfully</value>
+  </data>
+  <data name="OrderHeader" xml:space="preserve">
+    <value>Enter your Order</value>
+  </data>
+  <data name="OrderNotAllowed" xml:space="preserve">
+    <value>You are not allowed to perform the Order</value>
+  </data>
+  <data name="OrderStep1Desc" xml:space="preserve">
+    <value>Enter the Order currencies, required spread, amount, buy/sell, bank account, ...</value>
+  </data>
+  <data name="OrderStep1Header" xml:space="preserve">
+    <value>Enter your Order details</value>
+  </data>
+  <data name="OrderStep2Desc" xml:space="preserve">
+    <value>See your Order details and confirm the Order</value>
+  </data>
+  <data name="OrderStep2Header" xml:space="preserve">
+    <value>Confirm your Order</value>
+  </data>
+  <data name="OrderStep3Desc" xml:space="preserve">
+    <value>See the Order summary</value>
+  </data>
+  <data name="OrderStep3Header" xml:space="preserve">
+    <value>Order Summary</value>
+  </data>
+  <data name="OrderSubmit1" xml:space="preserve">
+    <value>Submit your Order</value>
+  </data>
+  <data name="OrderSubmitDemo" xml:space="preserve">
+    <value>Submit your DEMO Order</value>
+  </data>
+  <data name="OrderSummary" xml:space="preserve">
+    <value>Order Summary</value>
+  </data>
+  <data name="OrderSystem" xml:space="preserve">
+    <value>Order System</value>
   </data>
 </root>

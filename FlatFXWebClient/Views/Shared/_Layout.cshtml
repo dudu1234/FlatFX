@@ -11,6 +11,7 @@
     @Scripts.Render("~/bundles/modernizr")
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/bootstrap")
+    @Scripts.Render("~/bundles/angular")
     @Scripts.Render("~/bundles/noty")
 
     @{
@@ -27,7 +28,7 @@
     @Styles.Render("~/bundles/FFXcss1")
     @Styles.Render("~/bundles/FFXcss2")
     @Scripts.Render("~/bundles/FFXjs")
-
+    
     @{
         if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
         {
@@ -36,10 +37,11 @@
         }
     }
 
-    @Scripts.Render("~/bundles/FFXControllers")
+    @*@Scripts.Render("~/bundles/FFXControllers")*@
+    <script src="~/JS/Controllers/AllControllers.js"></script>
 
 </head>
-<body ng-app="flatfx">
+<body ng-app="FlatFXAPP">
     <div class="row">
         <div id="nav" class="col-xs-12 static">
             @Html.Partial("MainSiteHeader")

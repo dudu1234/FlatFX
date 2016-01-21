@@ -110,6 +110,15 @@ namespace FlatFXCore.BussinessLayer
             else
                 return amount * (1 / GetFXRateVsUSD(currency).Mid);
         }
+        public double TranslateAmount(double amount, string fromCurrency, string toCurrency)
+        {
+            if (PairRates.ContainsKey(fromCurrency + toCurrency))
+                return amount * PairRates[fromCurrency + toCurrency].Mid;
+            else if (PairRates.ContainsKey(toCurrency + fromCurrency))
+                return amount * (1 / PairRates[toCurrency + fromCurrency].Mid);
+            else
+                throw new Exception("Failed to find pair : " + fromCurrency + toCurrency);
+        }
         public Dictionary<string, string> CurrencyListByCulture
         {
             get

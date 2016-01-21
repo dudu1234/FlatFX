@@ -77,6 +77,7 @@ namespace FlatFXCore.Model.Data
         public bool IsOffer { get; set; }
         public bool IsDemo { get; set; }
 
+        //Statistices
 	    public double? CustomerTotalProfitUSD { get; set; }
         public double? FlatFXTotalProfitUSD { get; set; }
         public double? BankTotalProfitUSD { get; set; }
@@ -90,7 +91,155 @@ namespace FlatFXCore.Model.Data
             IsOffer = false;
             IsDemo = false;
         }
+
+        public bool IsRealDeal
+        {
+            get
+            {
+                return (
+                    IsCanceled == false &&
+                    /* d.IsDemo == false &&*/ 
+                    IsOffer == false &&
+                    !(DealProductType == Consts.eDealProductType.FxPromilOrder && !MaturityDate.HasValue)
+                    );
+            }
+        }
     }
+    [Table("Order")]
+    public class Order
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public Int64 OrderId { get; set; }
+
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser user { get; set; }
+
+        public string CompanyAccountId { get; set; }
+        [ForeignKey("CompanyAccountId")]
+        public virtual CompanyAccount CompanyAccount { get; set; }
+
+        public string ProviderId { get; set; }
+        [ForeignKey("ProviderId")]
+        public virtual Provider Provider { get; set; }
+
+        [Display(Name = "Account")]
+        public virtual ProviderAccount CreditedProviderAccount { get; set; }
+        [Display(Name = "Account")]
+        public virtual ProviderAccount ChargedProviderAccount { get; set; }
+
+        public Consts.eDealType DealType { get; set; }
+        public Consts.eDealProductType DealProductType { get; set; }
+        public Consts.eBuySell BuySell { get; set; }
+
+        [Required, Column(TypeName = "VARCHAR"), MaxLength(10)]
+        public string Symbol { get; set; }
+        public double AmountCCY1 { get; set; }
+        public double AmountCCY2_Estimation { get; set; }
+        public double AmountUSD_Estimation { get; set; }
+
+        public DateTime OrderDate { get; set; }
+        [MaxLength(500)]
+        public string Comment { get; set; }
+        public bool IsCanceled { get; set; }
+        public bool IsWaiting { get; set; }
+        public bool IsClosed { get; set; }
+        public bool IsConfirmed { get; set; }
+        public bool IsDemo { get; set; }
+
+        //Statistices
+        public double? CustomerTotalProfitUSD_Estimation { get; set; }
+        public double? FlatFXCommissionUSD_Estimation { get; set; }
+        
+        public double PromilRequired { get; set; }
+        public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
+        public DateTime? ExpiryDate { get; set; }
+        public double? MinimalPartnerTotalVolumeUSD { get; set; }
+        public int? PartnerMinScore { get; set; }
+
+        public double? AmountCCY1_Executed { get; set; }
+        public double? AmountCCY1_Remainder { get; set; }
+
+        public Order()
+        {
+            //Set the default values
+            IsCanceled = false;
+            IsDemo = false;
+            IsWaiting = false;
+            IsClosed = false;
+            IsConfirmed = false;
+        }
+
+        public string CCY1
+        {
+            get
+            {
+                return Symbol.Substring(0, 3);
+            }
+        }
+        public string CCY2
+        {
+            get
+            {
+                return Symbol.Substring(3, 3);
+            }
+        }
+        public double BuyAmount
+        {
+            get
+            {
+                if (BuySell == Consts.eBuySell.Buy)
+                    return AmountCCY1;
+                else
+                    return AmountCCY2_Estimation;
+            }
+        }
+        public double SellAmount
+        {
+            get
+            {
+                if (BuySell == Consts.eBuySell.Buy)
+                    return AmountCCY2_Estimation;
+                else
+                    return AmountCCY1;
+            }
+        }
+        public string BuyCurrency
+        {
+            get
+            {
+                if (BuySell == Consts.eBuySell.Buy)
+                    return CCY1;
+                else
+                    return CCY2;
+            }
+        }
+        public string SellCurrency
+        {
+            get
+            {
+                if (BuySell == Consts.eBuySell.Buy)
+                    return CCY2;
+                else
+                    return CCY1;
+            }
+        }
+    }
+    [Table("PromilOrderMatch")]
+    public class OrderMatch
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public Int64 MatchId { get; set; }
+
+        public virtual Deal Deal1 { get; set; }
+        public virtual Deal Deal2 { get; set; }
+
+        public virtual Order Order1 { get; set; }
+        public virtual Order Order2 { get; set; }
+    }
+
     [Table("Queries")]
     public class QueryData
     {

@@ -90,7 +90,8 @@ namespace FlatFXCore.BussinessLayer
         {
             FxSimpleExchange = 1,
             FxRFQ = 2,
-            FxStreaming = 3
+            FxStreaming = 3,
+            FxPromilOrder
         }
         public enum eBuySell
         {

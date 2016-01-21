@@ -367,6 +367,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Confirm your Deal.
+        /// </summary>
+        public static string ConfirmYourDeal {
+            get {
+                return ResourceManager.GetString("ConfirmYourDeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your DEMO Deal.
+        /// </summary>
+        public static string ConfirmYourDEMODeal {
+            get {
+                return ResourceManager.GetString("ConfirmYourDEMODeal", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Confirm your DEMO Order.
         /// </summary>
         public static string ConfirmYourDEMOOrder {
@@ -592,7 +610,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter Personal Zone.
+        ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string EnterPrivateZone {
             get {
@@ -1082,11 +1100,128 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Created Successfully.
+        /// </summary>
+        public static string OrderCreatedSuccessfully {
+            get {
+                return ResourceManager.GetString("OrderCreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Order.
+        /// </summary>
+        public static string OrderHeader {
+            get {
+                return ResourceManager.GetString("OrderHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order ID.
         /// </summary>
         public static string OrderID {
             get {
                 return ResourceManager.GetString("OrderID", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are not allowed to perform the Order.
+        /// </summary>
+        public static string OrderNotAllowed {
+            get {
+                return ResourceManager.GetString("OrderNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter the Order currencies, required spread, amount, buy/sell, bank account, ....
+        /// </summary>
+        public static string OrderStep1Desc {
+            get {
+                return ResourceManager.GetString("OrderStep1Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter your Order details.
+        /// </summary>
+        public static string OrderStep1Header {
+            get {
+                return ResourceManager.GetString("OrderStep1Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See your Order details and confirm the Order.
+        /// </summary>
+        public static string OrderStep2Desc {
+            get {
+                return ResourceManager.GetString("OrderStep2Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your Order.
+        /// </summary>
+        public static string OrderStep2Header {
+            get {
+                return ResourceManager.GetString("OrderStep2Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See the Order summary.
+        /// </summary>
+        public static string OrderStep3Desc {
+            get {
+                return ResourceManager.GetString("OrderStep3Desc", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Summary.
+        /// </summary>
+        public static string OrderStep3Header {
+            get {
+                return ResourceManager.GetString("OrderStep3Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit your Order.
+        /// </summary>
+        public static string OrderSubmit1 {
+            get {
+                return ResourceManager.GetString("OrderSubmit1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Submit your DEMO Order.
+        /// </summary>
+        public static string OrderSubmitDemo {
+            get {
+                return ResourceManager.GetString("OrderSubmitDemo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Summary.
+        /// </summary>
+        public static string OrderSummary {
+            get {
+                return ResourceManager.GetString("OrderSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order System.
+        /// </summary>
+        public static string OrderSystem {
+            get {
+                return ResourceManager.GetString("OrderSystem", resourceCulture);
             }
         }
         
@@ -1334,7 +1469,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your Order.
+        ///   Looks up a localized string similar to Enter Deal Request.
         /// </summary>
         public static string SmplTradeOrderHeader {
             get {
@@ -1352,7 +1487,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Submit your Order.
+        ///   Looks up a localized string similar to Submit your Deal.
         /// </summary>
         public static string SmplTradeOrderSubmit {
             get {
@@ -1361,7 +1496,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Submit your DEMO Order.
+        ///   Looks up a localized string similar to Submit your DEMO Deal.
         /// </summary>
         public static string SmplTradeOrderSubmitDemo {
             get {
@@ -1388,7 +1523,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter the Order currencies, amount, buy/sell, bank account, ....
+        ///   Looks up a localized string similar to Enter currencies, amount, buy/sell, bank account, ....
         /// </summary>
         public static string SmplTradeStep1Desc {
             get {
@@ -1397,7 +1532,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your Order details.
+        ///   Looks up a localized string similar to Enter your Deal details.
         /// </summary>
         public static string SmplTradeStep1Header {
             get {

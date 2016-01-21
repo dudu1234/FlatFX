@@ -1,0 +1,13 @@
+﻿<h2>What is your Bank commission ?</h2>
+<div>
+    <label class="col-xs-6">Annual exchange amount USD:</label> <input class="col-xs-6" type="text" ng-model="amountUSD">
+</div>
+<div>
+    <label class="col-xs-6">Money exchange commission discount:</label> <input min="0" max="100" value="0" class="col-xs-6" type="number" ng-model="exchangeDiscount">
+</div>
+<div>
+    <label class="col-xs-6">Spread discount:</label> <input min="0" max="100" value="0" class="col-xs-6" type="number" ng-model="spreadDiscount">
+</div>
+<div>
+    <label class="col-xs-6">Your commission:</label><label class="col-xs-6">{{ (amountUSD * 0.0075 * (100 - spreadDiscount)) + (amountUSD * 0.002 * (100 - exchangeDiscount) ) }} USD</label>
+</div>
