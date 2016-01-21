@@ -5,6 +5,29 @@ myApp.controller('RegisterAll', function ($scope) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
+    $scope.init = function () {
+        $scope.amountUSD = 10;
+        $scope.exchangeDiscount = 0;
+        $scope.spreadDiscount = 0;
+    };
+    $timeout(function () { // Use it instead of javascript $(document).ready(
+        $scope.ready();
+    }, 0);
+    $scope.ready = function () {
+        
+    }
+    $scope.BankCommision = function () {
+        return (4 * $scope.amountUSD * 1000000 * 0.0075 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.002 * (1 - (0.01 * $scope.exchangeDiscount)));
+    }
+    $scope.FlatFXSaving = function () {
+        var flatFxCommission = (4 * $scope.amountUSD * 1000000 * 0.003) + 50;
+        return $scope.BankCommision() - flatFxCommission;
+    }
+});
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
 myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval, noty) {
     $scope.init = function (WorkflowStage, isDemo, info, error) {
         $scope.isDemo = isDemo;

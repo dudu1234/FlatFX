@@ -214,6 +214,78 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exchange amount (Million $).
+        /// </summary>
+        public static string BankCommission1 {
+            get {
+                return ResourceManager.GetString("BankCommission1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Exchange commission discount (0%-100%).
+        /// </summary>
+        public static string BankCommission2 {
+            get {
+                return ResourceManager.GetString("BankCommission2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spread discount (0%-100%).
+        /// </summary>
+        public static string BankCommission3 {
+            get {
+                return ResourceManager.GetString("BankCommission3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Bank commission.
+        /// </summary>
+        public static string BankCommission4 {
+            get {
+                return ResourceManager.GetString("BankCommission4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Saving with FlatFX.
+        /// </summary>
+        public static string BankCommission5 {
+            get {
+                return ResourceManager.GetString("BankCommission5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank commission calculator.
+        /// </summary>
+        public static string BankCommissionHeader {
+            get {
+                return ResourceManager.GetString("BankCommissionHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank commission without discount is 0.2%.
+        /// </summary>
+        public static string BankCommissionRemark1 {
+            get {
+                return ResourceManager.GetString("BankCommissionRemark1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank spread without discount is 0.75%.
+        /// </summary>
+        public static string BankCommissionRemark2 {
+            get {
+                return ResourceManager.GetString("BankCommissionRemark2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Branch Number.
         /// </summary>
         public static string BranchNumber {

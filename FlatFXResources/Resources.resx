@@ -708,4 +708,28 @@
   <data name="OrderSystem" xml:space="preserve">
     <value>Order System</value>
   </data>
+  <data name="BankCommission1" xml:space="preserve">
+    <value>Exchange amount (Million $)</value>
+  </data>
+  <data name="BankCommission2" xml:space="preserve">
+    <value>Exchange commission discount (0%-100%)</value>
+  </data>
+  <data name="BankCommission3" xml:space="preserve">
+    <value>Spread discount (0%-100%)</value>
+  </data>
+  <data name="BankCommission4" xml:space="preserve">
+    <value>Your Bank commission</value>
+  </data>
+  <data name="BankCommission5" xml:space="preserve">
+    <value>Saving with FlatFX</value>
+  </data>
+  <data name="BankCommissionHeader" xml:space="preserve">
+    <value>Bank commission calculator</value>
+  </data>
+  <data name="BankCommissionRemark1" xml:space="preserve">
+    <value>Bank commission without discount is 0.2%</value>
+  </data>
+  <data name="BankCommissionRemark2" xml:space="preserve">
+    <value>Bank spread without discount is 0.75%</value>
+  </data>
 </root>

@@ -1,13 +1,42 @@
-﻿<h2>What is your Bank commission ?</h2>
-<div>
-    <label class="col-xs-6">Annual exchange amount USD:</label> <input class="col-xs-6" type="text" ng-model="amountUSD">
-</div>
-<div>
-    <label class="col-xs-6">Money exchange commission discount:</label> <input min="0" max="100" value="0" class="col-xs-6" type="number" ng-model="exchangeDiscount">
-</div>
-<div>
-    <label class="col-xs-6">Spread discount:</label> <input min="0" max="100" value="0" class="col-xs-6" type="number" ng-model="spreadDiscount">
-</div>
-<div>
-    <label class="col-xs-6">Your commission:</label><label class="col-xs-6">{{ (amountUSD * 0.0075 * (100 - spreadDiscount)) + (amountUSD * 0.002 * (100 - exchangeDiscount) ) }} USD</label>
+﻿<br /><br />
+<div class="form-horizontal">
+    <div class="panel panel-info bank-commission-form">
+        <div class="panel-heading">
+            <h3 class="panel-title">@FlatFXResources.Resources.BankCommissionHeader?</h3>
+        </div>
+        <div class="panel-body start-align">
+            <div class="form-group">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission1:</label>
+                <div class="col-md-4">
+                    <input type="number" class="form-control" ng-model="amountUSD">
+                </div>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission2:</label>
+                <div class="col-md-4">
+                    <input min="0" max="100" type="number" class="form-control" ng-model="exchangeDiscount">
+                </div>
+                <label class="control-label col-md-8 remark">@FlatFXResources.Resources.BankCommissionRemark1</label>
+            </div>
+            <div class="form-group">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission3:</label>
+                <div class="col-md-4">
+                    <input min="0" max="100" type="number" class="form-control" ng-model="spreadDiscount">
+                </div>
+                <label class="control-label col-md-8 remark">@FlatFXResources.Resources.BankCommissionRemark2</label>
+            </div>
+            <div class="form-group red">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission4:</label>
+                <div class="col-md-4">
+                    <label class="start-align">{{ BankCommision() | number:0 }} &#8362;</label>
+                </div>
+            </div>
+            <div class="form-group green">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission5:</label>
+                <div class="col-md-4">
+                    <label class="start-align">{{ FlatFXSaving() | number:0 }} &#8362;</label>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

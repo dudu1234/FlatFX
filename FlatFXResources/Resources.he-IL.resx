@@ -687,4 +687,28 @@
   <data name="OrderSystem" xml:space="preserve">
     <value>מערכת הזמנות</value>
   </data>
+  <data name="BankCommission1" xml:space="preserve">
+    <value>נפח המרה (במיליוני $)</value>
+  </data>
+  <data name="BankCommission2" xml:space="preserve">
+    <value>אחוז הנחה על עמלת חליפין</value>
+  </data>
+  <data name="BankCommission3" xml:space="preserve">
+    <value>אחוז הנחה על שערי מטבע</value>
+  </data>
+  <data name="BankCommission4" xml:space="preserve">
+    <value>עמלת הבנק</value>
+  </data>
+  <data name="BankCommission5" xml:space="preserve">
+    <value>חיסכון עם FlatFX</value>
+  </data>
+  <data name="BankCommissionHeader" xml:space="preserve">
+    <value>מחשבון עמלת המרה בבנק</value>
+  </data>
+  <data name="BankCommissionRemark1" xml:space="preserve">
+    <value>עמלת חליפין ללא הנחה הינה 0.2%</value>
+  </data>
+  <data name="BankCommissionRemark2" xml:space="preserve">
+    <value>מירווח הבנק ללא הנחה הינו 0.75%</value>
+  </data>
 </root>
