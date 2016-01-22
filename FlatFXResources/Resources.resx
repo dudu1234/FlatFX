@@ -732,4 +732,7 @@
   <data name="BankCommissionRemark2" xml:space="preserve">
     <value>Bank spread without discount is 0.75%</value>
   </data>
+  <data name="BankCommission6" xml:space="preserve">
+    <value>FlatFX commission</value>
+  </data>
 </root>

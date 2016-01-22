@@ -909,12 +909,12 @@ textarea {
 }
 
 .aboutSection {
-    background-color: rgba(252, 220, 116, 0.8);
+    background-color: rgba(252, 220, 116, 1);
     font-size: 18px;
 }
 
 .aboutSection .backcolor {
-    background-color: rgba(252, 220, 116, 0.8);
+    background-color: rgba(252, 220, 116, 1);
 }
 
 .bank-commission-form {
@@ -963,9 +963,9 @@ textarea {
 }
 
 .section-center {
-    width: 50%;
-    margin-left: 25%;
-    margin-right: 25%;
+    width: 70%;
+    margin-left: 15%;
+    margin-right: 15%;
 }
 
 .section-center ol {
@@ -974,4 +974,12 @@ textarea {
 
 .section-center ul {
     text-align: start;
+}
+
+.small-line {
+    line-height: 50%;
+}
+
+.home-class {
+    background-color: white;
 }

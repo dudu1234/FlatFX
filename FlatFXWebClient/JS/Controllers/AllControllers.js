@@ -17,12 +17,14 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
     $scope.ready = function () {
         
     }
-    $scope.BankCommision = function () {
+    $scope.BankCommission = function () {
         return (4 * $scope.amountUSD * 1000000 * 0.0075 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.002 * (1 - (0.01 * $scope.exchangeDiscount)));
     }
+    $scope.FlatFXCommission = function () {
+        return (4 * $scope.amountUSD * 1000000 * 0.002) + 50;
+    }
     $scope.FlatFXSaving = function () {
-        var flatFxCommission = (4 * $scope.amountUSD * 1000000 * 0.003) + 50;
-        return $scope.BankCommision() - flatFxCommission;
+        return $scope.BankCommission() - $scope.FlatFXCommission();
     }
 });
 

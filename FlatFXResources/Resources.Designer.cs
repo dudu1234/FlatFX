@@ -259,6 +259,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to FlatFX commission.
+        /// </summary>
+        public static string BankCommission6 {
+            get {
+                return ResourceManager.GetString("BankCommission6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Bank commission calculator.
         /// </summary>
         public static string BankCommissionHeader {

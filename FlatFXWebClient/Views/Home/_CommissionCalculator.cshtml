@@ -25,13 +25,19 @@
                 </div>
                 <label class="control-label col-md-8 remark">@FlatFXResources.Resources.BankCommissionRemark2</label>
             </div>
-            <div class="form-group red">
+            <div class="form-group red small-line">
                 <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission4:</label>
                 <div class="col-md-4">
-                    <label class="start-align">{{ BankCommision() | number:0 }} &#8362;</label>
+                    <label class="start-align">{{ BankCommission() | number:0 }} &#8362;</label>
                 </div>
             </div>
-            <div class="form-group green">
+            <div class="form-group blue small-line">
+                <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission6:</label>
+                <div class="col-md-4">
+                    <label class="start-align">{{ FlatFXCommission() | number:0 }} &#8362;</label>
+                </div>
+            </div>
+            <div class="form-group green small-line">
                 <label class="control-label col-md-8">@FlatFXResources.Resources.BankCommission5:</label>
                 <div class="col-md-4">
                     <label class="start-align">{{ FlatFXSaving() | number:0 }} &#8362;</label>
