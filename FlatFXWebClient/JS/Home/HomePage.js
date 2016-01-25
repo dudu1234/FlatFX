@@ -6,7 +6,7 @@
 //        'navigation': true,
 //        'navigationPosition': 'right',
 //        'navigationTooltips': ['Home', 'Movie', 'How it works', 'About'],
-//        anchors: ['firstPage', 'secondPage', '3rdPage', '4thPage'],
+//        anchors: ['firstPage', 'Movie', 'HowItWorks', 'About'],
 //        menu: '#menu',
 //        scrollingSpeed: 300,
 

@@ -735,4 +735,37 @@
   <data name="BankCommission6" xml:space="preserve">
     <value>FlatFX commission</value>
   </data>
+  <data name="ActionDescription" xml:space="preserve">
+    <value>Action Description</value>
+  </data>
+  <data name="AllAmount" xml:space="preserve">
+    <value>All Amount</value>
+  </data>
+  <data name="Estimation" xml:space="preserve">
+    <value>(Estimation)</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>Expiry Date</value>
+  </data>
+  <data name="MinimalPartnerExecutionAmount" xml:space="preserve">
+    <value>Minimal partner execution amount</value>
+  </data>
+  <data name="MinimalPartnerTotalVolumeUSD" xml:space="preserve">
+    <value>Minimal partner total volume (USD)</value>
+  </data>
+  <data name="OrderChooseCurrencyPair" xml:space="preserve">
+    <value>Choose Currency pair</value>
+  </data>
+  <data name="OrderSummary1" xml:space="preserve">
+    <value>You can edit or cancel your orders</value>
+  </data>
+  <data name="SelectAmount" xml:space="preserve">
+    <value>Select Amount</value>
+  </data>
+  <data name="SelectRequiredSpread" xml:space="preserve">
+    <value>Select Required Spread (Mid + Promil)</value>
+  </data>
+  <data name="SpreadRequired" xml:space="preserve">
+    <value>Spread Required</value>
+  </data>
 </root>

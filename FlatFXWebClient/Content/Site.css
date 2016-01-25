@@ -735,9 +735,13 @@ table.ffx-table tr td a {
     font-size: 25px;
 }
 
-.pairList span {
-    border: 5px outset brown;
+.pairList table {
+    
+}
+
+.pairList td {
     padding: 5px;
+    border: 5px outset brown;
 }
 
 .pairList .pairItem {
@@ -745,6 +749,8 @@ table.ffx-table tr td a {
     height: 50px;
     min-height: 50px;
     padding: 10px;
+    text-align: center;
+    font-weight: 600;
 }
 
 .pairList .selected {

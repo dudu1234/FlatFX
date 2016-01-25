@@ -714,4 +714,37 @@
   <data name="BankCommission6" xml:space="preserve">
     <value>עמלת FlatFX</value>
   </data>
+  <data name="ActionDescription" xml:space="preserve">
+    <value>תיאור הפעולה</value>
+  </data>
+  <data name="AllAmount" xml:space="preserve">
+    <value>כל הסכום</value>
+  </data>
+  <data name="Estimation" xml:space="preserve">
+    <value>(הערכה)</value>
+  </data>
+  <data name="ExpiryDate" xml:space="preserve">
+    <value>תאריך תפוגה</value>
+  </data>
+  <data name="MinimalPartnerExecutionAmount" xml:space="preserve">
+    <value>סכום ביצוע מינימלי מול הצד השני</value>
+  </data>
+  <data name="MinimalPartnerTotalVolumeUSD" xml:space="preserve">
+    <value>נפח מסחר מינימלי של הצד השני (בדולרים)</value>
+  </data>
+  <data name="OrderChooseCurrencyPair" xml:space="preserve">
+    <value>בחר צמד מטבעות</value>
+  </data>
+  <data name="OrderSummary1" xml:space="preserve">
+    <value>באפשרותך לנהל את הוראותך</value>
+  </data>
+  <data name="SelectAmount" xml:space="preserve">
+    <value>בחר כמות</value>
+  </data>
+  <data name="SelectRequiredSpread" xml:space="preserve">
+    <value>בחר מרווח מבוקש (שער אמצע + פרומיל)</value>
+  </data>
+  <data name="SpreadRequired" xml:space="preserve">
+    <value>מירווח מבוקש</value>
+  </data>
 </root>

@@ -14,7 +14,7 @@
                 <br />
                 <a class="btn btn-success btn-lg" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>הצטרף למהפיכה</a>&nbsp;&nbsp;&nbsp;
                 <a class="btn btn-success btn-lg" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>פתח חשבון דמו</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-success btn-lg" href="@Url.Action("Index", "Home")#4thPage"><span class="glyphicon glyphicon-info-sign"></span>למידע נוסף</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-success btn-lg" href="@Url.Action("Index", "Home")#About"><span class="glyphicon glyphicon-info-sign"></span>למידע נוסף</a>&nbsp;&nbsp;&nbsp;
                 <br /><br />
             </div>
             <div class="col-xs-offset-3 col-xs-6">
@@ -22,15 +22,15 @@
             </div>
         </div>
     </div>
-    <div class="text-center hebrew-only">
+    <div id="Movie" class="text-center hebrew-only">
         <video autoplay loop muted id="myVideo">
             <source src="Content/flowers.mp4" type="video/mp4">
             <source src="Content/flowers.webm" type="video/webm">
         </video>
     </div>
-    <div class="text-center hebrew-only howItWorksSection">
+    <div id="HowItWorks" class="text-center hebrew-only howItWorksSection">
         <div class="section-center">
-            <br />
+            <br /><br /><br />
             <h1>איך זה עובד</h1>
             <img src="~/Images/HowItWorks2.jpg" />
             <br />
@@ -62,7 +62,7 @@
             </ol>
         </div>
     </div>
-    <div id="aboutSection" class="text-center aboutSection">
+    <div id="About" class="text-center aboutSection">
         <div class="col-xs-12 backcolor hebrew-only">
             <div class="col-xs-offset-1 col-xs-10">
                 <h1 class="section-center">אודות</h1>
@@ -99,8 +99,13 @@
 
 <script>
     $(document).ready(function () {
-        $('html, body').animate({
-            scrollTop: $("#aboutSection").offset().top
-        }, 1000);
+        var navigateToSection = '';
+        var start = window.location.href.indexOf('#');
+        if (start > 0) {
+            navigateToSection = window.location.href.substr(start, window.location.href.length - start);
+            $('html, body').animate({
+                scrollTop: $(navigateToSection).offset().top
+            }, 1000);
+        }
     });
 </script>

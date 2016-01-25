@@ -88,6 +88,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Action Description.
+        /// </summary>
+        public static string ActionDescription {
+            get {
+                return ResourceManager.GetString("ActionDescription", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
@@ -102,6 +111,15 @@ namespace FlatFXResources {
         public static string AdminManage {
             get {
                 return ResourceManager.GetString("AdminManage", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to All Amount.
+        /// </summary>
+        public static string AllAmount {
+            get {
+                return ResourceManager.GetString("AllAmount", resourceCulture);
             }
         }
         
@@ -736,6 +754,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to (Estimation).
+        /// </summary>
+        public static string Estimation {
+            get {
+                return ResourceManager.GetString("Estimation", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Euro €.
         /// </summary>
         public static string EUR {
@@ -768,6 +795,15 @@ namespace FlatFXResources {
         public static string ExchangeSystem {
             get {
                 return ResourceManager.GetString("ExchangeSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Expiry Date.
+        /// </summary>
+        public static string ExpiryDate {
+            get {
+                return ResourceManager.GetString("ExpiryDate", resourceCulture);
             }
         }
         
@@ -1109,6 +1145,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Minimal partner execution amount.
+        /// </summary>
+        public static string MinimalPartnerExecutionAmount {
+            get {
+                return ResourceManager.GetString("MinimalPartnerExecutionAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Minimal partner total volume (USD).
+        /// </summary>
+        public static string MinimalPartnerTotalVolumeUSD {
+            get {
+                return ResourceManager.GetString("MinimalPartnerTotalVolumeUSD", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Phone.
         /// </summary>
         public static string MobilePhone {
@@ -1177,6 +1231,15 @@ namespace FlatFXResources {
         public static string OnLineRates {
             get {
                 return ResourceManager.GetString("OnLineRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Choose Currency pair.
+        /// </summary>
+        public static string OrderChooseCurrencyPair {
+            get {
+                return ResourceManager.GetString("OrderChooseCurrencyPair", resourceCulture);
             }
         }
         
@@ -1294,6 +1357,15 @@ namespace FlatFXResources {
         public static string OrderSummary {
             get {
                 return ResourceManager.GetString("OrderSummary", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You can edit or cancel your orders.
+        /// </summary>
+        public static string OrderSummary1 {
+            get {
+                return ResourceManager.GetString("OrderSummary1", resourceCulture);
             }
         }
         
@@ -1456,6 +1528,24 @@ namespace FlatFXResources {
         public static string Roles {
             get {
                 return ResourceManager.GetString("Roles", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Amount.
+        /// </summary>
+        public static string SelectAmount {
+            get {
+                return ResourceManager.GetString("SelectAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select Required Spread (Mid + Promil).
+        /// </summary>
+        public static string SelectRequiredSpread {
+            get {
+                return ResourceManager.GetString("SelectRequiredSpread", resourceCulture);
             }
         }
         
@@ -1654,6 +1744,15 @@ namespace FlatFXResources {
         public static string SmplTradeStep3Header {
             get {
                 return ResourceManager.GetString("SmplTradeStep3Header", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Spread Required.
+        /// </summary>
+        public static string SpreadRequired {
+            get {
+                return ResourceManager.GetString("SpreadRequired", resourceCulture);
             }
         }
         

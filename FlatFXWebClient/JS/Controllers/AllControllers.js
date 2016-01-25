@@ -263,7 +263,10 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         $scope.actionDescription = $('input[name="BuySell"]:checked').val() + ' ' + $scope.symbol.substring(0, 3) + ' by ' + $('input[name="BuySell"]:unchecked').val() + 'ing ' + $scope.symbol.substring(3, 6);
     }
     $scope.CCY1 = function () {
-        return $scope.symbol.substring(0, 3);
+        if (typeof $scope.symbol != 'undefined')
+            return $scope.symbol.substring(0, 3);
+        else
+            return '';
     }
     $scope.expiryDateCheckboxEvent = function ($event) {
         if ($event)
@@ -298,4 +301,7 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         return end;
     }
 });
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
 

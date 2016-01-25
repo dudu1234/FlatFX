@@ -31,9 +31,9 @@
                     <li><a href="@Url.Action("Index", "Home")"><span class="glyphicon glyphicon-home"></span></a></li>
                     @if (User.Identity.Name == "")
                     {
-                        <li><a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a></li>
-                        <li><a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a></li>
-                        <li><a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a></li>
+                        @*<li><a href="@Url.Action("Index", "Home")#Movie">@FlatFXResources.Resources.MenuMovie</a></li>*@
+                        <li><a href="@Url.Action("Index", "Home")#HowItWorks">@FlatFXResources.Resources.MenuHowItWorks</a></li>
+                        <li><a href="@Url.Action("Index", "Home")#About">@FlatFXResources.Resources.MenuAbout</a></li>
                     }
 
                     @if (User.Identity.Name != "")

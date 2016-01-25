@@ -63,9 +63,9 @@
             <div class="col-xs-1"></div>
             <div id="nav" class="col-xs-3">
                 <b>@FlatFXResources.Resources.Product</b><br />
-                <a href="@Url.Action("Index", "Home")#secondPage">@FlatFXResources.Resources.MenuMovie</a><br />
-                <a href="@Url.Action("Index", "Home")#3rdPage">@FlatFXResources.Resources.MenuHowItWorks</a><br />
-                <a href="@Url.Action("Index", "Home")#4thPage">@FlatFXResources.Resources.MenuAbout</a><br />
+                @*<a href="@Url.Action("Index", "Home")#Movie">@FlatFXResources.Resources.MenuMovie</a><br />*@
+                <a href="@Url.Action("Index", "Home")#HowItWorks">@FlatFXResources.Resources.MenuHowItWorks</a><br />
+                <a href="@Url.Action("Index", "Home")#About">@FlatFXResources.Resources.MenuAbout</a><br />
                 <a href="@Url.Action("ShowRates", "OnLineFXRates")">@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-usd white"></span><span class="glyphicon glyphicon-euro white"></span></a><br />
                 @if (User.Identity.Name != "")
                 {
