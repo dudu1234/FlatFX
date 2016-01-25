@@ -678,6 +678,7 @@ table.ffx-table tr td a {
     background-color: #7fb55e;
     margin-top: 10px;
 }
+
 .simple-currency-exchange {
     background-color: #bdd0b7;
     margin: 15px;
@@ -718,6 +719,24 @@ table.ffx-table tr td a {
     padding: 15px;
 }
 
+.order-confirm {
+    background-color: floralwhite;
+    padding: 15px;
+}
+
+    .order-confirm .panel-body .form-group {
+        margin: 0px;
+        line-height: 30px;
+    }
+
+        .order-confirm .panel-body .form-group:nth-child(even) {
+            background-color: #d9f1f7;
+        }
+
+        .order-confirm .panel-body .form-group:nth-child(odd) {
+            background-color: #e2e2e2;
+        }
+
 .order-system-header {
     background-color: #6b7c97;
     color: white;
@@ -736,7 +755,6 @@ table.ffx-table tr td a {
 }
 
 .pairList table {
-    
 }
 
 .pairList td {
@@ -919,19 +937,19 @@ textarea {
     font-size: 18px;
 }
 
-.aboutSection .backcolor {
-    background-color: rgba(252, 220, 116, 1);
-}
+    .aboutSection .backcolor {
+        background-color: rgba(252, 220, 116, 1);
+    }
 
 .bank-commission-form {
     border: 10px outset #b1b4bb;
 }
 
-.bank-commission-form .remark {
-    font-size: small;
-    font-weight: 200;
-    line-height: 10%;
-}
+    .bank-commission-form .remark {
+        font-size: small;
+        font-weight: 200;
+        line-height: 10%;
+    }
 
 
 #myVideo {
@@ -956,17 +974,17 @@ textarea {
     background-color: rgba(210, 248, 161, 0.70);
 }
 
-.section1 .backcolor {
-    background-color: rgba(210, 248, 161, 0.70);
-}
+    .section1 .backcolor {
+        background-color: rgba(210, 248, 161, 0.70);
+    }
 
-.section1 .text1 {
-    font-size: x-large;
-}
+    .section1 .text1 {
+        font-size: x-large;
+    }
 
-.section1 .text2 {
-    font-size: xx-large;
-}
+    .section1 .text2 {
+        font-size: xx-large;
+    }
 
 .section-center {
     width: 70%;
@@ -974,13 +992,13 @@ textarea {
     margin-right: 15%;
 }
 
-.section-center ol {
-    text-align: start;
-}
+    .section-center ol {
+        text-align: start;
+    }
 
-.section-center ul {
-    text-align: start;
-}
+    .section-center ul {
+        text-align: start;
+    }
 
 .small-line {
     line-height: 50%;
@@ -988,4 +1006,18 @@ textarea {
 
 .home-class {
     background-color: white;
+}
+
+#PromilSlider label {
+    position: absolute;
+    width: 20px;
+    margin-top: 20px;
+    margin-left: -10px;
+    text-align: center;
+}
+
+#PromilText {
+    font-size: large;
+    color: blue;
+    font-weight: 700;
 }

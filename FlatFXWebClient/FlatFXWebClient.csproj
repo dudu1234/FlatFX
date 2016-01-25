@@ -217,6 +217,7 @@
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fullpageex.css" />
+    <Content Include="Content\jquery-ui.min.css" />
     <Content Include="Content\jquery.fullPage.css" />
     <Content Include="Content\rtlCustom.css" />
     <Content Include="Content\Site.css" />

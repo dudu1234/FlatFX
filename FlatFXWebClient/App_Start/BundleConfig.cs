@@ -16,7 +16,8 @@ namespace FlatFXWebClient
                       "~/Content/bootstrap-theme.min.css",
                       "~/Content/examples.css",
                       "~/Content/angular-block-ui.min.css",
-                      "~/Content/font-awesome.min.css"
+                      "~/Content/font-awesome.min.css",
+                      "~/Content/jquery-ui.min.css"
                 /*"~/Content/fullpageex.css",
                 "~/Content/jquery.fullPage.css"*/
                       ));

@@ -768,4 +768,10 @@
   <data name="SpreadRequired" xml:space="preserve">
     <value>Spread Required</value>
   </data>
+  <data name="BankSpreadIs" xml:space="preserve">
+    <value>* The bank commission without discount is 0.11%.</value>
+  </data>
+  <data name="YourSaving" xml:space="preserve">
+    <value>Your Saving:</value>
+  </data>
 </root>

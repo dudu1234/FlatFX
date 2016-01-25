@@ -313,6 +313,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to * The bank commission without discount is 0.11%..
+        /// </summary>
+        public static string BankSpreadIs {
+            get {
+                return ResourceManager.GetString("BankSpreadIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Branch Number.
         /// </summary>
         public static string BranchNumber {
@@ -1959,6 +1968,15 @@ namespace FlatFXResources {
         public static string YourRateWas {
             get {
                 return ResourceManager.GetString("YourRateWas", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your Saving:.
+        /// </summary>
+        public static string YourSaving {
+            get {
+                return ResourceManager.GetString("YourSaving", resourceCulture);
             }
         }
         

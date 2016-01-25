@@ -16,7 +16,9 @@
     bool officeHoursOn = true;
 }
 <div class="order-system-wrapper">
-    <div ng-controller="OrderCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="order-currency-exchange-main">
+    <div ng-controller="OrderCurrencyExchange" 
+         ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.PromilRequired, @Model.AmountCCY1)" 
+         class="order-currency-exchange-main">
         @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             <div class="col-xs-12 order-system-header">
