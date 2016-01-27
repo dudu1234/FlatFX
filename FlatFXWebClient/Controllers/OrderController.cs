@@ -211,8 +211,9 @@ namespace FlatFXWebClient.Controllers
                 // 0.001 * 2 - constant FlatFX commision
                 // 0.011 - constant Bank full commission
                 // 0.001 * order.PromilRequired - Promil required
-                order.CustomerTotalProfitUSD_Estimation = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, (order.AmountUSD_Estimation * (0.011 - (0.001 * order.PromilRequired) - (0.001 * 2)) * pairRate.Mid) - 11), 2);
-                order.FlatFXCommissionUSD_Estimation = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, order.AmountUSD_Estimation * (FlatFXProfitInPromil + BankProfitInPromil) * pairRate.Mid), 2); // 3 promil
+                //order.CustomerTotalProfitUSD_Estimation = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, (order.AmountUSD_Estimation * (0.011 - (0.001 * order.PromilRequired) - (0.001 * 2)) * pairRate.Mid) - 11), 2);
+                order.CustomerTotalProfitUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (0.011 - (0.001 * order.PromilRequired) - (0.001 * 2))) - 11, 2);
+                order.FlatFXCommissionUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (FlatFXProfitInPromil + BankProfitInPromil)), 2); // 3 promil
                 
                 model.order = order;
 

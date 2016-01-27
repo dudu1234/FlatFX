@@ -932,6 +932,12 @@ textarea {
     font-size: 18px;
 }
 
+.how-it-work-image {
+    /*border: 10px outset #7fb55e;*/
+    max-width: 1200px;
+    width: 90%
+}
+
 .aboutSection {
     background-color: rgba(252, 220, 116, 1);
     font-size: 18px;
@@ -971,11 +977,13 @@ textarea {
 
 .section1 {
     padding-top: 100px;
-    background-color: rgba(210, 248, 161, 0.70);
+    background-color: #a7dc86;
+    /*background-color: rgba(210, 248, 161, 0.70);*/
 }
 
     .section1 .backcolor {
-        background-color: rgba(210, 248, 161, 0.70);
+        background-color: #a7dc86;
+        /*background-color: rgba(210, 248, 161, 0.70);*/
     }
 
     .section1 .text1 {
@@ -1021,3 +1029,21 @@ textarea {
     color: blue;
     font-weight: 700;
 }
+
+.spreads-image-section {
+    background-color: #e2e2e2;
+    padding-bottom: 50px;
+}
+
+.spreads-image-header {
+    font-size: x-large;
+    font-weight: 700;
+}
+
+.USDILS-image {
+    border: 10px outset #b1b4bb;
+    /*background: url("../Images/USDILS_Spreads.png") fixed 0 0;*/
+    max-width: 1200px;
+    width: 90%
+}
+

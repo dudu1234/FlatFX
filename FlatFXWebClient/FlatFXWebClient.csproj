@@ -276,6 +276,7 @@
     <Content Include="Images\sitebg8.jpg" />
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
+    <Content Include="Images\USDILS_Spreads.png" />
     <Content Include="JS\Controllers\AllControllers.js" />
     <Content Include="JS\Functions\Charts.js" />
     <Content Include="JS\Functions\NotyFunctions.js" />

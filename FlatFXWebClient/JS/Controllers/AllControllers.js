@@ -113,7 +113,7 @@ myApp.controller('UserManager', function ($scope, $timeout, noty) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeout, noty, StringManipulationService) {
+myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeout, noty) {
     $scope.init = function (feedUrl) {
         $scope.FeedRatesUrl = feedUrl;
     };
