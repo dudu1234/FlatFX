@@ -580,9 +580,9 @@
         &lt;div&gt;
             בנק: לאומי&lt;br /&gt;
             מספר בנק: 10&lt;br /&gt;
-            מספר סניף: 123&lt;br /&gt;
-            מספר חשבון: 12345678&lt;br /&gt;
-            IBAN: IL990101230000012345678&lt;br /&gt;
+            מספר סניף: XXX&lt;br /&gt;
+            מספר חשבון: XXXXXXXX&lt;br /&gt;
+            IBAN: IL99010XXX00000XXXXXXXX&lt;br /&gt;
             כתובת הסניף: בן גוריון, 12.15, תל אביב&lt;br /&gt;
         &lt;/div&gt;</value>
   </data>

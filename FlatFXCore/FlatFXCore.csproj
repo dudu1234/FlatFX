@@ -137,6 +137,7 @@
     <Compile Include="BussinessLayer\Configuration.cs" />
     <Compile Include="BussinessLayer\Consts.cs" />
     <Compile Include="BussinessLayer\Extensions.cs" />
+    <Compile Include="BussinessLayer\General.cs" />
     <Compile Include="BussinessLayer\Logger.cs" />
     <Compile Include="BussinessLayer\SecurityManager.cs" />
     <Compile Include="Migrations\201510200825190_Initial.cs" />

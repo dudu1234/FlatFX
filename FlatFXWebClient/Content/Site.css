@@ -1048,3 +1048,7 @@ textarea {
     width: 90%
 }
 
+.calc-section {
+    background-color: rgba(206, 251, 120, 0.71);
+    padding-bottom: 50px;
+}

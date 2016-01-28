@@ -18,6 +18,11 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
 
     }
     $scope.BankCommission = function () {
+        if ($scope.spreadDiscount === undefined)
+            $scope.spreadDiscount = 0;
+        if ($scope.exchangeDiscount === undefined)
+            $scope.exchangeDiscount = 0;
+
         return (4 * $scope.amountUSD * 1000000 * 0.0075 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.002 * (1 - (0.01 * $scope.exchangeDiscount)));
     }
     $scope.FlatFXCommission = function () {
@@ -168,6 +173,31 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, noty) {
     $scope.init = function () {
         $scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
         $scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
+        //JSON.parse('@Html.Raw(Model.CompanyMonthlyVolumeList)'))
+
+        // Guy how to get the values by $Http ?
+        // how to create array of 6 months back ($scope.siteChartLabels) ?
+        // how to pass List<int> from razor to angular init ?
+        // Why Date.now().toDateString() cause exception ?
+
+        //try
+        //{
+        //    var dateArray = new Array();
+        //    for (i = 6; i > 0; i--) {
+        //        var currentDate = Date.now();
+        //        alert(Date.now().toDateString());
+        //        alert(currentDate.getMonth());
+        //        alert(currentDate.getYear());
+        //        currentDate.setMonth(currentDate.getMonth() - 4);
+        //        alert(currentDate.getMonth());
+        //        alert(currentDate.getYear());
+        //        //dateArray.push(currentDate (currentDate.getMonth() - i). + '-' +  text += cars[i] + "<br>";
+        //    }
+        //}
+        //catch(e)
+        //{
+        //    alert(e);
+        //}
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();

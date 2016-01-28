@@ -59,12 +59,37 @@ namespace FlatFXWebClient.Controllers
             model.CompanyNumberOfDeal = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).Count();
 
             // CompanyDailyVolumeList - 30 days back
-            model.CompanyDailyVolumeList = db.Deals.Where(d4 => d4.CompanyAccount.Company.CompanyId == companyId && d4.OfferingDate > DbFunctions.AddDays(DateTime.Now, -30)).
-                ToList().Where(d5 => d5.IsRealDeal).GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy")).Select(d2 => d2.Sum(d3 => d3.AmountUSD)).ToList();
+            List<DateTime> days = GeneralFunction.GetDays(30, true);
+            model.CompanyDailyVolumeList = new List<int>();
+            var dic = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -30)).ToList()
+                .Where(d => d.IsRealDeal)
+                .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
+                .Select(d => new { period = d.Max(d2 => d2.OfferingDate.ToDateString("dd/MM/yyyy")), Sum = d.Sum(d3 => d3.AmountUSD) }).ToDictionary(v => v.period);
+            foreach(DateTime dt in days)
+            {
+                if (dic.ContainsKey(dt.ToDateString("dd/MM/yyyy")))
+                    model.CompanyDailyVolumeList.Add(dic[dt.ToDateString("dd/MM/yyyy")].Sum.ToInt());
+                else
+                    model.CompanyDailyVolumeList.Add(0);
+            }
+            model.CompanyDailyVolumeList.Reverse();
 
             // CompanyMonthlyVolumeList - 6 month back
-            model.CompanyMonthlyVolumeList = db.Deals.Where(d4 => d4.CompanyAccount.Company.CompanyId == companyId && d4.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -6)).
-                ToList().Where(d5 => d5.IsRealDeal).GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year).Select(d2 => d2.Sum(d3 => d3.AmountUSD)).ToList();
+            model.CompanyMonthlyVolumeList = new List<int>();
+            List<DateTime> monthes = GeneralFunction.GetMonth(6, true);
+            dic = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -6)).ToList()
+                .Where(d => d.IsRealDeal)
+                .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
+                .Select(d => new { period = d.Max(d2 => d2.OfferingDate.Month + "-" + d2.OfferingDate.Year), Sum = d.Sum(d3 => d3.AmountUSD) }).ToDictionary(v => v.period);
+            foreach (DateTime dt in monthes)
+            {
+                if (dic.ContainsKey(dt.Month + "-" + dt.Year))
+                    model.CompanyMonthlyVolumeList.Add(dic[dt.Month + "-" + dt.Year].Sum.ToInt());
+                else
+                    model.CompanyMonthlyVolumeList.Add(0);
+            }
+            model.CompanyMonthlyVolumeList.Reverse();
+
             return View(model);
         }
         

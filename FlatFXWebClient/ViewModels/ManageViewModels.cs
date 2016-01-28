@@ -25,8 +25,8 @@ namespace FlatFXWebClient.ViewModels
         public int CompanySavings { get; set; }
         public int CompanyNumberOfDeal { get; set; }
 
-        public List<double> CompanyMonthlyVolumeList { get; set; }
-        public List<double> CompanyDailyVolumeList { get; set; }
+        public List<int> CompanyMonthlyVolumeList { get; set; }
+        public List<int> CompanyDailyVolumeList { get; set; }
 
         public string CompanyMonthlyVolumeLabels
         {

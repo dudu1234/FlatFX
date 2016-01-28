@@ -601,9 +601,9 @@
         &lt;div&gt;
             Bank Name: לאומי&lt;br /&gt;
             Bank Number: 10&lt;br /&gt;
-            Branch Number: 123&lt;br /&gt;
-            Account Number: 12345678&lt;br /&gt;
-            IBAN: IL990101230000012345678&lt;br /&gt;
+            Branch Number: XXX&lt;br /&gt;
+            Account Number: XXXXXXXX&lt;br /&gt;
+            IBAN: IL99010XXX00000XXXXXXXX&lt;br /&gt;
             Branch Address: Ben-gurion 12/15, Tel-Aviv&lt;br /&gt;
         &lt;/div&gt;</value>
   </data>
