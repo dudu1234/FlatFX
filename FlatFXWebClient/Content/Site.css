@@ -976,13 +976,14 @@ textarea {
 }
 
 .section1 {
-    padding-top: 100px;
-    background-color: #a7dc86;
+    /*padding-top: 100px;*/
+    background-color: rgba(167, 220, 134, 0.70);
     /*background-color: rgba(210, 248, 161, 0.70);*/
 }
 
     .section1 .backcolor {
-        background-color: #a7dc86;
+        padding-top: 100px;
+        background-color: rgba(167, 220, 134, 0.70);
         /*background-color: rgba(210, 248, 161, 0.70);*/
     }
 

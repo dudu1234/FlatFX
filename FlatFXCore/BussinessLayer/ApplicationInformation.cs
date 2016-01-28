@@ -120,7 +120,7 @@ namespace FlatFXCore.BussinessLayer
             get
             {
                 System.Web.HttpContext context = System.Web.HttpContext.Current;
-                if (context == null || context.User.Identity.Name == "")
+                if (context == null || context.User == null || context.User.Identity.Name == "")
                     return "";
                 else
                     return context.User.Identity.GetUserId();
