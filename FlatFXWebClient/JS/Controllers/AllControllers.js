@@ -169,13 +169,14 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('Dashboard', function ($scope, $timeout, $interval, noty) {
+myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty) {
     $scope.init = function () {
-        $scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
-        $scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
+
+        //$scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
+        //$scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
         //JSON.parse('@Html.Raw(Model.CompanyMonthlyVolumeList)'))
 
-        // Guy how to get the values by $Http ?
+        // Guy how to 
         // how to create array of 6 months back ($scope.siteChartLabels) ?
         // how to pass List<int> from razor to angular init ?
         // Why Date.now().toDateString() cause exception ?
@@ -203,52 +204,62 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, noty) {
         $scope.ready();
     }, 0);
     $scope.ready = function () {
+        $scope.GetCompanyVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetCompanyVolume";
+        $http.get($scope.GetCompanyVolumeUrl).success(function (data) {
 
-        var dataSite = {
-            labels: ["July", "August", "September", "October", "November", "December", "January"],
-            //@*@Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeLabels)),*@
-            datasets: [
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,305,0.8)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    //@*data: @Html.Raw(Json.Encode(Model.CompanyMonthlyVolumeData))*@
-                    data: [230034, 400500, 500200, 800200, 1200400, 1400220, 900300]
-                }
-            ]
-        };
-
-        var ctx = $("#dashboardSiteChart").get(0).getContext("2d");
-        var myNewChart = new Chart(ctx);
-        myNewChart.Bar(dataSite, {
-            scaleShowGridLines: false,
-            responsive: true,
-            scaleFontColor: "#FFF"
+            $scope.updateChart("#dashboardCompanyMonthlyChart", data.companyMonthlyVolume, "rgba(255,100,100,0.8)");
+            $scope.updateChart("#dashboardCompanyDailyChart", data.companyDailyVolume, "rgba(255,0,0,0.8)");
+        })
+        .error(function (data, status) {
+            //console.log("Error status : " + status);
         });
 
-        var dataCompany = {
-            labels: $scope.siteChartLabels,
-            datasets: [
-                {
-                    label: "My Second dataset",
-                    fillColor: "rgba(151,187,305,0.8)",
-                    strokeColor: "rgba(151,187,205,0.8)",
-                    highlightFill: "rgba(151,187,205,0.75)",
-                    highlightStroke: "rgba(151,187,205,1)",
-                    data: $scope.siteChartData
-                }
-            ]
-        };
+        $scope.GetSiteVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetSiteVolume";
+        $http.get($scope.GetSiteVolumeUrl).success(function (data) {
 
-        //var ctx2 = $("#dashboardCompanyChart").get(0).getContext("2d");
-        //var myNewChart2 = new Chart(ctx2);
-        //myNewChart2.Bar(dataCompany, {
-        //    scaleShowGridLines: false,
-        //    responsive: true,
-        //    scaleFontColor: "#FFF"
-        //});
+            $scope.updateChart("#dashboardSiteDailyChart", data.dailyVolume, "rgba(200,200,300,0.8)");
+            $scope.updateChart("#dashboardSiteMonthlyChart", data.monthlyVolume, "rgba(100,100,305,0.8)");
+        })
+        .error(function (data, status) {
+            //console.log("Error status : " + status);
+        });
+    }
+    $scope.updateChart = function (chartName, data, fillColor) {
+        if (data != null) {
+            var labels = [];
+            var dataList = [];
+
+            for (var key in data) {
+                labels.push(data[key].Key);
+                dataList.push(data[key].Value);
+            }
+
+            $scope.monthlyCustomerChartLabels = labels;
+            $scope.monthlyCustomerChartData = dataList;
+
+
+            var dataSite = {
+                labels: labels, //["July", "August", "September", "October", "November", "December", "January"],
+                datasets: [
+                    {
+                        //label: "My Second dataset",
+                        fillColor: fillColor, //rgba(151,187,305,0.8)
+                        strokeColor: "rgba(151,187,205,0.8)",
+                        highlightFill: "rgba(151,187,205,0.75)",
+                        highlightStroke: "rgba(151,187,205,1)",
+                        data: dataList //[230034, 400500, 500200, 800200, 1200400, 1400220, 900300]
+                    }
+                ]
+            };
+
+            var ctx = $(chartName).get(0).getContext("2d");
+            var myNewChart = new Chart(ctx);
+            myNewChart.Bar(dataSite, {
+                scaleShowGridLines: false,
+                responsive: true,
+                scaleFontColor: "#000"
+            });
+        }
     }
 });
 

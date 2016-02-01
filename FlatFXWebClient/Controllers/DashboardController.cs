@@ -13,6 +13,7 @@ using FlatFXCore.Model.Core;
 using System.Collections.Generic;
 using FlatFXCore.Model.Data;
 using System.Data.Entity;
+using System.Globalization;
 
 namespace FlatFXWebClient.Controllers
 {
@@ -38,7 +39,7 @@ namespace FlatFXWebClient.Controllers
             model.UserName = user.FullName;
             model.CompanyName = user.Companies.First().CompanyName;
 
-            // To Do : Change all db.Deals.ToList().Where ... IsRealDeal - to a better loading. Now the query can all deals and then perform the Where section.
+            // Guy To Do : Change all db.Deals.ToList().Where ... IsRealDeal - to a better loading. Now the query can all deals and then perform the Where section.
             // a possible solution is to copy the IsRealDeal login to each where section.
 
             //total volume
@@ -58,44 +59,114 @@ namespace FlatFXWebClient.Controllers
                 Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
             model.CompanyNumberOfDeal = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).Count();
 
-            // CompanyDailyVolumeList - 30 days back
-            List<DateTime> days = GeneralFunction.GetDays(30, true);
-            model.CompanyDailyVolumeList = new List<int>();
-            var dic = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -30)).ToList()
-                .Where(d => d.IsRealDeal)
-                .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
-                .Select(d => new { period = d.Max(d2 => d2.OfferingDate.ToDateString("dd/MM/yyyy")), Sum = d.Sum(d3 => d3.AmountUSD) }).ToDictionary(v => v.period);
-            foreach(DateTime dt in days)
-            {
-                if (dic.ContainsKey(dt.ToDateString("dd/MM/yyyy")))
-                    model.CompanyDailyVolumeList.Add(dic[dt.ToDateString("dd/MM/yyyy")].Sum.ToInt());
-                else
-                    model.CompanyDailyVolumeList.Add(0);
-            }
-            model.CompanyDailyVolumeList.Reverse();
-
-            // CompanyMonthlyVolumeList - 6 month back
-            model.CompanyMonthlyVolumeList = new List<int>();
-            List<DateTime> monthes = GeneralFunction.GetMonth(6, true);
-            dic = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -6)).ToList()
-                .Where(d => d.IsRealDeal)
-                .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
-                .Select(d => new { period = d.Max(d2 => d2.OfferingDate.Month + "-" + d2.OfferingDate.Year), Sum = d.Sum(d3 => d3.AmountUSD) }).ToDictionary(v => v.period);
-            foreach (DateTime dt in monthes)
-            {
-                if (dic.ContainsKey(dt.Month + "-" + dt.Year))
-                    model.CompanyMonthlyVolumeList.Add(dic[dt.Month + "-" + dt.Year].Sum.ToInt());
-                else
-                    model.CompanyMonthlyVolumeList.Add(0);
-            }
-            model.CompanyMonthlyVolumeList.Reverse();
-
             return View(model);
         }
         
         protected override void Dispose(bool disposing)
         {
             base.Dispose(disposing);
+        }
+
+        public ActionResult GetCompanyVolume()
+        {
+            try
+            {
+                var userId = User.Identity.GetUserId();
+                ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                string companyId = user.Companies.First().CompanyId;
+
+                // CompanyDailyVolumeList - 14 days back
+                // Guy to do example for inner join
+                int daysBack = 14;
+                List<DateTime> days = GeneralFunction.GetDays(daysBack, true);
+                Dictionary<string, int> dicDays = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -1 * daysBack)).ToList()
+                    .Where(d => d.IsRealDeal)
+                    .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
+                    .Select(d => new Tuple<DateTime, int>(d.Max(d2 => new DateTime(d2.OfferingDate.Year, d2.OfferingDate.Month, d2.OfferingDate.Day, 0, 0, 0)), d.Sum(d3 => d3.AmountUSD).ToInt()))
+                    .ToDictionary(d => d.Item1.ToString("MM/dd"), d => d.Item2);
+                foreach (DateTime date in days)
+                {
+                    if (!dicDays.ContainsKey(date.ToString("MM/dd")))
+                        dicDays.Add(date.ToString("MM/dd"), 0);
+                }
+
+                // CompanyMonthlyVolumeList - 6 month back
+                int monthBack = 6;
+                List<DateTime> months = GeneralFunction.GetMonth(monthBack, true);
+                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -1 * monthBack)).ToList()
+                    .Where(d => d.IsRealDeal)
+                    .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
+                    .Select(d => new Tuple<string, int>(d.Max(d2 => d2.OfferingDate.ToString("MMMM-yy")), d.Sum(d3 => d3.AmountUSD).ToInt()))
+                    .ToDictionary(d => d.Item1, d => d.Item2);
+                foreach (DateTime dt in months)
+                {
+                    if (!dicMonth.ContainsKey(dt.ToString("MMMM-yy")))
+                        dicMonth.Add(dt.ToString("MMMM-yy"), 0);
+                }
+
+                ActionResult res = Json(new { 
+                    companyDailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", CultureInfo.InvariantCulture)),
+                    companyMonthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", CultureInfo.InvariantCulture)) 
+                    }, JsonRequestBehavior.AllowGet);
+                
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in GetCompanyVolume", ex);
+                return null;
+            }
+        }
+
+        public ActionResult GetSiteVolume()
+        {
+            try
+            {
+                // DailyVolumeList - 14 days back
+                int daysBack = 14;
+                List<DateTime> days = GeneralFunction.GetDays(daysBack, true);
+                Dictionary<string, int> dicDays = db.Deals.Where(d => d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -1 * daysBack)).ToList()
+                    .Where(d => d.IsRealDeal)
+                    .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
+                    .Select(d => new Tuple<DateTime, int>(d.Max(d2 => new DateTime(d2.OfferingDate.Year, d2.OfferingDate.Month, d2.OfferingDate.Day, 0, 0, 0)), d.Sum(d3 => d3.AmountUSD).ToInt()))
+                    .ToDictionary(d => d.Item1.ToString("MM/dd"), d => d.Item2);
+                foreach (DateTime date in days)
+                {
+                    if (!dicDays.ContainsKey(date.ToString("MM/dd")))
+                        dicDays.Add(date.ToString("MM/dd"), 0);
+                }
+
+                // MonthlyVolumeList - 6 month back
+                int monthBack = 6;
+                List<DateTime> months = GeneralFunction.GetMonth(monthBack, true);
+                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -1 * monthBack)).ToList()
+                    .Where(d => d.IsRealDeal)
+                    .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
+                    .Select(d => new Tuple<string, int>(d.Max(d2 => d2.OfferingDate.ToString("MMMM-yy")), d.Sum(d3 => d3.AmountUSD).ToInt()))
+                    .ToDictionary(d => d.Item1, d => d.Item2);
+                foreach (DateTime dt in months)
+                {
+                    if (!dicMonth.ContainsKey(dt.ToString("MMMM-yy")))
+                        dicMonth.Add(dt.ToString("MMMM-yy"), 0);
+                }
+
+                ActionResult res = Json(new
+                {
+                    dailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", CultureInfo.InvariantCulture)),
+                    monthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", CultureInfo.InvariantCulture))
+                }, JsonRequestBehavior.AllowGet);
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in GetSiteVolume", ex);
+                return null;
+            }
         }
     }
 }

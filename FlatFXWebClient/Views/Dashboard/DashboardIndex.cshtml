@@ -17,8 +17,13 @@
             </div>
             <br />
             <br />
-            <h5>Company Volume ($):</h5>
-            <canvas id="dashboardCompanyChart" class="chart chart-doughnut" chart-data="siteChartData" chart-labels="siteChartLabels"></canvas>
+            <h5 class="dashboard-chart-header">Company Daily Volume ($):</h5>
+            @*<canvas id="dashboardCompanyDailyChart" class="chart chart-doughnut" chart-data="siteChartData" chart-labels="siteChartLabels"></canvas>*@
+            <canvas id="dashboardCompanyDailyChart" class="dashboard-chart"></canvas>
+            <br />
+            <br />
+            <h5 class="dashboard-chart-header">Company Monthly Volume ($):</h5>
+            <canvas id="dashboardCompanyMonthlyChart" class="dashboard-chart"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
             <h3 class="header"><u>Site Statistics (All Customers):</u></h3>
@@ -30,8 +35,12 @@
             </div>
             <br />
             <br />
-            <h5>Site Volume ($):</h5>
-            <canvas id="dashboardSiteChart"></canvas>
+            <h5 class="dashboard-chart-header">Site Daily Volume ($):</h5>
+            <canvas id="dashboardSiteDailyChart" class="dashboard-chart"></canvas>
+            <br />
+            <br />
+            <h5 class="dashboard-chart-header">Site Monthly Volume ($):</h5>
+            <canvas id="dashboardSiteMonthlyChart" class="dashboard-chart"></canvas>
         </div>
     </div>
 </div>

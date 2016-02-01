@@ -66,9 +66,6 @@ namespace FlatFXCore.Model.User
 
         public ContactDetails ContactDetails { get; set; }
 
-        // NAVIGATION PROPERTIES GUY ??? if I uncomment this line a new index is created in table UserMessages
-        //public virtual ICollection<UserMessageData> ToMessageData { get; set; }
-        //public virtual ICollection<UserMessageData> FromMessageData { get; set; }
         public virtual ICollection<UserActionData> Actions { get; set; }
         public virtual ICollection<UserFavoriteData> Favorites { get; set; }
         public virtual ICollection<Provider> Providers { get; set; }

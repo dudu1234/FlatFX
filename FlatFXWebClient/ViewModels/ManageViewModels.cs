@@ -25,27 +25,6 @@ namespace FlatFXWebClient.ViewModels
         public int CompanySavings { get; set; }
         public int CompanyNumberOfDeal { get; set; }
 
-        public List<int> CompanyMonthlyVolumeList { get; set; }
-        public List<int> CompanyDailyVolumeList { get; set; }
-
-        public string CompanyMonthlyVolumeLabels
-        {
-            get
-            {
-                List<string> monthBack = new List<string>();
-                for (int i = 1; i > 0; i--)
-                    monthBack.Add(DateTime.Now.AddMonths(-1 * i).ToString("MMMM"));
-                return JsonConvert.SerializeObject(monthBack);
-            }
-        }
-        public string CompanyMonthlyVolumeData
-        {
-            get
-            {
-                return JsonConvert.SerializeObject(CompanyMonthlyVolumeList);
-            }
-        }
-
         List<Deal> LastDeals { get; set; }
     }
     public class IndexViewModel
