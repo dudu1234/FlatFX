@@ -8,38 +8,39 @@
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init()">
     <div class="row">
         <div class="col-xs-6 CompanyArea">
-            <h3 class="header"><u>Your company Statistics (@Model.CompanyName):</u></h3>
+            <div class="col-xs-12 header">
+                <span>Your company Statistics (@Model.CompanyName):</span>
+            </div>
             <div class="row">
-                <div class="col-xs-3 dashboard-square key">Total Volume ($):<br /><span class="value blue">@Model.CompanyVolume.ToString("N0")</span></div>
-                <div class="col-xs-3 dashboard-square key">Today Volume ($):<br /><span class="value blue">@Model.CompanyTodayVolume.ToString("N0")</span></div>
-                <div class="col-xs-3 dashboard-square key">Total Savings ($):<br /><span class="value green">@Model.CompanySavings.ToString("N0")</span></div>
-                <div class="col-xs-3 dashboard-square key">#Deals:<br /><span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Volume<br /><span class="value blue">@Model.CompanyVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">Today Volume<br /><span class="value blue">@Model.CompanyTodayVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Savings<br /><span class="value green">@Model.CompanySavings.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">#Deals<br /><span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span></div>
             </div>
             <br />
             <br />
-            <h5 class="dashboard-chart-header">Company Daily Volume ($):</h5>
-            @*<canvas id="dashboardCompanyDailyChart" class="chart chart-doughnut" chart-data="siteChartData" chart-labels="siteChartLabels"></canvas>*@
-            <canvas id="dashboardCompanyDailyChart" class="dashboard-chart"></canvas>
-            <br />
-            <br />
-            <h5 class="dashboard-chart-header">Company Monthly Volume ($):</h5>
-            <canvas id="dashboardCompanyMonthlyChart" class="dashboard-chart"></canvas>
+            <span class="dashboard-chart-header">Company Volume ($)</span>
+            &nbsp;&nbsp;<input type="radio" ng-model="companyChart" value="Daily">Daily&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" ng-model="companyChart" value="Monthly" />Monthly
+            <canvas id="dashboardCompanyDailyChart" class="dashboard-chart" ng-show="companyChart == 'Daily'"></canvas>
+            <canvas id="dashboardCompanyMonthlyChart" class="dashboard-chart" ng-show="companyChart == 'Monthly'"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
-            <h3 class="header"><u>Site Statistics (All Customers):</u></h3>
+            <div class="col-xs-12 header">
+                <span>Site Statistics (All Customers):</span>
+            </div>
             <div class="row">
-                <div class="col-xs-3 dashboard-square key">Total Volume ($):<br /><span class="value blue">@Model.SiteTotalVolume.ToString("N0")</span></div>
-                <div class="col-xs-3 dashboard-square key">Today Volume ($):<br /><span class="value blue">@Model.SiteTodayVolume.ToString("N0")</span></div>
-                <div class="col-xs-3 dashboard-square key">Total Savings ($):<br /><span class="value green">@Model.SiteTotalSavings.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Volume<br /><span class="value blue">@Model.SiteTotalVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">Today Volume<br /><span class="value blue">@Model.SiteTodayVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">Total Savings<br /><span class="value green">@Model.SiteTotalSavings.ToString("N0")$</span></div>
                 <div class="col-xs-3 dashboard-square key">#Deals:<br /><span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
             </div>
             <br />
             <br />
-            <h5 class="dashboard-chart-header">Site Daily Volume ($):</h5>
+            <span class="dashboard-chart-header">Site Daily Volume ($):</span>
             <canvas id="dashboardSiteDailyChart" class="dashboard-chart"></canvas>
             <br />
             <br />
-            <h5 class="dashboard-chart-header">Site Monthly Volume ($):</h5>
+            <span class="dashboard-chart-header">Site Monthly Volume ($):</span>
             <canvas id="dashboardSiteMonthlyChart" class="dashboard-chart"></canvas>
         </div>
     </div>

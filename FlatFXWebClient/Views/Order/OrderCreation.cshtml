@@ -72,12 +72,15 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-4">@FlatFXResources.Resources.SelectAmount (<u class="blue">{{ CCY1() }}</u>):</label>
-                <div class="col-md-7">
+                <label class="control-label col-md-4">@FlatFXResources.Resources.SelectAmount (<u class="site-color1">{{ CCY1() }}</u>):</label>
+                <div class="col-md-7 no-right-margin">
                     @Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control", @type = "number" } })
                     @Html.ValidationMessageFor(m => m.AmountCCY1, "", new { @class = "text-danger" })
                 </div>
-            </div>
+                <div class="col-md-1 no-left-margin">
+                    <span class="glyphicon glyphicon-usd currency-after-text" ng-class=""></span>
+                </div>
+                </div>
             <div class="form-group">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
                 <div class="col-md-7">
@@ -86,7 +89,7 @@
                     @Html.HiddenFor(model => model.PromilRequired)
                     <br /><br />
                     <span class="start-align col-md-12">              
-                        <b class="green">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+                        <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
                         @FlatFXResources.Resources.BankSpreadIs
                     </span>
                 </div>
@@ -105,7 +108,7 @@
             <div class="form-group">
                 <div class="col-md-4">
                     <label class="control-label">
-                        <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="blue">{{ CCY1() }}</u>):
+                        <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
                     </label>
                 </div>
                 <div class="col-md-7">

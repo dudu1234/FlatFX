@@ -108,9 +108,9 @@ namespace FlatFXWebClient.Controllers
                         dicMonth.Add(dt.ToString("MMMM-yy"), 0);
                 }
 
-                ActionResult res = Json(new { 
-                    companyDailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", CultureInfo.InvariantCulture)),
-                    companyMonthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", CultureInfo.InvariantCulture)) 
+                ActionResult res = Json(new {
+                    companyDailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", System.Threading.Thread.CurrentThread.CurrentCulture)),
+                    companyMonthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture)) 
                     }, JsonRequestBehavior.AllowGet);
                 
                 return res;
@@ -156,8 +156,8 @@ namespace FlatFXWebClient.Controllers
 
                 ActionResult res = Json(new
                 {
-                    dailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", CultureInfo.InvariantCulture)),
-                    monthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", CultureInfo.InvariantCulture))
+                    dailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", System.Threading.Thread.CurrentThread.CurrentCulture)),
+                    monthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture))
                 }, JsonRequestBehavior.AllowGet);
 
                 return res;

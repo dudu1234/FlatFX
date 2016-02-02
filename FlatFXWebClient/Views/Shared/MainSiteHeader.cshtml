@@ -38,20 +38,20 @@
 
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("DashboardIndex", "Dashboard")"><span class="glyphicon glyphicon-dashboard blue"></span>@FlatFXResources.Resources.Dashboard</a></li>
+                        <li><a href="@Url.Action("DashboardIndex", "Dashboard")">@*<span class="glyphicon glyphicon-dashboard blue"></span>*@ @FlatFXResources.Resources.Dashboard</a></li>
                     }
-                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")"><span class="glyphicon glyphicon-usd green small"></span>@FlatFXResources.Resources.OnLineRates<span class="glyphicon glyphicon-euro green small"></span></a></li>
+                    <li><a href="@Url.Action("ShowRates", "OnLineFXRates")">@*<span class="glyphicon glyphicon-usd light-green small"></span>*@ @FlatFXResources.Resources.OnLineRates @*<span class="glyphicon glyphicon-euro light-green small"></span>*@</a></li>
                     @if (User.Identity.Name != "")
                     {
-                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><span class="glyphicon glyphicon-transfer exchange-system-color"></span>@FlatFXResources.Resources.ExchangeSystem</a></li>
-                        <li><a href="@Url.Action("OrderIndex", "Order")"><span class="glyphicon glyphicon-resize-small order-system-color"></span>@FlatFXResources.Resources.OrderSystem</a></li>
+                        <li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@*<span class="glyphicon glyphicon-transfer exchange-system-color"></span>*@ @FlatFXResources.Resources.ExchangeSystem</a></li>
+                        <li><a href="@Url.Action("OrderIndex", "Order")">@*<span class="glyphicon glyphicon-resize-small order-system-color"></span>*@ @FlatFXResources.Resources.OrderSystem</a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><span class="glyphicon glyphicon-cog"></span> @FlatFXResources.Resources.UserManage<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu login-dropdown">
                                 <li><a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a></li>
                                 <li><a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a></li>
                                 <li><a href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.EditCompanyDetails</a></li>
@@ -63,7 +63,7 @@
                     {
                         <li class="dropdown">
                             <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false">@FlatFXResources.Resources.AdminManage<span class="caret"></span></a>
-                            <ul class="dropdown-menu">
+                            <ul class="dropdown-menu login-dropdown">
                                 <li><a href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a></li>
                                 <li><a href="@Url.Action("IndexAdmin", "Companies")">Companies</a></li>
                                 <li><a href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a></li>
