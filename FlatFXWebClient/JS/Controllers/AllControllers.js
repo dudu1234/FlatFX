@@ -173,6 +173,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
     $scope.init = function () {
 
         $scope.companyChart = "Daily";
+        $scope.siteChart = "Daily";
         //$scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
         //$scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
         //JSON.parse('@Html.Raw(Model.CompanyMonthlyVolumeList)'))

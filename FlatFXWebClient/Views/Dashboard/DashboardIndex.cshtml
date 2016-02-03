@@ -36,12 +36,10 @@
             </div>
             <br />
             <br />
-            <span class="dashboard-chart-header">Site Daily Volume ($):</span>
-            <canvas id="dashboardSiteDailyChart" class="dashboard-chart"></canvas>
-            <br />
-            <br />
-            <span class="dashboard-chart-header">Site Monthly Volume ($):</span>
-            <canvas id="dashboardSiteMonthlyChart" class="dashboard-chart"></canvas>
+            <span class="dashboard-chart-header">Site Daily Volume ($)</span>
+            &nbsp;&nbsp;<input type="radio" ng-model="siteChart" value="Daily">Daily&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" ng-model="siteChart" value="Monthly" />Monthly
+            <canvas id="dashboardSiteDailyChart" class="dashboard-chart" ng-show="siteChart == 'Daily'">></canvas>
+            <canvas id="dashboardSiteMonthlyChart" class="dashboard-chart" ng-show="siteChart == 'Monthly'"></canvas>
         </div>
     </div>
 </div>
