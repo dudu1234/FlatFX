@@ -753,4 +753,37 @@
   <data name="YourSaving" xml:space="preserve">
     <value>החיסכון שלך:</value>
   </data>
+  <data name="Daily" xml:space="preserve">
+    <value>יומי</value>
+  </data>
+  <data name="DashboardHeader0" xml:space="preserve">
+    <value>סטטיסטיקת </value>
+  </data>
+  <data name="DashboardHeader1" xml:space="preserve">
+    <value> (החברה שלך)</value>
+  </data>
+  <data name="DashboardHeader2" xml:space="preserve">
+    <value>נפח עיסקאות החברה ($)</value>
+  </data>
+  <data name="DashboardHeader3" xml:space="preserve">
+    <value>סטטיסטיקת האתר (כל הלקוחות)</value>
+  </data>
+  <data name="DashboardHeader4" xml:space="preserve">
+    <value>נפח עיסקאות באתר ($)</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>חודשי</value>
+  </data>
+  <data name="NumOfDeals" xml:space="preserve">
+    <value>מספר עיסקאות</value>
+  </data>
+  <data name="TodayVolume" xml:space="preserve">
+    <value>נפח יומי</value>
+  </data>
+  <data name="TotalSavings" xml:space="preserve">
+    <value>סה"כ חיסכון</value>
+  </data>
+  <data name="TotalVolume" xml:space="preserve">
+    <value>נפח כולל</value>
+  </data>
 </root>

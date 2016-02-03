@@ -9,35 +9,37 @@
     <div class="row">
         <div class="col-xs-6 CompanyArea">
             <div class="col-xs-12 header">
-                <span>Your company Statistics (@Model.CompanyName):</span>
+                <span>@FlatFXResources.Resources.DashboardHeader0@Model.CompanyName @FlatFXResources.Resources.DashboardHeader1</span>
             </div>
             <div class="row">
-                <div class="col-xs-3 dashboard-square key">Total Volume<br /><span class="value blue">@Model.CompanyVolume.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">Today Volume<br /><span class="value blue">@Model.CompanyTodayVolume.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">Total Savings<br /><span class="value green">@Model.CompanySavings.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">#Deals<br /><span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TotalVolume<br /><span class="value blue">@Model.CompanyVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TodayVolume<br /><span class="value blue">@Model.CompanyTodayVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TotalSavings<br /><span class="value green">@Model.CompanySavings.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.NumOfDeals<br /><span class="value blue">@Model.CompanyNumberOfDeal.ToString("N0")</span></div>
             </div>
             <br />
             <br />
-            <span class="dashboard-chart-header">Company Volume ($)</span>
-            &nbsp;&nbsp;<input type="radio" ng-model="companyChart" value="Daily">Daily&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" ng-model="companyChart" value="Monthly" />Monthly
+            <span class="dashboard-chart-header">@FlatFXResources.Resources.DashboardHeader2</span>
+            &nbsp;&nbsp;<input type="radio" ng-model="companyChart" value="Daily">@FlatFXResources.Resources.Daily&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" ng-model="companyChart" value="Monthly" />@FlatFXResources.Resources.Monthly
             <canvas id="dashboardCompanyDailyChart" class="dashboard-chart" ng-show="companyChart == 'Daily'"></canvas>
             <canvas id="dashboardCompanyMonthlyChart" class="dashboard-chart" ng-show="companyChart == 'Monthly'"></canvas>
         </div>
         <div class="col-xs-6 AllSiteArea">
             <div class="col-xs-12 header">
-                <span>Site Statistics (All Customers):</span>
+                <span>@FlatFXResources.Resources.DashboardHeader3</span>
             </div>
             <div class="row">
-                <div class="col-xs-3 dashboard-square key">Total Volume<br /><span class="value blue">@Model.SiteTotalVolume.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">Today Volume<br /><span class="value blue">@Model.SiteTodayVolume.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">Total Savings<br /><span class="value green">@Model.SiteTotalSavings.ToString("N0")$</span></div>
-                <div class="col-xs-3 dashboard-square key">#Deals:<br /><span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TotalVolume<br /><span class="value blue">@Model.SiteTotalVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TodayVolume<br /><span class="value blue">@Model.SiteTodayVolume.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.TotalSavings<br /><span class="value green">@Model.SiteTotalSavings.ToString("N0")$</span></div>
+                <div class="col-xs-3 dashboard-square key">@FlatFXResources.Resources.NumOfDeals<br /><span class="value blue">@Model.SiteTotalNumberOfDeals.ToString("N0")</span></div>
             </div>
             <br />
             <br />
-            <span class="dashboard-chart-header">Site Daily Volume ($)</span>
-            &nbsp;&nbsp;<input type="radio" ng-model="siteChart" value="Daily">Daily&nbsp;&nbsp;&nbsp;&nbsp;<input type="radio" ng-model="siteChart" value="Monthly" />Monthly
+            <span class="dashboard-chart-header">@FlatFXResources.Resources.DashboardHeader4</span>
+            &nbsp;&nbsp;<input type="radio" ng-model="siteChart" value="Daily">@FlatFXResources.Resources.Daily&nbsp;&nbsp;&nbsp;&nbsp;
+            <input type="radio" ng-model="siteChart" value="Monthly" />@FlatFXResources.Resources.Monthly
             <canvas id="dashboardSiteDailyChart" class="dashboard-chart" ng-show="siteChart == 'Daily'">></canvas>
             <canvas id="dashboardSiteMonthlyChart" class="dashboard-chart" ng-show="siteChart == 'Monthly'"></canvas>
         </div>

@@ -628,6 +628,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Daily.
+        /// </summary>
+        public static string Daily {
+            get {
+                return ResourceManager.GetString("Daily", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Daily P&amp;L.
         /// </summary>
         public static string DailyPNL {
@@ -642,6 +651,51 @@ namespace FlatFXResources {
         public static string Dashboard {
             get {
                 return ResourceManager.GetString("Dashboard", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string DashboardHeader0 {
+            get {
+                return ResourceManager.GetString("DashboardHeader0", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Statistics (Your company).
+        /// </summary>
+        public static string DashboardHeader1 {
+            get {
+                return ResourceManager.GetString("DashboardHeader1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Volume ($).
+        /// </summary>
+        public static string DashboardHeader2 {
+            get {
+                return ResourceManager.GetString("DashboardHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site Statistics (All Customers).
+        /// </summary>
+        public static string DashboardHeader3 {
+            get {
+                return ResourceManager.GetString("DashboardHeader3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Site Volume ($).
+        /// </summary>
+        public static string DashboardHeader4 {
+            get {
+                return ResourceManager.GetString("DashboardHeader4", resourceCulture);
             }
         }
         
@@ -1195,6 +1249,24 @@ namespace FlatFXResources {
         public static string MoneyTransferInstractions {
             get {
                 return ResourceManager.GetString("MoneyTransferInstractions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Monthly.
+        /// </summary>
+        public static string Monthly {
+            get {
+                return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to #Deals.
+        /// </summary>
+        public static string NumOfDeals {
+            get {
+                return ResourceManager.GetString("NumOfDeals", resourceCulture);
             }
         }
         
@@ -1798,6 +1870,33 @@ namespace FlatFXResources {
         public static string TheFunds {
             get {
                 return ResourceManager.GetString("TheFunds", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Today Volume.
+        /// </summary>
+        public static string TodayVolume {
+            get {
+                return ResourceManager.GetString("TodayVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Savings.
+        /// </summary>
+        public static string TotalSavings {
+            get {
+                return ResourceManager.GetString("TotalSavings", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Total Volume.
+        /// </summary>
+        public static string TotalVolume {
+            get {
+                return ResourceManager.GetString("TotalVolume", resourceCulture);
             }
         }
         

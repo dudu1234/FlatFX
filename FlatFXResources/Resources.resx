@@ -774,4 +774,37 @@
   <data name="YourSaving" xml:space="preserve">
     <value>Your Saving:</value>
   </data>
+  <data name="Daily" xml:space="preserve">
+    <value>Daily</value>
+  </data>
+  <data name="DashboardHeader0" xml:space="preserve">
+    <value />
+  </data>
+  <data name="DashboardHeader1" xml:space="preserve">
+    <value>Statistics (Your company)</value>
+  </data>
+  <data name="DashboardHeader2" xml:space="preserve">
+    <value>Company Volume ($)</value>
+  </data>
+  <data name="DashboardHeader3" xml:space="preserve">
+    <value>Site Statistics (All Customers)</value>
+  </data>
+  <data name="DashboardHeader4" xml:space="preserve">
+    <value>Site Volume ($)</value>
+  </data>
+  <data name="Monthly" xml:space="preserve">
+    <value>Monthly</value>
+  </data>
+  <data name="NumOfDeals" xml:space="preserve">
+    <value>#Deals</value>
+  </data>
+  <data name="TodayVolume" xml:space="preserve">
+    <value>Today Volume</value>
+  </data>
+  <data name="TotalSavings" xml:space="preserve">
+    <value>Total Savings</value>
+  </data>
+  <data name="TotalVolume" xml:space="preserve">
+    <value>Total Volume</value>
+  </data>
 </root>
