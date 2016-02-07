@@ -807,4 +807,16 @@
   <data name="TotalVolume" xml:space="preserve">
     <value>Total Volume</value>
   </data>
+  <data name="CommissionCalcAdmin1" xml:space="preserve">
+    <value>Administrator Fields</value>
+  </data>
+  <data name="CommissionCalcAdmin2" xml:space="preserve">
+    <value>FlatFX commission (Promil):</value>
+  </data>
+  <data name="CommissionCalcAdmin3" xml:space="preserve">
+    <value>Bank commission (Promil):</value>
+  </data>
+  <data name="CommissionCalcAdmin4" xml:space="preserve">
+    <value>FlatFX income:</value>
+  </data>
 </root>

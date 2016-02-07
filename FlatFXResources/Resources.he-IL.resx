@@ -786,4 +786,16 @@
   <data name="TotalVolume" xml:space="preserve">
     <value>נפח כולל</value>
   </data>
+  <data name="CommissionCalcAdmin1" xml:space="preserve">
+    <value>שדות מנהל מערכת</value>
+  </data>
+  <data name="CommissionCalcAdmin2" xml:space="preserve">
+    <value>עמלת FlatFX בפרומילים</value>
+  </data>
+  <data name="CommissionCalcAdmin3" xml:space="preserve">
+    <value>עמלת הבנק בפרומילים</value>
+  </data>
+  <data name="CommissionCalcAdmin4" xml:space="preserve">
+    <value>הכנסות FlatFX</value>
+  </data>
 </root>

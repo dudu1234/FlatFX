@@ -727,6 +727,13 @@ table.ffx-table tr td a {
     padding: 0px;
 }
 
+.exchange-amount {
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    padding-right: 0px;
+}
+
 .exchange-system-header {
     background-color: #209448;
     color: white;
@@ -1009,14 +1016,18 @@ textarea {
     width: 90%;
 }
 
-.aboutSection {
+.aboutSection, .ffx-commission-section {
     background-color: #209448;
     font-size: 18px;
     color: whitesmoke;
 }
 
-    .aboutSection .backcolor {
+    .aboutSection .backcolor, .ffx-commission-section .backcolor {
         background-color: #209448;
+    }
+
+    .ffx-commission-section a {
+        color: whitesmoke;
     }
 
 .bank-commission-form {
@@ -1145,8 +1156,10 @@ textarea {
     font-weight: 700;
     width: 100%;
     margin-left: 0px;
+    margin-right: 0px;
     margin-top: 3px;
     padding-left: 0px;
+    padding-right: 0px;
 }
 
 .no-right-margin {
@@ -1157,6 +1170,13 @@ textarea {
 .no-left-margin {
     margin-left: 0px;
     padding-left: 0px;
+}
+
+.no-side-margin {
+    margin-left: 0px;
+    padding-left: 0px;
+    margin-right: 0px;
+    padding-right: 0px;
 }
 
 .home-seperator {

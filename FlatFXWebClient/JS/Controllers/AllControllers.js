@@ -10,6 +10,8 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         $scope.amountUSD = 10;
         $scope.exchangeDiscount = 0;
         $scope.spreadDiscount = 0;
+        $scope.flatFXCommission = 2;
+        $scope.bankCommission = 1;
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
@@ -26,10 +28,16 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         return (4 * $scope.amountUSD * 1000000 * 0.0075 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.002 * (1 - (0.01 * $scope.exchangeDiscount)));
     }
     $scope.FlatFXCommission = function () {
-        return (4 * $scope.amountUSD * 1000000 * 0.002) + 50;
+        return (4 * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommission + $scope.bankCommission))) + 50;
     }
     $scope.FlatFXSaving = function () {
         return $scope.BankCommission() - $scope.FlatFXCommission();
+    }
+    $scope.FlatFXIncome = function () {
+        return (4 * $scope.amountUSD * 1000000 * 0.001 * $scope.flatFXCommission);
+    }
+    $scope.BankIncome = function () {
+        return (4 * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
     }
 });
 
@@ -71,6 +79,9 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
 
         $scope.CountDown = $scope.CountDown - 1;
     }, 1000);
+    $scope.getCCY1 = function () {
+        return $('#CCY1').val();
+    }
 });
 
 
@@ -342,6 +353,14 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
     $scope.CCY1 = function () {
         if (typeof $scope.symbol != 'undefined')
             return $scope.symbol.substring(0, 3);
+        else
+            return '';
+    }
+    $scope.glyphiconCCY1 = function () {
+        if ($scope.CCY1 == "USD")
+            return 'glyphicon-usd';
+        else if (cope.CCY1 == "EUR")
+            return 'glyphicon-eur';
         else
             return '';
     }

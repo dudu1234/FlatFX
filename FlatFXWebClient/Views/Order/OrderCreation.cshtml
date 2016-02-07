@@ -74,13 +74,13 @@
             <div class="form-group">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.SelectAmount (<u class="site-color1">{{ CCY1() }}</u>):</label>
                 <div class="col-md-7 no-right-margin">
-                    @Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control", @type = "number" } })
+                    @Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control number" } })
                     @Html.ValidationMessageFor(m => m.AmountCCY1, "", new { @class = "text-danger" })
                 </div>
-                <div class="col-md-1 no-left-margin">
-                    <span class="glyphicon glyphicon-usd currency-after-text" ng-class=""></span>
+                <div class="col-md-1 no-side-margin">
+                    <span class="currency-after-text" ng-class="{ 'glyphicon glyphicon-usd': CCY1() == 'USD', 'glyphicon glyphicon-eur': CCY1() == 'EUR' }"></span>
                 </div>
-                </div>
+            </div>
             <div class="form-group">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
                 <div class="col-md-7">
@@ -88,7 +88,7 @@
                     <div id="PromilSlider"></div>
                     @Html.HiddenFor(model => model.PromilRequired)
                     <br /><br />
-                    <span class="start-align col-md-12">              
+                    <span class="start-align col-md-12">
                         <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
                         @FlatFXResources.Resources.BankSpreadIs
                     </span>
@@ -145,3 +145,19 @@
         }
     </div>
 </div>
+
+<script>
+    $('input.number').keyup(function (event) {
+
+        // skip for arrow keys
+        if (event.which >= 37 && event.which <= 40) return;
+
+        // format number
+        $(this).val(function (index, value) {
+            return value
+            .replace(/\D/g, "")
+            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
+            ;
+        });
+    });
+</script>

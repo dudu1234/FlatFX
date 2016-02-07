@@ -394,6 +394,42 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Administrator Fields.
+        /// </summary>
+        public static string CommissionCalcAdmin1 {
+            get {
+                return ResourceManager.GetString("CommissionCalcAdmin1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FlatFX commission (Promil):.
+        /// </summary>
+        public static string CommissionCalcAdmin2 {
+            get {
+                return ResourceManager.GetString("CommissionCalcAdmin2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Bank commission (Promil):.
+        /// </summary>
+        public static string CommissionCalcAdmin3 {
+            get {
+                return ResourceManager.GetString("CommissionCalcAdmin3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to FlatFX income:.
+        /// </summary>
+        public static string CommissionCalcAdmin4 {
+            get {
+                return ResourceManager.GetString("CommissionCalcAdmin4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Companies.
         /// </summary>
         public static string Companies {

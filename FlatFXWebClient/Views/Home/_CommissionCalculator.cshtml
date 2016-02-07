@@ -1,7 +1,9 @@
-﻿<br /><br />
+﻿@using FlatFXCore.BussinessLayer;
+
+<br /><br />
 <div class="form-horizontal">
     <div class="panel panel-info bank-commission-form">
-        <div >
+        <div>
             <p class="spreads-image-header">@FlatFXResources.Resources.BankCommissionHeader</p>
         </div>
         <div class="panel-body start-align">
@@ -43,6 +45,30 @@
                     <label class="start-align">{{ FlatFXSaving() | number:0 }} &#8362;</label>
                 </div>
             </div>
+
+            @if (User.IsInRole(Consts.Role_Administrator))
+            {
+                <br /><br /><br />
+                <h2>@FlatFXResources.Resources.CommissionCalcAdmin1</h2>
+                <div class="form-group blue">
+                    <label class="control-label col-md-8">@FlatFXResources.Resources.CommissionCalcAdmin2</label>
+                    <div class="col-md-4">
+                        <input min="0" max="10" type="number" class="form-control" ng-model="flatFXCommission">
+                    </div>
+                </div>
+                <div class="form-group blue small-line">
+                    <label class="control-label col-md-8">@FlatFXResources.Resources.CommissionCalcAdmin3</label>
+                    <div class="col-md-4">
+                        <input min="0" max="10" type="number" class="form-control" ng-model="bankCommission">
+                    </div>
+                </div>
+                <div class="form-group blue small-line">
+                    <label class="control-label col-md-8">@FlatFXResources.Resources.CommissionCalcAdmin4</label>
+                    <div class="col-md-4">
+                        <label class="start-align">{{ FlatFXIncome() | number:0 }} &#8362;</label>
+                    </div>
+                </div>
+            }
         </div>
     </div>
 </div>
