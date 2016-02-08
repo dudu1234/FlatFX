@@ -61,7 +61,7 @@
                 </div>
                 <label class="control-label col-md-2">@FlatFXResources.Resources.InAmount</label>
                 <div class="col-md-2 exchange-amount">
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { id = "orderAmount", @class = "form-control number" } })
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { id = "orderAmount", @class = "form-control", type = "number" } })
                 </div>
                 <div class="col-md-1 no-side-margin">
                     <span class="currency-after-text" ng-class="{ 'glyphicon glyphicon-usd': getCCY1() == 'USD', 'glyphicon glyphicon-eur': getCCY1() == 'EUR' }"></span>
@@ -110,18 +110,4 @@
     function setBuySellText(text) {
         $('#buySellText').html(text);
     }
-
-    $('input.number').keyup(function (event) {
-
-        // skip for arrow keys
-        if (event.which >= 37 && event.which <= 40) return;
-
-        // format number
-        $(this).val(function (index, value) {
-            return value
-            .replace(/\D/g, "")
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            ;
-        });
-    });
 </script>

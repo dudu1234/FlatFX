@@ -181,6 +181,7 @@
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CompanyAccountsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
+    <Compile Include="Controllers\OrderBookController.cs" />
     <Compile Include="Controllers\OrderController.cs" />
     <Compile Include="Controllers\SimpleCurrencyExchangeController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -1257,6 +1258,7 @@
     <Content Include="Views\Order\OrderSummary.cshtml" />
     <Content Include="Views\Home\_CommissionCalculator.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
+    <Content Include="Views\OrderBook\OrderBookIndex.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

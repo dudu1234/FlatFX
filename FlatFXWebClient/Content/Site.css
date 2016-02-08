@@ -24,6 +24,13 @@ body {
     background-size: cover;
 }
 
+.not-active-a {
+    pointer-events: none;
+    cursor: default;
+    color: gray;
+    text-decoration: none !important;
+}
+
 li a {
     font-size: 15px;
 }
@@ -125,7 +132,7 @@ mark {
     background-color: black;
 }
 
-.site-header .nav .open>a, .site-header .nav .open>a:focus, .site-header .nav .open>a:hover {
+.site-header .nav .open > a, .site-header .nav .open > a:focus, .site-header .nav .open > a:hover {
     background-color: black;
     /*border-color: #337ab7;*/
 }
@@ -618,6 +625,28 @@ tr.pager td {
         background-color: whitesmoke;
     }
 
+table.ffx-table tr td a {
+    text-decoration: underline;
+}
+
+.table-order-buy {
+    background-color: #eff8d3;
+}
+
+    .table-order-buy thead > tr > th {
+        text-align: center;
+        background-color: #d9e4b9;
+    }
+
+.table-order-sell {
+    background-color: #fbe0d4;
+}
+
+    .table-order-sell thead > tr > th {
+        text-align: center;
+        background-color: #e9c0ae;
+    }
+
 .red {
     color: red;
 }
@@ -636,10 +665,6 @@ tr.pager td {
 
 .blue {
     color: blue;
-}
-
-table.ffx-table tr td a {
-    text-decoration: underline;
 }
 
 .on-line-window .panel {
@@ -709,7 +734,7 @@ table.ffx-table tr td a {
     box-shadow: 0 0 20px rgba(0,0,0,0.3);
 }
 
-    
+
 .panel-title {
     font-size: 20px;
     text-align: center;
@@ -763,11 +788,18 @@ table.ffx-table tr td a {
 
 .order-currency-exchange-stage {
     padding: 15px;
+    padding-top: 0px;
+}
+
+.ordr-book-panel {
+    padding: 15px;
+    padding-top: 0px;
 }
 
 .order-confirm {
     background-color: whitesmoke;
     padding: 15px;
+    padding-top: 0px;
 }
 
     .order-confirm .panel-body .form-group {
@@ -877,31 +909,31 @@ table.ffx-table tr td a {
     background-color: whitesmoke;
 }
 
-.simple-trading-order .panel-body .form-group {
-    margin: 5px;
-    line-height: 30px;
-}
-
-    .simple-trading-order .panel-body .form-group:nth-child(even) {
-        background-color: white;
+    .simple-trading-order .panel-body .form-group {
+        margin: 5px;
+        line-height: 30px;
     }
 
-    .simple-trading-order .panel-body .form-group:nth-child(odd) {
-        background-color: #f0f0ff;
+        .simple-trading-order .panel-body .form-group:nth-child(even) {
+            background-color: white;
+        }
+
+        .simple-trading-order .panel-body .form-group:nth-child(odd) {
+            background-color: #f0f0ff;
+        }
+
+    .simple-trading-confirm .panel-body .form-group {
+        margin: 0px;
+        line-height: 30px;
     }
 
-.simple-trading-confirm .panel-body .form-group {
-    margin: 0px;
-    line-height: 30px;
-}
+        .simple-trading-confirm .panel-body .form-group:nth-child(even) {
+            background-color: #d9f1f7;
+        }
 
-    .simple-trading-confirm .panel-body .form-group:nth-child(even) {
-        background-color: #d9f1f7;
-    }
-
-    .simple-trading-confirm .panel-body .form-group:nth-child(odd) {
-        background-color: #e2e2e2;
-    }
+        .simple-trading-confirm .panel-body .form-group:nth-child(odd) {
+            background-color: #e2e2e2;
+        }
 
 
 div.disabled {

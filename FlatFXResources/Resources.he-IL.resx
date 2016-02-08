@@ -652,7 +652,7 @@
     <value>ההזמנה עודכנה בהצלחה</value>
   </data>
   <data name="OrderHeader" xml:space="preserve">
-    <value>פרטי עיסקה</value>
+    <value>צור הזמנה חדשה</value>
   </data>
   <data name="OrderNotAllowed" xml:space="preserve">
     <value>אין אפשרות לבצע את הפעולה</value>
@@ -797,5 +797,14 @@
   </data>
   <data name="CommissionCalcAdmin4" xml:space="preserve">
     <value>הכנסות FlatFX</value>
+  </data>
+  <data name="Buy2" xml:space="preserve">
+    <value>קניית</value>
+  </data>
+  <data name="OrderRemark" xml:space="preserve">
+    <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה הינה קבועה, 0.02% לעומת 0.11% בבנקים</value>
+  </data>
+  <data name="Sell2" xml:space="preserve">
+    <value>בתמורה ל</value>
   </data>
 </root>

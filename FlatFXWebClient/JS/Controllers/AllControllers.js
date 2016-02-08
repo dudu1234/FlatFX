@@ -132,6 +132,7 @@ myApp.controller('UserManager', function ($scope, $timeout, noty) {
 myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeout, noty) {
     $scope.init = function (feedUrl) {
         $scope.FeedRatesUrl = feedUrl;
+        $scope.SimpleTradingUrl = "http://" + $(location).attr('host') + "/SimpleCurrencyExchange/StartTrade";
     };
 
     $scope.showError = function (error) {
@@ -175,6 +176,10 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
+
+    $scope.getHref = function (key, direction) {
+        return $scope.SimpleTradingUrl + '?key=' + key + '&direction=' + direction;
+    }
 });
 
 
@@ -344,15 +349,25 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
     $scope.setAction = function (symbol) {
         $('#Symbol').val(symbol);
         $scope.symbol = symbol;
-        $scope.actionDescription = $('input[name="BuySell"]:checked').val() + ' ' + symbol.substring(0, 3) + ' by ' + $('input[name="BuySell"]:unchecked').val() + 'ing ' + symbol.substring(3, 6);
+        //$scope.actionDescription = $('input[name="BuySell"]:checked').val() + ' ' + $scope.amountCcy1 + ' ' + symbol.substring(0, 3) + ' by ' + $('input[name="BuySell"]:unchecked').val() + 'ing ' + symbol.substring(3, 6);
+        if ($('input[name="BuySell"]:checked').val() == "Buy")
+            $scope.actionDescription = 'Buy ' + $scope.amountCcy1.toLocaleString() + ' ' + symbol.substring(0, 3) + ' by selling ' + symbol.substring(3, 6);
+        else
+            $scope.actionDescription = 'Buy ' + symbol.substring(3, 6) + ' by selling ' + $scope.amountCcy1.toLocaleString() + ' ' + symbol.substring(0, 3);
         $scope.symbolDisplay = $scope.actionDescription;
     }
     $scope.updateAction = function () {
-        $scope.actionDescription = $('input[name="BuySell"]:checked').val() + ' ' + $scope.symbol.substring(0, 3) + ' by ' + $('input[name="BuySell"]:unchecked').val() + 'ing ' + $scope.symbol.substring(3, 6);
+        $scope.setAction($scope.symbol);
     }
     $scope.CCY1 = function () {
         if (typeof $scope.symbol != 'undefined')
             return $scope.symbol.substring(0, 3);
+        else
+            return '';
+    }
+    $scope.CCY2 = function () {
+        if (typeof $scope.symbol != 'undefined')
+            return $scope.symbol.substring(3, 6);
         else
             return '';
     }
@@ -399,3 +414,63 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty) {
+    $scope.init = function (isDemo) {
+        $scope.isDemo = isDemo;
+        $scope.orderBookIndexUrl = "http://" + $(location).attr('host') + "/OrderBook/OrderBookIndex";
+
+        $scope.Key = 'USDILS';
+        $scope.KeyDisplay = 'USDILS';
+        $scope.MidRate = 0;
+        $scope.minAmount = 0;
+        $scope.OrdersToBuy = {};
+        $scope.OrdersToSell = {};
+        $scope.Pairs = null;
+    };
+
+    $scope.ready = function () {
+        $scope.refreshOrderBook();
+    };
+
+    $interval(function () {
+        $scope.refreshOrderBook();
+    }, 60000);
+
+    $timeout(function () { // Use it instead of javascript $(document).ready(
+        $scope.ready();
+    }, 0);
+
+    $scope.refreshOrderBook = function () {
+        $http.get($scope.orderBookIndexUrl, { params: { key: $scope.Key, minAmount: $scope.minAmount } })
+            .success(function (data, status, headers, config) {
+                try {
+                    if ($scope.Pairs == null) {
+                        $scope.Pairs = data.Pairs;
+                    }
+                    $scope.Key = data.Key;
+                    $scope.KeyDisplay = data.KeyDisplay;
+                    $scope.MidRate = data.MidRate;
+                    $scope.OrdersToBuy = data.OrdersToBuy;
+                    $scope.OrdersToSell = data.OrdersToSell;
+                }
+                catch (err) {
+                    $scope.OrdersToBuy = {};
+                    $scope.OrdersToSell = {};
+                    $scope.MidRate = 0;
+                }
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });
+    };
+
+    $scope.changePair = function () {
+        $scope.refreshOrderBook();
+    }
+});
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------

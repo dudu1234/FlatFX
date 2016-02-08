@@ -38,23 +38,28 @@
         }
         else
         {
+            <div class="form-group">
+                <remark class="control-label col-md-12">
+                    @Html.Raw(@FlatFXResources.Resources.OrderRemark)
+                </remark>
+            </div>
             <div class="form-group small-line" ng-click="updateAction()">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
-                <div class="col-md-2 order-radio-div">
+                <div class="col-md-4 order-radio-div">
                     @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" })
-                    <span>@FlatFXResources.Resources.Buy</span>
+                    <span>@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</span>
                 </div>
-                <div class="col-md-2 order-radio-div">
+                <div class="col-md-4 order-radio-div">
                     @Html.RadioButtonFor(model => model.BuySell, "Sell")
-                    <span>@FlatFXResources.Resources.Sell</span>
+                    <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
                 </div>
-                <div class="col-md-6"></div>
             </div>
             <div class="form-group pairList">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
                 @Html.HiddenFor(model => model.Symbol)
 
-                <div class="col-md-7 start-align">
+                <div class="col-md-12 start-align"></div>
+                <div class="col-md-12 start-align">
                     <table>
                         <tr>
                             @foreach (FXRate rate in CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || Model.OrderInSession.IsDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD"))
@@ -66,34 +71,42 @@
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-4">@FlatFXResources.Resources.ActionDescription:</label>
-                <div class="col-md-7">
-                    <label class="control-label order-action-description">{{ actionDescription }}</label>
-                </div>
-            </div>
-            <div class="form-group">
                 <label class="control-label col-md-4">@FlatFXResources.Resources.SelectAmount (<u class="site-color1">{{ CCY1() }}</u>):</label>
                 <div class="col-md-7 no-right-margin">
-                    @Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control number" } })
-                    @Html.ValidationMessageFor(m => m.AmountCCY1, "", new { @class = "text-danger" })
+                    <input type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" class="form-control" ng-change="setAction(symbol)" />
+                    @*@Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control", type = "number" } })*@
+                    @*@Html.ValidationMessageFor(m => m.AmountCCY1, "", new { @class = "text-danger" })>*@
                 </div>
                 <div class="col-md-1 no-side-margin">
                     <span class="currency-after-text" ng-class="{ 'glyphicon glyphicon-usd': CCY1() == 'USD', 'glyphicon glyphicon-eur': CCY1() == 'EUR' }"></span>
                 </div>
             </div>
             <div class="form-group">
-                <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
+                <label class="control-label col-md-4">@FlatFXResources.Resources.ActionDescription:</label>
                 <div class="col-md-7">
-                    <span id="PromilText">@FlatFXResources.Resources.MidRate + {{ promilRequired * 0.001 * 100 | number:1 }}%</span>
-                    <div id="PromilSlider"></div>
-                    @Html.HiddenFor(model => model.PromilRequired)
-                    <br /><br />
-                    <span class="start-align col-md-12">
-                        <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
-                        @FlatFXResources.Resources.BankSpreadIs
-                    </span>
+                    <label class="control-label order-action-description">{{ actionDescription }}</label>
                 </div>
             </div>
+            <div class="form-group">
+                @Html.HiddenFor(model => model.PromilRequired)
+                <span class="start-align col-md-12 col-md-offset-4">
+                    <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+                    @FlatFXResources.Resources.BankSpreadIs
+                </span>
+            </div>
+            @*<div class="form-group">
+                    <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
+                    <div class="col-md-7">
+                        <span id="PromilText">@FlatFXResources.Resources.MidRate + {{ promilRequired * 0.001 * 100 | number:1 }}%</span>
+                        <div id="PromilSlider"></div>
+                        @Html.HiddenFor(model => model.PromilRequired)
+                        <br /><br />
+                        <span class="start-align col-md-12">
+                            <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+                            @FlatFXResources.Resources.BankSpreadIs
+                        </span>
+                    </div>
+                </div>*@
             <div class="form-group">
                 <div class="col-md-4">
                     <label class="control-label">
@@ -145,19 +158,3 @@
         }
     </div>
 </div>
-
-<script>
-    $('input.number').keyup(function (event) {
-
-        // skip for arrow keys
-        if (event.which >= 37 && event.which <= 40) return;
-
-        // format number
-        $(this).val(function (index, value) {
-            return value
-            .replace(/\D/g, "")
-            .replace(/\B(?=(\d{3})+(?!\d))/g, ",")
-            ;
-        });
-    });
-</script>

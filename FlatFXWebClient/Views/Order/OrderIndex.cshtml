@@ -88,20 +88,19 @@
 
             if (officeHoursOn && Model.WorkflowStage != 3)
             {
-                string stage1Width = "col-xs-12";
-                if (Model.WorkflowStage == 2)
-                {
-                    stage1Width = "col-xs-6";
-                }
-                
                 <div class="row setup-content @queryBodyClass">
                     <div id="resultDiv" class="col-xs-12"></div>
-                    <div class="@stage1Width text-center">
+                    <div class="col-xs-6 text-center">
                         @Html.Partial("~/Views/Order/OrderCreation.cshtml", Model)
                     </div>
-                    @*<div class="col-xs-2 text-center"></div>*@
                     <div class="col-xs-6 text-center">
-                        @if (Model.WorkflowStage != 1)
+                        @if (Model.WorkflowStage == 1)
+                        {
+                            <div>
+                                @Html.Partial("~/Views/OrderBook/OrderBookIndex.cshtml")
+                            </div>
+                        }
+                        else
                         {
                             <div class="@confirmBodyClass">
                                 @Html.Partial("~/Views/Order/OrderConfirm.cshtml", Model)

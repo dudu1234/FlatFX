@@ -340,6 +340,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Buy.
+        /// </summary>
+        public static string Buy2 {
+            get {
+                return ResourceManager.GetString("Buy2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy Amount (you receive).
         /// </summary>
         public static string BuyAmount {
@@ -1370,7 +1379,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Enter your Order.
+        ///   Looks up a localized string similar to Create new Order.
         /// </summary>
         public static string OrderHeader {
             get {
@@ -1393,6 +1402,15 @@ namespace FlatFXResources {
         public static string OrderNotAllowed {
             get {
                 return ResourceManager.GetString("OrderNotAllowed", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Wants to find a partner for exchanging on the Mid price (no spreads) ? &lt;br /&gt;Create new order on the Mid rate, &lt;u&gt;no spread&lt;/u&gt;, the commission is always 0.02% instead of 0.11% in the banks..
+        /// </summary>
+        public static string OrderRemark {
+            get {
+                return ResourceManager.GetString("OrderRemark", resourceCulture);
             }
         }
         
@@ -1672,6 +1690,15 @@ namespace FlatFXResources {
         public static string Sell {
             get {
                 return ResourceManager.GetString("Sell", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Sell.
+        /// </summary>
+        public static string Sell2 {
+            get {
+                return ResourceManager.GetString("Sell2", resourceCulture);
             }
         }
         

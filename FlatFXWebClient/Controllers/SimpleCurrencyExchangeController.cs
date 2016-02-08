@@ -24,6 +24,26 @@ namespace FlatFXWebClient.Controllers
         public const double FlatFXProfitInPromil = 0.002;
         public const double CustomerProfitInPromil = 0.008;
 
+        public async Task<ActionResult> StartTrade(string key, string direction)
+        {
+            SimpleCurrencyExchangeViewModel model = new SimpleCurrencyExchangeViewModel();
+            await Initialize(model);
+            if (direction != "bid")
+            {
+                model.BuySell = Consts.eBuySell.Buy;
+                model.CCY1 = key.Substring(0, 3);
+                model.CCY2 = key.Substring(3, 3);
+            }
+            else
+            {
+                model.BuySell = Consts.eBuySell.Buy;
+                model.CCY2 = key.Substring(0, 3);
+                model.CCY1 = key.Substring(3, 3);
+            }
+            
+            return RedirectToAction("EnterData", model);
+        }
+
         public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
             if (model.WorkflowStage <= 0)
