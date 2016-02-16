@@ -116,7 +116,7 @@ namespace FlatFXWebClient.Controllers
                 order.user = user;
                 order.UserId = user.Id;
 
-                order.DealProductType = Consts.eDealProductType.FxPromilOrder;
+                order.DealProductType = Consts.eDealProductType.FxMidRateOrder;
                 order.DealType = Consts.eDealType.Spot;
                 order.IsClosed = false;
                 order.IsWaiting = false;
@@ -131,9 +131,7 @@ namespace FlatFXWebClient.Controllers
                 order.ExpiryDate = model.ExpiryDate;
                 model.MinimalPartnerExecutionAmountCCY1 = null;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                model.PromilRequired = 0;
-                order.PromilRequired = model.PromilRequired;
-
+                
                 order.IsConfirmed = false;
                 order.MinimalPartnerTotalVolumeUSD = null;
                 order.PartnerMinScore = null;
@@ -197,8 +195,7 @@ namespace FlatFXWebClient.Controllers
                 order.Comment = model.Comment;
                 order.ExpiryDate = model.ExpiryDate;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                order.PromilRequired = model.PromilRequired;
-
+                
                 //calculate AmountUSD_Estimation (volume)
                 if (order.CCY1 == "USD")
                     order.AmountUSD_Estimation = order.AmountCCY1;
@@ -210,9 +207,7 @@ namespace FlatFXWebClient.Controllers
                 string minorCurrency = order.CCY2;
                 // 0.001 * 2 - constant FlatFX commision
                 // 0.011 - constant Bank full commission
-                // 0.001 * order.PromilRequired - Promil required
-                //order.CustomerTotalProfitUSD_Estimation = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, (order.AmountUSD_Estimation * (0.011 - (0.001 * order.PromilRequired) - (0.001 * 2)) * pairRate.Mid) - 11), 2);
-                order.CustomerTotalProfitUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (0.011 - (0.001 * order.PromilRequired) - (0.001 * 2))) - 11, 2);
+                order.CustomerTotalProfitUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (0.011 - (0.001 * 2))) - 11, 2);
                 order.FlatFXCommissionUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (FlatFXProfitInPromil + BankProfitInPromil)), 2); // 3 promil
                 
                 model.order = order;

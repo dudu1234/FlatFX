@@ -730,7 +730,7 @@
     <value>Bank commission without discount is 0.2%</value>
   </data>
   <data name="BankCommissionRemark2" xml:space="preserve">
-    <value>Bank spread without discount is 0.75%</value>
+    <value>Bank spread without discount is 0.9%</value>
   </data>
   <data name="BankCommission6" xml:space="preserve">
     <value>FlatFX commission</value>
@@ -769,7 +769,7 @@
     <value>Spread Required</value>
   </data>
   <data name="BankSpreadIs" xml:space="preserve">
-    <value>* The bank commission without discount is 0.11%.</value>
+    <value>* The bank commission without discount is 1.1%.</value>
   </data>
   <data name="YourSaving" xml:space="preserve">
     <value>Your Saving:</value>
@@ -823,7 +823,7 @@
     <value>Buy</value>
   </data>
   <data name="OrderRemark" xml:space="preserve">
-    <value>Wants to find a partner for exchanging on the Mid price (no spreads) ? &lt;br /&gt;Create new order on the Mid rate, &lt;u&gt;no spread&lt;/u&gt;, the commission is always 0.02% instead of 0.11% in the banks.</value>
+    <value>Wants to find a partner for exchanging on the Mid price (no spreads) ? &lt;br /&gt;Create new order on the Mid rate, &lt;u&gt;no spread&lt;/u&gt;, the commission is always 0.2% instead of 1.1% in the banks.</value>
   </data>
   <data name="Sell2" xml:space="preserve">
     <value>Sell</value>

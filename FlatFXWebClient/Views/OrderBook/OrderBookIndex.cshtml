@@ -12,17 +12,14 @@
                     <select class="form-control" name="pairSelect" id="pairSelect" ng-model="Key" ng-options="k as v for (k,v) in Pairs" ng-change="changePair()"></select>
                 </div>
             </div>
+            @*<div class="col-xs-12">
+                    <label class="col-xs-6" for="minAmount">Partner min amount:</label>
+                    <div class="col-xs-6">
+                        <input class="form-control" name="minAmount" id="minAmount" type="number" ng-model="minAmount" />
+                    </div>
+                </div>*@
             <div class="col-xs-12">
-                <label class="col-xs-6" for="minAmount">Partner min amount:</label>
-                <div class="col-xs-6">
-                    <input class="form-control" name="minAmount" id="minAmount" type="number" ng-model="minAmount" />
-                </div>
-            </div>
-            <div class="col-xs-12">
-                <label class="col-xs-6">Mid Rate:</label>
-                <div class="col-xs-6">
-                    <label class="form-control">{{ Key }} {{ MidRate }}</label>
-                </div>
+                <label class="col-xs-6">{{ Key }} Mid Rate is {{ MidRate }}</label>
             </div>
 
             <div class="col-xs-12 text-center">
@@ -30,27 +27,29 @@
                     <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
                         <colgroup>
                             <col class="col-sm-4" />
-                            <col class="col-sm-3" />
-                            <col class="col-sm-3" />
-                            <col class="col-sm-2" />
+                            <col class="col-sm-4" />
+                            <col class="col-sm-4" />
                         </colgroup>
                         <thead>
-                            <tr>
+                            <tr class="first-header">
                                 <th colspan="4" class="text-center">Buy</th>
                             </tr>
-                            <tr>
-                                <th>Partner</th>
-                                <th>Max Amount</th>
-                                <th>Min Amount</th>
-                                <th>Promil</th>
+                            <tr class="second-header">
+                                <th ng-class="orderByBuy == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('CompanyName')">Partner</a></th>
+                                <th ng-class="orderByBuy == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MinAmount')">Min Amount</a></th>
+                                <th ng-class="orderByBuy == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MaxAmount')">Max Amount</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="order in OrdersToBuy">
+                            <tr>
+                                <td></td>
+                                <td><input class="form-control" name="minAmountBuy" id="minAmountBuy" type="number" ng-model="minAmountBuy" /></td>
+                                <td><input class="form-control" name="maxAmountBuy" id="maxAmountBuy" type="number" ng-model="maxAmountBuy" /></td>
+                            </tr>
+                            <tr ng-repeat="order in OrdersToBuy | filter:filterBuyFunction | orderBy:orderByBuy">
                                 <td>{{ order.CompanyName }}</td>
-                                <td>{{ order.MaxAmount | number:0 }}</td>
                                 <td>{{ order.MinAmount | number:0 }}</td>
-                                <td>{{ order.Promil }}</td>
+                                <td>{{ order.MaxAmount | number:0 }}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -58,27 +57,29 @@
                 <div class="col-xs-6">
                     <table class="table table-responsive table-bordered table-hover table-striped table-order-sell">
                         <colgroup>
-                            <col class="col-sm-2" />
-                            <col class="col-sm-3" />
-                            <col class="col-sm-3" />
+                            <col class="col-sm-4" />
+                            <col class="col-sm-4" />
                             <col class="col-sm-4" />
                         </colgroup>
                         <thead>
-                            <tr>
+                            <tr class="first-header">
                                 <th colspan="4" class="text-center">Sell</th>
                             </tr>
-                            <tr>
-                                <th>Promil</th>
-                                <th>Min Amount</th>
-                                <th>Max Amount</th>
-                                <th>Partner</th>
+                            <tr class="second-header">
+                                <th ng-class="orderBySell == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MaxAmount')">Max Amount</a></th>
+                                <th ng-class="orderBySell == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MinAmount')">Min Amount</a></th>
+                                <th ng-class="orderBySell == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('CompanyName')">Partner</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr ng-repeat="order in OrdersToSell">
-                                <td>{{ order.Promil }}</td>
-                                <td>{{ order.MinAmount | number:0 }}</td>
+                            <tr>
+                                <td><input class="form-control" name="maxAmountSell" id="maxAmountSell" type="number" ng-model="maxAmountSell" /></td>
+                                <td><input class="form-control" name="minAmountSell" id="minAmountSell" type="number" ng-model="minAmountSell" /></td>
+                                <td></td>
+                            </tr>
+                            <tr ng-repeat="order in OrdersToSell | filter:filterSellFunction | orderBy:orderBySell">
                                 <td>{{ order.MaxAmount | number:0 }}</td>
+                                <td>{{ order.MinAmount | number:0 }}</td>
                                 <td>{{ order.CompanyName }}</td>
                             </tr>
                         </tbody>

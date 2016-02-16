@@ -633,7 +633,7 @@ table.ffx-table tr td a {
     background-color: #eff8d3;
 }
 
-    .table-order-buy thead > tr > th {
+    .table-order-buy .second-header > th {
         text-align: center;
         background-color: #d9e4b9;
     }
@@ -642,9 +642,20 @@ table.ffx-table tr td a {
     background-color: #fbe0d4;
 }
 
-    .table-order-sell thead > tr > th {
+    .table-order-sell .first-header > th,
+    .table-order-buy .first-header > th {
+        text-align: center;
+        background-color: whitesmoke;
+    }
+
+    .table-order-sell .second-header > th {
         text-align: center;
         background-color: #e9c0ae;
+    }
+
+    .table-order-sell .second-header .selected,
+    .table-order-buy .second-header .selected {
+        text-decoration: underline;
     }
 
 .red {
@@ -653,6 +664,10 @@ table.ffx-table tr td a {
 
 .green {
     color: green;
+}
+
+.black {
+    color: black;
 }
 
 .site-color1 {
@@ -1163,7 +1178,7 @@ textarea {
 
 .USDILS-image {
     /*border: 10px outset #b1b4bb;*/
-    /*background: url("../Images/USDILS_Spreads.png") fixed 0 0;*/
+    /*background: url("../Images/USDILS_Spreads2.png") fixed 0 0;*/
     max-width: 1200px;
     width: 90%;
 }

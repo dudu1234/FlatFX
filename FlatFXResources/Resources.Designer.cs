@@ -304,7 +304,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Bank spread without discount is 0.75%.
+        ///   Looks up a localized string similar to Bank spread without discount is 0.9%.
         /// </summary>
         public static string BankCommissionRemark2 {
             get {
@@ -313,7 +313,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to * The bank commission without discount is 0.11%..
+        ///   Looks up a localized string similar to * The bank commission without discount is 1.1%..
         /// </summary>
         public static string BankSpreadIs {
             get {
@@ -1406,7 +1406,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Wants to find a partner for exchanging on the Mid price (no spreads) ? &lt;br /&gt;Create new order on the Mid rate, &lt;u&gt;no spread&lt;/u&gt;, the commission is always 0.02% instead of 0.11% in the banks..
+        ///   Looks up a localized string similar to Wants to find a partner for exchanging on the Mid price (no spreads) ? &lt;br /&gt;Create new order on the Mid rate, &lt;u&gt;no spread&lt;/u&gt;, the commission is always 0.2% instead of 1.1% in the banks..
         /// </summary>
         public static string OrderRemark {
             get {

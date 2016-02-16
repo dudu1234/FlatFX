@@ -14,7 +14,7 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderBookController : BaseController
     {
-        public ActionResult OrderBookIndex(string key, int minAmount)
+        public ActionResult OrderBookIndex(string key)
         {
             string error = null;
             try
@@ -31,24 +31,22 @@ namespace FlatFXWebClient.Controllers
                     error = "User is not approved by FlatFX team.";
 
                 List<OrderBookItem> ordersToBuy = db.Orders.ToList()
-                    .Where(o => o.Symbol == key && o.AmountCCY1_Remainder > minAmount &&
+                    .Where(o => o.Symbol == key &&
                         o.BuySell == Consts.eBuySell.Buy && (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now) && o.IsCanceled == false && o.IsClosed == false &&
                         o.IsConfirmed == true && o.IsWaiting == true && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId) && o.IsDemo == isDemo)
-                    .OrderBy(o => o.PromilRequired)
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
-                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, o.PromilRequired, 
+                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
                         o.CompanyAccount.Company.CompanyName))
                     .ToList();
 
                 List<OrderBookItem> ordersToSell = db.Orders.ToList()
-                    .Where(o => o.Symbol == key && o.AmountCCY1_Remainder > minAmount &&
+                    .Where(o => o.Symbol == key &&
                         o.BuySell == Consts.eBuySell.Sell && (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now) && o.IsCanceled == false && o.IsClosed == false &&
                         o.IsConfirmed == true && o.IsWaiting == true && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId) && o.IsDemo == isDemo)
-                    .OrderBy(o => o.PromilRequired)
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
-                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, o.PromilRequired, 
+                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
                         o.CompanyAccount.Company.CompanyName))
                     .ToList();
 
@@ -86,15 +84,13 @@ namespace FlatFXWebClient.Controllers
     {
         public long OrderId;
         public string CompanyName;
-        public double Promil;
         public double MinAmount;
         public double MaxAmount;
 
-        public OrderBookItem(long OrderId, double MaxAmount, double MinAmount, double Promil, string CompanyName)
+        public OrderBookItem(long OrderId, double MaxAmount, double MinAmount, string CompanyName)
         {
             this.OrderId = OrderId;
             this.CompanyName = CompanyName;
-            this.Promil = Promil;
             this.MinAmount = MinAmount;
             this.MaxAmount = MaxAmount;
         }

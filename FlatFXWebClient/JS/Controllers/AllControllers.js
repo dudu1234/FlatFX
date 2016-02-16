@@ -284,12 +284,11 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
-    $scope.init = function (WorkflowStage, isDemo, info, error, promilRequired, amountCCY1) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
         $scope.actionDescription = "";
-        $scope.promilRequired = promilRequired;
         $scope.amountCcy1 = amountCCY1;
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
@@ -313,38 +312,36 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         $scope.minimalPartnerExecutionAmountChkModel = 0;
         $("#MinimalPartnerExecutionAmountCCY1").hide();
 
-        $('#PromilRequired').attr('value', $scope.promilRequired);
-
-        $("#PromilSlider").slider({
-            //range: "min",
-            value: $scope.promilRequired,
-            min: -1,
-            max: 6,
-            step: 1,
-            //this gets a live reading of the value and prints it on the page
-            //slide: function (event, ui) {
-            //    $("#PromilText").text('@FlatFXResources.Resources.MidRate + ' + (ui.value * 0.01) + '%');
-            //},
-            //this updates the value of your hidden field when user stops dragging
-            change: function (event, ui) {
-                $scope.promilRequired = ui.value;
-                $('#PromilRequired').attr('value', ui.value);
-                $scope.$apply();
-            }
-        })
-        .each(function () {
-            var numberOfSteps = 7;
-            // Add labels to slider whose values are specified by min, max
-            for (var i = 0; i <= numberOfSteps; i++) {
-                // Create a new element and position it with percentages
-                var el = $('<label>' + (i - 1) + '</label>').css('left', (i / numberOfSteps * 100) + '%');
-                // Add the element inside #slider
-                $("#PromilSlider").append(el);
-            }
-        });
+        //$("#PromilSlider").slider({
+        //    //range: "min",
+        //    value: $scope.promilRequired,
+        //    min: -1,
+        //    max: 6,
+        //    step: 1,
+        //    //this gets a live reading of the value and prints it on the page
+        //    //slide: function (event, ui) {
+        //    //    $("#PromilText").text('@FlatFXResources.Resources.MidRate + ' + (ui.value * 0.01) + '%');
+        //    //},
+        //    //this updates the value of your hidden field when user stops dragging
+        //    change: function (event, ui) {
+        //        $scope.promilRequired = ui.value;
+        //        $('#PromilRequired').attr('value', ui.value);
+        //        $scope.$apply();
+        //    }
+        //})
+        //.each(function () {
+        //    var numberOfSteps = 7;
+        //    // Add labels to slider whose values are specified by min, max
+        //    for (var i = 0; i <= numberOfSteps; i++) {
+        //        // Create a new element and position it with percentages
+        //        var el = $('<label>' + (i - 1) + '</label>').css('left', (i / numberOfSteps * 100) + '%');
+        //        // Add the element inside #slider
+        //        $("#PromilSlider").append(el);
+        //    }
+        //});
     }
     $scope.getCustomerSaving = function () {
-        return (((0.001 * 11) - (0.001 * $scope.promilRequired) - (0.001 * 2)) * parseInt($scope.amountCcy1)) - 11;
+        return (((0.001 * 11) - (0.001 * 2)) * parseInt($scope.amountCcy1)) - 11;
     }
     $scope.setAction = function (symbol) {
         $('#Symbol').val(symbol);
@@ -422,7 +419,12 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';
         $scope.MidRate = 0;
-        $scope.minAmount = 0;
+        $scope.maxAmountSell = 5000000;
+        $scope.minAmountSell = 0;
+        $scope.maxAmountBuy = 5000000;
+        $scope.minAmountBuy = 0;
+        $scope.orderBySell = 'MaxAmount';
+        $scope.orderByBuy = 'MaxAmount';
         $scope.OrdersToBuy = {};
         $scope.OrdersToSell = {};
         $scope.Pairs = null;
@@ -441,7 +443,7 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     }, 0);
 
     $scope.refreshOrderBook = function () {
-        $http.get($scope.orderBookIndexUrl, { params: { key: $scope.Key, minAmount: $scope.minAmount } })
+        $http.get($scope.orderBookIndexUrl, { params: { key: $scope.Key } })
             .success(function (data, status, headers, config) {
                 try {
                     if ($scope.Pairs == null) {
@@ -469,6 +471,29 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
 
     $scope.changePair = function () {
         $scope.refreshOrderBook();
+    }
+
+    $scope.filterBuyFunction = function (obj)
+    {
+        return obj.MaxAmount <= $scope.maxAmountBuy && obj.MinAmount >= $scope.minAmountBuy;
+    }
+
+    $scope.filterSellFunction = function (obj) {
+        return obj.MaxAmount <= $scope.maxAmountSell && obj.MinAmount >= $scope.minAmountSell;
+    }
+
+    $scope.changeSortingB = function (columnName) {
+        if ($scope.orderByBuy == columnName)
+            $scope.orderByBuy = "-" + columnName;
+        else
+            $scope.orderByBuy = columnName;
+    }
+
+    $scope.changeSortingS = function (columnName) {
+        if ($scope.orderBySell == columnName)
+            $scope.orderBySell = "-" + columnName;
+        else
+            $scope.orderBySell = columnName;
     }
 });
 

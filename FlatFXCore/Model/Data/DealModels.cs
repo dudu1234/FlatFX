@@ -101,7 +101,7 @@ namespace FlatFXCore.Model.Data
                     IsCanceled == false &&
                     /* d.IsDemo == false &&*/ 
                     IsOffer == false &&
-                    !(DealProductType == Consts.eDealProductType.FxPromilOrder && !MaturityDate.HasValue)
+                    !(DealProductType == Consts.eDealProductType.FxMidRateOrder && !MaturityDate.HasValue)
                     );
             }
         }
@@ -153,7 +153,6 @@ namespace FlatFXCore.Model.Data
         public double? CustomerTotalProfitUSD_Estimation { get; set; }
         public double? FlatFXCommissionUSD_Estimation { get; set; }
         
-        public double PromilRequired { get; set; }
         public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public double? MinimalPartnerTotalVolumeUSD { get; set; }

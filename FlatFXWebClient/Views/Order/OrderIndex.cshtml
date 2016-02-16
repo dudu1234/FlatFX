@@ -17,7 +17,7 @@
 }
 <div class="order-system-wrapper">
     <div ng-controller="OrderCurrencyExchange" 
-         ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.PromilRequired, @Model.AmountCCY1)" 
+         ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1)" 
          class="order-currency-exchange-main">
         @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {

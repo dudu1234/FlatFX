@@ -748,7 +748,7 @@
     <value>מירווח מבוקש</value>
   </data>
   <data name="BankSpreadIs" xml:space="preserve">
-    <value>*עמלות הבנק ללא הנחה הינן שער האמצע + 0.11%.</value>
+    <value>*עמלות הבנק ללא הנחה הינן שער האמצע + 1.1%.</value>
   </data>
   <data name="YourSaving" xml:space="preserve">
     <value>החיסכון שלך:</value>
@@ -802,7 +802,7 @@
     <value>קניית</value>
   </data>
   <data name="OrderRemark" xml:space="preserve">
-    <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה הינה קבועה, 0.02% לעומת 0.11% בבנקים</value>
+    <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה הינה קבועה, 0.2% לעומת 1.1% בבנקים</value>
   </data>
   <data name="Sell2" xml:space="preserve">
     <value>בתמורה ל</value>
