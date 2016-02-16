@@ -133,6 +133,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Amount range.
+        /// </summary>
+        public static string AmountRange {
+            get {
+                return ResourceManager.GetString("AmountRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Approved by FlatFX.
         /// </summary>
         public static string ApprovedBYFlatFX {
@@ -1199,6 +1208,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Amount.
+        /// </summary>
+        public static string MaxAmount {
+            get {
+                return ResourceManager.GetString("MaxAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string MenuAbout {
@@ -1249,6 +1267,15 @@ namespace FlatFXResources {
         public static string MidRate {
             get {
                 return ResourceManager.GetString("MidRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min Amount.
+        /// </summary>
+        public static string MinAmount {
+            get {
+                return ResourceManager.GetString("MinAmount", resourceCulture);
             }
         }
         
@@ -1357,6 +1384,24 @@ namespace FlatFXResources {
         public static string OnLineRates {
             get {
                 return ResourceManager.GetString("OnLineRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Book.
+        /// </summary>
+        public static string OrderBook {
+            get {
+                return ResourceManager.GetString("OrderBook", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid Rate - .
+        /// </summary>
+        public static string OrderBookRate2 {
+            get {
+                return ResourceManager.GetString("OrderBookRate2", resourceCulture);
             }
         }
         
@@ -1523,6 +1568,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Partner.
+        /// </summary>
+        public static string Partner {
+            get {
+                return ResourceManager.GetString("Partner", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Password.
         /// </summary>
         public static string Password {
@@ -1672,6 +1726,15 @@ namespace FlatFXResources {
         public static string SelectAmount {
             get {
                 return ResourceManager.GetString("SelectAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select pair.
+        /// </summary>
+        public static string SelectPair {
+            get {
+                return ResourceManager.GetString("SelectPair", resourceCulture);
             }
         }
         

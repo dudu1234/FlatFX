@@ -595,7 +595,7 @@ tr.pager td {
 
 .form-group .control-label {
     text-align: start;
-    /*margin-top: 6px;*/
+    /*margin-top: 5px;*/
 }
 
 .admin-manage-header {
@@ -811,6 +811,10 @@ table.ffx-table tr td a {
     padding-top: 0px;
 }
 
+.ordr-book-panel .form-group label {
+    margin-top: 5px;
+}
+
 .order-confirm {
     background-color: whitesmoke;
     padding: 15px;
@@ -862,6 +866,9 @@ table.ffx-table tr td a {
     padding: 10px;
     text-align: center;
     font-weight: 600;
+    background-color: #e2e2e2;
+    cursor: pointer;
+    text-decoration: underline;
 }
 
 .pairList .selected {

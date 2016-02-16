@@ -807,4 +807,25 @@
   <data name="Sell2" xml:space="preserve">
     <value>בתמורה ל</value>
   </data>
+  <data name="MaxAmount" xml:space="preserve">
+    <value>סכום מקסימלי</value>
+  </data>
+  <data name="MinAmount" xml:space="preserve">
+    <value>סכום מינימלי</value>
+  </data>
+  <data name="OrderBook" xml:space="preserve">
+    <value>רשימת הזמנות עיסקה</value>
+  </data>
+  <data name="OrderBookRate2" xml:space="preserve">
+    <value>שער האמצע - </value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>מזמין העיסקה</value>
+  </data>
+  <data name="SelectPair" xml:space="preserve">
+    <value>בחר צמד מטבעות</value>
+  </data>
+  <data name="AmountRange" xml:space="preserve">
+    <value>טווח הסכום</value>
+  </data>
 </root>

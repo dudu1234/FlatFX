@@ -52,9 +52,9 @@ namespace FlatFXWebClient.Controllers
 
                 Dictionary<string, string> pairs = CurrencyManager.Instance.PairRates.Values
                     .Where(pr => pr.IsActive && pr.IsActiveForSimpleTrading && pr.IsTradable)
-                    .ToDictionary(pr => pr.Key, pr => pr.KeyDisplay);
+                    .ToDictionary(pr => pr.Key, pr => FlatFXResources.Resources.ResourceManager.GetString(pr.Key, FlatFXResources.Resources.Culture));
                 double midRate = CurrencyManager.Instance.PairRates[key].Mid;
-                string keyDisplay = CurrencyManager.Instance.PairRates[key].KeyDisplay;
+                string keyDisplay = FlatFXResources.Resources.ResourceManager.GetString(key, FlatFXResources.Resources.Culture);
 
                 if (error != null)
                 {

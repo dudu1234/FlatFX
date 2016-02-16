@@ -3,25 +3,26 @@
 <div ng-controller="OrderBook" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')">
     <div class="panel-danger form-horizontal ordr-book-panel">
         <div class="panel-heading">
-            <h3 class="panel-title">Order Book</h3>
+            <h3 class="panel-title">@FlatFXResources.Resources.OrderBook</h3>
         </div>
         <div class="panel-body start-align">
-            <div class="col-xs-12">
-                <label class="col-xs-6" for="pairSelect">Select pair:</label>
-                <div class="col-xs-6">
+            <div class="form-group col-xs-12">
+                <label class="col-xs-4" for="pairSelect">@FlatFXResources.Resources.SelectPair:</label>
+                <div class="col-xs-4">
                     <select class="form-control" name="pairSelect" id="pairSelect" ng-model="Key" ng-options="k as v for (k,v) in Pairs" ng-change="changePair()"></select>
                 </div>
+                <label class="col-xs-4">@FlatFXResources.Resources.OrderBookRate2 {{ MidRate }}</label>
             </div>
-            @*<div class="col-xs-12">
-                    <label class="col-xs-6" for="minAmount">Partner min amount:</label>
-                    <div class="col-xs-6">
-                        <input class="form-control" name="minAmount" id="minAmount" type="number" ng-model="minAmount" />
-                    </div>
-                </div>*@
-            <div class="col-xs-12">
-                <label class="col-xs-6">{{ Key }} Mid Rate is {{ MidRate }}</label>
+            <div class="form-group col-xs-12">
+                <label class="col-xs-4">@FlatFXResources.Resources.AmountRange ({{ CCY1() }})</label>
+                <div class="col-xs-3">
+                    <input class="form-control" name="minAmountBuy" id="minAmountBuy" ng-model="minAmountBuy" />
+                </div>
+                <label class="col-xs-1"> - </label>
+                <div class="col-xs-4">
+                    <input class="form-control" name="maxAmountBuy" id="maxAmountBuy" ng-model="maxAmountBuy" />
+                </div>
             </div>
-
             <div class="col-xs-12 text-center">
                 <div class="col-xs-6">
                     <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
@@ -32,20 +33,20 @@
                         </colgroup>
                         <thead>
                             <tr class="first-header">
-                                <th colspan="4" class="text-center">Buy</th>
+                                <th colspan="4" class="text-center">@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</th>
                             </tr>
                             <tr class="second-header">
-                                <th ng-class="orderByBuy == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('CompanyName')">Partner</a></th>
-                                <th ng-class="orderByBuy == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MinAmount')">Min Amount</a></th>
-                                <th ng-class="orderByBuy == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MaxAmount')">Max Amount</a></th>
+                                <th ng-class="orderByBuy == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('CompanyName')">@FlatFXResources.Resources.Partner</a></th>
+                                <th ng-class="orderByBuy == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MinAmount')">@FlatFXResources.Resources.MinAmount {{ CCY1() }}</a></th>
+                                <th ng-class="orderByBuy == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MaxAmount')">@FlatFXResources.Resources.MaxAmount {{ CCY1() }}</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
+                            @*<tr>
                                 <td></td>
-                                <td><input class="form-control" name="minAmountBuy" id="minAmountBuy" type="number" ng-model="minAmountBuy" /></td>
-                                <td><input class="form-control" name="maxAmountBuy" id="maxAmountBuy" type="number" ng-model="maxAmountBuy" /></td>
-                            </tr>
+                                <td><input class="form-control" name="minAmountBuy" id="minAmountBuy" ng-model="minAmountBuy" /></td>
+                                <td><input class="form-control" name="maxAmountBuy" id="maxAmountBuy" ng-model="maxAmountBuy" /></td>
+                            </tr>*@
                             <tr ng-repeat="order in OrdersToBuy | filter:filterBuyFunction | orderBy:orderByBuy">
                                 <td>{{ order.CompanyName }}</td>
                                 <td>{{ order.MinAmount | number:0 }}</td>
@@ -63,20 +64,20 @@
                         </colgroup>
                         <thead>
                             <tr class="first-header">
-                                <th colspan="4" class="text-center">Sell</th>
+                                <th colspan="4" class="text-center">@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</th>
                             </tr>
                             <tr class="second-header">
-                                <th ng-class="orderBySell == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MaxAmount')">Max Amount</a></th>
-                                <th ng-class="orderBySell == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MinAmount')">Min Amount</a></th>
-                                <th ng-class="orderBySell == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('CompanyName')">Partner</a></th>
+                                <th ng-class="orderBySell == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MaxAmount')">@FlatFXResources.Resources.MaxAmount {{ CCY1() }}</a></th>
+                                <th ng-class="orderBySell == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MinAmount')">@FlatFXResources.Resources.MinAmount {{ CCY1() }}</a></th>
+                                <th ng-class="orderBySell == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('CompanyName')">@FlatFXResources.Resources.Partner</a></th>
                             </tr>
                         </thead>
                         <tbody>
-                            <tr>
-                                <td><input class="form-control" name="maxAmountSell" id="maxAmountSell" type="number" ng-model="maxAmountSell" /></td>
-                                <td><input class="form-control" name="minAmountSell" id="minAmountSell" type="number" ng-model="minAmountSell" /></td>
+                            @*<tr>
+                                <td><input class="form-control" name="maxAmountSell" id="maxAmountSell" ng-model="maxAmountSell" /></td>
+                                <td><input class="form-control" name="minAmountSell" id="minAmountSell" ng-model="minAmountSell" /></td>
                                 <td></td>
-                            </tr>
+                            </tr>*@
                             <tr ng-repeat="order in OrdersToSell | filter:filterSellFunction | orderBy:orderBySell">
                                 <td>{{ order.MaxAmount | number:0 }}</td>
                                 <td>{{ order.MinAmount | number:0 }}</td>

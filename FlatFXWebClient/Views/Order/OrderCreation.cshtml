@@ -44,12 +44,12 @@
                 </remark>
             </div>
             <div class="form-group small-line" ng-click="updateAction()">
-                <label class="control-label col-md-4">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
-                <div class="col-md-4 order-radio-div">
+                <label class="control-label col-md-2">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
+                <div class="col-md-5 order-radio-div">
                     @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" })
                     <span>@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</span>
                 </div>
-                <div class="col-md-4 order-radio-div">
+                <div class="col-md-5 order-radio-div">
                     @Html.RadioButtonFor(model => model.BuySell, "Sell")
                     <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
                 </div>

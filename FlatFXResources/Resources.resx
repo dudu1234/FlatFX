@@ -828,4 +828,25 @@
   <data name="Sell2" xml:space="preserve">
     <value>Sell</value>
   </data>
+  <data name="MaxAmount" xml:space="preserve">
+    <value>Max Amount</value>
+  </data>
+  <data name="MinAmount" xml:space="preserve">
+    <value>Min Amount</value>
+  </data>
+  <data name="OrderBook" xml:space="preserve">
+    <value>Order Book</value>
+  </data>
+  <data name="OrderBookRate2" xml:space="preserve">
+    <value>Mid Rate - </value>
+  </data>
+  <data name="Partner" xml:space="preserve">
+    <value>Partner</value>
+  </data>
+  <data name="SelectPair" xml:space="preserve">
+    <value>Select pair</value>
+  </data>
+  <data name="AmountRange" xml:space="preserve">
+    <value>Amount range</value>
+  </data>
 </root>

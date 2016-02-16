@@ -419,8 +419,6 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';
         $scope.MidRate = 0;
-        $scope.maxAmountSell = 5000000;
-        $scope.minAmountSell = 0;
         $scope.maxAmountBuy = 5000000;
         $scope.minAmountBuy = 0;
         $scope.orderBySell = 'MaxAmount';
@@ -479,7 +477,7 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     }
 
     $scope.filterSellFunction = function (obj) {
-        return obj.MaxAmount <= $scope.maxAmountSell && obj.MinAmount >= $scope.minAmountSell;
+        return obj.MaxAmount <= $scope.maxAmountBuy && obj.MinAmount >= $scope.minAmountBuy;
     }
 
     $scope.changeSortingB = function (columnName) {
@@ -494,6 +492,19 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
             $scope.orderBySell = "-" + columnName;
         else
             $scope.orderBySell = columnName;
+    }
+
+    $scope.CCY1 = function () {
+        if (typeof $scope.Key != 'undefined')
+            return $scope.Key.substring(0, 3);
+        else
+            return '';
+    }
+    $scope.CCY2 = function () {
+        if (typeof $scope.Key != 'undefined')
+            return $scope.Key.substring(3, 6);
+        else
+            return '';
     }
 });
 
