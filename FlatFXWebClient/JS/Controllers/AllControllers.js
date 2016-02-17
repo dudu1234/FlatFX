@@ -25,7 +25,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         if ($scope.exchangeDiscount === undefined)
             $scope.exchangeDiscount = 0;
 
-        return (4 * $scope.amountUSD * 1000000 * 0.0075 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.002 * (1 - (0.01 * $scope.exchangeDiscount)));
+        return (4 * $scope.amountUSD * 1000000 * 0.009 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.0022 * (1 - (0.01 * $scope.exchangeDiscount)));
     }
     $scope.FlatFXCommission = function () {
         return (4 * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommission + $scope.bankCommission))) + 50;

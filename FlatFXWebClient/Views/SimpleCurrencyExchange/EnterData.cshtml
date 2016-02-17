@@ -87,7 +87,7 @@
 
             if (officeHoursOn && Model.WorkflowStage != 3)
             {
-                <div class="row setup-content @queryBodyClass">
+                <div class="row @queryBodyClass">
                     <div id="resultDiv" class="col-xs-12"></div>
                     <div class="col-xs-6 text-center">
                         @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Order.cshtml", Model)
@@ -105,7 +105,7 @@
             }
             if (Model.WorkflowStage == 3)
             {
-                <div class="row setup-content">
+                <div class="row ">
                     <div class="col-xs-12">
                         <div class="col-md-12 text-center">
                             @Html.Partial("~/Views/SimpleCurrencyExchange/EnterData_Summary.cshtml", Model)

@@ -1,24 +1,19 @@
 ﻿@model FlatFXWebClient.ViewModels.OrderViewModel
 @using FlatFXCore.BussinessLayer;
 
-<div class="panel-danger form-horizontal order-currency-exchange-stage">
-    <div class="panel-heading">
-        <h3 class="panel-title">@FlatFXResources.Resources.OrderSummary</h3>
+<div class="start-align">
+    <div>
+        <span class="text-danger">@TempData["ErrorResult"]</span>
     </div>
-    <div class="panel-body start-align">
-        <div>
-            <span class="text-danger">@TempData["ErrorResult"]</span>
+    <h3 class="green">@FlatFXResources.Resources.OrderCreatedSuccessfully.</h3>
+    <h4>@FlatFXResources.Resources.ConfirmationNumber: @Model.order.OrderId</h4>
+    <br /><br />
+    @FlatFXResources.Resources.OrderSummary1 <a href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Here</a>
+    <br /><br />
+    <div class="form-group">
+        <div class="col-md-12">
+            <a class="btn btn-success" href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Home</a>
         </div>
-        <h3 class="green">@FlatFXResources.Resources.OrderCreatedSuccessfully.</h3>
-        <h4>@FlatFXResources.Resources.ConfirmationNumber: @Model.order.OrderId</h4>
-        <br /><br />
-        @FlatFXResources.Resources.OrderSummary1 <a href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Here</a>
-        <br /><br />
-        <div class="form-group">
-            <div class="col-md-12">
-                <a class="btn btn-success" href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Home</a>
-            </div>
-        </div>
-        <br /><br />
     </div>
+    <br /><br />
 </div>

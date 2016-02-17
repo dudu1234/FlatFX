@@ -1,104 +1,94 @@
 ﻿@model FlatFXWebClient.ViewModels.OrderViewModel
 @using FlatFXCore.BussinessLayer;
 
-<div class="panel-danger form-horizontal order-confirm">
-    <div class="panel-heading">
-        <h3 class="panel-title">@FlatFXResources.Resources.ConfirmYourOrder</h3>
-        <div>
-            @Html.ValidationSummary("", new { @class = "text-danger" })
-        </div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.OrderID:</label>
+    <div class="col-md-6 order-value">@Model.order.OrderId</div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.CompanyName:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.CompanyAccount.Company.CompanyName
     </div>
-    <div class="panel-body">
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.OrderID:</label>
-            <div class="col-md-6 order-value">@Model.order.OrderId</div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.CompanyName:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.CompanyAccount.Company.CompanyName
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.BankAccount:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.ChargedProviderAccount.Provider.FullName @Model.order.ChargedProviderAccount.AccountName
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.UserName:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.user.FullName
-            </div>
-        </div>
-        <div class="form-group green">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.BuyAmount @((@Model.BuySell == Consts.eBuySell.Sell) ? FlatFXResources.Resources.Estimation : ""):</label>
-            <div class="col-md-6 order-value">
-                @Model.order.BuyAmount.ToString("N0") @Model.order.BuyCurrency
-            </div>
-        </div>
-        <div class="form-group red">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.SellAmount @((@Model.BuySell == Consts.eBuySell.Buy) ? FlatFXResources.Resources.Estimation : ""):</label>
-            <div class="col-md-6 order-value">
-                @Model.order.SellAmount.ToString("N0") @Model.order.SellCurrency
-            </div>
-        </div>
-        <div class="form-group blue">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.SpreadRequired:</label>
-            <div class="col-md-6 order-value">
-                @FlatFXResources.Resources.MidRate
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.YouSave* @FlatFXResources.Resources.Estimation:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.CustomerTotalProfitUSD_Estimation$
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.FlatFXCommission* @FlatFXResources.Resources.Estimation:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.FlatFXCommissionUSD_Estimation$
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.ExpiryDate:</label>
-            <div class="col-md-6 order-value">
-                @(Model.order.ExpiryDate.HasValue ? Model.order.ExpiryDate.Value.ToString("yyyy-MM-dd") : "Good Till Cancel")
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.MinimalPartnerExecutionAmount:</label>
-            <div class="col-md-6 order-value">
-                @(Model.order.MinimalPartnerExecutionAmountCCY1.HasValue ? (Model.order.MinimalPartnerExecutionAmountCCY1 + " " + Model.order.CCY1) : "Full Amount")
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.MinimalPartnerTotalVolumeUSD:</label>
-            <div class="col-md-6 order-value">
-                @(Model.order.MinimalPartnerTotalVolumeUSD.HasValue ? (Model.order.MinimalPartnerTotalVolumeUSD + "$") : "None")
-            </div>
-        </div>
-        <div class="form-group">
-            <label class="control-label col-md-6">@FlatFXResources.Resources.Comment:</label>
-            <div class="col-md-6 order-value">
-                @Model.order.Comment
-            </div>
-        </div>
-        <div class="form-group">
-            <br />
-            <div class="text-center col-md-12">
-                <div class="col-md-10 start-align">
-                    @if (ApplicationInformation.Instance.IsDemoUser)
-                    {
-                        <input type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
-                    }
-                    else
-                    {
-                        <input type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
-                    }
-                </div>
-            </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.BankAccount:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.ChargedProviderAccount.Provider.FullName @Model.order.ChargedProviderAccount.AccountName
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.UserName:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.user.FullName
+    </div>
+</div>
+<div class="form-group green">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.BuyAmount @((@Model.BuySell == Consts.eBuySell.Sell) ? FlatFXResources.Resources.Estimation : ""):</label>
+    <div class="col-md-6 order-value">
+        @Model.order.BuyAmount.ToString("N0") @Model.order.BuyCurrency
+    </div>
+</div>
+<div class="form-group red">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.SellAmount @((@Model.BuySell == Consts.eBuySell.Buy) ? FlatFXResources.Resources.Estimation : ""):</label>
+    <div class="col-md-6 order-value">
+        @Model.order.SellAmount.ToString("N0") @Model.order.SellCurrency
+    </div>
+</div>
+<div class="form-group blue">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.SpreadRequired:</label>
+    <div class="col-md-6 order-value">
+        @FlatFXResources.Resources.MidRate
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.YouSave* @FlatFXResources.Resources.Estimation:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.CustomerTotalProfitUSD_Estimation$
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.FlatFXCommission* @FlatFXResources.Resources.Estimation:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.FlatFXCommissionUSD_Estimation$
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.ExpiryDate:</label>
+    <div class="col-md-6 order-value">
+        @(Model.order.ExpiryDate.HasValue ? Model.order.ExpiryDate.Value.ToString("yyyy-MM-dd") : "Good Till Cancel")
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.MinimalPartnerExecutionAmount:</label>
+    <div class="col-md-6 order-value">
+        @(Model.order.MinimalPartnerExecutionAmountCCY1.HasValue ? (Model.order.MinimalPartnerExecutionAmountCCY1 + " " + Model.order.CCY1) : "Full Amount")
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.MinimalPartnerTotalVolumeUSD:</label>
+    <div class="col-md-6 order-value">
+        @(Model.order.MinimalPartnerTotalVolumeUSD.HasValue ? (Model.order.MinimalPartnerTotalVolumeUSD + "$") : "None")
+    </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-md-6">@FlatFXResources.Resources.Comment:</label>
+    <div class="col-md-6 order-value">
+        @Model.order.Comment
+    </div>
+</div>
+<div class="form-group">
+    <br />
+    <div class="text-center col-md-12">
+        <div class="col-md-10 start-align">
+            @if (ApplicationInformation.Instance.IsDemoUser)
+            {
+                <input type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
+            }
+            else
+            {
+                <input type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
+            }
         </div>
     </div>
 </div>

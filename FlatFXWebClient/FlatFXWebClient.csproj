@@ -1173,6 +1173,7 @@
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
     <Content Include="Scripts\_references.js" />
+    <Content Include="Views\Home\test.html" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
     </Content>

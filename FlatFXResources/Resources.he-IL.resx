@@ -709,7 +709,7 @@
     <value>עמלת חליפין ללא הנחה הינה 0.2%</value>
   </data>
   <data name="BankCommissionRemark2" xml:space="preserve">
-    <value>מירווח הבנק ללא הנחה הינו 0.75%</value>
+    <value>מירווח הבנק ללא הנחה הינו 0.9%</value>
   </data>
   <data name="BankCommission6" xml:space="preserve">
     <value>עמלת FlatFX</value>

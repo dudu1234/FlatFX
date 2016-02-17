@@ -57,7 +57,7 @@
         <div>
             @Html.ValidationSummary("", new { @class = "text-danger" })
         </div>
-        <div class="row setup-content @userBodyClass">
+        <div class="row @userBodyClass">
             <div class="col-xs-12">
                 <div class="col-md-12 text-center">
                     @Html.Partial("~/Views/ApplicationUsers/CreateAll.cshtml", Model)
@@ -75,7 +75,7 @@
         </div>
         @if (Session["RegisterAllStep"].ToInt() != 1)
         {
-            <div class="row setup-content @companyBodyClass">
+            <div class="row @companyBodyClass">
                 <div class="col-xs-12">
                     <div class="col-md-12 text-center">
                         @Html.Partial("~/Views/Companies/CreateAll.cshtml", Model)
@@ -87,7 +87,7 @@
         }
         @if (Session["RegisterAllStep"].ToInt() == 3)
         {
-            <div class="row setup-content">
+            <div class="row">
                 <div class="col-xs-12">
                     <div class="col-md-12 text-center">
                         @Html.Partial("RegisterBankAccount", Model)
