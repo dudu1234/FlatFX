@@ -471,15 +471,6 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
         $scope.refreshOrderBook();
     }
 
-    $scope.filterBuyFunction = function (obj)
-    {
-        return obj.MaxAmount <= $scope.maxAmountBuy && obj.MinAmount >= $scope.minAmountBuy;
-    }
-
-    $scope.filterSellFunction = function (obj) {
-        return obj.MaxAmount <= $scope.maxAmountBuy && obj.MinAmount >= $scope.minAmountBuy;
-    }
-
     $scope.changeSortingB = function (columnName) {
         if ($scope.orderByBuy == columnName)
             $scope.orderByBuy = "-" + columnName;

@@ -815,6 +815,10 @@ table.ffx-table tr td a {
     margin-top: 5px;
 }
 
+#pairSelect {
+    font-weight: 700;
+}
+
 .order-confirm {
     background-color: whitesmoke;
     padding: 15px;
@@ -1236,4 +1240,8 @@ textarea {
 .home-seperator {
     height: 5px;
     background-color: #209448;
+}
+
+.label-down {
+    margin-top: 5px;
 }
