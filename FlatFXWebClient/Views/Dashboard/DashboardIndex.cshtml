@@ -7,6 +7,50 @@
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init()">
     <div class="row">
+        <div class="col-xs-12 data-area">
+            <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
+                <thead>
+                    <tr class="second-header">
+                        <th ng-class="orderByColumn == 'DealId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('DealId')">Deal Id</a></th>
+                        <th ng-class="orderByColumn == 'ContractDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ContractDate')">Contract Date</a></th>
+                        <th ng-class="orderByColumn == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('BuySell')">Buy/Sell</a></th>
+                        <th ng-class="orderByColumn == 'ChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ChargedCurrency')">Charged Currency</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeChargedCurrency')">Charged Amount</a></th>
+                        <th ng-class="orderByColumn == 'CreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CreditedCurrency')">Credited Currency</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeCreditedCurrency')">Credited Amount</a></th>
+                        <th ng-class="orderByColumn == 'CustomerRate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerRate')">Rate</a></th>
+                        <th ng-class="orderByColumn == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Commission')">Commission USD</a></th>
+                        <th ng-class="orderByColumn == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerTotalProfitUSD')">Profit USD</a></th>
+                        <th ng-class="orderByColumn == 'IsCanceled' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('IsCanceled')">Is Canceled</a></th>
+                        <th ng-class="orderByColumn == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('UserName')">User Name</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @*<tr>
+                    <td></td>
+                    <td><input class="form-control" name="minAmountBuy" id="minAmountBuy" ng-model="minAmountBuy" /></td>
+                    <td><input class="form-control" name="maxAmountBuy" id="maxAmountBuy" ng-model="maxAmountBuy" /></td>
+                </tr>*@
+                    <tr ng-repeat="deal in Deals | orderBy:ContractDate">
+                        <td>{{ deal.DealId }}</td>
+                        <td>{{ deal.ContractDate }}</td>
+                        <td>{{ deal.BuySell }}</td>
+                        <td>{{ deal.ChargedCurrency }}</td>
+                        <td>{{ deal.AmountToExchangeChargedCurrency | number:0 }}</td>
+                        <td>{{ deal.CreditedCurrency }}</td>
+                        <td>{{ deal.AmountToExchangeCreditedCurrency | number:0 }}</td>
+                        <td>{{ deal.CustomerRate }}</td>
+                        <td>{{ deal.Commission | number:0 }}</td>
+                        <td>{{ deal.CustomerTotalProfitUSD | number:0 }}</td>
+                        <td>{{ deal.IsCanceled }}</td>
+                        <td>{{ deal.UserName }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div class="row">
         <div class="col-xs-6 CompanyArea">
             <div class="col-xs-12 header">
                 <span>@FlatFXResources.Resources.DashboardHeader0@Model.CompanyName @FlatFXResources.Resources.DashboardHeader1</span>

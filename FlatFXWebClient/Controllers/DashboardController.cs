@@ -168,5 +168,69 @@ namespace FlatFXWebClient.Controllers
                 return null;
             }
         }
+
+        public ActionResult GetDeals(bool onlyActiveDeals)
+        {
+            try
+            {
+                bool isDemo = ApplicationInformation.Instance.IsDemoUser;
+                string userId = ApplicationInformation.Instance.UserID;
+                ApplicationUser user = db.Users.Include(u => u.Companies).Where(u => u.Id == userId && u.IsActive == true).FirstOrDefault();
+                string companyId = user.Companies.First().CompanyId;
+
+                List<DealItem> deals = db.Deals
+                    .Where(d => d.IsDemo == isDemo && d.IsOffer == false && d.CompanyAccount.Company.CompanyId == companyId && d.DealProductType == Consts.eDealProductType.FxSimpleExchange)
+                    .ToList()
+                    .Where(d => d.MaturityDate.HasValue)
+                    .Select(d => new DealItem(d.DealId, d.BuySell, d.AmountToExchangeChargedCurrency, d.AmountToExchangeCreditedCurrency,
+                        d.ChargedCurrency, d.CreditedCurrency, d.Commission, d.ContractDate, d.CustomerRate,
+                        d.CustomerTotalProfitUSD, d.IsCanceled, d.IsDemo? "" : d.user.UserName))
+                    .ToList();
+
+                ActionResult res = Json(new
+                {
+                    Deals = deals
+                }, JsonRequestBehavior.AllowGet);
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in GetOrderBook", ex);
+                return null;
+            }
+        }
+    }
+
+    public class DealItem
+    {
+        public Int64 DealId;
+        public Consts.eBuySell BuySell;
+        public double AmountToExchangeChargedCurrency;
+        public double AmountToExchangeCreditedCurrency;
+        public string ChargedCurrency;
+        public string CreditedCurrency;
+        public double? Commission;
+        public DateTime? ContractDate;
+        public double CustomerRate;
+        public double? CustomerTotalProfitUSD;
+        public bool IsCanceled;
+        public string UserName;
+
+        public DealItem(Int64 DealId, Consts.eBuySell BuySell, double AmountToExchangeChargedCurrency, double AmountToExchangeCreditedCurrency, string ChargedCurrency,
+            string CreditedCurrency, double? Commission, DateTime? ContractDate, double CustomerRate, double? CustomerTotalProfitUSD, bool IsCanceled, string UserName)
+        {
+            this.DealId = DealId;
+            this.BuySell = BuySell;
+            this.AmountToExchangeChargedCurrency = AmountToExchangeChargedCurrency;
+            this.AmountToExchangeCreditedCurrency = AmountToExchangeCreditedCurrency;
+            this.ChargedCurrency = ChargedCurrency;
+            this.Commission = Commission;
+            this.ContractDate = ContractDate;
+            this.CustomerRate = CustomerRate;
+            this.CustomerTotalProfitUSD = CustomerTotalProfitUSD;
+            this.IsCanceled = IsCanceled;
+            this.UserName = UserName;
+        }
     }
 }

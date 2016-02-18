@@ -190,39 +190,22 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
         $scope.companyChart = "Daily";
         $scope.siteChart = "Daily";
-        //$scope.siteChartLabels = ["July", "August", "September", "October", "November", "December", "January"];
-        //$scope.siteChartData = [0, 0, 50020, 80020, 120040, 140022, 300300];
-        //JSON.parse('@Html.Raw(Model.CompanyMonthlyVolumeList)'))
+        $scope.GetCompanyVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetCompanyVolume";
+        $scope.GetSiteVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetSiteVolume";
 
-        // Guy how to 
-        // how to create array of 6 months back ($scope.siteChartLabels) ?
-        // how to pass List<int> from razor to angular init ?
-        // Why Date.now().toDateString() cause exception ?
+        $scope.dealsUrl = "http://" + $(location).attr('host') + "/Dashboard/GetDeals";
+        $scope.orderByColumn = '';
+        $scope.Deals = {};
+        $scope.onlyActiveDeals = true;
 
-        //try
-        //{
-        //    var dateArray = new Array();
-        //    for (i = 6; i > 0; i--) {
-        //        var currentDate = Date.now();
-        //        alert(Date.now().toDateString());
-        //        alert(currentDate.getMonth());
-        //        alert(currentDate.getYear());
-        //        currentDate.setMonth(currentDate.getMonth() - 4);
-        //        alert(currentDate.getMonth());
-        //        alert(currentDate.getYear());
-        //        //dateArray.push(currentDate (currentDate.getMonth() - i). + '-' +  text += cars[i] + "<br>";
-        //    }
-        //}
-        //catch(e)
-        //{
-        //    alert(e);
-        //}
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
     $scope.ready = function () {
-        $scope.GetCompanyVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetCompanyVolume";
+
+        $scope.RefreshDeals();
+
         $http.get($scope.GetCompanyVolumeUrl).success(function (data) {
 
             $scope.updateChart("#dashboardCompanyMonthlyChart", data.companyMonthlyVolume, "rgba(255,100,100,0.8)");
@@ -231,8 +214,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         .error(function (data, status) {
             //console.log("Error status : " + status);
         });
-
-        $scope.GetSiteVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetSiteVolume";
+        
         $http.get($scope.GetSiteVolumeUrl).success(function (data) {
 
             $scope.updateChart("#dashboardSiteDailyChart", data.dailyVolume, "rgba(200,200,300,0.8)");
@@ -278,6 +260,33 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                 scaleFontColor: "#000"
             });
         }
+    }
+
+
+
+    $scope.RefreshDeals = function () {
+        $http.get($scope.dealsUrl, { params: { onlyActiveDeals: $scope.onlyActiveDeals } })
+            .success(function (data, status, headers, config) {
+                try {
+                    $scope.Deals = data.Deals;
+                }
+                catch (err) {
+                    $scope.tableData = {};
+                }
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });
+    };
+
+    $scope.changeSorting = function (columnName) {
+        if ($scope.orderByColumn == columnName)
+            $scope.orderByColumn = "-" + columnName;
+        else
+            $scope.orderByColumn = columnName;
     }
 });
 

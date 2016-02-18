@@ -30,20 +30,22 @@ namespace FlatFXWebClient.Controllers
                 if (!isDemo && !user.IsApprovedByFlatFX)
                     error = "User is not approved by FlatFX team.";
 
-                List<OrderBookItem> ordersToBuy = db.Orders.ToList()
-                    .Where(o => o.Symbol == key &&
-                        o.BuySell == Consts.eBuySell.Buy && (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now) && o.IsCanceled == false && o.IsClosed == false &&
-                        o.IsConfirmed == true && o.IsWaiting == true && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId) && o.IsDemo == isDemo)
+                List<OrderBookItem> ordersToBuy = db.Orders
+                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Buy && o.IsCanceled == false && o.IsClosed == false &&
+                        o.IsConfirmed == true && o.IsWaiting == true && o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
+                    .ToList()
+                    .Where(o => (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now))
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
                         o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
                         o.CompanyAccount.Company.CompanyName))
                     .ToList();
 
-                List<OrderBookItem> ordersToSell = db.Orders.ToList()
-                    .Where(o => o.Symbol == key &&
-                        o.BuySell == Consts.eBuySell.Sell && (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now) && o.IsCanceled == false && o.IsClosed == false &&
-                        o.IsConfirmed == true && o.IsWaiting == true && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId) && o.IsDemo == isDemo)
+                List<OrderBookItem> ordersToSell = db.Orders
+                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Sell && o.IsCanceled == false && o.IsClosed == false &&
+                        o.IsConfirmed == true && o.IsWaiting == true && o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
+                    .ToList()
+                    .Where(o => (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now))
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
                         o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 

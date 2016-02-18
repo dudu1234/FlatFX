@@ -1103,6 +1103,7 @@
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
     <None Include="Properties\PublishProfiles\FlatFX HostCenter.pubxml" />
+    <None Include="Properties\PublishProfiles\test.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\i18n\ar.js" />
     <Content Include="Scripts\i18n\az.js" />
