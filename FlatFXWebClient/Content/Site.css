@@ -815,9 +815,9 @@ table.ffx-table tr td a {
     padding-top: 0px;
 }
 
-.order-book-panel .form-group label {
-    margin-top: 5px;
-}
+    .order-book-panel .form-group label {
+        margin-top: 5px;
+    }
 
 #pairSelect {
     font-weight: 700;
@@ -919,6 +919,15 @@ table.ffx-table tr td a {
         background-color: #a6dbed;
         color: black;
     }
+
+.navbar-default .site-header .navbar-nav > li > a.green-button:hover {
+    background-color: #7fb55e;
+}
+
+.navbar-default .site-header .navbar-nav > li > a.blue-button:hover {
+    background-color: #a6dbed;
+}
+
 
 #loginLink {
     padding: 5px;
