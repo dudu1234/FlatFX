@@ -57,14 +57,12 @@
             <div class="form-group">
                 <label class="control-label col-md-3">@FlatFXResources.Resources.OfCurrency</label>
                 <div class="col-md-4">
-                    @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyListByCulture, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                    @Html.DropDownListFor(m => m.CCY1, new SelectList(CurrencyManager.Instance.CurrencyListByCulture, "Key", "Value"), htmlAttributes: new { ng_model = "CCY1", ng_change = "changeCCY1()", @class = "form-control" })
                 </div>
                 <label class="control-label col-md-2">@FlatFXResources.Resources.InAmount</label>
-                <div class="col-md-2 exchange-amount">
-                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { id = "orderAmount", @class = "form-control", type = "number" } })
-                </div>
-                <div class="col-md-1 no-side-margin">
-                    <span class="currency-after-text" ng-class="{ 'glyphicon glyphicon-usd': getCCY1() == 'USD', 'glyphicon glyphicon-eur': getCCY1() == 'EUR' }"></span>
+                <div class="col-md-3 input-group">
+                    <span class="input-group-addon large-font">{{ CCY1Sign }}</span>
+                    @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", type = "number" } })
                 </div>
             </div>
             <div class="form-group">

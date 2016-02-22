@@ -41,43 +41,35 @@ else
         </div>
     </div>
     <div class="form-group pairList">
-        <label class="control-label col-md-4">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
+        <label class="control-label col-md-3">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
         @Html.HiddenFor(model => model.Symbol)
 
-        <div class="col-md-12 start-align"></div>
-        <div class="col-md-12 start-align">
-            <table>
-                <tr>
-                    @foreach (FXRate rate in CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || Model.OrderInSession.IsDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD"))
-                    {
-                        <td class="pairItem" id="@rate.Key" ng-click="setAction('@rate.Key')" ng-class="{ 'selected' : symbol == '@rate.Key' }">@FlatFXResources.Resources.ResourceManager.GetString(rate.Key)</td>
-                    }
-                </tr>
-            </table>
+        @*<div class="col-md-12 start-align"></div>*@
+        <div class="col-md-8 start-align">
+            @foreach (FXRate rate in CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || Model.OrderInSession.IsDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD"))
+            {
+                <div class="col-md-4 pairItem" id="@rate.Key" ng-click="setAction('@rate.Key')" ng-class="{ 'selected' : symbol == '@rate.Key' }">@FlatFXResources.Resources.ResourceManager.GetString(rate.Key)</div>
+            }
+
+
+            @*<table>
+                    <tr>
+                        @foreach (FXRate rate in CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || Model.OrderInSession.IsDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD"))
+                        {
+                            <td class="pairItem" id="@rate.Key" ng-click="setAction('@rate.Key')" ng-class="{ 'selected' : symbol == '@rate.Key' }">@FlatFXResources.Resources.ResourceManager.GetString(rate.Key)</td>
+                        }
+                    </tr>
+                </table>*@
         </div>
     </div>
     <div class="form-group">
-        <label class="control-label col-md-4">@FlatFXResources.Resources.SelectAmount (<u class="site-color1">{{ CCY1() }}</u>):</label>
-        <div class="col-md-7 no-right-margin">
-            <input type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" class="form-control" ng-change="setAction(symbol)" />
-            @*@Html.EditorFor(model => model.AmountCCY1, new { htmlAttributes = new { data_ng_model = "amountCcy1", @class = "form-control", type = "number" } })*@
-            @*@Html.ValidationMessageFor(m => m.AmountCCY1, "", new { @class = "text-danger" })>*@
+        <label class="control-label col-md-3">@FlatFXResources.Resources.SelectAmount:</label>
+        <div class="col-md-8">
+            <div class="input-group">
+                <span class="input-group-addon large-font">{{ CCY1Sign }}</span>
+                <input type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" class="form-control" ng-change="setAction(symbol)" />
+            </div>
         </div>
-        <div class="col-md-1 no-side-margin">
-            <span class="currency-after-text" ng-class="{ 'glyphicon glyphicon-usd': CCY1() == 'USD', 'glyphicon glyphicon-eur': CCY1() == 'EUR' }"></span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-4">@FlatFXResources.Resources.ActionDescription:</label>
-        <div class="col-md-7">
-            <label class="control-label order-action-description">{{ actionDescription }}</label>
-        </div>
-    </div>
-    <div class="form-group">
-        <span class="start-align col-md-12 col-md-offset-4">
-            <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
-            @FlatFXResources.Resources.BankSpreadIs
-        </span>
     </div>
     @*<div class="form-group">
             <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
@@ -93,39 +85,51 @@ else
             </div>
         </div>*@
     <div class="form-group">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <label class="control-label">
                 <input class="control-label" name="showExpiryDate" type="checkbox" ng-model="expiryDateChkModel" ng-change="expiryDateCheckboxEvent(expiryDateChkModel)" /> @FlatFXResources.Resources.ExpiryDate:
             </label>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             <input type="date" name="ExpiryDate" id="ExpiryDate" ng-model="ExpiryDateModel" class="form-control" />
             <label name="GTC" id="GTC" class="control-label">Good Till Cancel</label>
         </div>
     </div>
     <div class="form-group">
-        <div class="col-md-4">
+        <div class="col-md-3">
             <label class="control-label">
                 <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
             </label>
         </div>
-        <div class="col-md-7">
+        <div class="col-md-8">
             @Html.EditorFor(model => model.MinimalPartnerExecutionAmountCCY1, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
             @Html.ValidationMessageFor(m => m.MinimalPartnerExecutionAmountCCY1, "", new { @class = "text-danger" })
             <label name="AllAmount" id="AllAmount" class="control-label">@FlatFXResources.Resources.AllAmount</label>
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-7">
+        @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
             @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
         </div>
     </div>
     <div class="form-group">
-        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-4" })
-        <div class="col-md-7">
+        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3" })
+        <div class="col-md-8">
             @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
         </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-md-3">@FlatFXResources.Resources.ActionDescription:</label>
+        <div class="col-md-8">
+            <label class="control-label order-action-description">{{ actionDescription }}</label>
+        </div>
+    </div>
+    <div class="form-group">
+        <span class="start-align col-md-12 col-md-offset-3">
+            <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+            @FlatFXResources.Resources.BankSpreadIs
+        </span>
     </div>
 
     <div class="form-group">

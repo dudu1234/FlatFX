@@ -225,6 +225,7 @@ namespace FlatFXWebClient.Controllers
             this.AmountToExchangeChargedCurrency = AmountToExchangeChargedCurrency;
             this.AmountToExchangeCreditedCurrency = AmountToExchangeCreditedCurrency;
             this.ChargedCurrency = ChargedCurrency;
+            this.CreditedCurrency = CreditedCurrency;
             this.Commission = Commission;
             this.ContractDate = ContractDate;
             this.CustomerRate = CustomerRate;

@@ -658,6 +658,10 @@ table.ffx-table tr td a {
         text-decoration: underline;
     }
 
+.large-font {
+    font-size: large;
+}
+
 .red {
     color: red;
 }

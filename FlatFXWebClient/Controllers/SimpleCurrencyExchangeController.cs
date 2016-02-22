@@ -282,7 +282,7 @@ namespace FlatFXWebClient.Controllers
                 deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * BankProfitInPromil * pairRate.Mid), 2); // 1 promil
                 deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CustomerProfitInPromil * pairRate.Mid), 2); // 8 promil
                 deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 3 promil
-                
+                deal.Commission = deal.BankTotalProfitUSD + deal.FlatFXTotalProfitUSD;
                 
 
                 if (model.Comment == null)

@@ -6,8 +6,14 @@
 }
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init()">
+    <div class="col-xs-10 col-xs-offset-1 btn-group" role="group" aria-label="...">
+        <button type="button" class="btn btn-default">Open Deals</button>
+        <button type="button" class="btn btn-default">Deal History</button>
+        <button type="button" class="btn btn-default">Open Orders</button>
+        <button type="button" class="btn btn-default">Order History</button>
+    </div>
     <div class="row">
-        <div class="col-xs-12 data-area">
+        <div class="col-xs-10 col-xs-offset-1 data-area">
             <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
                 <thead>
                     <tr class="second-header">
@@ -31,10 +37,10 @@
                     <td><input class="form-control" name="minAmountBuy" id="minAmountBuy" ng-model="minAmountBuy" /></td>
                     <td><input class="form-control" name="maxAmountBuy" id="maxAmountBuy" ng-model="maxAmountBuy" /></td>
                 </tr>*@
-                    <tr ng-repeat="deal in Deals | orderBy:ContractDate">
+                    <tr ng-repeat="deal in Deals | orderBy:DealId">
                         <td>{{ deal.DealId }}</td>
-                        <td>{{ deal.ContractDate }}</td>
-                        <td>{{ deal.BuySell }}</td>
+                        <td>{{ deal.ContractDate | date:'medium'}}</td>
+                        <td>{{ (deal.BuySell == 1)? 'Buy' : 'Sell' }}</td>
                         <td>{{ deal.ChargedCurrency }}</td>
                         <td>{{ deal.AmountToExchangeChargedCurrency | number:0 }}</td>
                         <td>{{ deal.CreditedCurrency }}</td>

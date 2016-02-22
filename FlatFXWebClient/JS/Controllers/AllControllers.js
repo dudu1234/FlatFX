@@ -48,6 +48,8 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
+        $scope.CCY1 = 'USD';
+        $scope.CCY1Sign = '$';
         if (WorkflowStage == 2) {
             $scope.CountDown = 60;
         }
@@ -79,8 +81,15 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
 
         $scope.CountDown = $scope.CountDown - 1;
     }, 1000);
-    $scope.getCCY1 = function () {
-        return $('#CCY1').val();
+    $scope.changeCCY1 = function () {
+        if ($scope.CCY1 == 'USD')
+            $scope.CCY1Sign = '$';
+        else if ($scope.CCY1 == 'EUR')
+            $scope.CCY1Sign = '€';
+        else if ($scope.CCY1 == 'ILS')
+            $scope.CCY1Sign = '₪';
+        else
+            $scope.CCY1Sign = '???';
     }
 });
 
@@ -299,6 +308,7 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         $scope.error = error;
         $scope.actionDescription = "";
         $scope.amountCcy1 = amountCCY1;
+        $scope.CCY1Sign = "$";
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
@@ -361,6 +371,15 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         else
             $scope.actionDescription = 'Buy ' + symbol.substring(3, 6) + ' by selling ' + $scope.amountCcy1.toLocaleString() + ' ' + symbol.substring(0, 3);
         $scope.symbolDisplay = $scope.actionDescription;
+
+        if ($scope.CCY1() == 'USD')
+            $scope.CCY1Sign = '$';
+        else if ($scope.CCY1() == 'EUR')
+            $scope.CCY1Sign = '€';
+        else if ($scope.CCY1() == 'ILS')
+            $scope.CCY1Sign = '₪';
+        else
+            $scope.CCY1Sign = '???';
     }
     $scope.updateAction = function () {
         $scope.setAction($scope.symbol);
