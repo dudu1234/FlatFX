@@ -993,12 +993,13 @@ textarea {
 
 .order-radio-div {
     margin-top: 5px;
+    text-align: start;
 }
 
     .order-radio-div input[type="radio"]:checked + span {
         color: black;
         font-weight: bold;
-        font-size: medium;
+        /*font-size: medium;*/
     }
 
 .countdown-enabled {
