@@ -1054,8 +1054,12 @@ textarea {
         text-align: center;
     }
 
+.statistics-data {
+    background-color: #e2e2e2;
+}
+
 .AllSiteArea {
-    padding: 20px;
+    padding: 0px;
     min-width: 300px;
 }
 
@@ -1258,4 +1262,67 @@ textarea {
 
 .label-down {
     margin-top: 5px;
+}
+
+.nav, .pagination, .carousel, .panel-title a {
+    cursor: pointer;
+}
+
+.carousel-div {
+    background-color: #e9eff1;
+}
+
+.tales {
+    width: 80%;
+    max-width: 600px !important;
+}
+
+.carousel-inner {
+    width: 100%;
+    max-height: 700px !important;
+    min-height: 700px !important;
+}
+
+.carousel-text {
+    font-size: larger;
+}
+
+.carousel-footer {
+    background-color: #787878;
+    color: whitesmoke;
+}
+
+.carousel-caption {
+    top: 20px;
+    bottom: inherit;
+    padding-top: 5px;
+    padding-bottom: 5px;
+}
+
+.carousel-image {
+    padding-top: 150px;
+}
+
+.carousel-control.left {
+    background-image: none;
+}
+
+.carousel-control.right {
+    background-image: none;
+}
+
+.glyphicon-chevron-left {
+    color: black;
+}
+
+.glyphicon-chevron-right {
+    color: black;
+}
+
+.carousel-indicators li {
+    border-color: black;
+}
+
+.carousel-indicators .active {
+    background-color: black;
 }

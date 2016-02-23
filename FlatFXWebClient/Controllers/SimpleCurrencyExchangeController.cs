@@ -130,6 +130,7 @@ namespace FlatFXWebClient.Controllers
                 deal.DealProductType = Consts.eDealProductType.FxSimpleExchange;
                 deal.DealType = Consts.eDealType.Spot;
                 deal.IsOffer = true;
+                deal.Status = Consts.eDealStatus.None;
                 if (providerAccounts.Count > 0)
                 {
                     deal.Provider = providerAccounts[0].Provider;
@@ -288,7 +289,6 @@ namespace FlatFXWebClient.Controllers
                 if (model.Comment == null)
                     model.Comment = "";
                 deal.Comment = model.Comment;
-                deal.Commission = 0;
                 deal.ContractDate = null;
                 deal.MaturityDate = null;
 
@@ -343,6 +343,7 @@ namespace FlatFXWebClient.Controllers
                 deal.ContractDate = DateTime.Now;
                 deal.IsOffer = false;
                 deal.MaturityDate = DateTime.Now;
+                deal.Status = Consts.eDealStatus.CustomerTransfer;
                 db.SaveChanges();
 
                 model.DealId = deal.DealId;

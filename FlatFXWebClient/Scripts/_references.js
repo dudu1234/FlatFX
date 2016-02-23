@@ -41,3 +41,4 @@
 /// <reference path="angular-ui/ui-bootstrap-tpls.min.js" />
 /// <reference path="select2.min.js" />
 /// <reference path="angular-ui/ui-bootstrap.min.js" />
+/// <reference path="ui-bootstrap-tpls-0.12.0.min.js" />

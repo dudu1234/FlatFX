@@ -86,6 +86,15 @@ namespace FlatFXCore.BussinessLayer
             Forward = 3,
             Same_Day = 4
         }
+        public enum eDealStatus
+        {
+            None = 1,
+            CustomerTransfer = 2,
+            FlatFXTransfer = 3,
+            Closed = 4,
+            Canceled = 5,
+            Problem = 6
+        }
         public enum eDealProductType
         {
             FxSimpleExchange = 1,

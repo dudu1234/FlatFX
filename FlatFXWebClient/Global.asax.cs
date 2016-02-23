@@ -28,6 +28,7 @@ namespace FlatFXWebClient
             Logger.Instance.Start();
             CurrencyManager.Instance.Start();
             CurrencyFeedManager.Instance.Start();
+            DailyTasks.Instance.Start();
         }
         protected void Session_Start(object sender, EventArgs e)
         {

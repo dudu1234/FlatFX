@@ -12,6 +12,17 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         $scope.spreadDiscount = 0;
         $scope.flatFXCommission = 2;
         $scope.bankCommission = 1;
+
+        $scope.slides = [];
+        $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: 'http://' + $(location).attr('host') + '/Images/Crousel_OrderBook.png' });
+        $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: 'http://' + $(location).attr('host') + '/Images/Crousel_CreateOrder.png' });
+        $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: 'http://' + $(location).attr('host') + '/Images/Crousel_ManageDeals.png' });
+        $scope.slides.push({ header: 'View your Statistics', text: 'View your total volume, today volume, total savings, charts, ...', image: 'http://' + $(location).attr('host') + '/Images/Crousel_Statistics.png' });
+        $scope.slides.push({ header: 'Create Deal', text: 'Create a deal to be performed immediately against FlatFX prices', image: 'http://' + $(location).attr('host') + '/Images/Crousel_SimpleExchangeCreate.png' });
+        $scope.slides.push({ header: 'Deal Confirmation', text: 'Confirm your deal price and deal commission', image: 'http://' + $(location).attr('host') + '/Images/Crousel_SimpleExchangeConfirm.png' });
+        $scope.slides.push({ header: 'OnLine Rates', text: 'See online rates and compare FlatFX prices with your bank prices', image: 'http://' + $(location).attr('host') + '/Images/Crousel_Rates.png' });
+        $scope.slides.push({ header: 'Trading Room', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
+        $scope.slides.push({ header: 'Address', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
@@ -197,13 +208,15 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty) {
     $scope.init = function () {
 
+        $scope.radioDataModel = 'OpenDeals';
+
         $scope.companyChart = "Daily";
         $scope.siteChart = "Daily";
         $scope.GetCompanyVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetCompanyVolume";
         $scope.GetSiteVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetSiteVolume";
 
         $scope.dealsUrl = "http://" + $(location).attr('host') + "/Dashboard/GetDeals";
-        $scope.orderByColumn = '';
+        $scope.orderByColumn = 'DealId';
         $scope.Deals = {};
         $scope.onlyActiveDeals = true;
 
@@ -214,24 +227,6 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
     $scope.ready = function () {
 
         $scope.RefreshDeals();
-
-        $http.get($scope.GetCompanyVolumeUrl).success(function (data) {
-
-            $scope.updateChart("#dashboardCompanyMonthlyChart", data.companyMonthlyVolume, "rgba(255,100,100,0.8)");
-            $scope.updateChart("#dashboardCompanyDailyChart", data.companyDailyVolume, "rgba(255,0,0,0.8)");
-        })
-        .error(function (data, status) {
-            //console.log("Error status : " + status);
-        });
-        
-        $http.get($scope.GetSiteVolumeUrl).success(function (data) {
-
-            $scope.updateChart("#dashboardSiteDailyChart", data.dailyVolume, "rgba(200,200,300,0.8)");
-            $scope.updateChart("#dashboardSiteMonthlyChart", data.monthlyVolume, "rgba(100,100,305,0.8)");
-        })
-        .error(function (data, status) {
-            //console.log("Error status : " + status);
-        });
     }
     $scope.updateChart = function (chartName, data, fillColor) {
         if (data != null) {
@@ -274,6 +269,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
 
     $scope.RefreshDeals = function () {
+        $scope.onlyActiveDeals = ($scope.radioDataModel == 'OpenDeals');
         $http.get($scope.dealsUrl, { params: { onlyActiveDeals: $scope.onlyActiveDeals } })
             .success(function (data, status, headers, config) {
                 try {
@@ -296,6 +292,35 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
             $scope.orderByColumn = "-" + columnName;
         else
             $scope.orderByColumn = columnName;
+    }
+
+    $scope.changeData = function () {
+        if ($scope.radioDataModel == 'OpenDeals' || $scope.radioDataModel == 'DealHistory') {
+            $scope.RefreshDeals();
+        }
+        else if ($scope.radioDataModel == 'Statistics') {
+            $http.get($scope.GetCompanyVolumeUrl)
+                .success(function (data) {
+                    $scope.updateChart("#dashboardCompanyMonthlyChart", data.companyMonthlyVolume, "rgba(255,100,100,0.8)");
+                    $scope.updateChart("#dashboardCompanyDailyChart", data.companyDailyVolume, "rgba(255,0,0,0.8)");
+                })
+                .error(function (data, status) {
+                    //console.log("Error status : " + status);
+                });
+        }
+        else if ($scope.radioDataModel == 'SiteStatistics') {
+            $http.get($scope.GetSiteVolumeUrl)
+                .success(function (data) {
+                    $scope.updateChart("#dashboardSiteDailyChart", data.dailyVolume, "rgba(200,200,300,0.8)");
+                    $scope.updateChart("#dashboardSiteMonthlyChart", data.monthlyVolume, "rgba(100,100,305,0.8)");
+                })
+                .error(function (data, status) {
+                    //console.log("Error status : " + status);
+                });
+        }
+        else {
+            $scope.Deals = null;
+        }
     }
 });
 

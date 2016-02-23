@@ -17,7 +17,19 @@
                 <a class="btn btn-lg green-button" href="@Url.Action("Index", "Home")#About"><span class="glyphicon glyphicon-info-sign"></span> למידע נוסף</a>&nbsp;&nbsp;&nbsp;
                 <br /><br /><br /><br />
             </div>
-            
+        </div>
+    </div>
+    <div class="col-xs-12 carousel-div">
+        <div carousel interval="10000">
+            <div slide ng-repeat="slide in slides" active="slide.active">
+                <div class="carousel-inner">
+                    <div class="carousel-caption carousel-footer">
+                        <h3>{{slide.header}}</h3>
+                        <p class="carousel-text">{{slide.text}}</p>
+                    </div>
+                    <img ng-src="{{slide.image}}" style="margin: auto;" class="carousel-image tales">
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-xs-12 text-center hebrew-only calc-section">
@@ -34,11 +46,11 @@
         <img class="USDILS-image" src="~/Images/USDILS_Spreads2.png" />
     </div>
     @*<div id="Movie" class="text-center hebrew-only">
-        <video autoplay loop muted id="myVideo">
-            <source src="Content/flowers.mp4" type="video/mp4">
-            <source src="Content/flowers.webm" type="video/webm">
-        </video>
-    </div>*@
+            <video autoplay loop muted id="myVideo">
+                <source src="Content/flowers.mp4" type="video/mp4">
+                <source src="Content/flowers.webm" type="video/webm">
+            </video>
+        </div>*@
     <br /><br /><br /><br />
     <div id="FlatFXCommissions" class="text-center ffx-commission-section">
         <div class="col-xs-12 backcolor hebrew-only">
@@ -67,7 +79,7 @@
             </div>
         </div>
     </div>
-    
+
     <div id="HowItWorks" class="text-center hebrew-only howItWorksSection">
         <div class="section-center">
             <p>&nbsp;</p>

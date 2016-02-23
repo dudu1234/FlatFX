@@ -77,6 +77,9 @@ namespace FlatFXCore.Model.Data
         public bool IsCanceled { get; set; }
         public bool IsOffer { get; set; }
         public bool IsDemo { get; set; }
+        public Consts.eDealStatus Status { get; set; }
+        [MaxLength(500)]
+        public string StatusDetails { get; set; }
 
         //Statistices
 	    public double? CustomerTotalProfitUSD { get; set; }

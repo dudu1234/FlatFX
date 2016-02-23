@@ -179,12 +179,13 @@ namespace FlatFXWebClient.Controllers
                 string companyId = user.Companies.First().CompanyId;
 
                 List<DealItem> deals = db.Deals
-                    .Where(d => d.IsDemo == isDemo && d.IsOffer == false && d.CompanyAccount.Company.CompanyId == companyId && d.DealProductType == Consts.eDealProductType.FxSimpleExchange)
+                    .Where(d => d.IsDemo == isDemo && d.IsOffer == false && d.CompanyAccount.Company.CompanyId == companyId && d.DealProductType == Consts.eDealProductType.FxSimpleExchange &&
+                        (!onlyActiveDeals || (d.Status == Consts.eDealStatus.CustomerTransfer || d.Status == Consts.eDealStatus.FlatFXTransfer || d.Status == Consts.eDealStatus.Problem)))
                     .ToList()
                     .Where(d => d.MaturityDate.HasValue)
                     .Select(d => new DealItem(d.DealId, d.BuySell, d.AmountToExchangeChargedCurrency, d.AmountToExchangeCreditedCurrency,
                         d.ChargedCurrency, d.CreditedCurrency, d.Commission, d.ContractDate, d.CustomerRate,
-                        d.CustomerTotalProfitUSD, d.IsCanceled, d.IsDemo? "" : d.user.UserName))
+                        d.CustomerTotalProfitUSD, d.IsCanceled, d.IsDemo? "" : d.user.UserName, d.Status.ToString(), d.StatusDetails))
                     .ToList();
 
                 ActionResult res = Json(new
@@ -216,9 +217,12 @@ namespace FlatFXWebClient.Controllers
         public double? CustomerTotalProfitUSD;
         public bool IsCanceled;
         public string UserName;
+        public string Status;
+        public string StatusDetails;
 
         public DealItem(Int64 DealId, Consts.eBuySell BuySell, double AmountToExchangeChargedCurrency, double AmountToExchangeCreditedCurrency, string ChargedCurrency,
-            string CreditedCurrency, double? Commission, DateTime? ContractDate, double CustomerRate, double? CustomerTotalProfitUSD, bool IsCanceled, string UserName)
+            string CreditedCurrency, double? Commission, DateTime? ContractDate, double CustomerRate, double? CustomerTotalProfitUSD, bool IsCanceled, string UserName,
+            string Status, string StatusDetails)
         {
             this.DealId = DealId;
             this.BuySell = BuySell;
@@ -232,6 +236,8 @@ namespace FlatFXWebClient.Controllers
             this.CustomerTotalProfitUSD = CustomerTotalProfitUSD;
             this.IsCanceled = IsCanceled;
             this.UserName = UserName;
+            this.Status = Status;
+            this.StatusDetails = StatusDetails;
         }
     }
 }

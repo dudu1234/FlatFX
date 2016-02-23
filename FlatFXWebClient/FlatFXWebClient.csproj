@@ -265,7 +265,15 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Images\accent.png" />
+    <Content Include="Images\AddressImage.jpg" />
     <Content Include="Images\bullet.png" />
+    <Content Include="Images\Crousel_CreateOrder.png" />
+    <Content Include="Images\Crousel_ManageDeals.png" />
+    <Content Include="Images\Crousel_OrderBook.png" />
+    <Content Include="Images\Crousel_Rates.png" />
+    <Content Include="Images\Crousel_SimpleExchangeConfirm.png" />
+    <Content Include="Images\Crousel_SimpleExchangeCreate.png" />
+    <Content Include="Images\Crousel_Statistics.png" />
     <Content Include="Images\favicon.ico" />
     <Content Include="Images\FlatFXIcon.ico" />
     <Content Include="Images\FlatFXIconImage.png" />
@@ -279,6 +287,7 @@
     <Content Include="Images\israel_flag_16.png" />
     <Content Include="Images\Logo3.png" />
     <Content Include="Images\sitebg8.jpg" />
+    <Content Include="Images\TradingRoom.jpg" />
     <Content Include="Images\usa-flag-16.gif" />
     <Content Include="Images\usdFlag.png" />
     <Content Include="Images\USDILS_Spreads2.png" />
@@ -1174,6 +1183,7 @@
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\select2.js" />
     <Content Include="Scripts\select2.min.js" />
+    <Content Include="Scripts\ui-bootstrap-tpls-0.12.0.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Views\Home\test.html" />
     <Content Include="Web.config">
