@@ -15,7 +15,12 @@
 }
 else
 {
-    <li>@Html.ActionLink(FlatFXResources.Resources.Registration, "RegisterAll", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "green-button" })</li>
+    <div class="btn-group site-header-login-group">
+        <a class="btn btn-danger btn-sm" href="@Url.Action("RegisterAll", "Account")">@FlatFXResources.Resources.Registration</a>
+        <a class="btn btn-success btn-sm" href="@Url.Action("Login", "Account")">@FlatFXResources.Resources.EnterPrivateZone</a>
+    </div>
+
+    @*<li>@Html.ActionLink(, "RegisterAll", "Account", routeValues: null, htmlAttributes: new { id = "registerLink", @class = "green-button" })</li>
     <li>&nbsp;&nbsp;</li>
-    <li>@Html.ActionLink(FlatFXResources.Resources.EnterPrivateZone, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "blue-button" })</li>
+    <li>@Html.ActionLink(, "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink", @class= "blue-button" })</li>*@
 }

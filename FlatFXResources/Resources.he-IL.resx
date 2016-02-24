@@ -828,4 +828,79 @@
   <data name="AmountRange" xml:space="preserve">
     <value>טווח הסכום</value>
   </data>
+  <data name="HomeHeader1" xml:space="preserve">
+    <value>יצואן/יבואן/ממיר מט"ח?</value>
+  </data>
+  <data name="HomeHeader2" xml:space="preserve">
+    <value>הבנק מספק מרווחים גדולים? יודע מה המרווח שלך?</value>
+  </data>
+  <data name="HomeHeader3" xml:space="preserve">
+    <value>תפסיק להיות לקוח שבוי - הצטרף למהפיכה במט"ח</value>
+  </data>
+  <data name="HomeHeader4" xml:space="preserve">
+    <value>סחור ישירות מול לקוחות כמוך בשער אמצע (היציג) ללא מרווחי הבנק</value>
+  </data>
+  <data name="HomeHeader5" xml:space="preserve">
+    <value>איתנו תחסוך עד ₪200,000 כל שנה</value>
+  </data>
+  <data name="SlideHeader1" xml:space="preserve">
+    <value>רשימת הזמנות המרה</value>
+  </data>
+  <data name="SlideHeader10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SlideHeader2" xml:space="preserve">
+    <value>צור הזמנת המרה</value>
+  </data>
+  <data name="SlideHeader3" xml:space="preserve">
+    <value>ניהול עיסקאות</value>
+  </data>
+  <data name="SlideHeader4" xml:space="preserve">
+    <value>צפייה בסטטיסטיקה</value>
+  </data>
+  <data name="SlideHeader5" xml:space="preserve">
+    <value>בצע המרה</value>
+  </data>
+  <data name="SlideHeader6" xml:space="preserve">
+    <value>אשר ביצוע המרה</value>
+  </data>
+  <data name="SlideHeader7" xml:space="preserve">
+    <value>שערים בזמן אמת</value>
+  </data>
+  <data name="SlideHeader8" xml:space="preserve">
+    <value>חדר מסחר</value>
+  </data>
+  <data name="SlideHeader9" xml:space="preserve">
+    <value>כתובת</value>
+  </data>
+  <data name="SlideText1" xml:space="preserve">
+    <value>מצא הזמנת המרה אשר מתאימה לדרישות ההמרה שלך</value>
+  </data>
+  <data name="SlideText10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SlideText2" xml:space="preserve">
+    <value>הכנס הזמנת המרה חדשה והמתן למשתמש אשר יבצע התאמה מולך</value>
+  </data>
+  <data name="SlideText3" xml:space="preserve">
+    <value>נהל את העיסקאות והזמנות ההמרה</value>
+  </data>
+  <data name="SlideText4" xml:space="preserve">
+    <value>צפה בנפח המסחר היומי, הנפח הכללי, הרווח שלך, גרפים, ...</value>
+  </data>
+  <data name="SlideText5" xml:space="preserve">
+    <value>בצע המרה שתתבצע בזמן אמת מול FlatFX במרווחי המרה אטרקטיביים</value>
+  </data>
+  <data name="SlideText6" xml:space="preserve">
+    <value>אשר את ביצוע ההמרה, השער והעמלות</value>
+  </data>
+  <data name="SlideText7" xml:space="preserve">
+    <value>צפה במחירי ההמרה בזמן אמת והשווה את מחירי FlatFX עם מחירי הבנקים</value>
+  </data>
+  <data name="SlideText8" xml:space="preserve">
+    <value>אתה מוזמן לבקר אותנו במשרדינו בכתובת ...</value>
+  </data>
+  <data name="SlideText9" xml:space="preserve">
+    <value>אתה מוזמן לבקר אותנו במשרדינו בכתובת ...</value>
+  </data>
 </root>

@@ -1032,6 +1032,51 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Exporter / Importer / Currency converter ?.
+        /// </summary>
+        public static string HomeHeader1 {
+            get {
+                return ResourceManager.GetString("HomeHeader1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Your bank charged large commissions? Know what is your exchange spread?.
+        /// </summary>
+        public static string HomeHeader2 {
+            get {
+                return ResourceManager.GetString("HomeHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Stop being a captive client - join the revolution in Forex.
+        /// </summary>
+        public static string HomeHeader3 {
+            get {
+                return ResourceManager.GetString("HomeHeader3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trade directly with customers like you, on the mid price, skip your bank spreads.
+        /// </summary>
+        public static string HomeHeader4 {
+            get {
+                return ResourceManager.GetString("HomeHeader4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Save up to 50,000 $ each year.
+        /// </summary>
+        public static string HomeHeader5 {
+            get {
+                return ResourceManager.GetString("HomeHeader5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home Phone.
         /// </summary>
         public static string HomePhone {
@@ -1843,6 +1888,186 @@ namespace FlatFXResources {
         public static string Signout {
             get {
                 return ResourceManager.GetString("Signout", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order Book.
+        /// </summary>
+        public static string SlideHeader1 {
+            get {
+                return ResourceManager.GetString("SlideHeader1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SlideHeader10 {
+            get {
+                return ResourceManager.GetString("SlideHeader10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Order.
+        /// </summary>
+        public static string SlideHeader2 {
+            get {
+                return ResourceManager.GetString("SlideHeader2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage Deals.
+        /// </summary>
+        public static string SlideHeader3 {
+            get {
+                return ResourceManager.GetString("SlideHeader3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View your Statistics.
+        /// </summary>
+        public static string SlideHeader4 {
+            get {
+                return ResourceManager.GetString("SlideHeader4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create Deal.
+        /// </summary>
+        public static string SlideHeader5 {
+            get {
+                return ResourceManager.GetString("SlideHeader5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Deal Confirmation.
+        /// </summary>
+        public static string SlideHeader6 {
+            get {
+                return ResourceManager.GetString("SlideHeader6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to OnLine Rates.
+        /// </summary>
+        public static string SlideHeader7 {
+            get {
+                return ResourceManager.GetString("SlideHeader7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Trading Room.
+        /// </summary>
+        public static string SlideHeader8 {
+            get {
+                return ResourceManager.GetString("SlideHeader8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Address.
+        /// </summary>
+        public static string SlideHeader9 {
+            get {
+                return ResourceManager.GetString("SlideHeader9", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Find an order that best match your currency exchange requirements.
+        /// </summary>
+        public static string SlideText1 {
+            get {
+                return ResourceManager.GetString("SlideText1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to .
+        /// </summary>
+        public static string SlideText10 {
+            get {
+                return ResourceManager.GetString("SlideText10", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Enter new currency exchange order and wait for other site user to match your order.
+        /// </summary>
+        public static string SlideText2 {
+            get {
+                return ResourceManager.GetString("SlideText2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage your deals &amp; orders. edit, cancel and explore.
+        /// </summary>
+        public static string SlideText3 {
+            get {
+                return ResourceManager.GetString("SlideText3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to View your total volume, today volume, total savings, charts, ....
+        /// </summary>
+        public static string SlideText4 {
+            get {
+                return ResourceManager.GetString("SlideText4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create a deal to be performed immediately against FlatFX prices.
+        /// </summary>
+        public static string SlideText5 {
+            get {
+                return ResourceManager.GetString("SlideText5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Confirm your deal price and deal commission.
+        /// </summary>
+        public static string SlideText6 {
+            get {
+                return ResourceManager.GetString("SlideText6", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to See online rates and compare FlatFX prices with your bank prices.
+        /// </summary>
+        public static string SlideText7 {
+            get {
+                return ResourceManager.GetString("SlideText7", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are invited to visit our office at ....
+        /// </summary>
+        public static string SlideText8 {
+            get {
+                return ResourceManager.GetString("SlideText8", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You are invited to visit our office at ....
+        /// </summary>
+        public static string SlideText9 {
+            get {
+                return ResourceManager.GetString("SlideText9", resourceCulture);
             }
         }
         

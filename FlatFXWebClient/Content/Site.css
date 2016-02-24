@@ -183,6 +183,14 @@ mark {
 
 /* login
 ----------------------------------------------------------*/
+.site-header-login-group {
+    margin-top: 8px;
+}
+
+.site-header-login-group > a {
+    margin-right: 5px !important;
+}
+
 .login-box {
     margin-top: 60px;
     padding: 0px;
@@ -1157,6 +1165,10 @@ textarea {
 
     .section1 .btn-success {
         background-color: #209448;
+    }
+
+    .section1 .btn-group .btn-lg {
+        margin: 10px;
     }
 
 .section-center {

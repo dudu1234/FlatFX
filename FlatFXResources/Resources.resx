@@ -849,4 +849,79 @@
   <data name="AmountRange" xml:space="preserve">
     <value>Amount range</value>
   </data>
+  <data name="HomeHeader1" xml:space="preserve">
+    <value>Exporter / Importer / Currency converter ?</value>
+  </data>
+  <data name="HomeHeader2" xml:space="preserve">
+    <value>Your bank charged large commissions? Know what is your exchange spread?</value>
+  </data>
+  <data name="HomeHeader3" xml:space="preserve">
+    <value>Stop being a captive client - join the revolution in Forex</value>
+  </data>
+  <data name="HomeHeader4" xml:space="preserve">
+    <value>Trade directly with customers like you, on the mid price, skip your bank spreads</value>
+  </data>
+  <data name="HomeHeader5" xml:space="preserve">
+    <value>Save up to 50,000 $ each year</value>
+  </data>
+  <data name="SlideHeader1" xml:space="preserve">
+    <value>Order Book</value>
+  </data>
+  <data name="SlideHeader10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SlideHeader2" xml:space="preserve">
+    <value>Create Order</value>
+  </data>
+  <data name="SlideHeader3" xml:space="preserve">
+    <value>Manage Deals</value>
+  </data>
+  <data name="SlideHeader4" xml:space="preserve">
+    <value>View your Statistics</value>
+  </data>
+  <data name="SlideHeader5" xml:space="preserve">
+    <value>Create Deal</value>
+  </data>
+  <data name="SlideHeader6" xml:space="preserve">
+    <value>Deal Confirmation</value>
+  </data>
+  <data name="SlideHeader7" xml:space="preserve">
+    <value>OnLine Rates</value>
+  </data>
+  <data name="SlideHeader8" xml:space="preserve">
+    <value>Trading Room</value>
+  </data>
+  <data name="SlideHeader9" xml:space="preserve">
+    <value>Address</value>
+  </data>
+  <data name="SlideText1" xml:space="preserve">
+    <value>Find an order that best match your currency exchange requirements</value>
+  </data>
+  <data name="SlideText10" xml:space="preserve">
+    <value />
+  </data>
+  <data name="SlideText2" xml:space="preserve">
+    <value>Enter new currency exchange order and wait for other site user to match your order</value>
+  </data>
+  <data name="SlideText3" xml:space="preserve">
+    <value>Manage your deals &amp; orders. edit, cancel and explore</value>
+  </data>
+  <data name="SlideText4" xml:space="preserve">
+    <value>View your total volume, today volume, total savings, charts, ...</value>
+  </data>
+  <data name="SlideText5" xml:space="preserve">
+    <value>Create a deal to be performed immediately against FlatFX prices</value>
+  </data>
+  <data name="SlideText6" xml:space="preserve">
+    <value>Confirm your deal price and deal commission</value>
+  </data>
+  <data name="SlideText7" xml:space="preserve">
+    <value>See online rates and compare FlatFX prices with your bank prices</value>
+  </data>
+  <data name="SlideText8" xml:space="preserve">
+    <value>You are invited to visit our office at ...</value>
+  </data>
+  <data name="SlideText9" xml:space="preserve">
+    <value>You are invited to visit our office at ...</value>
+  </data>
 </root>

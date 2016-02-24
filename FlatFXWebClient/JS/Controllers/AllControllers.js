@@ -6,23 +6,44 @@ myApp.controller('RegisterAll', function ($scope) {
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
-    $scope.init = function () {
+    $scope.init = function (isRTL) {
         $scope.amountUSD = 10;
         $scope.exchangeDiscount = 0;
         $scope.spreadDiscount = 0;
         $scope.flatFXCommission = 2;
         $scope.bankCommission = 1;
+        $scope.isRTL = isRTL;
+        $scope.LangDir = "";
+        if ($scope.isRTL == "True")
+        {
+            $scope.LangDir = "Hebrew/"
+        }
 
         $scope.slides = [];
-        $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: 'http://' + $(location).attr('host') + '/Images/Crousel_OrderBook.png' });
-        $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: 'http://' + $(location).attr('host') + '/Images/Crousel_CreateOrder.png' });
-        $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: 'http://' + $(location).attr('host') + '/Images/Crousel_ManageDeals.png' });
-        $scope.slides.push({ header: 'View your Statistics', text: 'View your total volume, today volume, total savings, charts, ...', image: 'http://' + $(location).attr('host') + '/Images/Crousel_Statistics.png' });
-        $scope.slides.push({ header: 'Create Deal', text: 'Create a deal to be performed immediately against FlatFX prices', image: 'http://' + $(location).attr('host') + '/Images/Crousel_SimpleExchangeCreate.png' });
-        $scope.slides.push({ header: 'Deal Confirmation', text: 'Confirm your deal price and deal commission', image: 'http://' + $(location).attr('host') + '/Images/Crousel_SimpleExchangeConfirm.png' });
-        $scope.slides.push({ header: 'OnLine Rates', text: 'See online rates and compare FlatFX prices with your bank prices', image: 'http://' + $(location).attr('host') + '/Images/Crousel_Rates.png' });
-        $scope.slides.push({ header: 'Trading Room', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
-        $scope.slides.push({ header: 'Address', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
+
+        if ($scope.isRTL == "True") {
+            $scope.slides.push({ header: 'רשימת הזמנות המרה', text: 'מצא הזמנת המרה אשר מתאימה לדרישות ההמרה שלך', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
+            $scope.slides.push({ header: 'צור הזמנת המרה', text: 'הכנס הזמנת המרה חדשה והמתן למשתמש אשר יבצע התאמה מולך', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
+            $scope.slides.push({ header: 'ניהול עיסקאות', text: 'נהל את העיסקאות והזמנות ההמרה', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
+            $scope.slides.push({ header: 'צפייה בסטטיסטיקה', text: 'צפה בנפח המסחר היומי, הנפח הכללי, הרווח שלך, גרפים, ...', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
+            $scope.slides.push({ header: 'בצע המרה', text: 'בצע המרה שתתבצע בזמן אמת מול FlatFX במרווחי המרה אטרקטיביים', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
+            $scope.slides.push({ header: 'אשר ביצוע המרה', text: 'אשר את ביצוע ההמרה, השער והעמלות', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
+            $scope.slides.push({ header: 'שערים בזמן אמת', text: 'צפה במחירי ההמרה בזמן אמת והשווה את מחירי FlatFX עם מחירי הבנקים', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
+            $scope.slides.push({ header: 'חדר מסחר', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
+            $scope.slides.push({ header: 'כתובת', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
+        }
+        else
+        {
+            $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
+            $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
+            $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
+            $scope.slides.push({ header: 'View your Statistics', text: 'View your total volume, today volume, total savings, charts, ...', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
+            $scope.slides.push({ header: 'Create Deal', text: 'Create a deal to be performed immediately against FlatFX prices', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
+            $scope.slides.push({ header: 'Deal Confirmation', text: 'Confirm your deal price and deal commission', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
+            $scope.slides.push({ header: 'OnLine Rates', text: 'See online rates and compare FlatFX prices with your bank prices', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
+            $scope.slides.push({ header: 'Trading Room', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
+            $scope.slides.push({ header: 'Address', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
+        }
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();

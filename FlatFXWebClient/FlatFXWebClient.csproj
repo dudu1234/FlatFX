@@ -279,6 +279,13 @@
     <Content Include="Images\FlatFXIconImage.png" />
     <Content Include="Images\FlatFX_Logo4.png" />
     <Content Include="Images\FlatFX_Logo5.png" />
+    <Content Include="Images\Hebrew\Crousel_CreateOrder.png" />
+    <Content Include="Images\Hebrew\Crousel_ManageDeals.png" />
+    <Content Include="Images\Hebrew\Crousel_OrderBook.png" />
+    <Content Include="Images\Hebrew\Crousel_Rates.png" />
+    <Content Include="Images\Hebrew\Crousel_SimpleExchangeConfirm.png" />
+    <Content Include="Images\Hebrew\Crousel_SimpleExchangeCreate.png" />
+    <Content Include="Images\Hebrew\Crousel_Statistics.png" />
     <Content Include="Images\heroAccent.png" />
     <Content Include="Images\HowItWorks3.jpg" />
     <Content Include="Images\HowItWorks4.png" />

@@ -3,22 +3,33 @@
     string isRTL = System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft.ToString();
 }
 <script src="~/JS/Home/HomePage.js"></script>
-<div ng-controller="HomeIndex" ng-init="init()" class="home-class" @*id="full-page"*@>
+<div ng-controller="HomeIndex" ng-init="init('@isRTL')" class="home-class">
     <div class="text-center section1">
         <div class="col-xs-12 backcolor">
-            <div class="hebrew-only">
-                <p class="text1"><b>יצואן/יבואן/ממיר מט"ח?</b></p>
-                <p class="text1">הבנק מספק מרווחים גדולים? יודע מה המרווח שלך?</p>
-                <p class="text2"><b>תפסיק להיות לקוח שבוי - הצטרף למהפיכה במט"ח</b></p>
-                <p class="text1">סחור ישירות מול לקוחות כמוך בשער אמצע (היציג) ללא מרווחי הבנק</p>
-                <p class="text1">איתנו תחסוך עד &#8362;200,000 כל שנה</p>
+            <div>
+                <p class="text1"><b>@FlatFXResources.Resources.HomeHeader1</b></p>
+                <p class="text1">@FlatFXResources.Resources.HomeHeader2</p>
+                <p class="text2"><b>@FlatFXResources.Resources.HomeHeader3</b></p>
+                <p class="text1">@FlatFXResources.Resources.HomeHeader4</p>
+                <p class="text1">@FlatFXResources.Resources.HomeHeader5</p>
                 <br />
-                <a class="btn btn-lg green-button" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span> הצטרף למהפיכה</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-lg green-button" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span> פתח חשבון דמו</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-lg green-button" href="@Url.Action("Index", "Home")#About"><span class="glyphicon glyphicon-info-sign"></span> למידע נוסף</a>&nbsp;&nbsp;&nbsp;
+                <div class="btn-group">
+                    <a class="btn btn-danger btn-lg" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@Resources.JoinTheRevolution</a>
+                    <a class="btn btn-success btn-lg" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@Resources.CreateDemoAccount</a>
+                </div>
+
+                @*<a class="btn btn-lg green-button" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@FlatFXResources.Resources.JoinTheRevolution</a>&nbsp;&nbsp;&nbsp;
+                <a class="btn btn-lg green-button" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@FlatFXResources.Resources.CreateDemoAccount</a>&nbsp;&nbsp;&nbsp;*@
                 <br /><br /><br /><br />
             </div>
         </div>
+    </div>
+    <div class="col-xs-12 text-center calc-section">
+        <p>&nbsp;</p>
+        <div class="col-xs-offset-3 col-xs-6">
+            @Html.Partial("~/Views/Home/_CommissionCalculator.cshtml")
+        </div>
+        <p>&nbsp;</p>
     </div>
     <div class="col-xs-12 carousel-div">
         <div carousel interval="5000">
@@ -33,19 +44,12 @@
             </div>
         </div>
     </div>
-    <div class="col-xs-12 text-center hebrew-only calc-section">
-        <p>&nbsp;</p>
-        <div class="col-xs-offset-3 col-xs-6">
-            @Html.Partial("~/Views/Home/_CommissionCalculator.cshtml")
-        </div>
-        <p>&nbsp;</p>
-    </div>
-    <div class="text-center hebrew-only spreads-image-section">
+    @*<div class="text-center hebrew-only spreads-image-section">
         <p>&nbsp;</p>
         <p>&nbsp;</p>
         <p class="spreads-image-header">עמלות הבנקים</p>
         <img class="USDILS-image" src="~/Images/USDILS_Spreads2.png" />
-    </div>
+    </div>*@
     @*<div id="Movie" class="text-center hebrew-only">
             <video autoplay loop muted id="myVideo">
                 <source src="Content/flowers.mp4" type="video/mp4">

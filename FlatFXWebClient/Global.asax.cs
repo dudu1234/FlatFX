@@ -36,7 +36,7 @@ namespace FlatFXWebClient
             if (lang != null)
                 Session["lang"] = lang;
             else
-                Session["lang"] = "en-US";
+                Session["lang"] = "he-IL";
 
             Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
             Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
