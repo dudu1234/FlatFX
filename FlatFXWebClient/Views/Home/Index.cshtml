@@ -1,5 +1,6 @@
 ﻿@{
     ViewBag.Title = "FlatFX Home Page";
+    string isRTL = System.Globalization.CultureInfo.CurrentCulture.TextInfo.IsRightToLeft.ToString();
 }
 <script src="~/JS/Home/HomePage.js"></script>
 <div ng-controller="HomeIndex" ng-init="init()" class="home-class" @*id="full-page"*@>
@@ -20,7 +21,7 @@
         </div>
     </div>
     <div class="col-xs-12 carousel-div">
-        <div carousel interval="10000">
+        <div carousel interval="5000">
             <div slide ng-repeat="slide in slides" active="slide.active">
                 <div class="carousel-inner">
                     <div class="carousel-caption carousel-footer">
@@ -161,6 +162,14 @@
             $('html, body').animate({
                 scrollTop: $(navigateToSection).offset().top
             }, 1000);
+        }
+
+        if ("@isRTL" == "True")
+        {
+            var left = $('.glyphicon-chevron-left');
+            var right = $('.glyphicon-chevron-right');
+            left.removeClass('glyphicon-chevron-left').addClass('glyphicon-chevron-right');
+            right.removeClass('glyphicon-chevron-left').addClass('glyphicon-chevron-left');
         }
     });
 </script>
