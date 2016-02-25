@@ -1,4 +1,9 @@
-﻿
+﻿//localhost
+//var urlPrefix = "/FlatFXWebClient";
+
+//debug
+var urlPrefix = "";
+
 myApp.controller('RegisterAll', function ($scope) {
     //console.log('in controller');
 });
@@ -22,27 +27,27 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         $scope.slides = [];
 
         if ($scope.isRTL == "True") {
-            $scope.slides.push({ header: 'רשימת הזמנות המרה', text: 'מצא הזמנת המרה אשר מתאימה לדרישות ההמרה שלך', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
-            $scope.slides.push({ header: 'צור הזמנת המרה', text: 'הכנס הזמנת המרה חדשה והמתן למשתמש אשר יבצע התאמה מולך', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
-            $scope.slides.push({ header: 'ניהול עיסקאות', text: 'נהל את העיסקאות והזמנות ההמרה', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
-            $scope.slides.push({ header: 'צפייה בסטטיסטיקה', text: 'צפה בנפח המסחר היומי, הנפח הכללי, הרווח שלך, גרפים, ...', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
-            $scope.slides.push({ header: 'בצע המרה', text: 'בצע המרה שתתבצע בזמן אמת מול FlatFX במרווחי המרה אטרקטיביים', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
-            $scope.slides.push({ header: 'אשר ביצוע המרה', text: 'אשר את ביצוע ההמרה, השער והעמלות', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
-            $scope.slides.push({ header: 'שערים בזמן אמת', text: 'צפה במחירי ההמרה בזמן אמת והשווה את מחירי FlatFX עם מחירי הבנקים', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
-            $scope.slides.push({ header: 'חדר מסחר', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
-            $scope.slides.push({ header: 'כתובת', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
+            $scope.slides.push({ header: 'רשימת הזמנות המרה', text: 'מצא הזמנת המרה אשר מתאימה לדרישות ההמרה שלך', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
+            $scope.slides.push({ header: 'צור הזמנת המרה', text: 'הכנס הזמנת המרה חדשה והמתן למשתמש אשר יבצע התאמה מולך', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
+            $scope.slides.push({ header: 'ניהול עיסקאות', text: 'נהל את העיסקאות והזמנות ההמרה', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
+            $scope.slides.push({ header: 'צפייה בסטטיסטיקה', text: 'צפה בנפח המסחר היומי, הנפח הכללי, הרווח שלך, גרפים, ...', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
+            $scope.slides.push({ header: 'בצע המרה', text: 'בצע המרה שתתבצע בזמן אמת מול FlatFX במרווחי המרה אטרקטיביים', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
+            $scope.slides.push({ header: 'אשר ביצוע המרה', text: 'אשר את ביצוע ההמרה, השער והעמלות', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
+            $scope.slides.push({ header: 'שערים בזמן אמת', text: 'צפה במחירי ההמרה בזמן אמת והשווה את מחירי FlatFX עם מחירי הבנקים', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
+            $scope.slides.push({ header: 'חדר מסחר', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: urlPrefix + '/Images/TradingRoom.jpg' });
+            $scope.slides.push({ header: 'כתובת', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: urlPrefix + '/Images/AddressImage.jpg' });
         }
         else
         {
-            $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
-            $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
-            $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
-            $scope.slides.push({ header: 'View your Statistics', text: 'View your total volume, today volume, total savings, charts, ...', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
-            $scope.slides.push({ header: 'Create Deal', text: 'Create a deal to be performed immediately against FlatFX prices', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
-            $scope.slides.push({ header: 'Deal Confirmation', text: 'Confirm your deal price and deal commission', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
-            $scope.slides.push({ header: 'OnLine Rates', text: 'See online rates and compare FlatFX prices with your bank prices', image: 'http://' + $(location).attr('host') + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
-            $scope.slides.push({ header: 'Trading Room', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/TradingRoom.jpg' });
-            $scope.slides.push({ header: 'Address', text: 'You are invited to visit our office at ...', image: 'http://' + $(location).attr('host') + '/Images/AddressImage.jpg' });
+            $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
+            $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
+            $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
+            $scope.slides.push({ header: 'View your Statistics', text: 'View your total volume, today volume, total savings, charts, ...', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_Statistics.png' });
+            $scope.slides.push({ header: 'Create Deal', text: 'Create a deal to be performed immediately against FlatFX prices', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeCreate.png' });
+            $scope.slides.push({ header: 'Deal Confirmation', text: 'Confirm your deal price and deal commission', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_SimpleExchangeConfirm.png' });
+            $scope.slides.push({ header: 'OnLine Rates', text: 'See online rates and compare FlatFX prices with your bank prices', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_Rates.png' });
+            $scope.slides.push({ header: 'Trading Room', text: 'You are invited to visit our office at ...', image: urlPrefix + '/Images/TradingRoom.jpg' });
+            $scope.slides.push({ header: 'Address', text: 'You are invited to visit our office at ...', image: urlPrefix + '/Images/AddressImage.jpg' });
         }
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
@@ -173,7 +178,7 @@ myApp.controller('UserManager', function ($scope, $timeout, noty) {
 myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeout, noty) {
     $scope.init = function (feedUrl) {
         $scope.FeedRatesUrl = feedUrl;
-        $scope.SimpleTradingUrl = "http://" + $(location).attr('host') + "/SimpleCurrencyExchange/StartTrade";
+        $scope.SimpleTradingUrl = urlPrefix + "/SimpleCurrencyExchange/StartTrade";
     };
 
     $scope.showError = function (error) {
@@ -233,13 +238,18 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
         $scope.companyChart = "Daily";
         $scope.siteChart = "Daily";
-        $scope.GetCompanyVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetCompanyVolume";
-        $scope.GetSiteVolumeUrl = "http://" + $(location).attr('host') + "/Dashboard/GetSiteVolume";
+        $scope.GetCompanyVolumeUrl = urlPrefix + "/Dashboard/GetCompanyVolume";
+        $scope.GetSiteVolumeUrl = urlPrefix + "/Dashboard/GetSiteVolume";
 
-        $scope.dealsUrl = "http://" + $(location).attr('host') + "/Dashboard/GetDeals";
+        $scope.dealsUrl = urlPrefix + "/Dashboard/GetDeals";
         $scope.orderByColumn = 'DealId';
         $scope.Deals = {};
         $scope.onlyActiveDeals = true;
+
+        $scope.ordersUrl = urlPrefix + "/Dashboard/GetOrders";
+        $scope.orderByColumn2 = 'OrderId';
+        $scope.Orders = {};
+        $scope.onlyActiveOrders = true;
 
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
@@ -286,9 +296,6 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
             });
         }
     }
-
-
-
     $scope.RefreshDeals = function () {
         $scope.onlyActiveDeals = ($scope.radioDataModel == 'OpenDeals');
         $http.get($scope.dealsUrl, { params: { onlyActiveDeals: $scope.onlyActiveDeals } })
@@ -297,7 +304,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                     $scope.Deals = data.Deals;
                 }
                 catch (err) {
-                    $scope.tableData = {};
+                    $scope.Deals = {};
                 }
             })
             .error(function (data, status, header, config) {
@@ -307,17 +314,42 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                     "<br />config: " + jsonFilter(config);
             });
     };
-
+    $scope.RefreshOrders = function () {
+        $scope.onlyActiveOrders = ($scope.radioDataModel == 'OpenOrders');
+        $http.get($scope.ordersUrl, { params: { onlyActiveOrders: $scope.onlyActiveOrders } })
+            .success(function (data, status, headers, config) {
+                try {
+                    $scope.Orders = data.Orders;
+                }
+                catch (err) {
+                    $scope.Orders = {};
+                }
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });
+    };
     $scope.changeSorting = function (columnName) {
         if ($scope.orderByColumn == columnName)
             $scope.orderByColumn = "-" + columnName;
         else
             $scope.orderByColumn = columnName;
     }
-
+    $scope.changeSorting2 = function (columnName) {
+        if ($scope.orderByColumn2 == columnName)
+            $scope.orderByColumn2 = "-" + columnName;
+        else
+            $scope.orderByColumn2 = columnName;
+    }
     $scope.changeData = function () {
         if ($scope.radioDataModel == 'OpenDeals' || $scope.radioDataModel == 'DealHistory') {
             $scope.RefreshDeals();
+        }
+        else if ($scope.radioDataModel == 'OpenOrders' || $scope.radioDataModel == 'OrderHistory') {
+            $scope.RefreshOrders();
         }
         else if ($scope.radioDataModel == 'Statistics') {
             $http.get($scope.GetCompanyVolumeUrl)
@@ -488,7 +520,7 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
 myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty) {
     $scope.init = function (isDemo) {
         $scope.isDemo = isDemo;
-        $scope.orderBookIndexUrl = "http://" + $(location).attr('host') + "/OrderBook/OrderBookIndex";
+        $scope.orderBookIndexUrl = urlPrefix + "/OrderBook/OrderBookIndex";
 
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';

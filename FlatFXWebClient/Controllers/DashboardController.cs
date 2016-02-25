@@ -197,7 +197,40 @@ namespace FlatFXWebClient.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteError("Failed in GetOrderBook", ex);
+                Logger.Instance.WriteError("Failed in GetDeals", ex);
+                return null;
+            }
+        }
+
+        public ActionResult GetOrders(bool onlyActiveOrders)
+        {
+            try
+            {
+                bool isDemo = ApplicationInformation.Instance.IsDemoUser;
+                string userId = ApplicationInformation.Instance.UserID;
+                ApplicationUser user = db.Users.Include(u => u.Companies).Where(u => u.Id == userId && u.IsActive == true).FirstOrDefault();
+                string companyId = user.Companies.First().CompanyId;
+
+                List<OrderItem> orders = db.Orders
+                    .Where(o => o.IsDemo == isDemo && o.Status != Consts.eOrderStatus.None && o.CompanyAccount.Company.CompanyId == companyId && o.DealProductType == Consts.eDealProductType.FxMidRateOrder &&
+                        (!onlyActiveOrders || (o.Status == Consts.eOrderStatus.Problem || o.Status == Consts.eOrderStatus.Triggered ||
+                        o.Status == Consts.eOrderStatus.Triggered_partially || o.Status == Consts.eOrderStatus.Waiting)))
+                    .ToList()
+                    .Select(o => new OrderItem(o.OrderId, o.BuySell, o.AmountCCY1, o.AmountCCY2_Estimation, o.Symbol, o.FlatFXCommissionUSD_Estimation,
+                        o.OrderDate, o.CustomerTotalProfitUSD_Estimation, o.IsDemo ? "" : o.user.UserName, o.Status.ToString(), o.StatusDetails,
+                        o.MinimalPartnerExecutionAmountCCY1, o.ExpiryDate, o.AmountCCY1_Executed, o.AmountCCY1_Remainder))
+                    .ToList();
+
+                ActionResult res = Json(new
+                {
+                    Orders = orders
+                }, JsonRequestBehavior.AllowGet);
+
+                return res;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in GetOrders", ex);
                 return null;
             }
         }
@@ -238,6 +271,48 @@ namespace FlatFXWebClient.Controllers
             this.UserName = UserName;
             this.Status = Status;
             this.StatusDetails = StatusDetails;
+        }
+    }
+
+    public class OrderItem
+    {
+        public Int64 OrderId;
+        public Consts.eBuySell BuySell;
+        public double AmountToExchangeChargedCurrency;
+        public double AmountToExchangeCreditedCurrency;
+        public string ChargedCurrency;
+        public string CreditedCurrency;
+        public double? Commission;
+        public DateTime? OrderDate;
+        public double? CustomerTotalProfitUSD;
+        public string UserName;
+        public string Status;
+        public string StatusDetails;
+        public double? MinimalPartnerExecutionAmountCCY1;
+        public DateTime? ExpiryDate;
+        public double? AmountCCY1_Executed;
+        public double? AmountCCY1_Remainder;
+
+        public OrderItem(Int64 OrderId, Consts.eBuySell BuySell, double AmountCCY1, double AmountCCY2_Estimation, string Pair,
+            double? Commission, DateTime? OrderDate, double? CustomerTotalProfitUSD, string UserName, string Status, string StatusDetails, 
+            double? MinimalPartnerExecutionAmountCCY1, DateTime? ExpiryDate, double? AmountCCY1_Executed, double? AmountCCY1_Remainder)
+        {
+            this.OrderId = OrderId;
+            this.BuySell = BuySell;
+            this.AmountToExchangeCreditedCurrency = (BuySell == Consts.eBuySell.Buy) ? AmountCCY1 : AmountCCY2_Estimation;
+            this.AmountToExchangeChargedCurrency = (BuySell == Consts.eBuySell.Buy) ? AmountCCY2_Estimation : AmountCCY1;
+            this.CreditedCurrency = (BuySell == Consts.eBuySell.Buy) ? Pair.Substring(0, 3) : Pair.Substring(3, 3); 
+            this.ChargedCurrency = (BuySell == Consts.eBuySell.Buy) ? Pair.Substring(3, 3) : Pair.Substring(0, 3);
+            this.Commission = Commission;
+            this.OrderDate = OrderDate;
+            this.CustomerTotalProfitUSD = CustomerTotalProfitUSD;
+            this.UserName = UserName;
+            this.Status = Status;
+            this.StatusDetails = StatusDetails;
+            this.MinimalPartnerExecutionAmountCCY1 = MinimalPartnerExecutionAmountCCY1;
+            this.ExpiryDate = ExpiryDate;
+            this.AmountCCY1_Executed = AmountCCY1_Executed;
+            this.AmountCCY1_Remainder = AmountCCY1_Remainder;
         }
     }
 }

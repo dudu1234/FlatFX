@@ -31,8 +31,8 @@ namespace FlatFXWebClient.Controllers
                     error = "User is not approved by FlatFX team.";
 
                 List<OrderBookItem> ordersToBuy = db.Orders
-                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Buy && o.IsCanceled == false && o.IsClosed == false &&
-                        o.IsConfirmed == true && o.IsWaiting == true && o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
+                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Buy && (o.Status == Consts.eOrderStatus.Triggered_partially || o.Status == Consts.eOrderStatus.Waiting) &&
+                        o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
                     .ToList()
                     .Where(o => (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now))
                     .Select(o => new OrderBookItem(o.OrderId,
@@ -42,8 +42,8 @@ namespace FlatFXWebClient.Controllers
                     .ToList();
 
                 List<OrderBookItem> ordersToSell = db.Orders
-                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Sell && o.IsCanceled == false && o.IsClosed == false &&
-                        o.IsConfirmed == true && o.IsWaiting == true && o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
+                    .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Sell && (o.Status == Consts.eOrderStatus.Triggered_partially || o.Status == Consts.eOrderStatus.Waiting) &&
+                        o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
                     .ToList()
                     .Where(o => (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now))
                     .Select(o => new OrderBookItem(o.OrderId,

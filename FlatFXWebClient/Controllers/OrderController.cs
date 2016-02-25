@@ -118,8 +118,7 @@ namespace FlatFXWebClient.Controllers
 
                 order.DealProductType = Consts.eDealProductType.FxMidRateOrder;
                 order.DealType = Consts.eDealType.Spot;
-                order.IsClosed = false;
-                order.IsWaiting = false;
+                order.Status = Consts.eOrderStatus.None;
 
                 model.AmountCCY1 = 0;
                 order.AmountCCY1 = model.AmountCCY1;
@@ -132,7 +131,6 @@ namespace FlatFXWebClient.Controllers
                 model.MinimalPartnerExecutionAmountCCY1 = null;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
                 
-                order.IsConfirmed = false;
                 order.MinimalPartnerTotalVolumeUSD = null;
                 order.PartnerMinScore = null;
                 order.AmountCCY1_Executed = null;
@@ -252,8 +250,7 @@ namespace FlatFXWebClient.Controllers
 
                 Order order = db.Orders.Find(model.OrderInSession.OrderId);
 
-                order.IsWaiting = true;
-                order.IsConfirmed = true;
+                order.Status = Consts.eOrderStatus.Waiting;
                 db.SaveChanges();
 
                 model.OrderId = order.OrderId;

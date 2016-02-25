@@ -95,6 +95,17 @@ namespace FlatFXCore.BussinessLayer
             Canceled = 5,
             Problem = 6
         }
+        public enum eOrderStatus
+        {
+            None = 1,
+            Waiting = 2,
+            Triggered = 3,
+            Closed_Successfully = 4,
+            Canceled = 5,
+            Problem = 6,
+            Expired = 7,
+            Triggered_partially = 8
+        }
         public enum eDealProductType
         {
             FxSimpleExchange = 1,

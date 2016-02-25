@@ -45,11 +45,9 @@
                     <tr ng-repeat="deal in Deals | orderBy:orderByColumn">
                         <td>{{ deal.DealId }}</td>
                         <td>{{ deal.Status }}</td>
-                        <td>{{ deal.ContractDate | date:'medium'}}</td>
+                        <td>{{ deal.ContractDate.substring(6, 19) | date: 'yyyy-MM-dd HH:mm' }}</td>
                         <td>{{ (deal.BuySell == 1)? 'Buy' : 'Sell' }}</td>
-                        @*<td>{{ deal.ChargedCurrency }}</td>*@
                         <td>{{ deal.AmountToExchangeChargedCurrency | number:0 }} {{ deal.ChargedCurrency }}</td>
-                        @*<td>{{ deal.CreditedCurrency }}</td>*@
                         <td>{{ deal.AmountToExchangeCreditedCurrency | number:0 }} {{ deal.CreditedCurrency }}</td>
                         <td>{{ deal.CustomerRate }}</td>
                         <td>{{ deal.Commission | number:0 }}</td>
@@ -57,6 +55,50 @@
                         <td>{{ deal.IsCanceled }}</td>
                         <td>{{ deal.UserName }}</td>
                         <td>{{ deal.StatusDetails }}</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+    <div ng-show="radioDataModel == 'OpenOrders' || radioDataModel == 'OrderHistory'">
+        <div class="col-xs-10 col-xs-offset-1 data-area">
+            <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
+                <thead>
+                    <tr class="second-header">
+                        <th ng-class="orderByColumn == 'OrderId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('OrderId')">Order Id</a></th>
+                        <th ng-class="orderByColumn == 'Status' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Status')">Status</a></th>
+                        <th ng-class="orderByColumn == 'OrderDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('OrderDate')">Order Date</a></th>
+                        <th ng-class="orderByColumn == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('BuySell')">Buy/Sell</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeChargedCurrency')">Charged Amount</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeCreditedCurrency')">Credited Amount</a></th>
+                        <th ng-class="orderByColumn == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Commission')">Commission USD Estimation</a></th>
+                        <th ng-class="orderByColumn == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerTotalProfitUSD')">Profit USD Estimation</a></th>
+                        <th ng-class="orderByColumn == 'MinimalPartnerExecutionAmountCCY1' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('MinimalPartnerExecutionAmountCCY1')">Minimal Partner Execution Amount CCY1</a></th>
+                        <th ng-class="orderByColumn == 'ExpiryDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ExpiryDate')">Expiry Date</a></th>
+                        <th ng-class="orderByColumn == 'AmountCCY1_Executed' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountCCY1_Executed')">Amount Executed CCY1</a></th>
+                        <th ng-class="orderByColumn == 'AmountCCY1_Remainder' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountCCY1_Remainder')">Amount Remainder CCY1</a></th>
+                        <th ng-class="orderByColumn == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('UserName')">User Name</a></th>
+                        <th ng-class="orderByColumn == 'StatusDetails' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('StatusDetails')">Status Details</a></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr ng-repeat="order in Orders | orderBy:orderByColumn2">
+                        <td>{{ order.OrderId }}</td>
+                        <td>{{ order.Status }}</td>
+                        <td>{{ order.OrderDate.substring(6, 19) | date: 'yyyy-MM-dd HH:mm' }}</td>
+                        <td>{{ (order.BuySell == 1)? 'Buy' : 'Sell' }}</td>
+                        <td>{{ order.AmountToExchangeChargedCurrency | number:0 }} {{ order.ChargedCurrency }}</td>
+                        <td>{{ order.AmountToExchangeCreditedCurrency | number:0 }} {{ order.CreditedCurrency }}</td>
+                        <td>{{ order.Commission | number:0 }}</td>
+                        <td>{{ order.CustomerTotalProfitUSD | number:0 }}</td>
+                        <td>{{ order.MinimalPartnerExecutionAmountCCY1 | number:0 }}</td>
+                        <td>{{ order.ExpiryDate.substring(6, 19) | date: 'yyyy-MM-dd HH:mm' }}</td>
+                        <td>{{ order.AmountCCY1_Executed | number:0 }}</td>
+                        <td>{{ order.AmountCCY1_Remainder | number:0 }}</td>
+                        <td>{{ order.UserName }}</td>
+                        <td>{{ order.StatusDetails }}</td>
+
                     </tr>
                 </tbody>
             </table>

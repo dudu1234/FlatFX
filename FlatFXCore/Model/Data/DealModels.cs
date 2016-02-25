@@ -146,10 +146,6 @@ namespace FlatFXCore.Model.Data
         public DateTime OrderDate { get; set; }
         [MaxLength(500)]
         public string Comment { get; set; }
-        public bool IsCanceled { get; set; }
-        public bool IsWaiting { get; set; }
-        public bool IsClosed { get; set; }
-        public bool IsConfirmed { get; set; }
         public bool IsDemo { get; set; }
 
         //Statistices
@@ -164,14 +160,14 @@ namespace FlatFXCore.Model.Data
         public double? AmountCCY1_Executed { get; set; }
         public double? AmountCCY1_Remainder { get; set; }
 
+        public Consts.eOrderStatus Status { get; set; }
+        [MaxLength(500)]
+        public string StatusDetails { get; set; }
+
         public Order()
         {
-            //Set the default values
-            IsCanceled = false;
             IsDemo = false;
-            IsWaiting = false;
-            IsClosed = false;
-            IsConfirmed = false;
+            Status = Consts.eOrderStatus.None;
         }
 
         public string CCY1
