@@ -7,12 +7,12 @@
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init()">
     <div class="col-xs-10 col-xs-offset-1 btn-group">
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">Open Deals</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">Deal History</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">Open Orders</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OrderHistory'" ng-change="changeData()">Order History</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'Statistics'" ng-change="changeData()">Statistics</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'SiteStatistics'" ng-change="changeData()">Site Statistics</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">@FlatFXResources.Resources.OpenDeals</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">@FlatFXResources.Resources.DealHistory</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">@FlatFXResources.Resources.OpenOrders</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OrderHistory'" ng-change="changeData()">@FlatFXResources.Resources.OrderHistory</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'Statistics'" ng-change="changeData()">@FlatFXResources.Resources.Statistics</label>
+        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'SiteStatistics'" ng-change="changeData()">@FlatFXResources.Resources.SiteStatistics</label>
     </div>
 
     <div ng-show="radioDataModel == 'OpenDeals' || radioDataModel == 'DealHistory'">
@@ -20,20 +20,18 @@
             <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
                 <thead>
                     <tr class="second-header">
-                        <th ng-class="orderByColumn == 'DealId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('DealId')">Deal Id</a></th>
-                        <th ng-class="orderByColumn == 'Status' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Status')">Status</a></th>
-                        <th ng-class="orderByColumn == 'ContractDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ContractDate')">Contract Date</a></th>
-                        <th ng-class="orderByColumn == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('BuySell')">Buy/Sell</a></th>
-                        @*<th ng-class="orderByColumn == 'ChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ChargedCurrency')">Charged Currency</a></th>*@
-                        <th ng-class="orderByColumn == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeChargedCurrency')">Charged Amount</a></th>
-                        @*<th ng-class="orderByColumn == 'CreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CreditedCurrency')">Credited Currency</a></th>*@
-                        <th ng-class="orderByColumn == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeCreditedCurrency')">Credited Amount</a></th>
-                        <th ng-class="orderByColumn == 'CustomerRate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerRate')">Rate</a></th>
-                        <th ng-class="orderByColumn == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Commission')">Commission USD</a></th>
-                        <th ng-class="orderByColumn == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerTotalProfitUSD')">Profit USD</a></th>
-                        <th ng-class="orderByColumn == 'IsCanceled' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('IsCanceled')">Is Canceled</a></th>
-                        <th ng-class="orderByColumn == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('UserName')">User Name</a></th>
-                        <th ng-class="orderByColumn == 'StatusDetails' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('StatusDetails')">Status Details</a></th>
+                        <th ng-class="orderByColumn == 'DealId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('DealId')">@FlatFXResources.Resources.DealId</a></th>
+                        <th ng-class="orderByColumn == 'Status' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Status')">@FlatFXResources.Resources.Status</a></th>
+                        <th ng-class="orderByColumn == 'ContractDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ContractDate')">@FlatFXResources.Resources.ContractDate</a></th>
+                        <th ng-class="orderByColumn == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('BuySell')">@FlatFXResources.Resources.BuySell</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeChargedCurrency')">@FlatFXResources.Resources.ChargedAmount</a></th>
+                        <th ng-class="orderByColumn == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeCreditedCurrency')">@FlatFXResources.Resources.CreditedAmount</a></th>
+                        <th ng-class="orderByColumn == 'CustomerRate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerRate')">@FlatFXResources.Resources.Rate</a></th>
+                        <th ng-class="orderByColumn == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Commission')">@FlatFXResources.Resources.Commission USD</a></th>
+                        <th ng-class="orderByColumn == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerTotalProfitUSD')">@FlatFXResources.Resources.Profit USD</a></th>
+                        <th ng-class="orderByColumn == 'IsCanceled' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('IsCanceled')">@FlatFXResources.Resources.IsCanceled</a></th>
+                        <th ng-class="orderByColumn == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('UserName')">@FlatFXResources.Resources.UserName</a></th>
+                        <th ng-class="orderByColumn == 'StatusDetails' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('StatusDetails')">@FlatFXResources.Resources.StatusDetails</a></th>
                     </tr>
                 </thead>
                 <tbody>
@@ -66,20 +64,20 @@
             <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
                 <thead>
                     <tr class="second-header">
-                        <th ng-class="orderByColumn == 'OrderId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('OrderId')">Order Id</a></th>
-                        <th ng-class="orderByColumn == 'Status' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Status')">Status</a></th>
-                        <th ng-class="orderByColumn == 'OrderDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('OrderDate')">Order Date</a></th>
-                        <th ng-class="orderByColumn == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('BuySell')">Buy/Sell</a></th>
-                        <th ng-class="orderByColumn == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeChargedCurrency')">Charged Amount</a></th>
-                        <th ng-class="orderByColumn == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountToExchangeCreditedCurrency')">Credited Amount</a></th>
-                        <th ng-class="orderByColumn == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('Commission')">Commission USD Estimation</a></th>
-                        <th ng-class="orderByColumn == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('CustomerTotalProfitUSD')">Profit USD Estimation</a></th>
-                        <th ng-class="orderByColumn == 'MinimalPartnerExecutionAmountCCY1' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('MinimalPartnerExecutionAmountCCY1')">Minimal Partner Execution Amount CCY1</a></th>
-                        <th ng-class="orderByColumn == 'ExpiryDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('ExpiryDate')">Expiry Date</a></th>
-                        <th ng-class="orderByColumn == 'AmountCCY1_Executed' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountCCY1_Executed')">Amount Executed CCY1</a></th>
-                        <th ng-class="orderByColumn == 'AmountCCY1_Remainder' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('AmountCCY1_Remainder')">Amount Remainder CCY1</a></th>
-                        <th ng-class="orderByColumn == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('UserName')">User Name</a></th>
-                        <th ng-class="orderByColumn == 'StatusDetails' ? 'selected' :  ''"><a href="#" ng-click="changeSorting('StatusDetails')">Status Details</a></th>
+                        <th ng-class="orderByColumn2 == 'OrderId' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('OrderId')">@FlatFXResources.Resources.OrderID</a></th>
+                        <th ng-class="orderByColumn2 == 'Status' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('Status')">@FlatFXResources.Resources.Status</a></th>
+                        <th ng-class="orderByColumn2 == 'OrderDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('OrderDate')">@FlatFXResources.Resources.OrderDate</a></th>
+                        <th ng-class="orderByColumn2 == 'BuySell' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('BuySell')">@FlatFXResources.Resources.BuySell</a></th>
+                        <th ng-class="orderByColumn2 == 'AmountToExchangeChargedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('AmountToExchangeChargedCurrency')">@FlatFXResources.Resources.ChargedAmount</a></th>
+                        <th ng-class="orderByColumn2 == 'AmountToExchangeCreditedCurrency' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('AmountToExchangeCreditedCurrency')">@FlatFXResources.Resources.CreditedAmount</a></th>
+                        <th ng-class="orderByColumn2 == 'Commission' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('Commission')">@FlatFXResources.Resources.Commission USD @FlatFXResources.Resources.Estimation</a></th>
+                        <th ng-class="orderByColumn2 == 'CustomerTotalProfitUSD' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('CustomerTotalProfitUSD')">@FlatFXResources.Resources.Profit USD @FlatFXResources.Resources.Estimation</a></th>
+                        <th ng-class="orderByColumn2 == 'MinimalPartnerExecutionAmountCCY1' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('MinimalPartnerExecutionAmountCCY1')">@FlatFXResources.Resources.MinimalPartnerExecutionAmount CCY1</a></th>
+                        <th ng-class="orderByColumn2 == 'ExpiryDate' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('ExpiryDate')">@FlatFXResources.Resources.ExpiryDate</a></th>
+                        <th ng-class="orderByColumn2 == 'AmountCCY1_Executed' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('AmountCCY1_Executed')">@FlatFXResources.Resources.AmountExecuted CCY1</a></th>
+                        <th ng-class="orderByColumn2 == 'AmountCCY1_Remainder' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('AmountCCY1_Remainder')">@FlatFXResources.Resources.AmountRemainder CCY1</a></th>
+                        <th ng-class="orderByColumn2 == 'UserName' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('UserName')">@FlatFXResources.Resources.UserName</a></th>
+                        <th ng-class="orderByColumn2 == 'StatusDetails' ? 'selected' :  ''"><a href="#" ng-click="changeSorting2('StatusDetails')">@FlatFXResources.Resources.StatusDetails</a></th>
                     </tr>
                 </thead>
                 <tbody>

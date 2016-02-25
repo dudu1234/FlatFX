@@ -924,4 +924,64 @@
   <data name="SlideText9" xml:space="preserve">
     <value>You are invited to visit our office at ...</value>
   </data>
+  <data name="AmountExecuted" xml:space="preserve">
+    <value>Amount Executed</value>
+  </data>
+  <data name="AmountRemainder" xml:space="preserve">
+    <value>Amount Remainder</value>
+  </data>
+  <data name="BuySell" xml:space="preserve">
+    <value>Buy/Sell</value>
+  </data>
+  <data name="ChargedAmount" xml:space="preserve">
+    <value>Charged Amount</value>
+  </data>
+  <data name="Commission" xml:space="preserve">
+    <value>Commission</value>
+  </data>
+  <data name="ContractDate" xml:space="preserve">
+    <value>Contract Date</value>
+  </data>
+  <data name="CreditedAmount" xml:space="preserve">
+    <value>Credited Amount</value>
+  </data>
+  <data name="DealHistory" xml:space="preserve">
+    <value>Deal History</value>
+  </data>
+  <data name="DealId" xml:space="preserve">
+    <value>Deal Id</value>
+  </data>
+  <data name="IsCanceled" xml:space="preserve">
+    <value>Is Canceled</value>
+  </data>
+  <data name="OpenDeals" xml:space="preserve">
+    <value>Open Deals</value>
+  </data>
+  <data name="OpenOrders" xml:space="preserve">
+    <value>Open Orders</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>Order Date</value>
+  </data>
+  <data name="OrderHistory" xml:space="preserve">
+    <value>Order History</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>Profit</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>Rate</value>
+  </data>
+  <data name="SiteStatistics" xml:space="preserve">
+    <value>Site Statistics</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>Your Statistics</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>Status</value>
+  </data>
+  <data name="StatusDetails" xml:space="preserve">
+    <value>Status Details</value>
+  </data>
 </root>

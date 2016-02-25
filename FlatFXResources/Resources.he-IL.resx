@@ -903,4 +903,64 @@
   <data name="SlideText9" xml:space="preserve">
     <value>אתה מוזמן לבקר אותנו במשרדינו בכתובת ...</value>
   </data>
+  <data name="AmountExecuted" xml:space="preserve">
+    <value>סכום שבוצע</value>
+  </data>
+  <data name="AmountRemainder" xml:space="preserve">
+    <value>סכום שנותר</value>
+  </data>
+  <data name="BuySell" xml:space="preserve">
+    <value>קניה/מכירה</value>
+  </data>
+  <data name="ChargedAmount" xml:space="preserve">
+    <value>סכום לחיוב</value>
+  </data>
+  <data name="Commission" xml:space="preserve">
+    <value>עמלה</value>
+  </data>
+  <data name="ContractDate" xml:space="preserve">
+    <value>תאריך ההמרה</value>
+  </data>
+  <data name="CreditedAmount" xml:space="preserve">
+    <value>סכום לזיכוי</value>
+  </data>
+  <data name="DealHistory" xml:space="preserve">
+    <value>היסטוריית עיסקאות</value>
+  </data>
+  <data name="DealId" xml:space="preserve">
+    <value>מזהה</value>
+  </data>
+  <data name="IsCanceled" xml:space="preserve">
+    <value>עיסקה מבוטלת</value>
+  </data>
+  <data name="OpenDeals" xml:space="preserve">
+    <value>עיסקאות פתוחות</value>
+  </data>
+  <data name="OpenOrders" xml:space="preserve">
+    <value>הזמנות פתוחות</value>
+  </data>
+  <data name="OrderDate" xml:space="preserve">
+    <value>תאריך ההזמנה</value>
+  </data>
+  <data name="OrderHistory" xml:space="preserve">
+    <value>היסטוריית הזמנות</value>
+  </data>
+  <data name="Profit" xml:space="preserve">
+    <value>רווח</value>
+  </data>
+  <data name="Rate" xml:space="preserve">
+    <value>שער ההמרה</value>
+  </data>
+  <data name="SiteStatistics" xml:space="preserve">
+    <value>סטטיסטיקת האתר</value>
+  </data>
+  <data name="Statistics" xml:space="preserve">
+    <value>הסטטיסטיקה שלך</value>
+  </data>
+  <data name="Status" xml:space="preserve">
+    <value>סטטוס</value>
+  </data>
+  <data name="StatusDetails" xml:space="preserve">
+    <value>פרטי סטטוס</value>
+  </data>
 </root>
