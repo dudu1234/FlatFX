@@ -175,6 +175,9 @@ namespace FlatFXWebClient.Controllers
             if (!CurrencyManager.Instance.PairList.ContainsKey(model.Symbol))
                 TempData["ErrorResult"] += "Invalid currencies combination. ";
 
+            if (model.AmountCCY1 == 0)
+                TempData["ErrorResult"] += "Please select amount. ";
+
             if (TempData["ErrorResult"] != null)
                 return View(model);
 

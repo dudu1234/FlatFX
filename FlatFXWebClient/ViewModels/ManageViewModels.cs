@@ -12,9 +12,15 @@ namespace FlatFXWebClient.ViewModels
 {
     public class DashboardIndexViewModel
     {
-        public string UserName { get; set; }
-        public string CompanyName { get; set; }
-        
+        public string TabName { get; set; }
+
+        public DashboardIndexViewModel()
+        {
+            TabName = "OpenDeals";
+        }
+    }
+    public class DashboardStatisticsViewModel
+    {
         public int SiteTotalVolume { get; set; }
         public int SiteTodayVolume { get; set; }
         public int SiteTotalSavings { get; set; }
@@ -24,8 +30,6 @@ namespace FlatFXWebClient.ViewModels
         public int CompanyTodayVolume { get; set; }
         public int CompanySavings { get; set; }
         public int CompanyNumberOfDeal { get; set; }
-
-        List<Deal> LastDeals { get; set; }
     }
     public class IndexViewModel
     {

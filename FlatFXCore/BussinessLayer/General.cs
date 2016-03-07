@@ -94,7 +94,8 @@ namespace FlatFXCore.BussinessLayer
                 //Set status for all demo deals
                 using (var db = new ApplicationDBContext())
                 {
-                    List<Deal> deals = db.Deals.Where(d => d.IsDemo && d.Status != Consts.eDealStatus.Closed).ToList();
+                    DateTime dt = DateTime.Now.AddDays(-5);
+                    List<Deal> deals = db.Deals.Where(d => d.IsDemo && d.Status != Consts.eDealStatus.Closed && d.MaturityDate < dt).ToList();
                     foreach(Deal deal in deals)
                     {
                         deal.Status = Consts.eDealStatus.Closed;

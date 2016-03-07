@@ -25,39 +25,11 @@ namespace FlatFXWebClient.Controllers
         {
         }
 
-        public ActionResult DashboardIndex()
+        public ActionResult DashboardIndex(string TabName)
         {
             DashboardIndexViewModel model = new DashboardIndexViewModel();
-
-            var userId = User.Identity.GetUserId();
-            ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-
-            model.UserName = user.FullName;
-            model.CompanyName = user.Companies.First().CompanyName;
-
-            // Guy To Do : Change all db.Deals.ToList().Where ... IsRealDeal - to a better loading. Now the query can all deals and then perform the Where section.
-            // a possible solution is to copy the IsRealDeal login to each where section.
-
-            //total volume
-            model.SiteTotalVolume = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => d.AmountUSD).ToInt();
-            model.SiteTodayVolume = db.Deals.Where(d => DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).ToList().Where(d => d.IsRealDeal).
-                Sum(d => (double?)d.AmountUSD).ToInt();
-            model.SiteTotalSavings = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
-            model.SiteTotalNumberOfDeals = db.Deals.ToList().Where(d => d.IsRealDeal).Count();
-            
-            //company volume
-            string companyId = user.Companies.First().CompanyId;
-            model.CompanyVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
-                Sum(d => (double?)d.AmountUSD).ToInt(0);
-            model.CompanyTodayVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).
-                ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.AmountUSD).ToInt(0);
-            model.CompanySavings = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
-                Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
-            model.CompanyNumberOfDeal = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).Count();
+            if (TabName != null)
+                model.TabName = TabName;
 
             return View(model);
         }
@@ -108,9 +80,25 @@ namespace FlatFXWebClient.Controllers
                         dicMonth.Add(dt.ToString("MMMM-yy"), 0);
                 }
 
+                DashboardStatisticsViewModel model = new DashboardStatisticsViewModel();
+
+                // Guy To Do : Change all db.Deals.ToList().Where ... IsRealDeal - to a better loading. Now the query can all deals and then perform the Where section.
+                // a possible solution is to copy the IsRealDeal login to each where section.
+
+                //company volume
+                model.CompanyVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
+                    Sum(d => (double?)d.AmountUSD).ToInt(0);
+                model.CompanyTodayVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).
+                    ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.AmountUSD).ToInt(0);
+                model.CompanySavings = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
+                    Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
+                model.CompanyNumberOfDeal = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).Count();
+
+
                 ActionResult res = Json(new {
                     companyDailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", System.Threading.Thread.CurrentThread.CurrentCulture)),
-                    companyMonthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture)) 
+                    companyMonthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture)),
+                    DashboardStatisticsViewModel = model
                     }, JsonRequestBehavior.AllowGet);
                 
                 return res;
@@ -154,10 +142,23 @@ namespace FlatFXWebClient.Controllers
                         dicMonth.Add(dt.ToString("MMMM-yy"), 0);
                 }
 
+                DashboardStatisticsViewModel model = new DashboardStatisticsViewModel();
+
+                // Guy To Do : Change all db.Deals.ToList().Where ... IsRealDeal - to a better loading. Now the query can all deals and then perform the Where section.
+                // a possible solution is to copy the IsRealDeal login to each where section.
+
+                //total volume
+                model.SiteTotalVolume = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => d.AmountUSD).ToInt();
+                model.SiteTodayVolume = db.Deals.Where(d => DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).ToList().Where(d => d.IsRealDeal).
+                    Sum(d => (double?)d.AmountUSD).ToInt();
+                model.SiteTotalSavings = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
+                model.SiteTotalNumberOfDeals = db.Deals.ToList().Where(d => d.IsRealDeal).Count();
+
                 ActionResult res = Json(new
                 {
                     dailyVolume = dicDays.OrderBy(d => DateTime.ParseExact(d.Key, "MM/dd", System.Threading.Thread.CurrentThread.CurrentCulture)),
-                    monthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture))
+                    monthlyVolume = dicMonth.OrderBy(d => DateTime.ParseExact(d.Key, "MMMM-yy", System.Threading.Thread.CurrentThread.CurrentCulture)),
+                    DashboardStatisticsViewModel = model
                 }, JsonRequestBehavior.AllowGet);
 
                 return res;

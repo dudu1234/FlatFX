@@ -52,7 +52,6 @@
             if (officeHoursOn)
             {
                 <div>
-                    <div id="resultDiv"></div>
                     <div class="col-xs-12 col-md-6 text-center">
                         @Html.Partial("~/Views/OrderBook/OrderBookIndex.cshtml")
                     </div>
@@ -103,6 +102,8 @@
                                             </li>
                                         </ul>
                                     </div>
+
+                                    <div id="resultDiv"></div>
 
                                     @if (Model.WorkflowStage == 1)
                                     {

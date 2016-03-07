@@ -42,19 +42,15 @@
 </head>
 <body ng-app="FlatFXAPP">
     <div class="row">
-        <div id="nav" class="col-xs-12 static">
+        <div id="nav" class="col-xs-12">
             @Html.Partial("MainSiteHeader")
         </div>
     </div>
     <div class="row">
-        <div class="col-xs-12">
-
-            <div id="body">
-                @RenderBody()
-            </div>
+        <div class="col-xs-12" id="body">
+            @RenderBody()
         </div>
     </div>
-    @*<div class="row">filler</div>*@
     <div id="footer" class="row navbar navbar-default navbar-fixed-bottom">
         <div class="row">
             <div class="col-xs-0 col-xs-1"></div>

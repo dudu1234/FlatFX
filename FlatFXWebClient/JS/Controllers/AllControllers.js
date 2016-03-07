@@ -1,8 +1,8 @@
-﻿//localhost
-//var urlPrefix = "/FlatFXWebClient";
-
-//debug
-var urlPrefix = "";
+﻿var urlPrefix = "";
+if (location.hostname != 'localhost')
+{
+    urlPrefix = "/FlatFXWebClient";
+}
 
 myApp.controller('RegisterAll', function ($scope) {
     //console.log('in controller');
@@ -232,9 +232,14 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty) {
-    $scope.init = function () {
+    $scope.init = function (tabName) {
 
-        $scope.radioDataModel = 'OpenDeals';
+        if (tabName === undefined || tabName === null) {
+            alert('undefined');
+            tabName = 'OpenDeals';
+        }
+
+        $scope.radioDataModel = tabName;
 
         $scope.companyChart = "Daily";
         $scope.siteChart = "Daily";
@@ -251,13 +256,23 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $scope.Orders = {};
         $scope.onlyActiveOrders = true;
 
+        $scope.CompanyVolume = "";
+        $scope.CompanyTodayVolume = "";
+        $scope.CompanySavings = "";
+        $scope.CompanyNumberOfDeal = "";
+
+        $scope.SiteTotalVolume = "";
+        $scope.SiteTodayVolume = "";
+        $scope.SiteTotalSavings = "";
+        $scope.SiteTotalNumberOfDeals = "";
+
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
     $scope.ready = function () {
-
-        $scope.RefreshDeals();
+        //$scope.RefreshDeals();
+        $scope.changeData();
     }
     $scope.updateChart = function (chartName, data, fillColor) {
         if (data != null) {
@@ -354,6 +369,11 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         else if ($scope.radioDataModel == 'Statistics') {
             $http.get($scope.GetCompanyVolumeUrl)
                 .success(function (data) {
+                    $scope.CompanyVolume = numberWithCommas(data.DashboardStatisticsViewModel.CompanyVolume) + "$";
+                    $scope.CompanyTodayVolume = numberWithCommas(data.DashboardStatisticsViewModel.CompanyTodayVolume) + "$";
+                    $scope.CompanySavings = numberWithCommas(data.DashboardStatisticsViewModel.CompanySavings) + "$";
+                    $scope.CompanyNumberOfDeal = numberWithCommas(data.DashboardStatisticsViewModel.CompanyNumberOfDeal);
+
                     $scope.updateChart("#dashboardCompanyMonthlyChart", data.companyMonthlyVolume, "rgba(255,100,100,0.8)");
                     $scope.updateChart("#dashboardCompanyDailyChart", data.companyDailyVolume, "rgba(255,0,0,0.8)");
                 })
@@ -364,6 +384,11 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         else if ($scope.radioDataModel == 'SiteStatistics') {
             $http.get($scope.GetSiteVolumeUrl)
                 .success(function (data) {
+                    $scope.SiteTotalVolume = numberWithCommas(data.DashboardStatisticsViewModel.SiteTotalVolume) + "$";
+                    $scope.SiteTodayVolume = numberWithCommas(data.DashboardStatisticsViewModel.SiteTodayVolume) + "$";
+                    $scope.SiteTotalSavings = numberWithCommas(data.DashboardStatisticsViewModel.SiteTotalSavings) + "$";
+                    $scope.SiteTotalNumberOfDeals = numberWithCommas(data.DashboardStatisticsViewModel.SiteTotalNumberOfDeals);
+
                     $scope.updateChart("#dashboardSiteDailyChart", data.dailyVolume, "rgba(200,200,300,0.8)");
                     $scope.updateChart("#dashboardSiteMonthlyChart", data.monthlyVolume, "rgba(100,100,305,0.8)");
                 })

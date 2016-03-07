@@ -250,6 +250,11 @@ namespace FlatFXCore.BussinessLayer
                 m_LastHistoricalUpdate = DateTime.Now;
             }
 
+            DateTime updateTime = results.query.created;
+            updateTime = updateTime.AddHours(2);
+            //string updateTimeStr = results.query.created;
+            //DateTime updateTime = DateTime.ParseExact(updateTimeStr, "yyyy-MM-dd HH:mm:ss ", CultureInfo.InvariantCulture); //"2015-08-05T15:13:41Z"
+
             using (var db = new ApplicationDBContext())
             {
                 foreach (var pairInfo in results.query.results.rate)
@@ -267,8 +272,13 @@ namespace FlatFXCore.BussinessLayer
 
                     string date = pairInfo.Date;
                     string time = pairInfo.Time;
-                    DateTime updateTime = DateTime.ParseExact(date + " " + time.ToLower(), "M/d/yyyy h:mtt", CultureInfo.InvariantCulture);
-                    updateTime = updateTime.AddHours(2);
+                    //DateTime updateTime = DateTime.ParseExact(date + " " + time.ToLower(), "M/d/yyyy h:mtt", CultureInfo.InvariantCulture);
+                    //updateTime = updateTime.AddHours(2);
+                    
+
+                    if ((DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday) && Environment.MachineName == "DUDU-HP")
+                        updateTime = DateTime.Now;
+                    
                     if (CurrencyManager.Instance.LastFeedUpdate < updateTime)
                         CurrencyManager.Instance.LastFeedUpdate = updateTime;
 
@@ -297,7 +307,7 @@ namespace FlatFXCore.BussinessLayer
                         pairData.Ask = ask;
                         pairData.Mid = mid;
                         pairData.LastUpdate = updateTime;
-                        pairData.IsTradable = (pairData.IsActive && pairData.IsActiveForSimpleTrading && (DateTime.Now - updateTime).TotalSeconds < 120) ? true : false; //if the rate was updated in the last 2 minutes
+                        pairData.IsTradable = (pairData.IsActive && pairData.IsActiveForSimpleTrading && (DateTime.Now - updateTime).TotalSeconds < 600) ? true : false; //if the rate was updated in the last 10 minutes
                         pairData.KeyDisplay = CurrencyManager.Instance.PairList[key];
                     }
                     #endregion
@@ -310,8 +320,8 @@ namespace FlatFXCore.BussinessLayer
                         CurrencyManager.Instance.PairRates[key].Mid = mid;
                         CurrencyManager.Instance.PairRates[key].LastUpdate = updateTime;
                         CurrencyManager.Instance.PairRates[key].IsTradable = (CurrencyManager.Instance.PairRates[key].IsActive &&
-                            CurrencyManager.Instance.PairRates[key].IsActiveForSimpleTrading && 
-                            (DateTime.Now - updateTime).TotalSeconds < 120) ? true : false; //if the rate was updated in the last 2 minutes
+                            CurrencyManager.Instance.PairRates[key].IsActiveForSimpleTrading &&
+                            (DateTime.Now - updateTime).TotalSeconds < 600) ? true : false; //if the rate was updated in the last 10 minutes
                         CurrencyManager.Instance.PairRates[key].KeyDisplay = CurrencyManager.Instance.PairList[key];
                     }
                     #endregion
