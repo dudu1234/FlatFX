@@ -1,4 +1,4 @@
-﻿var myApp = angular.module('FlatFXAPP', ['ui.bootstrap', 'notyModule']);
+﻿var myApp = angular.module('FlatFXAPP', ['ui.bootstrap', 'notyModule', 'ngTable']);
 
 //myApp.service('StringManipulationService', function () {
 //    this.myFunction = function (str) {

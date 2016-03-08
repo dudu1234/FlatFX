@@ -187,9 +187,9 @@ mark {
     margin-top: 8px;
 }
 
-.site-header-login-group > a {
-    margin-right: 5px !important;
-}
+    .site-header-login-group > a {
+        margin-right: 5px !important;
+    }
 
 .login-box {
     margin-top: 60px;
@@ -622,6 +622,33 @@ tr.pager td {
     padding-left: 15px;
     font-size: 20px;
     color: white;
+}
+
+.ffx-ng-table > thead .header {
+    background-color: #d9e4b9;
+    font-size: medium;
+    font-weight: 600;
+    width: auto;
+    color: #333;
+    height: auto;
+}
+
+ul.pagination.ng-table-pagination {
+    margin: 0px 30px 10px 30px;
+    font-weight: 600;
+}
+
+.ffx-ng-table > thead > tr > td,
+.ffx-ng-table > thead > tr > th {
+    background-color: lightgray;
+}
+
+.ffx-ng-table > tbody > tr:nth-child(even) {
+    background-color: #edf6fa;
+}
+
+.ffx-ng-table > tbody > tr:nth-child(odd) {
+    /*background-color: #d5f1fa;*/
 }
 
 .ffx-table {

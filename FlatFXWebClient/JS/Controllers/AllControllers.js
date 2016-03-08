@@ -1,6 +1,5 @@
 ﻿var urlPrefix = "";
-if (location.hostname != 'localhost')
-{
+if (location.hostname != 'localhost') {
     urlPrefix = "/FlatFXWebClient";
 }
 
@@ -19,8 +18,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         $scope.bankCommission = 1;
         $scope.isRTL = isRTL;
         $scope.LangDir = "";
-        if ($scope.isRTL == "True")
-        {
+        if ($scope.isRTL == "True") {
             $scope.LangDir = "Hebrew/"
         }
 
@@ -37,8 +35,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
             $scope.slides.push({ header: 'חדר מסחר', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: urlPrefix + '/Images/TradingRoom.jpg' });
             $scope.slides.push({ header: 'כתובת', text: 'אתה מוזמן לבקר אותנו במשרדינו בכתובת ...', image: urlPrefix + '/Images/AddressImage.jpg' });
         }
-        else
-        {
+        else {
             $scope.slides.push({ header: 'Order Book', text: 'Find an order that best match your currency exchange requirements', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_OrderBook.png' });
             $scope.slides.push({ header: 'Create Order', text: 'Enter new currency exchange order and wait for other site user to match your order', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_CreateOrder.png' });
             $scope.slides.push({ header: 'Manage Deals', text: 'Manage your deals & orders. edit, cancel and explore.', image: urlPrefix + '/Images/' + $scope.LangDir + 'Crousel_ManageDeals.png' });
@@ -231,7 +228,7 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty) {
+myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty, NgTableParams) {
     $scope.init = function (tabName) {
 
         if (tabName === undefined || tabName === null) {
@@ -248,12 +245,12 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
         $scope.dealsUrl = urlPrefix + "/Dashboard/GetDeals";
         $scope.orderByColumn = 'DealId';
-        $scope.Deals = {};
+        $scope.dealTableParams = new NgTableParams({ count: 10 }, { data: [] });
         $scope.onlyActiveDeals = true;
 
         $scope.ordersUrl = urlPrefix + "/Dashboard/GetOrders";
         $scope.orderByColumn2 = 'OrderId';
-        $scope.Orders = {};
+        $scope.orderTableParams = new NgTableParams({ count: 10 }, { data: [] });
         $scope.onlyActiveOrders = true;
 
         $scope.CompanyVolume = "";
@@ -266,12 +263,15 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $scope.SiteTotalSavings = "";
         $scope.SiteTotalNumberOfDeals = "";
 
+        $scope.BuySellFilterData = [{ id: '', title: 'All' }, { id: 1, title: 'Buy' }, { id: 2, title: 'Sell' }];
+        $scope.DealStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'CustomerTransfer', title: 'Customer Transfer' }, { id: 'FlatFXTransfer', title: 'FlatFX Transfer' }, { id: 'Closed', title: 'Closed' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }];
+        $scope.OrderStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'Waiting', title: 'Waiting' }, { id: 'Triggered', title: 'Triggered' }, { id: 'Closed_Successfully', title: 'Closed Successfully' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }, { id: 'Expired', title: 'Expired' }, { id: 'Triggered_partially', title: 'Triggered partially' }];
+        $scope.IsCancelFilterData = [{ id: '', title: 'All' }, { id: 'false', title: 'false' }, { id: 'true', title: 'true' }];
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
     $scope.ready = function () {
-        //$scope.RefreshDeals();
         $scope.changeData();
     }
     $scope.updateChart = function (chartName, data, fillColor) {
@@ -316,10 +316,18 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $http.get($scope.dealsUrl, { params: { onlyActiveDeals: $scope.onlyActiveDeals } })
             .success(function (data, status, headers, config) {
                 try {
-                    $scope.Deals = data.Deals;
+                    var tableParams = {
+                        count: 10
+                    };
+                    var tableSettings = {
+                    };
+                    tableSettings.data = data.Deals;
+                    $scope.dealTableParams = new NgTableParams(tableParams, tableSettings);
                 }
                 catch (err) {
-                    $scope.Deals = {};
+                    $scope.dealTableParams = [];
+                    $scope.dealData = {
+                    };
                 }
             })
             .error(function (data, status, header, config) {
@@ -334,10 +342,16 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $http.get($scope.ordersUrl, { params: { onlyActiveOrders: $scope.onlyActiveOrders } })
             .success(function (data, status, headers, config) {
                 try {
-                    $scope.Orders = data.Orders;
+                    var tableParams = {
+                        count: 10
+                    };
+                    var tableSettings = {
+                    };
+                    tableSettings.data = data.Orders;
+                    $scope.orderTableParams = new NgTableParams(tableParams, tableSettings);
                 }
                 catch (err) {
-                    $scope.Orders = {};
+                    $scope.orderTableParams = [];
                 }
             })
             .error(function (data, status, header, config) {
@@ -347,18 +361,6 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                     "<br />config: " + jsonFilter(config);
             });
     };
-    $scope.changeSorting = function (columnName) {
-        if ($scope.orderByColumn == columnName)
-            $scope.orderByColumn = "-" + columnName;
-        else
-            $scope.orderByColumn = columnName;
-    }
-    $scope.changeSorting2 = function (columnName) {
-        if ($scope.orderByColumn2 == columnName)
-            $scope.orderByColumn2 = "-" + columnName;
-        else
-            $scope.orderByColumn2 = columnName;
-    }
     $scope.changeData = function () {
         if ($scope.radioDataModel == 'OpenDeals' || $scope.radioDataModel == 'DealHistory') {
             $scope.RefreshDeals();
@@ -554,8 +556,10 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
         $scope.minAmountBuy = 0;
         $scope.orderBySell = 'MaxAmount';
         $scope.orderByBuy = 'MaxAmount';
-        $scope.OrdersToBuy = {};
-        $scope.OrdersToSell = {};
+        $scope.OrdersToBuy = {
+        };
+        $scope.OrdersToSell = {
+        };
         $scope.Pairs = null;
     };
 
@@ -585,8 +589,10 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
                     $scope.OrdersToSell = data.OrdersToSell;
                 }
                 catch (err) {
-                    $scope.OrdersToBuy = {};
-                    $scope.OrdersToSell = {};
+                    $scope.OrdersToBuy = {
+                    };
+                    $scope.OrdersToSell = {
+                    };
                     $scope.MidRate = 0;
                 }
             })
