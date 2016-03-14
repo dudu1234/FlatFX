@@ -235,6 +235,36 @@ namespace FlatFXWebClient.Controllers
                 return null;
             }
         }
+
+        public ActionResult Cancel(string type, long id)
+        {
+            try
+            {
+                if (type != "Deal" && type != "Order")
+                    return Json(new { Error = "Invalid Parameters" }, JsonRequestBehavior.AllowGet);
+                
+                if (type == "Deal")
+                {
+                    Deal deal = db.Deals.Where(d => d.DealId == id).SingleOrDefault();
+                    deal.IsCanceled = true;
+                    deal.Status = Consts.eDealStatus.Canceled;
+                    db.SaveChanges();
+                }
+                else
+                {
+                    Order order = db.Orders.Where(o => o.OrderId == id).SingleOrDefault();
+                    order.Status = Consts.eOrderStatus.Canceled;
+                    db.SaveChanges();
+                }
+
+                return Json(new { Error = "" }, JsonRequestBehavior.AllowGet);
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in GetOrders", ex);
+                return Json(new { Error = "General Error" }, JsonRequestBehavior.AllowGet);
+            }
+        }
     }
 
     public class DealItem

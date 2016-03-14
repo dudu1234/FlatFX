@@ -228,7 +228,7 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty, NgTableParams) {
+myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty, NgTableParams, noty) {
     $scope.init = function (tabName) {
 
         if (tabName === undefined || tabName === null) {
@@ -252,6 +252,8 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $scope.orderByColumn2 = 'OrderId';
         $scope.orderTableParams = new NgTableParams({ count: 10 }, { data: [] });
         $scope.onlyActiveOrders = true;
+
+        $scope.cancelUrl = urlPrefix + "/Dashboard/Cancel";
 
         $scope.CompanyVolume = "";
         $scope.CompanyTodayVolume = "";
@@ -320,6 +322,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                         count: 10
                     };
                     var tableSettings = {
+                        filterDelay: 0
                     };
                     tableSettings.data = data.Deals;
                     $scope.dealTableParams = new NgTableParams(tableParams, tableSettings);
@@ -346,6 +349,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
                         count: 10
                     };
                     var tableSettings = {
+                        filterDelay: 0
                     };
                     tableSettings.data = data.Orders;
                     $scope.orderTableParams = new NgTableParams(tableParams, tableSettings);
@@ -402,18 +406,61 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
             $scope.Deals = null;
         }
     }
+
+    $scope.cancelOrder = function (orderId, order) {
+        //if (!window.confirm("Are you sure you want to cancel order #" + orderId + "?"))
+        //  return;
+
+        $http.get($scope.cancelUrl, { params: { type: 'Order', id: orderId } })
+        .success(function (data, status, headers, config) {
+            try {
+                if (data.Error == "") {
+                    notyWrapper.generateResultMessage($('#resultDiv'), 'success', 'Order #' + orderId + ' was canceled');
+                    order.Status = "Canceled";
+                }
+                else {
+                    notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+                }
+            }
+            catch (err) {
+                notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+            }
+        })
+        .error(function (data, status, header, config) {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+        }); 
+    }
+    $scope.EditOrder = function (orderId) {
+        window.location.href = urlPrefix + "/Order/EditOrder?orderId=" + orderId;
+    }
 });
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
-    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
         $scope.actionDescription = "";
         $scope.amountCcy1 = amountCCY1;
         $scope.CCY1Sign = "$";
+
+        if (dExpiryDate == 0) {
+            $scope.expiryDateChkModel = false;
+            $scope.ExpiryDateModel = '';
+        }
+        else {
+            $scope.expiryDateChkModel = true;
+            $scope.ExpiryDateModel = new Date(dExpiryDate);
+        }
+
+        if (MinimalPartnerExecutionAmountCCY1 == 0) {
+            $scope.minimalPartnerExecutionAmountChkModel = false;
+        }
+        else {
+            $scope.minimalPartnerExecutionAmountChkModel = true;
+        }
     };
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
@@ -428,13 +475,23 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
         $scope.Symbol = $('#Symbol').val();
         $('#' + $scope.Symbol).click();
 
-        $('#GTC').show();
-        $scope.ExpiryDateModel = '';
-        $("#ExpiryDate").hide();
+        if ($scope.ExpiryDateModel == '') {
+            $('#GTC').show();
+            $("#ExpiryDate").hide();
+        }
+        else {
+            $('#ExpiryDate').show();
+            $("#GTC").hide();
+        }
 
-        $('#AllAmount').show();
-        $scope.minimalPartnerExecutionAmountChkModel = 0;
-        $("#MinimalPartnerExecutionAmountCCY1").hide();
+        if ($scope.minimalPartnerExecutionAmountChkModel == false) {
+            $('#AllAmount').show();
+            $("#MinimalPartnerExecutionAmountCCY1").hide();
+        }
+        else {
+            $('#MinimalPartnerExecutionAmountCCY1').show();
+            $("#AllAmount").hide();
+        }
 
         //$("#PromilSlider").slider({
         //    //range: "min",
@@ -525,12 +582,11 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
     $scope.minimalPartnerCheckboxEvent = function ($event) {
         if ($event) {
             $('#AllAmount').hide();
-            $scope.minimalPartnerExecutionAmountChkModel = 0;
             $("#MinimalPartnerExecutionAmountCCY1").show();
         }
         else {
             $('#AllAmount').show();
-            $scope.minimalPartnerExecutionAmountChkModel = 0;
+            $("#MinimalPartnerExecutionAmountCCY1").val('');
             $("#MinimalPartnerExecutionAmountCCY1").hide();
         }
     }

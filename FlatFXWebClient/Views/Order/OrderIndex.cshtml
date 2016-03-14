@@ -14,10 +14,13 @@
         controllerAction = "Confim";
     }
     bool officeHoursOn = true;
+
+    double MinimalPartnerExecutionAmountCCY1 = (Model.MinimalPartnerExecutionAmountCCY1.HasValue) ? Model.MinimalPartnerExecutionAmountCCY1.Value : 0;
+    double dExpiryDate = (Model.ExpiryDate.HasValue)? Model.ExpiryDate.Value.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds : 0;
 }
 <div class="order-system-wrapper">
     <div ng-controller="OrderCurrencyExchange"
-         ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1)"
+         ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1)"
          class="order-currency-exchange-main">
         @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
@@ -108,7 +111,15 @@
                                     @if (Model.WorkflowStage == 1)
                                     {
                                         <div>
-                                            @Html.Partial("~/Views/Order/OrderCreation.cshtml", Model)
+                                            @if (Model.OrderId == 0)
+                                            {
+                                                @Html.Partial("~/Views/Order/OrderCreation.cshtml", Model)
+                                            }
+                                            else
+                                            {
+                                                @Html.Partial("~/Views/Order/OrderEdit.cshtml", Model)
+                                            }
+
                                         </div>
                                     }
                                     else if (Model.WorkflowStage == 2)

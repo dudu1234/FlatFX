@@ -27,12 +27,7 @@
 }
 else
 {
-    <div class="form-group">
-        <remark class="control-label col-md-12">
-            @Html.Raw(@FlatFXResources.Resources.OrderRemark)
-        </remark>
-    </div>
-    <div class="form-group small-line" ng-click="updateAction()">
+    <div class="form-group small-line disabled" ng-click="updateAction()">
         <label class="control-label col-md-3 label-down">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
         <div class="col-md-4 no-side-margin order-radio-div">
             @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" })
@@ -43,7 +38,7 @@ else
             <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
         </div>
     </div>
-    <div class="form-group pairList">
+    <div class="form-group pairList disabled">
         <label class="control-label col-md-3">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
         @Html.HiddenFor(model => model.Symbol)
 
@@ -74,19 +69,6 @@ else
             </div>
         </div>
     </div>
-    @*<div class="form-group">
-            <label class="control-label col-md-4">@FlatFXResources.Resources.SelectRequiredSpread:</label>
-            <div class="col-md-7">
-                <span id="PromilText">@FlatFXResources.Resources.MidRate + {{ promilRequired * 0.001 * 100 | number:1 }}%</span>
-                <div id="PromilSlider"></div>
-                @Html.HiddenFor(model => model.PromilRequired)
-                <br /><br />
-                <span class="start-align col-md-12">
-                    <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
-                    @FlatFXResources.Resources.BankSpreadIs
-                </span>
-            </div>
-        </div>*@
     <div class="form-group">
         <div class="col-md-3">
             <label class="control-label">
@@ -101,50 +83,51 @@ else
     <div class="form-group">
         <div class="col-md-3">
             <label class="control-label">
-                <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
-            </label>
+                <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel"
+                       ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
+                </label>
+            </div>
+            <div class="col-md-8">
+                @Html.EditorFor(model => model.MinimalPartnerExecutionAmountCCY1, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
+                @Html.ValidationMessageFor(m => m.MinimalPartnerExecutionAmountCCY1, "", new { @class = "text-danger" })
+                <label name="AllAmount" id="AllAmount" class="control-label">@FlatFXResources.Resources.AllAmount</label>
+            </div>
         </div>
-        <div class="col-md-8">
-            @Html.EditorFor(model => model.MinimalPartnerExecutionAmountCCY1, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-            @Html.ValidationMessageFor(m => m.MinimalPartnerExecutionAmountCCY1, "", new { @class = "text-danger" })
-            <label name="AllAmount" id="AllAmount" class="control-label">@FlatFXResources.Resources.AllAmount</label>
+        <div class="form-group disabled">
+            @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-8">
-            @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3" })
+            <div class="col-md-8">
+                @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-md-3" })
-        <div class="col-md-8">
-            @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group">
+            <label class="control-label col-md-3">@FlatFXResources.Resources.ActionDescription:</label>
+            <div class="col-md-8">
+                <label class="control-label order-action-description">{{ actionDescription }}</label>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-md-3">@FlatFXResources.Resources.ActionDescription:</label>
-        <div class="col-md-8">
-            <label class="control-label order-action-description">{{ actionDescription }}</label>
+        <div class="form-group">
+            <span class="start-align col-md-12 col-md-offset-3">
+                <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+                @FlatFXResources.Resources.BankSpreadIs
+            </span>
         </div>
-    </div>
-    <div class="form-group">
-        <span class="start-align col-md-12 col-md-offset-3">
-            <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
-            @FlatFXResources.Resources.BankSpreadIs
-        </span>
-    </div>
 
-    <div class="form-group">
-        <div class="text-center col-md-12">
-            @if (ApplicationInformation.Instance.IsDemoUser)
-            {
-                <input type="submit" value="@FlatFXResources.Resources.OrderSubmitDemo" class="btn btn-primary" />
-            }
-            else
-            {
-                <input type="submit" value="@FlatFXResources.Resources.OrderSubmit1" class="btn btn-primary" />
-            }
+        <div class="form-group">
+            <div class="text-center col-md-12">
+                @if (ApplicationInformation.Instance.IsDemoUser)
+                {
+                    <input type="submit" value="@FlatFXResources.Resources.OrderSubmitDemo" class="btn btn-primary" />
+                }
+                else
+                {
+                    <input type="submit" value="@FlatFXResources.Resources.OrderSubmit1" class="btn btn-primary" />
+                }
+            </div>
         </div>
-    </div>
 }

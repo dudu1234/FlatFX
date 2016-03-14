@@ -24,6 +24,27 @@ namespace FlatFXWebClient.Controllers
         public const double FlatFXProfitInPromil = 0.002;
         public const double CustomerProfitInPromil = 0.008;
 
+        public async Task<ActionResult> EditOrder(long orderId)
+        {
+            OrderViewModel model = new OrderViewModel();
+            Order order = db.Orders.Where(o => o.OrderId == orderId).SingleOrDefault();
+            if (order == null)
+                return RedirectToAction("OrderIndex", model);
+
+            await Initialize(model);
+            model.AmountCCY1 = order.AmountCCY1;
+            model.BuySell = order.BuySell;
+            model.Comment = order.Comment;
+            model.ExpiryDate = order.ExpiryDate;
+            model.MinimalPartnerExecutionAmountCCY1 = order.MinimalPartnerExecutionAmountCCY1;
+            model.order = order;
+            model.OrderId = order.OrderId;
+            //model.SelectedAccount = 
+            model.Symbol = order.Symbol;
+            //model.WorkflowStage = 
+            return RedirectToAction("OrderIndex", model);
+        }
+
         public async Task<ActionResult> OrderIndex(OrderViewModel model)
         {
             if (model.WorkflowStage <= 0)
@@ -178,6 +199,9 @@ namespace FlatFXWebClient.Controllers
             if (model.AmountCCY1 == 0)
                 TempData["ErrorResult"] += "Please select amount. ";
 
+            if (model.MinimalPartnerExecutionAmountCCY1 != null && model.AmountCCY1 < model.MinimalPartnerExecutionAmountCCY1)
+                TempData["ErrorResult"] += "Invalid minimal partner execution amount. ";
+
             if (TempData["ErrorResult"] != null)
                 return View(model);
 
@@ -185,18 +209,46 @@ namespace FlatFXWebClient.Controllers
             {
                 // to do support this fields on next stage
                 //deal.ChargedProviderAccount
+                if (model.OrderId > 0) //Edit mode
+                {
+                    //change only the fields that are relevant for editing order
+                    order = db.Orders.Where(o => o.OrderId == model.OrderId).SingleOrDefault();
+                    if (order == null)
+                    {
+                        TempData["ErrorResult"] += "Invalid minimal partner execution amount. ";
+                        return View(model);
+                    }
+                    if (order.Status != Consts.eOrderStatus.Waiting)
+                    {
+                        TempData["ErrorResult"] += "This order is already triggered and can not be edited. Only 'Waiting' orders can be edited. ";
+                        return View(model);
+                    }
 
-                order.BuySell = model.BuySell;
-                order.Symbol = model.Symbol;
-                FXRate pairRate = CurrencyManager.Instance.PairRates[order.Symbol];
-                order.OrderDate = DateTime.Now; //Request Date
-                order.AmountCCY1 = model.AmountCCY1;
-                order.AmountCCY1_Executed = 0;
-                order.AmountCCY1_Remainder = order.AmountCCY1;
-                order.Comment = model.Comment;
-                order.ExpiryDate = model.ExpiryDate;
-                order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                
+                    string txt = order.CompanyAccount.Company.CompanyName;
+                    txt = order.ChargedProviderAccount.Provider.FullName;
+                    txt = order.ChargedProviderAccount.AccountName;
+                    txt = order.user.FullName;
+                    order.OrderDate = DateTime.Now; //Request Date
+                    order.AmountCCY1 = model.AmountCCY1;
+                    order.AmountCCY1_Executed = 0;
+                    order.AmountCCY1_Remainder = order.AmountCCY1;
+                    order.Comment = model.Comment;
+                    order.ExpiryDate = model.ExpiryDate;
+                    order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                }
+                else
+                {
+                    order.BuySell = model.BuySell;
+                    order.Symbol = model.Symbol;
+                    order.OrderDate = DateTime.Now; //Request Date
+                    order.AmountCCY1 = model.AmountCCY1;
+                    order.AmountCCY1_Executed = 0;
+                    order.AmountCCY1_Remainder = order.AmountCCY1;
+                    order.Comment = model.Comment;
+                    order.ExpiryDate = model.ExpiryDate;
+                    order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                }
+
                 //calculate AmountUSD_Estimation (volume)
                 if (order.CCY1 == "USD")
                     order.AmountUSD_Estimation = order.AmountCCY1;
@@ -213,13 +265,15 @@ namespace FlatFXWebClient.Controllers
                 
                 model.order = order;
 
-                db.Orders.Attach(order);
-                db.Entry(order).State = EntityState.Added;
+                if (model.OrderId == 0)
+                {
+                    db.Orders.Attach(order);
+                    db.Entry(order).State = EntityState.Added;
+                }
                 db.SaveChanges();
 
                 model.OrderId = order.OrderId;
                 model.WorkflowStage = 2;
-
                 ApplicationInformation.Instance.Session[model.OrderKey] = order;
                 return RedirectToAction("OrderIndex", model);
             }

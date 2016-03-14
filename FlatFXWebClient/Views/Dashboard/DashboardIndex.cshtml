@@ -15,6 +15,8 @@
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'SiteStatistics'" ng-change="changeData()">@FlatFXResources.Resources.SiteStatistics</label>
     </div>
 
+    <div id="resultDiv" class="col-xs-10 col-xs-offset-1"></div>
+
     <div ng-show="radioDataModel == 'OpenDeals' || radioDataModel == 'DealHistory'">
         <div class="col-xs-10 col-xs-offset-1 data-area">
             <table ng-table="dealTableParams" class="table table-responsive table-bordered table-hover table-striped ffx-ng-table" show-filter="true">
@@ -56,6 +58,10 @@
                     <td title="'@FlatFXResources.Resources.AmountRemainder CCY1'" filter="{ AmountCCY1_Remainder: 'number'}" sortable="'AmountCCY1_Remainder'">{{ order.AmountCCY1_Remainder | number:0 }}</td>
                     <td title="'@FlatFXResources.Resources.UserName'" filter="{ UserName: 'number'}" sortable="'UserName'">{{ order.UserName }}</td>
                     <td title="'@FlatFXResources.Resources.StatusDetails'" filter="{ StatusDetails: 'number'}" sortable="'StatusDetails'">{{ order.StatusDetails }}</td>
+                    <td class="table-btn-td-2">
+                        <a class="btn btn-default btn-sm" ng-click="EditOrder(order.OrderId)" ng-if="order.Status =='Waiting' "><span class=" glyphicon glyphicon-pencil"></span></a>
+                        <button class="btn btn-danger btn-sm" ng-click="cancelOrder(order.OrderId, order)" ng-if="order.Status == 'Waiting'"><span class="glyphicon glyphicon-trash"></span></button>
+                    </td>
                 </tr>
             </table>
         </div>

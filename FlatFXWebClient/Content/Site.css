@@ -651,6 +651,11 @@ ul.pagination.ng-table-pagination {
     /*background-color: #d5f1fa;*/
 }
 
+.table-btn-td-2 {
+    width: 100px;
+    min-width: 100px;
+}
+
 .ffx-table {
     background-color: #e4f6ae;
     border: double;
@@ -1364,4 +1369,13 @@ textarea {
 
 .carousel-indicators .active {
     background-color: black;
+}
+
+div.disabled
+{
+  pointer-events: none;
+
+  /* for "disabled" effect */
+  opacity: 0.5;
+  background: #CCC;
 }

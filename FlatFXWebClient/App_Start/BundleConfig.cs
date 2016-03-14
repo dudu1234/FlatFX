@@ -53,7 +53,8 @@ namespace FlatFXWebClient
             bundles.Add(new ScriptBundle("~/bundles/noty").Include(
                         "~/Scripts/jquery.noty.packaged.js",
                         "~/Scripts/angular-noty.js",
-                        "~/Scripts/ui-bootstrap-tpls-0.12.0.min.js"
+                        "~/Scripts/ui-bootstrap-tpls-0.12.0.min.js",
+                        "~/Scripts/bootstrap-confirmation.js"
                         ));
 
             bundles.Add(new StyleBundle("~/bundles/RightToLeft1css").Include(
