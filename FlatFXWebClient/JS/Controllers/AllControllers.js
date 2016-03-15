@@ -1,5 +1,5 @@
 ﻿var urlPrefix = "";
-if (location.hostname != 'localhost') {
+if (location.hostname == 'dudu-hp') {
     urlPrefix = "/FlatFXWebClient";
 }
 
@@ -51,7 +51,6 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         $scope.ready();
     }, 0);
     $scope.ready = function () {
-
     }
     $scope.BankCommission = function () {
         if ($scope.spreadDiscount === undefined)
