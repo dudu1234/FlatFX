@@ -44,20 +44,19 @@
     <script src="~/JS/Controllers/AllControllers.js"></script>
 </head>
 <body ng-app="FlatFXAPP">
-    <div class="row">
+    <div class="row clearfix">
         <div id="nav" class="col-xs-12">
             @Html.Partial("MainSiteHeader")
         </div>
     </div>
-    <div class="row">
+    <div class="row clearfix">
         <div class="col-xs-12" id="body">
             @RenderBody()
         </div>
     </div>
-    <div id="footer" class="row navbar navbar-default navbar-fixed-bottom">
-        <div id="footer2" class="row">
-            <div class="col-xs-0 col-md-1"></div>
-            <div id="nav" class="col-xs-4 col-md-3">
+    <div id="footer" class="row clearfix navbar navbar-default navbar-fixed-bottom">
+        <div id="footer2" class="row clearfix">
+            <div id="nav" class="col-xs-5 col-xs-offset-1 col-md-3 col-md-offset-1">
                 <b>@FlatFXResources.Resources.Product</b><br />
                 @*<a href="@Url.Action("Index", "Home")#Movie">@FlatFXResources.Resources.MenuMovie</a><br />*@
                 <a href="@Url.Action("Index", "Home")#HowItWorks">@FlatFXResources.Resources.MenuHowItWorks</a><br />
@@ -70,7 +69,7 @@
             </div>
             @if (User.IsInRole(Consts.Role_Administrator) || User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))
             {
-                <div id="nav" class="col-xs-4 col-md-3">
+                <div id="nav" class="col-xs-5 col-xs-offset-1 col-md-3 col-md-offset-0">
                     <b>@FlatFXResources.Resources.UserManage</b><br />
                     <a href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.UserManage</a><br />
                     <a href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.EditUserDetails</a><br />
@@ -78,18 +77,15 @@
                 </div>
             }
 
-            <div id="nav" class="col-xs-4 col-md-4">
+            <div id="nav" class="col-xs-5 col-xs-offset-0 col-md-pull-1 col-md-4 col-md-offset-0 col-md-pull-1">
                 <b>@FlatFXResources.Resources.ContactUs</b><br />
-                @FlatFXResources.Resources.OfficePhone: 0548-036601<br />
-                @FlatFXResources.Resources.Email: <a href="mailto:info@FlatFX.com">info@FlatFX.com</a><br />
-                @FlatFXResources.Resources.Address: Ramat Gan, Israel<br />
+                <a href="#">@FlatFXResources.Resources.OfficePhone: 0548-036601</a><br />
+                <a href="mailto:info@FlatFX.com">@FlatFXResources.Resources.Email: info@FlatFX.com</a><br />
+                <a href="#">@FlatFXResources.Resources.Address: Ramat Gan, Israel</a><br />
             </div>
-            <div class="col-xs-0 col-md-1"></div>
         </div>
-        <div class="row copyright">
-            <div class="col-xs-1"></div>
-            <div id="nav" class="col-xs-10 text-left">&nbsp;&nbsp;Copyright © 2015 FlatFX Limited</div>
-            <div class="col-xs-1"></div>
+        <div class="row clearfix copyright">
+            <div id="nav" class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-11 text-left">&nbsp;&nbsp;Copyright © 2015 FlatFX Limited</div>
         </div>
     </div>
 </body>

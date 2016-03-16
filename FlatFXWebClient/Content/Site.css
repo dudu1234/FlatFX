@@ -14,7 +14,6 @@ body {
     background-color: white;
     border-top: solid 10px #000;
     color: #333;
-    /*font-size: 16px; */
     font-weight: 300; /*TEST*/
     font-family: "Segoe UI", Verdana, Helvetica, Sans-Serif;
     margin: 0;
@@ -22,6 +21,7 @@ body {
     direction: ltr;
     /*background: url("../Images/sitebg8.jpg") no-repeat center center fixed;*/
     background-size: cover;
+    font-size: 16px;
 }
 
 .not-active-a {
@@ -32,7 +32,11 @@ body {
 }
 
 li a {
-    font-size: 15px;
+    font-size: 0.95em;
+}
+
+.site-menu li a {
+    font-size: 1.1em;
 }
 
 a {
@@ -77,6 +81,8 @@ mark {
 #body {
     clear: both;
     min-height: calc(81vh - 100px);
+    padding-right: 0px;
+    padding-left: 0px;
 }
 
 .site-header {
@@ -155,12 +161,14 @@ mark {
 
     #footer b {
         color: white;
-        font-size: medium;
+        font-size: 1em;
     }
 
     #footer .copyright {
         color: white;
-        font-size: x-small;
+        font-size: 0.8em;
+        margin-top: 10px;
+        margin-bottom: 10px;
     }
 
 
@@ -392,8 +400,6 @@ table {
 }
 
 th {
-    /*font-size: 1.2em;*/
-    /*text-align: left;*/
     border: none 0px;
     padding-left: 0;
 }
@@ -423,7 +429,6 @@ th {
             position: absolute;
             right: 0em;
             top: 0;
-            /*font-size: 0.75em;*/
         }
 
         th.asc a:after {
@@ -464,7 +469,6 @@ tr.pager td {
 
     /* login */
     #login {
-        /*font-size: .85em;*/
         margin: 0 0 12px;
         text-align: center;
     }
@@ -553,7 +557,6 @@ tr.pager td {
     margin: 0 0 0 10px;
 }
 
-
 /* make sidebar nav vertical */
 @media (min-width: 768px) {
     .sidebar-nav .navbar .navbar-collapse {
@@ -603,7 +606,7 @@ tr.pager td {
     height: 50px;
     padding-top: 15px;
     padding-left: 15px;
-    font-size: 20px;
+    font-size: 1.25em;
     color: white;
 }
 
@@ -612,13 +615,13 @@ tr.pager td {
     height: 50px;
     padding-top: 15px;
     padding-left: 15px;
-    font-size: 20px;
+    font-size: 1.25em;
     color: white;
 }
 
 .ffx-ng-table > thead .header {
     background-color: #d9e4b9;
-    font-size: medium;
+    font-size: 1em;
     font-weight: 600;
     width: auto;
     color: #333;
@@ -661,6 +664,10 @@ table.ffx-table tr td a {
     text-decoration: underline;
 }
 
+.table-order-wrapper {
+    padding: 5px;
+}
+
 .table-order-buy {
     background-color: #eff8d3;
 }
@@ -691,7 +698,7 @@ table.ffx-table tr td a {
     }
 
 .large-font {
-    font-size: large;
+    font-size: 1.125em;
 }
 
 .red {
@@ -733,11 +740,11 @@ table.ffx-table tr td a {
 }
 
 .forgot-your-password {
-    font-size: x-small;
+    font-size: 0.625em;
 }
 
 .remember-me {
-    font-size: x-small;
+    font-size: 0.625em;
     margin-left: 20px;
     margin-top: 0px;
     display: inline;
@@ -777,7 +784,6 @@ table.ffx-table tr td a {
     border-radius: 5px;
     padding: 10px;
     color: #fff;
-    /*font-size: 12px;*/
 }
 
 .ffx-panel {
@@ -787,7 +793,7 @@ table.ffx-table tr td a {
 
 
 .panel-title {
-    font-size: 20px;
+    font-size: 1.25em;
     text-align: center;
     font-weight: bold;
 }
@@ -795,11 +801,11 @@ table.ffx-table tr td a {
 /* simple-currency-exchange Window */
 
 .simple-currency-exchange-wrapper {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .simple-currency-exchange {
-    margin: 15px;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -813,7 +819,7 @@ table.ffx-table tr td a {
 .exchange-system-header {
     background-color: #209448;
     color: white;
-    font-size: 40px;
+    font-size: 2.5em;
     font-weight: 800;
     text-align: center;
     padding: 5px;
@@ -824,16 +830,16 @@ table.ffx-table tr td a {
 }
 
 .exchange-system-icon {
-    font-size: 25px;
+    font-size: 1em;
 }
 
 /* Order Window */
 .order-system-wrapper {
-    margin-top: 10px;
+    /*margin-top: 10px;*/
 }
 
 .order-currency-exchange-main {
-    margin: 15px;
+    margin: 0px;
     padding: 0px;
 }
 
@@ -843,8 +849,12 @@ table.ffx-table tr td a {
 }
 
 .order-book-panel {
-    padding: 15px;
+    padding: 0px;
     padding-top: 0px;
+}
+
+.order-book-panel .panel-body {
+    padding: 5px;
 }
 
     .order-book-panel .form-group label {
@@ -877,7 +887,7 @@ table.ffx-table tr td a {
 .order-system-header {
     background-color: #209448;
     color: white;
-    font-size: 40px;
+    font-size: 2.5em;
     font-weight: 800;
     text-align: center;
     padding: 5px;
@@ -888,7 +898,7 @@ table.ffx-table tr td a {
 }
 
 .order-system-icon {
-    font-size: 25px;
+    font-size: 1em;
 }
 
 .pairList table {
@@ -918,7 +928,7 @@ table.ffx-table tr td a {
 
 .order-action-description {
     color: #209448;
-    font-size: large;
+    font-size: 1.125em;
     font-weight: 700;
     border-radius: 10px;
 }
@@ -967,7 +977,7 @@ table.ffx-table tr td a {
 }
 
 .large-glyphicon {
-    font-size: 22px;
+    font-size: 1.8em;
 }
 
 .order-value {
@@ -1040,17 +1050,16 @@ textarea {
     .order-radio-div input[type="radio"]:checked + span {
         color: black;
         font-weight: bold;
-        /*font-size: medium;*/
     }
 
 .countdown-enabled {
-    font-size: 50px;
+    font-size: 3em;
     color: green;
     font-weight: 700;
 }
 
 .countdown-disabled {
-    font-size: 50px;
+    font-size: 3em;
     color: red;
     font-weight: 300;
 }
@@ -1065,17 +1074,17 @@ textarea {
         background-color: #209448;
         color: white;
         text-align: start;
-        font-size: x-large;
+        font-size: 1.5em;
         margin: 0px;
     }
 
     .DashboardDiv .key {
-        font-size: small;
+        font-size: 0.8em;
         /*font-weight: 600;*/
     }
 
     .DashboardDiv .value {
-        font-size: large;
+        font-size: 1.125em;
         font-weight: 700;
         margin: 30px 0px 30px 0px;
     }
@@ -1089,6 +1098,10 @@ textarea {
 .statistics-data {
     background-color: #e2e2e2;
 }
+
+    .statistics-data .value {
+        font-size: 2em;
+    }
 
 .AllSiteArea {
     padding: 0px;
@@ -1114,19 +1127,18 @@ textarea {
 
 .howItWorksSection {
     background-color: white;
-    font-size: 18px;
-    line-height: 95%;
+    font-size: 1.125em;
+    /*line-height: 95%;*/
 }
 
 .how-it-work-image {
-    /*border: 10px outset #7fb55e;*/
     max-width: 1200px;
     width: 90%;
 }
 
 .aboutSection, .ffx-commission-section {
     background-color: #209448;
-    font-size: 18px;
+    font-size: 1.125em;
     color: whitesmoke;
 }
 
@@ -1143,9 +1155,9 @@ textarea {
 }
 
     .bank-commission-form .remark {
-        font-size: small;
+        font-size: 0.8em;
         font-weight: 200;
-        line-height: 10%;
+        line-height: 20%;
     }
 
     .bank-commission-form .panel-title {
@@ -1180,11 +1192,11 @@ textarea {
     }
 
     .section1 .text1 {
-        font-size: x-large;
+        font-size: 1.5em;
     }
 
     .section1 .text2 {
-        font-size: xx-large;
+        font-size: 2em;
     }
 
     .section1 .btn-success {
@@ -1226,7 +1238,7 @@ textarea {
 }
 
 #PromilText {
-    font-size: large;
+    font-size: 1.5em;
     color: #209448;
     font-weight: 700;
 }
@@ -1237,7 +1249,7 @@ textarea {
 }
 
 .spreads-image-header {
-    font-size: x-large;
+    font-size: 1.5em;
     font-weight: 700;
 }
 
@@ -1254,7 +1266,7 @@ textarea {
 }
 
 .dashboard-chart-header {
-    font-size: large;
+    font-size: 1.5em;
 }
 
 .dashboard-chart {
@@ -1263,7 +1275,7 @@ textarea {
 }
 
 .currency-after-text {
-    font-size: 25px;
+    font-size: 2em;
     text-align: start;
     font-weight: 700;
     width: 100%;
@@ -1320,7 +1332,7 @@ textarea {
 }
 
 .carousel-text {
-    font-size: larger;
+    font-size: 1.125em;
 }
 
 .carousel-footer {
@@ -1363,16 +1375,65 @@ textarea {
     background-color: black;
 }
 
-div.disabled
-{
-  pointer-events: none;
-
-  /* for "disabled" effect */
-  opacity: 0.5;
-  background: #CCC;
+div.disabled {
+    pointer-events: none;
+    /* for "disabled" effect */
+    opacity: 0.5;
+    background: #CCC;
 }
 
 .remove-row-margin {
     margin-right: 0;
     margin-left: 0;
+}
+
+.row {
+    margin-left: 0px;
+    margin-right: 0px;
+}
+
+@media screen and (max-width: 1024px /*480px*/ ) {
+    body {
+        font-size: 14px;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 9px 14px;
+        font-size: 16px;
+    }
+}
+
+@media screen and (max-width: 768px /*480px*/ ) {
+    .section1 .backcolor {
+        padding-top: 60px;
+    }
+
+    body {
+        font-size: 12px;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 7px 11px; /*10px 16px;*/
+        font-size: 14px; /* 18px */
+    }
+
+    .carousel-inner {
+        width: 100%;
+        max-height: 550px !important;
+        min-height: 550px !important;
+    }
+
+    .simple-trading-order > .panel-body.disabled {
+        display: none;
+    }
+
+    .simple-trading-order > .panel-heading.disabled {
+        display: none;
+    }
+
+    .order-value {
+        margin-top: 0px;
+    }
 }

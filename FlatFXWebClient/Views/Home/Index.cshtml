@@ -17,16 +17,13 @@
                     <a class="btn btn-danger btn-lg" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@Resources.JoinTheRevolution</a>
                     <a class="btn btn-success btn-lg" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@Resources.CreateDemoAccount</a>
                 </div>
-
-                @*<a class="btn btn-lg green-button" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@FlatFXResources.Resources.JoinTheRevolution</a>&nbsp;&nbsp;&nbsp;
-                <a class="btn btn-lg green-button" href="@Url.Action("RegisterDemo", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@FlatFXResources.Resources.CreateDemoAccount</a>&nbsp;&nbsp;&nbsp;*@
                 <br /><br /><br /><br />
             </div>
         </div>
     </div>
     <div class="col-xs-12 text-center calc-section">
         <p>&nbsp;</p>
-        <div class="col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-6">
+        <div class="col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
             @Html.Partial("~/Views/Home/_CommissionCalculator.cshtml")
         </div>
         <p>&nbsp;</p>
@@ -45,11 +42,11 @@
         </div>
     </div>
     @*<div class="text-center hebrew-only spreads-image-section">
-        <p>&nbsp;</p>
-        <p>&nbsp;</p>
-        <p class="spreads-image-header">עמלות הבנקים</p>
-        <img class="USDILS-image" src="~/Images/USDILS_Spreads2.png" />
-    </div>*@
+            <p>&nbsp;</p>
+            <p>&nbsp;</p>
+            <p class="spreads-image-header">עמלות הבנקים</p>
+            <img class="USDILS-image" src="~/Images/USDILS_Spreads2.png" />
+        </div>*@
     @*<div id="Movie" class="text-center hebrew-only">
             <video autoplay loop muted id="myVideo">
                 <source src="Content/flowers.mp4" type="video/mp4">
@@ -60,13 +57,13 @@
     <div id="FlatFXCommissions" class="text-center ffx-commission-section">
         <div class="col-xs-12 backcolor hebrew-only">
             <div class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-6">
-                <h1 class="section-center">המרת מטבע מול FlatFX</h1>
+                <h2 class="section-center">המרת מטבע מול FlatFX</h2>
                 <br />
                 <div class="start-align">
-                    <h3>מרווחי המרה בעבודה מול ה <a href="@Url.Action("OrderIndex", "Order")"><strong>Order System</strong></a></h3>
+                    <h4>מרווחי המרה בעבודה מול ה <a href="@Url.Action("OrderIndex", "Order")"><strong>Order System</strong></a></h4>
                     עמלה קבועה של 0.2% מסכום ההמרה, ההמרה בשער האמצע.
                     <br /><br />
-                    <h3>מרווחי המרה בעבודה מול ה <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><strong>Exchange System</strong></a></h3>
+                    <h4>מרווחי המרה בעבודה מול ה <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><strong>Exchange System</strong></a></h4>
                     אין עמלה על ביצוע ההמרה, העמלה היחידה הינה עמלת השער (המרווח משער האמצע)
                     <div>
                         <ul>
@@ -76,7 +73,7 @@
                         </ul>
                     </div>
                     <br />
-                    <h3>הערות</h3>
+                    <h4>הערות</h4>
                     מחיר המרה מינימלי הינו 10,000 דולר<br />
                     עמלת הבנק ללא הנחה (עמלת חליפין ומרווח השער) הינה 1.1%
                     <br /><br /><br />
@@ -89,8 +86,8 @@
         <div class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-6">
             <div class="section-center">
                 <p>&nbsp;</p>
-                <p>&nbsp;</p>
-                <p class="spreads-image-header">איך זה עובד</p>
+                <h2>איך זה עובד</h2>
+                @*<p class="spreads-image-header"></p>*@
                 <br />
                 <img class="how-it-work-image" src="~/Images/HowItWorks3.jpg" />
                 <br /><br /><br />
@@ -127,14 +124,14 @@
     <div id="About" class="text-center aboutSection">
         <div class="col-xs-12 backcolor hebrew-only">
             <div class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-6">
-                <h1 class="section-center">אודות</h1>
+                <h2 class="section-center">אודות</h2>
                 <div class="start-align">
-                    <h3>תיאור:</h3>
+                    <h4>תיאור:</h4>
                     <div>
                         <strong>FlatFX</strong> הינו אתר אינטרנטי המאפשר ללקוחות הבנקים לבצע פעולות מט"ח והמרת מטבעות באופן תחרותי, שקוף וזול.<br />
                         המוצר יוצר מהפיכה תחרותית בשוק המרות המטבע ומאפשר לחברות בינוניות וקטנות לבצע המרות מטבע זה מול זה, במחירים תחרותיים שעד עתה לא ראו (20%-80% הנחה).<br />
                     </div>
-                    <h3>תכונות המערכת:</h3>
+                    <h4>תכונות המערכת:</h4>
                     <div>
                         <ul>
                             <li><b>קבלת מחירי השוק OnLine,</b> שמירה על הלקוח מביצוע עיסקה במרווחים גדולים ע"י הצגת מרווחים רצויים.</li>
@@ -143,7 +140,7 @@
                             <li><b>מסכי ניהול עסקאות</b> צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
                         </ul>
                     </div>
-                    <h3>יתרונות עיקריים:</h3>
+                    <h4>יתרונות עיקריים:</h4>
                     <div>
                         <ul>
                             <li><b>הקטנת עמלות המשתמשים ב 30%-80%.</b></li>
@@ -170,8 +167,7 @@
             }, 1000);
         }
 
-        if ("@isRTL" == "True")
-        {
+        if ("@isRTL" == "True") {
             var left = $('.glyphicon-chevron-left');
             var right = $('.glyphicon-chevron-right');
             left.removeClass('glyphicon-chevron-left').addClass('glyphicon-chevron-right');

@@ -6,7 +6,7 @@
 }
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init('@Model.TabName')">
-    <div class="col-xs-12 col-xs-offset-0 col-md-10 col-md-offset-1 btn-group">
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-group">
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">@FlatFXResources.Resources.OpenDeals</label>
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">@FlatFXResources.Resources.DealHistory</label>
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">@FlatFXResources.Resources.OpenOrders</label>
@@ -18,7 +18,7 @@
     <div id="resultDiv" class="col-xs-10 col-xs-offset-1"></div>
 
     <div ng-show="radioDataModel == 'OpenDeals' || radioDataModel == 'DealHistory'">
-        <div class="col-xs-10 col-xs-offset-1 data-area">
+        <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 data-area">
             <table ng-table="dealTableParams" class="table table-responsive table-bordered table-hover table-striped ffx-ng-table" show-filter="true">
                 @*<tr ng-repeat="deal in Deals | orderBy:orderByColumn">*@
                 <tr ng-repeat="deal in $data">
@@ -40,7 +40,7 @@
     </div>
 
     <div ng-show="radioDataModel == 'OpenOrders' || radioDataModel == 'OrderHistory'">
-        <div class="col-xs-10 col-xs-offset-1 data-area">
+        <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 data-area">
             <table ng-table="orderTableParams" class="table table-responsive table-bordered table-hover table-striped ffx-ng-table" show-filter="true">
                 @*<tr ng-repeat="order in Orders | orderBy:orderByColumn2">*@
                 <tr ng-repeat="order in $data">
@@ -68,7 +68,7 @@
     </div>
 
     <div>
-        <div class="col-xs-10 col-xs-offset-1 companyarea" ng-show="radioDataModel == 'Statistics'">
+        <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1  companyarea" ng-show="radioDataModel == 'Statistics'">
             <br />
             <div class="row statistics-data">
                 <div class="col-xs-2 dashboard-square key">@FlatFXResources.Resources.TotalVolume<br /><span class="value blue" ng-bind="CompanyVolume"></span></div>
@@ -85,7 +85,7 @@
                 <canvas id="dashboardCompanyMonthlyChart" class="dashboard-chart" ng-show="companyChart == 'Monthly'"></canvas>
             </div>
         </div>
-        <div class="col-xs-10 col-xs-offset-1 AllSiteArea" ng-show="radioDataModel == 'SiteStatistics'">
+        <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1  AllSiteArea" ng-show="radioDataModel == 'SiteStatistics'">
             <br />
             <div class="row statistics-data">
                 <div class="col-xs-2 dashboard-square key">@FlatFXResources.Resources.TotalVolume<br /><span class="value blue" ng-bind="SiteTotalVolume"></span></div>
