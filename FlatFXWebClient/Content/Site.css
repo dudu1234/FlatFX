@@ -853,9 +853,9 @@ table.ffx-table tr td a {
     padding-top: 0px;
 }
 
-.order-book-panel .panel-body {
-    padding: 5px;
-}
+    .order-book-panel .panel-body {
+        padding: 5px;
+    }
 
     .order-book-panel .form-group label {
         margin-top: 5px;
@@ -1392,7 +1392,7 @@ div.disabled {
     margin-right: 0px;
 }
 
-@media screen and (max-width: 1024px /*480px*/ ) {
+@media screen and (max-width: 1024px /* For tablet and laptop */ ) {
     body {
         font-size: 14px;
     }
@@ -1404,7 +1404,7 @@ div.disabled {
     }
 }
 
-@media screen and (max-width: 768px /*480px*/ ) {
+@media screen and (max-width: 768px /* For big screen smart phones */ ) {
     .section1 .backcolor {
         padding-top: 60px;
     }
@@ -1435,5 +1435,30 @@ div.disabled {
 
     .order-value {
         margin-top: 0px;
+    }
+
+    .dashboard-chart {
+        min-width: 400px;
+        min-height: 300px;
+    }
+}
+
+@media screen and (max-width: 450px /* For big smart phones 5.1 */ ) {
+    .carousel-inner {
+        max-height: 400px !important;
+        min-height: 400px !important;
+    }
+
+    .ffx-commission-section h2 {
+        font-size: 28px;
+    }
+
+    .howItWorksSection li {
+        margin-top: 0px;
+        margin-bottom: 0px;
+    }
+
+    .dashboard-chart {
+        min-width: 300px;
     }
 }
