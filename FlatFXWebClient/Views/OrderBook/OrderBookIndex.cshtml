@@ -1,5 +1,8 @@
 ﻿@using FlatFXCore.BussinessLayer;
-
+@{
+    Layout = "~/Views/Order/OrderLayout.cshtml";
+    ViewBag.Title = "Order Book";
+}
 <div ng-controller="OrderBook" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')">
     <div class="panel-danger form-horizontal order-book-panel">
         <div class="panel-heading">

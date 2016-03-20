@@ -5,12 +5,12 @@
     Layout = "~/Views/Manage/UserManageLayout.cshtml";
 }
 
-<h2>Manage User Account</h2>
+<h2>@FlatFXResources.Resources.ManageUserAccount</h2>
 <div>
     [
     @if (Model.HasPassword)
     {
-        @Html.ActionLink("Change your password", "ChangePassword")
+        @Html.ActionLink(@FlatFXResources.Resources.ChangeYourPassword, "ChangePassword")
     }
     else
     {
@@ -24,7 +24,7 @@
 {
     <br /><br /><br />
     <div>
-        @Html.ActionLink("Change your Demo Account to a Real Account", "ConvertDemoToRealAccount", "Account")
+        @Html.ActionLink(@FlatFXResources.Resources.ChangeYourDemoAccount, "ConvertDemoToRealAccount", "Account")
     </div>
 }
 

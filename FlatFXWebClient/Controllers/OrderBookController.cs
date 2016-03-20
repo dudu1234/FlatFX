@@ -8,13 +8,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Threading.Tasks;
 
 namespace FlatFXWebClient.Controllers
 {
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderBookController : BaseController
     {
-        public ActionResult OrderBookIndex(string key)
+        public ActionResult OrderBookIndex()
+        {
+            return View();
+        }
+        public ActionResult LoadData(string key)
         {
             string error = null;
             try
@@ -30,6 +35,12 @@ namespace FlatFXWebClient.Controllers
                 if (!isDemo && !user.IsApprovedByFlatFX)
                     error = "User is not approved by FlatFX team.";
 
+                bool isAdmin = ApplicationInformation.Instance.IsAdministrator;
+
+                if (User.IsInRole(Consts.Role_Administrator))
+                    isAdmin = true;
+
+
                 List<OrderBookItem> ordersToBuy = db.Orders
                     .Where(o => o.Symbol == key && o.BuySell == Consts.eBuySell.Buy && (o.Status == Consts.eOrderStatus.Triggered_partially || o.Status == Consts.eOrderStatus.Waiting) &&
                         o.IsDemo == isDemo && (o.IsDemo || o.CompanyAccount.Company.CompanyId != companyId))
@@ -38,7 +49,7 @@ namespace FlatFXWebClient.Controllers
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
                         o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
-                        o.CompanyAccount.Company.CompanyName))
+                        (isAdmin)? o.CompanyAccount.Company.CompanyName : ""))
                     .ToList();
 
                 List<OrderBookItem> ordersToSell = db.Orders
@@ -48,8 +59,8 @@ namespace FlatFXWebClient.Controllers
                     .Where(o => (!o.ExpiryDate.HasValue || o.ExpiryDate <= DateTime.Now))
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
-                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
-                        o.CompanyAccount.Company.CompanyName))
+                        o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value,
+                        (isAdmin) ? o.CompanyAccount.Company.CompanyName : ""))
                     .ToList();
 
                 Dictionary<string, string> pairs = CurrencyManager.Instance.PairRates.Values

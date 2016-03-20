@@ -984,4 +984,49 @@
   <data name="StatusDetails" xml:space="preserve">
     <value>Status Details</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>Back to List</value>
+  </data>
+  <data name="BankProviderAccountsDetails" xml:space="preserve">
+    <value>Bank/Provider Accounts Details</value>
+  </data>
+  <data name="ChangeYourDemoAccount" xml:space="preserve">
+    <value>Change your Demo Account to a Real Account</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>Change Your Password</value>
+  </data>
+  <data name="CompanyAccountDetails" xml:space="preserve">
+    <value>Company Account Details</value>
+  </data>
+  <data name="CompanyDetails" xml:space="preserve">
+    <value>Company Details</value>
+  </data>
+  <data name="EditBankAccount" xml:space="preserve">
+    <value>Edit Bank Account</value>
+  </data>
+  <data name="EditCompany" xml:space="preserve">
+    <value>Edit Company</value>
+  </data>
+  <data name="EditCompanyAccount" xml:space="preserve">
+    <value>Edit Company Account</value>
+  </data>
+  <data name="EditContactDetails" xml:space="preserve">
+    <value>Edit Contact Details</value>
+  </data>
+  <data name="InviteCoWorkerToJoin" xml:space="preserve">
+    <value>Invite Co-Worker to join your company</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>Main</value>
+  </data>
+  <data name="ManageUserAccount" xml:space="preserve">
+    <value>Manage User Account</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>Save</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>User Details</value>
+  </data>
 </root>

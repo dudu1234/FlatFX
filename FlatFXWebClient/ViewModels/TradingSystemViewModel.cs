@@ -76,7 +76,6 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Account", ResourceType = typeof(FlatFXResources.Resources))]
         [Required]
         public string SelectedAccount { get; set; }
-        public List<string> InvalidAccountReason { get; set; }
         [Required]
         public Consts.eBuySell BuySell { get; set; }
         [Required]
@@ -94,6 +93,7 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Comment", ResourceType = typeof(FlatFXResources.Resources))]
         public string Comment { get; set; }
         public Order order { get; set; }
+        public List<string> InvalidAccountReason { get; set; }
 
         public OrderViewModel()
         {

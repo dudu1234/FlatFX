@@ -11,7 +11,7 @@
     <div class="form-horizontal">
         <div class="panel panel-danger">
             <div class="panel-heading">
-                <h3 class="panel-title">Edit Company</h3>
+                <h3 class="panel-title">@FlatFXResources.Resources.EditCompany</h3>
             </div>
             <div class="panel-body">
                 @Html.HiddenFor(model => model.CompanyId)
@@ -86,7 +86,7 @@
                 </div>
                 <div class="panel panel-info">
                     <div class="panel-heading">
-                        <h3 class="panel-title">Edit Contact Details</h3>
+                        <h3 class="panel-title">@FlatFXResources.Resources.EditContactDetails</h3>
                     </div>
                     <div class="panel-body">
 
@@ -178,7 +178,7 @@
 
                 <div class="form-group">
                     <div class="col-md-offset-2 col-md-10">
-                        <input type="submit" value="Save" class="btn btn-primary" />
+                        <input type="submit" value="@FlatFXResources.Resources.Save" class="btn btn-primary" />
                     </div>
                 </div>
             </div>
@@ -188,7 +188,7 @@
 
 <br /><br />
 <div>
-    <a class="btn btn-success" href="@Url.Action("IndexUser")">Back to List</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
-    <a class="btn btn-success" href="@Url.Action("InviteUserToCompany", "Companies", new { companyId = Model.CompanyId })">Invite Co-Worker to join your company</a>
+    <a class="btn btn-success" href="@Url.Action("IndexUser")">@FlatFXResources.Resources.BackToList</a>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+    <a class="btn btn-success" href="@Url.Action("InviteUserToCompany", "Companies", new { companyId = Model.CompanyId })">@FlatFXResources.Resources.InviteCoWorkerToJoin</a>
 </div>
 <br /><br />

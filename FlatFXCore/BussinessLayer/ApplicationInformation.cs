@@ -141,6 +141,13 @@ namespace FlatFXCore.BussinessLayer
                 return IsUserInRole(Consts.Role_CompanyDemoUser);
             }
         }
+        public bool IsAdministrator
+        {
+            get
+            {
+                return IsUserInRole(Consts.Role_Administrator);
+            }
+        }
         public string SessionID
         {
             get

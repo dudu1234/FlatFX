@@ -205,6 +205,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Back to List.
+        /// </summary>
+        public static string BackToList {
+            get {
+                return ResourceManager.GetString("BackToList", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to back to your account.
         /// </summary>
         public static string backtoyouraccount {
@@ -340,6 +349,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank/Provider Accounts Details.
+        /// </summary>
+        public static string BankProviderAccountsDetails {
+            get {
+                return ResourceManager.GetString("BankProviderAccountsDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to * The bank commission without discount is 1.1%..
         /// </summary>
         public static string BankSpreadIs {
@@ -417,6 +435,24 @@ namespace FlatFXResources {
         public static string CarPhone {
             get {
                 return ResourceManager.GetString("CarPhone", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change your Demo Account to a Real Account.
+        /// </summary>
+        public static string ChangeYourDemoAccount {
+            get {
+                return ResourceManager.GetString("ChangeYourDemoAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Change Your Password.
+        /// </summary>
+        public static string ChangeYourPassword {
+            get {
+                return ResourceManager.GetString("ChangeYourPassword", resourceCulture);
             }
         }
         
@@ -502,11 +538,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Company Account Details.
+        /// </summary>
+        public static string CompanyAccountDetails {
+            get {
+                return ResourceManager.GetString("CompanyAccountDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Company Accounts.
         /// </summary>
         public static string CompanyAccounts {
             get {
                 return ResourceManager.GetString("CompanyAccounts", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Company Details.
+        /// </summary>
+        public static string CompanyDetails {
+            get {
+                return ResourceManager.GetString("CompanyDetails", resourceCulture);
             }
         }
         
@@ -871,11 +925,47 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Bank Account.
+        /// </summary>
+        public static string EditBankAccount {
+            get {
+                return ResourceManager.GetString("EditBankAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Company.
+        /// </summary>
+        public static string EditCompany {
+            get {
+                return ResourceManager.GetString("EditCompany", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Company Account.
+        /// </summary>
+        public static string EditCompanyAccount {
+            get {
+                return ResourceManager.GetString("EditCompanyAccount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit Company Details.
         /// </summary>
         public static string EditCompanyDetails {
             get {
                 return ResourceManager.GetString("EditCompanyDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Contact Details.
+        /// </summary>
+        public static string EditContactDetails {
+            get {
+                return ResourceManager.GetString("EditContactDetails", resourceCulture);
             }
         }
         
@@ -1226,6 +1316,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Invite Co-Worker to join your company.
+        /// </summary>
+        public static string InviteCoWorkerToJoin {
+            get {
+                return ResourceManager.GetString("InviteCoWorkerToJoin", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to InvoiceCurrency.
         /// </summary>
         public static string InvoiceCurrency {
@@ -1339,6 +1438,24 @@ namespace FlatFXResources {
         public static string Login {
             get {
                 return ResourceManager.GetString("Login", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Main.
+        /// </summary>
+        public static string Main {
+            get {
+                return ResourceManager.GetString("Main", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Manage User Account.
+        /// </summary>
+        public static string ManageUserAccount {
+            get {
+                return ResourceManager.GetString("ManageUserAccount", resourceCulture);
             }
         }
         
@@ -1910,6 +2027,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Save.
+        /// </summary>
+        public static string Save {
+            get {
+                return ResourceManager.GetString("Save", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select Amount.
         /// </summary>
         public static string SelectAmount {
@@ -2473,6 +2599,15 @@ namespace FlatFXResources {
         public static string UserCreatedSuccessfully {
             get {
                 return ResourceManager.GetString("UserCreatedSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to User Details.
+        /// </summary>
+        public static string UserDetails {
+            get {
+                return ResourceManager.GetString("UserDetails", resourceCulture);
             }
         }
         

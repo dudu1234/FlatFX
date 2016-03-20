@@ -6,7 +6,7 @@
 }
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init('@Model.TabName')">
-    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-group">
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">@FlatFXResources.Resources.OpenDeals</label>
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">@FlatFXResources.Resources.DealHistory</label>
         <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">@FlatFXResources.Resources.OpenOrders</label>

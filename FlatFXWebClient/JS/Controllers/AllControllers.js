@@ -190,10 +190,10 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
         $http.get($scope.FeedRatesUrl)
             .success(function (data, status, headers, config) {
                 try {
-                    $scope.lastUpdate = new Date(parseInt(data.LastFeedUpdate.substr(6)));
-
+                    //$scope.lastUpdate = new Date(parseInt(data.LastFeedUpdate.replace('/Date(', '').replace(')/', '')));
+                    $scope.lastUpdate = new Date(data.LastFeedUpdate);
                     angular.forEach(data.Rates, function (value, key) {
-                        value.LastUpdate = new Date(parseInt(value.LastUpdate.substr(6)));
+                        value.LastUpdate = $scope.lastUpdate;
                     });
 
                     $scope.rates = data.Rates;
@@ -436,7 +436,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
+myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
     $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1) {
         $scope.isDemo = isDemo;
         $scope.info = info;
@@ -602,7 +602,7 @@ myApp.controller('OrderCurrencyExchange', function ($scope, $timeout, noty) {
 myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty) {
     $scope.init = function (isDemo) {
         $scope.isDemo = isDemo;
-        $scope.orderBookIndexUrl = urlPrefix + "/OrderBook/OrderBookIndex";
+        $scope.orderBookIndexUrl = urlPrefix + "/OrderBook/LoadData";
 
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';
@@ -693,3 +693,22 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
 
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
+
+myApp.controller('OrderLayout', function ($scope, $http, $timeout, noty) {
+    $scope.init = function (isDemo) {
+        $scope.isDemo = isDemo;
+    };
+
+    $scope.ready = function () {
+
+    };
+
+    $timeout(function () { // Use it instead of javascript $(document).ready(
+        $scope.ready();
+    }, 0);
+
+});
+
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+

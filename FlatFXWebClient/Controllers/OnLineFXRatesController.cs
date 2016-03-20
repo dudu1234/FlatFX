@@ -43,13 +43,13 @@ namespace FlatFXWebClient.Controllers
     }
     public class RatesResponse
     {
-        public DateTime LastFeedUpdate = DateTime.Now;
+        public string LastFeedUpdate = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
         public IEnumerable<FXRate> Rates = null;
 
         public RatesResponse(IEnumerable<FXRate> Rates, DateTime LastFeedUpdate)
         {
             this.Rates = Rates;
-            this.LastFeedUpdate = LastFeedUpdate;
+            this.LastFeedUpdate = LastFeedUpdate.ToString("yyyy/MM/dd HH:mm:ss");
         }
     }
 }

@@ -1,32 +1,24 @@
 ﻿@{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    ViewBag.Title = "Manage User";
+    ViewBag.Title = "User Manage";
 }
 
-<br /><br />
-
 <div ng-controller="UserManager" ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]')" class="row user-manage">
-    <div class="user-manage-header text-center"><span class="glyphicon glyphicon-user"></span> User Manage</div>
-    <div id="resultDiv" class="col-xs-9 col-xs-offset-3">
+    <div class="user-manage-header text-center"><span class="glyphicon glyphicon-user"></span> @FlatFXResources.Resources.UserManage</div>
+    <div id="resultDiv" class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
     </div>
 </div>
-<div class="row user-manage">
-    <div class="col-xs-3">
-        <div class="sidebar-nav">
-            <div class="navbar navbar-default" role="navigation">
-                <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li class="active">@Html.ActionLink("Main", "UserIndex", "Manage")</li>
-                        <li>@Html.ActionLink("User Details", "EditByUser", "ApplicationUsers")</li>
-                        <li>@Html.ActionLink("Company Details", "IndexUser", "Companies")</li>
-                        <li>@Html.ActionLink("Company Account Details", "IndexUser", "CompanyAccounts")</li>
-                        <li>@Html.ActionLink("Bank/Provider Accounts Details", "IndexUser", "ProviderAccounts")</li>
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+<div class="col-xs-12 order-navigation">
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
+        <a class="btn btn-primary" href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.Main</a>
+        <a class="btn btn-primary" href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.UserDetails</a>
+        <a class="btn btn-primary" href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.CompanyDetails</a>
+        <a class="btn btn-primary" href="@Url.Action("IndexUser", "CompanyAccounts")">@FlatFXResources.Resources.CompanyAccountDetails</a>
+        <a class="btn btn-primary" href="@Url.Action("IndexUser", "ProviderAccounts")">@FlatFXResources.Resources.BankProviderAccountsDetails</a>
     </div>
-    <div class="col-xs-9">
-        @RenderBody()
-    </div>
+</div>
+
+<div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+    @RenderBody()
 </div>

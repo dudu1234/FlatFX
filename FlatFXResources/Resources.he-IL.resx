@@ -963,4 +963,49 @@
   <data name="StatusDetails" xml:space="preserve">
     <value>פרטי סטטוס</value>
   </data>
+  <data name="BackToList" xml:space="preserve">
+    <value>חזרה</value>
+  </data>
+  <data name="BankProviderAccountsDetails" xml:space="preserve">
+    <value>פרטי חשבון בנק / ספק</value>
+  </data>
+  <data name="ChangeYourDemoAccount" xml:space="preserve">
+    <value>שנה את חשבון הדמו לחשבון אמיתי</value>
+  </data>
+  <data name="ChangeYourPassword" xml:space="preserve">
+    <value>שנה סיסמה</value>
+  </data>
+  <data name="CompanyAccountDetails" xml:space="preserve">
+    <value>פרטי חשבון ראשי</value>
+  </data>
+  <data name="CompanyDetails" xml:space="preserve">
+    <value>פרטי חברה</value>
+  </data>
+  <data name="EditBankAccount" xml:space="preserve">
+    <value>ערוך חשבון בנק / ספק</value>
+  </data>
+  <data name="EditCompany" xml:space="preserve">
+    <value>ערוך פרטי חברה</value>
+  </data>
+  <data name="EditCompanyAccount" xml:space="preserve">
+    <value>ערוך חשבון ראשי</value>
+  </data>
+  <data name="EditContactDetails" xml:space="preserve">
+    <value>ערוך פרטי משתמש</value>
+  </data>
+  <data name="InviteCoWorkerToJoin" xml:space="preserve">
+    <value>הזמן עובד בחברה להצטרף כמשתמש בחברה</value>
+  </data>
+  <data name="Main" xml:space="preserve">
+    <value>ראשי</value>
+  </data>
+  <data name="ManageUserAccount" xml:space="preserve">
+    <value>ערוך פרטי חשבון</value>
+  </data>
+  <data name="Save" xml:space="preserve">
+    <value>שמור</value>
+  </data>
+  <data name="UserDetails" xml:space="preserve">
+    <value>פרטי משתמש</value>
+  </data>
 </root>

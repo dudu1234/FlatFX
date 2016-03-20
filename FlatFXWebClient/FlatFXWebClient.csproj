@@ -1277,7 +1277,7 @@
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Confirm.cshtml" />
     <Content Include="Views\SimpleCurrencyExchange\EnterData_Summary.cshtml" />
     <Content Include="Views\Dashboard\DashboardIndex.cshtml" />
-    <Content Include="Views\Order\OrderIndex.cshtml" />
+    <Content Include="Views\Order\OrderWorkflow.cshtml" />
     <Content Include="Views\Order\OrderConfirm.cshtml" />
     <Content Include="Views\Order\OrderCreation.cshtml" />
     <Content Include="Views\Order\OrderSummary.cshtml" />
@@ -1285,6 +1285,7 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Views\OrderBook\OrderBookIndex.cshtml" />
     <Content Include="Views\Order\OrderEdit.cshtml" />
+    <Content Include="Views\Order\OrderLayout.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

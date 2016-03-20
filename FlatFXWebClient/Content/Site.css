@@ -664,6 +664,12 @@ table.ffx-table tr td a {
     text-decoration: underline;
 }
 
+.order-navigation {
+    background-color: white;
+    padding: 10px;
+    min-height: 40px;
+}
+
 .table-order-wrapper {
     padding: 5px;
 }
@@ -991,9 +997,20 @@ table.ffx-table tr td a {
 }
 
     .simple-trading-order .panel-body .form-group {
-        margin: 5px;
+        margin: 0px;
+        padding: 0px;
         line-height: 30px;
     }
+
+        .simple-trading-order .panel-body .form-group .control-label {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
+        
+        .simple-trading-order .panel-body .form-group div {
+            padding-top: 3px;
+            padding-bottom: 3px;
+        }
 
         .simple-trading-order .panel-body .form-group:nth-child(even) {
             background-color: white;

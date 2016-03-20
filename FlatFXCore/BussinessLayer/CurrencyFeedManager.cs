@@ -252,6 +252,10 @@ namespace FlatFXCore.BussinessLayer
 
             DateTime updateTime = results.query.created;
             updateTime = updateTime.AddHours(2);
+
+            if (updateTime > DateTime.Now.AddHours(1))
+                updateTime = updateTime.AddHours(-2);
+
             //string updateTimeStr = results.query.created;
             //DateTime updateTime = DateTime.ParseExact(updateTimeStr, "yyyy-MM-dd HH:mm:ss ", CultureInfo.InvariantCulture); //"2015-08-05T15:13:41Z"
 

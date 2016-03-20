@@ -7,30 +7,24 @@
 
 <div ng-controller="AdminManager" ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]' )" class="row admin-manage">
     <div class="admin-manage-header text-center"><span class="glyphicon glyphicon-user"></span> Admin Manage</div>
-    <div id="resultDiv" class="col-xs-10 col-xs-offset-2">
+    <div id="resultDiv" class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
     </div>
 </div>
-<div class="row admin-manage">
-    <div class="col-xs-2">
-        <div class="sidebar-nav">
-            <div class="navbar navbar-default" role="navigation">
-                <div class="navbar-collapse collapse sidebar-navbar-collapse">
-                    <ul class="nav navbar-nav">
-                        <li>@Html.ActionLink("Users", "IndexAdmin", "ApplicationUsers")</li>
-                        <li>@Html.ActionLink("Companies", "IndexAdmin", "Companies")</li>
-                        <li>@Html.ActionLink("Company Accounts", "Index", "CompanyAccounts")</li>
-                        <li>@Html.ActionLink("Provider Accounts", "Index", "ProviderAccounts")</li>
-                        <li>@Html.ActionLink("Providers", "Index", "Providers")</li>
-                        <li>@Html.ActionLink("Roles", "Index", "Roles")</li>
-                        <li>@Html.ActionLink("User Roles", "ManageUserRoles", "Roles")</li>
-                        <li>@Html.ActionLink("Log", "Index", "LogInfo")</li>
 
-                    </ul>
-                </div>
-            </div>
-        </div>
+
+<div class="col-xs-12 order-navigation">
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
+        <a class="btn btn-primary" href="@Url.Action("IndexAdmin", "ApplicationUsers")">Users</a>
+        <a class="btn btn-primary" href="@Url.Action("IndexAdmin", "Companies")">Companies</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "CompanyAccounts")">Company Accounts</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "ProviderAccounts")">Provider Accounts</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Providers")">Providers</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "Roles")">Roles</a>
+        <a class="btn btn-primary" href="@Url.Action("ManageUserRoles", "Roles")">User Roles</a>
+        <a class="btn btn-primary" href="@Url.Action("Index", "LogInfo")">Log</a>
     </div>
-    <div class="col-xs-10">
-        @RenderBody()
-    </div>
+</div>
+
+<div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+    @RenderBody()
 </div>

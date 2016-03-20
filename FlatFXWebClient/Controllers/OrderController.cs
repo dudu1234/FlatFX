@@ -29,7 +29,7 @@ namespace FlatFXWebClient.Controllers
             OrderViewModel model = new OrderViewModel();
             Order order = db.Orders.Where(o => o.OrderId == orderId).SingleOrDefault();
             if (order == null)
-                return RedirectToAction("OrderIndex", model);
+                return RedirectToAction("CreateOrderIndex", model);
 
             await Initialize(model);
             model.AmountCCY1 = order.AmountCCY1;
@@ -42,10 +42,10 @@ namespace FlatFXWebClient.Controllers
             //model.SelectedAccount = 
             model.Symbol = order.Symbol;
             //model.WorkflowStage = 
-            return RedirectToAction("OrderIndex", model);
+            return RedirectToAction("CreateOrderIndex", model);
         }
 
-        public async Task<ActionResult> OrderIndex(OrderViewModel model)
+        public async Task<ActionResult> CreateOrderIndex(OrderViewModel model)
         {
             if (model.WorkflowStage <= 0)
             {
@@ -171,9 +171,9 @@ namespace FlatFXWebClient.Controllers
 
             return true;
         }
-        [HttpPost, ActionName("OrderIndex")]
+        [HttpPost, ActionName("CreateOrderIndex")]
         [ValidateAntiForgeryToken]
-        public ActionResult OrderIndexPost(OrderViewModel model)
+        public ActionResult CreateOrderIndexPost(OrderViewModel model)
         {
             if (model == null || model.WorkflowStage < 1 || model.WorkflowStage > 2)
             {
@@ -190,7 +190,7 @@ namespace FlatFXWebClient.Controllers
             if (order == null)
             {
                 TempData["ErrorResult"] += "Timeout expired. ";
-                RedirectToAction("OrderIndex");
+                RedirectToAction("CreateOrderIndex");
             }
 
             if (!CurrencyManager.Instance.PairList.ContainsKey(model.Symbol))
@@ -275,7 +275,7 @@ namespace FlatFXWebClient.Controllers
                 model.OrderId = order.OrderId;
                 model.WorkflowStage = 2;
                 ApplicationInformation.Instance.Session[model.OrderKey] = order;
-                return RedirectToAction("OrderIndex", model);
+                return RedirectToAction("CreateOrderIndex", model);
             }
             catch (Exception ex)
             {
@@ -320,7 +320,7 @@ namespace FlatFXWebClient.Controllers
                 TempData["ErrorResult"] += "General Error. Please contact FlatFX Team.";
             }
 
-            return RedirectToAction("OrderIndex", model);
+            return RedirectToAction("CreateOrderIndex", model);
         }
     }
 }
