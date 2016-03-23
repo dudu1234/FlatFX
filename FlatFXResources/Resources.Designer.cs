@@ -1257,7 +1257,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Stop being a captive client - join the revolution in Forex.
+        ///   Looks up a localized string similar to Stop being a captive client - join the P2P revolution in Forex.
         /// </summary>
         public static string HomeHeader3 {
             get {
