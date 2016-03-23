@@ -1029,4 +1029,40 @@
   <data name="UserDetails" xml:space="preserve">
     <value>User Details</value>
   </data>
+  <data name="CreateNewOrder2" xml:space="preserve">
+    <value>Create new Order</value>
+  </data>
+  <data name="averagebank" xml:space="preserve">
+    <value>average bank</value>
+  </data>
+  <data name="ByUsingFlatFX" xml:space="preserve">
+    <value>by using FlatFX and not your bank!</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>Get started</value>
+  </data>
+  <data name="HowMuchWouldYouLikeToExchange" xml:space="preserve">
+    <value>How much would you like to exchange?</value>
+  </data>
+  <data name="inverse" xml:space="preserve">
+    <value>inverse</value>
+  </data>
+  <data name="saveSmall" xml:space="preserve">
+    <value>save</value>
+  </data>
+  <data name="SeeWhy" xml:space="preserve">
+    <value>See why</value>
+  </data>
+  <data name="TransferFee" xml:space="preserve">
+    <value>Transfer fee</value>
+  </data>
+  <data name="YOURECEIVE" xml:space="preserve">
+    <value>YOU RECEIVE</value>
+  </data>
+  <data name="YOUSEND" xml:space="preserve">
+    <value>YOU SEND</value>
+  </data>
+  <data name="YouWill" xml:space="preserve">
+    <value>You will</value>
+  </data>
 </root>

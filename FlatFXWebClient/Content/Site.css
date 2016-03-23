@@ -1,5 +1,6 @@
 ﻿html {
     width: 100%;
+    min-width: 100%;
     height: 100%;
     min-height: 100%;
     background-color: white;
@@ -9,8 +10,9 @@
 
 body {
     width: 100%;
-    min-height: 100%;
+    min-width: 100%;
     height: 100%;
+    min-height: 100%;
     background-color: white;
     border-top: solid 10px #000;
     color: #333;
@@ -21,7 +23,7 @@ body {
     direction: ltr;
     /*background: url("../Images/sitebg8.jpg") no-repeat center center fixed;*/
     background-size: cover;
-    font-size: 16px;
+    font-size: 12px;
 }
 
 .not-active-a {
@@ -665,9 +667,9 @@ table.ffx-table tr td a {
 }
 
 .order-navigation {
-    background-color: white;
-    padding: 10px;
-    min-height: 40px;
+    background-color: gray;
+    /*padding: 10px;
+    min-height: 40px;*/
 }
 
 .table-order-wrapper {
@@ -1006,7 +1008,7 @@ table.ffx-table tr td a {
             padding-top: 3px;
             padding-bottom: 3px;
         }
-        
+
         .simple-trading-order .panel-body .form-group div {
             padding-top: 3px;
             padding-bottom: 3px;
@@ -1208,11 +1210,11 @@ textarea {
         background-color: whitesmoke;
     }
 
-    .section1 .text1 {
+    .section1 .text1, .section-corrency-converter .text1 {
         font-size: 1.5em;
     }
 
-    .section1 .text2 {
+    .section1 .text2, .section-corrency-converter .text2 {
         font-size: 2em;
     }
 
@@ -1221,6 +1223,7 @@ textarea {
     }
 
     .section1 .btn-group .btn-lg {
+        width: 100%;
         margin: 10px;
     }
 
@@ -1344,8 +1347,8 @@ textarea {
 
 .carousel-inner {
     width: 100%;
-    max-height: 700px !important;
-    min-height: 700px !important;
+    max-height: 400px !important;
+    min-height: 400px !important;
 }
 
 .carousel-text {
@@ -1409,20 +1412,161 @@ div.disabled {
     margin-right: 0px;
 }
 
-@media screen and (max-width: 1024px /* For tablet and laptop */ ) {
-    body {
-        font-size: 14px;
+
+
+
+
+.corrency-converter-div {
+    width: 100%;
+}
+
+.send_money_box {
+    margin-bottom: -6px;
+    margin-top: 30px;
+}
+
+.recive_money_box {
+    margin-top: 17px;
+}
+
+.select_currency_header {
+    position: absolute;
+    z-index: 80;
+    padding: 15px 6px 0;
+    color: #0191ff;
+    font-weight: 500;
+    font-size: 1.275em;
+}
+
+.see-why-text {
+    margin-top: 20px;
+    font-size: 1.25em;
+}
+
+#recive_money_input, #send_money_input {
+    padding: 0 10px 0;
+    height: 50px !important;
+    border-color: #000;
+    border-color: #228cdb;
+    color: #228cdb;
+    font-size: 2em !important;
+    direction: rtl;
+    border-top-left-radius: 7px;
+    border-bottom-left-radius: 7px;
+    border-right: 0;
+}
+
+.select_currency_type {
+    -moz-appearance: none;
+    padding-right: 27px;
+    width: 100px;
+    height: 50px;
+    background-position: 100px 50px;
+    background-repeat: no-repeat;
+    color: #228cdb;
+    font-weight: 300 !important;
+    font-size: 20px;
+    font-family: inherit;
+    border-color: #228cdb !important;
+    border-bottom-right-radius: 7px;
+    border-top-right-radius: 7px;
+    outline: none !important;
+    border-left: 0px;
+}
+
+    .select_currency_type:focus, .select_currency_type:hover {
+        background-color: rgba(255,255,255,1) !important;
+        color: #0191ff !important;
+        background-position: 119px 28px;
+        background-repeat: no-repeat !important;
     }
 
-    .btn-lg,
-    .btn-group-lg > .btn {
-        padding: 9px 14px;
-        font-size: 16px;
+#send_money_dropdown, #recive_money_dropdown {
+    width: 226%;
+    margin-left: -125%;
+}
+
+.scrollable-menu {
+    overflow-x: hidden;
+    max-height: 200px;
+    height: auto;
+}
+
+.currency_options {
+    z-index: 85;
+    font-size: 20px;
+}
+
+.btn-get-started {
+    font-size: 2em;
+    margin-bottom: 50px;
+    margin-top: 40px;
+    width: 50%;
+}
+
+.currencyIso {
+    font-size: large;
+    font-weight: 600;
+    margin-left: 10px;
+    margin-right: 10px;
+}
+
+.currencyName {
+    font-size: small;
+}
+
+.section-corrency-converter {
+    padding-top: 100px;
+    background-color: #f1efef;
+}
+
+.font-bold {
+    font-weight: bold;
+}
+
+.see_why_table {
+    font-size: 1.1em;
+}
+
+
+
+
+
+
+
+
+
+
+
+
+@media screen and (max-width: 450px /* For smart phones 5.1 */ ) {
+    .ffx-commission-section h2 {
+        font-size: 28px;
+    }
+
+    .howItWorksSection li {
+        margin-top: 0px;
+        margin-bottom: 0px;
     }
 }
 
-@media screen and (max-width: 768px /* For big screen smart phones */ ) {
-    .section1 .backcolor {
+@media screen and (min-width: 10px /* For Note smart phones */ ) {
+    .DashboardDiv .btn-group .btn {
+        font-size: x-small;
+    }
+
+    .order-navigation .btn-group .btn {
+        font-size: x-small;
+    }
+
+    .dashboard-chart {
+        min-width: 400px;
+        max-width: 400px;
+        min-height: 300px;
+        max-height: 300px;
+    }
+
+    .section-corrency-converter, .section1 .backcolor {
         padding-top: 60px;
     }
 
@@ -1436,12 +1580,6 @@ div.disabled {
         font-size: 14px; /* 18px */
     }
 
-    .carousel-inner {
-        width: 100%;
-        max-height: 550px !important;
-        min-height: 550px !important;
-    }
-
     .simple-trading-order > .panel-body.disabled {
         display: none;
     }
@@ -1453,29 +1591,124 @@ div.disabled {
     .order-value {
         margin-top: 0px;
     }
+}
 
-    .dashboard-chart {
-        min-width: 400px;
-        min-height: 300px;
+@media screen and (min-width: 450px /* For Note smart phones */ ) {
+    .carousel-inner {
+        width: 100%;
+        max-height: 500px !important;
+        min-height: 500px !important;
+    }
+
+    #recive_money_input, #send_money_input {
+        height: 75px !important;
+        font-size: 3.125em !important;
+    }
+
+
+    .select_currency_type {
+        padding-right: 37px;
+        width: 150px;
+        height: 75px;
+        background-position: 150px 75px;
+        font-size: 32px;
+    }
+
+    .select_currency_header {
+        padding: 24px 6px 0;
     }
 }
 
-@media screen and (max-width: 450px /* For big smart phones 5.1 */ ) {
+@media screen and (min-width: 768px /* For Note smart phones */ ) {
+    .section1 .btn-group .btn-lg {
+        width: auto;
+    }
+}
+
+@media screen and (min-width: 1024px /* For tablet and laptop */ ) {
+    body {
+        font-size: 14px;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 9px 14px;
+        font-size: 16px;
+    }
+
     .carousel-inner {
-        max-height: 400px !important;
-        min-height: 400px !important;
+        max-height: 700px !important;
+        min-height: 700px !important;
     }
 
-    .ffx-commission-section h2 {
-        font-size: 28px;
+    .section1 .backcolor {
+        padding-top: 100px;
     }
 
-    .howItWorksSection li {
-        margin-top: 0px;
-        margin-bottom: 0px;
+    .simple-trading-order > .panel-body.disabled {
+        display: block;
+    }
+
+    .simple-trading-order > .panel-heading.disabled {
+        display: block;
+    }
+
+    .order-value {
+        margin-top: 8px;
     }
 
     .dashboard-chart {
-        min-width: 300px;
+        min-width: 800px;
+        max-width: 800px;
+        min-height: 400px;
+        max-height: 400px;
+    }
+
+    .DashboardDiv .btn-group .btn {
+        font-size: medium;
+    }
+
+    .order-navigation .btn-group .btn {
+        font-size: medium;
+    }
+}
+
+@media screen and (min-width: 1200px ) {
+    .corrency-converter-div {
+        padding-left: 10%;
+        padding-right: 10%;
+    }
+
+    body {
+        font-size: 16px;
+    }
+
+    .btn-lg,
+    .btn-group-lg > .btn {
+        padding: 10px 16px;
+        font-size: 18px;
+    }
+
+    .dashboard-chart {
+        min-width: 1000px;
+        max-width: 1000px;
+        min-height: 700px;
+        max-height: 700px;
+    }
+
+    .carousel-inner {
+        max-height: 800px !important;
+        min-height: 800px !important;
+    }
+
+    .select_currency_type {
+        font-size: 35px;
+    }
+}
+
+@media screen and (min-width: 1700px ) {
+    .corrency-converter-div {
+        padding-left: 20%;
+        padding-right: 20%;
     }
 }

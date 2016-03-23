@@ -4,8 +4,80 @@
 }
 <script src="~/JS/Home/HomePage.js"></script>
 <div ng-controller="HomeIndex" ng-init="init('@isRTL')" class="home-class">
+    <div class="col-xs-12 col-sm-6 text-center section-corrency-converter">
+        <div class="corrency-converter-div">
+            <div>
+                <p class="text1"><b>@FlatFXResources.Resources.HowMuchWouldYouLikeToExchange</b></p>
+                <div class="text-center send_money_box">
+                    <div class="input-group" id="send_money_row">
+                        <div class="select_currency_header">@FlatFXResources.Resources.YOUSEND</div>
+                        <input type="text" name="" id="send_money_input" maxlength="9" class="form-control ng-pristine ng-untouched ng-valid ng-valid-maxlength" ng-change="calculateReceive()" ng-model="converterAmount" fcsa-number="{ preventInvalidInput: true, showDecimals: 0 }">
+                        <div class="input-group-btn dropdown" dropdown="">
+                            <button type="button" class="select_currency_type btn btn-default dropdown-toggle ng-binding" id="send_money_dropdown_button" dropdown-toggle="" ng-disabled="disabled" aria-haspopup="true" aria-expanded="false"><b>{{currencies[SendCurrencyISO].Symbol}}</b> {{SendCurrencyISO}}</button>
+                            <ul class="dropdown-menu scrollable-menu" id="send_money_dropdown" role="menu">
+                                <li ng-repeat="currency in currencies" ng-click="changeSendCurrency(currency.ISO)" class="currency_options ng-scope" currency-name="currency.Name" currency-symbol="currency.Symbol" data-value="currency.ISO"><a href="#"><img ng-src="{{currency.Img}}"><span class="currencyIso ng-binding">{{ currency.ISO }}</span><span class="currencyName ng-binding">{{ currency.Name }}</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+                <div class="text-center recive_money_box">
+                    <div class="input-group" id="recive_money_row">
+                        <div class="select_currency_header">@FlatFXResources.Resources.YOURECEIVE</div>
+                        <input type="text" format="number" name="" id="recive_money_input" maxlength="9" class="form-control TransferInputFocus ng-pristine ng-untouched ng-valid ng-valid-maxlength" ng-change="calculateSend()" ng-model="IndicativeCalculatedAmount" fcsa-number="{ preventInvalidInput: true, showDecimals: 0 }">
+                        <div class=" input-group-btn dropdown" dropdown="">
+                            <button type="button" class="select_currency_type btn btn-default dropdown-toggle ng-binding" id="recive_money_dropdown_button" dropdown-toggle="" ng-disabled="disabled" aria-haspopup="true" aria-expanded="false"><b>{{currencies[ReceiveCurrencyISO].Symbol}}</b> {{ReceiveCurrencyISO}}</button>
+                            <ul class="dropdown-menu scrollable-menu" id="recive_money_dropdown" role="menu">
+                                <li ng-repeat="currency in currencies" ng-click="changeReceiveCurrency(currency.ISO)" class="currency_options ng-scope" currency-name="currency.Name" currency-symbol="currency.Symbol" data-value="currency.ISO"><a href="#"><img ng-src="{{currency.Img}}"> <span class="currencyIso ng-binding">{{ currency.ISO }}</span><span class="currencyName ng-binding">{{ currency.Name }}</span></a></li>
+                            </ul>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <div class="row" style="margin-bottom: -22px;">
+                    <p class="see-why-text">
+                        @FlatFXResources.Resources.YouWill <strong>@FlatFXResources.Resources.saveSmall <span id="see_why_amount" class="ng-binding" ng-bind="DirectionSymbol + (CalcSave | number:0)"></span></strong> @FlatFXResources.Resources.ByUsingFlatFX <a href="#" ng-click="ShowWhyFunc()"><u>@FlatFXResources.Resources.SeeWhy &gt;</u></a>
+                    </p>
+                    <br>
+                </div>
+                <div class="row">
+                    <div class="see_why_description text-center" ng-show="ShowWhy">
+                        <table class="table see_why_table">
+                            <thead>
+                                <tr>
+                                    <td></td>
+                                    <td class="font-bold">FlatFX</td>
+                                    <td class="font-bold">@FlatFXResources.Resources.averagebank</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td class="header">@FlatFXResources.Resources.Rate</td>
+                                    <td class="ng-binding">{{ Rate | number:4 }}<br> (@FlatFXResources.Resources.inverse: {{ (1 / Rate) | number:4 }})</td>
+                                    <td id="average_bank_rate" class="average_bank_col ng-binding">{{ BankRate | number:4}}<br> (inverse: {{ 1 / BankRate | number:4}})</td>
+                                </tr>
+                                <tr>
+                                    <td class="header">@FlatFXResources.Resources.TransferFee</td>
+                                    <td class="ng-binding">₪ 50</td>
+                                    <td id="average_bank_fee" class="average_bank_col ng-binding">₪ 0</td>
+                                </tr>
+                                <tr>
+                                    <td id="SeeWhyTableRecipientGetsHeader" class="font-bold ng-binding">{{ DirectionHeader }}</td>
+                                    <td class="font-bold ng-binding">{{DirectionSymbol}} {{DirectionGetFlatFX | number:0}}</td>
+                                    <td class="ng-binding">{{DirectionSymbol}} {{DirectionGetBank | number:0}}</td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+            <div class="text-center">
+                <a class="btn btn-primary btn-get-started" href="@Url.Action("Login", "Account")">@FlatFXResources.Resources.GetStarted</a>
+            </div>
+        </div>
+    </div>
     <div class="text-center section1">
-        <div class="col-xs-12 backcolor">
+        <div class="col-xs-12 col-sm-6 backcolor">
             <div>
                 <p class="text1"><b>@FlatFXResources.Resources.HomeHeader1</b></p>
                 <p class="text1">@FlatFXResources.Resources.HomeHeader2</p>
@@ -162,9 +234,11 @@
         var start = window.location.href.indexOf('#');
         if (start > 0) {
             navigateToSection = window.location.href.substr(start, window.location.href.length - start);
-            $('html, body').animate({
-                scrollTop: $(navigateToSection).offset().top
-            }, 1000);
+            if (navigateToSection != '#') {
+                $('html, body').animate({
+                    scrollTop: $(navigateToSection).offset().top
+                }, 1000);
+            }
         }
 
         if ("@isRTL" == "True") {

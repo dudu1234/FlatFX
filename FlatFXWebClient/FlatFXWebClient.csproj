@@ -275,6 +275,8 @@
     <Content Include="Images\Crousel_SimpleExchangeCreate.png" />
     <Content Include="Images\Crousel_Statistics.png" />
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\Flags\ILS.png" />
+    <Content Include="Images\Flags\USD.gif" />
     <Content Include="Images\FlatFXIcon.ico" />
     <Content Include="Images\FlatFXIconImage.png" />
     <Content Include="Images\FlatFX_Logo4.png" />
@@ -299,6 +301,7 @@
     <Content Include="Images\usdFlag.png" />
     <Content Include="Images\USDILS_Spreads2.png" />
     <Content Include="JS\Controllers\AllControllers.js" />
+    <Content Include="JS\Functions\fcsaNumber.js" />
     <Content Include="JS\Functions\Charts.js" />
     <Content Include="JS\Functions\NotyFunctions.js" />
     <Content Include="JS\rtlCustom.js" />

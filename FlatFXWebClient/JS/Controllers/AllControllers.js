@@ -9,7 +9,7 @@ myApp.controller('RegisterAll', function ($scope) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
+myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataService) {
     $scope.init = function (isRTL) {
         $scope.amountUSD = 10;
         $scope.exchangeDiscount = 0;
@@ -21,6 +21,8 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
         if ($scope.isRTL == "True") {
             $scope.LangDir = "Hebrew/"
         }
+
+        $scope.ShowWhy = false;
 
         $scope.slides = [];
 
@@ -50,7 +52,23 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
+
     $scope.ready = function () {
+        $scope.currencies = SharedDataService.Currencies;
+
+        $scope.converterAmount = 100000;
+        $scope.SendCurrencyISO = 'USD';
+        $scope.ReceiveCurrencyISO = 'ILS';
+        $scope.Rate = 0;
+        $scope.CalcByReceive = false;
+        $scope.CalcSave = 0;
+        $scope.BankRate = 0;
+        $scope.DirectionHeader = ($scope.isRTL == "True") ? "אתה מקבל" : "You get"; // You send
+        $scope.DirectionSymbol = "";
+        $scope.DirectionGetFlatFX = 0;
+        $scope.DirectionGetBank = 0;
+        $scope.ShowWhy = false;
+        $scope.calculateReceive();
     }
     $scope.BankCommission = function () {
         if ($scope.spreadDiscount === undefined)
@@ -71,6 +89,91 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty) {
     }
     $scope.BankIncome = function () {
         return (4 * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
+    }
+
+
+    $scope.calculateReceive = function () {
+        $scope.DirectionHeader = ($scope.isRTL == "True") ? "אתה מקבל" : "You get";
+        $scope.DirectionSymbol = $scope.currencies[$scope.ReceiveCurrencyISO].Symbol;
+        $scope.CalcByReceive = true;
+
+        if ($scope.SendCurrencyISO == 'USD') {
+            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].Bid;
+            $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
+            $scope.BankRate = $scope.currencies[$scope.ReceiveCurrencyISO].BidBank;
+        }
+        else if ($scope.ReceiveCurrencyISO == 'USD') {
+            $scope.Rate = 1 / $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
+            $scope.BankRate = 1 / ($scope.currencies[$scope.SendCurrencyISO].AskBank);
+        }
+        else {
+            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].Bid * (1 / $scope.currencies[$scope.SendCurrencyISO].Ask);
+            $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
+            $scope.BankRate = $scope.currencies[$scope.ReceiveCurrencyISO].BidBank * (1 / $scope.currencies[$scope.SendCurrencyISO].AskBank);
+        }
+
+        $scope.DirectionGetFlatFX = $scope.IndicativeCalculatedAmount;
+        $scope.DirectionGetBank = $scope.converterAmount * $scope.BankRate;
+        $scope.CalcSave = $scope.DirectionGetFlatFX - $scope.DirectionGetBank;
+
+        //$scope.$apply();
+    }
+    $scope.calculateSend = function () {
+        $scope.DirectionHeader = ($scope.isRTL == "True") ? "אתה מעביר" : "You send";
+        $scope.DirectionSymbol = $scope.currencies[$scope.SendCurrencyISO].Symbol;
+        $scope.CalcByReceive = false;
+
+        if ($scope.SendCurrencyISO == 'USD') {
+            $scope.Rate = 1 / $scope.currencies[$scope.ReceiveCurrencyISO].Bid;
+            $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
+            $scope.BankRate = 1 / ($scope.currencies[$scope.ReceiveCurrencyISO].BidBank);
+        }
+        else if ($scope.ReceiveCurrencyISO == 'USD') {
+            $scope.Rate = $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
+            $scope.BankRate = $scope.currencies[$scope.SendCurrencyISO].AskBank;
+        }
+        else {
+            $scope.Rate = (1 / $scope.currencies[$scope.ReceiveCurrencyISO].Bid) * $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
+            $scope.BankRate = (1 / $scope.currencies[$scope.ReceiveCurrencyISO].BidBank) * $scope.currencies[$scope.SendCurrencyISO].AskBank;
+        }
+
+        $scope.DirectionGetFlatFX = $scope.converterAmount;
+        $scope.DirectionGetBank = $scope.IndicativeCalculatedAmount * $scope.BankRate;
+        $scope.CalcSave = $scope.DirectionGetBank - $scope.DirectionGetFlatFX;
+
+        //$scope.$apply();
+    }
+    $scope.changeSendCurrency = function (ISO) {
+        if ($scope.ReceiveCurrencyISO == ISO) {
+            $scope.ReceiveCurrencyISO = $scope.SendCurrencyISO;
+        }
+        
+        $scope.SendCurrencyISO = ISO;
+        if ($scope.CalcByReceive) {
+            $scope.calculateReceive();
+        }
+        else {
+            $scope.calculateSend();
+        }
+    }
+    $scope.changeReceiveCurrency = function (ISO) {
+        if ($scope.SendCurrencyISO == ISO) {
+            $scope.SendCurrencyISO = $scope.ReceiveCurrencyISO;
+        }
+
+        $scope.ReceiveCurrencyISO = ISO;
+        if ($scope.CalcByReceive) {
+            $scope.calculateReceive();
+        }
+        else {
+            $scope.calculateSend();
+        }
+    }
+    $scope.ShowWhyFunc = function () {
+        $scope.ShowWhy = !$scope.ShowWhy;
     }
 });
 

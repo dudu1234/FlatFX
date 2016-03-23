@@ -6,13 +6,13 @@
 }
 
 <div ng-controller="Dashboard" class="DashboardDiv" ng-init="init('@Model.TabName')">
-    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">@FlatFXResources.Resources.OpenDeals</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">@FlatFXResources.Resources.DealHistory</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">@FlatFXResources.Resources.OpenOrders</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'OrderHistory'" ng-change="changeData()">@FlatFXResources.Resources.OrderHistory</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'Statistics'" ng-change="changeData()">@FlatFXResources.Resources.Statistics</label>
-        <label class="btn btn-primary" ng-model="radioDataModel" btn-radio="'SiteStatistics'" ng-change="changeData()">@FlatFXResources.Resources.SiteStatistics</label>
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-group">
+        <label class="btn btn-lg btn-primary" ng-model="radioDataModel" btn-radio="'OpenDeals'" ng-change="changeData()">@FlatFXResources.Resources.OpenDeals</label>
+        <label class="btn btn-lg btn-danger" ng-model="radioDataModel" btn-radio="'DealHistory'" ng-change="changeData()">@FlatFXResources.Resources.DealHistory</label>
+        <label class="btn btn-lg btn-primary" ng-model="radioDataModel" btn-radio="'OpenOrders'" ng-change="changeData()">@FlatFXResources.Resources.OpenOrders</label>
+        <label class="btn btn-lg btn-danger" ng-model="radioDataModel" btn-radio="'OrderHistory'" ng-change="changeData()">@FlatFXResources.Resources.OrderHistory</label>
+        <label class="btn btn-lg btn-primary" ng-model="radioDataModel" btn-radio="'Statistics'" ng-change="changeData()">@FlatFXResources.Resources.Statistics</label>
+        <label class="btn btn-lg btn-danger" ng-model="radioDataModel" btn-radio="'SiteStatistics'" ng-change="changeData()">@FlatFXResources.Resources.SiteStatistics</label>
     </div>
 
     <div id="resultDiv" class="col-xs-10 col-xs-offset-1"></div>

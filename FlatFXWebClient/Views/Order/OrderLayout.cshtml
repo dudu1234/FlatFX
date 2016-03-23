@@ -9,6 +9,14 @@
     <div class="col-xs-12 order-system-header">
         <span class="glyphicon glyphicon-resize-small order-system-icon"></span> Order System
     </div>
+    <div class="col-xs-12 order-navigation">
+        <div class="col-xs-12 btn-group">
+            <a class="btn btn-lg btn-primary" href="@Url.Action("OrderBookIndex", "OrderBook")">@FlatFXResources.Resources.OrderBook</a>
+            <a class="btn btn-lg btn-danger" href="@Url.Action("CreateOrderIndex", "Order")">@FlatFXResources.Resources.CreateNewOrder2</a>
+            <a class="btn btn-lg btn-primary" href="@Url.Action("OpenOrderIndex", "Order")">@FlatFXResources.Resources.OpenOrders</a>
+            <a class="btn btn-lg btn-danger" href="@Url.Action("OrderHistory", "Order")">@FlatFXResources.Resources.OrderHistory</a>
+        </div>
+    </div>
     @if (ApplicationInformation.Instance.IsDemoUser)
     {
         <div class="col-xs-12 demoToLiveTrading">
@@ -16,15 +24,6 @@
             <a class="btn btn-success demo-to-real-button" href="@Url.Action("ConvertDemoToRealAccount", "Account")">@FlatFXResources.Resources.DemoEnvButtonTxt</a>
         </div>
     }
-
-    <div class="col-xs-12 order-navigation">
-        <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
-            <a class="btn btn-primary" href="@Url.Action("OrderBookIndex", "OrderBook")">@FlatFXResources.Resources.OrderBook</a>
-            <a class="btn btn-primary" href="@Url.Action("CreateOrderIndex", "Order")">@FlatFXResources.Resources.CreateNewOrder</a>
-            <a class="btn btn-primary" href="@Url.Action("OpenOrderIndex", "Order")">@FlatFXResources.Resources.OpenOrders</a>
-            <a class="btn btn-primary" href="@Url.Action("OrderHistory", "Order")">@FlatFXResources.Resources.OrderHistory</a>
-        </div>
-    </div>
 
     <div ng-controller="OrderLayout" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')" class="order-currency-exchange-main">
         

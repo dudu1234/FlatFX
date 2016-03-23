@@ -1008,4 +1008,40 @@
   <data name="UserDetails" xml:space="preserve">
     <value>פרטי משתמש</value>
   </data>
+  <data name="CreateNewOrder2" xml:space="preserve">
+    <value>צור הזמנה חדשה</value>
+  </data>
+  <data name="averagebank" xml:space="preserve">
+    <value>בנק ממוצע</value>
+  </data>
+  <data name="ByUsingFlatFX" xml:space="preserve">
+    <value>ע"י שימוש באפליקציה ולא בבנק שלך !</value>
+  </data>
+  <data name="GetStarted" xml:space="preserve">
+    <value>נסה אותנו</value>
+  </data>
+  <data name="HowMuchWouldYouLikeToExchange" xml:space="preserve">
+    <value>כמה כסף ברצונך להמיר?</value>
+  </data>
+  <data name="inverse" xml:space="preserve">
+    <value>הופכי</value>
+  </data>
+  <data name="saveSmall" xml:space="preserve">
+    <value>תחסוך</value>
+  </data>
+  <data name="SeeWhy" xml:space="preserve">
+    <value>פרטים נוספים...</value>
+  </data>
+  <data name="TransferFee" xml:space="preserve">
+    <value>עמלות העברה</value>
+  </data>
+  <data name="YOURECEIVE" xml:space="preserve">
+    <value>אתה מקבל</value>
+  </data>
+  <data name="YOUSEND" xml:space="preserve">
+    <value>אתה מעביר</value>
+  </data>
+  <data name="YouWill" xml:space="preserve">
+    <value>אתה</value>
+  </data>
 </root>

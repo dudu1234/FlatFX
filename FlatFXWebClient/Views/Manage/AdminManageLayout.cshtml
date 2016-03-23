@@ -3,8 +3,6 @@
     ViewBag.Title = "Admin Manage";
 }
 
-<br /><br />
-
 <div ng-controller="AdminManager" ng-init="init('@TempData["Result"]', '@TempData["ErrorResult"]' )" class="row admin-manage">
     <div class="admin-manage-header text-center"><span class="glyphicon glyphicon-user"></span> Admin Manage</div>
     <div id="resultDiv" class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
@@ -25,6 +23,6 @@
     </div>
 </div>
 
-<div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
+<div class="">
     @RenderBody()
 </div>
