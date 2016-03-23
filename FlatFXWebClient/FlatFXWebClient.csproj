@@ -275,6 +275,7 @@
     <Content Include="Images\Crousel_SimpleExchangeCreate.png" />
     <Content Include="Images\Crousel_Statistics.png" />
     <Content Include="Images\favicon.ico" />
+    <Content Include="Images\Flags\EUR.gif" />
     <Content Include="Images\Flags\ILS.png" />
     <Content Include="Images\Flags\USD.gif" />
     <Content Include="Images\FlatFXIcon.ico" />
