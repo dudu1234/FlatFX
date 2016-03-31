@@ -630,6 +630,14 @@ tr.pager td {
     height: auto;
 }
 
+.DashboardDiv .btn.active {
+    text-decoration: underline;
+}
+
+.table-wide-column-1 {
+    width: 140px;
+}
+
 ul.pagination.ng-table-pagination {
     margin: 0px 30px 10px 30px;
     font-weight: 600;
@@ -693,6 +701,7 @@ table.ffx-table tr td a {
     .table-order-buy .first-header > th {
         text-align: center;
         background-color: whitesmoke;
+        font-size: 1.3em;
     }
 
     .table-order-sell .second-header > th {
@@ -871,6 +880,34 @@ table.ffx-table tr td a {
 
 #pairSelect {
     font-weight: 700;
+    font-size: 1em;
+    /*height: 1.2em;*/
+}
+
+#minAmountBuy {
+    max-width: 75px;
+}
+
+#maxAmountBuy {
+    max-width: 75px;
+}
+
+.orderbook-min {
+    float: left;
+}
+
+.orderbook-max {
+    float: left;
+    margin-left: 20px;
+}
+
+.orderbook-select-row {
+    /*margin-top: 1em !important;*/
+}
+
+.orderbook-mid-rate-label {
+    font-size: 1.1em;
+    color: green;
 }
 
 .order-confirm {
@@ -1306,6 +1343,11 @@ textarea {
     padding-right: 0px;
 }
 
+.no-margin {
+    margin: 0px;
+    padding: 0px;
+}
+
 .no-right-margin {
     margin-right: 0px;
     padding-right: 0px;
@@ -1617,11 +1659,48 @@ div.disabled {
     .select_currency_header {
         padding: 24px 6px 0;
     }
+
+    #pairSelect {
+        font-size: 1.2em;
+    }
+
+    .orderbook-mid-rate-label {
+        font-size: 1.2em;
+    }
+
+    #minAmountBuy {
+        max-width: 100px;
+    }
+
+    #maxAmountBuy {
+        max-width: 100px;
+    }
 }
 
 @media screen and (min-width: 768px /* For Note smart phones */ ) {
     .section1 .btn-group .btn-lg {
         width: auto;
+    }
+
+    #pairSelect {
+        font-size: 2em;
+        height: 1.8em;
+    }
+
+    .orderbook-select-row {
+        margin-top: 1em !important;
+    }
+
+    .orderbook-mid-rate-label {
+        font-size: 1.8em;
+    }
+
+    #minAmountBuy {
+        max-width: initial;
+    }
+
+    #maxAmountBuy {
+        max-width: initial;
     }
 }
 

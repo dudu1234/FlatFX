@@ -815,3 +815,87 @@ myApp.controller('OrderLayout', function ($scope, $http, $timeout, noty) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
+myApp.controller('OrderData', function ($scope, $timeout, $interval, $http, noty, NgTableParams, noty) {
+    $scope.init = function (tabName) {
+
+        if (tabName === undefined || tabName === null) {
+            tabName = 'OpenOrders';
+        }
+
+        $scope.DataModel = tabName;
+
+        $scope.ordersUrl = urlPrefix + "/Dashboard/GetOrders";
+        $scope.orderByColumn2 = 'OrderId';
+        $scope.orderTableParams = new NgTableParams({ count: 10 }, { data: [] });
+        $scope.onlyActiveOrders = true;
+
+        $scope.cancelUrl = urlPrefix + "/Dashboard/Cancel";
+
+        $scope.BuySellFilterData = [{ id: '', title: 'All' }, { id: 1, title: 'Buy' }, { id: 2, title: 'Sell' }];
+        $scope.OrderStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'Waiting', title: 'Waiting' }, { id: 'Triggered', title: 'Triggered' }, { id: 'Closed_Successfully', title: 'Closed Successfully' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }, { id: 'Expired', title: 'Expired' }, { id: 'Triggered_partially', title: 'Triggered partially' }];
+        $scope.IsCancelFilterData = [{ id: '', title: 'All' }, { id: 'false', title: 'false' }, { id: 'true', title: 'true' }];
+    };
+    $timeout(function () { // Use it instead of javascript $(document).ready(
+        $scope.ready();
+    }, 0);
+    $scope.ready = function () {
+        $scope.changeData();
+    }
+    $scope.RefreshOrders = function () {
+        $scope.onlyActiveOrders = ($scope.DataModel == 'OpenOrders');
+        $http.get($scope.ordersUrl, { params: { onlyActiveOrders: $scope.onlyActiveOrders } })
+            .success(function (data, status, headers, config) {
+                try {
+                    var tableParams = {
+                        count: 10
+                    };
+                    var tableSettings = {
+                        filterDelay: 0
+                    };
+                    tableSettings.data = data.Orders;
+                    $scope.orderTableParams = new NgTableParams(tableParams, tableSettings);
+                }
+                catch (err) {
+                    $scope.orderTableParams = [];
+                }
+            })
+            .error(function (data, status, header, config) {
+                $scope.ResponseDetails = "Data: " + data +
+                    "<br />status: " + status +
+                    "<br />headers: " + jsonFilter(header) +
+                    "<br />config: " + jsonFilter(config);
+            });
+    };
+    $scope.changeData = function () {
+        $scope.RefreshOrders();
+    }
+
+    $scope.cancelOrder = function (orderId, order) {
+        //if (!window.confirm("Are you sure you want to cancel order #" + orderId + "?"))
+        //  return;
+
+        $http.get($scope.cancelUrl, { params: { type: 'Order', id: orderId } })
+        .success(function (data, status, headers, config) {
+            try {
+                if (data.Error == "") {
+                    notyWrapper.generateResultMessage($('#resultDiv'), 'success', 'Order #' + orderId + ' was canceled');
+                    order.Status = "Canceled";
+                }
+                else {
+                    notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+                }
+            }
+            catch (err) {
+                notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+            }
+        })
+        .error(function (data, status, header, config) {
+            notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
+        });
+    }
+    $scope.EditOrder = function (orderId) {
+        window.location.href = urlPrefix + "/Order/EditOrder?orderId=" + orderId;
+    }
+});
+
+// -----------------------------------------------------------------------------------------------------------------------------------------------------

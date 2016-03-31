@@ -322,5 +322,13 @@ namespace FlatFXWebClient.Controllers
 
             return RedirectToAction("CreateOrderIndex", model);
         }
+        public ActionResult OrderData(string mode)
+        {
+            if (mode == "OrderHistory")
+                TempData["mode"] = "OrderHistory";
+            else
+                TempData["mode"] = "OpenOrders";
+            return View();
+        }
     }
 }

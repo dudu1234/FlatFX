@@ -274,11 +274,15 @@ namespace FlatFXCore.BussinessLayer
                 m_LastHistoricalUpdate = DateTime.Now;
             }
 
+            int timeZoneDiff = 3;
             DateTime updateTime = results.query.created;
-            updateTime = updateTime.AddHours(2);
+            if (updateTime > DateTime.Now.AddHours((-1 * timeZoneDiff) - 3))
+                updateTime = updateTime.AddHours(timeZoneDiff);
 
-            if (updateTime > DateTime.Now.AddHours(1))
-                updateTime = updateTime.AddHours(-2);
+            if (updateTime > DateTime.Now && updateTime < DateTime.Now.AddMinutes(20))
+                updateTime = DateTime.Now;
+            else
+                updateTime = updateTime.AddHours(-1 * timeZoneDiff);
 
             //string updateTimeStr = results.query.created;
             //DateTime updateTime = DateTime.ParseExact(updateTimeStr, "yyyy-MM-dd HH:mm:ss ", CultureInfo.InvariantCulture); //"2015-08-05T15:13:41Z"

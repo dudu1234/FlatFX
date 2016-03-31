@@ -74,15 +74,31 @@ namespace FlatFXWebClient.Controllers
                     return Json(new { Error = error }, JsonRequestBehavior.AllowGet);
                 }
 
-                ActionResult res = Json(new
+                ActionResult res = null;
+                if (pairs.Count == 0)
                 {
-                    Pairs = pairs,
-                    Key = key,
-                    MidRate = midRate,
-                    KeyDisplay = keyDisplay,
-                    OrdersToBuy = ordersToBuy,
-                    OrdersToSell = ordersToSell
-                }, JsonRequestBehavior.AllowGet);
+                    res = Json(new
+                    {
+                        Pairs = pairs,
+                        Key = "",
+                        MidRate = 0,
+                        KeyDisplay = "",
+                        OrdersToBuy = new List<OrderBookItem>(),
+                        OrdersToSell = new List<OrderBookItem>()
+                    }, JsonRequestBehavior.AllowGet);
+                }
+                else
+                {
+                    res = Json(new
+                    {
+                        Pairs = pairs,
+                        Key = key,
+                        MidRate = midRate,
+                        KeyDisplay = keyDisplay,
+                        OrdersToBuy = ordersToBuy,
+                        OrdersToSell = ordersToSell
+                    }, JsonRequestBehavior.AllowGet);
+                }
 
                 return res;
             }

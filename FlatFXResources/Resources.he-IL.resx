@@ -727,7 +727,7 @@
     <value>תאריך תפוגה</value>
   </data>
   <data name="MinimalPartnerExecutionAmount" xml:space="preserve">
-    <value>סכום ביצוע מינימלי מול הצד השני</value>
+    <value>סכום ביצוע מינימלי</value>
   </data>
   <data name="MinimalPartnerTotalVolumeUSD" xml:space="preserve">
     <value>נפח מסחר מינימלי של הצד השני (בדולרים)</value>
@@ -805,7 +805,7 @@
     <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה הינה קבועה, 0.2% לעומת 1.1% בבנקים</value>
   </data>
   <data name="Sell2" xml:space="preserve">
-    <value>בתמורה ל</value>
+    <value>בתמורה למכירת</value>
   </data>
   <data name="MaxAmount" xml:space="preserve">
     <value>סכום מקסימלי</value>
@@ -910,7 +910,7 @@
     <value>סכום שנותר</value>
   </data>
   <data name="BuySell" xml:space="preserve">
-    <value>קניה/מכירה</value>
+    <value>קניה / מכירה</value>
   </data>
   <data name="ChargedAmount" xml:space="preserve">
     <value>סכום לחיוב</value>
