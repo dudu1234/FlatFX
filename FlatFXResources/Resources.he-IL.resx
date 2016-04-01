@@ -1044,4 +1044,7 @@
   <data name="YouWill" xml:space="preserve">
     <value>אתה</value>
   </data>
+  <data name="EditOrder" xml:space="preserve">
+    <value>ערוך הזמנת עיסקה</value>
+  </data>
 </root>

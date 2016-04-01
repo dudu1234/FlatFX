@@ -58,6 +58,10 @@ nav, section {
     display: block;
 }
 
+.padding0 {
+    padding: 0px !important;
+}
+
 mark {
     background-color: #a6dbed;
     padding-left: 5px;
@@ -885,11 +889,11 @@ table.ffx-table tr td a {
 }
 
 #minAmountBuy {
-    max-width: 75px;
+    max-width: 90px;
 }
 
 #maxAmountBuy {
-    max-width: 75px;
+    max-width: 90px;
 }
 
 .orderbook-min {
@@ -906,7 +910,7 @@ table.ffx-table tr td a {
 }
 
 .orderbook-mid-rate-label {
-    font-size: 1.1em;
+    font-size: 1em;
     color: green;
 }
 
@@ -1087,11 +1091,13 @@ div.disabled {
 
 .demo-to-real-button {
     margin-left: 50px;
+    font-size: 1em;
 }
 
 .demo-to-real-label {
     text-align: start;
     font-weight: 700;
+    font-size: 1em;
 }
 
 textarea {

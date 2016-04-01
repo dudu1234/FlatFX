@@ -15,7 +15,9 @@
                     <div class="col-xs-7">
                         <select class="form-control" name="pairSelect" id="pairSelect" ng-model="Key" ng-options="k as v for (k,v) in Pairs" ng-change="changePair()"></select>
                     </div>
-                    <label class="col-xs-2 orderbook-mid-rate-label">@*@FlatFXResources.Resources.OrderBookRate2*@{{ MidRate }}</label>
+                    <div class="col-xs-2">
+                        <label class="orderbook-mid-rate-label">{{ MidRate }}</label>
+                    </div>
                 </div>
                 <div class="form-group">
                     <label class="col-xs-4">@FlatFXResources.Resources.AmountRange ({{ CCY1() }})</label>

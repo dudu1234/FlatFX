@@ -16,8 +16,8 @@
                 <a class="btn btn-success" href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Home</a>
                 <a class="btn btn-danger" href="@Url.Action("DashboardIndex", "Dashboard")">@FlatFXResources.Resources.OpenDeals</a>
                 <a class="btn btn-success" href="@Url.Action("DashboardIndex", "Dashboard", new { TabName = "DealHistory" })">@FlatFXResources.Resources.DealHistory</a>
-                <a class="btn btn-danger" href="@Url.Action("DashboardIndex", "Dashboard", new { TabName = "OpenOrders" })">@FlatFXResources.Resources.OpenOrders</a>
-                <a class="btn btn-success" href="@Url.Action("DashboardIndex", "Dashboard", new { TabName = "OrderHistory" })">@FlatFXResources.Resources.OrderHistory</a>
+                <a class="btn btn-danger" href="@Url.Action("OrderData", "Order", new { mode = "OpenOrders" })">@FlatFXResources.Resources.OpenOrders</a>
+                <a class="btn btn-success" href="@Url.Action("OrderData", "Order", new { mode = "OrderHistory" })">@FlatFXResources.Resources.OrderHistory</a>
                 <a class="btn btn-danger" href="@Url.Action("DashboardIndex", "Dashboard", new { TabName = "Statistics" })">@FlatFXResources.Resources.Statistics</a>
             </div>
         </div>

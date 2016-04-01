@@ -47,7 +47,7 @@ namespace FlatFXWebClient.Controllers
 
         public async Task<ActionResult> CreateOrderIndex(OrderViewModel model)
         {
-            if (model.WorkflowStage <= 0)
+            if (model == null || model.WorkflowStage <= 0)
             {
                 model = new OrderViewModel();
                 await Initialize(model);
@@ -57,7 +57,7 @@ namespace FlatFXWebClient.Controllers
                 if (model.order == null)
                     model.order = model.OrderInSession;
             }
-            return View(model);
+            return View("OrderWorkflow", model);
         }
         private async Task<bool> Initialize(OrderViewModel model)
         {
@@ -199,11 +199,14 @@ namespace FlatFXWebClient.Controllers
             if (model.AmountCCY1 == 0)
                 TempData["ErrorResult"] += "Please select amount. ";
 
+            if (model.AmountCCY1 < 1000)
+                TempData["ErrorResult"] += "invalid amount. amount > 1000. ";
+
             if (model.MinimalPartnerExecutionAmountCCY1 != null && model.AmountCCY1 < model.MinimalPartnerExecutionAmountCCY1)
                 TempData["ErrorResult"] += "Invalid minimal partner execution amount. ";
 
             if (TempData["ErrorResult"] != null)
-                return View(model);
+                return View("OrderWorkflow", model);
 
             try
             {
@@ -216,12 +219,12 @@ namespace FlatFXWebClient.Controllers
                     if (order == null)
                     {
                         TempData["ErrorResult"] += "Invalid minimal partner execution amount. ";
-                        return View(model);
+                        return View("OrderWorkflow", model);
                     }
                     if (order.Status != Consts.eOrderStatus.Waiting)
                     {
                         TempData["ErrorResult"] += "This order is already triggered and can not be edited. Only 'Waiting' orders can be edited. ";
-                        return View(model);
+                        return View("OrderWorkflow", model);
                     }
 
                     string txt = order.CompanyAccount.Company.CompanyName;
@@ -283,7 +286,7 @@ namespace FlatFXWebClient.Controllers
                 TempData["ErrorResult"] += "General Error. ";
             }
 
-            return View(model);
+            return View("OrderWorkflow", model);
         }
         [HttpPost, ActionName("Confim")]
         [ValidateAntiForgeryToken]

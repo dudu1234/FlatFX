@@ -1065,4 +1065,7 @@
   <data name="YouWill" xml:space="preserve">
     <value>You will</value>
   </data>
+  <data name="EditOrder" xml:space="preserve">
+    <value>Edit Order</value>
+  </data>
 </root>

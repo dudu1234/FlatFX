@@ -997,6 +997,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Edit Order.
+        /// </summary>
+        public static string EditOrder {
+            get {
+                return ResourceManager.GetString("EditOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Edit User Details.
         /// </summary>
         public static string EditUserDetails {
