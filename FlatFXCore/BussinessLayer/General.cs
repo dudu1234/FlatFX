@@ -91,14 +91,56 @@ namespace FlatFXCore.BussinessLayer
         {
             try
             {
-                //Set status for all demo deals
                 using (var db = new ApplicationDBContext())
                 {
-                    DateTime dt = DateTime.Now.AddDays(-5);
-                    List<Deal> deals = db.Deals.Where(d => d.IsDemo && d.Status != Consts.eDealStatus.Closed && d.MaturityDate < dt).ToList();
+                    DateTime dt = DateTime.Now;
+
+                    //Set Orders Expiry Date, to do dudu Should run on Mid-Night Exactlly
+                    dt = DateTime.Today;
+                    List<Order> orders2 = db.Orders.Where(o => (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting) && o.ExpiryDate.HasValue && o.ExpiryDate.Value <= dt).ToList();
+                    foreach (Order order in orders2)
+                    {
+                        order.Status = Consts.eOrderStatus.Expired;
+                    }
+                    db.SaveChanges();
+
+
+                    //Set status = Close for all DEMO FxSimpleExchange Deals
+                    dt = DateTime.Now.AddDays(-5);
+                    List<Deal> deals = db.Deals.Where(d => d.IsDemo && (d.Status == Consts.eDealStatus.None || d.Status == Consts.eDealStatus.New || d.Status == Consts.eDealStatus.CustomerTransfer) 
+                        && d.MaturityDate < dt && d.DealProductType == Consts.eDealProductType.FxSimpleExchange).ToList();
                     foreach(Deal deal in deals)
                     {
                         deal.Status = Consts.eDealStatus.Closed;
+                    }
+                    db.SaveChanges();
+
+
+                    //Set status = Close for all DEMO OrderMatch and match's orders + deals
+                    dt = DateTime.Now.AddDays(-1);
+                    List<OrderMatch> matches = db.OrderMatches.Where(m => m.Status != Consts.eMatchStatus.Closed && m.Order1.IsDemo == true && m.TriggerDate < dt).ToList();
+                    foreach (OrderMatch match in matches)
+                    {
+                        match.Status = Consts.eMatchStatus.Closed;
+                        match.CloseDate = DateTime.Now;
+
+                        match.Order1.Status = Consts.eOrderStatus.Closed_Successfully;
+                        match.Order2.Status = Consts.eOrderStatus.Closed_Successfully;
+
+                        match.Deal1.Status = Consts.eDealStatus.Closed;
+                        match.Deal2.Status = Consts.eDealStatus.Closed;
+                    }
+                    db.SaveChanges();
+
+
+                    //Set status = Close for all old DEMO Orders
+                    dt = DateTime.Now.AddDays(-60);
+                    List<Order> orders = db.Orders.Where(o => o.IsDemo && (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting) && 
+                        o.OrderDate < dt).ToList();
+                    foreach (Order order in orders)
+                    {
+                        order.Status = Consts.eOrderStatus.Expired;
+                        order.ExpiryDate = DateTime.Today;
                     }
                     db.SaveChanges();
                 }
