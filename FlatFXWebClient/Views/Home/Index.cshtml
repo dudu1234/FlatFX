@@ -35,40 +35,39 @@
             </div>
             <div class="text-center">
                 <div class="row" style="margin-bottom: -22px;">
+                    <span ng-show="CalcSave < 50" class="red large-font">@FlatFXResources.Resources.TheMinimalVolume</span>
                     <p class="see-why-text">
-                        @FlatFXResources.Resources.YouWill <strong>@FlatFXResources.Resources.saveSmall <span id="see_why_amount" class="ng-binding" ng-bind="DirectionSymbol + (CalcSave | number:0)"></span></strong> @FlatFXResources.Resources.ByUsingFlatFX <a href="#" ng-click="ShowWhyFunc()"><u>@FlatFXResources.Resources.SeeWhy &gt;</u></a>
+                        @FlatFXResources.Resources.YouWill <strong>@FlatFXResources.Resources.saveSmall <span id="see_why_amount" class="ng-binding" ng-bind="(CalcSave | number:0) + ' ' + DirectionSymbol"></span></strong> @FlatFXResources.Resources.ByUsingFlatFX <a href="#" ng-click="ShowWhyFunc()"><u>@FlatFXResources.Resources.SeeWhy &gt;</u></a>
                     </p>
                     <br>
                 </div>
-                <div class="row">
-                    <div class="see_why_description text-center" ng-show="ShowWhy">
-                        <table class="table see_why_table">
-                            <thead>
-                                <tr>
-                                    <td></td>
-                                    <td class="font-bold">FlatFX</td>
-                                    <td class="font-bold">@FlatFXResources.Resources.averagebank</td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td class="header">@FlatFXResources.Resources.Rate</td>
-                                    <td class="ng-binding">{{ Rate | number:4 }}<br> (@FlatFXResources.Resources.inverse: {{ (1 / Rate) | number:4 }})</td>
-                                    <td id="average_bank_rate" class="average_bank_col ng-binding">{{ BankRate | number:4}}<br> (@FlatFXResources.Resources.inverse: {{ 1 / BankRate | number:4}})</td>
-                                </tr>
-                                <tr>
-                                    <td class="header">@FlatFXResources.Resources.TransferFee</td>
-                                    <td class="ng-binding">₪ 70</td>
-                                    <td id="average_bank_fee" class="average_bank_col ng-binding">₪ 0</td>
-                                </tr>
-                                <tr>
-                                    <td id="SeeWhyTableRecipientGetsHeader" class="font-bold ng-binding">{{ DirectionHeader }}</td>
-                                    <td class="font-bold ng-binding">{{DirectionSymbol}} {{DirectionGetFlatFX | number:0}}</td>
-                                    <td class="ng-binding">{{DirectionSymbol}} {{DirectionGetBank | number:0}}</td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
+                <div class="row see_why_description text-center" ng-show="ShowWhy">
+                    <table class="table see_why_table">
+                        <thead>
+                            <tr>
+                                <td></td>
+                                <td class="font-bold">FlatFX</td>
+                                <td class="font-bold">@FlatFXResources.Resources.averagebank</td>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td class="header">@FlatFXResources.Resources.Rate</td>
+                                <td class="ng-binding">{{ Rate | number:4 }}<br> (@FlatFXResources.Resources.inverse: {{ (1 / Rate) | number:4 }})</td>
+                                <td id="average_bank_rate" class="average_bank_col ng-binding">{{ BankRate | number:4}}<br> (@FlatFXResources.Resources.inverse: {{ 1 / BankRate | number:4}})</td>
+                            </tr>
+                            <tr>
+                                <td class="header">@FlatFXResources.Resources.TransferFee</td>
+                                <td class="ng-binding">₪ 70</td>
+                                <td id="average_bank_fee" class="average_bank_col ng-binding">₪ 0</td>
+                            </tr>
+                            <tr>
+                                <td id="SeeWhyTableRecipientGetsHeader" class="font-bold ng-binding">{{ DirectionHeader }}</td>
+                                <td class="font-bold ng-binding">{{DirectionSymbol}} {{DirectionGetFlatFX | number:0}}</td>
+                                <td class="ng-binding">{{DirectionSymbol}} {{DirectionGetBank | number:0}}</td>
+                            </tr>
+                        </tbody>
+                    </table>
                 </div>
             </div>
             <div class="text-center">

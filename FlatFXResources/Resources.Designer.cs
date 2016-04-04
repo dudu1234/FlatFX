@@ -2686,6 +2686,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The minimal volume is 10,000$.
+        /// </summary>
+        public static string TheMinimalVolume {
+            get {
+                return ResourceManager.GetString("TheMinimalVolume", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Today Volume.
         /// </summary>
         public static string TodayVolume {

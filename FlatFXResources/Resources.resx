@@ -1094,4 +1094,7 @@ When the match occurs an automatic email will be send to you with directions for
   <data name="OrderUpdateSuccessfully" xml:space="preserve">
     <value>Order successfully updated</value>
   </data>
+  <data name="TheMinimalVolume" xml:space="preserve">
+    <value>The minimal volume is 10,000$</value>
+  </data>
 </root>

@@ -40,12 +40,13 @@ myApp.service('SharedDataService', function ($http, $interval) {
             'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
             'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
             'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 }
-        }
+        },
+        ILSUSD : 3.8
     };
 
-    //$interval(function () {
-    //    refreshRates();
-    //}, 20000);
+    $interval(function () {
+        refreshRates();
+    }, 60000);
 
     var refreshRates = function () {
         $http.get(RatesUrl)
@@ -65,6 +66,10 @@ myApp.service('SharedDataService', function ($http, $interval) {
                             Shared.Currencies[currency].BidBank = (isOpposite) ? (1 / value.Mid * 0.9888) : (value.Mid * 0.9888);
                             Shared.Currencies[currency].AskOrder = (isOpposite) ? (1 / value.Mid * 1.002) : (value.Mid * 1.002);
                             Shared.Currencies[currency].BidOrder = (isOpposite) ? (1 / value.Mid * 0.998) : (value.Mid * 0.998);
+
+                            if (currency == "ILS") {
+                                Shared.ILSUSD = value.Mid;
+                            }
                         }
                     });
                 }

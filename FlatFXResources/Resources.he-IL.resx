@@ -1073,4 +1073,7 @@
   <data name="OrderUpdateSuccessfully" xml:space="preserve">
     <value>הזמנת העיסקה עודכנה בהצלחה</value>
   </data>
+  <data name="TheMinimalVolume" xml:space="preserve">
+    <value>סכום ההמרה המינימלי הינו 10,000$</value>
+  </data>
 </root>
