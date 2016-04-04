@@ -95,10 +95,18 @@ namespace FlatFXWebClient.ViewModels
         public Order order { get; set; }
         public List<string> InvalidAccountReason { get; set; }
 
+        public long MatchOrderId { get; set; }
+        public double MatchMinAmount { get; set; }
+        public double MatchMaxAmount { get; set; }
+
+        public bool IsEdit { get; set; }
+        public Deal deal { get; set; }
+
         public OrderViewModel()
         {
             InvalidAccountReason = new List<string>();
             OrderKey = Guid.NewGuid().ToString();
+            IsEdit = false;
         }
 
         public Order OrderInSession

@@ -1047,4 +1047,30 @@
   <data name="EditOrder" xml:space="preserve">
     <value>ערוך הזמנת עיסקה</value>
   </data>
+  <data name="CreateMatchOrder" xml:space="preserve">
+    <value>צור התאמה להזמנת עיסקה</value>
+  </data>
+  <data name="FailedToCreateOrder" xml:space="preserve">
+    <value>יצירת הזמנת ההמרה נכשלה</value>
+  </data>
+  <data name="PleaseContactSupport" xml:space="preserve">
+    <value>אנא פנה לצוות FlaxFX ע"מ לפתור את הבעיה</value>
+  </data>
+  <data name="MatchDealId" xml:space="preserve">
+    <value>הזמנת העיסקה נהפכה לעיסקה, מספר העיסקה:</value>
+  </data>
+  <data name="MatchSummaryDetails" xml:space="preserve">
+    <value>השלב הבא הינו העברת הכספים,
+בעוד מספר דקות ישלח אליך אימייל אוטומטי עם הוראות העברת כספים</value>
+  </data>
+  <data name="OrderMatchSuccessfully" xml:space="preserve">
+    <value>התאמת הזמנות העיסקה נוצרה בהצלחה</value>
+  </data>
+  <data name="OrderSummaryDetails" xml:space="preserve">
+    <value>הזמנת העיסקה תמתין למשתמש שיבצע &lt;b&gt;התאמה&lt;/b&gt; להזמנה שלך.
+ברגע שתיווצר התאמה ישלח אליך אימייל אוטומטי עם הוראות העברת כספים</value>
+  </data>
+  <data name="OrderUpdateSuccessfully" xml:space="preserve">
+    <value>הזמנת העיסקה עודכנה בהצלחה</value>
+  </data>
 </root>

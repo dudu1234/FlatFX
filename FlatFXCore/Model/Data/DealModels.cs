@@ -33,7 +33,7 @@ namespace FlatFXCore.Model.Data
         [ForeignKey("ProviderId")]
         public virtual Provider Provider { get; set; }
 
-        [Display(Name="Account")]
+        [Display(Name = "Account")]
         public virtual ProviderAccount CreditedProviderAccount { get; set; }
         [Display(Name = "Account")]
         public virtual ProviderAccount ChargedProviderAccount { get; set; }
@@ -60,7 +60,7 @@ namespace FlatFXCore.Model.Data
         public string ChargedCurrency { get; set; }
         public double AmountToExchangeChargedCurrency { get; set; }
         public double AmountUSD { get; set; }
-        
+
         [Required]
         public double CustomerRate { get; set; }
         public double? BankRate { get; set; }
@@ -82,11 +82,13 @@ namespace FlatFXCore.Model.Data
         public string StatusDetails { get; set; }
 
         //Statistices
-	    public double? CustomerTotalProfitUSD { get; set; }
+        public double? CustomerTotalProfitUSD { get; set; }
         public double? FlatFXTotalProfitUSD { get; set; }
         public double? BankTotalProfitUSD { get; set; }
 
-        public Deal() 
+        public string HandleBy { get; set; }
+
+        public Deal()
         {
             //Set the default values
             IsCanceled = false;
@@ -102,7 +104,7 @@ namespace FlatFXCore.Model.Data
             {
                 return (
                     IsCanceled == false &&
-                    /* d.IsDemo == false &&*/ 
+                    /* d.IsDemo == false &&*/
                     IsOffer == false &&
                     !(DealProductType == Consts.eDealProductType.FxMidRateOrder && !MaturityDate.HasValue)
                     );
@@ -151,7 +153,7 @@ namespace FlatFXCore.Model.Data
         //Statistices
         public double? CustomerTotalProfitUSD_Estimation { get; set; }
         public double? FlatFXCommissionUSD_Estimation { get; set; }
-        
+
         public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
         public DateTime? ExpiryDate { get; set; }
         public double? MinimalPartnerTotalVolumeUSD { get; set; }
@@ -225,7 +227,7 @@ namespace FlatFXCore.Model.Data
             }
         }
     }
-    [Table("PromilOrderMatch")]
+    [Table("OrderMatch")]
     public class OrderMatch
     {
         [Key]
@@ -237,6 +239,24 @@ namespace FlatFXCore.Model.Data
 
         public virtual Order Order1 { get; set; }
         public virtual Order Order2 { get; set; }
+
+        public virtual Consts.eMatchStatus Status { get; set; }
+        public virtual Consts.eMatchTriggerSource TriggerSource { get; set; }
+
+        public DateTime TriggerDate { get; set; }
+        public DateTime? MaturityDate { get; set; }
+        public DateTime? CloseDate { get; set; }
+
+        public string HandleBy { get; set; }
+        public double? MidRate { get; set; }
+
+        [NotMapped]
+        public string ErrorMessage { get; set; }
+
+        public OrderMatch()
+        {
+
+        }
     }
 
     [Table("Queries")]
@@ -259,7 +279,7 @@ namespace FlatFXCore.Model.Data
         public virtual Provider Provider { get; set; }
 
         [Required]
-        public DateTime CreatedAt { get; set; }        
+        public DateTime CreatedAt { get; set; }
         [Required, Column(TypeName = "VARCHAR"), MaxLength(10)]
         public string Symbol { get; set; }
         public Consts.eDealType DealType { get; set; }

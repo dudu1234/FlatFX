@@ -80,15 +80,14 @@
 <div class="form-group">
     <br />
     <div class="text-center col-xs-12">
-        <div class="col-xs-10 start-align">
-            @if (ApplicationInformation.Instance.IsDemoUser)
-            {
-                <input type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
-            }
-            else
-            {
-                <input type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
-            }
-        </div>
+        @if (ApplicationInformation.Instance.IsDemoUser)
+        {
+            <input type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
+        }
+        else
+        {
+            <input type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
+        }
+
     </div>
 </div>

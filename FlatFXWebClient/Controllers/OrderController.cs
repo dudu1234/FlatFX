@@ -20,10 +20,6 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderController : BaseController
     {
-        public const double BankProfitInPromil = 0.001;
-        public const double FlatFXProfitInPromil = 0.002;
-        public const double CustomerProfitInPromil = 0.008;
-
         public async Task<ActionResult> EditOrder(long orderId)
         {
             OrderViewModel model = new OrderViewModel();
@@ -41,6 +37,7 @@ namespace FlatFXWebClient.Controllers
             model.OrderId = order.OrderId;
             //model.SelectedAccount = 
             model.Symbol = order.Symbol;
+            model.IsEdit = true;
             //model.WorkflowStage = 
             return RedirectToAction("CreateOrderIndex", model);
         }
@@ -199,11 +196,17 @@ namespace FlatFXWebClient.Controllers
             if (model.AmountCCY1 == 0)
                 TempData["ErrorResult"] += "Please select amount. ";
 
-            if (model.AmountCCY1 < 1000)
-                TempData["ErrorResult"] += "invalid amount. amount > 1000. ";
+            if (model.AmountCCY1 < CurrencyManager.MinDealAmount)
+                TempData["ErrorResult"] += "invalid amount. amount > " + CurrencyManager.MinDealAmount.ToString() + ". ";
+
+            if (model.MinimalPartnerExecutionAmountCCY1 != null && model.MinimalPartnerExecutionAmountCCY1 < CurrencyManager.MinDealAmount)
+                TempData["ErrorResult"] += "Invalid minimal partner execution amount. amount > " + CurrencyManager.MinDealAmount.ToString() + ". ";
 
             if (model.MinimalPartnerExecutionAmountCCY1 != null && model.AmountCCY1 < model.MinimalPartnerExecutionAmountCCY1)
                 TempData["ErrorResult"] += "Invalid minimal partner execution amount. ";
+
+            if (model.MatchOrderId > 0 && (model.MatchMaxAmount < model.AmountCCY1 || model.MatchMinAmount > model.AmountCCY1))
+                TempData["ErrorResult"] += "Invalid partner match amount. Amount range is " + model.MatchMinAmount + " - " + model.MatchMaxAmount;
 
             if (TempData["ErrorResult"] != null)
                 return View("OrderWorkflow", model);
@@ -261,10 +264,8 @@ namespace FlatFXWebClient.Controllers
                 
                 //calculate profit
                 string minorCurrency = order.CCY2;
-                // 0.001 * 2 - constant FlatFX commision
-                // 0.011 - constant Bank full commission
-                order.CustomerTotalProfitUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (0.011 - (0.001 * 2))) - 11, 2);
-                order.FlatFXCommissionUSD_Estimation = Math.Round( (order.AmountUSD_Estimation * (FlatFXProfitInPromil + BankProfitInPromil)), 2); // 3 promil
+                order.CustomerTotalProfitUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.CustomerOrderProfitInPromil)) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
+                order.FlatFXCommissionUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.FlatFXOrderProfitInPromil + CurrencyManager.BankProfitInPromil)), 2); // 2 promil
                 
                 model.order = order;
 
@@ -316,6 +317,24 @@ namespace FlatFXWebClient.Controllers
                 model.OrderId = order.OrderId;
                 model.order = order;
                 model.WorkflowStage = 3;
+
+                if (model.MatchOrderId > 0)
+                {
+                    //Match 2 orders
+                    OrderMatch match = new OrderMatch();
+                    bool isValid = InitializeMatch(match, order.OrderId, model.MatchOrderId, Consts.eMatchTriggerSource.Order1);
+                    if (!isValid || match.ErrorMessage != null)
+                    {
+                        TempData["ErrorResult"] += "Match falied. Please contact FlatFX Team. Details: " + match.ErrorMessage;
+                    }
+                    else
+                    {
+                        db.OrderMatches.Add(match);
+                        db.SaveChanges();
+                    }
+
+                    TempData["Deal"] = match.Deal1;
+                }
             }
             catch (Exception ex)
             {
@@ -333,5 +352,233 @@ namespace FlatFXWebClient.Controllers
                 TempData["mode"] = "OpenOrders";
             return View();
         }
+        public async Task<ActionResult> NewOrderWithMatchMin(long matchOrderId)
+        {
+            return await NewOrderWithMatch(matchOrderId, 0);
+        }
+        public async Task<ActionResult> NewOrderWithMatchMax(long matchOrderId)
+        {
+            return await NewOrderWithMatch(matchOrderId, 1);
+        }
+        private async Task<ActionResult> NewOrderWithMatch(long matchOrderId, int action)
+        {
+            OrderViewModel model = new OrderViewModel();
+            Order matchedOrder = db.Orders.Where(o => o.OrderId == matchOrderId).SingleOrDefault();
+            if (matchedOrder == null)
+                return RedirectToAction("CreateOrderIndex", model);
+
+            await Initialize(model);
+            if (action == 0) //min
+                model.AmountCCY1 = matchedOrder.MinimalPartnerExecutionAmountCCY1.HasValue ? matchedOrder.MinimalPartnerExecutionAmountCCY1.Value : matchedOrder.AmountCCY1_Remainder.Value;
+            else
+                model.AmountCCY1 = matchedOrder.AmountCCY1_Remainder.Value;
+            model.BuySell = (matchedOrder.BuySell == Consts.eBuySell.Buy) ? Consts.eBuySell.Sell : Consts.eBuySell.Buy;
+            model.Symbol = matchedOrder.Symbol;
+            
+            model.MatchOrderId = matchOrderId;
+            model.MatchMinAmount = matchedOrder.MinimalPartnerExecutionAmountCCY1.HasValue ? matchedOrder.MinimalPartnerExecutionAmountCCY1.Value : matchedOrder.AmountCCY1_Remainder.Value;
+            model.MatchMaxAmount = matchedOrder.AmountCCY1_Remainder.Value;
+
+            return RedirectToAction("CreateOrderIndex", model);
+        }
+
+        #region Order Match
+        public bool InitializeMatch(OrderMatch match, long orderId1, long orderId2, Consts.eMatchTriggerSource source)
+        {
+            try
+            {
+                match.ErrorMessage = null;
+
+                match.Order1 = db.Orders.Find(orderId1);
+                match.Order2 = db.Orders.Find(orderId2);
+
+                if (match.Order1 == null)
+                    match.ErrorMessage += "Order " + match.Order1.OrderId + " not exists" + Environment.NewLine;
+                if (match.Order2 == null)
+                    match.ErrorMessage += "Order " + match.Order2.OrderId + " not exists" + Environment.NewLine;
+
+                match.TriggerSource = source;
+
+                //validate the order types
+                if (match.Order1.Symbol != match.Order2.Symbol)
+                    match.ErrorMessage += "Orders symbol is different." + Environment.NewLine;
+                if (match.Order1.BuySell == match.Order2.BuySell)
+                    match.ErrorMessage += "Orders Buy/Sell is same direction." + Environment.NewLine;
+
+                //validate the orders state
+                if (match.Order1.Status != Consts.eOrderStatus.Waiting && match.Order1.Status != Consts.eOrderStatus.Triggered_partially)
+                    match.ErrorMessage += "Order " + match.Order1.OrderId + "(" + match.Order1.BuySell.ToString() + " " + match.Order1.AmountCCY1_Remainder + " " + match.Order1.CCY1 + ") is not longer valid." + Environment.NewLine;
+
+                if (match.Order2.Status != Consts.eOrderStatus.Waiting && match.Order2.Status != Consts.eOrderStatus.Triggered_partially)
+                    match.ErrorMessage += "Order " + match.Order2.OrderId + "(" + match.Order2.BuySell.ToString() + " " + match.Order2.AmountCCY1_Remainder + " " + match.Order2.CCY1 + ") is not longer valid." + Environment.NewLine;
+
+                //validate the orders amount
+                if (match.TriggerSource != Consts.eMatchTriggerSource.Automatic)
+                {
+                    Order activeOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order1 : match.Order2;
+                    Order passiveOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order2 : match.Order1;
+                    if (activeOrder.AmountCCY1_Remainder > passiveOrder.AmountCCY1_Remainder)
+                        match.ErrorMessage += "Order " + activeOrder.OrderId + "(" + activeOrder.BuySell.ToString() + " " + activeOrder.AmountCCY1_Remainder + " " + activeOrder.CCY1 + ") amount is too high." + Environment.NewLine;
+                    if (activeOrder.AmountCCY1_Remainder < passiveOrder.MinimalPartnerExecutionAmountCCY1)
+                        match.ErrorMessage += "Order " + activeOrder.OrderId + "(" + activeOrder.BuySell.ToString() + " " + activeOrder.AmountCCY1_Remainder + " " + activeOrder.CCY1 + ") amount is too low." + Environment.NewLine;
+                }
+
+                //Validate the match is not exists
+                OrderMatch temp = db.OrderMatches.Where(m => m.Order1.OrderId == match.Order1.OrderId && m.Order2.OrderId == match.Order2.OrderId && (m.Status == Consts.eMatchStatus.New || m.Status == Consts.eMatchStatus.Opened)).SingleOrDefault();
+                if (temp != null)
+                    match.ErrorMessage += "Match already exists." + Environment.NewLine;
+
+                match.TriggerDate = DateTime.Now;
+                match.MaturityDate = DateTime.Now;
+                match.Status = Consts.eMatchStatus.New;
+
+                FXRate pairRate = CurrencyManager.Instance.PairRates[match.Order1.Symbol];
+                if (!match.Order1.IsDemo && ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5 || !pairRate.IsTradable)) //the exchange rate is not up to date
+                    match.ErrorMessage += "The Exchange Rate is not up to date. Please contact FlatFX Support.";
+
+                match.MidRate = pairRate.Mid;
+
+                match.Deal1 = GenerateDeal(match, match.Order1, match.MidRate.Value, match.Order1.AmountCCY1);
+                match.Deal2 = GenerateDeal(match, match.Order2, match.MidRate.Value, match.Order1.AmountCCY1);
+
+                //Change Orders info
+                if (match.TriggerSource != Consts.eMatchTriggerSource.Automatic)
+                {
+                    Order activeOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order1 : match.Order2;
+                    Order passiveOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order2 : match.Order1;
+
+                    activeOrder.AmountCCY1_Executed = activeOrder.AmountCCY1_Remainder;
+                    activeOrder.AmountCCY1_Remainder = 0;
+                    activeOrder.Status = Consts.eOrderStatus.Triggered;
+
+                    if (passiveOrder.AmountCCY1_Remainder == activeOrder.AmountCCY1)
+                    {
+                        passiveOrder.AmountCCY1_Executed += activeOrder.AmountCCY1;
+                        passiveOrder.AmountCCY1_Remainder = 0;
+                        passiveOrder.Status = Consts.eOrderStatus.Triggered;
+                    }
+                    else if (passiveOrder.AmountCCY1_Remainder > activeOrder.AmountCCY1)
+                    {
+                        double AmountCCY1_Remainder = passiveOrder.AmountCCY1_Remainder.Value - activeOrder.AmountCCY1;
+                        if (AmountCCY1_Remainder > CurrencyManager.MinDealAmount && passiveOrder.MinimalPartnerExecutionAmountCCY1.HasValue &&
+                            passiveOrder.MinimalPartnerExecutionAmountCCY1.Value < AmountCCY1_Remainder)
+                        {
+                            passiveOrder.AmountCCY1_Executed += activeOrder.AmountCCY1;
+                            passiveOrder.AmountCCY1_Remainder = AmountCCY1_Remainder;
+                            passiveOrder.Status = Consts.eOrderStatus.Triggered_partially;
+                        }
+                        else
+                        {
+                            //not all the amount was executed but the rest is less than minimum
+                            passiveOrder.AmountCCY1_Executed += activeOrder.AmountCCY1;
+                            passiveOrder.AmountCCY1_Remainder = passiveOrder.AmountCCY1 - passiveOrder.AmountCCY1_Executed;
+                            passiveOrder.Status = Consts.eOrderStatus.Triggered;
+
+                            //send email that the order was closed automatically ??? to do ???
+                        }
+                    }
+                    else
+                    {
+                        //Error
+                        Logger.Instance.WriteError("Failed in OrderMatch::Initialize. passiveOrder.AmountCCY1_Remainder < activeOrder.AmountCCY1. Order Id: " + orderId1);
+                    }
+                }
+
+                if (match.ErrorMessage != null)
+                    return false;
+
+                return true;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in OrderMatch::Initialize", ex);
+                match.ErrorMessage += "General Error";
+                match.MatchId = 0;
+                return false;
+            }
+        }
+        private Deal GenerateDeal(OrderMatch match, Order order, double matchMidRate, double AmountCCY1)
+        {
+            try
+            {
+                //Initialize deal
+                Deal deal = new Deal();
+                deal.IsDemo = order.IsDemo;
+                deal.DealProductType = Consts.eDealProductType.FxMidRateOrder;
+                deal.DealType = Consts.eDealType.Spot;
+                deal.IsOffer = false;
+                deal.Status = Consts.eDealStatus.New;
+                deal.ChargedProviderAccount = order.ChargedProviderAccount;
+                deal.CreditedProviderAccount = order.CreditedProviderAccount;
+                deal.Provider = order.Provider;
+                deal.ProviderId = order.Provider.ProviderId;
+                deal.CompanyAccount = order.CompanyAccount;
+                deal.CompanyAccountId = order.CompanyAccount.CompanyAccountId;
+                deal.user = order.user;
+                deal.UserId = order.user.Id;
+
+                deal.BuySell = order.BuySell;
+                deal.Symbol = order.Symbol;
+                Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid;
+                if (deal.BuySell == Consts.eBuySell.Buy)
+                    priceBidOrAsk = Consts.eBidAsk.Ask;
+
+                deal.OfferingDate = DateTime.Now;
+                deal.MidRate = matchMidRate;
+                if (priceBidOrAsk == Consts.eBidAsk.Bid)
+                {
+                    deal.CustomerRate = matchMidRate - ((CurrencyManager.BankProfitInPromil + CurrencyManager.FlatFXOrderProfitInPromil) * matchMidRate);
+                    deal.BankRate = matchMidRate - (CurrencyManager.BankProfitInPromil * matchMidRate);
+                }
+                else
+                {
+                    deal.CustomerRate = matchMidRate + ((CurrencyManager.BankProfitInPromil + CurrencyManager.FlatFXOrderProfitInPromil) * matchMidRate);
+                    deal.BankRate = matchMidRate + (CurrencyManager.BankProfitInPromil * matchMidRate);
+                }
+
+                if (order.BuySell == Consts.eBuySell.Buy)
+                {
+                    deal.AmountToExchangeCreditedCurrency = AmountCCY1;
+                    deal.AmountToExchangeChargedCurrency = deal.CustomerRate * AmountCCY1;
+                    deal.CreditedCurrency = order.CCY1;
+                    deal.ChargedCurrency = order.CCY2;
+                }
+                else
+                {
+                    deal.AmountToExchangeChargedCurrency = AmountCCY1;
+                    deal.AmountToExchangeCreditedCurrency = deal.CustomerRate * AmountCCY1;
+                    deal.CreditedCurrency = order.CCY2;
+                    deal.ChargedCurrency = order.CCY1;
+                }
+
+                //calculate AmountUSD_Estimation (volume)
+                if (deal.CreditedCurrency == "USD")
+                    deal.AmountUSD = deal.AmountToExchangeCreditedCurrency;
+                else if (deal.ChargedCurrency == "USD")
+                    deal.AmountUSD = deal.AmountToExchangeChargedCurrency;
+                else
+                    deal.AmountUSD = CurrencyManager.Instance.GetAmountUSD(deal.CreditedCurrency, deal.AmountToExchangeCreditedCurrency);
+
+                //calculate profit
+                string minorCurrency = order.CCY2;
+                deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankProfitInPromil * matchMidRate), 2); // 0.5 promil
+                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.CustomerOrderProfitInPromil * matchMidRate) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
+                deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 1.5 promil
+                deal.Commission = deal.BankTotalProfitUSD + deal.FlatFXTotalProfitUSD; // 2 Promil
+
+                deal.Comment = order.Comment;
+                deal.ContractDate = DateTime.Now;
+                deal.MaturityDate = DateTime.Now;
+                deal.Status = Consts.eDealStatus.New;
+                return deal;
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in OrderMatch::GenerateDeal", ex);
+                match.ErrorMessage += "Failed to generate Deal from Order.";
+                return null;
+            }
+        }
+        #endregion
     }
 }

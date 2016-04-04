@@ -1068,4 +1068,30 @@
   <data name="EditOrder" xml:space="preserve">
     <value>Edit Order</value>
   </data>
+  <data name="CreateMatchOrder" xml:space="preserve">
+    <value>Create new Order Match</value>
+  </data>
+  <data name="FailedToCreateOrder" xml:space="preserve">
+    <value>Failed to create order</value>
+  </data>
+  <data name="PleaseContactSupport" xml:space="preserve">
+    <value>Please contact FlatFX support</value>
+  </data>
+  <data name="MatchDealId" xml:space="preserve">
+    <value>Your Order become a Deal, Your Deal id is: </value>
+  </data>
+  <data name="MatchSummaryDetails" xml:space="preserve">
+    <value>The next step is money transfer.
+In a few minutes an email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;</value>
+  </data>
+  <data name="OrderMatchSuccessfully" xml:space="preserve">
+    <value>Order Match created successfully</value>
+  </data>
+  <data name="OrderSummaryDetails" xml:space="preserve">
+    <value>Your order will be waiting for a partner to perform &lt;b&gt;Match&lt;/b&gt; with your order.&lt;br /&gt;
+When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;</value>
+  </data>
+  <data name="OrderUpdateSuccessfully" xml:space="preserve">
+    <value>Order successfully updated</value>
+  </data>
 </root>

@@ -93,7 +93,21 @@ namespace FlatFXCore.BussinessLayer
             FlatFXTransfer = 3,
             Closed = 4,
             Canceled = 5,
-            Problem = 6
+            Problem = 6,
+            New = 7
+        }
+        public enum eMatchStatus
+        {
+            New = 1,
+            Opened = 2,
+            Closed = 3,
+            Cancel = 4
+        }
+        public enum eMatchTriggerSource
+        {
+            Order1 = 1,
+            Order2 = 2,
+            Automatic = 3
         }
         public enum eOrderStatus
         {

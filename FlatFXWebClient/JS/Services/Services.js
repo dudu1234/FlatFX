@@ -37,11 +37,9 @@ myApp.service('SharedDataService', function ($http, $interval) {
 
     var Shared = {
         Currencies : {
-            'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1 },
-            'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1 },
-            'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1 }
-            //'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 3.835, Ask: 3.865, Mid: 3.85, BidBank: 3.795, AskBank: 3.905 },
-            //'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1 / 1.1315, Ask: 1 / 1.1285, Mid: 1 / 1.1300, BidBank: 1 / 1.137, AskBank: 1 / 1.123 }
+            'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
+            'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
+            'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 }
         }
     };
 
@@ -63,8 +61,10 @@ myApp.service('SharedDataService', function ($http, $interval) {
                             Shared.Currencies[currency].Mid = (isOpposite) ? 1 / value.Mid : value.Mid;
                             Shared.Currencies[currency].Bid = (isOpposite) ? 1 / value.Bid : value.Bid;
                             Shared.Currencies[currency].Ask = (isOpposite) ? 1 / value.Ask : value.Ask;
-                            Shared.Currencies[currency].AskBank = (isOpposite) ? (1 / value.Mid * 1.011) : (value.Mid * 1.011);
-                            Shared.Currencies[currency].BidBank = (isOpposite) ? (1 / value.Mid * 0.989) : (value.Mid * 0.989);
+                            Shared.Currencies[currency].AskBank = (isOpposite) ? (1 / value.Mid * 1.0112) : (value.Mid * 1.0112);
+                            Shared.Currencies[currency].BidBank = (isOpposite) ? (1 / value.Mid * 0.9888) : (value.Mid * 0.9888);
+                            Shared.Currencies[currency].AskOrder = (isOpposite) ? (1 / value.Mid * 1.002) : (value.Mid * 1.002);
+                            Shared.Currencies[currency].BidOrder = (isOpposite) ? (1 / value.Mid * 0.998) : (value.Mid * 0.998);
                         }
                     });
                 }

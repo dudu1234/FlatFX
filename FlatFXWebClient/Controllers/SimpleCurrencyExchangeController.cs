@@ -20,10 +20,6 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class SimpleCurrencyExchangeController : BaseController
     {
-        public const double BankProfitInPromil = 0.001;
-        public const double FlatFXProfitInPromil = 0.002;
-        public const double CustomerProfitInPromil = 0.008;
-
         public async Task<ActionResult> StartTrade(string key, string direction)
         {
             SimpleCurrencyExchangeViewModel model = new SimpleCurrencyExchangeViewModel();
@@ -170,6 +166,12 @@ namespace FlatFXWebClient.Controllers
             if (model.CCY1 == model.CCY2)
                 TempData["ErrorResult"] += "Currencies must be different. ";
 
+            if (model.Amount == 0)
+                TempData["ErrorResult"] += "Please select amount. ";
+
+            if (model.Amount < CurrencyManager.MinDealAmount)
+                TempData["ErrorResult"] += "invalid amount. amount > " + CurrencyManager.MinDealAmount.ToString() + ". ";
+
             if (model.InvalidAccountReason != null && model.InvalidAccountReason.Count == 1 && model.InvalidAccountReason[0] == "")
                 model.InvalidAccountReason = null;
 
@@ -231,12 +233,12 @@ namespace FlatFXWebClient.Controllers
                 if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
                     deal.CustomerRate = pairRate.Bid;
-                    deal.BankRate = pairRate.Mid - (BankProfitInPromil * pairRate.Mid);
+                    deal.BankRate = pairRate.Mid - (CurrencyManager.BankProfitInPromil * pairRate.Mid);
                 }
                 else
                 {
                     deal.CustomerRate = pairRate.Ask;
-                    deal.BankRate = pairRate.Mid + (BankProfitInPromil * pairRate.Mid);
+                    deal.BankRate = pairRate.Mid + (CurrencyManager.BankProfitInPromil * pairRate.Mid);
                 }
 
                 if (model.BuySell == Consts.eBuySell.Buy)
@@ -280,10 +282,10 @@ namespace FlatFXWebClient.Controllers
                 string minorCurrency = model.CCY2;
                 if (isOppositeSide)
                     minorCurrency = model.CCY1;
-                deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * BankProfitInPromil * pairRate.Mid), 2); // 1 promil
-                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CustomerProfitInPromil * pairRate.Mid), 2); // 8 promil
-                deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 3 promil
-                deal.Commission = deal.BankTotalProfitUSD + deal.FlatFXTotalProfitUSD;
+                deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankProfitInPromil * pairRate.Mid), 2); // 0.5 promil
+                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.CustomerProfitInPromil * pairRate.Mid) - CurrencyManager.TransactionFeeUSD, 2); // 8 promil
+                deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 2.5 promil
+                deal.Commission = deal.BankTotalProfitUSD + deal.FlatFXTotalProfitUSD; // 3 promil
                 
 
                 if (model.Comment == null)
@@ -343,7 +345,7 @@ namespace FlatFXWebClient.Controllers
                 deal.ContractDate = DateTime.Now;
                 deal.IsOffer = false;
                 deal.MaturityDate = DateTime.Now;
-                deal.Status = Consts.eDealStatus.CustomerTransfer;
+                deal.Status = Consts.eDealStatus.New;
                 db.SaveChanges();
 
                 model.DealId = deal.DealId;

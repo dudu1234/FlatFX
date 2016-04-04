@@ -31,6 +31,7 @@ namespace FlatFXCore.Model.Core
         public DbSet<DailyFXRate> DailyFXRates { get; set; }
         public DbSet<Deal> Deals { get; set; }
         public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderMatch> OrderMatches { get; set; }
         public DbSet<QueryData> Querys { get; set; }
         public DbSet<QueryPerProvider> QueriesPerProvider { get; set; }
         public DbSet<ConfigurationRow> Configurations { get; set; }

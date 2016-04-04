@@ -754,6 +754,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create new Order Match.
+        /// </summary>
+        public static string CreateMatchOrder {
+            get {
+                return ResourceManager.GetString("CreateMatchOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new account group.
         /// </summary>
         public static string CreateNewAccount {
@@ -1128,6 +1137,15 @@ namespace FlatFXResources {
         public static string ExpiryDate {
             get {
                 return ResourceManager.GetString("ExpiryDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Failed to create order.
+        /// </summary>
+        public static string FailedToCreateOrder {
+            get {
+                return ResourceManager.GetString("FailedToCreateOrder", resourceCulture);
             }
         }
         
@@ -1523,6 +1541,25 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your Order become a Deal, Your Deal id is: .
+        /// </summary>
+        public static string MatchDealId {
+            get {
+                return ResourceManager.GetString("MatchDealId", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The next step is money transfer.
+        ///In a few minutes an email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;.
+        /// </summary>
+        public static string MatchSummaryDetails {
+            get {
+                return ResourceManager.GetString("MatchSummaryDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Amount.
         /// </summary>
         public static string MaxAmount {
@@ -1793,6 +1830,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Order Match created successfully.
+        /// </summary>
+        public static string OrderMatchSuccessfully {
+            get {
+                return ResourceManager.GetString("OrderMatchSuccessfully", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are not allowed to perform the Order.
         /// </summary>
         public static string OrderNotAllowed {
@@ -1901,11 +1947,30 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Your order will be waiting for a partner to perform &lt;b&gt;Match&lt;/b&gt; with your order.&lt;br /&gt;
+        ///When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;.
+        /// </summary>
+        public static string OrderSummaryDetails {
+            get {
+                return ResourceManager.GetString("OrderSummaryDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Order System.
         /// </summary>
         public static string OrderSystem {
             get {
                 return ResourceManager.GetString("OrderSystem", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Order successfully updated.
+        /// </summary>
+        public static string OrderUpdateSuccessfully {
+            get {
+                return ResourceManager.GetString("OrderUpdateSuccessfully", resourceCulture);
             }
         }
         
@@ -1933,6 +1998,15 @@ namespace FlatFXResources {
         public static string Password {
             get {
                 return ResourceManager.GetString("Password", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please contact FlatFX support.
+        /// </summary>
+        public static string PleaseContactSupport {
+            get {
+                return ResourceManager.GetString("PleaseContactSupport", resourceCulture);
             }
         }
         

@@ -47,6 +47,14 @@ namespace FlatFXCore.BussinessLayer
         public Dictionary<string, FXRate> PairRates = new Dictionary<string, FXRate>();
         public DateTime LastFeedUpdate = DateTime.Now.AddDays(-3);
         public List<string> CurrencyList = null;
+
+        public const double BankProfitInPromil = 0.0005;
+        public const double FlatFXProfitInPromil = 0.0025;
+        public const double FlatFXOrderProfitInPromil = 0.0015;
+        public const double CustomerProfitInPromil = 0.008;
+        public const double CustomerOrderProfitInPromil = 0.009;
+        public const double TransactionFeeUSD = 17; //10$: USD transfer internal bank, 7$: ILS Zahav
+        public const int MinDealAmount = 1000;
         #endregion
 
         #region Ctor + Dtor

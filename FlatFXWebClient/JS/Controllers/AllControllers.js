@@ -14,8 +14,9 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
         $scope.amountUSD = 10;
         $scope.exchangeDiscount = 0;
         $scope.spreadDiscount = 0;
-        $scope.flatFXCommission = 2;
-        $scope.bankCommission = 1;
+        $scope.bankTransferFeeNIS = 70;
+        $scope.flatFXCommission = 1.5;
+        $scope.bankCommission = 0.5;
         $scope.isRTL = isRTL;
         $scope.LangDir = "";
         if ($scope.isRTL == "True") {
@@ -76,19 +77,19 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
         if ($scope.exchangeDiscount === undefined)
             $scope.exchangeDiscount = 0;
 
-        return (4 * $scope.amountUSD * 1000000 * 0.009 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.0022 * (1 - (0.01 * $scope.exchangeDiscount)));
+        return ($scope.currencies['ILS'].Mid * $scope.amountUSD * 1000000 * 0.009 * (1 - (0.01 * $scope.spreadDiscount))) + (4 * $scope.amountUSD * 1000000 * 0.0022 * (1 - (0.01 * $scope.exchangeDiscount)));
     }
     $scope.FlatFXCommission = function () {
-        return (4 * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommission + $scope.bankCommission))) + 50;
+        return ($scope.currencies['ILS'].Mid * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommission + $scope.bankCommission)));
     }
     $scope.FlatFXSaving = function () {
-        return $scope.BankCommission() - $scope.FlatFXCommission();
+        return $scope.BankCommission() - $scope.FlatFXCommission() - $scope.bankTransferFeeNIS;
     }
     $scope.FlatFXIncome = function () {
-        return (4 * $scope.amountUSD * 1000000 * 0.001 * $scope.flatFXCommission);
+        return ($scope.currencies['ILS'].Mid * $scope.amountUSD * 1000000 * 0.001 * $scope.flatFXCommission);
     }
     $scope.BankIncome = function () {
-        return (4 * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
+        return ($scope.currencies['ILS'].Mid * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
     }
 
 
@@ -98,24 +99,24 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
         $scope.CalcByReceive = true;
 
         if ($scope.SendCurrencyISO == 'USD') {
-            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].Bid;
+            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].BidOrder;
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = $scope.currencies[$scope.ReceiveCurrencyISO].BidBank;
         }
         else if ($scope.ReceiveCurrencyISO == 'USD') {
-            $scope.Rate = 1 / $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.Rate = 1 / $scope.currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = 1 / ($scope.currencies[$scope.SendCurrencyISO].AskBank);
         }
         else {
-            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].Bid * (1 / $scope.currencies[$scope.SendCurrencyISO].Ask);
+            $scope.Rate = $scope.currencies[$scope.ReceiveCurrencyISO].BidOrder * (1 / $scope.currencies[$scope.SendCurrencyISO].AskOrder);
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = $scope.currencies[$scope.ReceiveCurrencyISO].BidBank * (1 / $scope.currencies[$scope.SendCurrencyISO].AskBank);
         }
 
         $scope.DirectionGetFlatFX = $scope.IndicativeCalculatedAmount;
         $scope.DirectionGetBank = $scope.converterAmount * $scope.BankRate;
-        $scope.CalcSave = $scope.DirectionGetFlatFX - $scope.DirectionGetBank;
+        $scope.CalcSave = $scope.DirectionGetFlatFX - $scope.DirectionGetBank - $scope.bankTransferFeeNIS;
 
         //$scope.$apply();
     }
@@ -125,24 +126,24 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
         $scope.CalcByReceive = false;
 
         if ($scope.SendCurrencyISO == 'USD') {
-            $scope.Rate = 1 / $scope.currencies[$scope.ReceiveCurrencyISO].Bid;
+            $scope.Rate = 1 / $scope.currencies[$scope.ReceiveCurrencyISO].BidOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = 1 / ($scope.currencies[$scope.ReceiveCurrencyISO].BidBank);
         }
         else if ($scope.ReceiveCurrencyISO == 'USD') {
-            $scope.Rate = $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.Rate = $scope.currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = $scope.currencies[$scope.SendCurrencyISO].AskBank;
         }
         else {
-            $scope.Rate = (1 / $scope.currencies[$scope.ReceiveCurrencyISO].Bid) * $scope.currencies[$scope.SendCurrencyISO].Ask;
+            $scope.Rate = (1 / $scope.currencies[$scope.ReceiveCurrencyISO].BidOrder) * $scope.currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = (1 / $scope.currencies[$scope.ReceiveCurrencyISO].BidBank) * $scope.currencies[$scope.SendCurrencyISO].AskBank;
         }
 
         $scope.DirectionGetFlatFX = $scope.converterAmount;
         $scope.DirectionGetBank = $scope.IndicativeCalculatedAmount * $scope.BankRate;
-        $scope.CalcSave = $scope.DirectionGetBank - $scope.DirectionGetFlatFX;
+        $scope.CalcSave = $scope.DirectionGetBank - $scope.DirectionGetFlatFX - $scope.bankTransferFeeNIS;
 
         //$scope.$apply();
     }
@@ -368,7 +369,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         $scope.SiteTotalNumberOfDeals = "";
 
         $scope.BuySellFilterData = [{ id: '', title: 'All' }, { id: 1, title: 'Buy' }, { id: 2, title: 'Sell' }];
-        $scope.DealStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'CustomerTransfer', title: 'Customer Transfer' }, { id: 'FlatFXTransfer', title: 'FlatFX Transfer' }, { id: 'Closed', title: 'Closed' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }];
+        $scope.DealStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'New', title: 'New' }, { id: 'CustomerTransfer', title: 'Customer Transfer' }, { id: 'FlatFXTransfer', title: 'FlatFX Transfer' }, { id: 'Closed', title: 'Closed' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }];
         $scope.OrderStatusFilterData = [{ id: '', title: 'All' }, { id: 'None', title: 'None' }, { id: 'Waiting', title: 'Waiting' }, { id: 'Triggered', title: 'Triggered' }, { id: 'Closed_Successfully', title: 'Closed Successfully' }, { id: 'Canceled', title: 'Canceled' }, { id: 'Problem', title: 'Problem' }, { id: 'Expired', title: 'Expired' }, { id: 'Triggered_partially', title: 'Triggered partially' }];
         $scope.IsCancelFilterData = [{ id: '', title: 'All' }, { id: 'false', title: 'false' }, { id: 'true', title: 'true' }];
     };
@@ -624,7 +625,7 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
         //});
     }
     $scope.getCustomerSaving = function () {
-        return (((0.001 * 11) - (0.001 * 2)) * parseInt($scope.amountCcy1)) - 11;
+        return (((0.001 * 11) - (0.001 * 2)) * parseInt($scope.amountCcy1)) - 17;
     }
     $scope.setAction = function (symbol) {
         $('#Symbol').val(symbol);
@@ -706,6 +707,7 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     $scope.init = function (isDemo) {
         $scope.isDemo = isDemo;
         $scope.orderBookIndexUrl = urlPrefix + "/OrderBook/LoadData";
+        $scope.newOrderWithMatchUrl = urlPrefix + "/Order/NewOrderWithMatch";
 
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';
@@ -791,6 +793,14 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
             return $scope.Key.substring(3, 6);
         else
             return '';
+    }
+    $scope.createNewOrderWithMatch = function (order, columnName) {
+        if (columnName == 'Min') {
+            window.location.href = $scope.newOrderWithMatchUrl + "Min?matchOrderId=" + order.OrderId + '&action=0';
+        }
+        else if (columnName == 'Max') {
+            window.location.href = $scope.newOrderWithMatchUrl + "Max?matchOrderId=" + order.OrderId + '&action=1';
+        }
     }
 });
 

@@ -33,6 +33,7 @@
                     <td title="'@FlatFXResources.Resources.Profit'" filter="{ CustomerTotalProfitUSD: 'number'}" sortable="'CustomerTotalProfitUSD'">{{ deal.CustomerTotalProfitUSD | number:0 | currency:'$' }}</td>
                     <td title="'@FlatFXResources.Resources.IsCanceled'" filter="{ IsCanceled: 'select'}" filter-data="IsCancelFilterData" sortable="'IsCanceled'">{{ deal.IsCanceled }}</td>
                     <td title="'@FlatFXResources.Resources.UserName'" filter="{ UserName: 'text'}" sortable="'UserName'">{{ deal.UserName }}</td>
+                    <td title="'@FlatFXResources.Resources.Product'" filter="{ ProductType: 'text'}" sortable="'ProductType'">{{ deal.ProductType }}</td>
                     <td title="'@FlatFXResources.Resources.StatusDetails'" filter="{ StatusDetails: 'text'}" sortable="'StatusDetails'">{{ deal.StatusDetails }}</td>
                 </tr>
             </table>

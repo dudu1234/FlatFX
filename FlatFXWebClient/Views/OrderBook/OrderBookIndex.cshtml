@@ -51,8 +51,8 @@
                             <tbody>
                                 <tr ng-repeat="order in OrdersToBuy | rangeFilter:'MinAmount':minAmountBuy:'MaxAmount':maxAmountBuy | orderBy:orderByBuy">
                                     @*<td>{{ order.CompanyName }}</td>*@
-                                    <td>{{ order.MinAmount | number:0 }}</td>
-                                    <td>{{ order.MaxAmount | number:0 }}</td>
+                                    <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Min')">{{ order.MinAmount | number:0 }}</a></td>
+                                    <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Max')">{{ order.MaxAmount | number:0 }}</a></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -76,8 +76,8 @@
                             </thead>
                             <tbody>
                                 <tr ng-repeat="order in OrdersToSell | rangeFilter:'MinAmount':minAmountBuy:'MaxAmount':maxAmountBuy | orderBy:orderBySell">
-                                    <td>{{ order.MaxAmount | number:0 }}</td>
-                                    <td>{{ order.MinAmount | number:0 }}</td>
+                                    <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Max')">{{ order.MaxAmount | number:0 }}</a></td>
+                                    <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Min')">{{ order.MinAmount | number:0 }}</a></td>
                                     @*<td>{{ order.CompanyName }}</td>*@
                                 </tr>
                             </tbody>

@@ -905,6 +905,13 @@ table.ffx-table tr td a {
     margin-left: 20px;
 }
 
+.orderbook-amount {
+    text-decoration: underline;
+    color: #228cdb;
+    font-size: 1.2em;
+    cursor: pointer;
+}
+
 .orderbook-select-row {
     /*margin-top: 1em !important;*/
 }
