@@ -24,6 +24,9 @@ namespace FlatFXWebClient.ViewModels
         [Display(Name = "Account", ResourceType = typeof(FlatFXResources.Resources))]
         [Required]
         public string SelectedAccount { get; set; }
+        public bool EnsureOnLinePrice { get; set; }
+        public bool PvPEnabled { get; set; }
+        public bool FastTransferEnabled { get; set; }
         public List<string> InvalidAccountReason { get; set; }
         [Required]
         public Consts.eBuySell BuySell { get; set; }

@@ -48,13 +48,17 @@ namespace FlatFXCore.BussinessLayer
         public DateTime LastFeedUpdate = DateTime.Now.AddDays(-3);
         public List<string> CurrencyList = null;
 
-        public const double BankProfitInPromil = 0.0005;
-        public const double FlatFXProfitInPromil = 0.0025;
-        public const double FlatFXOrderProfitInPromil = 0.0015;
-        public const double CustomerProfitInPromil = 0.008;
-        public const double CustomerOrderProfitInPromil = 0.009;
+        public const double BankCommission = 0.0005;
+        public const double FlatFXCommission = 0.0025;
+        public const double FlatFXOrderCommission = 0.0015;
+        public const double CustomerProfit = 0.008;
+        public const double CustomerOrderProfit = 0.009;
         public const double TransactionFeeUSD = 17; //10$: USD transfer internal bank, 7$: ILS Zahav
-        public const int MinDealAmount = 1000;
+        public const int MinDealAmountUSD = 5000;
+
+        public const double ExtraCharge_EnsureOnLinePrice = 0.001;
+        public const double ExtraCharge_PvPEnabled = 0.001;
+        public const double ExtraCharge_FastTransferEnabled = 0.001;
         #endregion
 
         #region Ctor + Dtor
@@ -117,7 +121,7 @@ namespace FlatFXCore.BussinessLayer
                 }
 
                 return ApplicationInformation.Instance.Session["PairList"] as Dictionary<string, string>;
-            }        
+            }
         }
         public FXRate GetFXRateVsUSD(string currency)
         {
@@ -156,7 +160,7 @@ namespace FlatFXCore.BussinessLayer
             get
             {
                 Dictionary<string, string> currencyListByCulture = new Dictionary<string, string>();
-                foreach(string curr in CurrencyList)
+                foreach (string curr in CurrencyList)
                 {
                     currencyListByCulture.Add(curr, curr + " - " + FlatFXResources.Resources.ResourceManager.GetString(curr));
                 }
@@ -172,7 +176,6 @@ namespace FlatFXCore.BussinessLayer
         private int m_UpdateFeedTimerInterval = 60 * 1000;
         private string m_CurrencyListString = "";
         private DateTime? m_LastHistoricalUpdate = null;
-        public const double FlatFXSpreadInPromil = 0.003;
         #endregion
 
         #region Ctor + Dtor
@@ -263,7 +266,7 @@ namespace FlatFXCore.BussinessLayer
 
                 //Convert to Json
                 var results = JsonConvert.DeserializeObject<dynamic>(response);
-                
+
                 //Insert the response to the DB.
                 UpdateFXRatesTables(results);
             }
@@ -282,15 +285,17 @@ namespace FlatFXCore.BussinessLayer
                 m_LastHistoricalUpdate = DateTime.Now;
             }
 
-            int timeZoneDiff = 3;
-            DateTime updateTime = results.query.created;
-            if (updateTime > DateTime.Now.AddHours((-1 * timeZoneDiff) - 3))
-                updateTime = updateTime.AddHours(timeZoneDiff);
+            DateTime updateTime = DateTime.Now;
 
-            if (updateTime > DateTime.Now && updateTime < DateTime.Now.AddMinutes(20))
-                updateTime = DateTime.Now;
-            else
-                updateTime = updateTime.AddHours(-1 * timeZoneDiff);
+            //int timeZoneDiff = 3;
+            //DateTime updateTime = results.query.created;
+            //if (updateTime > DateTime.Now.AddHours((-1 * timeZoneDiff) - 3))
+            //    updateTime = updateTime.AddHours(timeZoneDiff);
+
+            //if (updateTime > DateTime.Now && updateTime < DateTime.Now.AddMinutes(20))
+            //    updateTime = DateTime.Now;
+            //else
+            //    updateTime = updateTime.AddHours(-1 * timeZoneDiff);
 
             //string updateTimeStr = results.query.created;
             //DateTime updateTime = DateTime.ParseExact(updateTimeStr, "yyyy-MM-dd HH:mm:ss ", CultureInfo.InvariantCulture); //"2015-08-05T15:13:41Z"
@@ -303,9 +308,9 @@ namespace FlatFXCore.BussinessLayer
                     double ask = pairInfo.Ask;
                     double bid = pairInfo.Bid;
                     double mid = (ask + bid) / 2;
-                    
+
                     //Calculate FlatFX prices
-                    double spread = mid * FlatFXSpreadInPromil; // 3 Promil
+                    double spread = mid * (CurrencyManager.BankCommission + CurrencyManager.FlatFXCommission); // 3 Promil
                     bid = System.Math.Round(mid - spread, 4);
                     ask = System.Math.Round(mid + spread, 4);
                     mid = System.Math.Round(mid, 4);
@@ -314,11 +319,11 @@ namespace FlatFXCore.BussinessLayer
                     string time = pairInfo.Time;
                     //DateTime updateTime = DateTime.ParseExact(date + " " + time.ToLower(), "M/d/yyyy h:mtt", CultureInfo.InvariantCulture);
                     //updateTime = updateTime.AddHours(2);
-                    
+
 
                     if ((DateTime.Now.DayOfWeek == DayOfWeek.Saturday || DateTime.Now.DayOfWeek == DayOfWeek.Sunday) && Environment.MachineName == "DUDU-HP")
                         updateTime = DateTime.Now;
-                    
+
                     if (CurrencyManager.Instance.LastFeedUpdate < updateTime)
                         CurrencyManager.Instance.LastFeedUpdate = updateTime;
 
@@ -367,9 +372,7 @@ namespace FlatFXCore.BussinessLayer
                     #endregion
 
                     #region DailyFXRate table
-                    DailyFXRate dailyPairData = null;
-                    dailyPairData = db.DailyFXRates.Where(rate => rate.Key == key && rate.Time == updateTime).FirstOrDefault();
-                    if (dailyPairData == null)
+                    if ((DateTime.Now.Minute % 5) == 0)
                     {
                         DailyFXRate pairDailyData = new DailyFXRate()
                             {
@@ -377,7 +380,7 @@ namespace FlatFXCore.BussinessLayer
                                 Bid = bid,
                                 Ask = ask,
                                 Mid = mid,
-                                Time = updateTime
+                                Time = new DateTime(updateTime.Year, updateTime.Month, updateTime.Day, updateTime.Hour, updateTime.Minute, 0)
                             };
                         db.DailyFXRates.Add(pairDailyData);
                     }
@@ -386,8 +389,8 @@ namespace FlatFXCore.BussinessLayer
                     #region HistoricalFXRate table
                     if (updateHistoricalData)
                     {
-                        HistoricalFXRate pairHistoricalData = null;
-                        pairHistoricalData = db.HistoricalFXRates.Where(rate => rate.Key == key && rate.Time == updateTime).FirstOrDefault();
+                        DateTime today = DateTime.Today;
+                        HistoricalFXRate pairHistoricalData = db.HistoricalFXRates.Where(rate => rate.Key == key && rate.Time > today).FirstOrDefault();
                         if (pairHistoricalData == null)
                         {
                             pairHistoricalData = new HistoricalFXRate()

@@ -551,9 +551,6 @@
   <data name="ASAP" xml:space="preserve">
     <value>במהירות האפשרית ולא יאוחר מ</value>
   </data>
-  <data name="backtoyouraccount" xml:space="preserve">
-    <value>בחזרה לחשבונך</value>
-  </data>
   <data name="BankAccount" xml:space="preserve">
     <value>חשבון</value>
   </data>
@@ -576,7 +573,7 @@
     <value>סיכום העיסקה והוראות העברת כספים</value>
   </data>
   <data name="FlatFXBankAccountDetails" xml:space="preserve">
-    <value>&lt;h3&gt;פרטי חשבון FlatFX:&lt;/h3&gt;
+    <value>&lt;h3&gt;פרטי חשבון FlatFX&lt;/h3&gt;
         &lt;div&gt;
             בנק: לאומי&lt;br /&gt;
             מספר בנק: 10&lt;br /&gt;
@@ -586,9 +583,6 @@
             כתובת הסניף: בן גוריון, 12.15, תל אביב&lt;br /&gt;
         &lt;/div&gt;</value>
   </data>
-  <data name="FromYourBankAccount" xml:space="preserve">
-    <value>מחשבונך</value>
-  </data>
   <data name="Here" xml:space="preserve">
     <value>כאן</value>
   </data>
@@ -596,24 +590,14 @@
     <value>דף הבית</value>
   </data>
   <data name="HowToTransfer" xml:space="preserve">
-    <value>&lt;b&gt;איך להעביר את הכסף&lt;/b&gt;&lt;br /&gt;
-            1) מומלץ בחום להשתמש באתר האינטרנט של הבנק לצורך העברת הכספים&lt;br /&gt; 
-            2) אם ברצונך להעביר את הכסף באמצעות שליחת פקס לבנק:&lt;br /&gt;
-            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;בעוד מספר דקות ישלח אליך במייל טופס העברת כספים, בבקשה וודא שהפרטים נכונים,&lt;br /&gt;
-            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;חתום על הטופס ושלח אותו לבנק, פקס. 03-3333333.&lt;br /&gt;
-            תוכל לעקוב אחר מצב העיסקה</value>
-  </data>
-  <data name="MoneyTransferInstractions" xml:space="preserve">
-    <value>הוראות להעברת הכספים</value>
-  </data>
-  <data name="OnceTheMoney" xml:space="preserve">
-    <value>ברגע שהכסף יועבר, FlatFX תעביר</value>
+    <value>&lt;h3&gt;איך להעביר את הכסף&lt;/h3&gt;
+העברת שקלים - באתר האינטרנט של הבנק באמצעות מערכת זה"ב, עלות של 30 שקלים, הכסף מגיע לאחר מספר דקות&lt;br /&gt;
+העברת דולרים - באמצעות אתר האינטרנט של הבנק:&lt;br /&gt;
+- לחשבון באותו בנק: הכסף מגיע באותו היום, עלות של 10$&lt;br /&gt;
+- לחשבון בבנק אחר: הכסף מגיע יום למחרת, עלות מלאה של 0.22% מנפח ההעברה וע"פ ההנחה ללקוח</value>
   </data>
   <data name="OrderID" xml:space="preserve">
     <value>מספר עיסקה</value>
-  </data>
-  <data name="PleaseTransfer" xml:space="preserve">
-    <value>בבקשה העבר</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>ספק נזילות</value>
@@ -623,9 +607,6 @@
   </data>
   <data name="SettlementDate" xml:space="preserve">
     <value>תאריך קבלת הכספים</value>
-  </data>
-  <data name="TheFunds" xml:space="preserve">
-    <value>על הכספים להתקבל בחשבון FlatFX עד לתאריך</value>
   </data>
   <data name="WeTradedAt" xml:space="preserve">
     <value>תאריך העיסקה</value>
@@ -1067,13 +1048,160 @@
     <value>התאמת הזמנות העיסקה נוצרה בהצלחה</value>
   </data>
   <data name="OrderSummaryDetails" xml:space="preserve">
-    <value>הזמנת העיסקה תמתין למשתמש שיבצע &lt;b&gt;התאמה&lt;/b&gt; להזמנה שלך.
-ברגע שתיווצר התאמה ישלח אליך אימייל אוטומטי עם הוראות העברת כספים</value>
+    <value>הזמנת העיסקה תמתין למשתמש שיבצע התאמה להזמנה שלך.&lt;br /&gt;
+ברגע שתיווצר התאמה ישלח אליך אימייל אוטומטי עם הוראות העברת כספים&lt;br /&gt;
+שים לב שברגע שנוצרת התאמה להזמנה ונוצרת עיסקה, עליך להעביר את הכסף תוך יום.</value>
   </data>
   <data name="OrderUpdateSuccessfully" xml:space="preserve">
     <value>הזמנת העיסקה עודכנה בהצלחה</value>
   </data>
   <data name="TheMinimalVolume" xml:space="preserve">
     <value>סכום ההמרה המינימלי הינו 10,000$</value>
+  </data>
+  <data name="EnsureOnLinePrice" xml:space="preserve">
+    <value>הבטחת שער נוכחי</value>
+  </data>
+  <data name="FastTransferEnabled" xml:space="preserve">
+    <value>העברת כספים מהירה</value>
+  </data>
+  <data name="PvPEnabled" xml:space="preserve">
+    <value>שימוש בהעברה מותנית</value>
+  </data>
+  <data name="CurrentRateIs" xml:space="preserve">
+    <value>השער הנוכחי הינו</value>
+  </data>
+  <data name="EnsureOnLinePriceDetails" xml:space="preserve">
+    <value>מסומן - שער העיסקה יהיה השער הנוכחי.&lt;br /&gt;
+לא מסומן - שער העיסקה יקבע לשעה 13:00 לאחר שהכסף יגיע לחשבון הסולק, באפשרותך לשנות את שעת קביעת השער.</value>
+  </data>
+  <data name="ExtraChargeOf" xml:space="preserve">
+    <value>תשלום נוסף של</value>
+  </data>
+  <data name="FastTransferEnabledDetails" xml:space="preserve">
+    <value>מסומן - העברת הכספים תבוצע באותו יום עסקים (על הכספים להגיע לסולק לפני 14:00).&lt;br /&gt;
+לא מסומן - קבלת הכספים לאחר 1-2 ימי עסקים.</value>
+  </data>
+  <data name="MoreDetails" xml:space="preserve">
+    <value>לפרטים נוספים...</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>לא</value>
+  </data>
+  <data name="PvPEnabledDetails" xml:space="preserve">
+    <value>מסומן - שימוש בהעברה בנקאית מסוג "העברה מותנית".&lt;br /&gt;
+שיטת העברה במערכת הבנקאית שבה ההעברה אל הסולק מתבצעת אך ורק אם ההעברה מן הסולק מתבצעת . ההעברות מתבצעות בו זמנית ע"י הבנק. בשיטה זו יש לשלוח פקס לבנק עם חתימה על הסכם ההעברה (סכומי ההעברה מכל צד).&lt;br /&gt;
+
+לא מסומן - הלקוח מעביר כסף לספק ומקבל את הסכום שנקבע לאחר 1-2 ימי עסקים.</value>
+  </data>
+  <data name="TrasferPeriod" xml:space="preserve">
+    <value>משך זמן העברת הכספים</value>
+  </data>
+  <data name="WillBeSetAfterMoneyTransfer" xml:space="preserve">
+    <value>יקבע לאחר העברת הכספים</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>כן</value>
+  </data>
+  <data name="EstimationByFinalDealRate" xml:space="preserve">
+    <value>הסכום מוערך. הסכום המדויק יקבע ע"פ שער האמצע בשעה 14:00 לאחר שהכסף יגיע לחשבון ספק הנזילות (באפשרותך לשנות את שעת קביעת השער)</value>
+  </data>
+  <data name="EstimationByFinalDealRate_Order" xml:space="preserve">
+    <value>הסכום המדוייק יקבע ע"פ שער האמצע לאחר שתיווצר התאמה להזמנה, בשעה 14:00 לאחר שהכסף יגיע לחשבון הספק</value>
+  </data>
+  <data name="FlatFXShortBankInfo" xml:space="preserve">
+    <value>בנק לאומי XXX-XXXXXX</value>
+  </data>
+  <data name="SummaryEnjoy" xml:space="preserve">
+    <value>הכסף מוכן בחשבונך</value>
+  </data>
+  <data name="SummaryMainHeader" xml:space="preserve">
+    <value>איך זה מתבצע ?</value>
+  </data>
+  <data name="SummaryOnLineStep1Description1" xml:space="preserve">
+    <value>הספק יבצע את המרת המטבע מול חדר העיסקאות במירווחים אטרקטיביים עקב הנחת נפח המרות גבוה&lt;br /&gt;
+שער העיסקה הינו  </value>
+  </data>
+  <data name="SummaryOnLineStep3Description1" xml:space="preserve">
+    <value>הספק יעביר חזרה סכום של </value>
+  </data>
+  <data name="SummaryPvpStep2Description1" xml:space="preserve">
+    <value>הספק יכין סכום של </value>
+  </data>
+  <data name="SummaryPvpStep2Description2" xml:space="preserve">
+    <value>בחשבונו: </value>
+  </data>
+  <data name="SummaryPvpStep2Description3" xml:space="preserve">
+    <value>עליך להכין סכום של </value>
+  </data>
+  <data name="SummaryPvpStep2Description4" xml:space="preserve">
+    <value>בחשבונך: </value>
+  </data>
+  <data name="SummaryPvpStep3Description1" xml:space="preserve">
+    <value>בעוד מספר דקות ישלח אליך אימייל שמכיל את חוזה ההעברה המותנית&lt;br /&gt;
+עליך לקרוא את המסמך, לחתום עליו ולהעבירו אל הבנק שלך&lt;br /&gt;
+החוזה יכלול את ההוראות הבאות: &lt;br /&gt;</value>
+  </data>
+  <data name="SummaryPvpStep3Direction1" xml:space="preserve">
+    <value>1) הספק יעביר סכום של  </value>
+  </data>
+  <data name="SummaryPvpStep3Direction1_2" xml:space="preserve">
+    <value>מחשבונו </value>
+  </data>
+  <data name="SummaryPvpStep3Direction1_3" xml:space="preserve">
+    <value>אל חשבון  </value>
+  </data>
+  <data name="SummaryPvpStep3Direction2" xml:space="preserve">
+    <value>2) הלקוח יעביר סכום של  </value>
+  </data>
+  <data name="SummaryPvpStep3Direction3" xml:space="preserve">
+    <value>שתי ההעברות יתבצעו בו זמנית</value>
+  </data>
+  <data name="SummaryPvpStep3Direction4" xml:space="preserve">
+    <value>הבנק אחראי לכך שההעברה תבוצע אך ורק אם ההעברה השניה מתבצעת אף היא</value>
+  </data>
+  <data name="SummarySecondaryHeader" xml:space="preserve">
+    <value>להלן השלבים הבאים לצורך ביצוע העיסקה:</value>
+  </data>
+  <data name="SummaryStep1" xml:space="preserve">
+    <value>שלב 1</value>
+  </data>
+  <data name="SummaryStep1Description1" xml:space="preserve">
+    <value>עליך להעביר </value>
+  </data>
+  <data name="SummaryStep1Description2" xml:space="preserve">
+    <value>מחשבונך ב </value>
+  </data>
+  <data name="SummaryStep1Description3" xml:space="preserve">
+    <value>על הכסף להגיע לחשבון הספק עד </value>
+  </data>
+  <data name="SummaryStep1Description4" xml:space="preserve">
+    <value>עליך להשתמש במערכת זה"ב ע"מ לבצע את העברת הכספים בדרך המהירה ביותר</value>
+  </data>
+  <data name="SummaryStep2" xml:space="preserve">
+    <value>שלב 2</value>
+  </data>
+  <data name="SummaryStep2Description" xml:space="preserve">
+    <value>הספק יבצע את המרת המטבע מול חדר העיסקאות במירווחים אטרקטיביים עקב הנחת נפח המרות גבוה</value>
+  </data>
+  <data name="SummaryStep3" xml:space="preserve">
+    <value>שלב 3</value>
+  </data>
+  <data name="SummaryStep3Description1" xml:space="preserve">
+    <value>הספק יעביר חזרה סכום מוערך של כ </value>
+  </data>
+  <data name="SummaryStep3Description2" xml:space="preserve">
+    <value>אל חשבונך ב </value>
+  </data>
+  <data name="SummaryStep3Description3" xml:space="preserve">
+    <value>הסכום המדויק יקבע ע"פ שער האמצע בשעה 14:00 לאחר קבלת הכספים בחשבון הספק (באפשרותך לשנות את שעת קביעת השער)</value>
+  </data>
+  <data name="SummaryStep4" xml:space="preserve">
+    <value>שלב 4</value>
+  </data>
+  <data name="SummaryThankYou" xml:space="preserve">
+    <value>תודה רבה שבחרת ב FlatFX</value>
+  </data>
+  <data name="TheFunds" xml:space="preserve">
+    <value>על הכספים להתקבל בחשבון FlatFX עד לתאריך</value>
   </data>
 </root>

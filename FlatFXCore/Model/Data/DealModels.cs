@@ -83,10 +83,15 @@ namespace FlatFXCore.Model.Data
 
         //Statistices
         public double? CustomerTotalProfitUSD { get; set; }
-        public double? FlatFXTotalProfitUSD { get; set; }
-        public double? BankTotalProfitUSD { get; set; }
+        public double? FlatFXIncomeUSD { get; set; }
+        public double? BankIncomeUSD { get; set; }
 
         public string HandleBy { get; set; }
+
+        public bool EnsureOnLinePrice { get; set; }
+        public bool PvPEnabled { get; set; }
+        public bool FastTransferEnabled { get; set; }
+        public double? OfferingMidRate { get; set; }
 
         public Deal()
         {
@@ -96,6 +101,11 @@ namespace FlatFXCore.Model.Data
             IsDelivery = false;
             IsOffer = false;
             IsDemo = false;
+
+            // To Do get it from company defaults
+            EnsureOnLinePrice = false;
+            PvPEnabled = false;
+            FastTransferEnabled = false;
         }
 
         public bool IsRealDeal

@@ -1,5 +1,5 @@
 ﻿var urlPrefix = "";
-if (location.hostname == 'dudu-hp') {
+if (location.href.indexOf('localhost/FlatFXWebClient') > -1) {
     urlPrefix = "/FlatFXWebClient";
 }
 
@@ -192,12 +192,12 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval, noty) {
-    $scope.init = function (WorkflowStage, isDemo, info, error) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, CCY1ISO) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
-        $scope.CCY1 = 'USD';
-        $scope.CCY1Sign = '$';
+        $scope.CCY1 = CCY1ISO;
+        $scope.CCY1Sign = getCurrencySign(CCY1ISO);
         if (WorkflowStage == 2) {
             $scope.CountDown = 60;
         }

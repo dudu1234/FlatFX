@@ -169,8 +169,8 @@ namespace FlatFXWebClient.Controllers
             if (model.Amount == 0)
                 TempData["ErrorResult"] += "Please select amount. ";
 
-            if (model.Amount < CurrencyManager.MinDealAmount)
-                TempData["ErrorResult"] += "invalid amount. amount > " + CurrencyManager.MinDealAmount.ToString() + ". ";
+            if (model.Amount < CurrencyManager.MinDealAmountUSD)
+                TempData["ErrorResult"] += "invalid amount. amount > " + CurrencyManager.MinDealAmountUSD.ToString() + ". ";
 
             if (model.InvalidAccountReason != null && model.InvalidAccountReason.Count == 1 && model.InvalidAccountReason[0] == "")
                 model.InvalidAccountReason = null;
@@ -229,16 +229,49 @@ namespace FlatFXWebClient.Controllers
                 }
 
                 deal.OfferingDate = DateTime.Now;
-                deal.MidRate = pairRate.Mid;
+                deal.EnsureOnLinePrice = model.EnsureOnLinePrice;
+                deal.PvPEnabled = model.PvPEnabled;
+                deal.FastTransferEnabled = model.FastTransferEnabled;
+                if (deal.PvPEnabled)
+                {
+                    model.EnsureOnLinePrice = true;
+                    deal.EnsureOnLinePrice = true;
+                }
+
+
+                double Mid = pairRate.Mid;
+                double Bid = pairRate.Bid;
+                double Ask = pairRate.Ask;
+
+                double extraCharge = 0;
+                if (deal.EnsureOnLinePrice)
+                    extraCharge += CurrencyManager.ExtraCharge_EnsureOnLinePrice;
+                if (deal.PvPEnabled)
+                    extraCharge += CurrencyManager.ExtraCharge_PvPEnabled;
+                if (deal.FastTransferEnabled)
+                    extraCharge += CurrencyManager.ExtraCharge_FastTransferEnabled;
+
+                deal.OfferingMidRate = deal.MidRate;
+                if (deal.EnsureOnLinePrice)
+                    deal.MidRate = deal.OfferingMidRate;
+                else
+                    deal.MidRate = null;
+
+                if (extraCharge > 0)
+                {
+                    Bid = Bid + (Mid * extraCharge);
+                    Ask = Ask + (Mid * extraCharge);
+                }
+
                 if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
-                    deal.CustomerRate = pairRate.Bid;
-                    deal.BankRate = pairRate.Mid - (CurrencyManager.BankProfitInPromil * pairRate.Mid);
+                    deal.CustomerRate = Bid;
+                    deal.BankRate = Mid - (CurrencyManager.BankCommission * Mid);
                 }
                 else
                 {
-                    deal.CustomerRate = pairRate.Ask;
-                    deal.BankRate = pairRate.Mid + (CurrencyManager.BankProfitInPromil * pairRate.Mid);
+                    deal.CustomerRate = Ask;
+                    deal.BankRate = Mid + (CurrencyManager.BankCommission * Mid);
                 }
 
                 if (model.BuySell == Consts.eBuySell.Buy)
@@ -282,10 +315,10 @@ namespace FlatFXWebClient.Controllers
                 string minorCurrency = model.CCY2;
                 if (isOppositeSide)
                     minorCurrency = model.CCY1;
-                deal.BankTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankProfitInPromil * pairRate.Mid), 2); // 0.5 promil
-                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.CustomerProfitInPromil * pairRate.Mid) - CurrencyManager.TransactionFeeUSD, 2); // 8 promil
-                deal.FlatFXTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 2.5 promil
-                deal.Commission = deal.BankTotalProfitUSD + deal.FlatFXTotalProfitUSD; // 3 promil
+                deal.BankIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankCommission * Mid), 2); // 0.5 promil 
+                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * (CurrencyManager.CustomerProfit - extraCharge) * Mid) - CurrencyManager.TransactionFeeUSD, 2); // 8 promil - Extra
+                deal.FlatFXIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 2.5 promil + Extra
+                deal.Commission = deal.BankIncomeUSD + deal.FlatFXIncomeUSD; // 3 promil + Extra
                 
 
                 if (model.Comment == null)

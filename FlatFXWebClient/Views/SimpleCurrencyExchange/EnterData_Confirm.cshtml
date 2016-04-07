@@ -33,16 +33,24 @@
                 @Model.deal.user.FullName
             </div>
         </div>
-        <div class="form-group green">
-            <label class="control-label col-xs-6">@FlatFXResources.Resources.BuyAmount:</label>
-            <div class="col-xs-6 order-value">
-                @Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency
-            </div>
-        </div>
         <div class="form-group red">
             <label class="control-label col-xs-6">@FlatFXResources.Resources.SellAmount:</label>
             <div class="col-xs-6 order-value">
                 @Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency
+            </div>
+        </div>
+        <div class="form-group green">
+            <div class="col-xs-6">
+                <label class="control-label">@FlatFXResources.Resources.BuyAmount:</label>
+                @if(!Model.deal.EnsureOnLinePrice)
+                {
+                    <div class="medium-line start-align">
+                        <span class="estimation">@Resources.EstimationByFinalDealRate</span>
+                    </div>
+                }
+            </div>
+            <div class="col-xs-6 order-value">
+                @Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency
             </div>
         </div>
         <div class="form-group">
@@ -54,12 +62,21 @@
         <div class="form-group">
             <label class="control-label col-xs-6">@FlatFXResources.Resources.YourRateWas:</label>
             <div class="col-xs-6 order-value">
-                @Model.deal.CustomerRate
+                @if (Model.deal.EnsureOnLinePrice)
+                {
+                    @Model.deal.CustomerRate
+                }
+                else
+                {
+                    @FlatFXResources.Resources.WillBeSetAfterMoneyTransfer
+                    <br />
+                    <span class="estimation">@FlatFXResources.Resources.CurrentRateIs @Model.deal.CustomerRate</span>
+                }
             </div>
         </div>
 
         <div class="form-group">
-            <label class="control-label col-xs-6">@FlatFXResources.Resources.YouSave*:</label>
+            <label class="control-label col-xs-6">@FlatFXResources.Resources.YouSave:</label>
             <div class="col-xs-6 order-value">
                 @Model.deal.CustomerTotalProfitUSD$
             </div>
@@ -67,14 +84,25 @@
         <div class="form-group">
             <label class="control-label col-xs-6">@FlatFXResources.Resources.FlatFXCommission:</label>
             <div class="col-xs-6 order-value">
-                @(Model.deal.FlatFXTotalProfitUSD + Model.deal.BankTotalProfitUSD)$
+                @Model.deal.Commission$
             </div>
         </div>
-        
         <div class="form-group">
-            <label class="control-label col-xs-6">@FlatFXResources.Resources.SettlementDate:</label>
+            <label class="control-label col-xs-6">@FlatFXResources.Resources.EnsureOnLinePrice:</label>
             <div class="col-xs-6 order-value">
-                @Model.deal.OfferingDate.AddDays(1).ToShortDateString() 13:00
+                @((Model.deal.EnsureOnLinePrice) ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-6">@FlatFXResources.Resources.FastTransferEnabled:</label>
+            <div class="col-xs-6 order-value">
+                @((Model.deal.FastTransferEnabled) ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-6">@FlatFXResources.Resources.PvPEnabled:</label>
+            <div class="col-xs-6 order-value">
+                @((Model.deal.PvPEnabled) ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
             </div>
         </div>
         <div class="form-group">

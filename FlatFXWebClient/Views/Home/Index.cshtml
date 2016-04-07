@@ -100,7 +100,7 @@
         <p>&nbsp;</p>
     </div>
     <div class="col-xs-12 carousel-div">
-        <div carousel interval="5000">
+        <div carousel interval="30000">
             <div slide ng-repeat="slide in slides" active="slide.active">
                 <div class="carousel-inner">
                     <div class="carousel-caption carousel-footer">
@@ -152,10 +152,9 @@
             </div>
         </div>
     </div>
-
-    <div id="HowItWorks" class="text-center hebrew-only howItWorksSection">
+    <div class="text-center hebrew-only howItWorksSection">
         <div class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-6">
-            <div class="section-center">
+            <div id="HowItWorks" class="section-center">
                 <p>&nbsp;</p>
                 <h2>איך זה עובד</h2>
                 @*<p class="spreads-image-header"></p>*@
@@ -192,8 +191,8 @@
         </div>
     </div>
     <br /><br />
-    <div id="About" class="text-center aboutSection">
-        <div class="col-xs-12 backcolor hebrew-only">
+    <div class="text-center aboutSection">
+        <div id="About" class="col-xs-12 backcolor hebrew-only">
             <div class="col-xs-offset-0 col-xs-12 col-md-offset-1 col-md-10 col-lg-offset-3 col-lg-6">
                 <h2 class="section-center">אודות</h2>
                 <div class="start-align">
@@ -235,7 +234,7 @@
             navigateToSection = window.location.href.substr(start, window.location.href.length - start);
             if (navigateToSection != '#') {
                 $('html, body').animate({
-                    scrollTop: $(navigateToSection).offset().top
+                    scrollTop: ($(navigateToSection).offset().top - 60)
                 }, 1000);
             }
         }

@@ -1,5 +1,6 @@
 ﻿var urlPrefix2 = "";
-if (location.hostname == 'dudu-hp') {
+//if (location.hostname == 'localhost') {
+if (location.href.indexOf('localhost/FlatFXWebClient') > -1) {
     urlPrefix2 = "/FlatFXWebClient";
 }
 

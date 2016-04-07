@@ -87,6 +87,10 @@ namespace FlatFXCore.BussinessLayer
         }
         #endregion
 
+        /// <summary>
+        /// Runs every day at 02:00 AM
+        /// </summary>
+        /// <param name="stateInfo"></param>
         public void DailyTrigger(Object stateInfo)
         {
             try
@@ -143,6 +147,10 @@ namespace FlatFXCore.BussinessLayer
                         order.ExpiryDate = DateTime.Today;
                     }
                     db.SaveChanges();
+
+                    //Delete Daily Rates
+                    DateTime date = DateTime.Now.AddDays(-7);
+                    db.DailyFXRates.RemoveRange(db.DailyFXRates.Where(r => r.Time < date));
                 }
 
             }

@@ -17,7 +17,7 @@
 }
 
 <div class="simple-currency-exchange-wrapper">
-    <div ng-controller="SimpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]')" class="simple-currency-exchange">
+    <div ng-controller="SimpleCurrencyExchange" ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', '@Model.CCY1')" class="simple-currency-exchange">
         @using (Html.BeginForm(controllerAction, "SimpleCurrencyExchange", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
         {
             <div class="col-xs-12 exchange-system-header">

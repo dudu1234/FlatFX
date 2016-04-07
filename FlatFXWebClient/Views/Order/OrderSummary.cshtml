@@ -19,7 +19,7 @@
         if (Model.IsEdit)
         {
             <h3 class="green">@FlatFXResources.Resources.OrderUpdateSuccessfully.</h3>
-            <h4>@FlatFXResources.Resources.OrderSummaryDetails</h4>
+            <h4>@Html.Raw(FlatFXResources.Resources.OrderSummaryDetails)</h4>
         }
         else if (Model.MatchOrderId > 0)
         {
@@ -27,22 +27,43 @@
             <h4>@FlatFXResources.Resources.MatchDealId @deal.DealId</h4>
             <h4>@FlatFXResources.Resources.MatchSummaryDetails</h4>
             <br />
-            <h3>@FlatFXResources.Resources.MoneyTransferInstractions:</h3>
-            <div>
-                <b>@FlatFXResources.Resources.TheFunds @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00.</b><br />
-                @FlatFXResources.Resources.PleaseTransfer @deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency @FlatFXResources.Resources.FromYourBankAccount @deal.ChargedProviderAccount.Provider.FullName @deal.ChargedProviderAccount.AccountName<br />
-                @FlatFXResources.Resources.ASAP @deal.OfferingDate.AddDays(1).ToShortDateString() 13:00.<br />
-                @FlatFXResources.Resources.OnceTheMoney @deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency @FlatFXResources.Resources.backtoyouraccount.<br />
-                <br />
-                @Html.Raw(@FlatFXResources.Resources.HowToTransfer) <a href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Here</a>.<br />
-            </div>
-            @Html.Raw(@FlatFXResources.Resources.FlatFXBankAccountDetails)
+            <h3><b>@FlatFXResources.Resources.SummaryMainHeader</b></h3>
+            <h4><b>@FlatFXResources.Resources.SummarySecondaryHeader</b></h4>
+            <ul class="summary-steps-description">
+                <li>
+                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
+                    @FlatFXResources.Resources.SummaryStep1Description1
+                    <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                    @FlatFXResources.Resources.SummaryStep1Description2<b>@deal.ChargedProviderAccount.Provider.FullName @deal.ChargedProviderAccount.AccountName</b><br />
+                    @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
 
+                    @if (deal.FastTransferEnabled)
+                    {
+                        <br />
+                        @FlatFXResources.Resources.SummaryStep1Description4
+                    }
+                </li>
+                <li>
+                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
+                    @FlatFXResources.Resources.SummaryStep2Description
+                </li>
+                <li>
+                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
+                    @FlatFXResources.Resources.SummaryStep3Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                    @FlatFXResources.Resources.SummaryStep3Description2 <b>@deal.ChargedProviderAccount.Provider.FullName @deal.ChargedProviderAccount.AccountName</b><br />
+                    @FlatFXResources.Resources.SummaryStep3Description3
+                </li>
+                <li>
+                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span><br />
+                    @FlatFXResources.Resources.SummaryEnjoy<br />
+                    @FlatFXResources.Resources.SummaryThankYou
+                </li>
+            </ul>
         }
         else
         {
             <h3 class="green">@FlatFXResources.Resources.OrderCreatedSuccessfully.</h3>
-            <h4>@FlatFXResources.Resources.OrderSummaryDetails</h4>
+            <h4>@Html.Raw(FlatFXResources.Resources.OrderSummaryDetails)</h4>
         }
     }
     else
@@ -52,9 +73,8 @@
     }
 
 
-    <br /><br />
-    @FlatFXResources.Resources.OrderSummary1 <a href="@Url.Action("Index", "Home")">@FlatFXResources.Resources.Here</a>
-    <br /><br />
+    <br />
+    <br />
     <div class="form-group">
         <div class="col-md-12">
             <div class="btn-group">
@@ -68,5 +88,6 @@
             </div>
         </div>
     </div>
-    <br /><br />
+    <br />
+    <br />
 </div>

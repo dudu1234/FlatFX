@@ -572,9 +572,6 @@
   <data name="ASAP" xml:space="preserve">
     <value>as soon as possible and no later than</value>
   </data>
-  <data name="backtoyouraccount" xml:space="preserve">
-    <value>back to your account</value>
-  </data>
   <data name="BankAccount" xml:space="preserve">
     <value>Bank Account</value>
   </data>
@@ -597,7 +594,7 @@
     <value>Deal Summary &amp; Money transfer</value>
   </data>
   <data name="FlatFXBankAccountDetails" xml:space="preserve">
-    <value>&lt;h3&gt;FlatFX Bank Account Details:&lt;/h3&gt;
+    <value>&lt;h3&gt;FlatFX Bank Account Details&lt;/h3&gt;
         &lt;div&gt;
             Bank Name: לאומי&lt;br /&gt;
             Bank Number: 10&lt;br /&gt;
@@ -607,9 +604,6 @@
             Branch Address: Ben-gurion 12/15, Tel-Aviv&lt;br /&gt;
         &lt;/div&gt;</value>
   </data>
-  <data name="FromYourBankAccount" xml:space="preserve">
-    <value>from your bank account</value>
-  </data>
   <data name="Here" xml:space="preserve">
     <value>Here</value>
   </data>
@@ -617,24 +611,11 @@
     <value>Home</value>
   </data>
   <data name="HowToTransfer" xml:space="preserve">
-    <value>&lt;b&gt;How to transfer:&lt;/b&gt;&lt;br /&gt;
-            1) It is recommended to use your bank interent site in order to transfer money.&lt;br /&gt; 
-            2) If you want to transfer by sending fax to the bank:&lt;br /&gt;
-            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;in a few minutes an Email with the "Money Transfer" form will be send to you, please make sure all details are correct,&lt;br /&gt;
-            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;sign the form and send it to your bank, Fax no. 03-3333333.&lt;br /&gt;
-            You can follow the deal status</value>
-  </data>
-  <data name="MoneyTransferInstractions" xml:space="preserve">
-    <value>Money Transfer Instractions</value>
-  </data>
-  <data name="OnceTheMoney" xml:space="preserve">
-    <value>Once the money will be transfered, FlatFX will transfer</value>
+    <value>&lt;h3&gt;How to transfer:&lt;/h3&gt;
+Use your bank interent site in order to transfer money.&lt;br /&gt;</value>
   </data>
   <data name="OrderID" xml:space="preserve">
     <value>Order ID</value>
-  </data>
-  <data name="PleaseTransfer" xml:space="preserve">
-    <value>Please transfer</value>
   </data>
   <data name="Provider" xml:space="preserve">
     <value>Provider</value>
@@ -644,9 +625,6 @@
   </data>
   <data name="SettlementDate" xml:space="preserve">
     <value>Settlement Date</value>
-  </data>
-  <data name="TheFunds" xml:space="preserve">
-    <value>The funds must received by FlatFX on</value>
   </data>
   <data name="WeTradedAt" xml:space="preserve">
     <value>We Traded At</value>
@@ -1088,13 +1066,160 @@ In a few minutes an email will be send to you with directions for transfer money
     <value>Order Match created successfully</value>
   </data>
   <data name="OrderSummaryDetails" xml:space="preserve">
-    <value>Your order will be waiting for a partner to perform &lt;b&gt;Match&lt;/b&gt; with your order.&lt;br /&gt;
-When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;</value>
+    <value>Your order will be waiting for a partner to perform Match with your order.&lt;br /&gt;
+When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;
+Make sure that when the order match is triggered, you should be ready to transfer the money within 1 day.</value>
   </data>
   <data name="OrderUpdateSuccessfully" xml:space="preserve">
     <value>Order successfully updated</value>
   </data>
   <data name="TheMinimalVolume" xml:space="preserve">
     <value>The minimal volume is 10,000$</value>
+  </data>
+  <data name="EnsureOnLinePrice" xml:space="preserve">
+    <value>Ensure current currency rate</value>
+  </data>
+  <data name="FastTransferEnabled" xml:space="preserve">
+    <value>Fast money transfer method</value>
+  </data>
+  <data name="PvPEnabled" xml:space="preserve">
+    <value>Use PvP money transfer</value>
+  </data>
+  <data name="CurrentRateIs" xml:space="preserve">
+    <value>Current rate is</value>
+  </data>
+  <data name="EnsureOnLinePriceDetails" xml:space="preserve">
+    <value>Checked - The deal rate will be the current rate.&lt;br /&gt;
+Unchecked - The deal rate will be set on 13:00 only after the money will arrive to the provider. You can change the time of the rate setting.</value>
+  </data>
+  <data name="ExtraChargeOf" xml:space="preserve">
+    <value>extra charge of</value>
+  </data>
+  <data name="FastTransferEnabledDetails" xml:space="preserve">
+    <value>Checked - You will get the money back on the same day (if your transfer arrive before 14:00).&lt;br /&gt;
+Unchecked - You will get the money back after 1-2 bussiness days.</value>
+  </data>
+  <data name="MoreDetails" xml:space="preserve">
+    <value>More details...</value>
+  </data>
+  <data name="No" xml:space="preserve">
+    <value>No</value>
+  </data>
+  <data name="PvPEnabledDetails" xml:space="preserve">
+    <value>Checked - use "Payment versus payment" bank transfer method.&lt;br /&gt;
+A mechanism in the bank system to ensure that your transfer occurs only if the provider transfer of the other currency also takes place.&lt;br /&gt;
+E.G. if the exchange is Buy 100,000 EUR-USD on rate=1.1: Your tansfer of 110,000 USD and provider transfer of 100,000 EUR will orrurs on the same time. A fax should be sand to the bank.&lt;br /&gt;
+Unchecked - You will send money and get it back after 1-2 bussiness days.</value>
+  </data>
+  <data name="TrasferPeriod" xml:space="preserve">
+    <value>Money trasfer period</value>
+  </data>
+  <data name="WillBeSetAfterMoneyTransfer" xml:space="preserve">
+    <value>Will be set after money transfer</value>
+  </data>
+  <data name="Yes" xml:space="preserve">
+    <value>Yes</value>
+  </data>
+  <data name="EstimationByFinalDealRate" xml:space="preserve">
+    <value>The exact amount will be set according to the MID Rate on 14:00 after the money will arrive to the provider account (you can change the setting time)</value>
+  </data>
+  <data name="EstimationByFinalDealRate_Order" xml:space="preserve">
+    <value>The exact amount will be set according to the MID Rate after the match order, on 14:00 after the money will arrive to the provider account.</value>
+  </data>
+  <data name="FlatFXShortBankInfo" xml:space="preserve">
+    <value>Bank Leumi XXX-XXXXXX</value>
+  </data>
+  <data name="SummaryEnjoy" xml:space="preserve">
+    <value>Enjoy the money</value>
+  </data>
+  <data name="SummaryMainHeader" xml:space="preserve">
+    <value>What are the next steps ?</value>
+  </data>
+  <data name="SummaryOnLineStep1Description1" xml:space="preserve">
+    <value>The provider will perform the money conversion with atractive spreads because of large volume discount&lt;br /&gt;
+The deal rate will be </value>
+  </data>
+  <data name="SummaryOnLineStep3Description1" xml:space="preserve">
+    <value>The provider will transfer back an amount of </value>
+  </data>
+  <data name="SummaryPvpStep2Description1" xml:space="preserve">
+    <value>The provider will prepare amount of </value>
+  </data>
+  <data name="SummaryPvpStep2Description2" xml:space="preserve">
+    <value>In his account: </value>
+  </data>
+  <data name="SummaryPvpStep2Description3" xml:space="preserve">
+    <value>You will prepare amount of </value>
+  </data>
+  <data name="SummaryPvpStep2Description4" xml:space="preserve">
+    <value>In your account: </value>
+  </data>
+  <data name="SummaryPvpStep3Description1" xml:space="preserve">
+    <value>Within few minutes an email will be send to you with the PvP contract attached&lt;br /&gt;
+You need to sign the contract and send it to your bank.&lt;br /&gt;
+The contract will include the following directions:&lt;br /&gt;</value>
+  </data>
+  <data name="SummaryPvpStep3Direction1" xml:space="preserve">
+    <value>1) The provider will transfer amount of </value>
+  </data>
+  <data name="SummaryPvpStep3Direction1_2" xml:space="preserve">
+    <value>from his account </value>
+  </data>
+  <data name="SummaryPvpStep3Direction1_3" xml:space="preserve">
+    <value>to customer account </value>
+  </data>
+  <data name="SummaryPvpStep3Direction2" xml:space="preserve">
+    <value>2) The customer will transfer amount of </value>
+  </data>
+  <data name="SummaryPvpStep3Direction3" xml:space="preserve">
+    <value>Both transfer will be perform on the same time</value>
+  </data>
+  <data name="SummaryPvpStep3Direction4" xml:space="preserve">
+    <value>The bank guarantee that the transfer will be executed only if both sides perform the transfer successfully</value>
+  </data>
+  <data name="SummarySecondaryHeader" xml:space="preserve">
+    <value>Please follow the next steps:</value>
+  </data>
+  <data name="SummaryStep1" xml:space="preserve">
+    <value>Step 1</value>
+  </data>
+  <data name="SummaryStep1Description1" xml:space="preserve">
+    <value>You should transfer </value>
+  </data>
+  <data name="SummaryStep1Description2" xml:space="preserve">
+    <value>from your account in </value>
+  </data>
+  <data name="SummaryStep1Description3" xml:space="preserve">
+    <value>The money should be transfered until </value>
+  </data>
+  <data name="SummaryStep1Description4" xml:space="preserve">
+    <value>You must use ZAHAV system in order to transfer the money as fast as possible</value>
+  </data>
+  <data name="SummaryStep2" xml:space="preserve">
+    <value>Step 2</value>
+  </data>
+  <data name="SummaryStep2Description" xml:space="preserve">
+    <value>The provider will perform the money conversion with atractive spreads because of large volume discount </value>
+  </data>
+  <data name="SummaryStep3" xml:space="preserve">
+    <value>Step 3</value>
+  </data>
+  <data name="SummaryStep3Description1" xml:space="preserve">
+    <value>The provider will transfer back an estimated amount of </value>
+  </data>
+  <data name="SummaryStep3Description2" xml:space="preserve">
+    <value>to your account in </value>
+  </data>
+  <data name="SummaryStep3Description3" xml:space="preserve">
+    <value>The exact amount will be set according to the Mid Rate on the next bussiness day at 14:00 (You can change the setting time)</value>
+  </data>
+  <data name="SummaryStep4" xml:space="preserve">
+    <value>Step 4</value>
+  </data>
+  <data name="SummaryThankYou" xml:space="preserve">
+    <value>Thank You for choosing FlatFX</value>
+  </data>
+  <data name="TheFunds" xml:space="preserve">
+    <value>The funds must received by FlatFX on</value>
   </data>
 </root>

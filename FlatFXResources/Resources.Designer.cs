@@ -223,15 +223,6 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to back to your account.
-        /// </summary>
-        public static string backtoyouraccount {
-            get {
-                return ResourceManager.GetString("backtoyouraccount", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Balance.
         /// </summary>
         public static string Balance {
@@ -826,6 +817,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Current rate is.
+        /// </summary>
+        public static string CurrentRateIs {
+            get {
+                return ResourceManager.GetString("CurrentRateIs", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Customer Type.
         /// </summary>
         public static string CustomerType {
@@ -1042,6 +1042,25 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Ensure current currency rate.
+        /// </summary>
+        public static string EnsureOnLinePrice {
+            get {
+                return ResourceManager.GetString("EnsureOnLinePrice", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checked - The deal rate will be the current rate.&lt;br /&gt;
+        ///Unchecked - The deal rate will be set on 13:00 only after the money will arrive to the provider. You can change the time of the rate setting..
+        /// </summary>
+        public static string EnsureOnLinePriceDetails {
+            get {
+                return ResourceManager.GetString("EnsureOnLinePriceDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Login.
         /// </summary>
         public static string EnterPrivateZone {
@@ -1096,6 +1115,24 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The exact amount will be set according to the MID Rate on 14:00 after the money will arrive to the provider account (you can change the setting time).
+        /// </summary>
+        public static string EstimationByFinalDealRate {
+            get {
+                return ResourceManager.GetString("EstimationByFinalDealRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The exact amount will be set according to the MID Rate after the match order, on 14:00 after the money will arrive to the provider account..
+        /// </summary>
+        public static string EstimationByFinalDealRate_Order {
+            get {
+                return ResourceManager.GetString("EstimationByFinalDealRate_Order", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Euro €.
         /// </summary>
         public static string EUR {
@@ -1141,11 +1178,39 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to extra charge of.
+        /// </summary>
+        public static string ExtraChargeOf {
+            get {
+                return ResourceManager.GetString("ExtraChargeOf", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Failed to create order.
         /// </summary>
         public static string FailedToCreateOrder {
             get {
                 return ResourceManager.GetString("FailedToCreateOrder", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fast money transfer method.
+        /// </summary>
+        public static string FastTransferEnabled {
+            get {
+                return ResourceManager.GetString("FastTransferEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checked - You will get the money back on the same day (if your transfer arrive before 14:00).&lt;br /&gt;
+        ///Unchecked - You will get the money back after 1-2 bussiness days..
+        /// </summary>
+        public static string FastTransferEnabledDetails {
+            get {
+                return ResourceManager.GetString("FastTransferEnabledDetails", resourceCulture);
             }
         }
         
@@ -1168,7 +1233,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;h3&gt;FlatFX Bank Account Details:&lt;/h3&gt;
+        ///   Looks up a localized string similar to &lt;h3&gt;FlatFX Bank Account Details&lt;/h3&gt;
         ///        &lt;div&gt;
         ///            Bank Name: לאומי&lt;br /&gt;
         ///            Bank Number: 10&lt;br /&gt;
@@ -1194,20 +1259,20 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Bank Leumi XXX-XXXXXX.
+        /// </summary>
+        public static string FlatFXShortBankInfo {
+            get {
+                return ResourceManager.GetString("FlatFXShortBankInfo", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Forgot your password?.
         /// </summary>
         public static string ForgotYourPassword {
             get {
                 return ResourceManager.GetString("ForgotYourPassword", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to from your bank account.
-        /// </summary>
-        public static string FromYourBankAccount {
-            get {
-                return ResourceManager.GetString("FromYourBankAccount", resourceCulture);
             }
         }
         
@@ -1329,12 +1394,8 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to &lt;b&gt;How to transfer:&lt;/b&gt;&lt;br /&gt;
-        ///            1) It is recommended to use your bank interent site in order to transfer money.&lt;br /&gt; 
-        ///            2) If you want to transfer by sending fax to the bank:&lt;br /&gt;
-        ///            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;in a few minutes an Email with the &quot;Money Transfer&quot; form will be send to you, please make sure all details are correct,&lt;br /&gt;
-        ///            &amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;&amp;nbsp;sign the form and send it to your bank, Fax no. 03-3333333.&lt;br /&gt;
-        ///            You can follow th [rest of string was truncated]&quot;;.
+        ///   Looks up a localized string similar to &lt;h3&gt;How to transfer:&lt;/h3&gt;
+        ///Use your bank interent site in order to transfer money.&lt;br /&gt;.
         /// </summary>
         public static string HowToTransfer {
             get {
@@ -1668,20 +1729,29 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Money Transfer Instractions.
-        /// </summary>
-        public static string MoneyTransferInstractions {
-            get {
-                return ResourceManager.GetString("MoneyTransferInstractions", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Monthly.
         /// </summary>
         public static string Monthly {
             get {
                 return ResourceManager.GetString("Monthly", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to More details....
+        /// </summary>
+        public static string MoreDetails {
+            get {
+                return ResourceManager.GetString("MoreDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to No.
+        /// </summary>
+        public static string No {
+            get {
+                return ResourceManager.GetString("No", resourceCulture);
             }
         }
         
@@ -1718,15 +1788,6 @@ namespace FlatFXResources {
         public static string OfficePhone2 {
             get {
                 return ResourceManager.GetString("OfficePhone2", resourceCulture);
-            }
-        }
-        
-        /// <summary>
-        ///   Looks up a localized string similar to Once the money will be transfered, FlatFX will transfer.
-        /// </summary>
-        public static string OnceTheMoney {
-            get {
-                return ResourceManager.GetString("OnceTheMoney", resourceCulture);
             }
         }
         
@@ -1947,8 +2008,9 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Your order will be waiting for a partner to perform &lt;b&gt;Match&lt;/b&gt; with your order.&lt;br /&gt;
-        ///When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;.
+        ///   Looks up a localized string similar to Your order will be waiting for a partner to perform Match with your order.&lt;br /&gt;
+        ///When the match occurs an automatic email will be send to you with directions for transfer money to FlatFX account.&lt;br /&gt;
+        ///Make sure that when the order match is triggered, you should be ready to transfer the money within 1 day..
         /// </summary>
         public static string OrderSummaryDetails {
             get {
@@ -2011,15 +2073,6 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Please transfer.
-        /// </summary>
-        public static string PleaseTransfer {
-            get {
-                return ResourceManager.GetString("PleaseTransfer", resourceCulture);
-            }
-        }
-        
-        /// <summary>
         ///   Looks up a localized string similar to Product.
         /// </summary>
         public static string Product {
@@ -2070,6 +2123,27 @@ namespace FlatFXResources {
         public static string Providers {
             get {
                 return ResourceManager.GetString("Providers", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Use PvP money transfer.
+        /// </summary>
+        public static string PvPEnabled {
+            get {
+                return ResourceManager.GetString("PvPEnabled", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Checked - use &quot;Payment versus payment&quot; bank transfer method.&lt;br /&gt;
+        ///A mechanism in the bank system to ensure that your transfer occurs only if the provider transfer of the other currency also takes place.&lt;br /&gt;
+        ///E.G. if the exchange is Buy 100,000 EUR-USD on rate=1.1: Your tansfer of 110,000 USD and provider transfer of 100,000 EUR will orrurs on the same time. A fax should be sand to the bank.&lt;br /&gt;
+        ///Unchecked - You will send money and get it back after 1-2 bussiness days..
+        /// </summary>
+        public static string PvPEnabledDetails {
+            get {
+                return ResourceManager.GetString("PvPEnabledDetails", resourceCulture);
             }
         }
         
@@ -2668,6 +2742,270 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Enjoy the money.
+        /// </summary>
+        public static string SummaryEnjoy {
+            get {
+                return ResourceManager.GetString("SummaryEnjoy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to What are the next steps ?.
+        /// </summary>
+        public static string SummaryMainHeader {
+            get {
+                return ResourceManager.GetString("SummaryMainHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provider will perform the money conversion with atractive spreads because of large volume discount&lt;br /&gt;
+        ///The deal rate will be .
+        /// </summary>
+        public static string SummaryOnLineStep1Description1 {
+            get {
+                return ResourceManager.GetString("SummaryOnLineStep1Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provider will transfer back an amount of .
+        /// </summary>
+        public static string SummaryOnLineStep3Description1 {
+            get {
+                return ResourceManager.GetString("SummaryOnLineStep3Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provider will prepare amount of .
+        /// </summary>
+        public static string SummaryPvpStep2Description1 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep2Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In his account: .
+        /// </summary>
+        public static string SummaryPvpStep2Description2 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep2Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You will prepare amount of .
+        /// </summary>
+        public static string SummaryPvpStep2Description3 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep2Description3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to In your account: .
+        /// </summary>
+        public static string SummaryPvpStep2Description4 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep2Description4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Within few minutes an email will be send to you with the PvP contract attached&lt;br /&gt;
+        ///You need to sign the contract and send it to your bank.&lt;br /&gt;
+        ///The contract will include the following directions:&lt;br /&gt;.
+        /// </summary>
+        public static string SummaryPvpStep3Description1 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 1) The provider will transfer amount of .
+        /// </summary>
+        public static string SummaryPvpStep3Direction1 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from his account .
+        /// </summary>
+        public static string SummaryPvpStep3Direction1_2 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction1_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to customer account .
+        /// </summary>
+        public static string SummaryPvpStep3Direction1_3 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction1_3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2) The customer will transfer amount of .
+        /// </summary>
+        public static string SummaryPvpStep3Direction2 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Both transfer will be perform on the same time.
+        /// </summary>
+        public static string SummaryPvpStep3Direction3 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The bank guarantee that the transfer will be executed only if both sides perform the transfer successfully.
+        /// </summary>
+        public static string SummaryPvpStep3Direction4 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Please follow the next steps:.
+        /// </summary>
+        public static string SummarySecondaryHeader {
+            get {
+                return ResourceManager.GetString("SummarySecondaryHeader", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 1.
+        /// </summary>
+        public static string SummaryStep1 {
+            get {
+                return ResourceManager.GetString("SummaryStep1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You should transfer .
+        /// </summary>
+        public static string SummaryStep1Description1 {
+            get {
+                return ResourceManager.GetString("SummaryStep1Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to from your account in .
+        /// </summary>
+        public static string SummaryStep1Description2 {
+            get {
+                return ResourceManager.GetString("SummaryStep1Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The money should be transfered until .
+        /// </summary>
+        public static string SummaryStep1Description3 {
+            get {
+                return ResourceManager.GetString("SummaryStep1Description3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to You must use ZAHAV system in order to transfer the money as fast as possible.
+        /// </summary>
+        public static string SummaryStep1Description4 {
+            get {
+                return ResourceManager.GetString("SummaryStep1Description4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 2.
+        /// </summary>
+        public static string SummaryStep2 {
+            get {
+                return ResourceManager.GetString("SummaryStep2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provider will perform the money conversion with atractive spreads because of large volume discount .
+        /// </summary>
+        public static string SummaryStep2Description {
+            get {
+                return ResourceManager.GetString("SummaryStep2Description", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 3.
+        /// </summary>
+        public static string SummaryStep3 {
+            get {
+                return ResourceManager.GetString("SummaryStep3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The provider will transfer back an estimated amount of .
+        /// </summary>
+        public static string SummaryStep3Description1 {
+            get {
+                return ResourceManager.GetString("SummaryStep3Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to to your account in .
+        /// </summary>
+        public static string SummaryStep3Description2 {
+            get {
+                return ResourceManager.GetString("SummaryStep3Description2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The exact amount will be set according to the Mid Rate on the next bussiness day at 14:00 (You can change the setting time).
+        /// </summary>
+        public static string SummaryStep3Description3 {
+            get {
+                return ResourceManager.GetString("SummaryStep3Description3", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Step 4.
+        /// </summary>
+        public static string SummaryStep4 {
+            get {
+                return ResourceManager.GetString("SummaryStep4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Thank You for choosing FlatFX.
+        /// </summary>
+        public static string SummaryThankYou {
+            get {
+                return ResourceManager.GetString("SummaryThankYou", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to SWIFT.
         /// </summary>
         public static string SWIFT {
@@ -2727,6 +3065,15 @@ namespace FlatFXResources {
         public static string TransferFee {
             get {
                 return ResourceManager.GetString("TransferFee", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Money trasfer period.
+        /// </summary>
+        public static string TrasferPeriod {
+            get {
+                return ResourceManager.GetString("TrasferPeriod", resourceCulture);
             }
         }
         
@@ -2888,6 +3235,24 @@ namespace FlatFXResources {
         public static string WeTradedAt {
             get {
                 return ResourceManager.GetString("WeTradedAt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Will be set after money transfer.
+        /// </summary>
+        public static string WillBeSetAfterMoneyTransfer {
+            get {
+                return ResourceManager.GetString("WillBeSetAfterMoneyTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Yes.
+        /// </summary>
+        public static string Yes {
+            get {
+                return ResourceManager.GetString("Yes", resourceCulture);
             }
         }
         
