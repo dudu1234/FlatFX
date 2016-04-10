@@ -10,7 +10,7 @@
     [
     @if (Model.HasPassword)
     {
-        @Html.ActionLink(@FlatFXResources.Resources.ChangeYourPassword, "ChangePassword")
+        @Html.ActionLink(FlatFXResources.Resources.ChangeYourPassword, "ChangePassword")
     }
     else
     {
@@ -24,7 +24,7 @@
 {
     <br /><br /><br />
     <div>
-        @Html.ActionLink(@FlatFXResources.Resources.ChangeYourDemoAccount, "ConvertDemoToRealAccount", "Account")
+        @Html.ActionLink(FlatFXResources.Resources.ChangeYourDemoAccount, "ConvertDemoToRealAccount", "Account")
     </div>
 }
 

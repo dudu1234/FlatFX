@@ -62,6 +62,10 @@ nav, section {
     padding: 0px !important;
 }
 
+.padding20 {
+    padding: 20px;
+}
+
 mark {
     background-color: #a6dbed;
     padding-left: 5px;

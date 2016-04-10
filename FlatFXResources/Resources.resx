@@ -1222,4 +1222,13 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="TheFunds" xml:space="preserve">
     <value>The funds must received by FlatFX on</value>
   </data>
+  <data name="TradingHours" xml:space="preserve">
+    <value>&lt;div class="padding20"&gt;
+&lt;h2 class="red"&gt;The trading system is not available&lt;/h2&gt;
+                &lt;h3 class="green"&gt;
+                    &lt;u&gt;Office Hours (GMT +02:00):&lt;/u&gt;&lt;br /&gt;&lt;br /&gt;
+                    Monday - Thursday: 8:00 - 17:00&lt;br /&gt;&lt;br /&gt;
+                    Friday: 8:00 - 13:00&lt;br /&gt;
+                &lt;/h3&gt;</value>
+  </data>
 </root>

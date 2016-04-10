@@ -218,7 +218,6 @@
     <Content Include="Content\bootstrap.rtl.min.css" />
     <Content Include="Content\css\select2.css" />
     <Content Include="Content\css\select2.min.css" />
-    <Content Include="Content\flowers.mp4" />
     <Content Include="Content\font-awesome.css" />
     <Content Include="Content\font-awesome.min.css" />
     <Content Include="Content\fullpageex.css" />
@@ -308,7 +307,6 @@
     <Content Include="JS\rtlCustom.js" />
     <Content Include="JS\FFx.js" />
     <Content Include="JS\Home\HomePage.js" />
-    <Content Include="Content\flowers.webm" />
     <Content Include="fonts\glyphicons-halflings-regular.woff" />
     <Content Include="fonts\glyphicons-halflings-regular.ttf" />
     <Content Include="fonts\glyphicons-halflings-regular.eot" />

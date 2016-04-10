@@ -8,13 +8,15 @@ namespace FlatFXWebClient
         // For more information on bundling, visit http://go.microsoft.com/fwlink/?LinkId=301862
         public static void RegisterBundles(BundleCollection bundles)
         {
+            return;
+
             bundles.Add(new StyleBundle("~/Content/css").Include(
                 //"~/Content/bootstrap-theme.css.map",
                 //"~/Content/bootstrap.css",
                 //"~/Content/bootstrap.css.map",
                       "~/Content/bootstrap.min.css",
                       "~/Content/bootstrap-theme.min.css",
-                      "~/Content/examples.css",
+                      //"~/Content/examples.css",
                       "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/jquery-ui.min.css"
@@ -44,9 +46,9 @@ namespace FlatFXWebClient
                        "~/Scripts/angular-route.min.js",
                        "~/Scripts/angular-sanitize.min.js",
                        "~/Scripts/angular-ui.min.js",
-                       "~/Scripts/angular-ui/ui-bootstrap.min.js",
-                       "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
-                       "~/Scripts/angular-ui.min.js",
+                       // ??? 2 times "~/Scripts/angular-ui/ui-bootstrap.min.js",
+                       // ??? "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
+                       // ??? 2 times "~/Scripts/angular-ui.min.js",
                        "~/Scripts/angular-block-ui.js"
                        ));
 

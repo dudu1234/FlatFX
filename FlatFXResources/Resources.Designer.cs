@@ -3060,6 +3060,21 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to &lt;div class=&quot;padding20&quot;&gt;
+        ///&lt;h2 class=&quot;red&quot;&gt;The trading system is not available&lt;/h2&gt;
+        ///                &lt;h3 class=&quot;green&quot;&gt;
+        ///                    &lt;u&gt;Office Hours (GMT +02:00):&lt;/u&gt;&lt;br /&gt;&lt;br /&gt;
+        ///                    Monday - Thursday: 8:00 - 17:00&lt;br /&gt;&lt;br /&gt;
+        ///                    Friday: 8:00 - 13:00&lt;br /&gt;
+        ///                &lt;/h3&gt;.
+        /// </summary>
+        public static string TradingHours {
+            get {
+                return ResourceManager.GetString("TradingHours", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Transfer fee.
         /// </summary>
         public static string TransferFee {

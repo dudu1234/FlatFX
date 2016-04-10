@@ -1204,4 +1204,14 @@
   <data name="TheFunds" xml:space="preserve">
     <value>על הכספים להתקבל בחשבון FlatFX עד לתאריך</value>
   </data>
+  <data name="TradingHours" xml:space="preserve">
+    <value>&lt;div class="padding20"&gt;
+&lt;h2 class="red"&gt;המערכת אינה זמינה בשעה זו&lt;/h2&gt;
+                &lt;h3 class="green"&gt;
+                    &lt;u&gt;שעות הפתיחה (זמן ישראל):&lt;/u&gt;&lt;br /&gt;&lt;br /&gt;
+                    שני-חמישי: 17:00 - 08:00&lt;br /&gt;&lt;br /&gt;
+                    שישי: 13:00 - 08:00&lt;br /&gt;
+                &lt;/h3&gt;
+&lt;/div&gt;</value>
+  </data>
 </root>

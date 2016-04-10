@@ -15,7 +15,12 @@
                 string[] list = reason2.Split('\n');
                 foreach (string r in list)
                 {
-                    if (r != "")
+                    if (r.Contains("Currency Exchange is not available") || r.Contains("Office Hours"))
+                    {
+                        @Html.Raw(FlatFXResources.Resources.TradingHours)
+                        break;
+                    }
+                    else if (r != "")
                     {
                         <h4>@r</h4>
                     }
@@ -31,7 +36,7 @@ else
     {
         <div class="form-group">
             <remark class="control-label col-xs-12">
-                @Html.Raw(@FlatFXResources.Resources.OrderRemark)
+                @Html.Raw(FlatFXResources.Resources.OrderRemark)
             </remark>
         </div>
     }

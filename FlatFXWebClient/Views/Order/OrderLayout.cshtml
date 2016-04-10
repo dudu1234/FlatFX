@@ -29,12 +29,7 @@
         
         @if (!officeHoursOn)
         {
-        <h2 class="red">The order system is not available</h2>
-        <h3 class="green">
-            <u>Office Hours (GMT +02:00):</u><br /><br />
-            Monday - Thursday: 8:00 - 23:00<br /><br />
-            Friday: 8:00 - 13:00<br />
-        </h3>
+            @Html.Raw(FlatFXResources.Resources.TradingHours)
         }
 
         @if (officeHoursOn)
