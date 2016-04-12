@@ -1,10 +1,10 @@
-﻿using FlatFXCore.Model.Core;
-using FlatFXCore.Model.Data;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using FlatFXCore.Model.Core;
+using FlatFXCore.Model.Data;
 
 namespace FlatFXCore.BussinessLayer
 {
@@ -108,7 +108,6 @@ namespace FlatFXCore.BussinessLayer
                     }
                     db.SaveChanges();
 
-
                     //Set status = Close for all DEMO FxSimpleExchange Deals
                     dt = DateTime.Now.AddDays(-5);
                     List<Deal> deals = db.Deals.Where(d => d.IsDemo && (d.Status == Consts.eDealStatus.None || d.Status == Consts.eDealStatus.New || d.Status == Consts.eDealStatus.CustomerTransfer) 
@@ -122,7 +121,7 @@ namespace FlatFXCore.BussinessLayer
 
                     //Set status = Close for all DEMO OrderMatch and match's orders + deals
                     dt = DateTime.Now.AddDays(-1);
-                    List<OrderMatch> matches = db.OrderMatches.Where(m => m.Status != Consts.eMatchStatus.Closed && m.Order1.IsDemo == true && m.TriggerDate < dt).ToList();
+                    List<OrderMatch> matches = db.OrderMatches.Include("Order1").Include("Deal1").Include("Order2").Include("Deal2").Where(m => m.Status != Consts.eMatchStatus.Closed && m.Order1.IsDemo == true && m.TriggerDate < dt).ToList();
                     foreach (OrderMatch match in matches)
                     {
                         match.Status = Consts.eMatchStatus.Closed;

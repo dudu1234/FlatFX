@@ -42,6 +42,7 @@ namespace FlatFXCore.Model.Core
         public ApplicationDBContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)
         {
+            
         }
 
         public static ApplicationDBContext Create()

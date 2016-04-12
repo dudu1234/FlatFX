@@ -140,9 +140,9 @@
     <Compile Include="BussinessLayer\General.cs" />
     <Compile Include="BussinessLayer\Logger.cs" />
     <Compile Include="BussinessLayer\SecurityManager.cs" />
-    <Compile Include="Migrations\201510200825190_Initial.cs" />
-    <Compile Include="Migrations\201510200825190_Initial.Designer.cs">
-      <DependentUpon>201510200825190_Initial.cs</DependentUpon>
+    <Compile Include="Migrations\201604110911386_Initial.cs" />
+    <Compile Include="Migrations\201604110911386_Initial.Designer.cs">
+      <DependentUpon>201604110911386_Initial.cs</DependentUpon>
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Model\Core\Context.cs" />
@@ -180,7 +180,7 @@
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
-    <Content Include="Migrations\Database Changes For Production.txt" />
+    <Content Include="Model\Core\Database Changes For Production.txt" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Scripts\jquery-2.2.0.intellisense.js" />
@@ -194,8 +194,8 @@
     </ProjectReference>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Migrations\201510200825190_Initial.resx">
-      <DependentUpon>201510200825190_Initial.cs</DependentUpon>
+    <EmbeddedResource Include="Migrations\201604110911386_Initial.resx">
+      <DependentUpon>201604110911386_Initial.cs</DependentUpon>
     </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />

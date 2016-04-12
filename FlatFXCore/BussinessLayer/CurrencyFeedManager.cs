@@ -302,6 +302,8 @@ namespace FlatFXCore.BussinessLayer
 
             using (var db = new ApplicationDBContext())
             {
+                Dictionary<string, FXRate> pairsData = db.FXRates.ToDictionary(r => r.Key);
+
                 foreach (var pairInfo in results.query.results.rate)
                 {
                     string key = pairInfo.id;
@@ -329,7 +331,9 @@ namespace FlatFXCore.BussinessLayer
 
                     #region FXRate table
                     FXRate pairData = null;
-                    pairData = db.FXRates.Where(rate => rate.Key == key).FirstOrDefault();
+                    if (pairsData.ContainsKey(key))
+                        pairData = pairsData[key];
+                    //pairData = db.FXRates.Where(rate => rate.Key == key).FirstOrDefault();
                     if (pairData == null)
                     {
                         pairData = new FXRate()
