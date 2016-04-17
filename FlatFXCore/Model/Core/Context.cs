@@ -10,9 +10,11 @@ using FlatFXCore.Model.Data;
 using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using FlatFXCore.Model.User;
+using MySql.Data.Entity;
 
 namespace FlatFXCore.Model.Core
 {
+    [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     {
         //public DbSet<ContactDetails> ContactsDetails { get; set; }

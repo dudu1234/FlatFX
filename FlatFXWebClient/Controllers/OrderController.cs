@@ -33,6 +33,8 @@ namespace FlatFXWebClient.Controllers
             model.Comment = order.Comment;
             model.ExpiryDate = order.ExpiryDate;
             model.MinimalPartnerExecutionAmountCCY1 = order.MinimalPartnerExecutionAmountCCY1;
+            model.PvPEnabled = order.PvPEnabled;
+            model.EnsureOnLinePrice = order.EnsureOnLinePrice;
             model.order = order;
             model.OrderId = order.OrderId;
             //model.SelectedAccount = 
@@ -119,8 +121,8 @@ namespace FlatFXWebClient.Controllers
                     order.IsDemo = true;
                 if (providerAccounts.Count > 0)
                 {
-                    order.ChargedProviderAccount = providerAccounts[0];
-                    order.CreditedProviderAccount = providerAccounts[0];
+                    order.ChargedAccount = providerAccounts[0];
+                    order.CreditedAccount = providerAccounts[0];
                 }
                 
                 if (providerAccounts.Count > 0)
@@ -148,7 +150,10 @@ namespace FlatFXWebClient.Controllers
                 order.ExpiryDate = model.ExpiryDate;
                 model.MinimalPartnerExecutionAmountCCY1 = null;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                
+                model.PvPEnabled = false;
+                order.PvPEnabled = false;
+                model.EnsureOnLinePrice = false;
+                order.EnsureOnLinePrice = false;
                 order.MinimalPartnerTotalVolumeUSD = null;
                 order.PartnerMinScore = null;
                 order.AmountCCY1_Executed = null;
@@ -214,7 +219,7 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 // to do support this fields on next stage
-                //deal.ChargedProviderAccount
+                //deal.ChargedAccount
                 if (model.OrderId > 0) //Edit mode
                 {
                     //change only the fields that are relevant for editing order
@@ -231,8 +236,8 @@ namespace FlatFXWebClient.Controllers
                     }
 
                     string txt = order.CompanyAccount.Company.CompanyName;
-                    txt = order.ChargedProviderAccount.Provider.FullName;
-                    txt = order.ChargedProviderAccount.AccountName;
+                    txt = order.ChargedAccount.Provider.FullName;
+                    txt = order.ChargedAccount.AccountName;
                     txt = order.user.FullName;
                     order.OrderDate = DateTime.Now; //Request Date
                     order.AmountCCY1 = model.AmountCCY1;
@@ -241,6 +246,8 @@ namespace FlatFXWebClient.Controllers
                     order.Comment = model.Comment;
                     order.ExpiryDate = model.ExpiryDate;
                     order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                    order.PvPEnabled = model.PvPEnabled;
+                    order.EnsureOnLinePrice = model.EnsureOnLinePrice;
                 }
                 else
                 {
@@ -253,19 +260,27 @@ namespace FlatFXWebClient.Controllers
                     order.Comment = model.Comment;
                     order.ExpiryDate = model.ExpiryDate;
                     order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                    order.PvPEnabled = model.PvPEnabled;
+                    order.EnsureOnLinePrice = model.EnsureOnLinePrice;
                 }
 
+                double extraCharge = 0;
+                //if (order.EnsureOnLinePrice)
+                //    extraCharge += CurrencyManager.ExtraCharge_EnsureOnLinePrice;
+                if (order.PvPEnabled)
+                    extraCharge += CurrencyManager.ExtraCharge_PvPEnabled;
+                
                 //calculate AmountUSD_Estimation (volume)
                 if (order.CCY1 == "USD")
                     order.AmountUSD_Estimation = order.AmountCCY1;
                 else
                     order.AmountUSD_Estimation = CurrencyManager.Instance.GetAmountUSD(order.CCY1, order.AmountCCY1);
-                order.AmountCCY2_Estimation = CurrencyManager.Instance.TranslateAmount(order.AmountCCY1, order.CCY1, order.CCY2);
+                order.AmountCCY2_Estimation = CurrencyManager.Instance.TranslateAmount(order.AmountCCY1 - (extraCharge * order.AmountCCY1), order.CCY1, order.CCY2);
                 
                 //calculate profit
                 string minorCurrency = order.CCY2;
-                order.CustomerTotalProfitUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.CustomerOrderProfit)) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
-                order.FlatFXCommissionUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.FlatFXOrderCommission + CurrencyManager.BankCommission)), 2); // 2 promil
+                order.CustomerTotalProfitUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.CustomerOrderProfit - extraCharge)) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
+                order.FlatFXCommissionUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.FlatFXOrderCommission + CurrencyManager.BankCommission + extraCharge)), 2); // 2 promil
                 
                 model.order = order;
 
@@ -279,6 +294,12 @@ namespace FlatFXWebClient.Controllers
                 model.OrderId = order.OrderId;
                 model.WorkflowStage = 2;
                 ApplicationInformation.Instance.Session[model.OrderKey] = order;
+
+                if (model.MatchOrderId > 0)
+                {
+                    FXRate pairRate = CurrencyManager.Instance.PairRates[order.Symbol];
+                    model.MatchMidRate = pairRate.Mid;
+                }
                 return RedirectToAction("CreateOrderIndex", model);
             }
             catch (Exception ex)
@@ -311,6 +332,12 @@ namespace FlatFXWebClient.Controllers
 
                 Order order = db.Orders.Find(model.OrderInSession.OrderId);
 
+                if (DateTime.Now > order.OrderDate.AddSeconds(60))
+                {
+                    TempData["ErrorResult"] = "Timeout expired";
+                    return RedirectToAction("CreateOrderIndex", model);
+                }
+
                 order.Status = Consts.eOrderStatus.Waiting;
                 db.SaveChanges();
 
@@ -322,6 +349,7 @@ namespace FlatFXWebClient.Controllers
                 {
                     //Match 2 orders
                     OrderMatch match = new OrderMatch();
+                    match.MidRate = model.MatchMidRate;
                     bool isValid = InitializeMatch(match, order.OrderId, model.MatchOrderId, Consts.eMatchTriggerSource.Order1);
                     if (!isValid || match.ErrorMessage != null)
                     {
@@ -363,7 +391,7 @@ namespace FlatFXWebClient.Controllers
         private async Task<ActionResult> NewOrderWithMatch(long matchOrderId, int action)
         {
             OrderViewModel model = new OrderViewModel();
-            Order matchedOrder = db.Orders.Where(o => o.OrderId == matchOrderId).SingleOrDefault();
+            Order matchedOrder = await db.Orders.Where(o => o.OrderId == matchOrderId).SingleOrDefaultAsync();
             if (matchedOrder == null)
                 return RedirectToAction("CreateOrderIndex", model);
 
@@ -431,12 +459,14 @@ namespace FlatFXWebClient.Controllers
                 match.TriggerDate = DateTime.Now;
                 match.MaturityDate = DateTime.Now;
                 match.Status = Consts.eMatchStatus.New;
-
+                
                 FXRate pairRate = CurrencyManager.Instance.PairRates[match.Order1.Symbol];
                 if (!match.Order1.IsDemo && ((DateTime.Now - pairRate.LastUpdate).TotalMinutes > 5 || !pairRate.IsTradable)) //the exchange rate is not up to date
                     match.ErrorMessage += "The Exchange Rate is not up to date. Please contact FlatFX Support.";
 
-                match.MidRate = pairRate.Mid;
+                //check the MidRate was not changed manually
+                if (match.MidRate.Value > (pairRate.Mid * 1.001) || match.MidRate.Value < (pairRate.Mid * 0.999))
+                    match.ErrorMessage += "The Exchange Rate is not up to date. Please contact FlatFX Support.";
 
                 match.Deal1 = GenerateDeal(match, match.Order1, match.MidRate.Value, match.Order1.AmountCCY1);
                 match.Deal2 = GenerateDeal(match, match.Order2, match.MidRate.Value, match.Order1.AmountCCY1);
@@ -511,8 +541,8 @@ namespace FlatFXWebClient.Controllers
                 deal.EnsureOnLinePrice = false;
                 deal.PvPEnabled = false;
                 deal.FastTransferEnabled = false;
-                deal.ChargedProviderAccount = order.ChargedProviderAccount;
-                deal.CreditedProviderAccount = order.CreditedProviderAccount;
+                deal.ChargedAccount = order.ChargedAccount;
+                deal.CreditedAccount = order.CreditedAccount;
                 deal.Provider = order.Provider;
                 deal.ProviderId = order.Provider.ProviderId;
                 deal.CompanyAccount = order.CompanyAccount;
@@ -527,22 +557,27 @@ namespace FlatFXWebClient.Controllers
                     priceBidOrAsk = Consts.eBidAsk.Ask;
 
                 deal.OfferingDate = DateTime.Now;
+                deal.OfferingMidRate = matchMidRate; 
                 deal.MidRate = matchMidRate;
 
-                // to do support this fields in order
-                deal.EnsureOnLinePrice = false; 
-                deal.PvPEnabled = false;
+                deal.EnsureOnLinePrice = (order.PvPEnabled)? true : order.EnsureOnLinePrice; 
+                deal.PvPEnabled = order.PvPEnabled;
                 deal.FastTransferEnabled = false;
-                deal.OfferingMidRate = matchMidRate;
 
+                double extraCharge = 0;
+                //if (deal.EnsureOnLinePrice)
+                //    extraCharge += CurrencyManager.ExtraCharge_EnsureOnLinePrice;
+                if (deal.PvPEnabled)
+                    extraCharge += CurrencyManager.ExtraCharge_PvPEnabled;
+                
                 if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
-                    deal.CustomerRate = matchMidRate - ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission) * matchMidRate);
+                    deal.CustomerRate = matchMidRate - ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission + extraCharge) * matchMidRate);
                     deal.BankRate = matchMidRate - (CurrencyManager.BankCommission * matchMidRate);
                 }
                 else
                 {
-                    deal.CustomerRate = matchMidRate + ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission) * matchMidRate);
+                    deal.CustomerRate = matchMidRate + ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission + extraCharge) * matchMidRate);
                     deal.BankRate = matchMidRate + (CurrencyManager.BankCommission * matchMidRate);
                 }
 
@@ -572,7 +607,7 @@ namespace FlatFXWebClient.Controllers
                 //calculate profit
                 string minorCurrency = order.CCY2;
                 deal.BankIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankCommission * matchMidRate), 2); // 0.5 promil
-                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.CustomerOrderProfit * matchMidRate) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
+                deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * (CurrencyManager.CustomerOrderProfit - extraCharge) * matchMidRate) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
                 deal.FlatFXIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 1.5 promil
                 deal.Commission = deal.BankIncomeUSD + deal.FlatFXIncomeUSD; // 2 Promil
 

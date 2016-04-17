@@ -120,8 +120,8 @@ namespace FlatFXWebClient.Controllers
                     deal.IsDemo = true;
                 if (providerAccounts.Count > 0)
                 {
-                    deal.ChargedProviderAccount = providerAccounts[0];
-                    deal.CreditedProviderAccount = providerAccounts[0];
+                    deal.ChargedAccount = providerAccounts[0];
+                    deal.CreditedAccount = providerAccounts[0];
                 }
                 deal.DealProductType = Consts.eDealProductType.FxSimpleExchange;
                 deal.DealType = Consts.eDealType.Spot;
@@ -193,7 +193,7 @@ namespace FlatFXWebClient.Controllers
             try
             {
                 // to do support this fields on next stage
-                //deal.ChargedProviderAccount
+                //deal.ChargedAccount
 
                 deal.BuySell = model.BuySell;
 
@@ -259,7 +259,7 @@ namespace FlatFXWebClient.Controllers
 
                 if (extraCharge > 0)
                 {
-                    Bid = Bid + (Mid * extraCharge);
+                    Bid = Bid - (Mid * extraCharge);
                     Ask = Ask + (Mid * extraCharge);
                 }
 

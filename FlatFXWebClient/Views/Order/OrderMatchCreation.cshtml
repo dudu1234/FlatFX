@@ -27,95 +27,112 @@
 }
 else
 {
-    <div class="form-group pairList disabled">
-        <label class="control-label col-xs-5 col-md-3">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
-        @Html.HiddenFor(model => model.Symbol)
-
-        <div class="col-xs-7 col-md-9 start-align">
-            @foreach (FXRate rate in CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || Model.OrderInSession.IsDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD"))
-            {
-                <div class="col-xs-8 col-md-8 col-lg-4 pairItem" id="@rate.Key" ng-click="setAction('@rate.Key')" ng-class="{ 'selected' : symbol == '@rate.Key' }">@FlatFXResources.Resources.ResourceManager.GetString(rate.Key)</div>
-            }
-        </div>
-    </div>
-    <div class="form-group small-line disabled" ng-click="updateAction()">
-        <label class="control-label col-xs-12 col-lg-3 label-down">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
-        <div class="col-xs-6 col-lg-4 order-radio-div">
-            @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" })
-            <span>@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</span>
-        </div>
-        <div class="col-xs-6 col-lg-5 no-side-margin order-radio-div">
-            @Html.RadioButtonFor(model => model.BuySell, "Sell")
-            <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
-        </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-5">@FlatFXResources.Resources.SelectAmount:</label>
-        <div class="col-xs-7">
-            <div class="input-group">
-                <span class="input-group-addon large-font">{{ CCY1Sign }}</span>
-                <input type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" max="@Model.MatchMaxAmount" min="@Model.MatchMinAmount" class="form-control" ng-change="setAction(symbol)" />
+    @Html.HiddenFor(model => model.EnsureOnLinePrice)
+    <div class="simple-trading-order">
+        <div class="form-group">
+            <label class="control-label col-xs-5">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
+            <div class="col-xs-7 disabled">
+                @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser), "Key", "Value"), htmlAttributes: new { @class = "form-control" })
             </div>
         </div>
-    </div>
-    <div class="form-group disabled">
-        <div class="col-xs-5">
-            <label class="control-label">
-                <input class="control-label" name="showExpiryDate" type="checkbox" ng-model="expiryDateChkModel" ng-change="expiryDateCheckboxEvent(expiryDateChkModel)" /> @FlatFXResources.Resources.ExpiryDate:
-            </label>
+        <div class="form-group small-line">
+            <label class="control-label col-xs-12 col-lg-3 label-down">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
+            <div class="col-xs-6 col-lg-4 order-radio-div">
+                @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked", disabled = "disabled" })
+                <span>@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</span>
+            </div>
+            <div class="col-xs-6 col-lg-5 no-side-margin order-radio-div">
+                @Html.RadioButtonFor(model => model.BuySell, "Sell", new { disabled = "disabled" })
+                <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
+            </div>
         </div>
-        <div class="col-xs-7">
-            <input type="date" name="ExpiryDate" id="ExpiryDate" ng-model="ExpiryDateModel" class="form-control" />
-            <label name="GTC" id="GTC" class="control-label">Good Till Cancel</label>
+        <div class="form-group">
+            <label class="control-label col-xs-5">@FlatFXResources.Resources.SelectAmount:</label>
+            <div class="col-xs-7">
+                <div class="input-group">
+                    <span class="input-group-addon large-font">{{ CCY1Sign }}</span>
+                    <input type="number" id="AmountCCY1" name="AmountCCY1" ng-model="amountCcy1" class="form-control" ng-change="setAction()" />
+                </div>
+                <div class="red" ng-show="amountCcy1 > MatchMaxAmount || amountCcy1 < MatchMinAmount">The amount range: {{ MatchMinAmount }} - {{ MatchMaxAmount }}</div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-xs-5" })
-        <div class="col-xs-7">
-            @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+        <div class="form-group">
+            <div class="col-xs-5">
+                <label class="control-label">
+                    <input class="control-label" name="showMinimalPartnerExecutionAmount" disabled type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
+                </label>
+            </div>
+            <div class="col-xs-7">
+                @Html.EditorFor(model => model.MinimalPartnerExecutionAmountCCY1, new { htmlAttributes = new { @class = "form-control", @type = "number", disabled = "disabled" } })
+                @Html.ValidationMessageFor(m => m.MinimalPartnerExecutionAmountCCY1, "", new { @class = "text-danger" })
+                <label name="AllAmount" id="AllAmount" class="control-label">@FlatFXResources.Resources.AllAmount</label>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-xs-5" })
-        <div class="col-xs-7">
-            @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+        <div class="form-group">
+            <label class="control-label col-xs-5">@FlatFXResources.Resources.ActionDescription:</label>
+            <div class="col-xs-7">
+                <label class="control-label order-action-description">{{ actionDescription }}</label>
+            </div>
         </div>
-    </div>
-    <div class="form-group disabled">
-        <div class="col-xs-5">
-            <label class="control-label">
-                <input class="control-label" name="showMinimalPartnerExecutionAmount" type="checkbox" ng-model="minimalPartnerExecutionAmountChkModel" ng-change="minimalPartnerCheckboxEvent(minimalPartnerExecutionAmountChkModel)" /> @FlatFXResources.Resources.MinimalPartnerExecutionAmount (<u class="site-color1">{{ CCY1() }}</u>):
-            </label>
+        <div class="form-group">
+            <div class="col-xs-5">
+                <label class="control-label">
+                    <input class="control-label" disabled name="showExpiryDate" type="checkbox" ng-model="expiryDateChkModel" ng-change="expiryDateCheckboxEvent(expiryDateChkModel)" /> @FlatFXResources.Resources.ExpiryDate:
+                </label>
+            </div>
+            <div class="col-xs-7">
+                <input disabled type="date" name="ExpiryDate" id="ExpiryDate" ng-model="ExpiryDateModel" class="form-control" />
+                <label name="GTC" id="GTC" class="control-label">Good Till Cancel</label>
+            </div>
         </div>
-        <div class="col-xs-7">
-            @Html.EditorFor(model => model.MinimalPartnerExecutionAmountCCY1, new { htmlAttributes = new { @class = "form-control", @type = "number" } })
-            @Html.ValidationMessageFor(m => m.MinimalPartnerExecutionAmountCCY1, "", new { @class = "text-danger" })
-            <label name="AllAmount" id="AllAmount" class="control-label">@FlatFXResources.Resources.AllAmount</label>
+        <div class="form-group">
+            @Html.LabelFor(model => model.SelectedAccount, htmlAttributes: new { @class = "control-label col-xs-5" })
+            <div class="col-xs-7">
+                @Html.DropDownListFor(model => model.SelectedAccount, Model.UserBankAccounts, htmlAttributes: new { @readonly = "readonly", @class = "form-control" })
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <label class="control-label col-xs-5">@FlatFXResources.Resources.ActionDescription:</label>
-        <div class="col-xs-7">
-            <label class="control-label order-action-description">{{ actionDescription }}</label>
+        @*<div class="form-group">
+                <div class="col-xs-12 start-align">
+                    @Html.CheckBoxFor(m => m.EnsureOnLinePrice, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.EnsureOnLinePrice, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_EnsureOnLinePrice * 100)%
+                    <span ng-model="showEnsureOnLinePrice" ng-click="showEnsureOnLinePrice = !showEnsureOnLinePrice" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
+                    <div ng-show="showEnsureOnLinePrice" class="descriptionDiv">
+                        @Html.Raw(FlatFXResources.Resources.EnsureOnLinePriceDetails)
+                    </div>
+                </div>
+            </div>*@
+        <div class="form-group">
+            <div class="col-xs-12 start-align">
+                @Html.CheckBoxFor(m => m.PvPEnabled, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.PvPEnabled, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_PvPEnabled * 100)%
+                <span ng-model="showPvPEnabled" ng-click="showPvPEnabled = !showPvPEnabled" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
+                <div ng-show="showPvPEnabled" class="descriptionDiv">
+                    @Html.Raw(FlatFXResources.Resources.PvPEnabledDetails)
+                </div>
+            </div>
         </div>
-    </div>
-    <div class="form-group">
-        <span class="start-align col-xs-12">
-            <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
-            @FlatFXResources.Resources.BankSpreadIs
-        </span>
-    </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-xs-5" })
+            <div class="col-xs-7">
+                @Html.TextAreaFor(model => model.Comment, new { htmlAttributes = new { @class = "form-control" } })
+            </div>
+        </div>
+        <div class="form-group">
+            <span class="start-align col-xs-12">
+                <b class="site-color1">@FlatFXResources.Resources.YourSaving {{ getCustomerSaving() | number:0 }} {{ CCY1() }} @FlatFXResources.Resources.Estimation</b><br />
+                @FlatFXResources.Resources.BankSpreadIs
+            </span>
+        </div>
 
-    <div class="form-group">
-        <div class="text-center col-xs-12">
-            @if (ApplicationInformation.Instance.IsDemoUser)
-            {
-                <input type="submit" value="@FlatFXResources.Resources.OrderSubmitDemo" class="btn btn-primary" />
-            }
-            else
-            {
-                <input type="submit" value="@FlatFXResources.Resources.OrderSubmit1" class="btn btn-primary" />
-            }
+        <div class="form-group">
+            <div class="text-center col-xs-12">
+                @if (ApplicationInformation.Instance.IsDemoUser)
+                {
+                    <input type="submit" value="@FlatFXResources.Resources.OrderSubmitDemo" class="btn btn-primary" />
+                }
+                else
+                {
+                    <input type="submit" value="@FlatFXResources.Resources.OrderSubmit1" class="btn btn-primary" />
+                }
+            </div>
         </div>
     </div>
 }

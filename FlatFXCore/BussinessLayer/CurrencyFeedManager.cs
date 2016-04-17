@@ -167,6 +167,11 @@ namespace FlatFXCore.BussinessLayer
                 return currencyListByCulture;
             }
         }
+        public Dictionary<string, string> PairsListByCulture(bool isDemo)
+        {
+            Dictionary<string, string> pairsDic = CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || isDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD").ToDictionary(r => r.Key, r => FlatFXResources.Resources.ResourceManager.GetString(r.Key));
+            return pairsDic;
+        }
     }
     public class CurrencyFeedManager
     {

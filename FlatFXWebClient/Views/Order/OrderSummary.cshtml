@@ -29,35 +29,70 @@
             <br />
             <h3><b>@FlatFXResources.Resources.SummaryMainHeader</b></h3>
             <h4><b>@FlatFXResources.Resources.SummarySecondaryHeader</b></h4>
-            <ul class="summary-steps-description">
-                <li>
-                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                    @FlatFXResources.Resources.SummaryStep1Description1
-                    <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
-                    @FlatFXResources.Resources.SummaryStep1Description2<b>@deal.ChargedProviderAccount.Provider.FullName @deal.ChargedProviderAccount.AccountName</b><br />
-                    @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
 
-                    @if (deal.FastTransferEnabled)
-                    {
+
+            <ul class="summary-steps-description">
+
+                @if (deal.PvPEnabled)
+                {
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
+                        @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @deal.CustomerRate<br />
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
+                        @FlatFXResources.Resources.SummaryPvpStep2Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @Html.Raw(FlatFXResources.Resources.SummaryPvpStep2Description2) <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b><br />
+                        @FlatFXResources.Resources.SummaryPvpStep2Description3 <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                        @FlatFXResources.Resources.SummaryPvpStep2Description4 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
+                        @Html.Raw(FlatFXResources.Resources.SummaryPvpStep3Description1)
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
                         <br />
-                        @FlatFXResources.Resources.SummaryStep1Description4
-                    }
-                </li>
-                <li>
-                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
-                    @FlatFXResources.Resources.SummaryStep2Description
-                </li>
-                <li>
-                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
-                    @FlatFXResources.Resources.SummaryStep3Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
-                    @FlatFXResources.Resources.SummaryStep3Description2 <b>@deal.ChargedProviderAccount.Provider.FullName @deal.ChargedProviderAccount.AccountName</b><br />
-                    @FlatFXResources.Resources.SummaryStep3Description3
-                </li>
-                <li>
-                    <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span><br />
-                    @FlatFXResources.Resources.SummaryEnjoy<br />
-                    @FlatFXResources.Resources.SummaryThankYou
-                </li>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction2 <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
+                        <br />
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction3
+                        <br />
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction4
+                    </li>
+                }
+                else
+                {
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
+                        @FlatFXResources.Resources.SummaryStep1Description1
+                        <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                        @FlatFXResources.Resources.SummaryStep1Description2<b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b><br />
+                        @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
+
+                        @if (deal.FastTransferEnabled)
+                        {
+                            <br />
+                            @FlatFXResources.Resources.SummaryStep1Description4
+                        }
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
+                        @FlatFXResources.Resources.SummaryStep2Description
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
+                        @FlatFXResources.Resources.SummaryStep3Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @FlatFXResources.Resources.SummaryStep3Description2 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b><br />
+                        @FlatFXResources.Resources.SummaryStep3Description3
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span><br />
+                        @FlatFXResources.Resources.SummaryEnjoy<br />
+                        @FlatFXResources.Resources.SummaryThankYou
+                    </li>
+                }
             </ul>
         }
         else

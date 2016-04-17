@@ -13,7 +13,7 @@ namespace FlatFXCore.Migrations
         
         string IMigrationMetadata.Id
         {
-            get { return "201604110911386_Initial"; }
+            get { return "201604131135349_Initial"; }
         }
         
         string IMigrationMetadata.Source

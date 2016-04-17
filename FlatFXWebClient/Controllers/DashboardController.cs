@@ -43,6 +43,7 @@ namespace FlatFXWebClient.Controllers
         {
             try
             {
+                DateTime today = DateTime.Today;
                 var userId = User.Identity.GetUserId();
                 ApplicationUser user = db.Users.Where(u => u.Id == userId).FirstOrDefault();
                 if (user == null)
@@ -55,7 +56,8 @@ namespace FlatFXWebClient.Controllers
                 // Guy to do example for inner join
                 int daysBack = 14;
                 List<DateTime> days = GeneralFunction.GetDays(daysBack, true);
-                Dictionary<string, int> dicDays = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -1 * daysBack)).ToList()
+                DateTime daysBackDT = DateTime.Now.AddDays(-1 * daysBack);
+                Dictionary<string, int> dicDays = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > daysBackDT).ToList()
                     .Where(d => d.IsRealDeal)
                     .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
                     .Select(d => new Tuple<DateTime, int>(d.Max(d2 => new DateTime(d2.OfferingDate.Year, d2.OfferingDate.Month, d2.OfferingDate.Day, 0, 0, 0)), d.Sum(d3 => d3.AmountUSD).ToInt()))
@@ -69,7 +71,8 @@ namespace FlatFXWebClient.Controllers
                 // CompanyMonthlyVolumeList - 6 month back
                 int monthBack = 6;
                 List<DateTime> months = GeneralFunction.GetMonth(monthBack, true);
-                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -1 * monthBack)).ToList()
+                DateTime monthesBackDT = DateTime.Now.AddMonths(-1 * monthBack);
+                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate > monthesBackDT).ToList()
                     .Where(d => d.IsRealDeal)
                     .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
                     .Select(d => new Tuple<string, int>(d.Max(d2 => d2.OfferingDate.ToString("MMMM-yy")), d.Sum(d3 => d3.AmountUSD).ToInt()))
@@ -88,7 +91,7 @@ namespace FlatFXWebClient.Controllers
                 //company volume
                 model.CompanyVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
                     Sum(d => (double?)d.AmountUSD).ToInt(0);
-                model.CompanyTodayVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).
+                model.CompanyTodayVolume = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId && d.OfferingDate >= today).
                     ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.AmountUSD).ToInt(0);
                 model.CompanySavings = db.Deals.Where(d => d.CompanyAccount.Company.CompanyId == companyId).ToList().Where(d => d.IsRealDeal).
                     Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
@@ -116,8 +119,10 @@ namespace FlatFXWebClient.Controllers
             {
                 // DailyVolumeList - 14 days back
                 int daysBack = 14;
+                DateTime today = DateTime.Today;
                 List<DateTime> days = GeneralFunction.GetDays(daysBack, true);
-                Dictionary<string, int> dicDays = db.Deals.Where(d => d.OfferingDate > DbFunctions.AddDays(DateTime.Now, -1 * daysBack)).ToList()
+                DateTime daysBackDT = DateTime.Now.AddDays(-1 * daysBack);
+                Dictionary<string, int> dicDays = db.Deals.Where(d => d.OfferingDate > daysBackDT).ToList()
                     .Where(d => d.IsRealDeal)
                     .GroupBy(d => d.OfferingDate.ToDateString("dd/MM/yyyy"))
                     .Select(d => new Tuple<DateTime, int>(d.Max(d2 => new DateTime(d2.OfferingDate.Year, d2.OfferingDate.Month, d2.OfferingDate.Day, 0, 0, 0)), d.Sum(d3 => d3.AmountUSD).ToInt()))
@@ -131,7 +136,8 @@ namespace FlatFXWebClient.Controllers
                 // MonthlyVolumeList - 6 month back
                 int monthBack = 6;
                 List<DateTime> months = GeneralFunction.GetMonth(monthBack, true);
-                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.OfferingDate > DbFunctions.AddMonths(DateTime.Now, -1 * monthBack)).ToList()
+                DateTime monthesBackDT = DateTime.Now.AddMonths(-1 * monthBack);
+                Dictionary<string, int> dicMonth = db.Deals.Where(d => d.OfferingDate > monthesBackDT).ToList()
                     .Where(d => d.IsRealDeal)
                     .GroupBy(d => d.OfferingDate.Month + "-" + d.OfferingDate.Year)
                     .Select(d => new Tuple<string, int>(d.Max(d2 => d2.OfferingDate.ToString("MMMM-yy")), d.Sum(d3 => d3.AmountUSD).ToInt()))
@@ -149,7 +155,7 @@ namespace FlatFXWebClient.Controllers
 
                 //total volume
                 model.SiteTotalVolume = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => d.AmountUSD).ToInt();
-                model.SiteTodayVolume = db.Deals.Where(d => DbFunctions.TruncateTime(d.OfferingDate) == DbFunctions.TruncateTime(DateTime.Now)).ToList().Where(d => d.IsRealDeal).
+                model.SiteTodayVolume = db.Deals.Where(d => d.OfferingDate >= today).ToList().Where(d => d.IsRealDeal).
                     Sum(d => (double?)d.AmountUSD).ToInt();
                 model.SiteTotalSavings = db.Deals.ToList().Where(d => d.IsRealDeal).Sum(d => (double?)d.CustomerTotalProfitUSD).ToInt(0);
                 model.SiteTotalNumberOfDeals = db.Deals.ToList().Where(d => d.IsRealDeal).Count();

@@ -34,9 +34,9 @@ namespace FlatFXCore.Model.Data
         public virtual Provider Provider { get; set; }
 
         [Display(Name = "Account")]
-        public virtual ProviderAccount CreditedProviderAccount { get; set; }
+        public virtual ProviderAccount CreditedAccount { get; set; }
         [Display(Name = "Account")]
-        public virtual ProviderAccount ChargedProviderAccount { get; set; }
+        public virtual ProviderAccount ChargedAccount { get; set; }
 
         public string ProviderUserId { get; set; }
         [ForeignKey("ProviderUserId")]
@@ -141,9 +141,9 @@ namespace FlatFXCore.Model.Data
         public virtual Provider Provider { get; set; }
 
         [Display(Name = "Account")]
-        public virtual ProviderAccount CreditedProviderAccount { get; set; }
+        public virtual ProviderAccount CreditedAccount { get; set; }
         [Display(Name = "Account")]
-        public virtual ProviderAccount ChargedProviderAccount { get; set; }
+        public virtual ProviderAccount ChargedAccount { get; set; }
 
         public Consts.eDealType DealType { get; set; }
         public Consts.eDealProductType DealProductType { get; set; }
@@ -168,6 +168,9 @@ namespace FlatFXCore.Model.Data
         public DateTime? ExpiryDate { get; set; }
         public double? MinimalPartnerTotalVolumeUSD { get; set; }
         public int? PartnerMinScore { get; set; }
+
+        public bool EnsureOnLinePrice { get; set; }
+        public bool PvPEnabled { get; set; }
 
         public double? AmountCCY1_Executed { get; set; }
         public double? AmountCCY1_Remainder { get; set; }

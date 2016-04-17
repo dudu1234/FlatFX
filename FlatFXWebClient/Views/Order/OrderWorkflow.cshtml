@@ -27,7 +27,7 @@
 }
 
 <div ng-controller="OrderWorkflow"
-     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1)"
+     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1, @Model.MatchMinAmount, @Model.MatchMaxAmount)"
      class="order-currency-exchange-main">
 
     @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
@@ -40,6 +40,7 @@
         @Html.HiddenFor(model => model.MatchOrderId)
         @Html.HiddenFor(model => model.MatchMinAmount)
         @Html.HiddenFor(model => model.MatchMaxAmount)
+        @Html.HiddenFor(model => model.MatchMidRate)
         @Html.HiddenFor(model => model.IsEdit)
 
 

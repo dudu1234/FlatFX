@@ -145,12 +145,12 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
 
         $scope.DirectionGetFlatFX = $scope.converterAmount;
         $scope.DirectionGetBank = $scope.IndicativeCalculatedAmount * $scope.BankRate;
-        
+
         $scope.CalcSave = $scope.DirectionGetBank - $scope.DirectionGetFlatFX - $scope.GetTransferFee($scope.SendCurrencyISO);
 
         //$scope.$apply();
     }
-    $scope.GetTransferFee = function(ISO) {
+    $scope.GetTransferFee = function (ISO) {
         var TransferFee = $scope.bankTransferFeeNIS;
         if (ISO == 'USD')
             TransferFee = $scope.bankTransferFeeUSD;
@@ -162,7 +162,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
         if ($scope.ReceiveCurrencyISO == ISO) {
             $scope.ReceiveCurrencyISO = $scope.SendCurrencyISO;
         }
-        
+
         $scope.SendCurrencyISO = ISO;
         if ($scope.CalcByReceive) {
             $scope.calculateReceive();
@@ -215,7 +215,6 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
         else if ($scope.error != '') {
             notyWrapper.generateResultMessage($('#resultDiv'), 'error', $scope.error);
         }
-        $('#confirm-reorder').hide();
     }
     $interval(function () {
         if ($scope.CountDown < 1)
@@ -224,7 +223,6 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
         if ($scope.CountDown == 1) {
             $('#confirm-submit').attr("disabled", true);
             $('#confirm-countdown').removeClass('countdown-enabled').addClass('countdown-disabled');
-            $('#confirm-reorder').fadeIn(500);
         }
 
         $scope.CountDown = $scope.CountDown - 1;
@@ -542,7 +540,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
         })
         .error(function (data, status, header, config) {
             notyWrapper.generateResultMessage($('#resultDiv'), 'error', 'Failed to cancel order #' + orderId);
-        }); 
+        });
     }
     $scope.EditOrder = function (orderId) {
         window.location.href = urlPrefix + "/Order/EditOrder?orderId=" + orderId;
@@ -551,14 +549,18 @@ myApp.controller('Dashboard', function ($scope, $timeout, $interval, $http, noty
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
-    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1) {
+myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
         $scope.actionDescription = "";
         $scope.amountCcy1 = amountCCY1;
         $scope.CCY1Sign = "$";
+        $scope.MatchMinAmount = MatchMinAmount;
+        $scope.MatchMaxAmount = MatchMaxAmount;
+        $scope.CountDown = 60;
+        $scope.WorkflowStage = WorkflowStage;
 
         if (dExpiryDate == 0) {
             $scope.expiryDateChkModel = false;
@@ -579,6 +581,20 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
     $timeout(function () { // Use it instead of javascript $(document).ready(
         $scope.ready();
     }, 0);
+    $interval(function () {
+        if ($scope.WorkflowStage != 2)
+            return;
+
+        if ($scope.CountDown < 1)
+            return;
+
+        if ($scope.CountDown == 1) {
+            $('#confirm-submit').attr("disabled", true);
+            $('#confirm-countdown').removeClass('countdown-enabled').addClass('countdown-disabled');
+        }
+
+        $scope.CountDown = $scope.CountDown - 1;
+    }, 1000);
     $scope.ready = function () {
         if ($scope.info != '') {
             notyWrapper.generateResultMessage($('#resultDiv'), 'success', $scope.info);
@@ -586,66 +602,43 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
         else if ($scope.error != '') {
             notyWrapper.generateResultMessage($('#resultDiv'), 'error', $scope.error);
         }
-        $scope.Symbol = $('#Symbol').val();
-        $('#' + $scope.Symbol).click();
 
-        if ($scope.ExpiryDateModel == '') {
-            $('#GTC').show();
-            $("#ExpiryDate").hide();
-        }
-        else {
-            $('#ExpiryDate').show();
-            $("#GTC").hide();
-        }
+        if ($scope.WorkflowStage == 1) {
+            $scope.Symbol = $('#Symbol').val();
+            $scope.setAction();
 
-        if ($scope.minimalPartnerExecutionAmountChkModel == false) {
-            $('#AllAmount').show();
-            $("#MinimalPartnerExecutionAmountCCY1").hide();
-        }
-        else {
-            $('#MinimalPartnerExecutionAmountCCY1').show();
-            $("#AllAmount").hide();
-        }
+            if ($scope.ExpiryDateModel == '') {
+                $('#GTC').show();
+                $("#ExpiryDate").hide();
+            }
+            else {
+                $('#ExpiryDate').show();
+                $("#GTC").hide();
+            }
 
-        //$("#PromilSlider").slider({
-        //    //range: "min",
-        //    value: $scope.promilRequired,
-        //    min: -1,
-        //    max: 6,
-        //    step: 1,
-        //    //this gets a live reading of the value and prints it on the page
-        //    //slide: function (event, ui) {
-        //    //    $("#PromilText").text('@FlatFXResources.Resources.MidRate + ' + (ui.value * 0.01) + '%');
-        //    //},
-        //    //this updates the value of your hidden field when user stops dragging
-        //    change: function (event, ui) {
-        //        $scope.promilRequired = ui.value;
-        //        $('#PromilRequired').attr('value', ui.value);
-        //        $scope.$apply();
-        //    }
-        //})
-        //.each(function () {
-        //    var numberOfSteps = 7;
-        //    // Add labels to slider whose values are specified by min, max
-        //    for (var i = 0; i <= numberOfSteps; i++) {
-        //        // Create a new element and position it with percentages
-        //        var el = $('<label>' + (i - 1) + '</label>').css('left', (i / numberOfSteps * 100) + '%');
-        //        // Add the element inside #slider
-        //        $("#PromilSlider").append(el);
-        //    }
-        //});
+            if ($scope.minimalPartnerExecutionAmountChkModel == false) {
+                $('#AllAmount').show();
+                $("#MinimalPartnerExecutionAmountCCY1").hide();
+            }
+            else {
+                $('#MinimalPartnerExecutionAmountCCY1').show();
+                $("#AllAmount").hide();
+            }
+        }
     }
     $scope.getCustomerSaving = function () {
         return (((0.001 * 11) - (0.001 * 2)) * parseInt($scope.amountCcy1)) - 17;
     }
-    $scope.setAction = function (symbol) {
-        $('#Symbol').val(symbol);
-        $scope.symbol = symbol;
-        //$scope.actionDescription = $('input[name="BuySell"]:checked').val() + ' ' + $scope.amountCcy1 + ' ' + symbol.substring(0, 3) + ' by ' + $('input[name="BuySell"]:unchecked').val() + 'ing ' + symbol.substring(3, 6);
+    $scope.setAction = function () {
+        if ($scope.amountCcy1 == null)
+            return;
+        if ($scope.Symbol == undefined)
+            return;
+
         if ($('input[name="BuySell"]:checked').val() == "Buy")
-            $scope.actionDescription = 'Buy ' + $scope.amountCcy1.toLocaleString() + ' ' + symbol.substring(0, 3) + ' by selling ' + symbol.substring(3, 6);
+            $scope.actionDescription = 'Buy ' + $scope.amountCcy1.toLocaleString() + ' ' + $scope.Symbol.substring(0, 3) + ' by selling ' + $scope.Symbol.substring(3, 6);
         else
-            $scope.actionDescription = 'Buy ' + symbol.substring(3, 6) + ' by selling ' + $scope.amountCcy1.toLocaleString() + ' ' + symbol.substring(0, 3);
+            $scope.actionDescription = 'Buy ' + $scope.Symbol.substring(3, 6) + ' by selling ' + $scope.amountCcy1.toLocaleString() + ' ' + $scope.Symbol.substring(0, 3);
         $scope.symbolDisplay = $scope.actionDescription;
 
         if ($scope.CCY1() == 'USD')
@@ -658,17 +651,17 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, noty) {
             $scope.CCY1Sign = '???';
     }
     $scope.updateAction = function () {
-        $scope.setAction($scope.symbol);
+        $scope.setAction($scope.Symbol);
     }
     $scope.CCY1 = function () {
-        if (typeof $scope.symbol != 'undefined')
-            return $scope.symbol.substring(0, 3);
+        if (typeof $scope.Symbol != 'undefined')
+            return $scope.Symbol.substring(0, 3);
         else
             return '';
     }
     $scope.CCY2 = function () {
-        if (typeof $scope.symbol != 'undefined')
-            return $scope.symbol.substring(3, 6);
+        if (typeof $scope.Symbol != 'undefined')
+            return $scope.Symbol.substring(3, 6);
         else
             return '';
     }

@@ -24,7 +24,7 @@
         <div class="form-group">
             <label class="control-label col-xs-6">@FlatFXResources.Resources.BankAccount:</label>
             <div class="col-xs-6 order-value">
-                @Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName
+                @Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName
             </div>
         </div>
         <div class="form-group">
@@ -135,7 +135,7 @@
                         <remark>@FlatFXResources.Resources.TheFunds @DateTime.Now.AddDays(1).ToShortDateString() @FlatFXResources.Resources.At 13:00</remark>
                     }
 
-                    <a id="confirm-reorder" class="btn btn-primary" href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.CreateNewOrder</a>
+                    <a id="confirm-reorder" class="btn btn-primary" ng-show="CountDown == 0" href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@FlatFXResources.Resources.CreateNewOrder</a>
                 </div>
             </div>
         </div>

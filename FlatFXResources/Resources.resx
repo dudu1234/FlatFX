@@ -1124,7 +1124,7 @@ Unchecked - You will send money and get it back after 1-2 bussiness days.</value
     <value>The exact amount will be set according to the MID Rate on 14:00 after the money will arrive to the provider account (you can change the setting time)</value>
   </data>
   <data name="EstimationByFinalDealRate_Order" xml:space="preserve">
-    <value>The exact amount will be set according to the MID Rate after the match order, on 14:00 after the money will arrive to the provider account.</value>
+    <value>The exact amount will be set according to the MID Rate when the match order.</value>
   </data>
   <data name="FlatFXShortBankInfo" xml:space="preserve">
     <value>Bank Leumi XXX-XXXXXX</value>
@@ -1230,5 +1230,8 @@ The contract will include the following directions:&lt;br /&gt;</value>
                     Monday - Thursday: 8:00 - 17:00&lt;br /&gt;&lt;br /&gt;
                     Friday: 8:00 - 13:00&lt;br /&gt;
                 &lt;/h3&gt;</value>
+  </data>
+  <data name="MidRateOnMatch" xml:space="preserve">
+    <value>Mid Rate when match triggered</value>
   </data>
 </root>

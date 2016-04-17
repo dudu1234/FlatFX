@@ -1124,7 +1124,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The exact amount will be set according to the MID Rate after the match order, on 14:00 after the money will arrive to the provider account..
+        ///   Looks up a localized string similar to The exact amount will be set according to the MID Rate when the match order..
         /// </summary>
         public static string EstimationByFinalDealRate_Order {
             get {
@@ -1680,6 +1680,15 @@ namespace FlatFXResources {
         public static string MidRate {
             get {
                 return ResourceManager.GetString("MidRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid Rate when match triggered.
+        /// </summary>
+        public static string MidRateOnMatch {
+            get {
+                return ResourceManager.GetString("MidRateOnMatch", resourceCulture);
             }
         }
         

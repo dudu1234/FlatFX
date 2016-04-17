@@ -726,7 +726,7 @@
     <value>בחר מרווח מבוקש (שער אמצע + פרומיל)</value>
   </data>
   <data name="SpreadRequired" xml:space="preserve">
-    <value>מירווח מבוקש</value>
+    <value>שער</value>
   </data>
   <data name="BankSpreadIs" xml:space="preserve">
     <value>*עמלות הבנק ללא הנחה הינן שער האמצע + 1.1%.</value>
@@ -1106,7 +1106,7 @@
     <value>הסכום מוערך. הסכום המדויק יקבע ע"פ שער האמצע בשעה 14:00 לאחר שהכסף יגיע לחשבון ספק הנזילות (באפשרותך לשנות את שעת קביעת השער)</value>
   </data>
   <data name="EstimationByFinalDealRate_Order" xml:space="preserve">
-    <value>הסכום המדוייק יקבע ע"פ שער האמצע לאחר שתיווצר התאמה להזמנה, בשעה 14:00 לאחר שהכסף יגיע לחשבון הספק</value>
+    <value>הסכום המדוייק יקבע ע"פ שער האמצע ברגע שתיווצר התאמה להזמנה</value>
   </data>
   <data name="FlatFXShortBankInfo" xml:space="preserve">
     <value>בנק לאומי XXX-XXXXXX</value>
@@ -1213,5 +1213,8 @@
                     שישי: 13:00 - 08:00&lt;br /&gt;
                 &lt;/h3&gt;
 &lt;/div&gt;</value>
+  </data>
+  <data name="MidRateOnMatch" xml:space="preserve">
+    <value>שער האמצע בזמן ביצוע התאמה</value>
   </data>
 </root>

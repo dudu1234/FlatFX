@@ -969,31 +969,6 @@ table.ffx-table tr td a {
     font-size: 1em;
 }
 
-.pairList table {
-}
-
-.pairList td {
-    padding: 5px;
-    /*border: 5px outset brown;*/
-}
-
-.pairList .pairItem {
-    min-width: 150px;
-    height: 50px;
-    min-height: 50px;
-    padding: 10px;
-    text-align: center;
-    font-weight: 600;
-    background-color: #e2e2e2;
-    cursor: pointer;
-    text-decoration: underline;
-}
-
-.pairList .selected {
-    background-color: #209448;
-    color: whitesmoke;
-}
-
 .order-action-description {
     color: #209448;
     font-size: 1.125em;
@@ -1057,8 +1032,13 @@ table.ffx-table tr td a {
 .simple-trading-order, .simple-trading-confirm {
     background-color: whitesmoke;
 }
+    
+    .simple-trading-order .form-group remark {
+        background-color: #e2e2e2;
+        line-height: 120%;
+    }
 
-    .simple-trading-order .panel-body .form-group {
+    .simple-trading-order .form-group {
         margin: 0px;
         padding: 0px;
         line-height: 35px;
@@ -1068,31 +1048,31 @@ table.ffx-table tr td a {
         height: 35px;
     }
 
-    .simple-trading-order .panel-body .form-group .form-control {
+    .simple-trading-order .form-group .form-control {
         font-size: 1.1em;
     }
 
-    .simple-trading-order .panel-body .form-group select {
+    .simple-trading-order .form-group select {
         height: 35px;
         font-weight: 600;
     }
 
-    .simple-trading-order .panel-body .form-group .control-label {
+    .simple-trading-order .form-group .control-label {
         padding-top: 3px;
         padding-bottom: 3px;
     }
 
-    .simple-trading-order .panel-body .form-group div {
+    .simple-trading-order .form-group div {
         padding-top: 3px;
         padding-bottom: 3px;
         font-weight: 600;
     }
 
-    .simple-trading-order .panel-body .form-group:nth-child(even) {
+    .simple-trading-order .form-group:nth-child(even) {
         background-color: white;
     }
 
-    .simple-trading-order .panel-body .form-group:nth-child(odd) {
+    .simple-trading-order .form-group:nth-child(odd) {
         background-color: #f0f0ff;
     }
 

@@ -1,6 +1,15 @@
 ﻿@model FlatFXWebClient.ViewModels.OrderViewModel
 @using FlatFXCore.BussinessLayer;
 
+@{
+    bool hasMatch = Model.MatchOrderId > 0;
+    string estimationIF = "";
+    if (!hasMatch)
+    {
+        estimationIF = FlatFXResources.Resources.Estimation;
+    }
+}
+
 <div class="form-group">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.OrderID:</label>
     <div class="col-xs-6 order-value">@Model.order.OrderId</div>
@@ -14,7 +23,7 @@
 <div class="form-group">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.BankAccount:</label>
     <div class="col-xs-6 order-value">
-        @Model.order.ChargedProviderAccount.Provider.FullName @Model.order.ChargedProviderAccount.AccountName
+        @Model.order.ChargedAccount.Provider.FullName @Model.order.ChargedAccount.AccountName
     </div>
 </div>
 <div class="form-group">
@@ -24,36 +33,47 @@
     </div>
 </div>
 <div class="form-group red">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.SellAmount @((@Model.BuySell == Consts.eBuySell.Buy) ? FlatFXResources.Resources.Estimation : ""):</label>
+    <div class="col-xs-6">
+        <label class="control-label">@FlatFXResources.Resources.SellAmount @((Model.order.BuySell == Consts.eBuySell.Buy) ? estimationIF : ""):</label>
+        @if (!hasMatch && Model.order.BuySell == Consts.eBuySell.Buy)
+        {
+            <div class="medium-line start-align">
+                <span class="estimation">@Resources.EstimationByFinalDealRate_Order</span>
+            </div>
+        }
+    </div>
     <div class="col-xs-6 order-value">
         @Model.order.SellAmount.ToString("N0") @Model.order.SellCurrency
     </div>
 </div>
 <div class="form-group green">
     <div class="col-xs-6">
-        <label class="control-label">@FlatFXResources.Resources.BuyAmount @((@Model.BuySell == Consts.eBuySell.Sell) ? FlatFXResources.Resources.Estimation : ""):</label>
-        <div class="medium-line start-align">
-            <span class="estimation">@Resources.EstimationByFinalDealRate_Order</span>
-        </div>
+        <label class="control-label">@FlatFXResources.Resources.BuyAmount @((Model.order.BuySell == Consts.eBuySell.Sell) ? estimationIF : ""):</label>
+        @if (!hasMatch && Model.order.BuySell == Consts.eBuySell.Sell)
+        {
+            <div class="medium-line start-align">
+                <span class="estimation">@Resources.EstimationByFinalDealRate_Order</span>
+            </div>
+        }
     </div>
     <div class="col-xs-6 order-value">
         @Model.order.BuyAmount.ToString("N0") @Model.order.BuyCurrency
     </div>
 </div>
 <div class="form-group blue">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.SpreadRequired:</label>
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.Rate:</label>
     <div class="col-xs-6 order-value">
-        @FlatFXResources.Resources.MidRate
+        @((!hasMatch) ? FlatFXResources.Resources.MidRateOnMatch : Model.MatchMidRate.ToString())
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.YouSave* @FlatFXResources.Resources.Estimation:</label>
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.YouSave @estimationIF:</label>
     <div class="col-xs-6 order-value">
         @Model.order.CustomerTotalProfitUSD_Estimation$
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.FlatFXCommission* @FlatFXResources.Resources.Estimation:</label>
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.FlatFXCommission @estimationIF:</label>
     <div class="col-xs-6 order-value">
         @Model.order.FlatFXCommissionUSD_Estimation$
     </div>
@@ -71,6 +91,18 @@
     </div>
 </div>
 <div class="form-group">
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.PvPEnabled:</label>
+    <div class="col-xs-6 order-value">
+        @(Model.order.PvPEnabled ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+    </div>
+</div>
+@*<div class="form-group">
+        <label class="control-label col-xs-6">@FlatFXResources.Resources.EnsureOnLinePrice:</label>
+        <div class="col-xs-6 order-value">
+            @(Model.order.EnsureOnLinePrice ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+        </div>
+    </div>*@
+<div class="form-group">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.MinimalPartnerTotalVolumeUSD:</label>
     <div class="col-xs-6 order-value">
         @(Model.order.MinimalPartnerTotalVolumeUSD.HasValue ? (Model.order.MinimalPartnerTotalVolumeUSD + "$") : "None")
@@ -85,14 +117,19 @@
 <div class="form-group">
     <br />
     <div class="text-center col-xs-12">
-        @if (ApplicationInformation.Instance.IsDemoUser)
-        {
-            <input type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
-        }
-        else
-        {
-            <input type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
-        }
-
+        <div class="end-align col-xs-2">
+            <span id="confirm-countdown" class="countdown-enabled">{{ CountDown }}</span>
+        </div>
+        <div class="col-xs-10 start-align">
+            @if (ApplicationInformation.Instance.IsDemoUser)
+            {
+                <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourDEMOOrder" class="btn btn-primary" />
+            }
+            else
+            {
+                <input id="confirm-submit" type="submit" value="@FlatFXResources.Resources.ConfirmYourOrder" class="btn btn-primary" />
+            }
+            <a id="confirm-reorder" class="btn btn-primary" ng-show="CountDown == 0" href="@Url.Action("OrderBookIndex", "OrderBook")">@FlatFXResources.Resources.OrderBook</a>
+        </div>
     </div>
 </div>

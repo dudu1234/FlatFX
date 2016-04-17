@@ -86,7 +86,7 @@ namespace FlatFXWebClient.ViewModels
         [Range(1000, 1000000, ErrorMessage = "Please enter number between 1,000-1,000,000")]
         [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double AmountCCY1 { get; set; }
-        [Display(Name = "Minimal Partner Execution Amount (CCY1)")]
+        [Display(Name = "Minimal Exchange Amount (CCY1)")]
         [Range(0, 100000000, ErrorMessage = "Please enter number between 0 - 100,000,000")]
         public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
         [Display(Name = "Expiry Date")]
@@ -95,12 +95,15 @@ namespace FlatFXWebClient.ViewModels
         public string Symbol { get; set; }
         [Display(Name = "Comment", ResourceType = typeof(FlatFXResources.Resources))]
         public string Comment { get; set; }
+        public bool PvPEnabled { get; set; }
+        public bool EnsureOnLinePrice { get; set; }
         public Order order { get; set; }
         public List<string> InvalidAccountReason { get; set; }
 
         public long MatchOrderId { get; set; }
         public double MatchMinAmount { get; set; }
         public double MatchMaxAmount { get; set; }
+        public double MatchMidRate { get; set; }
 
         public bool IsEdit { get; set; }
         public Deal deal { get; set; }

@@ -24,17 +24,17 @@
                     @FlatFXResources.Resources.SummaryPvpStep2Description1 <b>@Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency</b>
                     @Html.Raw(FlatFXResources.Resources.SummaryPvpStep2Description2) <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b><br />
                     @FlatFXResources.Resources.SummaryPvpStep2Description3 <b>@Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency</b>
-                    @FlatFXResources.Resources.SummaryPvpStep2Description4 <b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b>
+                    @FlatFXResources.Resources.SummaryPvpStep2Description4 <b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b>
                 </li>
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
                     @Html.Raw(FlatFXResources.Resources.SummaryPvpStep3Description1)
                     @FlatFXResources.Resources.SummaryPvpStep3Direction1 <b>@Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency</b>
                     @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
-                    @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b>
+                    @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b>
                     <br />
                     @FlatFXResources.Resources.SummaryPvpStep3Direction2 <b>@Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency</b>
-                    @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b>
+                    @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b>
                     @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
                     <br />
                     @FlatFXResources.Resources.SummaryPvpStep3Direction3
@@ -52,7 +52,7 @@
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
                     @FlatFXResources.Resources.SummaryStep1Description1
                     <b>@Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency</b>
-                    @FlatFXResources.Resources.SummaryStep1Description2<b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b><br />
+                    @FlatFXResources.Resources.SummaryStep1Description2<b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b><br />
                     @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!Model.deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
 
                     @if (Model.deal.FastTransferEnabled)
@@ -67,7 +67,7 @@
                     @FlatFXResources.Resources.SummaryOnLineStep3Description1
                     <b>@Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency</b>
                     @FlatFXResources.Resources.SummaryStep3Description2
-                    <b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b>
+                    <b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b>
                 </li>
             }
             else
@@ -76,7 +76,7 @@
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
                     @FlatFXResources.Resources.SummaryStep1Description1
                     <b>@Model.deal.AmountToExchangeChargedCurrency.ToString("N0") @Model.deal.ChargedCurrency</b>
-                    @FlatFXResources.Resources.SummaryStep1Description2<b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b><br />
+                    @FlatFXResources.Resources.SummaryStep1Description2<b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b><br />
                     @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!Model.deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
 
                     @if (Model.deal.FastTransferEnabled)
@@ -92,7 +92,7 @@
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
                     @FlatFXResources.Resources.SummaryStep3Description1 <b>@Model.deal.AmountToExchangeCreditedCurrency.ToString("N0") @Model.deal.CreditedCurrency</b>
-                    @FlatFXResources.Resources.SummaryStep3Description2 <b>@Model.deal.ChargedProviderAccount.Provider.FullName @Model.deal.ChargedProviderAccount.AccountName</b><br />
+                    @FlatFXResources.Resources.SummaryStep3Description2 <b>@Model.deal.ChargedAccount.Provider.FullName @Model.deal.ChargedAccount.AccountName</b><br />
                     @FlatFXResources.Resources.SummaryStep3Description3
                 </li>
             }
