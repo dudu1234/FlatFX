@@ -1115,7 +1115,7 @@ Unchecked - You will send money and get it back after 1-2 bussiness days.</value
     <value>Money trasfer period</value>
   </data>
   <data name="WillBeSetAfterMoneyTransfer" xml:space="preserve">
-    <value>Will be set after money transfer</value>
+    <value>Mid Rate on 14:00 after the money transfer</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>Yes</value>
@@ -1233,5 +1233,20 @@ The contract will include the following directions:&lt;br /&gt;</value>
   </data>
   <data name="MidRateOnMatch" xml:space="preserve">
     <value>Mid Rate when match triggered</value>
+  </data>
+  <data name="OrderWarnningPartnerNotTransfer" xml:space="preserve">
+    <value>Attension: If your partner will not transfer the money, the deal will be canceled and you will get back the same amount you transferred (the same currency)</value>
+  </data>
+  <data name="RateCommission" xml:space="preserve">
+    <value>commission will be added to the mid rate</value>
+  </data>
+  <data name="SummaryStep5" xml:space="preserve">
+    <value>Step 5</value>
+  </data>
+  <data name="TheDealRateIs" xml:space="preserve">
+    <value>The deal rate is the current MID rate</value>
+  </data>
+  <data name="WaitFor2Partners" xml:space="preserve">
+    <value>The provider will wait that both sides will transfer the money</value>
   </data>
 </root>

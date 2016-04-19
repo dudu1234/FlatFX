@@ -44,3 +44,5 @@
 /// <reference path="ui-bootstrap-tpls-0.12.0.min.js" />
 /// <reference path="bootstrap-confirmation.js" />
 /// <reference path="../js/functions/fcsanumber.js" />
+/// <reference path="ngstorage.min.js" />
+/// <reference path="ng-table.min.js" />

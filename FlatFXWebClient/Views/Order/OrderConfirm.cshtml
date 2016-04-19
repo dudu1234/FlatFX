@@ -8,6 +8,8 @@
     {
         estimationIF = FlatFXResources.Resources.Estimation;
     }
+
+    
 }
 
 <div class="form-group">
@@ -55,6 +57,9 @@
                 <span class="estimation">@Resources.EstimationByFinalDealRate_Order</span>
             </div>
         }
+        <div class="medium-line start-align">
+            <span>@Resources.OrderWarnningPartnerNotTransfer</span>
+        </div>
     </div>
     <div class="col-xs-6 order-value">
         @Model.order.BuyAmount.ToString("N0") @Model.order.BuyCurrency
@@ -63,7 +68,7 @@
 <div class="form-group blue">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.Rate:</label>
     <div class="col-xs-6 order-value">
-        @((!hasMatch) ? FlatFXResources.Resources.MidRateOnMatch : Model.MatchMidRate.ToString())
+        @((!hasMatch) ? FlatFXResources.Resources.MidRateOnMatch : (FlatFXResources.Resources.MidRate + ": " + Model.MatchMidRate.ToString("N4") + " - " + FlatFXResources.Resources.RateCommission))
     </div>
 </div>
 <div class="form-group">

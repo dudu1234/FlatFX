@@ -3,6 +3,7 @@ FFX = {
     // test commit 10.9
 }
 
+
 function numberWithCommas(x) {
     x = x.toString();
     var pattern = /(-?\d+)(\d{3})/;
@@ -20,6 +21,15 @@ function getCurrencySign(ISO) {
         return '$';
     else
         return 'Unknown';
+}
+
+
+function wait(ms) {
+    var start = new Date().getTime();
+    var end = start;
+    while (end < start + ms) {
+        end = new Date().getTime();
+    }
 }
 
   (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){

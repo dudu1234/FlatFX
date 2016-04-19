@@ -19,8 +19,8 @@ namespace FlatFXWebClient.Controllers
         // GET: LogInfo
         public async Task<ActionResult> Index()
         {
-            DateTime from = DateTime.Now.AddMinutes(-60);
-            var logInfo = db.LogInfo.Include(l => l.User).Where(l => l.Date > from);
+            DateTime from = DateTime.Now.AddDays(-1);
+            var logInfo = db.LogInfo.Include(l => l.User).Where(l => l.Date > from).OrderByDescending(l => l.Date);
             return View(await logInfo.ToListAsync());
         }
     }

@@ -2046,6 +2046,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Attension: If your partner will not transfer the money, the deal will be canceled and you will get back the same amount you transferred (the same currency).
+        /// </summary>
+        public static string OrderWarnningPartnerNotTransfer {
+            get {
+                return ResourceManager.GetString("OrderWarnningPartnerNotTransfer", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Pair.
         /// </summary>
         public static string Pair {
@@ -2162,6 +2171,15 @@ namespace FlatFXResources {
         public static string Rate {
             get {
                 return ResourceManager.GetString("Rate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to commission will be added to the mid rate.
+        /// </summary>
+        public static string RateCommission {
+            get {
+                return ResourceManager.GetString("RateCommission", resourceCulture);
             }
         }
         
@@ -3006,6 +3024,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Step 5.
+        /// </summary>
+        public static string SummaryStep5 {
+            get {
+                return ResourceManager.GetString("SummaryStep5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Thank You for choosing FlatFX.
         /// </summary>
         public static string SummaryThankYou {
@@ -3020,6 +3047,15 @@ namespace FlatFXResources {
         public static string SWIFT {
             get {
                 return ResourceManager.GetString("SWIFT", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to The deal rate is the current MID rate.
+        /// </summary>
+        public static string TheDealRateIs {
+            get {
+                return ResourceManager.GetString("TheDealRateIs", resourceCulture);
             }
         }
         
@@ -3245,6 +3281,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The provider will wait that both sides will transfer the money.
+        /// </summary>
+        public static string WaitFor2Partners {
+            get {
+                return ResourceManager.GetString("WaitFor2Partners", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Web Site.
         /// </summary>
         public static string WebSite {
@@ -3263,7 +3308,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Will be set after money transfer.
+        ///   Looks up a localized string similar to Mid Rate on 14:00 after the money transfer.
         /// </summary>
         public static string WillBeSetAfterMoneyTransfer {
             get {

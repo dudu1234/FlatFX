@@ -57,7 +57,16 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
     }, 0);
 
     $scope.ready = function () {
-        $scope.currencies = SharedDataService.Currencies;
+        var maxLoops = 20;
+        var loop = 0;
+        while (loop < maxLoops && SharedDataService.Currencies['ILS'].Mid == 1)
+        {
+            //if (loop == 0) {
+            //    UpdateFeedService.refreshRates();
+            //}
+            loop++;
+            wait(100);
+        }
 
         $scope.converterAmount = 100000;
         $scope.SendCurrencyISO = 'USD';

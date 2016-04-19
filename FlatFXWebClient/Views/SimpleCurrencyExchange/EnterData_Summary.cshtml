@@ -17,7 +17,7 @@
             {
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                    @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @Model.deal.CustomerRate<br />
+                    @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @Model.deal.CustomerRate.ToString("N4")<br />
                 </li>
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
@@ -46,7 +46,7 @@
             {
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                    @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @Model.deal.CustomerRate
+                    @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @Model.deal.CustomerRate.ToString("N4")
                 </li>
                 <li>
                     <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />

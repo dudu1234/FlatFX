@@ -64,13 +64,13 @@
             <div class="col-xs-6 order-value">
                 @if (Model.deal.EnsureOnLinePrice)
                 {
-                    @Model.deal.CustomerRate
+                    @Model.deal.CustomerRate.ToString("N4")
                 }
                 else
                 {
                     @FlatFXResources.Resources.WillBeSetAfterMoneyTransfer
                     <br />
-                    <span class="estimation">@FlatFXResources.Resources.CurrentRateIs @Model.deal.CustomerRate</span>
+                    <span class="estimation">@FlatFXResources.Resources.CurrentRateIs @Model.deal.CustomerRate.ToString("N4")</span>
                 }
             </div>
         </div>

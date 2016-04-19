@@ -37,7 +37,7 @@
                 {
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                        @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @deal.CustomerRate<br />
+                        @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @deal.CustomerRate.ToString("N4")<br />
                     </li>
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
@@ -66,29 +66,30 @@
                 {
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                        @FlatFXResources.Resources.SummaryStep1Description1
-                        <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
-                        @FlatFXResources.Resources.SummaryStep1Description2<b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b><br />
-                        @FlatFXResources.Resources.SummaryStep1Description3 <b>@((!deal.FastTransferEnabled) ? ApplicationInformation.Instance.NextBussinessDay() : DateTime.Now.ToShortDateString()) 13:00</b>
-
-                        @if (deal.FastTransferEnabled)
-                        {
-                            <br />
-                            @FlatFXResources.Resources.SummaryStep1Description4
-                        }
+                        @Html.Raw(FlatFXResources.Resources.TheDealRateIs) - @deal.CustomerRate.ToString("N4")
                     </li>
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
-                        @FlatFXResources.Resources.SummaryStep2Description
+                        @FlatFXResources.Resources.SummaryStep1Description1
+                        <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                        @FlatFXResources.Resources.SummaryStep1Description2<b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b><br />
+                        @FlatFXResources.Resources.SummaryStep1Description3 <b>@ApplicationInformation.Instance.NextBussinessDay() 13:00</b>
                     </li>
                     <li>
-                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
-                        @FlatFXResources.Resources.SummaryStep3Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
-                        @FlatFXResources.Resources.SummaryStep3Description2 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b><br />
-                        @FlatFXResources.Resources.SummaryStep3Description3
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span>
+                        <br />
+                        @FlatFXResources.Resources.WaitFor2Partners
                     </li>
                     <li>
-                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span><br />
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span>
+                        <br />
+                        @FlatFXResources.Resources.SummaryOnLineStep3Description1
+                        <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @FlatFXResources.Resources.SummaryStep3Description2
+                        <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep5:</span><br />
                         @FlatFXResources.Resources.SummaryEnjoy<br />
                         @FlatFXResources.Resources.SummaryThankYou
                     </li>

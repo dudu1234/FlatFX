@@ -10,83 +10,88 @@ namespace FlatFXWebClient
         {
             return;
 
-            bundles.Add(new StyleBundle("~/Content/css").Include(
-                //"~/Content/bootstrap-theme.css.map",
-                //"~/Content/bootstrap.css",
-                //"~/Content/bootstrap.css.map",
+            bundles.Add(new StyleBundle("~/Content/csszz").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/bootstrap-theme.min.css",
-                      //"~/Content/examples.css",
                       "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
-                      "~/Content/jquery-ui.min.css"
-                /*"~/Content/fullpageex.css",
-                "~/Content/jquery.fullPage.css"*/
+                      "~/Content/jquery-ui.min.css",
+                      "~/Content/ng-table.css"
                       ));
 
-            bundles.Add(new ScriptBundle("~/bundles/modernizr").Include(
-                        "~/Scripts/modernizr-*"));
-
-            bundles.Add(new ScriptBundle("~/bundles/jquery").Include(
-                        "~/Scripts/jquery-{version}.js",
-                        "~/Scripts/jquery-ui-{version}.js",
+            bundles.Add(new ScriptBundle("~/Scripts/jquery/jqueryzz").Include(
+                        "~/Scripts/jquery-2.2.0.min.js",
+                        "~/Scripts/jquery-ui-1.11.4.min.js",
                         "~/Scripts/jquery.fullPage.js",
                         "~/Scripts/jquery.validate-vsdoc.js",
                         "~/Scripts/jquery.validate.min.js",
                         "~/Scripts/jquery.validate.unobtrusive.min.js"
-                //"~/Scripts/knockout-{version}.js"
                         ));
 
-            bundles.Add(new ScriptBundle("~/bundles/bootstrap").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/modernizrzz").Include(
+                        "~/Scripts/modernizr-*"));
+            
+            bundles.Add(new ScriptBundle("~/Scripts/bootstrapzz").Include(
                       "~/Scripts/bootstrap.min.js",
                       "~/Scripts/respond.min.js"));
 
-            bundles.Add(new ScriptBundle("~/bundles/angular").Include(
-                       "~/Scripts/angular.min.js",
-                       "~/Scripts/angular-route.min.js",
-                       "~/Scripts/angular-sanitize.min.js",
-                       "~/Scripts/angular-ui.min.js",
-                       // ??? 2 times "~/Scripts/angular-ui/ui-bootstrap.min.js",
-                       // ??? "~/Scripts/angular-ui/ui-bootstrap-tpls.min.js",
-                       // ??? 2 times "~/Scripts/angular-ui.min.js",
-                       "~/Scripts/angular-block-ui.js"
+            bundles.Add(new ScriptBundle("~/Scripts/angularzz1").Include(
+                       "~/Scripts/angular.min.js"
                        ));
 
-            bundles.Add(new ScriptBundle("~/bundles/noty").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/angularzz2").Include(
+                       "~/Scripts/angular-ui.min.js"
+                       ));
+
+            bundles.Add(new ScriptBundle("~/Scripts/angularzz3").Include(
+                       "~/Scripts/angular-route.min.js",
+                       "~/Scripts/angular-sanitize.min.js",
+                       "~/Scripts/angular-block-ui.min.js"
+                       ));
+
+            bundles.Add(new ScriptBundle("~/Scripts/angular-ui/angularzz4").Include(
+                       "~/Scripts/angular-ui/ui-bootstrap.min.js"
+                       ));
+
+            bundles.Add(new ScriptBundle("~/Scripts/diffzz").Include(
                         "~/Scripts/jquery.noty.packaged.js",
                         "~/Scripts/angular-noty.js",
                         "~/Scripts/ui-bootstrap-tpls-0.12.0.min.js",
-                        "~/Scripts/bootstrap-confirmation.js"
+                        "~/Scripts/bootstrap-confirmation.js",
+                        "~/Scripts/ng-table.min.js",
+                        "~/Scripts/ngStorage.min.js",
+                        "~/Scripts/Chart.min.js"
                         ));
 
-            bundles.Add(new StyleBundle("~/bundles/RightToLeft1css").Include(
+            bundles.Add(new StyleBundle("~/Content/RightToLeft1csszz").Include(
                         "~/Content/bootstrap.rtl.min.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/RightToLeft1js").Include(
+            bundles.Add(new ScriptBundle("~/Scripts/RightToLeft1jszz").Include(
                         "~/Scripts/bootstrap.rtl.min.js"));
 
 
-            bundles.Add(new StyleBundle("~/bundles/FFXcss1").Include(
+            bundles.Add(new StyleBundle("~/Content/FFXcss1zz").Include(
                         "~/Content/fullpageex.css"));
 
-            bundles.Add(new StyleBundle("~/bundles/FFXcss2").Include(
+            bundles.Add(new StyleBundle("~/Content/FFXcss2zz").Include(
                         "~/Content/Site.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/FFXjs").Include(
-                //"~/JS/Controllers/*.js",
+            bundles.Add(new ScriptBundle("~/JS/FFXjszz").Include(
+                        "~/JS/Functions/Charts.js",
+                        "~/JS/Functions/fcsaNumber.js",
                         "~/JS/FFx.js",
                         "~/JS/Services/Services.js",
-                        "~/JS/Functions/NotyFunctions.js"));
+                        "~/JS/Functions/NotyFunctions.js"
+                        ));
 
-            bundles.Add(new ScriptBundle("~/bundles/FFXControllers").IncludeDirectory(
-                        "~/JS/Controllers", "*.js"));
-
-            bundles.Add(new StyleBundle("~/bundles/FFXcssRtl").Include(
+            bundles.Add(new StyleBundle("~/Content/FFXcssRtlzz").Include(
                         "~/Content/rtlCustom.css"));
 
-            bundles.Add(new ScriptBundle("~/bundles/FFXjsRtl").Include(
+            bundles.Add(new ScriptBundle("~/JS/FFXjsRtlzz").Include(
                         "~/JS/rtlCustom.js"));
 
+            bundles.Add(new ScriptBundle("~/JS/FFXControllerszz").Include(
+                        "~/JS/Controllers/AllControllers.js"));
         }
     }
 }

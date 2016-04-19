@@ -364,7 +364,7 @@
     <value>קניה</value>
   </data>
   <data name="CHFILS" xml:space="preserve">
-    <value>פרנק שווצרי - שקל (CHF-₪)</value>
+    <value>פרנק שוויצרי - שקל (CHF-₪)</value>
   </data>
   <data name="CurrencyExchangeRateIndication" xml:space="preserve">
     <value>אינדיקציה לשערי מסחר מט"ח</value>
@@ -1097,7 +1097,7 @@
     <value>משך זמן העברת הכספים</value>
   </data>
   <data name="WillBeSetAfterMoneyTransfer" xml:space="preserve">
-    <value>יקבע לאחר העברת הכספים</value>
+    <value>שער האמצע בשעה 14:00 שלאחר קבלת הכספים</value>
   </data>
   <data name="Yes" xml:space="preserve">
     <value>כן</value>
@@ -1216,5 +1216,20 @@
   </data>
   <data name="MidRateOnMatch" xml:space="preserve">
     <value>שער האמצע בזמן ביצוע התאמה</value>
+  </data>
+  <data name="OrderWarnningPartnerNotTransfer" xml:space="preserve">
+    <value>שים לב: במידה ושותפך לעיסקה לא יעביר את הכסף ע"פ סיכום העיסקה, העיסקה תבוטל, אתה תקבל את הכסף שהעברת חזרה לחשבונך (אותו מטבע)</value>
+  </data>
+  <data name="RateCommission" xml:space="preserve">
+    <value>העמלה תתווסף לשער האמצע</value>
+  </data>
+  <data name="SummaryStep5" xml:space="preserve">
+    <value>שלב 5</value>
+  </data>
+  <data name="TheDealRateIs" xml:space="preserve">
+    <value>שער העיסקה הינו שער האמצע הנוכחי</value>
+  </data>
+  <data name="WaitFor2Partners" xml:space="preserve">
+    <value>הספק ימתין לקבלת הכסף משני הצדדים</value>
   </data>
 </root>

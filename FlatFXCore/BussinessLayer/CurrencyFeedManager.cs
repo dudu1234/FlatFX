@@ -57,7 +57,7 @@ namespace FlatFXCore.BussinessLayer
         public const int MinDealAmountUSD = 5000;
 
         public const double ExtraCharge_EnsureOnLinePrice = 0.001;
-        public const double ExtraCharge_PvPEnabled = 0.001;
+        public const double ExtraCharge_PvPEnabled = 0.002;
         public const double ExtraCharge_FastTransferEnabled = 0.001;
         #endregion
 
