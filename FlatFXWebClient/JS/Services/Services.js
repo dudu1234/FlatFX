@@ -100,7 +100,3 @@ myApp.service('UpdateFeedService', function ($http, $timeout, $interval, SharedD
 
     refreshRates();
 });
-
-myApp.run(function (UpdateFeedService) {
-    var f = UpdateFeedService.refreshRates;
-});

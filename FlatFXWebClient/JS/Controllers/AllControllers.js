@@ -9,7 +9,7 @@ myApp.controller('RegisterAll', function ($scope) {
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataService) {
+myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataService, UpdateFeedService) {
     $scope.init = function (isRTL) {
         $scope.amountUSD = 10;
         $scope.exchangeDiscount = 0;
@@ -57,13 +57,13 @@ myApp.controller('HomeIndex', function ($scope, $timeout, noty, SharedDataServic
     }, 0);
 
     $scope.ready = function () {
-        var maxLoops = 20;
+        var maxLoops = 40;
         var loop = 0;
         while (loop < maxLoops && SharedDataService.Currencies['ILS'].Mid == 1)
         {
-            //if (loop == 0) {
-            //    UpdateFeedService.refreshRates();
-            //}
+            if (loop == 0) {
+                var f = UpdateFeedService.refreshRates;
+            }
             loop++;
             wait(100);
         }
