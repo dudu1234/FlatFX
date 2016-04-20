@@ -130,7 +130,7 @@ Chart.defaults.global = {
 
     // Function - Will fire on animation completion.
     onAnimationComplete: function () { }
-}
+};
 
 Chart.defaults.global.responsive = true;
 Chart.defaults.global.scaleLabel = "<%=parseInt(value).toLocaleString()%>";

@@ -1,7 +1,7 @@
 ﻿
 FFX = {
     // test commit 10.9
-}
+};
 
 
 function numberWithCommas(x) {
@@ -10,7 +10,7 @@ function numberWithCommas(x) {
     while (pattern.test(x))
         x = x.replace(pattern, "$1,$2");
     return x;
-}
+};
 
 function getCurrencySign(ISO) {
     if (ISO == 'ILS')
@@ -21,7 +21,7 @@ function getCurrencySign(ISO) {
         return '$';
     else
         return 'Unknown';
-}
+};
 
 
 function wait(ms) {

@@ -36,13 +36,36 @@ namespace FlatFXWebClient
         protected void Session_Start(object sender, EventArgs e)
         {
             string lang = FlatFXCookie.GetCookieValue("lang");
-            if (lang != null)
-                Session["lang"] = lang;
-            else
-                Session["lang"] = "he-IL";
+            if (lang == null)
+            {
+                lang = "he-IL"; //default
 
-            Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
-            Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+                try
+                {
+                    // http://ip-api.com/json/208.80.152.201
+                    string ip = HttpContext.Current.Request.UserHostAddress;
+                    if (ip != null && ip.Length > 7)
+                    {
+                        System.Net.WebClient web = new System.Net.WebClient();
+                        string url = "http://ip-api.com/json/" + ip;
+                        string response = web.DownloadString(url);
+
+                        if (!response.Contains("Israel"))
+                            lang = "en-US";
+                    }
+                }
+                catch { }
+
+                Session["lang"] = lang;
+                FlatFXCookie.SetCookie("lang", lang);
+            }
+
+            if (lang != null)
+            {
+                Session["lang"] = lang;
+                Thread.CurrentThread.CurrentCulture = new System.Globalization.CultureInfo(Session["lang"].ToString());
+                Thread.CurrentThread.CurrentUICulture = Thread.CurrentThread.CurrentCulture;
+            }
 
             Logger.Instance.WriteSystemTrace("Session Start", Consts.eLogOperationStatus.Succeeded, "Session Start");
         }

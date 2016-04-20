@@ -8,84 +8,28 @@
     <link href="~/Images/FlatFXIcon.ico" rel="shortcut icon" type="image/x-icon" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <script src="~/Scripts/jquery-2.2.0.min.js"></script>
-    <script src="~/Scripts/jquery-ui-1.11.4.min.js"></script>
-    <script src="~/Scripts/jquery.fullPage.js"></script>
-    <script src="~/Scripts/jquery.validate-vsdoc.js"></script>
-    <script src="~/Scripts/jquery.validate.min.js"></script>
-    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
-
-    <script src="~/Scripts/modernizr-2.8.3.js"></script>
-
-    <script src="~/Scripts/bootstrap.min.js"></script>
-    <script src="~/Scripts/respond.min.js"></script>
-
-    <script src="~/Scripts/angular.min.js"></script>
-    <script src="~/Scripts/angular-route.min.js"></script>
-    <script src="~/Scripts/angular-sanitize.min.js"></script>
-    <script src="~/Scripts/angular-ui.min.js"></script>
-    <script src="~/Scripts/angular-ui/ui-bootstrap.min.js"></script>
-    <script src="~/Scripts/angular-block-ui.min.js"></script>
-
-    <script src="~/Scripts/jquery.noty.packaged.js"></script>
-    <script src="~/Scripts/angular-noty.js"></script>
-    <script src="~/Scripts/ui-bootstrap-tpls-0.12.0.min.js"></script>
-    <script src="~/Scripts/bootstrap-confirmation.js"></script>
-    <script src="~/Scripts/ng-table.min.js"></script>
-    <link href="~/Content/ng-table.css" rel="stylesheet" />
-    <script src="~/Scripts/ngStorage.min.js"></script>
-
-    @{
-        if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
-        {
-            <link href="~/Content/bootstrap.rtl.min.css" rel="stylesheet" />
-            @* Add it ? <script src="~/Scripts/bootstrap.rtl.min.js"></script>*@
-        }
-    }
-
-    <script src="~/Scripts/Chart.min.js"></script>
-    <script src="~/JS/Functions/Charts.js"></script>
-    <script src="~/JS/Functions/fcsaNumber.js"></script>
-
-    <link href="~/Content/fullpageex.css" rel="stylesheet" />
-
-    <link href="~/Content/Site.css" rel="stylesheet" />
-
-    <script src="~/JS/FFx.js"></script>
-    <script src="~/JS/Services/Services.js"></script>
-    <script src="~/JS/Functions/NotyFunctions.js"></script>
-
-    @{
-        if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
-        {
-
-            <link href="~/Content/rtlCustom.css" rel="stylesheet" />
-            <script src="~/JS/rtlCustom.js"></script>
-        }
-    }
-
-    <script src="~/JS/Controllers/AllControllers.js"></script>
-
-    @*
     @Styles.Render("~/Content/csszz")
-    @Scripts.Render("~/Scripts/jquery/jqueryzz")
+    @Scripts.Render("~/Scripts/jqueryzz")
     @Scripts.Render("~/Scripts/modernizrzz")
     @Scripts.Render("~/Scripts/bootstrapzz")
     @Scripts.Render("~/Scripts/angularzz1")
     @Scripts.Render("~/Scripts/angularzz2")
     @Scripts.Render("~/Scripts/angularzz3")
     @Scripts.Render("~/Scripts/angular-ui/angularzz4")
+    @Scripts.Render("~/Scripts/diff0zz")
     @Scripts.Render("~/Scripts/diffzz")
 
     @if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
     {
         @Styles.Render("~/Content/RightToLeft1csszz")
-        @* Add It ? @Styles.Render("~/Scripts/RightToLeft1jszz")*@@*
+        @* Add It ? @Styles.Render("~/Scripts/RightToLeft1jszz")*@
     }
 
     @Styles.Render("~/Content/FFXcss1zz")
     @Styles.Render("~/Content/FFXcss2zz")
-    @Scripts.Render("~/JS/FFXjszz")
+    @Scripts.Render("~/JS/Functions/FFXjszz")
+    @Scripts.Render("~/JS/FFXjs1zz")
+    @Scripts.Render("~/JS/Services/FFXjs2zz")
 
     @if (System.Threading.Thread.CurrentThread.CurrentCulture.TextInfo.IsRightToLeft)
     {
@@ -93,10 +37,11 @@
         @Scripts.Render("~/JS/FFXjsRtlzz")
     }
         
-    @Scripts.Render("~/JS/FFXControllerszz")*@
+    @Scripts.Render("~/JS/Controllers/FFXControllerszz")
 
 </head>
 <body ng-app="FlatFXAPP">
+    @*ng-strict-di*@
     <div class="row clearfix">
         <div id="nav" class="col-xs-12">
             @Html.Partial("MainSiteHeader")

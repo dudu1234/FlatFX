@@ -73,4 +73,4 @@ notyWrapper = {
             //timeout: 5000
         });
     }
-}
+};
