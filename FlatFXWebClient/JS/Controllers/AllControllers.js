@@ -71,7 +71,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         $scope.SendCurrencyISO = 'USD';
         $scope.ReceiveCurrencyISO = 'ILS';
         $scope.Rate = 0;
-        $scope.CalcByReceive = false;
+        $scope.CalcByReceive = true;
         $scope.CalcSave = 0;
         $scope.BankRate = 0;
         $scope.DirectionHeader = "You get";

@@ -44,7 +44,7 @@ myApp.service('SharedDataService', function ($localStorage) {
     };
 });
 
-myApp.service('UpdateFeedService', function ($http, $interval, SharedDataService, broadcastService) {
+myApp.service('UpdateFeedService', function ($http, $timeout, $interval, SharedDataService, broadcastService) {
     "use strict";
     var me = this;
     var RatesUrl = urlPrefix2 + "/OnLineFXRates/GetRates";
@@ -99,4 +99,10 @@ myApp.service('UpdateFeedService', function ($http, $interval, SharedDataService
     $interval(function () {
         me.RefreshRates();
     }, 600000);
+
+    $timeout(function () {
+        if (SharedDataService.Get().Currencies === null || SharedDataService.Get().Currencies === undefined || SharedDataService.Get().Currencies.ILS.Mid === 1) {
+            me.RefreshRates();
+        }
+    }, 100);
 });
