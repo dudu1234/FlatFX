@@ -88,6 +88,15 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         } else {
             $scope.calculateReceive();
         }
+
+        var div1h = document.getElementById('sectionNum1').clientHeight;
+        var div2h = document.getElementById('sectionNum2').clientHeight;
+        if (div1h > div2h)
+        {
+            $('#sectionNum2').height(div1h);
+        } else {
+            $('#sectionNum1').height(div2h);
+        }
     };
 
     $scope.$on('RateReady', function (event, args) {
