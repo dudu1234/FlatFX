@@ -100,7 +100,11 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
     };
 
     $scope.$on('RateReady', function (event, args) {
-        $scope.calculateReceive();
+        if ($scope.CalcByReceive) {
+            $scope.calculateReceive();
+        } else {
+            $scope.calculateSend();
+        }
     });
 
     $scope.BankCommission = function () {
