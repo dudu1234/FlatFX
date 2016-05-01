@@ -3,7 +3,6 @@ if (location.href.indexOf('localhost/FlatFXWebClient') > -1) {
     urlPrefix2 = "/FlatFXWebClient";
 }
 
-
 var myApp = angular.module('FlatFXAPP', ['ui.bootstrap', 'notyModule', 'ngTable', 'ngStorage', 'fcsa-number']);
 
 myApp.filter('rangeFilter', function () {
@@ -48,7 +47,6 @@ myApp.service('UpdateFeedService', function ($http, $timeout, $interval, SharedD
     "use strict";
     var me = this;
     var RatesUrl = urlPrefix2 + "/OnLineFXRates/GetRates";
-
     this.RefreshRates = function () {
         $http.get(RatesUrl)
             .success(function (data, status, headers, config) {
