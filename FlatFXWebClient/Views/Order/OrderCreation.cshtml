@@ -45,17 +45,16 @@ else
         <div class="form-group">
             <label class="control-label col-xs-5">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
             <div class="col-xs-7">
-                @*ng_model = "orderSymbol", ng_change = "setAction()",*@
-                @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser), "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser), 
+                    "Key", "Value"), htmlAttributes: new { ng_model = "Symbol", ng_change = "setAction()", @class = "form-control" })
             </div>
         </div>
         <div class="form-group small-line" ng-click="updateAction()">
-            <label class="control-label col-xs-12 col-lg-3 label-down">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
-            <div class="col-xs-6 col-lg-4 order-radio-div">
+            <label class="control-label col-xs-5 label-down">@FlatFXResources.Resources.SmplTradeOrderWishTo</label>
+            <div class="col-xs-7 order-radio-div">
                 @Html.RadioButtonFor(model => model.BuySell, "Buy", new { @checked = "checked" })
                 <span>@FlatFXResources.Resources.Buy2 {{ CCY1() }} @FlatFXResources.Resources.Sell2 {{ CCY2() }}</span>
-            </div>
-            <div class="col-xs-6 col-lg-5 no-side-margin order-radio-div">
+                <br />
                 @Html.RadioButtonFor(model => model.BuySell, "Sell")
                 <span>@FlatFXResources.Resources.Buy2 {{ CCY2() }} @FlatFXResources.Resources.Sell2 {{ CCY1() }}</span>
             </div>

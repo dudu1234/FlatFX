@@ -8,6 +8,8 @@ myApp.controller('RegisterAll', function ($scope) {
     "use strict";
 });
 
+// -----------------------------------------------------------------------------------------------------------------------------------------------------
+
 myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, UpdateFeedService) {
     "use strict";
     $scope.init = function (isRTL) {
@@ -91,8 +93,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
 
         var div1h = document.getElementById('sectionNum1').clientHeight;
         var div2h = document.getElementById('sectionNum2').clientHeight;
-        if (div1h > div2h)
-        {
+        if (div1h > div2h) {
             $('#sectionNum2').height(div1h);
         } else {
             $('#sectionNum1').height(div2h);
@@ -273,7 +274,6 @@ myApp.controller('SimpleCurrencyExchange', function ($scope, $timeout, $interval
     };
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('AdminManager', function ($scope, $timeout, noty) {
@@ -294,7 +294,6 @@ myApp.controller('AdminManager', function ($scope, $timeout, noty) {
     };
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('UserManager', function ($scope, $timeout, noty) {
@@ -314,7 +313,6 @@ myApp.controller('UserManager', function ($scope, $timeout, noty) {
         }
     };
 });
-
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -367,7 +365,6 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
         return $scope.SimpleTradingUrl + '?key=' + key + '&direction=' + direction;
     };
 });
-
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
@@ -571,7 +568,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
 
 myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
     "use strict";
-    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount, Symbol) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
@@ -582,6 +579,7 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
         $scope.MatchMaxAmount = MatchMaxAmount;
         $scope.CountDown = 60;
         $scope.WorkflowStage = WorkflowStage;
+        $scope.Symbol = Symbol;
 
         if (dExpiryDate == 0) {
             $scope.expiryDateChkModel = false;
@@ -624,7 +622,7 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
         }
 
         if ($scope.WorkflowStage === 1) {
-            $scope.Symbol = $('#Symbol').val();
+            //$scope.Symbol = $('#Symbol').val();
             $scope.setAction();
 
             if ($scope.ExpiryDateModel == '') {
@@ -730,7 +728,6 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
     };
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty) {
@@ -834,7 +831,6 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     };
 });
 
-
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
 myApp.controller('OrderLayout', function ($scope, $http, $timeout, noty) {
@@ -852,7 +848,6 @@ myApp.controller('OrderLayout', function ($scope, $http, $timeout, noty) {
     }, 0);
 
 });
-
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
