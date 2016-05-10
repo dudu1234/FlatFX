@@ -26,11 +26,11 @@ myApp.factory('broadcastService', function ($rootScope) {
     }
 });
 
-myApp.service('SharedDataService', function ($localStorage) {
+myApp.service('SharedDataService', function ($sessionStorage) {
     "use strict";
     this.Get = function () {
-        if ($localStorage.FFXShared === null || $localStorage.FFXShared === undefined) {
-            $localStorage.FFXShared = {
+        if ($sessionStorage.FFXShared === null || $sessionStorage.FFXShared === undefined) {
+            $sessionStorage.FFXShared = {
                 Currencies: {
                     'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
                     'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
@@ -39,7 +39,7 @@ myApp.service('SharedDataService', function ($localStorage) {
                 ILSUSD: 3.8
             };
         }
-        return $localStorage.FFXShared;
+        return $sessionStorage.FFXShared;
     };
 });
 

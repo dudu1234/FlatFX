@@ -131,7 +131,6 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
     };
 
-
     $scope.calculateReceive = function () {
         $scope.DirectionHeader = "You get";
         if ($scope.isRTL === "True") {

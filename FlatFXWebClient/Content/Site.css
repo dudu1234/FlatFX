@@ -1527,6 +1527,10 @@ div.disabled {
     font-size: 1.25em;
 }
 
+#see_why_amount {
+    font-size: 1.3em;
+}
+
 #recive_money_input, #send_money_input {
     padding: 0 10px 0;
     height: 50px !important;

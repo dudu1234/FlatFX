@@ -27,22 +27,30 @@ namespace FlatFXCore.Model.User
         {
             try
             {
-                // Plug in your email service here to send an email.
+                /* Contabo */
+                var sentFrom = "noreply@flatfx.com";
+                System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("mail.flatfx.com", 25);
+                client.Timeout = 30000;
+                client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
+                client.UseDefaultCredentials = false;
+                client.EnableSsl = false; 
+                System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(sentFrom, "tr#tmQ26");
+                client.Credentials = credentials;
+                
+                
+                /* Google 
                 var credentialUserName = "noreply.FlatFX@gmail.com";
                 var sentFrom = "noreply.FlatFX@gmail.com";
                 var pwd = "FlatFx1!";
 
-                // Configure the client:
                 System.Net.Mail.SmtpClient client = new System.Net.Mail.SmtpClient("smtp.gmail.com", 587);
-
                 client.Timeout = 30000;
                 client.DeliveryMethod = System.Net.Mail.SmtpDeliveryMethod.Network;
                 client.UseDefaultCredentials = false;
-
-                // Creatte the credentials:
                 System.Net.NetworkCredential credentials = new System.Net.NetworkCredential(credentialUserName, pwd);
                 client.EnableSsl = true;
                 client.Credentials = credentials;
+                */
 
                 // Create the message:
                 var mail = new System.Net.Mail.MailMessage(sentFrom, message.Destination);
@@ -92,7 +100,7 @@ namespace FlatFXCore.Model.User
             manager.PasswordValidator = new PasswordValidator
             {
                 RequiredLength = 8,
-                RequireNonLetterOrDigit = true,
+                RequireNonLetterOrDigit = false,
                 RequireDigit = true,
                 RequireLowercase = true,
                 RequireUppercase = true,
