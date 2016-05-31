@@ -1133,6 +1133,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Estimation according to current mid rate of.
+        /// </summary>
+        public static string EstimationByMidRate {
+            get {
+                return ResourceManager.GetString("EstimationByMidRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Euro €.
         /// </summary>
         public static string EUR {
@@ -2028,7 +2037,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Order System.
+        ///   Looks up a localized string similar to ExchangeP2P System.
         /// </summary>
         public static string OrderSystem {
             get {
@@ -2046,7 +2055,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Attension: If your partner will not transfer the money, the deal will be canceled and you will get back the same amount you transferred (the same currency).
+        ///   Looks up a localized string similar to Attension: If your partner will not transfer the money, the deal will be canceled.
         /// </summary>
         public static string OrderWarnningPartnerNotTransfer {
             get {
@@ -2806,7 +2815,16 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to The provider will prepare amount of .
+        ///   Looks up a localized string similar to The P2P match mid rate is .
+        /// </summary>
+        public static string SummaryPvpStep1Description1 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep1Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to will prepare amount of .
         /// </summary>
         public static string SummaryPvpStep2Description1 {
             get {
@@ -2842,8 +2860,8 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Within few minutes an email will be send to you with the PvP contract attached&lt;br /&gt;
-        ///You need to sign the contract and send it to your bank.&lt;br /&gt;
+        ///   Looks up a localized string similar to Within few minutes an email will be send to you and to your bank representative with the PvP contract attached&lt;br /&gt;
+        ///Within the next 2 hours your representative will contact you and ask for approval for the PvP money transfer directions.&lt;br /&gt;
         ///The contract will include the following directions:&lt;br /&gt;.
         /// </summary>
         public static string SummaryPvpStep3Description1 {
@@ -2853,7 +2871,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 1) The provider will transfer amount of .
+        ///   Looks up a localized string similar to will transfer amount of .
         /// </summary>
         public static string SummaryPvpStep3Direction1 {
             get {
@@ -2880,7 +2898,7 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to 2) The customer will transfer amount of .
+        ///   Looks up a localized string similar to will transfer amount of .
         /// </summary>
         public static string SummaryPvpStep3Direction2 {
             get {
@@ -2898,11 +2916,38 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to The money should be ready for transfer at .
+        /// </summary>
+        public static string SummaryPvpStep3Direction31 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep3Direction31", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to The bank guarantee that the transfer will be executed only if both sides perform the transfer successfully.
         /// </summary>
         public static string SummaryPvpStep3Direction4 {
             get {
                 return ResourceManager.GetString("SummaryPvpStep3Direction4", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Commission of .
+        /// </summary>
+        public static string SummaryPvpStep4Description1 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep4Description1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to will be charged in the end of the month..
+        /// </summary>
+        public static string SummaryPvpStep4Description2 {
+            get {
+                return ResourceManager.GetString("SummaryPvpStep4Description2", resourceCulture);
             }
         }
         

@@ -37,29 +37,35 @@
                 {
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep1:</span><br />
-                        @Html.Raw(FlatFXResources.Resources.SummaryOnLineStep1Description1) @deal.CustomerRate.ToString("N4")<br />
+                        @Html.Raw(FlatFXResources.Resources.SummaryPvpStep1Description1) @deal.CustomerRate.ToString("N4")<br />
                     </li>
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep2:</span><br />
-                        @FlatFXResources.Resources.SummaryPvpStep2Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
-                        @Html.Raw(FlatFXResources.Resources.SummaryPvpStep2Description2) <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b><br />
+                        @Model.MatchPartnerName @FlatFXResources.Resources.SummaryPvpStep2Description1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @Html.Raw(FlatFXResources.Resources.SummaryPvpStep2Description2) <b>@Model.MatchPartnerAccount</b><br />
                         @FlatFXResources.Resources.SummaryPvpStep2Description3 <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
                         @FlatFXResources.Resources.SummaryPvpStep2Description4 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
                     </li>
                     <li>
                         <span class="summary-step">@FlatFXResources.Resources.SummaryStep3:</span><br />
                         @Html.Raw(FlatFXResources.Resources.SummaryPvpStep3Description1)
-                        @FlatFXResources.Resources.SummaryPvpStep3Direction1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
-                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
-                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
+                        1) @Model.MatchPartnerName @FlatFXResources.Resources.SummaryPvpStep3Direction1 <b>@deal.AmountToExchangeCreditedCurrency.ToString("N0") @deal.CreditedCurrency</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@Model.MatchPartnerAccount</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 @Model.MatchMyName - <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
                         <br />
-                        @FlatFXResources.Resources.SummaryPvpStep3Direction2 <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
+                        2) @Model.MatchMyName @FlatFXResources.Resources.SummaryPvpStep3Direction2 <b>@deal.AmountToExchangeChargedCurrency.ToString("N0") @deal.ChargedCurrency</b>
                         @FlatFXResources.Resources.SummaryPvpStep3Direction1_2 <b>@deal.ChargedAccount.Provider.FullName @deal.ChargedAccount.AccountName</b>
-                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 <b>@FlatFXResources.Resources.FlatFXShortBankInfo</b>
+                        @FlatFXResources.Resources.SummaryPvpStep3Direction1_3 @Model.MatchPartnerName - <b>@Model.MatchPartnerAccount</b>
+                        <br />
+                        3) @FlatFXResources.Resources.SummaryPvpStep3Direction31 <b>@deal.MaturityDate.Value.ToString("yyyy/MM/dd HH:mm")</b>
                         <br />
                         @FlatFXResources.Resources.SummaryPvpStep3Direction3
                         <br />
                         @FlatFXResources.Resources.SummaryPvpStep3Direction4
+                    </li>
+                    <li>
+                        <span class="summary-step">@FlatFXResources.Resources.SummaryStep4:</span><br />
+                        @FlatFXResources.Resources.SummaryPvpStep4Description1 @deal.Commission.Value.ToString("N0")$ @FlatFXResources.Resources.SummaryPvpStep4Description2<br />
                     </li>
                 }
                 else

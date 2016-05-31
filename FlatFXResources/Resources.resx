@@ -684,7 +684,7 @@ Use your bank interent site in order to transfer money.&lt;br /&gt;</value>
     <value>Order Summary</value>
   </data>
   <data name="OrderSystem" xml:space="preserve">
-    <value>Order System</value>
+    <value>ExchangeP2P System</value>
   </data>
   <data name="BankCommission1" xml:space="preserve">
     <value>Exchange amount (Million $)</value>
@@ -1143,7 +1143,7 @@ The deal rate will be </value>
     <value>The provider will transfer back an amount of </value>
   </data>
   <data name="SummaryPvpStep2Description1" xml:space="preserve">
-    <value>The provider will prepare amount of </value>
+    <value>will prepare amount of </value>
   </data>
   <data name="SummaryPvpStep2Description2" xml:space="preserve">
     <value>In his account: </value>
@@ -1155,12 +1155,12 @@ The deal rate will be </value>
     <value>In your account: </value>
   </data>
   <data name="SummaryPvpStep3Description1" xml:space="preserve">
-    <value>Within few minutes an email will be send to you with the PvP contract attached&lt;br /&gt;
-You need to sign the contract and send it to your bank.&lt;br /&gt;
+    <value>Within few minutes an email will be send to you and to your bank representative with the PvP contract attached&lt;br /&gt;
+Within the next 2 hours your representative will contact you and ask for approval for the PvP money transfer directions.&lt;br /&gt;
 The contract will include the following directions:&lt;br /&gt;</value>
   </data>
   <data name="SummaryPvpStep3Direction1" xml:space="preserve">
-    <value>1) The provider will transfer amount of </value>
+    <value>will transfer amount of </value>
   </data>
   <data name="SummaryPvpStep3Direction1_2" xml:space="preserve">
     <value>from his account </value>
@@ -1169,7 +1169,7 @@ The contract will include the following directions:&lt;br /&gt;</value>
     <value>to customer account </value>
   </data>
   <data name="SummaryPvpStep3Direction2" xml:space="preserve">
-    <value>2) The customer will transfer amount of </value>
+    <value>will transfer amount of </value>
   </data>
   <data name="SummaryPvpStep3Direction3" xml:space="preserve">
     <value>Both transfer will be perform on the same time</value>
@@ -1235,7 +1235,7 @@ The contract will include the following directions:&lt;br /&gt;</value>
     <value>Mid Rate when match triggered</value>
   </data>
   <data name="OrderWarnningPartnerNotTransfer" xml:space="preserve">
-    <value>Attension: If your partner will not transfer the money, the deal will be canceled and you will get back the same amount you transferred (the same currency)</value>
+    <value>Attension: If your partner will not transfer the money, the deal will be canceled</value>
   </data>
   <data name="RateCommission" xml:space="preserve">
     <value>commission will be added to the mid rate</value>
@@ -1248,5 +1248,20 @@ The contract will include the following directions:&lt;br /&gt;</value>
   </data>
   <data name="WaitFor2Partners" xml:space="preserve">
     <value>The provider will wait that both sides will transfer the money</value>
+  </data>
+  <data name="EstimationByMidRate" xml:space="preserve">
+    <value>Estimation according to current mid rate of</value>
+  </data>
+  <data name="SummaryPvpStep1Description1" xml:space="preserve">
+    <value>The P2P match mid rate is </value>
+  </data>
+  <data name="SummaryPvpStep3Direction31" xml:space="preserve">
+    <value>The money should be ready for transfer at </value>
+  </data>
+  <data name="SummaryPvpStep4Description1" xml:space="preserve">
+    <value>Commission of </value>
+  </data>
+  <data name="SummaryPvpStep4Description2" xml:space="preserve">
+    <value>will be charged in the end of the month.</value>
   </data>
 </root>

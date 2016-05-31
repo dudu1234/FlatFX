@@ -210,6 +210,19 @@ namespace FlatFXCore.BussinessLayer
 
             return nextDay.ToLongDateString();
         }
+        public DateTime NextBussinessDay(int hour, int minute)
+        {
+            DateTime nextDay = DateTime.Now;
+            // To do Support Israel only, Does not support hollydays
+            if (DateTime.Now.DayOfWeek == DayOfWeek.Thursday)
+                nextDay = DateTime.Now.AddDays(3);
+            else if (DateTime.Now.DayOfWeek == DayOfWeek.Friday)
+                nextDay = DateTime.Now.AddDays(2);
+            else
+                nextDay = DateTime.Now.AddDays(1);
+
+            return new DateTime(nextDay.Year, nextDay.Month, nextDay.Day, hour, minute, 0);
+        }
         #endregion
     }
 }

@@ -22,6 +22,9 @@ namespace FlatFXWebClient.Controllers
     {
         public async Task<ActionResult> StartTrade(string key, string direction)
         {
+            // To Do remove this link
+            return RedirectToAction("Index", "Home");
+
             SimpleCurrencyExchangeViewModel model = new SimpleCurrencyExchangeViewModel();
             await Initialize(model);
             if (direction != "bid")
@@ -42,6 +45,10 @@ namespace FlatFXWebClient.Controllers
 
         public async Task<ActionResult> EnterData(SimpleCurrencyExchangeViewModel model)
         {
+            // To Do remove this link
+            return RedirectToAction("Index", "Home");
+
+
             if (model.WorkflowStage <= 0)
             {
                 model = new SimpleCurrencyExchangeViewModel();
@@ -155,6 +162,10 @@ namespace FlatFXWebClient.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult EnterDataPost(SimpleCurrencyExchangeViewModel model)
         {
+            // To Do remove this link
+            return RedirectToAction("Index", "Home");
+
+
             if (model == null || model.WorkflowStage < 1 || model.WorkflowStage > 2)
             {
                 return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
@@ -351,6 +362,10 @@ namespace FlatFXWebClient.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult Confim(SimpleCurrencyExchangeViewModel model)
         {
+            // To Do remove this link
+            return RedirectToAction("Index", "Home");
+
+
             try
             {
                 if (model == null)
@@ -377,7 +392,7 @@ namespace FlatFXWebClient.Controllers
 
                 deal.ContractDate = DateTime.Now;
                 deal.IsOffer = false;
-                deal.MaturityDate = DateTime.Now;
+                deal.MaturityDate = ApplicationInformation.Instance.NextBussinessDay(12, 0);
                 deal.Status = Consts.eDealStatus.New;
                 db.SaveChanges();
 

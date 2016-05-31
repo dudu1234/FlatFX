@@ -666,7 +666,7 @@
     <value>סיכום הזמנת עיסקה</value>
   </data>
   <data name="OrderSystem" xml:space="preserve">
-    <value>מערכת הזמנות</value>
+    <value>ExchangeP2P</value>
   </data>
   <data name="BankCommission1" xml:space="preserve">
     <value>נפח המרה (במיליוני $)</value>
@@ -783,7 +783,7 @@
     <value>קניית</value>
   </data>
   <data name="OrderRemark" xml:space="preserve">
-    <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה הינה קבועה, 0.2% לעומת 1.1% בבנקים</value>
+    <value>רוצה למצוא שותף להמרת מטבע בשער אמצע (ללא מרווח) ?&lt;br&gt;צור הזמנה חדשה להמרה בשער אמצע, ללא מרווחים, העמלה תלויית נפח, בין 0.3% - 0.1% לעומת 1.1% בבנקים</value>
   </data>
   <data name="Sell2" xml:space="preserve">
     <value>בתמורה למכירת</value>
@@ -795,7 +795,7 @@
     <value>סכום מינימלי</value>
   </data>
   <data name="OrderBook" xml:space="preserve">
-    <value>רשימת הזמנות עיסקה</value>
+    <value>סל הזמנות</value>
   </data>
   <data name="OrderBookRate2" xml:space="preserve">
     <value>שער האמצע - </value>
@@ -819,7 +819,7 @@
     <value>תפסיק להיות לקוח שבוי - הצטרף למהפיכת ה P2P במט"ח</value>
   </data>
   <data name="HomeHeader4" xml:space="preserve">
-    <value>סחור ישירות מול לקוחות כמוך בשער אמצע (היציג) ללא מרווחי הבנק</value>
+    <value>סחור ישירות מול לקוחות כמוך בשער האמצע הבין-בנקאי ללא מרווחי הבנק</value>
   </data>
   <data name="HomeHeader5" xml:space="preserve">
     <value>איתנו תחסוך עד ₪200,000 כל שנה</value>
@@ -1125,7 +1125,7 @@
     <value>הספק יעביר חזרה סכום של </value>
   </data>
   <data name="SummaryPvpStep2Description1" xml:space="preserve">
-    <value>הספק יכין סכום של </value>
+    <value>יכין סכום של</value>
   </data>
   <data name="SummaryPvpStep2Description2" xml:space="preserve">
     <value>בחשבונו: </value>
@@ -1137,12 +1137,13 @@
     <value>בחשבונך: </value>
   </data>
   <data name="SummaryPvpStep3Description1" xml:space="preserve">
-    <value>בעוד מספר דקות ישלח אליך אימייל שמכיל את חוזה ההעברה המותנית&lt;br /&gt;
-עליך לקרוא את המסמך, לחתום עליו ולהעבירו אל הבנק שלך&lt;br /&gt;
+    <value>בעוד מספר דקות ישלח אליך ואל הבנקאי המטפל בך אימייל שמכיל את חוזה ההעברה המותנית&lt;br /&gt;
+עליך לקרוא את המסמך ולוודא שהינו תקין.&lt;br /&gt;
+בשעתיים הקרובות הבנקאי צריך ליצור איתך קשר לצורך אישור ההעברה&lt;br /&gt;
 החוזה יכלול את ההוראות הבאות: &lt;br /&gt;</value>
   </data>
   <data name="SummaryPvpStep3Direction1" xml:space="preserve">
-    <value>1) הספק יעביר סכום של  </value>
+    <value>יעביר סכום של  </value>
   </data>
   <data name="SummaryPvpStep3Direction1_2" xml:space="preserve">
     <value>מחשבונו </value>
@@ -1151,7 +1152,7 @@
     <value>אל חשבון  </value>
   </data>
   <data name="SummaryPvpStep3Direction2" xml:space="preserve">
-    <value>2) הלקוח יעביר סכום של  </value>
+    <value>יעביר סכום של  </value>
   </data>
   <data name="SummaryPvpStep3Direction3" xml:space="preserve">
     <value>שתי ההעברות יתבצעו בו זמנית</value>
@@ -1215,10 +1216,10 @@
 &lt;/div&gt;</value>
   </data>
   <data name="MidRateOnMatch" xml:space="preserve">
-    <value>שער האמצע בזמן ביצוע התאמה</value>
+    <value>שער האמצע הבין-בנקאי בזמן ביצוע התאמה</value>
   </data>
   <data name="OrderWarnningPartnerNotTransfer" xml:space="preserve">
-    <value>שים לב: במידה ושותפך לעיסקה לא יעביר את הכסף ע"פ סיכום העיסקה, העיסקה תבוטל, אתה תקבל את הכסף שהעברת חזרה לחשבונך (אותו מטבע)</value>
+    <value>שים לב: במידה ושותפך לעיסקה לא יעביר את הכסף ע"פ סיכום העיסקה, העיסקה תבוטל</value>
   </data>
   <data name="RateCommission" xml:space="preserve">
     <value>העמלה תתווסף לשער האמצע</value>
@@ -1231,5 +1232,20 @@
   </data>
   <data name="WaitFor2Partners" xml:space="preserve">
     <value>הספק ימתין לקבלת הכסף משני הצדדים</value>
+  </data>
+  <data name="SummaryPvpStep1Description1" xml:space="preserve">
+    <value>שער האמצע שנקבע בין 2 הצדדים הינו </value>
+  </data>
+  <data name="SummaryPvpStep4Description1" xml:space="preserve">
+    <value>עמלה בסכום של </value>
+  </data>
+  <data name="SummaryPvpStep4Description2" xml:space="preserve">
+    <value>תגבה בסוף החודש</value>
+  </data>
+  <data name="EstimationByMidRate" xml:space="preserve">
+    <value>הערכה ע"פ שער אמצע נוכחי של</value>
+  </data>
+  <data name="SummaryPvpStep3Direction31" xml:space="preserve">
+    <value>הכסף צריך להיות זמין להעברה עד תאריך</value>
   </data>
 </root>

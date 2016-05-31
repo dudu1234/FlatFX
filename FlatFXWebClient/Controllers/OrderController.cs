@@ -33,8 +33,8 @@ namespace FlatFXWebClient.Controllers
             model.Comment = order.Comment;
             model.ExpiryDate = order.ExpiryDate;
             model.MinimalPartnerExecutionAmountCCY1 = order.MinimalPartnerExecutionAmountCCY1;
-            model.PvPEnabled = order.PvPEnabled;
-            model.EnsureOnLinePrice = order.EnsureOnLinePrice;
+            model.PvPEnabled = true; // order.PvPEnabled;
+            model.EnsureOnLinePrice = true; // order.EnsureOnLinePrice;
             model.order = order;
             model.OrderId = order.OrderId;
             //model.SelectedAccount = 
@@ -150,10 +150,10 @@ namespace FlatFXWebClient.Controllers
                 order.ExpiryDate = model.ExpiryDate;
                 model.MinimalPartnerExecutionAmountCCY1 = null;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                model.PvPEnabled = false;
-                order.PvPEnabled = false;
-                model.EnsureOnLinePrice = false;
-                order.EnsureOnLinePrice = false;
+                model.PvPEnabled = true;
+                order.PvPEnabled = true;
+                model.EnsureOnLinePrice = true;
+                order.EnsureOnLinePrice = true;
                 order.MinimalPartnerTotalVolumeUSD = null;
                 order.PartnerMinScore = null;
                 order.AmountCCY1_Executed = null;
@@ -253,8 +253,8 @@ namespace FlatFXWebClient.Controllers
                     order.Comment = model.Comment;
                     order.ExpiryDate = model.ExpiryDate;
                     order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
-                    order.PvPEnabled = model.PvPEnabled;
-                    order.EnsureOnLinePrice = model.EnsureOnLinePrice;
+                    order.PvPEnabled = true; // model.PvPEnabled;
+                    order.EnsureOnLinePrice = true; // model.EnsureOnLinePrice;
                 }
                 else // new order or match order
                 {
@@ -272,8 +272,8 @@ namespace FlatFXWebClient.Controllers
                     order.AmountCCY1_Executed = 0;
                     order.AmountCCY1_Remainder = order.AmountCCY1;
                     order.Comment = model.Comment;
-                    order.PvPEnabled = model.PvPEnabled;
-                    order.EnsureOnLinePrice = model.EnsureOnLinePrice;
+                    order.PvPEnabled = true; // model.PvPEnabled;
+                    order.EnsureOnLinePrice = true; // model.EnsureOnLinePrice;
                 }
 
                 double extraCharge = 0;
@@ -287,13 +287,18 @@ namespace FlatFXWebClient.Controllers
                     order.AmountUSD_Estimation = order.AmountCCY1;
                 else
                     order.AmountUSD_Estimation = CurrencyManager.Instance.GetAmountUSD(order.CCY1, order.AmountCCY1);
-                order.AmountCCY2_Estimation = CurrencyManager.Instance.TranslateAmount(order.AmountCCY1 - ((CurrencyManager.FlatFXOrderCommission + CurrencyManager.BankCommission + extraCharge) * order.AmountCCY1), order.CCY1, order.CCY2);
+                order.AmountCCY2_Estimation = CurrencyManager.Instance.TranslateAmount(order.AmountCCY1, order.CCY1, order.CCY2);
 
                 //calculate profit
                 string minorCurrency = order.CCY2;
                 order.CustomerTotalProfitUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.CustomerOrderProfit - extraCharge)) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
-                order.FlatFXCommissionUSD_Estimation = Math.Round((order.AmountUSD_Estimation * (CurrencyManager.FlatFXOrderCommission + CurrencyManager.BankCommission + extraCharge)), 2); // 2 promil
+                order.FlatFXCommissionUSD_Estimation = Math.Round((order.AmountUSD_Estimation * CurrencyManager.Instance.GetOrderCommission(order.AmountUSD_Estimation)), 2); // 2 promil
 
+                /*if (order.BuySell == Consts.eBuySell.Buy)
+                    order.AmountCCY2_Estimation += CurrencyManager.Instance.TranslateAmount(order.FlatFXCommissionUSD_Estimation.Value, "USD", order.CCY2);
+                else
+                    order.AmountCCY2_Estimation -= CurrencyManager.Instance.TranslateAmount(order.FlatFXCommissionUSD_Estimation.Value, "USD", order.CCY2);
+                */
                 model.order = order;
 
                 if (model.OrderId == 0)
@@ -307,11 +312,9 @@ namespace FlatFXWebClient.Controllers
                 model.WorkflowStage = 2;
                 ApplicationInformation.Instance.Session[model.OrderKey] = order;
 
-                if (model.MatchOrderId > 0)
-                {
-                    FXRate pairRate = CurrencyManager.Instance.PairRates[order.Symbol];
-                    model.MatchMidRate = pairRate.Mid;
-                }
+                FXRate pairRate = CurrencyManager.Instance.PairRates[order.Symbol];
+                model.MatchMidRate = pairRate.Mid;
+                
                 return RedirectToAction("CreateOrderIndex", model);
             }
             catch (Exception ex)
@@ -362,6 +365,7 @@ namespace FlatFXWebClient.Controllers
                     //Match 2 orders
                     OrderMatch match = new OrderMatch();
                     match.MidRate = model.MatchMidRate;
+                    
                     bool isValid = InitializeMatch(match, order.OrderId, model.MatchOrderId, Consts.eMatchTriggerSource.Order1);
                     if (!isValid || match.ErrorMessage != null)
                     {
@@ -371,6 +375,22 @@ namespace FlatFXWebClient.Controllers
                     {
                         db.OrderMatches.Add(match);
                         db.SaveChanges();
+                    }
+
+                    if (order.IsDemo)
+                    {
+                        model.MatchMyName = match.Deal1.user.FullName + " @ Demo Company";
+                        model.MatchPartnerAccount = match.Deal2.Provider.Name + " - 222-222222";
+                        model.MatchPartnerName = match.Deal2.user.FullName + " @ Demo Company";
+
+                        if (model.MatchMyName == model.MatchPartnerName)
+                            model.MatchPartnerName = match.Deal2.user.FullName + "2 @ Demo Company";
+                    }
+                    else
+                    {
+                        model.MatchMyName = match.Deal1.user.FullName + " @ " + match.Deal1.CompanyAccount.Company.CompanyName;
+                        model.MatchPartnerAccount = match.Deal2.Provider.Name + " - " + match.Deal2.ChargedAccount.BankBranchNumber + "-" + match.Deal2.ChargedAccount.BankAccountNumber;
+                        model.MatchPartnerName = match.Deal2.user.FullName + " @ " + match.Deal2.CompanyAccount.Company.CompanyName;
                     }
 
                     TempData["Deal"] = match.Deal1;
@@ -473,7 +493,7 @@ namespace FlatFXWebClient.Controllers
                     match.ErrorMessage += "Match already exists." + Environment.NewLine;
 
                 match.TriggerDate = DateTime.Now;
-                match.MaturityDate = DateTime.Now;
+                match.MaturityDate = ApplicationInformation.Instance.NextBussinessDay(12, 0);
                 match.Status = Consts.eMatchStatus.New;
 
                 FXRate pairRate = CurrencyManager.Instance.PairRates[match.Order1.Symbol];
@@ -554,8 +574,8 @@ namespace FlatFXWebClient.Controllers
                 deal.DealType = Consts.eDealType.Spot;
                 deal.IsOffer = false;
                 deal.Status = Consts.eDealStatus.New;
-                deal.EnsureOnLinePrice = false;
-                deal.PvPEnabled = false;
+                deal.EnsureOnLinePrice = true;
+                deal.PvPEnabled = true;
                 deal.FastTransferEnabled = false;
                 deal.ChargedAccount = order.ChargedAccount;
                 deal.CreditedAccount = order.CreditedAccount;
@@ -576,9 +596,9 @@ namespace FlatFXWebClient.Controllers
                 deal.OfferingMidRate = matchMidRate;
                 deal.MidRate = matchMidRate;
 
-                deal.EnsureOnLinePrice = (order.PvPEnabled) ? true : order.EnsureOnLinePrice;
-                deal.PvPEnabled = order.PvPEnabled;
-                deal.FastTransferEnabled = false;
+                //deal.EnsureOnLinePrice = (order.PvPEnabled) ? true : order.EnsureOnLinePrice;
+                //deal.PvPEnabled = order.PvPEnabled;
+                //deal.FastTransferEnabled = false;
 
                 double extraCharge = 0;
                 //if (deal.EnsureOnLinePrice)
@@ -586,16 +606,25 @@ namespace FlatFXWebClient.Controllers
                 if (deal.PvPEnabled)
                     extraCharge += CurrencyManager.ExtraCharge_PvPEnabled;
 
-                if (priceBidOrAsk == Consts.eBidAsk.Bid)
+                double amountUSD = 0;
+                if (order.CCY1 == "USD")
+                    amountUSD = AmountCCY1;
+                else
+                    amountUSD = CurrencyManager.Instance.GetAmountUSD(order.CCY1, AmountCCY1);
+
+                deal.CustomerRate = matchMidRate;
+                deal.BankRate = 0;
+
+                /*if (priceBidOrAsk == Consts.eBidAsk.Bid)
                 {
-                    deal.CustomerRate = matchMidRate - ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission + extraCharge) * matchMidRate);
-                    deal.BankRate = matchMidRate - (CurrencyManager.BankCommission * matchMidRate);
+                    deal.CustomerRate = matchMidRate -((CurrencyManager.Instance.GetOrderCommission(amountUSD) + extraCharge) * matchMidRate);
+                    deal.BankRate = 0; // matchMidRate - (CurrencyManager.BankCommission * matchMidRate);
                 }
                 else
                 {
-                    deal.CustomerRate = matchMidRate + ((CurrencyManager.BankCommission + CurrencyManager.FlatFXOrderCommission + extraCharge) * matchMidRate);
-                    deal.BankRate = matchMidRate + (CurrencyManager.BankCommission * matchMidRate);
-                }
+                    deal.CustomerRate = matchMidRate + ((CurrencyManager.Instance.GetOrderCommission(amountUSD) + extraCharge) * matchMidRate);
+                    deal.BankRate = 0; // matchMidRate + (CurrencyManager.BankCommission * matchMidRate);
+                }*/
 
                 if (order.BuySell == Consts.eBuySell.Buy)
                 {
@@ -612,7 +641,7 @@ namespace FlatFXWebClient.Controllers
                     deal.ChargedCurrency = order.CCY1;
                 }
 
-                //calculate AmountUSD_Estimation (volume)
+                //calculate AmountUSD (volume)
                 if (deal.CreditedCurrency == "USD")
                     deal.AmountUSD = deal.AmountToExchangeCreditedCurrency;
                 else if (deal.ChargedCurrency == "USD")
@@ -622,14 +651,14 @@ namespace FlatFXWebClient.Controllers
 
                 //calculate profit
                 string minorCurrency = order.CCY2;
-                deal.BankIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankCommission * matchMidRate), 2); // 0.5 promil
+                deal.BankIncomeUSD = 0; // Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * CurrencyManager.BankCommission * matchMidRate), 2); // 0.5 promil
                 deal.CustomerTotalProfitUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * (CurrencyManager.CustomerOrderProfit - extraCharge) * matchMidRate) - CurrencyManager.TransactionFeeUSD, 2); // 9 promil
-                deal.FlatFXIncomeUSD = Math.Round(CurrencyManager.Instance.GetAmountUSD(minorCurrency, deal.AmountUSD * Math.Abs(deal.CustomerRate - deal.BankRate.Value)), 2); // 1.5 promil
+                deal.FlatFXIncomeUSD = Math.Round((deal.AmountUSD * CurrencyManager.Instance.GetOrderCommission(deal.AmountUSD)), 2); // 2 promil
                 deal.Commission = deal.BankIncomeUSD + deal.FlatFXIncomeUSD; // 2 Promil
 
                 deal.Comment = order.Comment;
                 deal.ContractDate = DateTime.Now;
-                deal.MaturityDate = DateTime.Now;
+                deal.MaturityDate = ApplicationInformation.Instance.NextBussinessDay(12, 0);
                 deal.Status = Consts.eDealStatus.New;
                 return deal;
             }

@@ -39,8 +39,10 @@
                                     <td ng-class="rate.IsTradable == false ? 'bg-red' : 'bg-green'"></td>
                                     <td>{{ rate.KeyDisplay }}</td>
                                     <td>{{ rate.Mid }}</td>
-                                    <td><a href="{{ getHref(rate.Key, 'bid')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Bid }}</a></td>
-                                    <td><a href="{{ getHref(rate.Key, 'ask')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Ask }}</a></td>
+                                    @*<td><a href="{{ getHref(rate.Key, 'bid')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Bid }}</a></td>
+                                    <td><a href="{{ getHref(rate.Key, 'ask')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Ask }}</a></td>*@
+                                    <td>{{ rate.Bid }}</td>
+                                    <td>{{ rate.Ask }}</td>
                                     <td>{{ rate.LastUpdate | date:'HH:mm' }}</td>
                                 </tr>
                             </tbody>

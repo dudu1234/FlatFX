@@ -29,9 +29,12 @@
                     <td title="'@FlatFXResources.Resources.ChargedAmount'" filter="{ AmountToExchangeChargedCurrency: 'text'}" sortable="'AmountToExchangeChargedCurrency'">{{ deal.AmountToExchangeChargedCurrency | number:0 }} {{ deal.ChargedCurrency }}</td>
                     <td title="'@FlatFXResources.Resources.CreditedAmount'" filter="{ AmountToExchangeCreditedCurrency: 'text'}" sortable="'AmountToExchangeCreditedCurrency'">{{ deal.AmountToExchangeCreditedCurrency | number:0 }} {{ deal.CreditedCurrency }}</td>
                     <td title="'@FlatFXResources.Resources.Rate'" filter="{ CustomerRate: 'number'}" sortable="'CustomerRate'">{{ deal.CustomerRate | number:4 }}</td>
-                    <td title="'@FlatFXResources.Resources.Commission'" filter="{ Commission: 'number'}" sortable="'Commission'">{{ deal.Commission | number:0 | currency:'$' }}</td>
-                    <td title="'@FlatFXResources.Resources.Profit'" filter="{ CustomerTotalProfitUSD: 'number'}" sortable="'CustomerTotalProfitUSD'">{{ deal.CustomerTotalProfitUSD | number:0 | currency:'$' }}</td>
+                    <td title="'@FlatFXResources.Resources.Commission'" filter="{ Commission: 'number'}" sortable="'Commission'">{{ deal.Commission | number:0 }}$</td>
+                    <td title="'@FlatFXResources.Resources.Profit'" filter="{ CustomerTotalProfitUSD: 'number'}" sortable="'CustomerTotalProfitUSD'">{{ deal.CustomerTotalProfitUSD | number:0 }}$</td>
                     <td title="'@FlatFXResources.Resources.IsCanceled'" filter="{ IsCanceled: 'select'}" filter-data="IsCancelFilterData" sortable="'IsCanceled'">{{ deal.IsCanceled }}</td>
+                    <td title="'@FlatFXResources.Resources.PvPEnabled'" filter="{ PvPEnabled: 'select'}" filter-data="IsCancelFilterData" sortable="'PvPEnabled'">{{ deal.PvPEnabled }}</td>
+                    @*<td title="'@FlatFXResources.Resources.FastTransferEnabled'" filter="{ FastTransferEnabled: 'select'}" filter-data="IsCancelFilterData" sortable="'FastTransferEnabled'">{{ deal.FastTransferEnabled }}</td>
+                    <td title="'@FlatFXResources.Resources.EnsureOnLinePrice'" filter="{ EnsureOnLinePrice: 'select'}" filter-data="IsCancelFilterData" sortable="'EnsureOnLinePrice'">{{ deal.EnsureOnLinePrice }}</td>*@
                     <td title="'@FlatFXResources.Resources.UserName'" filter="{ UserName: 'text'}" sortable="'UserName'">{{ deal.UserName }}</td>
                     <td title="'@FlatFXResources.Resources.Product'" filter="{ ProductType: 'text'}" sortable="'ProductType'">{{ deal.ProductType }}</td>
                     <td title="'@FlatFXResources.Resources.StatusDetails'" filter="{ StatusDetails: 'text'}" sortable="'StatusDetails'">{{ deal.StatusDetails }}</td>
@@ -51,14 +54,18 @@
                     <td title="'@FlatFXResources.Resources.BuySell'" filter="{ BuySell: 'select'}" filter-data="BuySellFilterData" sortable="'BuySell'">{{ (order.BuySell == 1)? 'Buy' : 'Sell' }}</td>
                     <td title="'@FlatFXResources.Resources.ChargedAmount'" filter="{ AmountToExchangeChargedCurrency: 'text'}" sortable="'AmountToExchangeChargedCurrency'" class="table-wide-column-1">{{ order.AmountToExchangeChargedCurrency | number:0 }} {{ order.ChargedCurrency }}</td>
                     <td title="'@FlatFXResources.Resources.CreditedAmount'" filter="{ AmountToExchangeCreditedCurrency: 'text'}" sortable="'AmountToExchangeCreditedCurrency'" class="table-wide-column-1">{{ order.AmountToExchangeCreditedCurrency | number:0 }} {{ order.CreditedCurrency }}</td>
-                    <td title="'@FlatFXResources.Resources.Commission @FlatFXResources.Resources.Estimation'" filter="{ Commission: 'number'}" sortable="'Commission'">{{ order.Commission | number:0 | currency:'$' }}</td>
-                    <td title="'@FlatFXResources.Resources.Profit @FlatFXResources.Resources.Estimation'" filter="{ CustomerTotalProfitUSD: 'number'}" sortable="'CustomerTotalProfitUSD'">{{ order.CustomerTotalProfitUSD | number:0 | currency:'$' }}</td>
+                    <td title="'@FlatFXResources.Resources.Commission @FlatFXResources.Resources.Estimation'" filter="{ Commission: 'number'}" sortable="'Commission'">{{ order.Commission | number:0 }}$</td>
+                    <td title="'@FlatFXResources.Resources.Profit @FlatFXResources.Resources.Estimation'" filter="{ CustomerTotalProfitUSD: 'number'}" sortable="'CustomerTotalProfitUSD'">{{ order.CustomerTotalProfitUSD | number:0 }}$</td>
                     <td title="'@FlatFXResources.Resources.MinimalPartnerExecutionAmount CCY1'" filter="{ MinimalPartnerExecutionAmountCCY1: 'number'}" sortable="'MinimalPartnerExecutionAmountCCY1'">{{ order.MinimalPartnerExecutionAmountCCY1 | number:0 }}</td>
                     <td title="'@FlatFXResources.Resources.ExpiryDate'" filter="{ ExpiryDate: 'number'}" sortable="'ExpiryDate'" class="table-wide-column-1">{{ order.ExpiryDate.substring(6, 19) | date: 'yyyy-MM-dd HH:mm' }}</td>
                     <td title="'@FlatFXResources.Resources.AmountExecuted CCY1'" filter="{ AmountCCY1_Executed: 'number'}" sortable="'AmountCCY1_Executed'">{{ order.AmountCCY1_Executed | number:0 }}</td>
                     <td title="'@FlatFXResources.Resources.AmountRemainder CCY1'" filter="{ AmountCCY1_Remainder: 'number'}" sortable="'AmountCCY1_Remainder'">{{ order.AmountCCY1_Remainder | number:0 }}</td>
                     <td title="'@FlatFXResources.Resources.UserName'" filter="{ UserName: 'number'}" sortable="'UserName'">{{ order.UserName }}</td>
+                    <td title="'@FlatFXResources.Resources.PvPEnabled'" filter="{ PvPEnabled: 'select'}" filter-data="IsCancelFilterData" sortable="'PvPEnabled'">{{ order.PvPEnabled }}</td>
                     <td title="'@FlatFXResources.Resources.StatusDetails'" filter="{ StatusDetails: 'number'}" sortable="'StatusDetails'">{{ order.StatusDetails }}</td>
+                    @*<td title="'@FlatFXResources.Resources.FastTransferEnabled'" filter="{ FastTransferEnabled: 'select'}" filter-data="IsCancelFilterData" sortable="'FastTransferEnabled'">{{ order.FastTransferEnabled }}</td>*@
+
+
                     <td class="table-btn-td-2">
                         <a class="btn btn-default btn-sm" ng-click="EditOrder(order.OrderId)" ng-if="order.Status =='Waiting' "><span class=" glyphicon glyphicon-pencil"></span></a>
                         <button class="btn btn-danger btn-sm" ng-click="cancelOrder(order.OrderId, order)" ng-if="order.Status == 'Waiting'"><span class="glyphicon glyphicon-trash"></span></button>

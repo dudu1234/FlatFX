@@ -104,6 +104,9 @@ namespace FlatFXWebClient.ViewModels
         public double MatchMinAmount { get; set; }
         public double MatchMaxAmount { get; set; }
         public double MatchMidRate { get; set; }
+        public string MatchPartnerName { get; set; }
+        public string MatchPartnerAccount { get; set; }
+        public string MatchMyName { get; set; }
 
         public bool IsEdit { get; set; }
         public Deal deal { get; set; }

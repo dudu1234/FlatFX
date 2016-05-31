@@ -50,14 +50,16 @@ namespace FlatFXCore.BussinessLayer
 
         public const double BankCommission = 0.0005;
         public const double FlatFXCommission = 0.0025;
-        public const double FlatFXOrderCommission = 0.0015;
+        public const double FlatFXSmallOrderCommission = 0.003;  // X < 50,000$
+        public const double FlatFXMediumOrderCommission = 0.002; // 50,000$ > X < 200,000$ 
+        public const double FlatFXLargeOrderCommission = 0.001;  // X > 200,000$ 
         public const double CustomerProfit = 0.008;
         public const double CustomerOrderProfit = 0.009;
-        public const double TransactionFeeUSD = 17; //10$: USD transfer internal bank, 7$: ILS Zahav
+        public const double TransactionFeeUSD = 17; //6$: USD transfer internal bank, 1$: ILS transfer, 10$: PvP transfer
         public const int MinDealAmountUSD = 5000;
 
         public const double ExtraCharge_EnsureOnLinePrice = 0.001;
-        public const double ExtraCharge_PvPEnabled = 0.002;
+        public const double ExtraCharge_PvPEnabled = 0; //0.002;
         public const double ExtraCharge_FastTransferEnabled = 0.001;
         #endregion
 
@@ -171,6 +173,15 @@ namespace FlatFXCore.BussinessLayer
         {
             Dictionary<string, string> pairsDic = CurrencyManager.Instance.PairRates.Values.Where(r => (r.IsTradable || isDemo) && r.IsActiveForSimpleTrading && r.Key != "USDUSD").ToDictionary(r => r.Key, r => FlatFXResources.Resources.ResourceManager.GetString(r.Key));
             return pairsDic;
+        }
+        public double GetOrderCommission(double amountUSD)
+        {
+            if (amountUSD < 50000)
+                return FlatFXSmallOrderCommission;
+            else if (amountUSD < 200000)
+                return FlatFXMediumOrderCommission;
+            else
+                return FlatFXLargeOrderCommission;
         }
     }
     public class CurrencyFeedManager

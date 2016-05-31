@@ -192,7 +192,7 @@ namespace FlatFXWebClient.Controllers
                     .Where(d => d.MaturityDate.HasValue)
                     .Select(d => new DealItem(d.DealId, d.BuySell, d.AmountToExchangeChargedCurrency, d.AmountToExchangeCreditedCurrency,
                         d.ChargedCurrency, d.CreditedCurrency, d.Commission, d.ContractDate, d.CustomerRate,
-                        d.CustomerTotalProfitUSD, d.IsCanceled, d.IsDemo? "" : d.user.UserName, d.Status.ToString(), d.StatusDetails, d.DealProductType))
+                        d.CustomerTotalProfitUSD, d.IsCanceled, d.PvPEnabled, d.EnsureOnLinePrice, d.FastTransferEnabled, d.IsDemo? "" : d.user.UserName, d.Status.ToString(), d.StatusDetails, d.DealProductType))
                     .ToList();
 
                 ActionResult res = Json(new
@@ -225,7 +225,7 @@ namespace FlatFXWebClient.Controllers
                     .ToList()
                     .Select(o => new OrderItem(o.OrderId, o.BuySell, o.AmountCCY1, o.AmountCCY2_Estimation, o.Symbol, o.FlatFXCommissionUSD_Estimation,
                         o.OrderDate, o.CustomerTotalProfitUSD_Estimation, o.IsDemo ? "" : o.user.UserName, o.Status.ToString(), o.StatusDetails,
-                        o.MinimalPartnerExecutionAmountCCY1, o.ExpiryDate, o.AmountCCY1_Executed, o.AmountCCY1_Remainder))
+                        o.MinimalPartnerExecutionAmountCCY1, o.ExpiryDate, o.AmountCCY1_Executed, o.AmountCCY1_Remainder, o.EnsureOnLinePrice, o.PvPEnabled))
                     .ToList();
 
                 ActionResult res = Json(new
@@ -286,13 +286,17 @@ namespace FlatFXWebClient.Controllers
         public double CustomerRate;
         public double? CustomerTotalProfitUSD;
         public bool IsCanceled;
+        public bool PvPEnabled;
+        public bool EnsureOnLinePrice;
+        public bool FastTransferEnabled;
         public string UserName;
         public string Status;
         public string StatusDetails;
         public string ProductType;
 
         public DealItem(Int64 DealId, Consts.eBuySell BuySell, double AmountToExchangeChargedCurrency, double AmountToExchangeCreditedCurrency, string ChargedCurrency,
-            string CreditedCurrency, double? Commission, DateTime? ContractDate, double CustomerRate, double? CustomerTotalProfitUSD, bool IsCanceled, string UserName,
+            string CreditedCurrency, double? Commission, DateTime? ContractDate, double CustomerRate, double? CustomerTotalProfitUSD, bool IsCanceled,
+            bool PvPEnabled, bool EnsureOnLinePrice, bool FastTransferEnabled, string UserName,
             string Status, string StatusDetails, Consts.eDealProductType productType)
         {
             this.DealId = DealId;
@@ -306,6 +310,9 @@ namespace FlatFXWebClient.Controllers
             this.CustomerRate = CustomerRate;
             this.CustomerTotalProfitUSD = CustomerTotalProfitUSD;
             this.IsCanceled = IsCanceled;
+            this.PvPEnabled = PvPEnabled;
+            this.EnsureOnLinePrice = EnsureOnLinePrice;
+            this.FastTransferEnabled = FastTransferEnabled;    
             this.UserName = UserName;
             this.Status = Status;
             this.StatusDetails = StatusDetails;
@@ -331,10 +338,13 @@ namespace FlatFXWebClient.Controllers
         public DateTime? ExpiryDate;
         public double? AmountCCY1_Executed;
         public double? AmountCCY1_Remainder;
+        public bool EnsureOnLinePrice;
+        public bool PvPEnabled;
 
         public OrderItem(Int64 OrderId, Consts.eBuySell BuySell, double AmountCCY1, double AmountCCY2_Estimation, string Pair,
             double? Commission, DateTime? OrderDate, double? CustomerTotalProfitUSD, string UserName, string Status, string StatusDetails, 
-            double? MinimalPartnerExecutionAmountCCY1, DateTime? ExpiryDate, double? AmountCCY1_Executed, double? AmountCCY1_Remainder)
+            double? MinimalPartnerExecutionAmountCCY1, DateTime? ExpiryDate, double? AmountCCY1_Executed, double? AmountCCY1_Remainder,
+            bool EnsureOnLinePrice, bool PvPEnabled)
         {
             this.OrderId = OrderId;
             this.BuySell = BuySell;
@@ -352,6 +362,8 @@ namespace FlatFXWebClient.Controllers
             this.ExpiryDate = ExpiryDate;
             this.AmountCCY1_Executed = AmountCCY1_Executed;
             this.AmountCCY1_Remainder = AmountCCY1_Remainder;
+            this.PvPEnabled = PvPEnabled;
+            this.EnsureOnLinePrice = EnsureOnLinePrice;
         }
     }
 }
