@@ -28,55 +28,60 @@
                 <label class="control-label col-xs-8 remark">@FlatFXResources.Resources.BankCommissionRemark2</label>
             </div>
             <div class="form-group red small-line">
-                <label class="control-label col-xs-8">
+                <label class="control-label col-xs-4">
                     <a href="#" tooltip-placement="top" tooltip="Total bank commission without discount is 1.1%">@FlatFXResources.Resources.BankCommission4</a> <a href="http://www.leumi.co.il/home04/currency_rates/9034/" target="_blank">
                         <span class="glyphicon glyphicon-info-sign red"></span>
                     </a>:
                 </label>
-                <div class="col-xs-4">
-                    <label class="start-align">{{ BankCommission() | number:0 }} &#8362;</label>
-                </div>
+                <label class="control-label blue col-xs-4">
+                    <a class="Minus" ng-click="spreadDiscount = spreadDiscount + 9; exchangeDiscount = exchangeDiscount + 9;"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                    {{ (((9 * (100 - spreadDiscount) / 100) + (2 * (100 - exchangeDiscount) / 100)) / 10) | number:1 }}%
+                    <a class="Plus" ng-click="spreadDiscount = spreadDiscount - 9; exchangeDiscount = exchangeDiscount - 9;"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                </label>
+                <label class="col-xs-4 control-label start-align">{{ BankCommission() | number:0 }} &#8362;</label>
             </div>
             <div class="form-group blue small-line">
-                <label class="control-label col-xs-8">
-                    <a href="#" tooltip-placement="top" tooltip="Total FlatFX commission for orders is 0.2%">@FlatFXResources.Resources.BankCommission6</a> 
-                    <a href="@Url.Action("ShowRates", "OnLineFXRates")" target="_blank"><span class="glyphicon glyphicon-info-sign blue"></span>
-                </a>:
-            </label>
-            <div class="col-xs-4">
-                <label class="start-align">{{ FlatFXCommission() | number:0 }} &#8362;</label>
+                <label class="control-label col-xs-4">
+                    <a href="#" tooltip-placement="top" tooltip="Total FlatFX commission for orders is 0.1% - 0.3%">@FlatFXResources.Resources.BankCommission6</a>
+                    <a href="@Url.Action("ShowRates", "OnLineFXRates")" target="_blank">
+                        <span class="glyphicon glyphicon-info-sign blue"></span>
+                    </a>:
+                </label>
+                <label class="control-label col-xs-4">
+                    <a class="Minus" ng-click="flatFXCommissionParam = flatFXCommissionParam - 1"><span class="glyphicon glyphicon-minus-sign"></span></a>
+                    0.{{ flatFXCommissionParam }}%
+                    <a class="Plus" ng-click="flatFXCommissionParam = flatFXCommissionParam + 1"><span class="glyphicon glyphicon-plus-sign"></span></a>
+                </label>
+                <label class="control-label col-xs-4 start-align">{{ FlatFXCommission() | number:0 }} &#8362;</label>
             </div>
-        </div>
-        <div class="form-group green small-line">
-            <label class="control-label col-xs-8">@FlatFXResources.Resources.BankCommission5:</label>
-            <div class="col-xs-4">
-                <label class="start-align">{{ FlatFXSaving() | number:0 }} &#8362;</label>
+            <div class="form-group green small-line">
+                <label class="control-label col-xs-8">@FlatFXResources.Resources.BankCommission5:</label>
+                <label class="col-xs-4 control-label start-align">{{ FlatFXSaving() | number:0 }} &#8362;</label>
             </div>
-        </div>
 
-        @if (User.IsInRole(Consts.Role_Administrator))
-        {
-            <br /><br /><br />
-            <h2>@FlatFXResources.Resources.CommissionCalcAdmin1</h2>
-            <div class="form-group blue">
-                <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin2</label>
-                <div class="col-xs-4">
-                    <input min="0" max="10" type="number" class="form-control" ng-model="flatFXCommission">
+            @if (User.IsInRole(Consts.Role_Administrator))
+            {
+                <br /><br /><br />
+                <h2>@FlatFXResources.Resources.CommissionCalcAdmin1</h2>
+                <div class="form-group blue">
+                    <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin2</label>
+                    <div class="col-xs-4">
+                        <input min="0" max="10" type="number" class="form-control" ng-model="flatFXCommissionParam">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group blue small-line">
-                <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin3</label>
-                <div class="col-xs-4">
-                    <input min="0" max="10" type="number" class="form-control" ng-model="bankCommission">
+                <div class="form-group blue small-line">
+                    <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin3</label>
+                    <div class="col-xs-4">
+                        <input min="0" max="10" type="number" class="form-control" ng-model="bankCommissionParam">
+                    </div>
                 </div>
-            </div>
-            <div class="form-group blue small-line">
-                <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin4</label>
-                <div class="col-xs-4">
-                    <label class="start-align">{{ FlatFXIncome() | number:0 }} &#8362;</label>
+                <div class="form-group blue small-line">
+                    <label class="control-label col-xs-8">@FlatFXResources.Resources.CommissionCalcAdmin4</label>
+                    <div class="col-xs-4">
+                        <label class="start-align">{{ FlatFXIncome() | number:0 }} &#8362;</label>
+                    </div>
                 </div>
-            </div>
-        }
+            }
+        </div>
     </div>
-</div>
 </div>

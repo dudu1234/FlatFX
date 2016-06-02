@@ -32,9 +32,9 @@ myApp.service('SharedDataService', function ($sessionStorage) {
         if ($sessionStorage.FFXShared === null || $sessionStorage.FFXShared === undefined) {
             $sessionStorage.FFXShared = {
                 Currencies: {
-                    'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
-                    'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 },
-                    'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidOrder: 1, AskOrder: 1 }
+                    'USD': { ISO: 'USD', Name: 'United States Dollar', Symbol: '$', Img: urlPrefix2 + '/Images/Flags/USD.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidBroker: 1, AskBroker: 1, BidOrder: 1, AskOrder: 1 },
+                    'ILS': { ISO: 'ILS', Name: 'Israeli New Shekel', Symbol: '₪', Img: urlPrefix2 + '/Images/Flags/ILS.png', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidBroker: 1, AskBroker: 1, BidOrder: 1, AskOrder: 1 },
+                    'EUR': { ISO: 'EUR', Name: 'Euro', Symbol: '€', Img: urlPrefix2 + '/Images/Flags/EUR.gif', Bid: 1, Ask: 1, Mid: 1, BidBank: 1, AskBank: 1, BidBroker: 1, AskBroker: 1, BidOrder: 1, AskOrder: 1 }
                 },
                 ILSUSD: 3.8
             };
@@ -67,6 +67,8 @@ myApp.service('UpdateFeedService', function ($http, $timeout, $interval, SharedD
                                 SharedDataService.Get().Currencies[currency].BidBank = 1 / value.Mid * 0.9888;
                                 SharedDataService.Get().Currencies[currency].AskOrder = 1 / value.Mid * 1.002;
                                 SharedDataService.Get().Currencies[currency].BidOrder = 1 / value.Mid * 0.998;
+                                SharedDataService.Get().Currencies[currency].AskBroker = 1 / value.Mid * 1.005;
+                                SharedDataService.Get().Currencies[currency].BidBroker = 1 / value.Mid * 0.995;
                             } else {
                                 SharedDataService.Get().Currencies[currency].Mid = value.Mid;
                                 SharedDataService.Get().Currencies[currency].Bid = value.Bid;
@@ -75,6 +77,8 @@ myApp.service('UpdateFeedService', function ($http, $timeout, $interval, SharedD
                                 SharedDataService.Get().Currencies[currency].BidBank = value.Mid * 0.9888;
                                 SharedDataService.Get().Currencies[currency].AskOrder = value.Mid * 1.002;
                                 SharedDataService.Get().Currencies[currency].BidOrder = value.Mid * 0.998;
+                                SharedDataService.Get().Currencies[currency].AskBroker = value.Mid * 1.005;
+                                SharedDataService.Get().Currencies[currency].BidBroker = value.Mid * 0.995;
                             }
 
                             if (currency === "ILS") {

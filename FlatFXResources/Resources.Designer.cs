@@ -214,6 +214,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to average broker.
+        /// </summary>
+        public static string averagebroker {
+            get {
+                return ResourceManager.GetString("averagebroker", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Back to List.
         /// </summary>
         public static string BackToList {
@@ -399,6 +408,15 @@ namespace FlatFXResources {
         public static string BuyAmount {
             get {
                 return ResourceManager.GetString("BuyAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Buying.
+        /// </summary>
+        public static string buying {
+            get {
+                return ResourceManager.GetString("buying", resourceCulture);
             }
         }
         
@@ -1376,11 +1394,20 @@ namespace FlatFXResources {
         }
         
         /// <summary>
-        ///   Looks up a localized string similar to Save up to 50,000 $ each year.
+        ///   Looks up a localized string similar to Best rates on the market (0.1%-0.3%).
         /// </summary>
         public static string HomeHeader5 {
             get {
                 return ResourceManager.GetString("HomeHeader5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Fully secured - use PvP transfer method, your money stays in your bank account.
+        /// </summary>
+        public static string HomeHeader6 {
+            get {
+                return ResourceManager.GetString("HomeHeader6", resourceCulture);
             }
         }
         
@@ -1436,6 +1463,15 @@ namespace FlatFXResources {
         public static string InAmount {
             get {
                 return ResourceManager.GetString("InAmount", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Warning: Prefare choosing orders located in your bank (average transfer commission of 6$). Choosing different bank cause to additional transfer commission of 0.2% (average).
+        /// </summary>
+        public static string InterBankPvPCommissionWarning {
+            get {
+                return ResourceManager.GetString("InterBankPvPCommissionWarning", resourceCulture);
             }
         }
         

@@ -840,7 +840,7 @@ Use your bank interent site in order to transfer money.&lt;br /&gt;</value>
     <value>Trade directly with customers like you, on the mid price, skip your bank spreads</value>
   </data>
   <data name="HomeHeader5" xml:space="preserve">
-    <value>Save up to 50,000 $ each year</value>
+    <value>Best rates on the market (0.1%-0.3%)</value>
   </data>
   <data name="SlideHeader1" xml:space="preserve">
     <value>Order Book</value>
@@ -1252,6 +1252,9 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="EstimationByMidRate" xml:space="preserve">
     <value>Estimation according to current mid rate of</value>
   </data>
+  <data name="HomeHeader6" xml:space="preserve">
+    <value>Fully secured - use PvP transfer method, your money stays in your bank account</value>
+  </data>
   <data name="SummaryPvpStep1Description1" xml:space="preserve">
     <value>The P2P match mid rate is </value>
   </data>
@@ -1263,5 +1266,14 @@ The contract will include the following directions:&lt;br /&gt;</value>
   </data>
   <data name="SummaryPvpStep4Description2" xml:space="preserve">
     <value>will be charged in the end of the month.</value>
+  </data>
+  <data name="averagebroker" xml:space="preserve">
+    <value>average broker</value>
+  </data>
+  <data name="buying" xml:space="preserve">
+    <value>Buying</value>
+  </data>
+  <data name="InterBankPvPCommissionWarning" xml:space="preserve">
+    <value>Warning: Prefare choosing orders located in your bank (average transfer commission of 6$). Choosing different bank cause to additional transfer commission of 0.2% (average)</value>
   </data>
 </root>

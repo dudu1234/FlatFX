@@ -49,7 +49,7 @@ namespace FlatFXWebClient.Controllers
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
                         o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value, 
-                        (isAdmin)? o.CompanyAccount.Company.CompanyName : ""))
+                        (isAdmin)? o.CompanyAccount.Company.CompanyName : "", o.Provider.Name))
                     .ToList();
 
                 List<OrderBookItem> ordersToSell = db.Orders
@@ -60,7 +60,7 @@ namespace FlatFXWebClient.Controllers
                     .Select(o => new OrderBookItem(o.OrderId,
                         o.AmountCCY1_Remainder.HasValue ? o.AmountCCY1_Remainder.Value : 0,
                         o.MinimalPartnerExecutionAmountCCY1.HasValue ? o.MinimalPartnerExecutionAmountCCY1.Value : o.AmountCCY1_Remainder.Value,
-                        (isAdmin) ? o.CompanyAccount.Company.CompanyName : ""))
+                        (isAdmin) ? o.CompanyAccount.Company.CompanyName : "", o.Provider.Name))
                     .ToList();
 
                 Dictionary<string, string> pairs = CurrencyManager.Instance.PairRates.Values
@@ -115,13 +115,15 @@ namespace FlatFXWebClient.Controllers
         public string CompanyName;
         public double MinAmount;
         public double MaxAmount;
+        public string BankName;
 
-        public OrderBookItem(long OrderId, double MaxAmount, double MinAmount, string CompanyName)
+        public OrderBookItem(long OrderId, double MaxAmount, double MinAmount, string CompanyName, string BankName)
         {
             this.OrderId = OrderId;
             this.CompanyName = CompanyName;
             this.MinAmount = MinAmount;
             this.MaxAmount = MaxAmount;
+            this.BankName = BankName;
         }
     }
 }

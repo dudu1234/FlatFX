@@ -259,13 +259,31 @@ namespace FlatFXCore.BussinessLayer
             try
             {
                 WebClient web = new WebClient();
-
-                string url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22" +
-                    m_CurrencyListString +
-                    "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
-                response = web.DownloadString(url);
+                string url = "";
 
                 /*
+                CurrencyLayer Request:
+                http://apilayer.net/api/live?access_key=c8f66016ac43de90b0d8cb73a5c08cb8&currencies=USD,ILS&format=1
+
+                CurrencyLayer Response:
+                {
+                  "success":true,
+                  "terms":"https:\/\/currencylayer.com\/terms",
+                  "privacy":"https:\/\/currencylayer.com\/privacy",
+                  "timestamp":1464774971,
+                  "source":"USD",
+                  "quotes":{
+                    "USDUSD":1,
+                    "USDILS":3.85065
+                  }
+                }
+                */
+
+
+                url = "https://query.yahooapis.com/v1/public/yql?q=select%20*%20from%20yahoo.finance.xchange%20where%20pair%20in%20(%22" +
+                    m_CurrencyListString +
+                    "%22)&format=json&env=store%3A%2F%2Fdatatables.org%2Falltableswithkeys&callback=";
+                /* Yahoo Response
                     {
                         "query": {
                             "count": 3, 
@@ -279,6 +297,9 @@ namespace FlatFXCore.BussinessLayer
                     }
                  */
                 //{"query":{"count":7,"created":"2015-11-18T14:25:25Z","lang":"en-US","results":{"rate":[{"id":"EURUSD","Name":"EUR/USD","Rate":"1.0663","Date":"11/18/2015","Time":"2:25pm","Ask":"1.0666","Bid":"1.0661"},{"id":"USDILS","Name":"USD/ILS","Rate":"3.9007","Date":"11/18/2015","Time":"2:25pm","Ask":"3.9022","Bid":"3.9007"},{"id":"EURILS","Name":"EUR/ILS","Rate":"4.1595","Date":"11/18/2015","Time":"2:25pm","Ask":"4.1620","Bid":"4.1569"},{"id":"GBPILS","Name":"GBP/ILS","Rate":"5.9330","Date":"11/18/2015","Time":"2:25pm","Ask":"5.9354","Bid":"5.9305"},{"id":"JPYILS","Name":"JPY/ILS","Rate":"0.0316","Date":"11/18/2015","Time":"2:25pm","Ask":"0.0316","Bid":"0.0316"},{"id":"CHFILS","Name":"CHF/ILS","Rate":"3.8334","Date":"11/18/2015","Time":"2:25pm","Ask":"3.8358","Bid":"3.8309"},{"id":"AUDILS","Name":"AUD/ILS","Rate":"2.7701","Date":"11/18/2015","Time":"2:25pm","Ask":"2.7715","Bid":"2.7687"}]}}}
+
+                //Perform request
+                response = web.DownloadString(url);
 
                 //Convert to Json
                 var results = JsonConvert.DeserializeObject<dynamic>(response);

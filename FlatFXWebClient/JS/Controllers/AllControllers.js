@@ -19,8 +19,8 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         $scope.bankTransferFeeNIS = 70;
         $scope.bankTransferFeeUSD = 18;
         $scope.bankTransferFeeEUR = 16;
-        $scope.flatFXCommission = 1.5;
-        $scope.bankCommission = 0.5;
+        $scope.flatFXCommissionParam = 2;
+        $scope.bankCommissionParam = 0;
         $scope.isRTL = isRTL;
         $scope.LangDir = "";
         if ($scope.isRTL === "True") {
@@ -76,6 +76,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         $scope.CalcByReceive = true;
         $scope.CalcSave = 0;
         $scope.BankRate = 0;
+        $scope.BrokerRate = 0;
         $scope.DirectionHeader = "You get";
         if ($scope.isRTL === "True") {
             $scope.DirectionHeader = "אתה מקבל";
@@ -83,6 +84,7 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         $scope.DirectionSymbol = "";
         $scope.DirectionGetFlatFX = 0;
         $scope.DirectionGetBank = 0;
+        $scope.DirectionGetBroker = 0;
         $scope.ShowWhy = false;
 
         if (loop === maxLoops) {
@@ -119,16 +121,16 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
         return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.009 * (1 - (0.01 * $scope.spreadDiscount))) + (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.0022 * (1 - (0.01 * $scope.exchangeDiscount)));
     };
     $scope.FlatFXCommission = function () {
-        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommission + $scope.bankCommission)));
+        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * (0.001 * ($scope.flatFXCommissionParam + $scope.bankCommissionParam)));
     };
     $scope.FlatFXSaving = function () {
         return ($scope.BankCommission() - $scope.FlatFXCommission() - $scope.bankTransferFeeNIS);
     };
     $scope.FlatFXIncome = function () {
-        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.001 * $scope.flatFXCommission);
+        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.001 * $scope.flatFXCommissionParam);
     };
     $scope.BankIncome = function () {
-        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommission);
+        return (SharedDataService.Get().ILSUSD * $scope.amountUSD * 1000000 * 0.001 * $scope.bankCommissionParam);
     };
 
     $scope.calculateReceive = function () {
@@ -143,18 +145,23 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
             $scope.Rate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidOrder;
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBank;
+            $scope.BrokerRate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBroker;
         } else if ($scope.ReceiveCurrencyISO === 'USD') {
             $scope.Rate = 1 / SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = 1 / (SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBank);
+            $scope.BrokerRate = 1 / (SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBroker);
         } else {
             $scope.Rate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidOrder * (1 / SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskOrder);
             $scope.IndicativeCalculatedAmount = $scope.converterAmount * $scope.Rate;
             $scope.BankRate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBank * (1 / SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBank);
+            $scope.BrokerRate = SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBroker * (1 / SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBroker);
         }
 
         $scope.DirectionGetFlatFX = $scope.IndicativeCalculatedAmount;
         $scope.DirectionGetBank = $scope.converterAmount * $scope.BankRate;
+        $scope.DirectionGetBroker = $scope.converterAmount * $scope.BrokerRate;
+
         $scope.CalcSave = $scope.DirectionGetFlatFX - $scope.DirectionGetBank - $scope.GetTransferFee($scope.ReceiveCurrencyISO);
     };
     $scope.calculateSend = function () {
@@ -169,18 +176,22 @@ myApp.controller('HomeIndex', function ($scope, $timeout, SharedDataService, Upd
             $scope.Rate = 1 / SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = 1 / (SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBank);
+            $scope.BrokerRate = 1 / (SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBroker);
         } else if ($scope.ReceiveCurrencyISO === 'USD') {
             $scope.Rate = SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBank;
+            $scope.BrokerRate = SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBroker;
         } else {
             $scope.Rate = (1 / SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidOrder) * SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskOrder;
             $scope.converterAmount = $scope.IndicativeCalculatedAmount * $scope.Rate;
             $scope.BankRate = (1 / SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBank) * SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBank;
+            $scope.BrokerRate = (1 / SharedDataService.Get().Currencies[$scope.ReceiveCurrencyISO].BidBroker) * SharedDataService.Get().Currencies[$scope.SendCurrencyISO].AskBroker;
         }
 
         $scope.DirectionGetFlatFX = $scope.converterAmount;
         $scope.DirectionGetBank = $scope.IndicativeCalculatedAmount * $scope.BankRate;
+        $scope.DirectionGetBroker = $scope.IndicativeCalculatedAmount * $scope.BrokerRate;
 
         $scope.CalcSave = $scope.DirectionGetBank - $scope.DirectionGetFlatFX - $scope.GetTransferFee($scope.SendCurrencyISO);
     };

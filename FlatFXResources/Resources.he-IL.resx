@@ -822,7 +822,7 @@
     <value>סחור ישירות מול לקוחות כמוך בשער האמצע הבין-בנקאי ללא מרווחי הבנק</value>
   </data>
   <data name="HomeHeader5" xml:space="preserve">
-    <value>איתנו תחסוך עד ₪200,000 כל שנה</value>
+    <value>סחור במרווחים הנמוכים ביותר בשוק (0.1%-0.3%)</value>
   </data>
   <data name="SlideHeader1" xml:space="preserve">
     <value>רשימת הזמנות המרה</value>
@@ -1247,5 +1247,17 @@
   </data>
   <data name="SummaryPvpStep3Direction31" xml:space="preserve">
     <value>הכסף צריך להיות זמין להעברה עד תאריך</value>
+  </data>
+  <data name="HomeHeader6" xml:space="preserve">
+    <value>בטחון מלא - הכסף לא יוצא מחשבון הבנק שלך עקב שימוש בהעברה מותנית</value>
+  </data>
+  <data name="averagebroker" xml:space="preserve">
+    <value>ברוקר ממוצע</value>
+  </data>
+  <data name="buying" xml:space="preserve">
+    <value>קונים</value>
+  </data>
+  <data name="InterBankPvPCommissionWarning" xml:space="preserve">
+    <value>אזהרה: בחר לבצע עסקאות מול הזמנות בבנק שלך (עמלת העברה ממוצעת של 6$), בחירת בנק שונה גוררת עמלות העברה בין בנקאיות בעלות ממוצעת של 0.2%</value>
   </data>
 </root>

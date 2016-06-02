@@ -48,23 +48,29 @@
                                 <td></td>
                                 <td class="font-bold">FlatFX</td>
                                 <td class="font-bold">@FlatFXResources.Resources.averagebank</td>
+                                <td class="font-bold">@FlatFXResources.Resources.averagebroker</td>
                             </tr>
                         </thead>
                         <tbody>
                             <tr>
                                 <td class="header">@FlatFXResources.Resources.Rate</td>
-                                <td class="ng-binding">{{ Rate | number:4 }}<br> (@FlatFXResources.Resources.inverse: {{ (1 / Rate) | number:4 }})</td>
-                                <td id="average_bank_rate" class="average_bank_col ng-binding">{{ BankRate | number:4}}<br> (@FlatFXResources.Resources.inverse: {{ 1 / BankRate | number:4}})</td>
+                                <td class="ng-binding">@FlatFXResources.Resources.MidRate + 0.2%</td>
+                                <td class="ng-binding">@FlatFXResources.Resources.MidRate + 1.1%</td>
+                                <td class="ng-binding">@FlatFXResources.Resources.MidRate + 0.5%</td>
+                                @*<td class="ng-binding">{{ Rate | number:4 }}<br> (@FlatFXResources.Resources.inverse: {{ (1 / Rate) | number:4 }})</td>
+                                <td id="average_bank_rate" class="average_bank_col ng-binding">{{ BankRate | number:4}}<br> (@FlatFXResources.Resources.inverse: {{ 1 / BankRate | number:4}})</td>*@
                             </tr>
                             <tr>
                                 <td class="header">@FlatFXResources.Resources.TransferFee</td>
                                 <td class="ng-binding">₪ 70</td>
                                 <td id="average_bank_fee" class="average_bank_col ng-binding">₪ 0</td>
+                                <td id="average_bank_fee" class="average_bank_col ng-binding">₪ 30</td>
                             </tr>
                             <tr>
                                 <td id="SeeWhyTableRecipientGetsHeader" class="font-bold ng-binding">{{ DirectionHeader }}</td>
                                 <td class="font-bold ng-binding">{{DirectionSymbol}} {{DirectionGetFlatFX | number:0}}</td>
                                 <td class="ng-binding">{{DirectionSymbol}} {{DirectionGetBank | number:0}}</td>
+                                <td class="ng-binding">{{DirectionSymbol}} {{DirectionGetBroker | number:0}}</td>
                             </tr>
                         </tbody>
                     </table>
@@ -81,8 +87,9 @@
                 <p class="text1"><b>@FlatFXResources.Resources.HomeHeader1</b></p>
                 <p class="text1">@FlatFXResources.Resources.HomeHeader2</p>
                 <p class="text2"><b>@FlatFXResources.Resources.HomeHeader3</b></p>
-                <p class="text1">@FlatFXResources.Resources.HomeHeader4</p>
-                <p class="text1">@FlatFXResources.Resources.HomeHeader5</p>
+                <p class="text3"><span class="glyphicon glyphicon-user"></span><span class="glyphicon glyphicon-transfer"></span><span class="glyphicon glyphicon-user"></span> @FlatFXResources.Resources.HomeHeader4</p>
+                <p class="text3"><span class="glyphicon glyphicon-scissors"></span>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<span class="glyphicon glyphicon-scissors"></span> @FlatFXResources.Resources.HomeHeader5</p>
+                <p class="text3"><span class="glyphicon glyphicon-tower"></span><span class="glyphicon glyphicon-tower"></span><span class="glyphicon glyphicon-tower"></span> @FlatFXResources.Resources.HomeHeader6</p>
                 <br />
                 <div class="btn-group">
                     <a class="btn btn-danger btn-lg" href="@Url.Action("RegisterAll", "Account")"><span class="glyphicon glyphicon-registration-mark"></span>@Resources.JoinTheRevolution</a>
@@ -94,7 +101,7 @@
     </div>
     <div class="col-xs-12 text-center calc-section">
         <p>&nbsp;</p>
-        <div class="col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-6 col-lg-offset-4 col-lg-4">
+        <div class="col-xs-offset-0 col-xs-12 col-md-offset-3 col-md-6">
             @Html.Partial("~/Views/Home/_CommissionCalculator.cshtml")
         </div>
         <p>&nbsp;</p>
@@ -140,15 +147,15 @@
                         </ul>
                     </div>
                     @*<br /><br />
-                    <h4>מרווחי המרה בעבודה מול ה <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><strong>Exchange System</strong></a></h4>
-                    אין עמלה על ביצוע ההמרה, העמלה היחידה הינה עמלת השער (המרווח משער האמצע)
-                    <div>
-                        <ul>
-                            <li>המרה של 100,000 דולר ומעלה - 0.2%</li>
-                            <li>המרה של 50,000-100,000 דולר - 0.3%</li>
-                            <li>המרה נמוכה מ 50,000 דולר - 0.4%</li>
-                        </ul>
-                    </div>*@
+                        <h4>מרווחי המרה בעבודה מול ה <a href="@Url.Action("EnterData", "SimpleCurrencyExchange")"><strong>Exchange System</strong></a></h4>
+                        אין עמלה על ביצוע ההמרה, העמלה היחידה הינה עמלת השער (המרווח משער האמצע)
+                        <div>
+                            <ul>
+                                <li>המרה של 100,000 דולר ומעלה - 0.2%</li>
+                                <li>המרה של 50,000-100,000 דולר - 0.3%</li>
+                                <li>המרה נמוכה מ 50,000 דולר - 0.4%</li>
+                            </ul>
+                        </div>*@
                     <br />
                     <h4>הערות</h4>
                     מחיר המרה מינימלי הינו 10,000 דולר<br />
@@ -177,13 +184,12 @@
                 </ol>
                 <div class="padding20">
                     <h4 class="start-align">איך מחיר העמלה כ"כ זול ?</h4>
-                    <div class="start-align">
-                        המרת המטבע הינה ישירות בין הלקוחות, לא מבוצעת המרת מטבע מול הבנקים ועקב כך:
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;- לא משולמת עמלת המרה לבנקים
-                        <br />
-                        &nbsp;&nbsp;&nbsp;&nbsp;- על FlatFX לא נדרש להבטיח את השער ללקוח, ההמרה הינה בין 2 הלקוחות ע"פ שער מוסכם
-                    </div>
+                    <ol>
+                        <li>לא מבוצעת המרת מטבע מול הבנקים אלא ישירות בין הלקוחות</li>
+                        <li>על FlatFX לא נדרש להבטיח את השער ללקוח, ההמרה הינה בין 2 הלקוחות ע"פ שער מוסכם</li>
+                        <li>לא מתבצעת העברה לחשבון FlatFX ולכן נחסכות הוצאות גבוהות על ניהול חשבונות, תשלומים לנאמן, תשלומים לביטוח, ועוד.</li>
+                        <li>מכיוון שההמרה אינה מתבצעת מול FlatFX אז לא נדרש הון עצמי או בטחונות מול הלקוח</li>
+                    </ol>
                 </div>
             </div>
         </div>
@@ -204,7 +210,7 @@
                         <ul>
                             <li><b>קבלת מחירי השוק OnLine,</b> שמירה על הלקוח מביצוע עיסקה במרווחים גדולים ע"י הצגת מרווחים רצויים.</li>
                             <li><b>מערכת ביצוע המרת מט"ח</b> במחירים זולים (עד 80% הנחה ממחירי הבנקים).</li>
-                            <li><b>מערכת הזמנת עיסקאות</b> בשער אמצע (יציג) מול לקוחות האתר האחרים</li>
+                            <li><b>מערכת הזמנת עיסקאות</b> בשער האמצע הבין-בנקאי מול לקוחות האתר האחרים</li>
                             <li><b>מסכי ניהול עסקאות</b> צפיה בכל העיסקאות הפתוחות / הסגורות. צפייה בהיסטוריית העיסקאות.</li>
                         </ul>
                     </div>
@@ -213,7 +219,6 @@
                         <ul>
                             <li><b>הקטנת עמלות המשתמשים ב 30%-80%.</b></li>
                             <li>המוצר מבצע מהפיכה במסחר במט"ח ומאפשר ללקוחות שונים לבצע המרה אחד עם השני באמצעות העברה מותנית</li>
-                            <li>ע"י השימוש במערכת הלקוח מסווג בקבוצת עמלות נמוכות בהשוואה לסיווגו כלקוח יחיד מול הבנק</li>
                         </ul>
                         <br /><br />
                     </div>

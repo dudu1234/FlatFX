@@ -1291,6 +1291,15 @@ textarea {
         font-size: 2em;
     }
 
+    .section1 .text3, .section-corrency-converter .text3 {
+        font-size: 1.1em;
+        text-align: start;
+    }
+
+    .section1 .text3 .glyphicon, .section-corrency-converter .text3 .glyphicon {
+        font-size: 1.5em;
+    }
+
     .section1 .btn-success {
         background-color: #209448;
     }
@@ -1361,6 +1370,12 @@ textarea {
     background-color: #209448;
     padding-bottom: 50px;
 }
+
+.bank-commission-form .Plus, .bank-commission-form .Minus {
+    font-size: 1em;
+    color: red;
+}
+
 
 .dashboard-chart-header {
     font-size: 1.5em;

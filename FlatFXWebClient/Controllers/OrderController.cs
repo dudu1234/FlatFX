@@ -381,10 +381,7 @@ namespace FlatFXWebClient.Controllers
                     {
                         model.MatchMyName = match.Deal1.user.FullName + " @ Demo Company";
                         model.MatchPartnerAccount = match.Deal2.Provider.Name + " - 222-222222";
-                        model.MatchPartnerName = match.Deal2.user.FullName + " @ Demo Company";
-
-                        if (model.MatchMyName == model.MatchPartnerName)
-                            model.MatchPartnerName = match.Deal2.user.FullName + "2 @ Demo Company";
+                        model.MatchPartnerName = " Anonymous @ Demo Company";
                     }
                     else
                     {
@@ -588,9 +585,9 @@ namespace FlatFXWebClient.Controllers
 
                 deal.BuySell = order.BuySell;
                 deal.Symbol = order.Symbol;
-                Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid;
-                if (deal.BuySell == Consts.eBuySell.Buy)
-                    priceBidOrAsk = Consts.eBidAsk.Ask;
+                //Consts.eBidAsk priceBidOrAsk = Consts.eBidAsk.Bid;
+                //if (deal.BuySell == Consts.eBuySell.Buy)
+                //    priceBidOrAsk = Consts.eBidAsk.Ask;
 
                 deal.OfferingDate = DateTime.Now;
                 deal.OfferingMidRate = matchMidRate;
