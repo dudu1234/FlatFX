@@ -385,6 +385,33 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 Bussiness Day.
+        /// </summary>
+        public static string BussinessDay1 {
+            get {
+                return ResourceManager.GetString("BussinessDay1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 Bussiness Day.
+        /// </summary>
+        public static string BussinessDay2 {
+            get {
+                return ResourceManager.GetString("BussinessDay2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 Bussiness Day.
+        /// </summary>
+        public static string BussinessDay5 {
+            get {
+                return ResourceManager.GetString("BussinessDay5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Buy.
         /// </summary>
         public static string Buy {
@@ -498,6 +525,15 @@ namespace FlatFXResources {
         public static string CHFILS {
             get {
                 return ResourceManager.GetString("CHFILS", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Clearing Type.
+        /// </summary>
+        public static string ClearingType {
+            get {
+                return ResourceManager.GetString("ClearingType", resourceCulture);
             }
         }
         
@@ -1666,6 +1702,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max.
+        /// </summary>
+        public static string Max {
+            get {
+                return ResourceManager.GetString("Max", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Max Amount.
         /// </summary>
         public static string MaxAmount {
@@ -1734,6 +1779,15 @@ namespace FlatFXResources {
         public static string MidRateOnMatch {
             get {
                 return ResourceManager.GetString("MidRateOnMatch", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Min.
+        /// </summary>
+        public static string Min {
+            get {
+                return ResourceManager.GetString("Min", resourceCulture);
             }
         }
         
@@ -2229,6 +2283,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Rate Range.
+        /// </summary>
+        public static string RateRange {
+            get {
+                return ResourceManager.GetString("RateRange", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Register.
         /// </summary>
         public static string Register {
@@ -2310,6 +2373,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Same Day.
+        /// </summary>
+        public static string SameDay {
+            get {
+                return ResourceManager.GetString("SameDay", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Save.
         /// </summary>
         public static string Save {
@@ -2333,6 +2405,15 @@ namespace FlatFXResources {
         public static string SeeWhy {
             get {
                 return ResourceManager.GetString("SeeWhy", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Select.
+        /// </summary>
+        public static string Select {
+            get {
+                return ResourceManager.GetString("Select", resourceCulture);
             }
         }
         

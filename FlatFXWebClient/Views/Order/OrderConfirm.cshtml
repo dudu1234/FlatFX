@@ -8,6 +8,23 @@
     {
         estimationIF = FlatFXResources.Resources.EstimationByMidRate + " " + Model.MatchMidRate.ToString("N4");
     }
+    string RateRangeTxt = "";
+    if (Model.order.MinRate.HasValue && Model.order.MaxRate.HasValue)
+    {
+        RateRangeTxt = Model.order.MinRate + " - " + Model.order.MaxRate;
+    }
+    else if (Model.order.MinRate.HasValue)
+    {
+        RateRangeTxt = Model.order.MinRate + " < Rate";
+    }
+    else if (Model.order.MaxRate.HasValue)
+    {
+        RateRangeTxt = Model.order.MaxRate + " > Rate";
+    }
+    else
+    {
+        RateRangeTxt = "-";
+    }
 }
 
 <div class="form-group">
@@ -34,7 +51,10 @@
 </div>
 <div class="form-group red">
     <div class="col-xs-6">
-        <label class="control-label">@FlatFXResources.Resources.SellAmount @((Model.order.BuySell == Consts.eBuySell.Buy) ? estimationIF : ""):</label>
+        <label class="control-label">@FlatFXResources.Resources.SellAmount:</label>
+        <div class="medium-line start-align">
+            <span class="estimation">@((Model.order.BuySell == Consts.eBuySell.Buy) ? estimationIF : "")</span>
+        </div>
         @if (!hasMatch && Model.order.BuySell == Consts.eBuySell.Buy)
         {
             <div class="medium-line start-align">
@@ -48,7 +68,10 @@
 </div>
 <div class="form-group green">
     <div class="col-xs-6">
-        <label class="control-label">@FlatFXResources.Resources.BuyAmount @((Model.order.BuySell == Consts.eBuySell.Sell) ? estimationIF : ""):</label>
+        <label class="control-label">@FlatFXResources.Resources.BuyAmount:</label>
+        <div class="medium-line start-align">
+            <span class="estimation">@((Model.order.BuySell == Consts.eBuySell.Sell) ? estimationIF : "")</span>
+        </div>
         @if (!hasMatch && Model.order.BuySell == Consts.eBuySell.Sell)
         {
             <div class="medium-line start-align">
@@ -70,13 +93,23 @@
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.YouSave @estimationIF:</label>
+    <div class="col-xs-6">
+        <label class="control-label">@FlatFXResources.Resources.YouSave:</label>
+        <div class="medium-line start-align">
+            <span class="estimation">@estimationIF</span>
+        </div>
+    </div>
     <div class="col-xs-6 order-value">
         @Model.order.CustomerTotalProfitUSD_Estimation$
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.FlatFXCommission @estimationIF:</label>
+    <div class="col-xs-6">
+        <label class="control-label">@FlatFXResources.Resources.FlatFXCommission:</label>
+        <div class="medium-line start-align">
+            <span class="estimation">@estimationIF</span>
+        </div>
+    </div>
     <div class="col-xs-6 order-value">
         @Model.order.FlatFXCommissionUSD_Estimation$ (@(CurrencyManager.Instance.GetOrderCommission(Model.order.AmountUSD_Estimation) * 100)%)
     </div>
@@ -84,27 +117,40 @@
 <div class="form-group">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.ExpiryDate:</label>
     <div class="col-xs-6 order-value">
-        @(Model.order.ExpiryDate.HasValue ? Model.order.ExpiryDate.Value.ToString("yyyy-MM-dd") : "Good Till Cancel")
+        @(Model.order.ExpiryDate.HasValue ? Model.order.ExpiryDate.Value.ToString("yyyy-MM-dd HH:mm") : "Good Till Cancel")
     </div>
 </div>
-@*<div class="form-group">
+<div class="form-group">
     <label class="control-label col-xs-6">@FlatFXResources.Resources.MinimalPartnerExecutionAmount:</label>
     <div class="col-xs-6 order-value">
         @(Model.order.MinimalPartnerExecutionAmountCCY1.HasValue ? (Model.order.MinimalPartnerExecutionAmountCCY1 + " " + Model.order.CCY1) : "Full Amount")
     </div>
 </div>
 <div class="form-group">
-    <label class="control-label col-xs-6">@FlatFXResources.Resources.PvPEnabled:</label>
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.ClearingType:</label>
     <div class="col-xs-6 order-value">
-        @(Model.order.PvPEnabled ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+        @Model.order.ClearingType.ToString()
     </div>
-</div>*@
-@*<div class="form-group">
-            <label class="control-label col-xs-6">@FlatFXResources.Resources.EnsureOnLinePrice:</label>
-            <div class="col-xs-6 order-value">
-                @(Model.order.EnsureOnLinePrice ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
-            </div>
+</div>
+<div class="form-group">
+    <label class="control-label col-xs-6">@FlatFXResources.Resources.RateRange:</label>
+    <div class="col-xs-6 order-value">
+        @RateRangeTxt
+    </div>
+</div>
+@*
+    <div class="form-group">
+        <label class="control-label col-xs-6">@FlatFXResources.Resources.PvPEnabled:</label>
+        <div class="col-xs-6 order-value">
+            @(Model.order.PvPEnabled ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
         </div>
+    </div>
+    <div class="form-group">
+        <label class="control-label col-xs-6">@FlatFXResources.Resources.EnsureOnLinePrice:</label>
+        <div class="col-xs-6 order-value">
+            @(Model.order.EnsureOnLinePrice ? FlatFXResources.Resources.Yes : FlatFXResources.Resources.No)
+        </div>
+    </div>
     <div class="form-group">
         <label class="control-label col-xs-6">@FlatFXResources.Resources.MinimalPartnerTotalVolumeUSD:</label>
         <div class="col-xs-6 order-value">

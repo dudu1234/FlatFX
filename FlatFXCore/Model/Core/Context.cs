@@ -14,6 +14,9 @@ using MySql.Data.Entity;
 
 namespace FlatFXCore.Model.Core
 {
+    /// <summary>
+    /// Update-Database -Force -Verbose
+    /// </summary>
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
     {

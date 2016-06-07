@@ -83,12 +83,15 @@ namespace FlatFXWebClient.ViewModels
         public Consts.eBuySell BuySell { get; set; }
         [Required]
         [Display(Name = "Amount CCY1")]
-        [Range(1000, 1000000, ErrorMessage = "Please enter number between 1,000-1,000,000")]
+        [Range(1000, 5000000, ErrorMessage = "Please enter number between 1,000-5,000,000")]
         [DisplayFormat(DataFormatString = "{0:0,0}")]
         public double AmountCCY1 { get; set; }
         [Display(Name = "Minimal Exchange Amount (CCY1)")]
         [Range(0, 100000000, ErrorMessage = "Please enter number between 0 - 100,000,000")]
         public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
+        public Consts.eClearingType ClearingType { get; set; }
+        public double? MinRate { get; set; }
+        public double? MaxRate { get; set; }
         [Display(Name = "Expiry Date")]
         public DateTime? ExpiryDate { get; set; }
         [Required]

@@ -2,6 +2,7 @@
 @using FlatFXCore.BussinessLayer;
 @using FlatFXCore.Model.Data;
 
+
 @Html.HiddenFor(model => model.InvalidAccountReason)
 @if (Model.InvalidAccountReason != null && Model.InvalidAccountReason.Count > 0)
 {
@@ -46,7 +47,7 @@ else
         <div class="form-group">
             <label class="control-label col-xs-5">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
             <div class="col-xs-7">
-                @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser), 
+                @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser),
                     "Key", "Value"), htmlAttributes: new { ng_model = "Symbol", ng_change = "setAction()", @class = "form-control" })
             </div>
         </div>
@@ -65,7 +66,7 @@ else
             <div class="col-xs-7">
                 <div class="input-group">
                     <span class="input-group-addon large-font">{{ CCY1Sign }}</span>
-                    <input type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" class="form-control amount-input" ng-change="setAction()" />
+                    <input autofocus type="number" id="AmountCCY1" name="AmountCCY1" data_ng_model="amountCcy1" class="form-control amount-input" ng-change="setAction()" />
                 </div>
             </div>
         </div>
@@ -94,8 +95,48 @@ else
                 </label>
             </div>
             <div class="col-xs-7">
-                <input type="date" name="ExpiryDate" id="ExpiryDate" ng-model="ExpiryDateModel" class="form-control" />
+                <div class="input-group direction-ltr" id="ExpiryDateDiv">
+                    <input type="datetime-local" name="ExpiryDate" id="ExpiryDate" ng-model="ExpiryDateModel" placeholder="Please enter expiry date" />
+                </div>
                 <label name="GTC" id="GTC" class="control-label">Good Till Cancel</label>
+            </div>
+        </div>
+        <div class="form-group">
+            <label class="control-label col-xs-5">@FlatFXResources.Resources.ClearingType</label>
+            <div class="col-xs-7">
+                <select id="ClearingType" name="ClearingType" class="form-control">
+                    <option value="-1">@FlatFXResources.Resources.Select</option>
+                    <option value="0">@FlatFXResources.Resources.SameDay</option>
+                    <option value="1">@FlatFXResources.Resources.BussinessDay1</option>
+                    <option value="2">@FlatFXResources.Resources.BussinessDay2</option>
+                    <option value="5">@FlatFXResources.Resources.BussinessDay5</option>
+                </select>
+            </div>
+        </div>
+        <div class="form-group">
+            <div class="col-xs-5">
+                <label class="control-label">
+                    <input class="control-label" name="showRateRange" type="checkbox" ng-model="rateRangeChkModel" ng-change="rateRangeCheckboxEvent(rateRangeChkModel)" /> @FlatFXResources.Resources.RateRange:
+                </label>
+            </div>
+            <div class="col-xs-7">
+                <div id="rateRangeDiv" ng-show="minRateModel > 0 || maxRateModel > 0">
+                    <div class="col-xs-12">
+                        <label class="control-label col-xs-1">@FlatFXResources.Resources.Min</label>
+                        <div class="col-xs-11">
+                            <input type="number" name="MinRate" id="MinRate" ng-model="minRateModel" class="form-control" placeholder="Min rate" step="0.0001" />
+                        </div>
+                    </div>
+                    <div class="col-xs-12">
+                        <label class="control-label col-xs-1">@FlatFXResources.Resources.Max</label>
+                        <div class="col-xs-11">
+                            <input type="number" name="MaxRate" id="MaxRate" ng-model="maxRateModel" class="form-control" placeholder="Max rate" step="0.0001" />
+                        </div>
+                    </div>
+                </div>
+                <div id="rateRangeDiv" ng-show="minRateModel == null && maxRateModel == null" class="start-align">
+                    <label>-</label>
+                </div>
             </div>
         </div>
         <div class="form-group">
@@ -105,23 +146,23 @@ else
             </div>
         </div>
         @*<div class="form-group">
-            <div class="col-xs-12 start-align">
-                @Html.CheckBoxFor(m => m.EnsureOnLinePrice, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.EnsureOnLinePrice, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_EnsureOnLinePrice * 100)%
-                <span ng-model="showEnsureOnLinePrice" ng-click="showEnsureOnLinePrice = !showEnsureOnLinePrice" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
-                <div ng-show="showEnsureOnLinePrice" class="descriptionDiv">
-                    @Html.Raw(FlatFXResources.Resources.EnsureOnLinePriceDetails)
+                <div class="col-xs-12 start-align">
+                    @Html.CheckBoxFor(m => m.EnsureOnLinePrice, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.EnsureOnLinePrice, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_EnsureOnLinePrice * 100)%
+                    <span ng-model="showEnsureOnLinePrice" ng-click="showEnsureOnLinePrice = !showEnsureOnLinePrice" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
+                    <div ng-show="showEnsureOnLinePrice" class="descriptionDiv">
+                        @Html.Raw(FlatFXResources.Resources.EnsureOnLinePriceDetails)
+                    </div>
                 </div>
             </div>
-        </div>
-        <div class="form-group">
-            <div class="col-xs-12 start-align">
-                @Html.CheckBoxFor(m => m.PvPEnabled, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.PvPEnabled, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_PvPEnabled * 100)%
-                <span ng-model="showPvPEnabled" ng-click="showPvPEnabled = !showPvPEnabled" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
-                <div ng-show="showPvPEnabled" class="descriptionDiv">
-                    @Html.Raw(FlatFXResources.Resources.PvPEnabledDetails)
+            <div class="form-group">
+                <div class="col-xs-12 start-align">
+                    @Html.CheckBoxFor(m => m.PvPEnabled, new { htmlAttributes = new { @class = "form-control" } }) @FlatFXResources.Resources.PvPEnabled, @FlatFXResources.Resources.ExtraChargeOf @(CurrencyManager.ExtraCharge_PvPEnabled * 100)%
+                    <span ng-model="showPvPEnabled" ng-click="showPvPEnabled = !showPvPEnabled" class="more-details"> @FlatFXResources.Resources.MoreDetails</span>
+                    <div ng-show="showPvPEnabled" class="descriptionDiv">
+                        @Html.Raw(FlatFXResources.Resources.PvPEnabledDetails)
+                    </div>
                 </div>
-            </div>
-        </div>*@
+            </div>*@
         <div class="form-group">
             @Html.LabelFor(model => model.Comment, htmlAttributes: new { @class = "control-label col-xs-5" })
             <div class="col-xs-7">

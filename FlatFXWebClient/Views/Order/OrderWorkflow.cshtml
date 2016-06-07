@@ -23,11 +23,11 @@
         controllerAction = "Confim";
     }
     double MinimalPartnerExecutionAmountCCY1 = (Model.MinimalPartnerExecutionAmountCCY1.HasValue) ? Model.MinimalPartnerExecutionAmountCCY1.Value : 0;
-    double dExpiryDate = (Model.ExpiryDate.HasValue) ? Model.ExpiryDate.Value.Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds : 0;
+    double dExpiryDate = (Model.ExpiryDate.HasValue) ? Model.ExpiryDate.Value.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds : 0;
 }
 
 <div ng-controller="OrderWorkflow"
-     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1, @Model.MatchMinAmount, @Model.MatchMaxAmount, '@Model.Symbol')"
+     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1, @Model.MatchMinAmount, @Model.MatchMaxAmount, '@Model.Symbol', @(Model.MinRate.HasValue? Model.MinRate.Value : 0), @(Model.MaxRate.HasValue ? Model.MaxRate.Value : 0))"
      class="order-currency-exchange-main">
 
     @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

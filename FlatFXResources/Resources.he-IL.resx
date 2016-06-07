@@ -1260,4 +1260,31 @@
   <data name="InterBankPvPCommissionWarning" xml:space="preserve">
     <value>אזהרה: בחר לבצע עסקאות מול הזמנות בבנק שלך (עמלת העברה ממוצעת של 6$), בחירת בנק שונה גוררת עמלות העברה בין בנקאיות בעלות ממוצעת של 0.2%</value>
   </data>
+  <data name="BussinessDay1" xml:space="preserve">
+    <value>יום העסקים הבא</value>
+  </data>
+  <data name="BussinessDay2" xml:space="preserve">
+    <value>2 ימי עסקים</value>
+  </data>
+  <data name="BussinessDay5" xml:space="preserve">
+    <value>5 ימי עסקים</value>
+  </data>
+  <data name="ClearingType" xml:space="preserve">
+    <value>סוג סליקה</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>מקסימום</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>מינימום</value>
+  </data>
+  <data name="RateRange" xml:space="preserve">
+    <value>טווח השער</value>
+  </data>
+  <data name="SameDay" xml:space="preserve">
+    <value>תוך יומי</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>בחר</value>
+  </data>
 </root>

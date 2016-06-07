@@ -576,9 +576,9 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
 
 // -----------------------------------------------------------------------------------------------------------------------------------------------------
 
-myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
+myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, SharedDataService, noty) {
     "use strict";
-    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount, Symbol) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount, Symbol, MinRateModel, MaxRateModel) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
@@ -590,6 +590,8 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
         $scope.CountDown = 60;
         $scope.WorkflowStage = WorkflowStage;
         $scope.Symbol = Symbol;
+        $scope.minRateModel = (MinRateModel == 0) ? null : MinRateModel;
+        $scope.maxRateModel = (MaxRateModel == 0) ? null: MaxRateModel;
 
         if (dExpiryDate == 0) {
             $scope.expiryDateChkModel = false;
@@ -637,9 +639,9 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
 
             if ($scope.ExpiryDateModel == '') {
                 $('#GTC').show();
-                $("#ExpiryDate").hide();
+                $("#ExpiryDateDiv").hide();
             } else {
-                $('#ExpiryDate').show();
+                $('#ExpiryDateDiv').show();
                 $("#GTC").hide();
             }
 
@@ -713,12 +715,12 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
         if ($event) {
             var today = $scope.EndOfDay();
             $scope.ExpiryDateModel = today;
-            $("#ExpiryDate").show();
+            $("#ExpiryDateDiv").show();
             $('#GTC').hide();
         } else {
             $('#GTC').show();
             $scope.ExpiryDateModel = '';
-            $("#ExpiryDate").hide();
+            $("#ExpiryDateDiv").hide();
         }
     };
     $scope.minimalPartnerCheckboxEvent = function ($event) {
@@ -731,9 +733,18 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, noty) {
             $("#MinimalPartnerExecutionAmountCCY1").hide();
         }
     };
+    $scope.rateRangeCheckboxEvent = function ($event) {
+        if ($event) {
+            $scope.minRateModel = parseFloat((SharedDataService.Get().Currencies[$scope.CCY2()].Mid * 0.98).toFixed(4));
+            $scope.maxRateModel = parseFloat((SharedDataService.Get().Currencies[$scope.CCY2()].Mid * 1.02).toFixed(4));
+        } else {
+            $scope.minRateModel = null;
+            $scope.maxRateModel = null;
+        }
+    };
     $scope.EndOfDay = function () {
         var end = new Date();
-        end.setHours(23, 59, 59, 999);
+        end.setHours(23, 59, 0, 0);
         return end;
     };
 });

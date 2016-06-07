@@ -1273,6 +1273,13 @@ textarea {
     direction: rtl;
 }
 
+.direction-ltr {
+    direction: ltr;
+}
+
+.ffx-inline {
+    display:inline-block;
+}
 .section1 {
     /*padding-top: 100px;*/
     background-color: whitesmoke;

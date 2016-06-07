@@ -109,6 +109,19 @@ namespace FlatFXCore.BussinessLayer
             Order2 = 2,
             Automatic = 3
         }
+        public enum eClearingType
+        {
+            [Display(Name = "None")]
+            None = -1,
+            [Display(Name = "Same Day")]
+            SameDay = 0,
+            [Display(Name = "1 Business Day")]
+            BusinessDay_1 = 1,
+            [Display(Name = "2 Business Day")]
+            BusinessDay_2 = 2,
+            [Display(Name = "5 Business Day")]
+            BusinessDay_5 = 5
+        }
         public enum eOrderStatus
         {
             None = 1,

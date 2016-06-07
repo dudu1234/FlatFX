@@ -1276,4 +1276,31 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="InterBankPvPCommissionWarning" xml:space="preserve">
     <value>Warning: Prefare choosing orders located in your bank (average transfer commission of 6$). Choosing different bank cause to additional transfer commission of 0.2% (average)</value>
   </data>
+  <data name="BussinessDay1" xml:space="preserve">
+    <value>1 Bussiness Day</value>
+  </data>
+  <data name="BussinessDay2" xml:space="preserve">
+    <value>2 Bussiness Day</value>
+  </data>
+  <data name="BussinessDay5" xml:space="preserve">
+    <value>5 Bussiness Day</value>
+  </data>
+  <data name="ClearingType" xml:space="preserve">
+    <value>Clearing Type</value>
+  </data>
+  <data name="Max" xml:space="preserve">
+    <value>Max</value>
+  </data>
+  <data name="Min" xml:space="preserve">
+    <value>Min</value>
+  </data>
+  <data name="RateRange" xml:space="preserve">
+    <value>Rate Range</value>
+  </data>
+  <data name="SameDay" xml:space="preserve">
+    <value>Same Day</value>
+  </data>
+  <data name="Select" xml:space="preserve">
+    <value>Select</value>
+  </data>
 </root>

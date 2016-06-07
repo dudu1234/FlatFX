@@ -165,6 +165,7 @@ namespace FlatFXCore.Model.Data
         public double? FlatFXCommissionUSD_Estimation { get; set; }
 
         public double? MinimalPartnerExecutionAmountCCY1 { get; set; }
+        [DisplayFormat(DataFormatString = "{0:yyyy/MM/dd HH:mm}", ApplyFormatInEditMode = true)]
         public DateTime? ExpiryDate { get; set; }
         public double? MinimalPartnerTotalVolumeUSD { get; set; }
         public int? PartnerMinScore { get; set; }
@@ -175,6 +176,9 @@ namespace FlatFXCore.Model.Data
         public double? AmountCCY1_Executed { get; set; }
         public double? AmountCCY1_Remainder { get; set; }
 
+        public Consts.eClearingType ClearingType { get; set; }
+        public double? MinRate { get; set; }
+        public double? MaxRate { get; set; }
         public Consts.eOrderStatus Status { get; set; }
         [MaxLength(500)]
         public string StatusDetails { get; set; }

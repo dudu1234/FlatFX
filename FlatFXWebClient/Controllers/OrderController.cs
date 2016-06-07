@@ -33,6 +33,9 @@ namespace FlatFXWebClient.Controllers
             model.Comment = order.Comment;
             model.ExpiryDate = order.ExpiryDate;
             model.MinimalPartnerExecutionAmountCCY1 = order.MinimalPartnerExecutionAmountCCY1;
+            model.ClearingType = order.ClearingType;
+            model.MinRate = order.MinRate;
+            model.MaxRate = order.MaxRate;
             model.PvPEnabled = true; // order.PvPEnabled;
             model.EnsureOnLinePrice = true; // order.EnsureOnLinePrice;
             model.order = order;
@@ -150,6 +153,12 @@ namespace FlatFXWebClient.Controllers
                 order.ExpiryDate = model.ExpiryDate;
                 model.MinimalPartnerExecutionAmountCCY1 = null;
                 order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                model.ClearingType = Consts.eClearingType.None;
+                order.ClearingType = model.ClearingType;
+                model.MinRate = null;
+                order.MinRate = null;
+                model.MaxRate = null;
+                order.MaxRate = null;
                 model.PvPEnabled = true;
                 order.PvPEnabled = true;
                 model.EnsureOnLinePrice = true;
@@ -201,6 +210,9 @@ namespace FlatFXWebClient.Controllers
             if (model.AmountCCY1 == 0)
                 TempData["ErrorResult"] += "Please select amount. ";
 
+            if (model.ClearingType == Consts.eClearingType.None)
+                TempData["ErrorResult"] += "Please select Clearing Day. ";
+
             if (model.AmountCCY1 < CurrencyManager.MinDealAmountUSD)
                 TempData["ErrorResult"] += "invalid amount. amount > " + CurrencyManager.MinDealAmountUSD.ToString() + ". ";
 
@@ -212,6 +224,9 @@ namespace FlatFXWebClient.Controllers
 
             if (model.MatchOrderId > 0 && (model.MatchMaxAmount < model.AmountCCY1 || model.MatchMinAmount > model.AmountCCY1))
                 TempData["ErrorResult"] += "Invalid partner match amount. Amount range is " + model.MatchMinAmount + " - " + model.MatchMaxAmount;
+
+            if (model.ExpiryDate.HasValue && model.ExpiryDate.Value.AddMinutes(-10) < DateTime.Now)
+                TempData["ErrorResult"] += "Expired date must be at least 10 minutes from now";
 
             if (TempData["ErrorResult"] != null)
                 return View("OrderWorkflow", model);
@@ -253,18 +268,24 @@ namespace FlatFXWebClient.Controllers
                     order.Comment = model.Comment;
                     order.ExpiryDate = model.ExpiryDate;
                     order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                    order.ClearingType = model.ClearingType;
+                    order.MinRate = model.MinRate;
+                    order.MaxRate = model.MaxRate;
                     order.PvPEnabled = true; // model.PvPEnabled;
                     order.EnsureOnLinePrice = true; // model.EnsureOnLinePrice;
                 }
                 else // new order or match order
                 {
-                    //change only the fields that are relevant for match order
+                    //do not change some of the fields in case of "match order"
                     if (model.MatchOrderId <= 0)
                     {
                         order.BuySell = model.BuySell;
                         order.Symbol = model.Symbol;
                         order.ExpiryDate = model.ExpiryDate;
+                        order.ClearingType = model.ClearingType;
                         order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
+                        order.MinRate = model.MinRate;
+                        order.MaxRate = model.MaxRate;
                     }
                     
                     order.OrderDate = DateTime.Now; //Request Date
@@ -431,10 +452,13 @@ namespace FlatFXWebClient.Controllers
                 model.AmountCCY1 = matchedOrder.AmountCCY1_Remainder.Value;
             model.BuySell = (matchedOrder.BuySell == Consts.eBuySell.Buy) ? Consts.eBuySell.Sell : Consts.eBuySell.Buy;
             model.Symbol = matchedOrder.Symbol;
-            model.ExpiryDate = DateTime.Now.AddHours(2);
+            model.ClearingType = matchedOrder.ClearingType;
+            DateTime dtExpiryDate = DateTime.Now.AddHours(2);
+            dtExpiryDate = new DateTime(dtExpiryDate.Year, dtExpiryDate.Month, dtExpiryDate.Day, dtExpiryDate.Hour, dtExpiryDate.Minute, 0);
+            model.ExpiryDate = dtExpiryDate;
             (ApplicationInformation.Instance.Session[model.OrderKey] as Order).BuySell = model.BuySell;
             (ApplicationInformation.Instance.Session[model.OrderKey] as Order).Symbol = model.Symbol;
-            (ApplicationInformation.Instance.Session[model.OrderKey] as Order).ExpiryDate = model.ExpiryDate;
+            (ApplicationInformation.Instance.Session[model.OrderKey] as Order).ExpiryDate = dtExpiryDate;
 
             model.MatchOrderId = matchOrderId;
             model.MatchMinAmount = matchedOrder.MinimalPartnerExecutionAmountCCY1.HasValue ? matchedOrder.MinimalPartnerExecutionAmountCCY1.Value : matchedOrder.AmountCCY1_Remainder.Value;
