@@ -90,12 +90,12 @@ else
         <div class="form-group">
             <label class="control-label col-xs-5">@FlatFXResources.Resources.ClearingType</label>
             <div class="col-xs-7">
-                <select id="ClearingType" name="ClearingType" class="form-control">
-                    <option value="-1">@FlatFXResources.Resources.Select</option>
-                    <option value="0">@FlatFXResources.Resources.SameDay</option>
-                    <option value="1">@FlatFXResources.Resources.BussinessDay1</option>
-                    <option value="2">@FlatFXResources.Resources.BussinessDay2</option>
-                    <option value="5">@FlatFXResources.Resources.BussinessDay5</option>
+                <select id="ClearingType" name="ClearingType" class="form-control" ng-model="ClearingTypeModel">
+                    <option ng-selected="ClearingTypeModel == -1" value="-1">@FlatFXResources.Resources.Select</option>
+                    <option ng-selected="ClearingTypeModel == 0" value="0">@FlatFXResources.Resources.SameDay</option>
+                    <option ng-selected="ClearingTypeModel == 1" value="1">@FlatFXResources.Resources.BussinessDay1</option>
+                    <option ng-selected="ClearingTypeModel == 2" value="2">@FlatFXResources.Resources.BussinessDay2</option>
+                    <option ng-selected="ClearingTypeModel == 5" value="5">@FlatFXResources.Resources.BussinessDay5</option>
                 </select>
             </div>
         </div>

@@ -16,7 +16,7 @@ namespace FlatFXWebClient.ViewModels
 
         public DashboardIndexViewModel()
         {
-            TabName = "OpenDeals";
+            TabName = "OpenOrders";
         }
     }
     public class DashboardStatisticsViewModel

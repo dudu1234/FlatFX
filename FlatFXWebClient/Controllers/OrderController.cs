@@ -282,12 +282,12 @@ namespace FlatFXWebClient.Controllers
                         order.BuySell = model.BuySell;
                         order.Symbol = model.Symbol;
                         order.ExpiryDate = model.ExpiryDate;
-                        order.ClearingType = model.ClearingType;
                         order.MinimalPartnerExecutionAmountCCY1 = model.MinimalPartnerExecutionAmountCCY1;
                         order.MinRate = model.MinRate;
                         order.MaxRate = model.MaxRate;
                     }
                     
+                    order.ClearingType = model.ClearingType;
                     order.OrderDate = DateTime.Now; //Request Date
                     order.AmountCCY1 = model.AmountCCY1;
                     order.AmountCCY1_Executed = 0;
@@ -386,11 +386,14 @@ namespace FlatFXWebClient.Controllers
                     //Match 2 orders
                     OrderMatch match = new OrderMatch();
                     match.MidRate = model.MatchMidRate;
-                    
+
                     bool isValid = InitializeMatch(match, order.OrderId, model.MatchOrderId, Consts.eMatchTriggerSource.Order1);
                     if (!isValid || match.ErrorMessage != null)
                     {
-                        TempData["ErrorResult"] += "Match falied. Please contact FlatFX Team. Details: " + match.ErrorMessage;
+                        TempData["ErrorResult"] += "Match falied, Your order has been canceled. Please contact FlatFX Team. Details: " + match.ErrorMessage;
+                        order.Status = Consts.eOrderStatus.Canceled;
+                        db.SaveChanges();
+                        return RedirectToAction("CreateOrderIndex", model);
                     }
                     else
                     {
@@ -497,11 +500,13 @@ namespace FlatFXWebClient.Controllers
                 if (match.Order2.Status != Consts.eOrderStatus.Waiting && match.Order2.Status != Consts.eOrderStatus.Triggered_partially)
                     match.ErrorMessage += "Order " + match.Order2.OrderId + "(" + match.Order2.BuySell.ToString() + " " + match.Order2.AmountCCY1_Remainder + " " + match.Order2.CCY1 + ") is not longer valid." + Environment.NewLine;
 
+                Order activeOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order1 : match.Order2;
+                Order passiveOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order2 : match.Order1;
+
                 //validate the orders amount
                 if (match.TriggerSource != Consts.eMatchTriggerSource.Automatic)
                 {
-                    Order activeOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order1 : match.Order2;
-                    Order passiveOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order2 : match.Order1;
+                    
                     if (activeOrder.AmountCCY1_Remainder > passiveOrder.AmountCCY1_Remainder)
                         match.ErrorMessage += "Order " + activeOrder.OrderId + "(" + activeOrder.BuySell.ToString() + " " + activeOrder.AmountCCY1_Remainder + " " + activeOrder.CCY1 + ") amount is too high." + Environment.NewLine;
                     if (activeOrder.AmountCCY1_Remainder < passiveOrder.MinimalPartnerExecutionAmountCCY1)
@@ -525,15 +530,25 @@ namespace FlatFXWebClient.Controllers
                 if (match.MidRate.Value > (pairRate.Mid * 1.001) || match.MidRate.Value < (pairRate.Mid * 0.999))
                     match.ErrorMessage += "The Exchange Rate is not up to date. Please contact FlatFX Support.";
 
+                //Make sure the match is not Expired 
+                if (passiveOrder.ExpiryDate.HasValue && passiveOrder.ExpiryDate.Value < DateTime.Now)
+                    match.ErrorMessage += "The partner order is Expired";
+
+                //Make sure the rate is in the matched order range
+                if (passiveOrder.MinRate.HasValue && passiveOrder.MinRate.Value > match.MidRate.Value)
+                    match.ErrorMessage += "The confirmed matched mid rate is below the rate range of your partner order";
+                if (passiveOrder.MaxRate.HasValue && passiveOrder.MaxRate.Value < match.MidRate.Value)
+                    match.ErrorMessage += "The confirmed matched mid rate is obove the rate range of your partner order";
+
+                if (match.ErrorMessage != null)
+                    return false;
+
                 match.Deal1 = GenerateDeal(match, match.Order1, match.MidRate.Value, match.Order1.AmountCCY1);
                 match.Deal2 = GenerateDeal(match, match.Order2, match.MidRate.Value, match.Order1.AmountCCY1);
 
                 //Change Orders info
                 if (match.TriggerSource != Consts.eMatchTriggerSource.Automatic)
                 {
-                    Order activeOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order1 : match.Order2;
-                    Order passiveOrder = (match.TriggerSource == Consts.eMatchTriggerSource.Order1) ? match.Order2 : match.Order1;
-
                     activeOrder.AmountCCY1_Executed = activeOrder.AmountCCY1_Remainder;
                     activeOrder.AmountCCY1_Remainder = 0;
                     activeOrder.Status = Consts.eOrderStatus.Triggered;

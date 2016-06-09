@@ -29,6 +29,9 @@
                             <td title="'@FlatFXResources.Resources.ExpiryDate'" filter="{ ExpiryDate: 'number'}" sortable="'ExpiryDate'" class="table-wide-column-1">{{ order.ExpiryDate.substring(6, 19) | date: 'yyyy-MM-dd HH:mm' }}</td>
                             <td title="'@FlatFXResources.Resources.AmountExecuted CCY1'" filter="{ AmountCCY1_Executed: 'number'}" sortable="'AmountCCY1_Executed'">{{ order.AmountCCY1_Executed | number:0 }}</td>
                             <td title="'@FlatFXResources.Resources.AmountRemainder CCY1'" filter="{ AmountCCY1_Remainder: 'number'}" sortable="'AmountCCY1_Remainder'">{{ order.AmountCCY1_Remainder | number:0 }}</td>
+                            <td title="'@FlatFXResources.Resources.ClearingType'" filter="{ ClearingType: 'text'}" sortable="'ClearingType'">{{ order.ClearingType }}</td>
+                            <td title="'@FlatFXResources.Resources.MinRate'" filter="{ MinRate: 'number'}" sortable="'MinRate'">{{ order.MinRate }}</td>
+                            <td title="'@FlatFXResources.Resources.MaxRate'" filter="{ MaxRate: 'number'}" sortable="'MaxRate'">{{ order.MaxRate }}</td>
                             <td title="'@FlatFXResources.Resources.UserName'" filter="{ UserName: 'number'}" sortable="'UserName'">{{ order.UserName }}</td>
                             <td title="'@FlatFXResources.Resources.StatusDetails'" filter="{ StatusDetails: 'number'}" sortable="'StatusDetails'">{{ order.StatusDetails }}</td>
                             <td class="table-btn-td-2">

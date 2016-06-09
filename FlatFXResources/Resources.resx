@@ -1276,6 +1276,15 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="InterBankPvPCommissionWarning" xml:space="preserve">
     <value>Warning: Prefare choosing orders located in your bank (average transfer commission of 6$). Choosing different bank cause to additional transfer commission of 0.2% (average)</value>
   </data>
+  <data name="BusinessDay_1" xml:space="preserve">
+    <value>1 Bussiness day</value>
+  </data>
+  <data name="BusinessDay_2" xml:space="preserve">
+    <value>2 Bussiness day</value>
+  </data>
+  <data name="BusinessDay_5" xml:space="preserve">
+    <value>5 Bussiness day</value>
+  </data>
   <data name="BussinessDay1" xml:space="preserve">
     <value>1 Bussiness Day</value>
   </data>
@@ -1291,8 +1300,17 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="Max" xml:space="preserve">
     <value>Max</value>
   </data>
+  <data name="MaxRate" xml:space="preserve">
+    <value>Max Rate</value>
+  </data>
   <data name="Min" xml:space="preserve">
     <value>Min</value>
+  </data>
+  <data name="MinRate" xml:space="preserve">
+    <value>Min Rate</value>
+  </data>
+  <data name="None" xml:space="preserve">
+    <value>None</value>
   </data>
   <data name="RateRange" xml:space="preserve">
     <value>Rate Range</value>

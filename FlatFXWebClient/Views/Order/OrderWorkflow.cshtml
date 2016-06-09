@@ -27,7 +27,7 @@
 }
 
 <div ng-controller="OrderWorkflow"
-     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1, @Model.MatchMinAmount, @Model.MatchMaxAmount, '@Model.Symbol', @(Model.MinRate.HasValue? Model.MinRate.Value : 0), @(Model.MaxRate.HasValue ? Model.MaxRate.Value : 0))"
+     ng-init="init(@Model.WorkflowStage, '@Html.Raw(ApplicationInformation.Instance.IsDemoUser)', '@TempData["Result"]', '@TempData["ErrorResult"]', @Model.AmountCCY1, @dExpiryDate, @MinimalPartnerExecutionAmountCCY1, @Model.MatchMinAmount, @Model.MatchMaxAmount, '@Model.Symbol', @(Model.MinRate.HasValue? Model.MinRate.Value : 0), @(Model.MaxRate.HasValue ? Model.MaxRate.Value : 0), @(((int)Model.ClearingType).ToString()))"
      class="order-currency-exchange-main">
 
     @using (Html.BeginForm(controllerAction, "Order", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))

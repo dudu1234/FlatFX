@@ -37,9 +37,9 @@
                             <colgroup>
                                 <col class="col-sm-2" />
                                 <col class="col-sm-2" />
-                                <col class="col-sm-1" />
+                                <col class="col-sm-2" />
                                 <col class="col-sm-3" />
-                                <col class="col-sm-4" />
+                                <col class="col-sm-3" />
                             </colgroup>
                             <thead>
                                 <tr class="first-header">
@@ -48,8 +48,8 @@
                                 <tr class="second-header">
                                     @*<th ng-class="orderByBuy == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('CompanyName')">@FlatFXResources.Resources.Partner</a></th>*@
                                     <th>@FlatFXResources.Resources.Bank</th>
-                                    <th>Expired</th>
-                                    <th>Transfer On</th>
+                                    <th>@FlatFXResources.Resources.ExpiryDate</th>
+                                    <th>@FlatFXResources.Resources.ClearingType</th>
                                     <th ng-class="orderByBuy == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MinAmount')">@FlatFXResources.Resources.MinAmount {{ CCY1() }}</a></th>
                                     <th ng-class="orderByBuy == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingB('MaxAmount')">@FlatFXResources.Resources.MaxAmount {{ CCY1() }}</a></th>
                                 </tr>
@@ -58,8 +58,8 @@
                                 <tr ng-repeat="order in OrdersToBuy | rangeFilter:'MinAmount':minAmountBuy:'MaxAmount':maxAmountBuy | orderBy:orderByBuy">
                                     @*<td>{{ order.CompanyName }}</td>*@
                                     <td>{{ order.BankName }}</td>
-                                    <td>Today 22:45</td>
-                                    <td>Today</td>
+                                    <td>{{ order.ExpiredTxt }}</td>
+                                    <td>{{ order.ClearingTypeTxt }}</td>
                                     <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Min')">{{ order.MinAmount | number:0 }}</a></td>
                                     <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Max')">{{ order.MaxAmount | number:0 }}</a></td>
                                 </tr>
@@ -69,9 +69,9 @@
                     <div class="col-xs-6 col-md-6 table-order-wrapper">
                         <table class="table table-responsive table-bordered table-hover table-striped table-order-sell">
                             <colgroup>
-                                <col class="col-sm-4" />
                                 <col class="col-sm-3" />
-                                <col class="col-sm-1" />
+                                <col class="col-sm-3" />
+                                <col class="col-sm-2" />
                                 <col class="col-sm-2" />
                                 <col class="col-sm-2" />
                             </colgroup>
@@ -83,8 +83,8 @@
                                     <th ng-class="orderBySell == 'MaxAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MaxAmount')">@FlatFXResources.Resources.MaxAmount {{ CCY1() }}</a></th>
                                     <th ng-class="orderBySell == 'MinAmount' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('MinAmount')">@FlatFXResources.Resources.MinAmount {{ CCY1() }}</a></th>
                                     @*<th ng-class="orderBySell == 'CompanyName' ? 'selected' :  ''"><a href="#" ng-click="changeSortingS('CompanyName')">@FlatFXResources.Resources.Partner</a></th>*@
-                                    <th>Transfer On</th>
-                                    <th>Expired</th>
+                                    <th>@FlatFXResources.Resources.ClearingType</th>
+                                    <th>@FlatFXResources.Resources.ExpiryDate</th>
                                     <th>@FlatFXResources.Resources.Bank</th>
                                 </tr>
                             </thead>
@@ -92,8 +92,8 @@
                                 <tr ng-repeat="order in OrdersToSell | rangeFilter:'MinAmount':minAmountBuy:'MaxAmount':maxAmountBuy | orderBy:orderBySell">
                                     <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Max')">{{ order.MaxAmount | number:0 }}</a></td>
                                     <td><a class="orderbook-amount" ng-click="createNewOrderWithMatch(order, 'Min')">{{ order.MinAmount | number:0 }}</a></td>
-                                    <td>Today</td>
-                                    <td>Today 22:45</td>
+                                    <td>{{ order.ClearingTypeTxt }}</td>
+                                    <td>{{ order.ExpiredTxt }}</td>
                                     <td>{{ order.BankName }}</td>
                                     @*<td>{{ order.CompanyName }}</td>*@
                                 </tr>

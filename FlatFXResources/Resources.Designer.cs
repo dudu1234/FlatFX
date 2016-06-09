@@ -385,6 +385,33 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to 1 Bussiness day.
+        /// </summary>
+        public static string BusinessDay_1 {
+            get {
+                return ResourceManager.GetString("BusinessDay_1", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 2 Bussiness day.
+        /// </summary>
+        public static string BusinessDay_2 {
+            get {
+                return ResourceManager.GetString("BusinessDay_2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to 5 Bussiness day.
+        /// </summary>
+        public static string BusinessDay_5 {
+            get {
+                return ResourceManager.GetString("BusinessDay_5", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to 1 Bussiness Day.
         /// </summary>
         public static string BussinessDay1 {
@@ -1720,6 +1747,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Max Rate.
+        /// </summary>
+        public static string MaxRate {
+            get {
+                return ResourceManager.GetString("MaxRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to About.
         /// </summary>
         public static string MenuAbout {
@@ -1819,6 +1855,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Min Rate.
+        /// </summary>
+        public static string MinRate {
+            get {
+                return ResourceManager.GetString("MinRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Mobile Phone.
         /// </summary>
         public static string MobilePhone {
@@ -1860,6 +1905,15 @@ namespace FlatFXResources {
         public static string No {
             get {
                 return ResourceManager.GetString("No", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to None.
+        /// </summary>
+        public static string None {
+            get {
+                return ResourceManager.GetString("None", resourceCulture);
             }
         }
         

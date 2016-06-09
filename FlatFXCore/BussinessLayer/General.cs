@@ -25,6 +25,7 @@ namespace FlatFXCore.BussinessLayer
     {
         private static DailyTasks m_DailyTasks = null;
         private System.Threading.Timer m_DailyTimer = null;
+        private System.Threading.Timer m_5MinutesTimer = null;
         
         #region Ctor
         /// <summary>
@@ -50,7 +51,7 @@ namespace FlatFXCore.BussinessLayer
             DateTime two = new DateTime(DateTime.Now.Year, DateTime.Now.Month, DateTime.Now.Day, 2, 0, 0).AddDays(1);
             TimeSpan ts = two - DateTime.Now;
             m_DailyTimer = new System.Threading.Timer(callback, null, (int)(ts.TotalSeconds * 1000), 24 * 60 * 60 * 1000);
-
+            m_5MinutesTimer = new System.Threading.Timer(Minutes5Trigger, null, 60 * 1000, 5 * 1000);
             callback(null);
         }
         #endregion
@@ -67,6 +68,11 @@ namespace FlatFXCore.BussinessLayer
                 {
                     m_DailyTimer.Dispose();
                     m_DailyTimer = null;
+                }
+                if (m_5MinutesTimer != null)
+                {
+                    m_5MinutesTimer.Dispose();
+                    m_5MinutesTimer = null;
                 }
             }
         }
@@ -101,7 +107,7 @@ namespace FlatFXCore.BussinessLayer
 
                     //Set Orders Expiry Date, to do dudu Should run on Mid-Night Exactlly
                     dt = DateTime.Today;
-                    List<Order> orders2 = db.Orders.Where(o => (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting) && o.ExpiryDate.HasValue && o.ExpiryDate.Value <= dt).ToList();
+                    List<Order> orders2 = db.Orders.Where(o => (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting || o.Status == Consts.eOrderStatus.Triggered_partially) && o.ExpiryDate.HasValue && o.ExpiryDate.Value <= dt).ToList();
                     foreach (Order order in orders2)
                     {
                         order.Status = Consts.eOrderStatus.Expired;
@@ -138,7 +144,7 @@ namespace FlatFXCore.BussinessLayer
 
                     //Set status = Close for all old DEMO Orders
                     dt = DateTime.Now.AddDays(-60);
-                    List<Order> orders = db.Orders.Where(o => o.IsDemo && (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting) && 
+                    List<Order> orders = db.Orders.Where(o => o.IsDemo && (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting || o.Status == Consts.eOrderStatus.Triggered_partially) && 
                         o.OrderDate < dt).ToList();
                     foreach (Order order in orders)
                     {
@@ -156,6 +162,33 @@ namespace FlatFXCore.BussinessLayer
             catch(Exception ex)
             {
                 Logger.Instance.WriteError("Failed in DailyTrigger", ex);
+            }
+        }
+        /// <summary>
+        /// Runs every 5 Minutes
+        /// </summary>
+        /// <param name="stateInfo"></param>
+        public void Minutes5Trigger(Object stateInfo)
+        {
+            try
+            {
+                using (var db = new ApplicationDBContext())
+                {
+                    DateTime dt = DateTime.Now;
+
+                    //Set Orders Expiry Date
+                    List<Order> orders2 = db.Orders.Where(o => (o.Status == Consts.eOrderStatus.None || o.Status == Consts.eOrderStatus.Waiting || o.Status == Consts.eOrderStatus.Triggered_partially) && o.ExpiryDate.HasValue && o.ExpiryDate.Value <= dt).ToList();
+                    foreach (Order order in orders2)
+                    {
+                        order.Status = Consts.eOrderStatus.Expired;
+                    }
+                    db.SaveChanges();
+                }
+
+            }
+            catch (Exception ex)
+            {
+                Logger.Instance.WriteError("Failed in Minutes5Trigger", ex);
             }
         }
     }

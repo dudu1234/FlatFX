@@ -384,7 +384,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
 
         if (tabName === undefined || tabName === null) {
             alert('undefined');
-            tabName = 'OpenDeals';
+            tabName = 'OpenOrders';
         }
 
         $scope.radioDataModel = tabName;
@@ -578,7 +578,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
 
 myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, SharedDataService, noty) {
     "use strict";
-    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount, Symbol, MinRateModel, MaxRateModel) {
+    $scope.init = function (WorkflowStage, isDemo, info, error, amountCCY1, dExpiryDate, MinimalPartnerExecutionAmountCCY1, MatchMinAmount, MatchMaxAmount, Symbol, MinRateModel, MaxRateModel, ClearingTypeModel) {
         $scope.isDemo = isDemo;
         $scope.info = info;
         $scope.error = error;
@@ -591,7 +591,9 @@ myApp.controller('OrderWorkflow', function ($scope, $timeout, $interval, SharedD
         $scope.WorkflowStage = WorkflowStage;
         $scope.Symbol = Symbol;
         $scope.minRateModel = (MinRateModel == 0) ? null : MinRateModel;
-        $scope.maxRateModel = (MaxRateModel == 0) ? null: MaxRateModel;
+        $scope.maxRateModel = (MaxRateModel == 0) ? null : MaxRateModel;
+        $scope.rateRangeChkModel = (MaxRateModel > 0) || (MinRateModel > 0);
+        $scope.ClearingTypeModel = ClearingTypeModel;
 
         if (dExpiryDate == 0) {
             $scope.expiryDateChkModel = false;

@@ -18,19 +18,19 @@
                         <table class="table table-bordered table-hover table-striped ffx-table">
                             <colgroup>
                                 <col width="10" />
-                                <col class="col-sm-4" />
-                                <col class="col-sm-2" />
-                                <col class="col-sm-2" />
-                                <col class="col-sm-2" />
-                                <col class="col-sm-2" />
+                                <col class="col-sm-6" />
+                                <col class="col-sm-3" />
+                                @*<col class="col-sm-2" />
+                                <col class="col-sm-2" />*@
+                                <col class="col-sm-3" />
                             </colgroup>
                             <thead>
                                 <tr>
                                     <th></th>
                                     <th>@FlatFXResources.Resources.Pair</th>
                                     <th>@FlatFXResources.Resources.MidRate</th>
-                                    <th>@FlatFXResources.Resources.Buy</th>
-                                    <th>@FlatFXResources.Resources.Sell</th>
+                                    @*<th>@FlatFXResources.Resources.Buy</th>
+                                    <th>@FlatFXResources.Resources.Sell</th>*@
                                     <th>@FlatFXResources.Resources.LastUpdate</th>
                                 </tr>
                             </thead>
@@ -41,9 +41,9 @@
                                     <td>{{ rate.Mid }}</td>
                                     @*<td><a href="{{ getHref(rate.Key, 'bid')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Bid }}</a></td>
                                     <td><a href="{{ getHref(rate.Key, 'ask')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Ask }}</a></td>*@
-                                    <td>{{ rate.Bid }}</td>
-                                    <td>{{ rate.Ask }}</td>
-                                    <td>{{ rate.LastUpdate | date:'HH:mm' }}</td>
+                                    @*<td>{{ rate.Bid }}</td>
+                                    <td>{{ rate.Ask }}</td>*@
+                                    <td>{{ rate.LastUpdate | date:'HH:mm yy/MM/dd' }}</td>
                                 </tr>
                             </tbody>
                         </table>
