@@ -331,6 +331,14 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
     $scope.init = function (feedUrl) {
         $scope.FeedRatesUrl = feedUrl;
         $scope.SimpleTradingUrl = urlPrefix + "/SimpleCurrencyExchange/StartTrade";
+
+
+        $scope.showHistoricalRatesHeader = true;
+        $scope.SelectPairModel = 'USDILS';
+        $scope.SelectedDateModel = new Date();
+        $scope.SelectedDateMidRate = '-';
+        $scope.HistoryRatesUrl = urlPrefix + "/OnLineFXRates/GetHistoricalRates";
+        $scope.HistoricalRates = {};
     };
 
     $scope.showError = function (error) {
@@ -340,6 +348,7 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
     $scope.ready = function () {
         $scope.refreshYahooDataFeed();
         $scope.isFirstLoad = true;
+        $scope.GetRatesHistory();
     };
 
     $scope.refreshYahooDataFeed = function () {
@@ -373,6 +382,41 @@ myApp.controller('OnLineRatesViewer', function ($scope, $http, $interval, $timeo
 
     $scope.getHref = function (key, direction) {
         return $scope.SimpleTradingUrl + '?key=' + key + '&direction=' + direction;
+    };
+
+    $scope.GetRatesHistory = function () {
+        var data = $.param({
+            Symbol: $scope.SelectPairModel,
+            date1: $scope.SelectedDateModel.toISOString()
+        });
+        var url = $scope.HistoryRatesUrl;
+
+        $http({
+            method: 'POST',
+            url: url,
+            data: data,
+            headers: { 'Content-Type': 'application/x-www-form-urlencoded' }
+        })
+        .then(function (response) {
+            try {
+                if (response.data.Rate == null) {
+                    $scope.SelectedDateMidRate = 'Unknown';
+                    $scope.HistoricalRates = {};
+                }
+                else {
+                    $scope.SelectedDateMidRate = response.data.Rate;
+                    $scope.HistoricalRates = response.data.Rates;
+                    angular.forEach($scope.HistoricalRates, function (value, key) {
+                        value.Time = new Date(parseInt(value.Time.substr(6)));
+                    });
+                }
+            } catch (err) {
+                $scope.HistoricalRates = {};
+            }
+        },
+        function (response) { // optional
+            $scope.HistoricalRates = {};
+        });
     };
 });
 

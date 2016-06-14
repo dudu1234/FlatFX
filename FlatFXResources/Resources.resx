@@ -1321,4 +1321,16 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="Select" xml:space="preserve">
     <value>Select</value>
   </data>
+  <data name="HistoricalRates" xml:space="preserve">
+    <value>Historical Rates</value>
+  </data>
+  <data name="MidRateIs" xml:space="preserve">
+    <value>Mid Rate is</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>Select Date</value>
+  </data>
+  <data name="ShowRate" xml:space="preserve">
+    <value>Show Rate</value>
+  </data>
 </root>

@@ -21,7 +21,7 @@
                                 <col class="col-sm-6" />
                                 <col class="col-sm-3" />
                                 @*<col class="col-sm-2" />
-                                <col class="col-sm-2" />*@
+                                    <col class="col-sm-2" />*@
                                 <col class="col-sm-3" />
                             </colgroup>
                             <thead>
@@ -30,7 +30,7 @@
                                     <th>@FlatFXResources.Resources.Pair</th>
                                     <th>@FlatFXResources.Resources.MidRate</th>
                                     @*<th>@FlatFXResources.Resources.Buy</th>
-                                    <th>@FlatFXResources.Resources.Sell</th>*@
+                                        <th>@FlatFXResources.Resources.Sell</th>*@
                                     <th>@FlatFXResources.Resources.LastUpdate</th>
                                 </tr>
                             </thead>
@@ -40,9 +40,9 @@
                                     <td>{{ rate.KeyDisplay }}</td>
                                     <td>{{ rate.Mid }}</td>
                                     @*<td><a href="{{ getHref(rate.Key, 'bid')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Bid }}</a></td>
-                                    <td><a href="{{ getHref(rate.Key, 'ask')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Ask }}</a></td>*@
+                                        <td><a href="{{ getHref(rate.Key, 'ask')}}" ng-class="rate.IsTradable == false ? 'not-active-a' : ''">{{ rate.Ask }}</a></td>*@
                                     @*<td>{{ rate.Bid }}</td>
-                                    <td>{{ rate.Ask }}</td>*@
+                                        <td>{{ rate.Ask }}</td>*@
                                     <td>{{ rate.LastUpdate | date:'HH:mm yy/MM/dd' }}</td>
                                 </tr>
                             </tbody>
@@ -64,6 +64,46 @@
                 <p>@FlatFXResources.Resources.ShowRateRemarksRow3</p>
                 <p>@FlatFXResources.Resources.ShowRateRemarksRow4</p>
                 <p>@FlatFXResources.Resources.ShowRateRemarksRow5</p>
+            </div>
+        </div>
+        <div class="col-sm-12 col-sm-offset-0 col-md-10 col-md-offset-1 col-lg-6 col-lg-offset-3 historical-rates-panel">
+            <h3 class="historical-rates-header" ng-model="showHistoricalRatesHeader" ng-click="showHistoricalRatesHeader=true">@FlatFXResources.Resources.HistoricalRates</h3>
+            <div id="historical-rates" ng-show="showHistoricalRatesHeader">
+                <div class="col-sm-9">
+                    <div class="form-group">
+                        <label class="control-label col-xs-5">@FlatFXResources.Resources.OrderChooseCurrencyPair:</label>
+                        <div class="col-xs-7">
+                            <select id="SelectPair" name="SelectPair" class="form-control" ng-model="SelectPairModel">
+                                <option ng-selected="SelectPairModel == 'USDILS'" value="USDILS">@FlatFXResources.Resources.ResourceManager.GetString("USDILS")</option>
+                                <option ng-selected="SelectPairModel == 'EURILS'" value="EURILS">@FlatFXResources.Resources.ResourceManager.GetString("EURILS")</option>
+                            </select>
+                        </div>
+                    </div>
+                    <br />
+                    <div class="form-group">
+                        <label class="col-xs-5 control-label">@FlatFXResources.Resources.SelectDate:</label>
+                        <div class="col-xs-7">
+                            <input type="datetime-local" name="SelectedDate" id="SelectedDate" class="form-control" ng-model="SelectedDateModel" placeholder="Please enter date" />
+                        </div>
+                    </div>
+                </div>
+                <div class="col-sm-3">
+                    <div class="form-group">
+                        <label id="GetHistoryButton" name="GetHistoryButton" class="btn btn-primary historical-rates-button" ng-model="gethistorybuttonmodel" ng-click="GetRatesHistory()">@FlatFXResources.Resources.ShowRate</label>
+                    </div>
+                </div>
+                <div class="col-sm-12 historical-rates-result">
+                    <label class="rate">@FlatFXResources.Resources.MidRateIs: <b>{{ SelectedDateMidRate }}</b></label>
+                    <div>
+                        <label>@FlatFXResources.Resources.HistoricalRates:</label>
+                        <table>
+                            <tr ng-repeat="rate in HistoricalRates">
+                                <td>{{ rate.Time | date:'yyyy-MM-dd HH:mm' }}</td>
+                                <td>{{ rate.Mid }}</td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
             </div>
         </div>
     </div>

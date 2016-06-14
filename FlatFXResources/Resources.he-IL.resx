@@ -1305,4 +1305,16 @@
   <data name="Select" xml:space="preserve">
     <value>בחר</value>
   </data>
+  <data name="HistoricalRates" xml:space="preserve">
+    <value>שערים היסטוריים</value>
+  </data>
+  <data name="MidRateIs" xml:space="preserve">
+    <value>שער האמצע הינו</value>
+  </data>
+  <data name="SelectDate" xml:space="preserve">
+    <value>בחר תאריך</value>
+  </data>
+  <data name="ShowRate" xml:space="preserve">
+    <value>הצג שער</value>
+  </data>
 </root>

@@ -750,6 +750,39 @@ table.ffx-table tr td a {
     color: blue;
 }
 
+.historical-rates-panel {
+    background-color: #228cdb;
+    color: white;
+    margin-top: 30px;
+}
+
+.historical-rates-header {
+    font-size: 1.2em;
+    background-color: black;
+    cursor: pointer;
+    text-align: center;
+    line-height: 40px;
+}
+
+.historical-rates-button {
+    margin-top: 15px;
+    height: 40px;
+    vertical-align: middle;
+    font-size: 1em;
+    background-color: green;
+}
+
+.historical-rates-result {
+    border: 4px double #333;
+    margin-top: 30px;
+    margin-bottom: 30px;
+    padding: 15px;
+}
+
+.historical-rates-result .rate {
+    font-size: 1.3em;
+}
+
 .on-line-window .panel {
     border-width: 0px;
 }

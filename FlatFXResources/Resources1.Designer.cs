@@ -1412,6 +1412,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Historical Rates.
+        /// </summary>
+        public static string HistoricalRates {
+            get {
+                return ResourceManager.GetString("HistoricalRates", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Home.
         /// </summary>
         public static string Home {
@@ -1806,6 +1815,15 @@ namespace FlatFXResources {
         public static string MidRate {
             get {
                 return ResourceManager.GetString("MidRate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Mid Rate is.
+        /// </summary>
+        public static string MidRateIs {
+            get {
+                return ResourceManager.GetString("MidRateIs", resourceCulture);
             }
         }
         
@@ -2481,6 +2499,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Select Date.
+        /// </summary>
+        public static string SelectDate {
+            get {
+                return ResourceManager.GetString("SelectDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Select pair.
         /// </summary>
         public static string SelectPair {
@@ -2531,6 +2558,15 @@ namespace FlatFXResources {
         public static string SettlementDate {
             get {
                 return ResourceManager.GetString("SettlementDate", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Show Rate.
+        /// </summary>
+        public static string ShowRate {
+            get {
+                return ResourceManager.GetString("ShowRate", resourceCulture);
             }
         }
         
