@@ -146,6 +146,7 @@
     <Compile Include="BussinessLayer\Extensions.cs" />
     <Compile Include="BussinessLayer\General.cs" />
     <Compile Include="BussinessLayer\Logger.cs" />
+    <Compile Include="BussinessLayer\NotificationManager.cs" />
     <Compile Include="BussinessLayer\SecurityManager.cs" />
     <Compile Include="Migrations\201604131135349_Initial.cs" />
     <Compile Include="Migrations\201604131135349_Initial.Designer.cs">
@@ -162,6 +163,7 @@
     <Compile Include="Model\Data\DealModels.cs" />
     <Compile Include="Model\Data\FXRateModels.cs" />
     <Compile Include="Model\Data\LogModels.cs" />
+    <Compile Include="Model\Data\NotificationModel.cs" />
     <Compile Include="Model\Data\ProviderModels.cs" />
     <Compile Include="Model\User\IdentityConfig.cs" />
     <Compile Include="Model\User\User.cs" />

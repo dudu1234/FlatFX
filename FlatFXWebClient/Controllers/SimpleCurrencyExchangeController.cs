@@ -358,9 +358,9 @@ namespace FlatFXWebClient.Controllers
 
             return View(model);
         }
-        [HttpPost, ActionName("Confim")]
+        [HttpPost, ActionName("Confirm")]
         [ValidateAntiForgeryToken]
-        public ActionResult Confim(SimpleCurrencyExchangeViewModel model)
+        public ActionResult Confirm(SimpleCurrencyExchangeViewModel model)
         {
             // To Do remove this link
             return RedirectToAction("Index", "Home");
@@ -402,7 +402,7 @@ namespace FlatFXWebClient.Controllers
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteError("Failed in SimpleCurrencyExchangeController::Confim", ex);
+                Logger.Instance.WriteError("Failed in SimpleCurrencyExchangeController::Confirm", ex);
                 TempData["ErrorResult"] += "General Error. Please contact FlatFX Team.";
             }
 

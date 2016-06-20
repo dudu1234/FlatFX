@@ -20,7 +20,7 @@
     string controllerAction = "CreateOrderIndex";
     if (Model.WorkflowStage == 2)
     {
-        controllerAction = "Confim";
+        controllerAction = "Confirm";
     }
     double MinimalPartnerExecutionAmountCCY1 = (Model.MinimalPartnerExecutionAmountCCY1.HasValue) ? Model.MinimalPartnerExecutionAmountCCY1.Value : 0;
     double dExpiryDate = (Model.ExpiryDate.HasValue) ? Model.ExpiryDate.Value.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds : 0;

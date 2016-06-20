@@ -22,6 +22,7 @@ namespace FlatFXWebClient
             FilterConfig.RegisterGlobalFilters(GlobalFilters.Filters);
             RouteConfig.RegisterRoutes(RouteTable.Routes);
             BundleConfig.RegisterBundles(BundleTable.Bundles);
+            
 
             //Start application instances
             ApplicationInformation.Instance.Start();
@@ -30,6 +31,7 @@ namespace FlatFXWebClient
             CurrencyManager.Instance.Start();
             CurrencyFeedManager.Instance.Start();
             DailyTasks.Instance.Start();
+            NotificationManager.Instance.Start();
 
             Logger.Instance.WriteSystemTrace("Application Start", Consts.eLogOperationStatus.Succeeded, "Application Start. start: " + start.ToString("HH:mm:ss") + ", end: " + DateTime.Now.ToString("HH:mm:ss"));
         }

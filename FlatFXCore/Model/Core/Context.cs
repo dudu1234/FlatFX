@@ -15,7 +15,10 @@ using MySql.Data.Entity;
 namespace FlatFXCore.Model.Core
 {
     /// <summary>
+    /// 
     /// Update-Database -Force -Verbose
+    /// 
+    /// UpdateDatabase DatabaseUpdate Database-Update
     /// </summary>
     [DbConfigurationType(typeof(MySqlEFConfiguration))]
     public class ApplicationDBContext : IdentityDbContext<ApplicationUser>
@@ -43,6 +46,7 @@ namespace FlatFXCore.Model.Core
         public DbSet<LogInfo> LogInfo { get; set; }
         public DbSet<GenericDictionaryItem> GenericDictionary { get; set; }
         public DbSet<Currency> Currencies { get; set; }
+        public DbSet<EmailNotification> EmailNotifications { get; set; }
 
         public ApplicationDBContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)

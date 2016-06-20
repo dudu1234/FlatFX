@@ -346,9 +346,9 @@ namespace FlatFXWebClient.Controllers
 
             return View("OrderWorkflow", model);
         }
-        [HttpPost, ActionName("Confim")]
+        [HttpPost, ActionName("Confirm")]
         [ValidateAntiForgeryToken]
-        public ActionResult Confim(OrderViewModel model)
+        public ActionResult Confirm(OrderViewModel model)
         {
             try
             {
@@ -415,11 +415,55 @@ namespace FlatFXWebClient.Controllers
                     }
 
                     TempData["Deal"] = match.Deal1;
+
+                    EmailNotification emailNotification = new EmailNotification(match.Deal1.user.Email, "info@FlatFX.com");
+                    emailNotification.Subject = ((match.Deal1.IsDemo) ? "Demo " : "") + "Exchange Match #" + match.MatchId + " Confirmation.";
+                    emailNotification.Body = "Hello " + match.Deal1.user.FullName + "<br />" +
+                        "Your exchange match #" + match.MatchId + " has been confirmed.<br />" +
+                        "Match Summary: <br />" + 
+                        "You send: " + match.Deal1.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal1.ChargedCurrency + "<br />" +
+                        "You recieve: " + match.Deal1.AmountToExchangeCreditedCurrency.ToString("N2") + " " + match.Deal1.CreditedCurrency + "<br />" +
+                        "Match Mid Rate: " + match.MidRate + "<br />";
+                    db.EmailNotifications.Add(emailNotification);
+
+                    EmailNotification emailNotification2 = new EmailNotification(match.Deal2.user.Email, "info@FlatFX.com");
+                    emailNotification2.Subject = "Your " + ((match.Deal2.IsDemo) ? "Demo " : "") + "Exchange Order #" + match.Order2.OrderId + " has a Match";
+                    emailNotification2.Body = "Hello " + match.Deal2.user.FullName + "<br />" +
+                        "Your " + ((match.Deal2.IsDemo) ? "Demo " : "") + "Exchange Order #" + match.Order2.OrderId + " has a Match<br />" +
+                        "Match #" + match.MatchId + " has been confirmed.<br />" +
+                        "Match Summary: <br />" +
+                        "You send: " + match.Deal2.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal2.ChargedCurrency + "<br />" +
+                        "You recieve: " + match.Deal2.AmountToExchangeCreditedCurrency.ToString("N2") + " " + match.Deal2.CreditedCurrency + "<br />" +
+                        "Match Mid Rate: " + match.MidRate + "<br />";
+                    db.EmailNotifications.Add(emailNotification2);
+
+                    db.SaveChangesAsync();
+                }
+                else
+                {
+                    EmailNotification emailNotification = new EmailNotification(order.user.Email, "info@FlatFX.com");
+                    emailNotification.Subject = ((order.IsDemo)? "Demo " : "") + "Exchange Order #" + order.OrderId + " Confirmation.";
+                    emailNotification.Body = "Hello " + order.user.FullName + "<br />" +
+                        "Your exchange order #" + order.OrderId + " has been confirmed.<br />" +
+                        "Order Summary: <br />";
+                    /*
+                    emailNotification.Body += "<table>";
+                    emailNotification.Body += "</table>";
+
+                    <tr style="background-color: #d5ebe3">
+                        <td>Order Id</td>
+                        <td style="font-weight: 600"></td>
+                    </tr>
+                    */
+
+                    emailNotification.Body += order.BuySell.ToString() + " " + order.AmountCCY1 + " " + order.Symbol + "<br />";
+                    db.EmailNotifications.Add(emailNotification);
+                    db.SaveChangesAsync();
                 }
             }
             catch (Exception ex)
             {
-                Logger.Instance.WriteError("Failed in PromilOrderController::Confim", ex);
+                Logger.Instance.WriteError("Failed in PromilOrderController::Confirm", ex);
                 TempData["ErrorResult"] += "General Error. Please contact FlatFX Team.";
             }
 

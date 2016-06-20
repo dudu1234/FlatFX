@@ -339,5 +339,11 @@ namespace FlatFXCore.BussinessLayer
             [Display(Name = "מטח למטח")]
             FXtoFX = 3
         }
+        public enum eEmailStatus
+        {
+            None = 1,
+            Sent = 2,
+            SentConfirmed = 3
+        }
     }
 }

@@ -77,6 +77,16 @@ namespace FlatFXCore.BussinessLayer
         #endregion
 
         #region Public Functions
+        public bool IsDevelopmetMachine
+        {
+            get
+            {
+                if (Environment.MachineName == "DUDU-HP")
+                    return true;
+                else
+                    return false;
+            }
+        }
         public string UserID
         {
             get
