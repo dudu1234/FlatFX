@@ -1,0 +1,81 @@
+﻿@model IEnumerable<FlatFXCore.Model.Data.NewOrderNotification>
+@using FlatFXCore.Model.Data;
+
+@{
+    Layout = "~/Views/Manage/UserManageLayout.cshtml";
+}
+
+<div class="form-horizontal">
+    <div class="panel panel-danger">
+        <div class="panel-heading">
+            <h3 class="panel-title">@((ViewBag.UserName == null) ? "Notifications List" : (ViewBag.UserName + " notifications:"))</h3>
+        </div>
+        <div class="panel-body table-responsive">
+            <table class="table table-bordered table-hover table-striped ffx-table">
+                <tr>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Symbol)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.BuySell)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.CreatedAt)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MinVolume)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.MaxVolume)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.Expired)
+                    </th>
+                    <th>
+                        @Html.DisplayNameFor(model => model.ProviderId)
+                    </th>
+                    <th width="150px">Actions</th>
+                </tr>
+
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Symbol)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.BuySell)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.CreatedAt)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MinVolume)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.MaxVolume)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.Expired)
+                        </td>
+                        <td>
+                            @((item.ProviderId == null || item.ProviderId == "")? "All" : Provider.ProviderList[item.ProviderId])
+                        </td>
+                        <td>
+                            @Html.ActionLink("Edit", "EditByUser", new { id = item.NotificationId }) <br />
+                            @Html.ActionLink("Delete", "Delete", new { id = item.NotificationId }) <br />
+                        </td>
+                    </tr>
+                }
+
+            </table>
+        </div>
+    </div>
+
+    <br /><br />
+    <div>
+        <a class="btn btn-success" href="@Url.Action("Create")">Create New</a>
+    </div>
+    <br /><br />
+
+</div>

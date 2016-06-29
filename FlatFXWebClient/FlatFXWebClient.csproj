@@ -189,6 +189,7 @@
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\ApplicationUsersController.cs" />
     <Compile Include="Controllers\BaseController.cs" />
+    <Compile Include="Controllers\NotificationsController.cs" />
     <Compile Include="Controllers\CompaniesController.cs" />
     <Compile Include="Controllers\CompanyAccountsController.cs" />
     <Compile Include="Controllers\DashboardController.cs" />
@@ -1299,6 +1300,12 @@
     <Content Include="Views\Order\OrderLayout.cshtml" />
     <Content Include="Views\Order\OrderData.cshtml" />
     <Content Include="Views\Order\OrderMatchCreation.cshtml" />
+    <Content Include="Views\Notifications\Create.cshtml" />
+    <Content Include="Views\Notifications\Delete.cshtml" />
+    <Content Include="Views\Notifications\Edit.cshtml" />
+    <Content Include="Views\Notifications\EditByUser.cshtml" />
+    <Content Include="Views\Notifications\IndexAdmin.cshtml" />
+    <Content Include="Views\Notifications\IndexUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

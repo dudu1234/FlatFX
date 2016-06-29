@@ -79,6 +79,10 @@ namespace FlatFXCore.BussinessLayer
             Client_Improve_Price = 8,
             Client_Cancel = 9
         }
+        public enum eNotificationType
+        {
+            OnNewOrder = 1
+        }
         public enum eDealType
         {
             None = 1,

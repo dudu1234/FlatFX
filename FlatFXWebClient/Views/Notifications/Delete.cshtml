@@ -1,0 +1,57 @@
+﻿@model FlatFXCore.Model.Data.NewOrderNotification
+
+@{
+    ViewBag.Title = "Delete";
+    Layout = "~/Views/Manage/AdminManageLayout.cshtml";
+}
+
+<div class="col-xs-12 col-xs-offset-0 col-lg-6 col-lg-offset-3">
+    <h2>Delete</h2>
+    <h3>Are you sure you want to delete this?</h3>
+    <div>
+        <dl class="dl-horizontal">
+            <dt>
+                @Html.DisplayNameFor(model => model.Symbol)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.Symbol)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.BuySell)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.BuySell)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MinVolume)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MinVolume)
+            </dd>
+
+            <dt>
+                @Html.DisplayNameFor(model => model.MaxVolume)
+            </dt>
+
+            <dd>
+                @Html.DisplayFor(model => model.MaxVolume)
+            </dd>
+
+        </dl>
+
+        @using (Html.BeginForm())
+        {
+            @Html.AntiForgeryToken()
+
+            <div class="form-actions no-color">
+                <input type="submit" value="Delete" class="btn btn-info" /> |
+                <a class="btn btn-success" href="@Url.Action("IndexUser")">Back to List</a>
+            </div>
+        }
+    </div>
+</div>

@@ -47,6 +47,7 @@ namespace FlatFXCore.Model.Core
         public DbSet<GenericDictionaryItem> GenericDictionary { get; set; }
         public DbSet<Currency> Currencies { get; set; }
         public DbSet<EmailNotification> EmailNotifications { get; set; }
+        public DbSet<NewOrderNotification> NewOrderNotifications { get; set; }
 
         public ApplicationDBContext()
             : base("name=FFXConnectionString", throwIfV1Schema: false)

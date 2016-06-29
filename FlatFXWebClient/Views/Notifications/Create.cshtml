@@ -1,0 +1,91 @@
+﻿@model FlatFXCore.Model.Data.NewOrderNotification
+@using FlatFXCore.BussinessLayer;
+@using FlatFXCore.Model.Data;
+@using FlatFXCore.Model.Core;
+
+@{
+    
+    Dictionary<string, string> userProviders = null;
+    Dictionary<string, string> users = new Dictionary<string, string>();
+
+    bool isAdmin = Request.UrlReferrer.AbsolutePath.ToLower().Contains("admin");
+    string backTo = isAdmin ? "IndexAdmin" : "IndexUser";
+    
+    using (var context = new ApplicationDBContext())
+    {
+        userProviders = context.Providers.Where(p => p.IsActive).ToDictionary(p1 => p1.ProviderId, p2 => p2.FullName);
+        userProviders.Add("", "All");
+
+        if (isAdmin)
+        {
+            TempData["isAdmin"] = true;
+            users = context.Users.Where(u => u.IsActive).ToDictionary(u => u.Id, u2 => u2.FirstName + " " + u2.LastName + " - " + u2.Email);
+        }
+    }
+    
+    
+}
+
+@using (Html.BeginForm())
+{
+    @Html.AntiForgeryToken()
+    <br /><br />
+    <div class="form-horizontal col-sm-12 col-sm-offset-0 col-lg-6 col-lg-offset-3">
+        <div class="panel panel-danger">
+            <div class="panel-heading">
+                <h3 class="panel-title">CreateNewOrderNotification</h3>
+            </div>
+            <div class="panel-body">
+                @if (isAdmin)
+                { 
+                    <div class="form-group">
+                        @Html.LabelFor(m => m.UserId, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                        <div class="col-sm-10">
+                            @Html.DropDownListFor(m => m.UserId, new SelectList(users, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                        </div>
+                    </div>
+                }
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Symbol, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser),
+                        "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                    </div>
+                    @Html.LabelFor(m => m.BuySell, htmlAttributes: new { @class = "control-label col-sm-2" })
+                    <div class="col-sm-4">
+                        @Html.EnumDropDownListFor(m => m.BuySell, htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.MinVolume, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.MinVolume, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.MinVolume) })
+                        @Html.ValidationMessageFor(m => m.MinVolume, "", new { @class = "text-danger" })
+                    </div>
+                    @Html.LabelFor(m => m.MaxVolume, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                    <div class="col-sm-4">
+                        @Html.TextBoxFor(m => m.MaxVolume, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.MaxVolume) })
+                        @Html.ValidationMessageFor(m => m.MaxVolume, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    @Html.LabelFor(m => m.Expired, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                    <div class="col-sm-4">
+                        @Html.EditorFor(model => model.Expired)
+                    </div>
+                    @Html.LabelFor(m => m.ProviderId, htmlAttributes: new { @class = "control-label col-sm-2 " })
+                    <div class="col-sm-4">
+                        @Html.DropDownListFor(m => m.ProviderId, new SelectList(userProviders, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="@FlatFXResources.Resources.Save" class="btn btn-primary" />
+                        &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                        <a class="btn btn-success" href="@Url.Action(backTo)">@FlatFXResources.Resources.BackToList</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}

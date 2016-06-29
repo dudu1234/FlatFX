@@ -54,4 +54,39 @@ namespace FlatFXCore.Model.Data
         }
 
     }
+    public abstract class BaseNotification
+    {
+        [Key]
+        [DatabaseGeneratedAttribute(DatabaseGeneratedOption.Identity)]
+        public Int64 NotificationId { get; set; }
+        public string UserId { get; set; }
+        [ForeignKey("UserId")]
+        public virtual ApplicationUser User { get; set; }
+        public DateTime CreatedAt { get; set; }
+        public Consts.eNotificationType NotificationType { get; set; }
+        public DateTime Expired { get; set; }
+
+        public BaseNotification()
+        {
+            CreatedAt = DateTime.Now;
+            Expired = new DateTime(DateTime.Now.Year + 5, 1, 1);
+        }
+    }
+    public class NewOrderNotification : BaseNotification
+    {
+        public string ProviderId { get; set; }
+        public string Symbol { get; set; }
+        public Consts.eBuySell BuySell { get; set; }
+        public int MinVolume { get; set; }
+        public int MaxVolume { get; set; }
+
+        public NewOrderNotification() : base()
+        {
+            NotificationType = Consts.eNotificationType.OnNewOrder;
+            ProviderId = "";
+            MinVolume = 10000;
+            MaxVolume = 10000000;
+            BuySell = Consts.eBuySell.Both;
+        }
+    }
 }
