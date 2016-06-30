@@ -418,23 +418,37 @@ namespace FlatFXWebClient.Controllers
 
                     EmailNotification emailNotification = new EmailNotification(match.Deal1.user.Email, "info@FlatFX.com");
                     emailNotification.Subject = ((match.Deal1.IsDemo) ? "Demo " : "") + "Exchange Match #" + match.MatchId + " Confirmation.";
-                    emailNotification.Body = "Hello " + match.Deal1.user.FullName + "<br />" +
-                        "Your exchange match #" + match.MatchId + " has been confirmed.<br />" +
-                        "Match Summary: <br />" + 
-                        "You send: " + match.Deal1.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal1.ChargedCurrency + "<br />" +
+                    emailNotification.Body = "<b>Hello " + match.Deal1.user.FullName + "</b><br /><br />" +
+                        "Your exchange match #" + match.MatchId + " has been confirmed.<br /><br />" +
+                        "<b>Match Summary: </b><br />" +
+                        "<div style=\"font-size: 0.9em\">You send: " + match.Deal1.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal1.ChargedCurrency + "<br />" +
                         "You recieve: " + match.Deal1.AmountToExchangeCreditedCurrency.ToString("N2") + " " + match.Deal1.CreditedCurrency + "<br />" +
-                        "Match Mid Rate: " + match.MidRate + "<br />";
+                        "Match Mid Rate: " + match.MidRate + "&nbsp;&nbsp;&nbsp;<a href=\"http://www.flatfx.com/OnLineFXRates/ShowRates\">check mid rate historical prices</a><br />" +
+                        "Contract Date: " + match.Deal1.OfferingDate.ToString("dd/MM/yyyy HH:mm:ss") + "<br />" +
+                        "Maturity Date: " + match.Deal1.MaturityDate.Value.ToString("dd/MM/yyyy HH:mm") + "<br />" +
+                        "Your Account: " + match.Deal1.ChargedAccount.Provider.Name + " " + match.Deal1.ChargedAccount.BankBranchNumber + "-" + match.Deal1.ChargedAccount.BankAccountNumber + "<br />" +
+                        "Your saving: " + match.Deal1.CustomerTotalProfitUSD.Value.ToString("N2") + "$<br />" +
+                        "Commission: " + match.Deal1.Commission.Value.ToString("N2") + "$<br />" +
+                        "</div>";
+                    emailNotification.Body += NotificationManager.Instance.AddBackOfficeSignature();
                     db.EmailNotifications.Add(emailNotification);
 
                     EmailNotification emailNotification2 = new EmailNotification(match.Deal2.user.Email, "info@FlatFX.com");
                     emailNotification2.Subject = "Your " + ((match.Deal2.IsDemo) ? "Demo " : "") + "Exchange Order #" + match.Order2.OrderId + " has a Match";
-                    emailNotification2.Body = "Hello " + match.Deal2.user.FullName + "<br />" +
+                    emailNotification2.Body = "<b>Hello " + match.Deal2.user.FullName + "</b><br /><br />" +
                         "Your " + ((match.Deal2.IsDemo) ? "Demo " : "") + "Exchange Order #" + match.Order2.OrderId + " has a Match<br />" +
-                        "Match #" + match.MatchId + " has been confirmed.<br />" +
-                        "Match Summary: <br />" +
-                        "You send: " + match.Deal2.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal2.ChargedCurrency + "<br />" +
+                        "Match #" + match.MatchId + " has been confirmed.<br /><br />" +
+                        "<b>Match Summary: </b><br />" +
+                        "<div style=\"font-size: 0.9em\">You send: " + match.Deal2.AmountToExchangeChargedCurrency.ToString("N2") + " " + match.Deal2.ChargedCurrency + "<br />" +
                         "You recieve: " + match.Deal2.AmountToExchangeCreditedCurrency.ToString("N2") + " " + match.Deal2.CreditedCurrency + "<br />" +
-                        "Match Mid Rate: " + match.MidRate + "<br />";
+                        "Match Mid Rate: " + match.MidRate + "&nbsp;&nbsp;&nbsp;<a href=\"http://www.flatfx.com/OnLineFXRates/ShowRates\">check mid rate historical prices</a><br />" +
+                        "Contract Date: " + match.Deal2.OfferingDate.ToString("dd/MM/yyyy HH:mm:ss") + "<br />" +
+                        "Maturity Date: " + match.Deal2.MaturityDate.Value.ToString("dd/MM/yyyy HH:mm") + "<br />" +
+                        "Your Account: " + match.Deal2.ChargedAccount.Provider.Name + " " + match.Deal2.ChargedAccount.BankBranchNumber + "-" + match.Deal2.ChargedAccount.BankAccountNumber + "<br />" +
+                        "Your saving: " + match.Deal2.CustomerTotalProfitUSD.Value.ToString("N2") + "$<br />" +
+                        "Commission: " + match.Deal2.Commission.Value.ToString("N2") + "$<br />" +
+                        "</div>";
+                    emailNotification2.Body += NotificationManager.Instance.AddBackOfficeSignature();
                     db.EmailNotifications.Add(emailNotification2);
 
                     db.SaveChangesAsync();
@@ -443,20 +457,11 @@ namespace FlatFXWebClient.Controllers
                 {
                     EmailNotification emailNotification = new EmailNotification(order.user.Email, "info@FlatFX.com");
                     emailNotification.Subject = ((order.IsDemo)? "Demo " : "") + "Exchange Order #" + order.OrderId + " Confirmation.";
-                    emailNotification.Body = "Hello " + order.user.FullName + "<br />" +
-                        "Your exchange order #" + order.OrderId + " has been confirmed.<br />" +
-                        "Order Summary: <br />";
-                    /*
-                    emailNotification.Body += "<table>";
-                    emailNotification.Body += "</table>";
-
-                    <tr style="background-color: #d5ebe3">
-                        <td>Order Id</td>
-                        <td style="font-weight: 600"></td>
-                    </tr>
-                    */
-
-                    emailNotification.Body += order.BuySell.ToString() + " " + order.AmountCCY1 + " " + order.Symbol + "<br />";
+                    emailNotification.Body = "<b>Hello " + order.user.FullName + "</b><br /><br />" +
+                        "Your exchange order #" + order.OrderId + " has been confirmed.<br /><br />" +
+                        "<b>Order Summary: </b><br /><div style=\"font-size: 0.9em\">";
+                    emailNotification.Body += order.BuySell.ToString() + " " + order.AmountCCY1.ToString("N2") + " " + order.Symbol + "<br /></div>";
+                    emailNotification.Body += NotificationManager.Instance.AddBackOfficeSignature();
                     db.EmailNotifications.Add(emailNotification);
                     db.SaveChangesAsync();
 

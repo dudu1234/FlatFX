@@ -103,6 +103,7 @@ namespace FlatFXCore.BussinessLayer
         }
         #endregion
 
+        #region Send Emails Loop
         void SendEmailLoop()
         {
             while (!m_Terminate)
@@ -128,7 +129,9 @@ namespace FlatFXCore.BussinessLayer
                 }
             }
         }
+        #endregion
 
+        #region New Order Notification
         public void AddNewOrder(Order order)
         {
             lock (m_NewOrdersListSync)
@@ -136,7 +139,6 @@ namespace FlatFXCore.BussinessLayer
                 m_NewOrdersQueue.Enqueue(order);
             }
         }
-
         void SendNewOrderNotificationLoop()
         {
             while (true)
@@ -177,27 +179,44 @@ namespace FlatFXCore.BussinessLayer
                             if (order.ExpiryDate.HasValue && order.ExpiryDate.Value < DateTime.Now.AddDays(2))
                                 emailNotification.Subject += ". Expired: " + order.ExpiryDate.Value.ToString("dd/MM/yyyy HH:mm");
 
-                            emailNotification.Body = "Hello " + notification.User.FullName + "<br />" +
-                                "This is to inform you that potencial partner entered a new order.<br />" +
-                                "Order Summary: <br />" +
-                                "Symbol: " + order.Symbol + "<br />" +
+                            emailNotification.Body = "<b>Hello " + notification.User.FullName + "</b><br /><br />" +
+                                "This is to inform you that potential partner entered a new exchange order.<br /><br />" +
+                                "<b>Order Summary: </b><br />" +
+                                "<div style=\"font-size: 0.9em\">Symbol: " + order.Symbol + "<br />" +
                                 "Direction: " + order.BuySell + "<br />" +
-                                "Amount CCY1: " + order.AmountCCY1 + "<br />" +
+                                "Amount CCY1: " + order.AmountCCY1.ToString("N2") + "<br />" +
                                 "Expiry Date: " + (order.ExpiryDate.HasValue? order.ExpiryDate.Value.ToString() : "GTC") + "<br />" +
                                 "Clearing Type: " + order.ClearingType.ToString() + "<br />" +
-                                "Max Amount: " + order.AmountCCY1 + "<br />" +
-                                "Min Amount: " + order.MinimalPartnerExecutionAmountCCY1 + "<br /><br />";
+                                "Max Amount: " + order.AmountCCY1.ToString("N2") + "<br />" +
+                                "Min Amount: " + (order.MinimalPartnerExecutionAmountCCY1.HasValue? order.MinimalPartnerExecutionAmountCCY1.Value.ToString("N2") : "-") + "<br /><br /></div>";
+                            emailNotification.Body += AddBackOfficeSignature();
                             db.EmailNotifications.Add(emailNotification);
                         }
                         if (performSave)
                             db.SaveChanges();
                     }
                 }
-                catch (Exception ex)
+                catch
                 {
 
                 }
             }
         }
+        #endregion
+
+        #region Email generic functions
+        public string AddBackOfficeSignature()
+        {
+            string htmlCode = "<br /><br />Best Regards,<br /><br />" +
+                "<div>" +
+                    "<b style=\"font-size: 1.1em;color: blue\">FlatFX Back Office Team</b><br />" +
+                    "<div style=\"font-size: 0.9em\">" +
+                        "phone:&nbsp;<a href=\"callto:972-3-111-1111\">972-3-111-1111</a><br />" +
+                        "email:&nbsp;<a href=\"mailto:support@FlatFX.com\">support@FlatFX.com</a><br />" +
+                        "web:&nbsp;<a href=\"http://www.FlatFX.com\">www.FlatFX.com</a><br />" +
+                    "</div></div>";
+            return htmlCode;
+        }
+        #endregion
     }
 }
