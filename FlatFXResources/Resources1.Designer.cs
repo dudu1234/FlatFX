@@ -97,6 +97,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Actions.
+        /// </summary>
+        public static string Actions {
+            get {
+                return ResourceManager.GetString("Actions", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Address.
         /// </summary>
         public static string Address {
@@ -835,6 +844,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Create New.
+        /// </summary>
+        public static string CreateNew {
+            get {
+                return ResourceManager.GetString("CreateNew", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to Create new account group.
         /// </summary>
         public static string CreateNewAccount {
@@ -867,6 +885,15 @@ namespace FlatFXResources {
         public static string CreateNewOrder2 {
             get {
                 return ResourceManager.GetString("CreateNewOrder2", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Create new order notification.
+        /// </summary>
+        public static string CreateNewOrderNotification {
+            get {
+                return ResourceManager.GetString("CreateNewOrderNotification", resourceCulture);
             }
         }
         
@@ -1024,6 +1051,15 @@ namespace FlatFXResources {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to Delete.
+        /// </summary>
+        public static string Delete {
+            get {
+                return ResourceManager.GetString("Delete", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized string similar to You are in a demo environment. Your trades won&apos;t have any effect!.
         /// </summary>
         public static string DemoEnvAlert {
@@ -1038,6 +1074,15 @@ namespace FlatFXResources {
         public static string DemoEnvButtonTxt {
             get {
                 return ResourceManager.GetString("DemoEnvButtonTxt", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit.
+        /// </summary>
+        public static string Edit {
+            get {
+                return ResourceManager.GetString("Edit", resourceCulture);
             }
         }
         
@@ -1083,6 +1128,15 @@ namespace FlatFXResources {
         public static string EditContactDetails {
             get {
                 return ResourceManager.GetString("EditContactDetails", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Edit Notification.
+        /// </summary>
+        public static string EditNotification {
+            get {
+                return ResourceManager.GetString("EditNotification", resourceCulture);
             }
         }
         
@@ -1932,6 +1986,24 @@ namespace FlatFXResources {
         public static string None {
             get {
                 return ResourceManager.GetString("None", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications.
+        /// </summary>
+        public static string Notifications {
+            get {
+                return ResourceManager.GetString("Notifications", resourceCulture);
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Notifications List.
+        /// </summary>
+        public static string NotificationsList {
+            get {
+                return ResourceManager.GetString("NotificationsList", resourceCulture);
             }
         }
         

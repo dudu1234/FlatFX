@@ -1317,4 +1317,28 @@
   <data name="ShowRate" xml:space="preserve">
     <value>הצג שער</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>פעולות</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>צור חדש</value>
+  </data>
+  <data name="CreateNewOrderNotification" xml:space="preserve">
+    <value>צור התראת "הזמנה חדשה"</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>מחק</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>ערוך</value>
+  </data>
+  <data name="EditNotification" xml:space="preserve">
+    <value>ערוך התראה</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>התראות</value>
+  </data>
+  <data name="NotificationsList" xml:space="preserve">
+    <value>רשימת התראות</value>
+  </data>
 </root>

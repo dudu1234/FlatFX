@@ -459,6 +459,8 @@ namespace FlatFXWebClient.Controllers
                     emailNotification.Body += order.BuySell.ToString() + " " + order.AmountCCY1 + " " + order.Symbol + "<br />";
                     db.EmailNotifications.Add(emailNotification);
                     db.SaveChangesAsync();
+
+                    NotificationManager.Instance.AddNewOrder(order);
                 }
             }
             catch (Exception ex)

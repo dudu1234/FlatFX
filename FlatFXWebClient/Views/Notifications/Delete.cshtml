@@ -1,4 +1,5 @@
 ﻿@model FlatFXCore.Model.Data.NewOrderNotification
+@using FlatFXCore.BussinessLayer;
 
 @{
     ViewBag.Title = "Delete";
@@ -10,24 +11,14 @@
     <h3>Are you sure you want to delete this?</h3>
     <div>
         <dl class="dl-horizontal">
-            <dt>
-                @Html.DisplayNameFor(model => model.Symbol)
-            </dt>
+            <dt>@FlatFXResources.Resources.Pair</dt>
+            <dd>@Html.DisplayFor(model => model.Symbol)</dd>
 
-            <dd>
-                @Html.DisplayFor(model => model.Symbol)
-            </dd>
+            <dt>@FlatFXResources.Resources.BuySell</dt>
+            <dd>@Html.DisplayFor(model => model.BuySell)</dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.BuySell)
-            </dt>
-
-            <dd>
-                @Html.DisplayFor(model => model.BuySell)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.MinVolume)
+                @FlatFXResources.Resources.MinAmount
             </dt>
 
             <dd>
@@ -35,7 +26,7 @@
             </dd>
 
             <dt>
-                @Html.DisplayNameFor(model => model.MaxVolume)
+                @FlatFXResources.Resources.MaxAmount
             </dt>
 
             <dd>

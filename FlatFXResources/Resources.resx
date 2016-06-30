@@ -1333,4 +1333,28 @@ The contract will include the following directions:&lt;br /&gt;</value>
   <data name="ShowRate" xml:space="preserve">
     <value>Show Rate</value>
   </data>
+  <data name="Actions" xml:space="preserve">
+    <value>Actions</value>
+  </data>
+  <data name="CreateNew" xml:space="preserve">
+    <value>Create New</value>
+  </data>
+  <data name="CreateNewOrderNotification" xml:space="preserve">
+    <value>Create new order notification</value>
+  </data>
+  <data name="Delete" xml:space="preserve">
+    <value>Delete</value>
+  </data>
+  <data name="Edit" xml:space="preserve">
+    <value>Edit</value>
+  </data>
+  <data name="EditNotification" xml:space="preserve">
+    <value>Edit Notification</value>
+  </data>
+  <data name="Notifications" xml:space="preserve">
+    <value>Notifications</value>
+  </data>
+  <data name="NotificationsList" xml:space="preserve">
+    <value>Notifications List</value>
+  </data>
 </root>

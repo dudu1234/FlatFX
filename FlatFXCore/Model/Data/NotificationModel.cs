@@ -65,6 +65,7 @@ namespace FlatFXCore.Model.Data
         public DateTime CreatedAt { get; set; }
         public Consts.eNotificationType NotificationType { get; set; }
         public DateTime Expired { get; set; }
+        public bool IsDemo { get; set; }
 
         public BaseNotification()
         {

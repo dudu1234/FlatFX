@@ -20,9 +20,14 @@ namespace FlatFXCore.BussinessLayer
         private static Object m_Sync = new Object();
         private const int m_SendEmailInterval = 30 * 1000;
         private ApplicationDBContext db = new ApplicationDBContext();
+        private ApplicationDBContext sendNewOrderNotificationDB = new ApplicationDBContext();
         private Task m_SendEmailTask = null;
         private bool m_Terminate = false;
         private EmailService m_EmailService = null;
+        private Object m_NewOrdersListSync = new Object();
+        private Queue<Order> m_NewOrdersQueue = new Queue<Order>();
+
+        private Task m_SendNewOrderNotificationTask = null;
 
         #region Ctor + Dtor
         /// <summary>
@@ -45,9 +50,21 @@ namespace FlatFXCore.BussinessLayer
                     m_SendEmailTask.Dispose();
                     m_SendEmailTask = null;
                 }
+
+                if (m_SendNewOrderNotificationTask != null)
+                {
+                    m_SendNewOrderNotificationTask.Dispose();
+                    m_SendNewOrderNotificationTask = null;
+                }
+
                 if (db != null)
                 {
                     db.Dispose();
+                }
+
+                if (sendNewOrderNotificationDB != null)
+                {
+                    sendNewOrderNotificationDB.Dispose();
                 }
             }
         }
@@ -70,12 +87,18 @@ namespace FlatFXCore.BussinessLayer
                 return m_Instance;
             }
         }
-        public void Start() 
+        public void Start()
         {
             if (m_SendEmailTask == null)
             {
                 m_SendEmailTask = new Task(() => SendEmailLoop());
                 m_SendEmailTask.Start();
+            }
+
+            if (m_SendNewOrderNotificationTask == null)
+            {
+                m_SendNewOrderNotificationTask = new Task(() => SendNewOrderNotificationLoop());
+                m_SendNewOrderNotificationTask.Start();
             }
         }
         #endregion
@@ -91,7 +114,7 @@ namespace FlatFXCore.BussinessLayer
                     if (list.Count == 0)
                         continue;
 
-                    foreach(EmailNotification email in list)
+                    foreach (EmailNotification email in list)
                     {
                         bool res = m_EmailService.SendMail(email);
                         if (res)
@@ -106,5 +129,75 @@ namespace FlatFXCore.BussinessLayer
             }
         }
 
+        public void AddNewOrder(Order order)
+        {
+            lock (m_NewOrdersListSync)
+            {
+                m_NewOrdersQueue.Enqueue(order);
+            }
+        }
+
+        void SendNewOrderNotificationLoop()
+        {
+            while (true)
+            {
+                Order order = null;
+                try
+                {
+                    System.Threading.Thread.Sleep(5000);
+
+                    lock (m_NewOrdersListSync)
+                    {
+                        if (m_NewOrdersQueue.Count > 0)
+                            order = m_NewOrdersQueue.Dequeue();
+                    }
+
+                    if (order != null)
+                    {
+                        //Check if there are notifications to send
+                        DateTime dt = DateTime.Now;
+
+                        List<NewOrderNotification> notifications = sendNewOrderNotificationDB.NewOrderNotifications.Where(n => n.Expired > dt && 
+                            (n.BuySell == Consts.eBuySell.Both || n.BuySell == order.BuySell) &&
+                            n.Symbol == order.Symbol &&
+                            (n.ProviderId == null || n.ProviderId == "" || n.ProviderId == order.ProviderId) &&
+                            n.UserId != order.UserId &&
+                            n.NotificationType == Consts.eNotificationType.OnNewOrder &&
+                            n.MaxVolume >= order.AmountCCY1 &&
+                            n.MinVolume <= order.AmountCCY1 && 
+                            n.IsDemo == order.IsDemo).ToList();
+
+                        bool performSave = false;
+                        foreach(NewOrderNotification notification in notifications)
+                        {
+                            performSave = true;
+                            EmailNotification emailNotification = new EmailNotification(notification.User.Email, "info@FlatFX.com");
+                            emailNotification.Subject = ((order.IsDemo) ? "Demo " : "") + "New Order notification: " +
+                                order.BuySell.ToString() + " " + order.AmountCCY1 + " " + order.Symbol;
+                            if (order.ExpiryDate.HasValue && order.ExpiryDate.Value < DateTime.Now.AddDays(2))
+                                emailNotification.Subject += ". Expired: " + order.ExpiryDate.Value.ToString("dd/MM/yyyy HH:mm");
+
+                            emailNotification.Body = "Hello " + notification.User.FullName + "<br />" +
+                                "This is to inform you that potencial partner entered a new order.<br />" +
+                                "Order Summary: <br />" +
+                                "Symbol: " + order.Symbol + "<br />" +
+                                "Direction: " + order.BuySell + "<br />" +
+                                "Amount CCY1: " + order.AmountCCY1 + "<br />" +
+                                "Expiry Date: " + (order.ExpiryDate.HasValue? order.ExpiryDate.Value.ToString() : "GTC") + "<br />" +
+                                "Clearing Type: " + order.ClearingType.ToString() + "<br />" +
+                                "Max Amount: " + order.AmountCCY1 + "<br />" +
+                                "Min Amount: " + order.MinimalPartnerExecutionAmountCCY1 + "<br /><br />";
+                            db.EmailNotifications.Add(emailNotification);
+                        }
+                        if (performSave)
+                            db.SaveChanges();
+                    }
+                }
+                catch (Exception ex)
+                {
+
+                }
+            }
+        }
     }
 }

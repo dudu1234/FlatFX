@@ -1,4 +1,6 @@
-﻿@{
+﻿@using FlatFXCore.BussinessLayer;
+
+@{
     Layout = "~/Views/Shared/_Layout.cshtml";
     ViewBag.Title = "User Manage";
 }
@@ -12,11 +14,14 @@
 <div class="col-xs-12 order-navigation">
     <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 btn-toolbar">
         <a class="btn btn-primary" href="@Url.Action("UserIndex", "Manage")">@FlatFXResources.Resources.Main</a>
-        <a class="btn btn-primary" href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.UserDetails</a>
-        <a class="btn btn-primary" href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.CompanyDetails</a>
-        <a class="btn btn-primary" href="@Url.Action("IndexUser", "CompanyAccounts")">@FlatFXResources.Resources.CompanyAccountDetails</a>
-        <a class="btn btn-primary" href="@Url.Action("IndexUser", "ProviderAccounts")">@FlatFXResources.Resources.BankProviderAccountsDetails</a>
-        <a class="btn btn-primary" href="@Url.Action("IndexUser", "Notifications")">Notifications</a>
+        @if (!ApplicationInformation.Instance.IsDemoUser)
+        {
+            <a class="btn btn-primary" href="@Url.Action("EditByUser", "ApplicationUsers")">@FlatFXResources.Resources.UserDetails</a>
+            <a class="btn btn-primary" href="@Url.Action("IndexUser", "Companies")">@FlatFXResources.Resources.CompanyDetails</a>
+            <a class="btn btn-primary" href="@Url.Action("IndexUser", "CompanyAccounts")">@FlatFXResources.Resources.CompanyAccountDetails</a>
+            <a class="btn btn-primary" href="@Url.Action("IndexUser", "ProviderAccounts")">@FlatFXResources.Resources.BankProviderAccountsDetails</a>
+        }
+        <a class="btn btn-primary" href="@Url.Action("IndexUser", "Notifications")">@FlatFXResources.Resources.Notifications</a>
     </div>
 </div>
 

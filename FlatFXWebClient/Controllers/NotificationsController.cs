@@ -26,7 +26,7 @@ namespace FlatFXWebClient.Controllers
         }
 
         [OverrideAuthorization]
-        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> IndexUser()
         {
             string userId = User.Identity.GetUserId();
@@ -47,6 +47,8 @@ namespace FlatFXWebClient.Controllers
             return View("IndexAdmin", notifications);
         }
 
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public ActionResult Create()
         {
             NewOrderNotification notification = new NewOrderNotification();
@@ -56,6 +58,8 @@ namespace FlatFXWebClient.Controllers
         // POST: Notifications/Create
         [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> CreatePost()
         {
             NewOrderNotification notification = new NewOrderNotification();
@@ -71,7 +75,9 @@ namespace FlatFXWebClient.Controllers
 
                         if (notification.UserId == null)
                             notification.UserId = User.Identity.GetUserId();
-                        
+
+                        bool isDemo = db.ProviderAccounts.Where(pa => pa.CompanyAccount.Company.Users.Any(u => u.Id == notification.UserId)).FirstOrDefault().IsDemoAccount;
+                        notification.IsDemo = isDemo;
                         if (notification.ProviderId == null)
                             notification.ProviderId = "";
                         db.NewOrderNotifications.Add(notification);
@@ -144,7 +150,7 @@ namespace FlatFXWebClient.Controllers
         }
         // GET: Notifications/Edit/5
         [OverrideAuthorization]
-        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> EditByUser(Int64 id)
         {
             NewOrderNotification notification = await db.NewOrderNotifications.FindAsync(id);
@@ -159,7 +165,7 @@ namespace FlatFXWebClient.Controllers
         [HttpPost, ActionName("EditByUser")]
         [ValidateAntiForgeryToken]
         [OverrideAuthorization]
-        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser)]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> EditByUserPost(Int64 id)
         {
             NewOrderNotification notification = await db.NewOrderNotifications.FindAsync(id);
@@ -195,6 +201,8 @@ namespace FlatFXWebClient.Controllers
 
 
         // GET: Notifications/Delete/5
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> Delete(Int64 id, bool? saveChangesError = false)
         {
             if (saveChangesError.GetValueOrDefault())
@@ -211,6 +219,8 @@ namespace FlatFXWebClient.Controllers
         // POST: Notifications/Delete/5
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
+        [OverrideAuthorization]
+        [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
         public async Task<ActionResult> DeleteConfirmed(Int64 id)
         {
             try

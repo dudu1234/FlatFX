@@ -29,47 +29,47 @@
                 @Html.HiddenFor(model => model.NotificationId)
 
                 <div class="form-group">
-                    @Html.LabelFor(model => model.Symbol, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.Pair</label>
                     <div class="col-md-4">
                         @Html.DropDownListFor(m => m.Symbol, new SelectList(CurrencyManager.Instance.PairsListByCulture(ApplicationInformation.Instance.IsDemoUser), "Key", "Value"), htmlAttributes: new { @class = "form-control" })
                         @Html.ValidationMessageFor(model => model.Symbol, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.BuySell, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.BuySell</label>
                     <div class="col-md-4">
                         @Html.EnumDropDownListFor(model => model.BuySell, htmlAttributes: new { @class = "form-control" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(model => model.CreatedAt, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.CreatedAt</label>
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.CreatedAt, new { htmlAttributes = new { @disabled = true, @readonly = "readonly", @class = "form-control" } })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.MinVolume, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.MinAmount</label>
                     <div class="col-sm-4">
                         @Html.TextBoxFor(m => m.MinVolume, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.MinVolume) })
                         @Html.ValidationMessageFor(m => m.MinVolume, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.MaxVolume, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.MaxAmount</label>
                     <div class="col-sm-4">
                         @Html.TextBoxFor(m => m.MaxVolume, new { @class = "form-control", @placeholder = Html.DisplayNameFor(x => x.MaxVolume) })
                         @Html.ValidationMessageFor(m => m.MaxVolume, "", new { @class = "text-danger" })
                     </div>
                 </div>
                 <div class="form-group">
-                    @Html.LabelFor(m => m.Expired, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.ExpiryDate</label>
                     <div class="col-sm-4">
                         @Html.EditorFor(model => model.Expired)
                     </div>
                 </div>
 
                 <div class="form-group">
-                    @Html.LabelFor(m => m.ProviderId, htmlAttributes: new { @class = "control-label col-sm-2 required" })
+                    <label class="control-label col-sm-2">@FlatFXResources.Resources.Provider</label>
                     <div class="col-sm-4">
                         @Html.DropDownListFor(m => m.ProviderId, new SelectList(userProviders, "Key", "Value"), htmlAttributes: new { @class = "form-control" })
                     </div>

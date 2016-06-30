@@ -8,33 +8,33 @@
 <div class="form-horizontal">
     <div class="panel panel-danger">
         <div class="panel-heading">
-            <h3 class="panel-title">@((ViewBag.UserName == null) ? "Notifications List" : (ViewBag.UserName + " notifications:"))</h3>
+            <h3 class="panel-title">@((ViewBag.UserName == null) ? FlatFXResources.Resources.NotificationsList : (ViewBag.UserName + " " + FlatFXResources.Resources.Notifications + ":"))</h3>
         </div>
         <div class="panel-body table-responsive">
             <table class="table table-bordered table-hover table-striped ffx-table">
                 <tr>
                     <th>
-                        @Html.DisplayNameFor(model => model.Symbol)
+                        @FlatFXResources.Resources.Pair
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.BuySell)
+                        @FlatFXResources.Resources.BuySell
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.CreatedAt)
+                        @FlatFXResources.Resources.CreatedAt
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.MinVolume)
+                        @FlatFXResources.Resources.MinAmount
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.MaxVolume)
+                        @FlatFXResources.Resources.MaxAmount
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.Expired)
+                        @FlatFXResources.Resources.ExpiryDate
                     </th>
                     <th>
-                        @Html.DisplayNameFor(model => model.ProviderId)
+                        @FlatFXResources.Resources.Provider
                     </th>
-                    <th width="150px">Actions</th>
+                    <th width="150px">@FlatFXResources.Resources.Actions</th>
                 </tr>
 
                 @foreach (var item in Model)
@@ -62,8 +62,8 @@
                             @((item.ProviderId == null || item.ProviderId == "")? "All" : Provider.ProviderList[item.ProviderId])
                         </td>
                         <td>
-                            @Html.ActionLink("Edit", "EditByUser", new { id = item.NotificationId }) <br />
-                            @Html.ActionLink("Delete", "Delete", new { id = item.NotificationId }) <br />
+                            @Html.ActionLink(FlatFXResources.Resources.Edit, "EditByUser", new { id = item.NotificationId }) <br />
+                            @Html.ActionLink(FlatFXResources.Resources.Delete, "Delete", new { id = item.NotificationId }) <br />
                         </td>
                     </tr>
                 }
@@ -74,7 +74,7 @@
 
     <br /><br />
     <div>
-        <a class="btn btn-success" href="@Url.Action("Create")">Create New</a>
+        <a class="btn btn-success" href="@Url.Action("Create")">@FlatFXResources.Resources.CreateNew</a>
     </div>
     <br /><br />
 
