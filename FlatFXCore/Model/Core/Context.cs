@@ -11,6 +11,7 @@ using System.Data.Entity.ModelConfiguration.Conventions;
 using Microsoft.AspNet.Identity.EntityFramework;
 using FlatFXCore.Model.User;
 using MySql.Data.Entity;
+using FlatFXCore.BussinessLayer;
 
 namespace FlatFXCore.Model.Core
 {
@@ -49,8 +50,7 @@ namespace FlatFXCore.Model.Core
         public DbSet<EmailNotification> EmailNotifications { get; set; }
         public DbSet<NewOrderNotification> NewOrderNotifications { get; set; }
 
-        public ApplicationDBContext()
-            : base("name=FFXConnectionString", throwIfV1Schema: false)
+        public ApplicationDBContext() : base(Crypto.DecryptStringAES(System.Configuration.ConfigurationManager.ConnectionStrings["FFXConnectionString"].ConnectionString), throwIfV1Schema: false)
         {
             
         }
