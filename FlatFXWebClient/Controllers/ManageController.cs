@@ -85,6 +85,23 @@ namespace FlatFXWebClient.Controllers
         {
             return View();
         }
+        [Authorize(Roles = Consts.Role_Administrator)]
+        [HttpPost]
+        public JsonResult SetTradingBlocked(string isBlocked)
+        {
+            try
+            {
+                if (isBlocked == "true")
+                    TradingSecurity.Instance.BlockTrading();
+                else
+                    TradingSecurity.Instance.EnableTrading();
+                return Json(true, JsonRequestBehavior.AllowGet);
+            }
+            catch
+            {
+                return Json(false, JsonRequestBehavior.AllowGet);
+            }
+        }
         //
         // POST: /Manage/RemoveLogin
         [HttpPost]

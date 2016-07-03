@@ -156,6 +156,12 @@ namespace FlatFXCore.BussinessLayer
                     //Delete Daily Rates
                     DateTime date = DateTime.Now.AddDays(-7);
                     db.DailyFXRates.RemoveRange(db.DailyFXRates.Where(r => r.Time < date));
+                    db.SaveChanges();
+
+                    //Delete expired notifications
+                    dt = DateTime.Now;
+                    db.NewOrderNotifications.RemoveRange(db.NewOrderNotifications.Where(n => n.Expired < dt));
+                    db.SaveChanges();
                 }
 
             }
@@ -184,6 +190,10 @@ namespace FlatFXCore.BussinessLayer
                     }
                     db.SaveChanges();
                 }
+
+                //set trading enabled to false on the end of the day
+                if (DateTime.Now.Hour == 0)
+                    TradingSecurity.Instance.BlockTrading();
 
             }
             catch (Exception ex)

@@ -346,6 +346,7 @@
     <Content Include="Scripts\angular-scenario.js" />
     <Content Include="Scripts\angular-touch.js" />
     <Content Include="Scripts\angular-touch.min.js" />
+    <Content Include="Scripts\bootstrap-toggle.min.js" />
     <Content Include="Scripts\ng-table.min.js" />
     <Content Include="Scripts\angular-ui-ieshiv.js" />
     <Content Include="Scripts\angular-ui-ieshiv.min.js" />
@@ -1132,6 +1133,7 @@
     <Content Include="fonts\fontawesome-webfont.ttf" />
     <Content Include="fonts\fontawesome-webfont.eot" />
     <Content Include="fonts\FontAwesome.otf" />
+    <Content Include="Content\bootstrap-toggle.min.css" />
     <None Include="Properties\PublishProfiles\Local.pubxml" />
     <None Include="Scripts\jquery-2.2.0.intellisense.js" />
     <Content Include="Scripts\i18n\ar.js" />

@@ -228,6 +228,9 @@ namespace FlatFXWebClient.Controllers
             if (model.ExpiryDate.HasValue && model.ExpiryDate.Value.AddMinutes(-10) < DateTime.Now)
                 TempData["ErrorResult"] += "Expired date must be at least 10 minutes from now";
 
+            if (!ApplicationInformation.Instance.IsDemoUser && !TradingSecurity.Instance.IsTradingEnabled)
+                TempData["ErrorResult"] += "The trading is not enable right now, please contact our support directly. " + FlatFXResources.Resources.TradingHours;
+
             if (TempData["ErrorResult"] != null)
                 return View("OrderWorkflow", model);
 

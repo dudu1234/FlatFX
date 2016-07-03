@@ -46,3 +46,4 @@
 /// <reference path="../js/functions/fcsanumber.js" />
 /// <reference path="ngstorage.min.js" />
 /// <reference path="ng-table.min.js" />
+/// <reference path="bootstrap-toggle.min.js" />

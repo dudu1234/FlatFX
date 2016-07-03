@@ -2,7 +2,7 @@
 @using FlatFXCore.BussinessLayer;
 @{
     Layout = "~/Views/Shared/_Layout.cshtml";
-    bool officeHoursOn = true; //To Do add logic in Application Information (function parameter user/account)
+    bool officeHoursOn = true; // TradingSecurity.Instance.IsTradingEnabled;
 }
 
 <div class="order-system-wrapper">
@@ -27,7 +27,7 @@
 
     <div ng-controller="OrderLayout" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')" class="order-currency-exchange-main">
         
-        @if (!officeHoursOn)
+        @if (!ApplicationInformation.Instance.IsDemoUser && !officeHoursOn)
         {
             @Html.Raw(FlatFXResources.Resources.TradingHours)
         }

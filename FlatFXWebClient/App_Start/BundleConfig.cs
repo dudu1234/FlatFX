@@ -11,6 +11,7 @@ namespace FlatFXWebClient
             bundles.Add(new StyleBundle("~/Content/csszz").Include(
                       "~/Content/bootstrap.min.css",
                       "~/Content/bootstrap-theme.min.css",
+                      "~/Content/bootstrap-toggle.min.css",
                       "~/Content/angular-block-ui.min.css",
                       "~/Content/font-awesome.min.css",
                       "~/Content/jquery-ui.min.css",
@@ -59,6 +60,7 @@ namespace FlatFXWebClient
                         "~/Scripts/angular-noty.js",
                         "~/Scripts/ui-bootstrap-tpls-0.12.0.min.js",
                         "~/Scripts/bootstrap-confirmation.js",
+                        "~/Scripts/bootstrap-toggle.min.js",
                         "~/Scripts/ng-table.min.js",
                         "~/Scripts/ngStorage.min.js",
                         "~/Scripts/Chart.min.js"
