@@ -1,1 +1,3 @@
-﻿
+﻿in web.config under system.web add the following row:
+<httpCookies httpOnlyCookies="true" requireSSL="true" />
+
