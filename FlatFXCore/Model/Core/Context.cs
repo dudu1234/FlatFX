@@ -50,11 +50,18 @@ namespace FlatFXCore.Model.Core
         public DbSet<EmailNotification> EmailNotifications { get; set; }
         public DbSet<NewOrderNotification> NewOrderNotifications { get; set; }
 
-        public ApplicationDBContext() : base(Crypto.DecryptStringAES(System.Configuration.ConfigurationManager.ConnectionStrings["FFXConnectionString"].ConnectionString), throwIfV1Schema: false)
+        public ApplicationDBContext() : base(GetConnectionString(), throwIfV1Schema: false)
         {
             
         }
 
+        private static string GetConnectionString()
+        {
+            if (ApplicationInformation.Instance.IsDevelopmetMachine)
+                return System.Configuration.ConfigurationManager.ConnectionStrings["FFXConnectionString"].ConnectionString;
+            else
+                return Crypto.DecryptStringAES(System.Configuration.ConfigurationManager.ConnectionStrings["FFXConnectionString"].ConnectionString);
+        }
         public static ApplicationDBContext Create()
         {
             return new ApplicationDBContext();
