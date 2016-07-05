@@ -15,9 +15,9 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderBookController : BaseController
     {
-        public ActionResult OrderBookIndex()
+        public ActionResult List()
         {
-            return View();
+            return View("OrderBookIndex");
         }
         public async Task<ActionResult> LoadData(string key)
         {

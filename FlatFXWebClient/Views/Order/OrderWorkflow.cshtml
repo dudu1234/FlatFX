@@ -4,6 +4,7 @@
 @{
     Layout = "~/Views/Order/OrderLayout.cshtml";
     ViewBag.Title = "Create Order";
+    
     string queryHeaderClass = (Model.WorkflowStage == 1) ? "active" : "disabled not-active";
     string confirmHeaderClass = (Model.WorkflowStage == 2) ? "active" : "disabled not-active";
     string summaryHeaderClass = (Model.WorkflowStage == 3) ? "active" : "disabled not-active";
@@ -17,10 +18,11 @@
     {
         panelHeader = FlatFXResources.Resources.EditOrder;
     }
-    string controllerAction = "CreateOrderIndex";
+    string controllerAction = "Create";
     if (Model.WorkflowStage == 2)
     {
         controllerAction = "Confirm";
+        ViewBag.Title = "Confirm Order";
     }
     double MinimalPartnerExecutionAmountCCY1 = (Model.MinimalPartnerExecutionAmountCCY1.HasValue) ? Model.MinimalPartnerExecutionAmountCCY1.Value : 0;
     double dExpiryDate = (Model.ExpiryDate.HasValue) ? Model.ExpiryDate.Value.ToUniversalTime().Subtract(new DateTime(1970, 1, 1)).TotalMilliseconds : 0;

@@ -4,8 +4,8 @@
     ViewBag.Title = "Order Book";
 }
 <div ng-controller="OrderBook" ng-init="init('@Html.Raw(ApplicationInformation.Instance.IsDemoUser)')">
-    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1">
-        <div class="panel-danger form-horizontal order-book-panel">
+    <div class="col-xs-12 col-xs-offset-0 col-lg-10 col-lg-offset-1 padding0">
+        <div class="panel-danger form-horizontal order-book-panel padding0">
             <div class="panel-heading">
                 <h3 class="panel-title">@FlatFXResources.Resources.OrderBook</h3>
             </div>
@@ -19,7 +19,7 @@
                         <label class="orderbook-mid-rate-label">{{ MidRate }}</label>
                     </div>
                 </div>
-                <div class="form-group">
+                @*<div class="form-group">
                     <label class="col-xs-4">@FlatFXResources.Resources.AmountRange ({{ CCY1() }})</label>
                     <div class="col-xs-8 col-sm-8 col-md-6">
                         <div class="orderbook-min">
@@ -29,8 +29,7 @@
                             <input class="form-control" name="maxAmountBuy" id="maxAmountBuy" ng-model="maxAmountBuy" />
                         </div>
                     </div>
-                </div>
-                <remark class="red">@FlatFXResources.Resources.InterBankPvPCommissionWarning</remark>
+                </div>*@
                 <div class="text-center">
                     <div class="col-xs-12 col-md-6 table-order-wrapper">
                         <table class="table table-responsive table-bordered table-hover table-striped table-order-buy">
@@ -102,6 +101,7 @@
                     </div>
                 </div>
             </div>
+            <remark class="red">@FlatFXResources.Resources.InterBankPvPCommissionWarning</remark><br /><br />
         </div>
     </div>
 </div>

@@ -901,6 +901,12 @@ table.ffx-table tr td a {
     padding: 0px;
 }
 
+.order-currency-exchange-main .panel-danger > .panel-heading {
+    color: white;
+    background-image: -webkit-linear-gradient(top,#7fb55e 0,#7fb55e 100%);
+    font-size: 1.4em;
+}
+
 .order-currency-exchange-stage {
     padding: 15px;
     padding-top: 0px;
@@ -986,12 +992,13 @@ table.ffx-table tr td a {
         }
 
 .order-system-header {
-    background-color: #209448;
+    /*background-color: #209448;*/
+    background-color: gray;
     color: white;
-    font-size: 2.5em;
+    font-size: 2em;
     font-weight: 800;
-    text-align: center;
-    padding: 5px;
+    text-align: left;
+    padding: 5px 5px 5px 30px;
 }
 
 .order-system-color {
@@ -1147,7 +1154,7 @@ div.disabled {
 }
 
 .demoToLiveTrading {
-    background-color: #e4f6ae;
+    /*background-color: #e4f6ae;*/
     padding: 10px;
 }
 

@@ -42,7 +42,7 @@
                     @if (User.Identity.Name != "")
                     {
                         @*<li><a href="@Url.Action("EnterData", "SimpleCurrencyExchange")">@*<span class="glyphicon glyphicon-transfer exchange-system-color"></span> @FlatFXResources.Resources.ExchangeSystem</a></li>*@
-                        <li><a href="@Url.Action("OrderBookIndex", "OrderBook")">@*<span class="glyphicon glyphicon-resize-small order-system-color"></span>*@ @FlatFXResources.Resources.OrderSystem</a></li>
+                        <li><a href="@Url.Action("List", "OrderBook")">@*<span class="glyphicon glyphicon-resize-small order-system-color"></span>*@ @FlatFXResources.Resources.OrderSystem</a></li>
                     }
 
                     @if (User.IsInRole(Consts.Role_CompanyUser) || User.IsInRole(Consts.Role_ProviderUser))

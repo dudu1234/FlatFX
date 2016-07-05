@@ -20,12 +20,12 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderController : BaseController
     {
-        public async Task<ActionResult> EditOrder(long orderId)
+        public async Task<ActionResult> Edit(long orderId)
         {
             OrderViewModel model = new OrderViewModel();
             Order order = db.Orders.Where(o => o.OrderId == orderId).SingleOrDefault();
             if (order == null)
-                return RedirectToAction("CreateOrderIndex", model);
+                return await Create(null);
 
             await Initialize(model);
             model.AmountCCY1 = order.AmountCCY1;
@@ -44,10 +44,11 @@ namespace FlatFXWebClient.Controllers
             model.Symbol = order.Symbol;
             model.IsEdit = true;
             //model.WorkflowStage = 
-            return RedirectToAction("CreateOrderIndex", model);
+
+            return View("OrderWorkflow", model);
         }
 
-        public async Task<ActionResult> CreateOrderIndex(OrderViewModel model)
+        public async Task<ActionResult> Create(OrderViewModel model)
         {
             if (model == null || model.WorkflowStage <= 0)
             {
@@ -182,9 +183,9 @@ namespace FlatFXWebClient.Controllers
 
             return true;
         }
-        [HttpPost, ActionName("CreateOrderIndex")]
+        [HttpPost, ActionName("Create")]
         [ValidateAntiForgeryToken]
-        public ActionResult CreateOrderIndexPost(OrderViewModel model)
+        public async Task<ActionResult> CreatePost(OrderViewModel model)
         {
             if (model == null || model.WorkflowStage < 1 || model.WorkflowStage > 2)
             {
@@ -201,7 +202,7 @@ namespace FlatFXWebClient.Controllers
             if (order == null)
             {
                 TempData["ErrorResult"] += "Timeout expired. ";
-                RedirectToAction("CreateOrderIndex");
+                return await Create(null);
             }
 
             if (!CurrencyManager.Instance.PairList.ContainsKey(model.Symbol))
@@ -338,8 +339,10 @@ namespace FlatFXWebClient.Controllers
 
                 FXRate pairRate = CurrencyManager.Instance.PairRates[order.Symbol];
                 model.MatchMidRate = pairRate.Mid;
-                
-                return RedirectToAction("CreateOrderIndex", model);
+
+                //return View("OrderWorkflow", model);
+                TempData["modelToConfirm"] = model;
+                return RedirectToAction("Confirm");
             }
             catch (Exception ex)
             {
@@ -349,9 +352,21 @@ namespace FlatFXWebClient.Controllers
 
             return View("OrderWorkflow", model);
         }
+        public ActionResult Confirm()
+        {
+            if (TempData["modelToConfirm"] == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            OrderViewModel model = TempData["modelToConfirm"] as OrderViewModel;
+            TempData["modelToConfirm"] = null;
+
+            if (model.order == null)
+                model.order = model.OrderInSession;
+            return View("OrderWorkflow", model);
+        }
         [HttpPost, ActionName("Confirm")]
         [ValidateAntiForgeryToken]
-        public ActionResult Confirm(OrderViewModel model)
+        public async Task<ActionResult> ConfirmPost(OrderViewModel model)
         {
             try
             {
@@ -374,7 +389,8 @@ namespace FlatFXWebClient.Controllers
                 if (DateTime.Now > order.OrderDate.AddSeconds(60))
                 {
                     TempData["ErrorResult"] = "Timeout expired";
-                    return RedirectToAction("CreateOrderIndex", model);
+                    return View("OrderWorkflow", model);
+                    //return RedirectToAction("Create", model);
                 }
 
                 order.Status = Consts.eOrderStatus.Waiting;
@@ -396,7 +412,8 @@ namespace FlatFXWebClient.Controllers
                         TempData["ErrorResult"] += "Match falied, Your order has been canceled. Please contact FlatFX Team. Details: " + match.ErrorMessage;
                         order.Status = Consts.eOrderStatus.Canceled;
                         db.SaveChanges();
-                        return RedirectToAction("CreateOrderIndex", model);
+                        return await Create(model);
+                        //return RedirectToAction("Create", model);
                     }
                     else
                     {
@@ -454,7 +471,7 @@ namespace FlatFXWebClient.Controllers
                     emailNotification2.Body += NotificationManager.Instance.AddBackOfficeSignature();
                     db.EmailNotifications.Add(emailNotification2);
 
-                    db.SaveChangesAsync();
+                    await db.SaveChangesAsync();
                 }
                 else
                 {
@@ -466,7 +483,7 @@ namespace FlatFXWebClient.Controllers
                     emailNotification.Body += order.BuySell.ToString() + " " + order.AmountCCY1.ToString("N2") + " " + order.Symbol + "<br /></div>";
                     emailNotification.Body += NotificationManager.Instance.AddBackOfficeSignature();
                     db.EmailNotifications.Add(emailNotification);
-                    db.SaveChangesAsync();
+                    await db.SaveChangesAsync();
 
                     NotificationManager.Instance.AddNewOrder(order);
                 }
@@ -477,7 +494,23 @@ namespace FlatFXWebClient.Controllers
                 TempData["ErrorResult"] += "General Error. Please contact FlatFX Team.";
             }
 
-            return RedirectToAction("CreateOrderIndex", model);
+            TempData["modelToSummary"] = model;
+            return RedirectToAction("Summary");
+
+            //return View("OrderWorkflow", model);
+            //return RedirectToAction("Create", model);
+        }
+        public ActionResult Summary()
+        {
+            if (TempData["modelToSummary"] == null)
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            OrderViewModel model = TempData["modelToSummary"] as OrderViewModel;
+            TempData["modelToSummary"] = null;
+
+            if (model.order == null)
+                model.order = model.OrderInSession;
+            return View("OrderWorkflow", model);
         }
         public ActionResult OrderData(string mode)
         {
@@ -487,20 +520,20 @@ namespace FlatFXWebClient.Controllers
                 TempData["mode"] = "OpenOrders";
             return View();
         }
-        public async Task<ActionResult> NewOrderWithMatchMin(long matchOrderId)
+        public async Task<ActionResult> MatchMin(long matchOrderId)
         {
-            return await NewOrderWithMatch(matchOrderId, 0);
+            return await Match(matchOrderId, 0);
         }
-        public async Task<ActionResult> NewOrderWithMatchMax(long matchOrderId)
+        public async Task<ActionResult> MatchMax(long matchOrderId)
         {
-            return await NewOrderWithMatch(matchOrderId, 1);
+            return await Match(matchOrderId, 1);
         }
-        private async Task<ActionResult> NewOrderWithMatch(long matchOrderId, int action)
+        private async Task<ActionResult> Match(long matchOrderId, int action)
         {
             OrderViewModel model = new OrderViewModel();
             Order matchedOrder = await db.Orders.Where(o => o.OrderId == matchOrderId).SingleOrDefaultAsync();
             if (matchedOrder == null)
-                return RedirectToAction("CreateOrderIndex", model);
+                return await Create(null); //return RedirectToAction("Create", model);
 
             await Initialize(model);
             if (action == 0) //min
@@ -521,7 +554,10 @@ namespace FlatFXWebClient.Controllers
             model.MatchMinAmount = matchedOrder.MinimalPartnerExecutionAmountCCY1.HasValue ? matchedOrder.MinimalPartnerExecutionAmountCCY1.Value : matchedOrder.AmountCCY1_Remainder.Value;
             model.MatchMaxAmount = matchedOrder.AmountCCY1_Remainder.Value;
 
-            return RedirectToAction("CreateOrderIndex", model);
+            if (model.order == null)
+                model.order = model.OrderInSession;
+            return View("OrderWorkflow", model);
+            //return RedirectToAction("Create", model);
         }
 
         #region Order Match

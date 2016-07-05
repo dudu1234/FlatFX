@@ -614,7 +614,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
     };
 
     $scope.EditOrder = function (orderId) {
-        window.location.href = urlPrefix + "/Order/EditOrder?orderId=" + orderId;
+        window.location.href = urlPrefix + "/Order/Edit?orderId=" + orderId;
     };
 });
 
@@ -802,12 +802,12 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     $scope.init = function (isDemo) {
         $scope.isDemo = isDemo;
         $scope.orderBookIndexUrl = urlPrefix + "/OrderBook/LoadData";
-        $scope.newOrderWithMatchUrl = urlPrefix + "/Order/NewOrderWithMatch";
+        $scope.newOrderWithMatchUrl = urlPrefix + "/Order/Match";
 
         $scope.Key = 'USDILS';
         $scope.KeyDisplay = 'USDILS';
         $scope.MidRate = 0;
-        $scope.maxAmountBuy = 5000000;
+        $scope.maxAmountBuy = 50000000;
         $scope.minAmountBuy = 0;
         $scope.orderBySell = 'MaxAmount';
         $scope.orderByBuy = 'MaxAmount';
@@ -989,7 +989,7 @@ myApp.controller('OrderData', function ($scope, $timeout, $interval, $http, noty
     };
 
     $scope.EditOrder = function (orderId) {
-        window.location.href = urlPrefix + "/Order/EditOrder?orderId=" + orderId;
+        window.location.href = urlPrefix + "/Order/Edit?orderId=" + orderId;
     };
 });
 
