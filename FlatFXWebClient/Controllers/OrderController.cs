@@ -25,7 +25,11 @@ namespace FlatFXWebClient.Controllers
             OrderViewModel model = new OrderViewModel();
             Order order = db.Orders.Where(o => o.OrderId == orderId).SingleOrDefault();
             if (order == null)
-                return await Create(null);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
+            //Make sure the order is of the same company as the user
+            if (!order.IsDemo && !SecurityManager.IsValidCompany(db, User, User.Identity.GetUserId(), order.CompanyAccount.CompanyId))
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             await Initialize(model);
             model.AmountCCY1 = order.AmountCCY1;
@@ -301,6 +305,10 @@ namespace FlatFXWebClient.Controllers
                     order.EnsureOnLinePrice = true; // model.EnsureOnLinePrice;
                 }
 
+                //Make sure the order is of the same company as the user
+                if (!order.IsDemo && !SecurityManager.IsValidCompany(db, User, User.Identity.GetUserId(), order.CompanyAccount.CompanyId))
+                    return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
+
                 double extraCharge = 0;
                 //if (order.EnsureOnLinePrice)
                 //    extraCharge += CurrencyManager.ExtraCharge_EnsureOnLinePrice;
@@ -533,7 +541,7 @@ namespace FlatFXWebClient.Controllers
             OrderViewModel model = new OrderViewModel();
             Order matchedOrder = await db.Orders.Where(o => o.OrderId == matchOrderId).SingleOrDefaultAsync();
             if (matchedOrder == null)
-                return await Create(null); //return RedirectToAction("Create", model);
+                return new HttpStatusCodeResult(HttpStatusCode.BadRequest);
 
             await Initialize(model);
             if (action == 0) //min

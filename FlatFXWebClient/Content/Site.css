@@ -1161,6 +1161,13 @@ div.disabled {
 .demo-to-real-button {
     margin-left: 50px;
     font-size: 1em;
+    color: blue;
+    font-weight: 600;
+    text-decoration: underline;
+}
+
+.demo-to-real-button:hover {
+    color: red;
 }
 
 .demo-to-real-label {
