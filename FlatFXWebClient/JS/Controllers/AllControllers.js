@@ -891,10 +891,8 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     };
     $scope.createNewOrderWithMatch = function (order, columnName) {
         if (columnName === 'Min') {
-            //window.location.href = $scope.newOrderWithMatchUrl + "Min?matchOrderId=" + order.OrderId + '&action=0';
             window.location.href = $scope.newOrderWithMatchUrl + "Min/" + order.OrderId;
         } else if (columnName === 'Max') {
-            //window.location.href = $scope.newOrderWithMatchUrl + "Max?matchOrderId=" + order.OrderId + '&action=1';
             window.location.href = $scope.newOrderWithMatchUrl + "Max/" + order.OrderId;
         }
     };
