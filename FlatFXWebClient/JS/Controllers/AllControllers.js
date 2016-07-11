@@ -614,7 +614,7 @@ myApp.controller('Dashboard', function ($scope, $timeout, $http, noty, NgTablePa
     };
 
     $scope.EditOrder = function (orderId) {
-        window.location.href = urlPrefix + "/Order/Edit?orderId=" + orderId;
+        window.location.href = urlPrefix + "/Order/Edit/" + orderId;
     };
 });
 
@@ -891,9 +891,11 @@ myApp.controller('OrderBook', function ($scope, $http, $interval, $timeout, noty
     };
     $scope.createNewOrderWithMatch = function (order, columnName) {
         if (columnName === 'Min') {
-            window.location.href = $scope.newOrderWithMatchUrl + "Min?matchOrderId=" + order.OrderId + '&action=0';
+            //window.location.href = $scope.newOrderWithMatchUrl + "Min?matchOrderId=" + order.OrderId + '&action=0';
+            window.location.href = $scope.newOrderWithMatchUrl + "Min/" + order.OrderId;
         } else if (columnName === 'Max') {
-            window.location.href = $scope.newOrderWithMatchUrl + "Max?matchOrderId=" + order.OrderId + '&action=1';
+            //window.location.href = $scope.newOrderWithMatchUrl + "Max?matchOrderId=" + order.OrderId + '&action=1';
+            window.location.href = $scope.newOrderWithMatchUrl + "Max/" + order.OrderId;
         }
     };
 });
@@ -989,7 +991,7 @@ myApp.controller('OrderData', function ($scope, $timeout, $interval, $http, noty
     };
 
     $scope.EditOrder = function (orderId) {
-        window.location.href = urlPrefix + "/Order/Edit?orderId=" + orderId;
+        window.location.href = urlPrefix + "/Order/Edit/" + orderId;
     };
 });
 

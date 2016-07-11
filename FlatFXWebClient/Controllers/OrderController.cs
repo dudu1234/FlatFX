@@ -20,6 +20,7 @@ namespace FlatFXWebClient.Controllers
     [Authorize(Roles = Consts.Role_Administrator + "," + Consts.Role_CompanyUser + "," + Consts.Role_ProviderUser + "," + Consts.Role_CompanyDemoUser)]
     public class OrderController : BaseController
     {
+        [Route("Order/Edit/{orderId}")]
         public async Task<ActionResult> Edit(long orderId)
         {
             OrderViewModel model = new OrderViewModel();
@@ -528,10 +529,12 @@ namespace FlatFXWebClient.Controllers
                 TempData["mode"] = "OpenOrders";
             return View();
         }
+        [Route("Order/MatchMin/{matchOrderId}")]
         public async Task<ActionResult> MatchMin(long matchOrderId)
         {
             return await Match(matchOrderId, 0);
         }
+        [Route("Order/MatchMax/{matchOrderId}")]
         public async Task<ActionResult> MatchMax(long matchOrderId)
         {
             return await Match(matchOrderId, 1);
@@ -569,7 +572,7 @@ namespace FlatFXWebClient.Controllers
         }
 
         #region Order Match
-        public bool InitializeMatch(OrderMatch match, long orderId1, long orderId2, Consts.eMatchTriggerSource source)
+        private bool InitializeMatch(OrderMatch match, long orderId1, long orderId2, Consts.eMatchTriggerSource source)
         {
             try
             {
